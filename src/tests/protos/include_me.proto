@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package my.package2;
+
+enum MyEnum {
+	Zero = 0;
+	One = 1;
+	Two = 2;
+}
+
+message IncludedMessage {
+	int32 x = 1;
+
+	message SuperNestedMessage {
+		int32 y = 1;
+	}
+}

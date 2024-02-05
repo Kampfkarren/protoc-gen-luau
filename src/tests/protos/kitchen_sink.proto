@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package my.package;
+
+import "include_me.proto";
+
+enum MyEnum {
+	Zero = 0;
+	One = 1;
+	Two = 2;
+}
+
+// TODO: Preserve comments
+message KitchenSink {
+	int32 int32 = 1;
+	optional int32 optionalInt32 = 2;
+
+	// TODO: Do something interesting with oneof
+	oneof oneofValue {
+		int32 x = 3;
+		string y = 4;
+	}
+
+	MyEnum enum = 5;
+	my.package2.MyEnum enum2 = 6;
+
+	repeated int32 ints = 7;
+
+	// TODO: Convert this to { [key]: value }
+	map<int32, string> map = 8;
+
+	message NestedMessage {
+		int32 x = 1;
+	}
+	NestedMessage nestedMessage = 9;
+
+	my.package2.IncludedMessage includedMessage = 10;
+	my.package2.IncludedMessage.SuperNestedMessage superNestedMessage = 11;
+
+	enum NestedEnum {
+		Zero = 0;
+	}
+	NestedEnum nestedEnum = 12;
+}
+
+message MessageTwo {
+	int32 int32 = 1;
+}
