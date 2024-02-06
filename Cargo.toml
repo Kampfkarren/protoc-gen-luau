@@ -1,5 +1,5 @@
 [package]
-name = "protobuf-luau" # TODO: rename to protoc-gen-luau
+name = "protoc-gen-luau"
 version = "0.1.0"
 edition = "2021"
 

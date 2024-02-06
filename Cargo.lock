@@ -225,7 +225,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "protobuf-luau"
+name = "protoc-gen-luau"
 version = "0.1.0"
 dependencies = [
  "color-eyre",
