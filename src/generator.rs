@@ -29,7 +29,14 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         &mut request
             .proto_file
             .into_iter()
-            .map(|file| FileGenerator::new(file, &export_map).generate_file())
+            .filter_map(|file| 
+				if file.syntax() != "proto3" {
+					eprintln!("Non-proto3 {} is not supported", file.name());
+					None
+				} else {
+					Some(FileGenerator::new(file, &export_map).generate_file())
+				}
+			)
             .collect(),
     );
 
@@ -378,7 +385,7 @@ impl<'a> FileGenerator<'a> {
 	
 				Type::Bytes => {
 					var_type = "buffer".to_owned();
-					default = "buffer.new()".to_owned();
+					default = "buffer.create(0)".to_owned();
 	
 					encode_check = Some(format!("if buffer.len(self.{field_name}) > 0 then"));
 
