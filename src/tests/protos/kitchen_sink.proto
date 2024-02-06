@@ -41,6 +41,9 @@ message KitchenSink {
 		Zero = 0;
 	}
 	NestedEnum nestedEnum = 12;
+
+	float float = 13;
+	double double = 14;
 }
 
 message MessageTwo {

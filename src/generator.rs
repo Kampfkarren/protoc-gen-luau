@@ -153,57 +153,61 @@ fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"<name> = {
-	new = function()
-		return {
+    new = function()
+        return {
 <default>
-		}
-	end,
+        }
+    end,
 
-	encode = function(self: <name>): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+    encode = function(self: <name>): buffer
+        local output = buffer.create(0)
+        local cursor = 0
 
 <encode>
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+        local shrunkBuffer = buffer.create(cursor)
+        buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+        return shrunkBuffer
+    end,
 
-	decode = function(input: buffer): <name>
-		local self = <name>.new()
-		local cursor = 0
+    decode = function(input: buffer): <name>
+        local self = <name>.new()
+        local cursor = 0
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+        while cursor < buffer.len(input) do
+            local field, wireType
+            field, wireType, cursor = proto.readTag(input, cursor)
 
-			if wireType == proto.wireTypes.varint then
-				local value
-				value, cursor = proto.readVarInt(input, cursor)
+            if wireType == proto.wireTypes.varint then
+                local value
+                value, cursor = proto.readVarInt(input, cursor)
 
-				<decode_varint>
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
+                <decode_varint>
+            elseif wireType == proto.wireTypes.lengthDelimited then
+                local value
+                value, cursor = proto.readBuffer(input, cursor)
 
-				<decode_len>
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
+                <decode_len>
+            elseif wireType == proto.wireTypes.i32 then
+                <decode_i32>
+            elseif wireType == proto.wireTypes.i64 then
+                <decode_i64>
+            else
+                error("Unsupported wire type: " .. wireType)
+            end
+        end
 
-		return self
-	end
+        return self
+    end
 }"#;
 
 const ENUM: &str = r#"<name> = {
-	fromNumber = function(value: number): <name>?
-		<from_number>
-	end,
+    fromNumber = function(value: number): <name>?
+        <from_number>
+    end,
 
-	toNumber = function(self: <name>): number
-		<to_number>
-	end
+    toNumber = function(self: <name>): number
+        <to_number>
+    end
 }"#;
 
 fn create_decoder(fields: BTreeMap<i32, String>) -> String {
@@ -337,6 +341,8 @@ impl<'a> FileGenerator<'a> {
 
         let mut varint_fields: BTreeMap<i32, String> = BTreeMap::new();
         let mut len_fields: BTreeMap<i32, String> = BTreeMap::new();
+        let mut i32_fields: BTreeMap<i32, String> = BTreeMap::new();
+        let mut i64_fields: BTreeMap<i32, String> = BTreeMap::new();
 
         // TODO: Make sure optional and required stuff makes sense between proto2/proto3
         for field in &message.field {
@@ -352,6 +358,7 @@ impl<'a> FileGenerator<'a> {
             let number = field.number();
 
             let decode_fields;
+            let mut decode_prep = None;
             let decode_value;
 
             match field.r#type() {
@@ -360,8 +367,6 @@ impl<'a> FileGenerator<'a> {
                 // | Type::Sint32
                 // | Type::Fixed32
                 // | Type::Sfixed32
-                // | Type::Double
-                // | Type::Float
                  => {
                     var_type = "number".to_owned();
                     default = "0".to_owned();
@@ -370,6 +375,30 @@ impl<'a> FileGenerator<'a> {
                     encode_builder.push("output, cursor = proto.writeVarInt(output, cursor, <value>)");
 
                     decode_fields = &mut varint_fields;
+                    decode_value = "value".to_owned();
+                }
+
+                Type::Float => {
+                    var_type = "number".to_owned();
+                    default = "0".to_owned();
+
+                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.i32)"));
+                    encode_builder.push("output, cursor = proto.writeFloat(output, cursor, <value>)");
+
+                    decode_fields = &mut i32_fields;
+                    decode_prep = Some("local value\n\tvalue, cursor = proto.readFloat(input, cursor)".to_owned());
+                    decode_value = "value".to_owned();
+                }
+
+                Type::Double => {
+                    var_type = "number".to_owned();
+                    default = "0".to_owned();
+
+                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.i64)"));
+                    encode_builder.push("output, cursor = proto.writeDouble(output, cursor, <value>)");
+
+                    decode_fields = &mut i64_fields;
+                    decode_prep = Some("local value\n\tvalue, cursor = proto.readDouble(input, cursor)".to_owned());
                     decode_value = "value".to_owned();
                 }
 
@@ -485,13 +514,18 @@ impl<'a> FileGenerator<'a> {
                 encode_lines.dedent();
                 encode_lines.push("end");
 
-                let decode_lines = vec![
+                let mut decode_lines = vec![
                     format!("if self.{field_name} == nil then"),
                     format!("\t\tself.{field_name} = {{}}"),
                     "\tend".to_owned(),
                     format!("\tassert(self.{field_name} ~= nil, \"Luau\")\n"),
-                    format!("\ttable.insert(self.{field_name}, {decode_value})"),
                 ];
+
+                if let Some(decode_prep) = decode_prep {
+                    decode_lines.push(decode_prep);
+                }
+
+                decode_lines.push(format!("\ttable.insert(self.{field_name}, {decode_value})"));
 
                 decode_fields.insert(number, decode_lines.join("\n"));
             } else {
@@ -508,7 +542,17 @@ impl<'a> FileGenerator<'a> {
                     encode_lines.push("end");
                 }
 
-                decode_fields.insert(number, format!("self.{field_name} = {decode_value}"));
+                decode_fields.insert(
+                    number,
+                    format!(
+                        "{}self.{field_name} = {decode_value}",
+                        if let Some(decode_prep) = decode_prep {
+                            decode_prep + "\n\t"
+                        } else {
+                            "".to_owned()
+                        }
+                    ),
+                );
             }
 
             if is_optional {
@@ -536,11 +580,14 @@ impl<'a> FileGenerator<'a> {
 
         self.implementations.push(
             MESSAGE
+                .replace("    ", "\t")
                 .replace("<name>", &name)
                 .replace("<default>", &default_lines.build())
                 .replace("<encode>", &encode_lines.build())
                 .replace("<decode_varint>", &create_decoder(varint_fields))
-                .replace("<decode_len>", &create_decoder(len_fields)),
+                .replace("<decode_len>", &create_decoder(len_fields))
+                .replace("<decode_i32>", &create_decoder(i32_fields))
+                .replace("<decode_i64>", &create_decoder(i64_fields)),
         );
         self.implementations.blank();
 

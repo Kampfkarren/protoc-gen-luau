@@ -32,6 +32,14 @@ function proto.readVarInt(input: buffer, cursor: number): (number, number)
 	return finalNumber, cursor + numberBytes
 end
 
+function proto.readFloat(input: buffer, cursor: number): (number, number)
+	return buffer.readf32(input, cursor), cursor + 4
+end
+
+function proto.readDouble(input: buffer, cursor: number): (number, number)
+	return buffer.readf64(input, cursor), cursor + 8
+end
+
 function proto.readTag(input: buffer, cursor: number): (number, number, number)
 	local varInt, newCursor = proto.readVarInt(input, cursor)
 	return bit32.rshift(varInt, 3), bit32.band(varInt, 0b111), newCursor
@@ -86,6 +94,18 @@ function proto.writeVarInt(output: buffer, cursor: number, number: number): (buf
 	until number <= 0
 
 	return output, cursor + bytesWritten
+end
+
+function proto.writeFloat(output: buffer, cursor: number, float: number): (buffer, number)
+	output = reserveBuffer(output, cursor, 4)
+	buffer.writef32(output, cursor, float)
+	return output, cursor + 4
+end
+
+function proto.writeDouble(output: buffer, cursor: number, double: number): (buffer, number)
+	output = reserveBuffer(output, cursor, 8)
+	buffer.writef64(output, cursor, double)
+	return output, cursor + 8
 end
 
 function proto.writeTag(output: buffer, cursor: number, field: number, wireType: number): (buffer, number)
