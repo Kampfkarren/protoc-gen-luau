@@ -166,7 +166,7 @@ const MESSAGE: &str = r#"<name> = {
 				value, cursor = proto.readVarInt(input, cursor)
 
 				<decode_varint>
-			elseif wireType == proto.wireTypes.len then
+			elseif wireType == proto.wireTypes.lengthDelimited then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 
@@ -381,6 +381,9 @@ impl<'a> FileGenerator<'a> {
 					default = "buffer.new()".to_owned();
 	
 					encode_check = Some(format!("if buffer.len(self.{field_name}) > 0 then"));
+
+					encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.lengthDelimited)"));
+					encode_builder.push("output, cursor = proto.writeBuffer(output, cursor, <value>)");
 
 					decode_fields = &mut len_fields;
 					decode_value = "value".to_owned();
