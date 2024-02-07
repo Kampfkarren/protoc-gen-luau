@@ -25,6 +25,12 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         ..Default::default()
     });
 
+    files.push(File {
+        name: Some("base64.luau".to_owned()),
+        content: Some(include_str!("./luau/base64.luau").to_owned()),
+        ..Default::default()
+    });
+
     files.append(
         &mut request
             .proto_file
@@ -197,6 +203,20 @@ const MESSAGE: &str = r#"<name> = {
         end
 
         return self
+    end,
+
+    jsonEncode = function(self: <name>): any
+        local output: <partial_type> = {}
+
+        <json_encode>
+        return output
+    end,
+
+    jsonDecode = function(input: any): <name>
+        local self = <name>.new()
+
+        <json_decode>
+        return self
     end
 }"#;
 
@@ -333,11 +353,18 @@ impl<'a> FileGenerator<'a> {
         self.types.push(format!("export type {name} = {{"));
         self.types.indent();
 
+        let mut partial_type = StringBuilder::new();
+        partial_type.push("{");
+        partial_type.indent_n(3);
+
         let mut default_lines = StringBuilder::new();
         default_lines.indent_n(3);
 
         let mut encode_lines = StringBuilder::new();
         encode_lines.indent_n(2);
+
+        let mut json_encode_lines = StringBuilder::new();
+        json_encode_lines.indent_n(2);
 
         let mut varint_fields: BTreeMap<i32, String> = BTreeMap::new();
         let mut len_fields: BTreeMap<i32, String> = BTreeMap::new();
@@ -361,6 +388,8 @@ impl<'a> FileGenerator<'a> {
             let mut decode_prep = None;
             let decode_value;
 
+            let json_encode_method;
+
             match field.r#type() {
                 Type::Int32
                 | Type::Uint32
@@ -376,6 +405,8 @@ impl<'a> FileGenerator<'a> {
 
                     decode_fields = &mut varint_fields;
                     decode_value = "value".to_owned();
+
+                    json_encode_method = "<value>".to_owned();
                 }
 
                 Type::Float => {
@@ -388,6 +419,8 @@ impl<'a> FileGenerator<'a> {
                     decode_fields = &mut i32_fields;
                     decode_prep = Some("local value\n\tvalue, cursor = proto.readFloat(input, cursor)".to_owned());
                     decode_value = "value".to_owned();
+
+                    json_encode_method = "proto.json.serializeNumber(<value>)".to_owned();
                 }
 
                 Type::Double => {
@@ -400,6 +433,8 @@ impl<'a> FileGenerator<'a> {
                     decode_fields = &mut i64_fields;
                     decode_prep = Some("local value\n\tvalue, cursor = proto.readDouble(input, cursor)".to_owned());
                     decode_value = "value".to_owned();
+
+                    json_encode_method = "proto.json.serializeNumber(<value>)".to_owned();
                 }
 
                 Type::String => {
@@ -411,6 +446,8 @@ impl<'a> FileGenerator<'a> {
 
                     decode_fields = &mut len_fields;
                     decode_value = "buffer.tostring(value)".to_owned();
+
+                    json_encode_method = "<value>".to_owned();
                 }
 
                 Type::Bool => {
@@ -422,6 +459,8 @@ impl<'a> FileGenerator<'a> {
 
                     decode_fields = &mut varint_fields;
                     decode_value = "value ~= 0".to_owned();
+
+                    json_encode_method = "<value>".to_owned();
                 }
 
                 Type::Bytes => {
@@ -435,6 +474,8 @@ impl<'a> FileGenerator<'a> {
 
                     decode_fields = &mut len_fields;
                     decode_value = "value".to_owned();
+
+                    json_encode_method = "proto.json.serializeBuffer(<value>)".to_owned();
                 }
 
                 Type::Enum | Type::Message => {
@@ -471,6 +512,8 @@ impl<'a> FileGenerator<'a> {
 
                         decode_fields = &mut varint_fields;
                         decode_value = format!("{var_type}.fromNumber(value) or value");
+
+                        json_encode_method = "<value>".to_owned();
                     } else {
                         default = "nil".to_owned();
 
@@ -481,6 +524,8 @@ impl<'a> FileGenerator<'a> {
 
                         decode_fields = &mut len_fields;
                         decode_value = format!("{var_type}.decode(value)");
+
+                        json_encode_method = format!("{var_type}.jsonEncode(<value>)");
                     }
                 }
 
@@ -498,6 +543,9 @@ impl<'a> FileGenerator<'a> {
             if is_optional {
                 encode_lines.push(format!("if self.{field_name} ~= nil then"));
                 encode_lines.indent();
+
+                json_encode_lines.push(format!("if self.{field_name} ~= nil then"));
+                json_encode_lines.indent();
             }
 
             // TODO: proto2 stuff (required/optional)
@@ -528,18 +576,48 @@ impl<'a> FileGenerator<'a> {
                 decode_lines.push(format!("\ttable.insert(self.{field_name}, {decode_value})"));
 
                 decode_fields.insert(number, decode_lines.join("\n"));
+
+                json_encode_lines.push(format!("for _, value in self.{field_name} do"));
+                json_encode_lines.indent();
+                json_encode_lines.push(format!(
+                    "if output.{field_name} == nil then",
+                    field_name = field_name
+                ));
+                json_encode_lines.push(format!(
+                    "\toutput.{field_name} = {{}}",
+                    field_name = field_name
+                ));
+                json_encode_lines.push("end");
+                json_encode_lines.push(format!("assert(output.{field_name} ~= nil, \"Luau\")"));
+                json_encode_lines.push(format!(
+                    "table.insert(output.{field_name}, {})",
+                    json_encode_method.replace("<value>", "value")
+                ));
+                json_encode_lines.dedent();
+                json_encode_lines.push("end");
             } else {
                 if !is_optional {
-                    encode_lines.push(encode_check);
+                    encode_lines.push(&encode_check);
                     encode_lines.indent();
+
+                    json_encode_lines.push(&encode_check);
+                    json_encode_lines.indent();
                 }
 
                 encode_builder.replace("<value>", &format!("self.{field_name}"));
                 encode_lines.append(&mut encode_builder);
 
+                json_encode_lines.push(format!(
+                    "output.{field_name} = {}",
+                    json_encode_method.replace("<value>", &format!("self.{field_name}"))
+                ));
+
                 if !is_optional {
                     encode_lines.dedent();
                     encode_lines.push("end");
+
+                    json_encode_lines.dedent();
+                    json_encode_lines.push("end");
                 }
 
                 decode_fields.insert(
@@ -558,9 +636,15 @@ impl<'a> FileGenerator<'a> {
             if is_optional {
                 encode_lines.dedent();
                 encode_lines.push("end");
+
+                json_encode_lines.dedent();
+                json_encode_lines.push("end");
             }
 
             encode_lines.blank();
+            json_encode_lines.blank();
+
+            partial_type.push(format!("{field_name}: {var_type}?,"));
 
             // TODO: proto2?
             // TODO: "in proto3 the default representation for all user-defined message types is Option<T>"
@@ -578,6 +662,9 @@ impl<'a> FileGenerator<'a> {
         self.types.push("}");
         self.types.blank();
 
+        partial_type.dedent();
+        partial_type.push("}");
+
         self.implementations.push(
             MESSAGE
                 .replace("    ", "\t")
@@ -587,7 +674,10 @@ impl<'a> FileGenerator<'a> {
                 .replace("<decode_varint>", &create_decoder(varint_fields))
                 .replace("<decode_len>", &create_decoder(len_fields))
                 .replace("<decode_i32>", &create_decoder(i32_fields))
-                .replace("<decode_i64>", &create_decoder(i64_fields)),
+                .replace("<decode_i64>", &create_decoder(i64_fields))
+                .replace("<json_encode>", &json_encode_lines.build().trim_start())
+                .replace("<json_decode>", "-- NYI")
+                .replace("<partial_type>", &partial_type.build()),
         );
         self.implementations.blank();
 

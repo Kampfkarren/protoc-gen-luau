@@ -1,9 +1,15 @@
+local base64 = require("./base64")
+
 local proto = {}
 
 export type Message<T> = {
 	new: () -> T,
+
 	encode: (T) -> buffer,
 	decode: (buffer) -> T,
+
+	jsonEncode: (T) -> any,
+	jsonDecode: (any) -> T,
 }
 
 export type Enum<T> = {
@@ -124,6 +130,42 @@ end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)
 	return proto.writeBuffer(output, cursor, buffer.fromstring(text))
+end
+
+proto.json = {}
+
+-- selene: allow(undefined_variable)
+function proto.json.jsonEncode(input: any): string
+	if game == nil then
+		return game:GetService("HttpService"):JSONEncode(input)
+	elseif string.match(_VERSION, "^Lune") ~= nil then
+		return require("@lune/net").jsonEncode(input)
+	else
+		error("No JSON encoding available")
+	end
+end
+
+-- selene: allow(undefined_variable)
+function proto.json.jsonDecode(input: string): any
+	if game == nil then
+		return game:GetService("HttpService"):JSONDecode(input)
+	elseif string.match(_VERSION, "^Lune") ~= nil then
+		return require("@lune/net").jsonDecode(input)
+	else
+		error("No JSON decoding available")
+	end
+end
+
+function proto.json.serializeNumber(input: number): string | number
+	return if input == math.huge
+		then "Infinity"
+		elseif input == -math.huge then "-Infinity"
+		elseif input ~= input then "NaN"
+		else input
+end
+
+function proto.json.serializeBuffer(input: buffer): string
+	return base64.decode(buffer.tostring(input))
 end
 
 return proto
