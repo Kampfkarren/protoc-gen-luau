@@ -66,18 +66,6 @@ do
 	assertEquals(newCursor, 10)
 end
 
--- Deserialize 64-bit integer (and fail)
--- do
--- 	local success = pcall(proto.readVarInt, buffer.fromstring("\x81\x80\x80\x80\xf8\xff\xff\xff\xff\x01"), 0)
--- 	assert(not success, "Shouldn't have been able to deserialize 64-bit integer")
--- end
-
--- Deserialize 64-bit negative integer (and fail)
--- do
--- 	local success = pcall(proto.readVarInt, buffer.fromstring("\xff\xff\xff\xff\x07"), 0)
--- 	assert(not success, "Shouldn't have been able to deserialize 64-bit negative integer")
--- end
-
 do
 	local output, newCursor = proto.writeString(buffer.create(0), 0, "testing")
 	assertBufferEquals(output, newCursor, "\x07testing")
