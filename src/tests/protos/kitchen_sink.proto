@@ -25,8 +25,7 @@ message KitchenSink {
 
 	repeated int32 ints = 7;
 
-	// TODO: Convert this to { [key]: value }
-	map<int32, string> map = 8;
+	map<bool, string> map = 8;
 
 	message NestedMessage {
 		int32 x = 1;

@@ -6,7 +6,7 @@ use prost_types::{
 };
 
 use crate::{
-    generator::{file_path_export_name, ExportMap},
+    generator::{file_path_export_name, ExportMap, MapType},
     if_builder::IfBuilder,
     string_builder::StringBuilder,
 };
@@ -31,6 +31,10 @@ impl FieldGenerator<'_> {
     fn has_presence(&self) -> bool {
         match &self.field_kind {
             FieldKind::Single(field) => {
+                if self.map_type().is_some() {
+                    return false;
+                }
+
                 (field.label.is_some() && field.label() == Label::Optional)
                     || matches!(field.r#type(), Type::Message)
             }
@@ -39,23 +43,39 @@ impl FieldGenerator<'_> {
         }
     }
 
-    pub fn name(&self) -> String {
+    pub fn name(&self) -> &str {
         match &self.field_kind {
-            FieldKind::Single(field) => field.name().to_owned(),
-            FieldKind::OneOf { name, .. } => name.to_owned(),
+            FieldKind::Single(field) => field.name(),
+            FieldKind::OneOf { name, .. } => name,
         }
     }
 
     pub fn type_definition_no_presence(&self) -> String {
         match &self.field_kind {
             FieldKind::Single(field) => format!("{}: {}", field.name(), {
-                let definition =
-                    type_definition_of_field_descriptor(field, self.export_map, self.base_file);
-
-                if field.label.is_some() && field.label() == Label::Repeated {
-                    format!("{{ {definition} }}")
+                if let Some(map_type) = self.map_type() {
+                    format!(
+                        "{{ [{}]: {} }}",
+                        type_definition_of_field_descriptor(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file
+                        ),
+                        type_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file
+                        ),
+                    )
                 } else {
-                    definition
+                    let definition =
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file);
+
+                    if field.label.is_some() && field.label() == Label::Repeated {
+                        format!("{{ {definition} }}")
+                    } else {
+                        definition
+                    }
                 }
             }),
 
@@ -91,20 +111,24 @@ impl FieldGenerator<'_> {
     }
 
     pub fn json_type(&self) -> String {
-        if let FieldKind::OneOf { name, fields, .. } = &self.field_kind {
-            let variants = fields
-                .iter()
-                .map(|field| {
-                    type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                })
-                .collect::<Vec<_>>();
+        match &self.field_kind {
+            FieldKind::Single(_) => {
+                let mut definition = self.type_definition_no_presence();
+                definition.push('?');
+                definition
+            }
 
-            return format!("{name}: ({})?", variants.join(" | "));
+            FieldKind::OneOf { name, fields, .. } => {
+                let variants = fields
+                    .iter()
+                    .map(|field| {
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                    })
+                    .collect::<Vec<_>>();
+
+                format!("{name}: ({})?", variants.join(" | "))
+            }
         }
-
-        let mut definition = self.type_definition_no_presence();
-        definition.push('?');
-        definition
     }
 
     pub fn should_encode(&self) -> String {
@@ -114,25 +138,33 @@ impl FieldGenerator<'_> {
             return format!("{this} ~= nil");
         }
 
-        let FieldKind::Single(field) = self.field_kind else {
-            unreachable!("OneOf has presence");
-        };
+        match &self.field_kind {
+            FieldKind::OneOf { .. } => unreachable!("OneOf has presence"),
 
-        if field.label.is_some() && field.label() == Label::Repeated {
-            return format!("#{this} > 0");
-        }
+            FieldKind::Single(field) => {
+                if self.map_type().is_some() {
+                    return format!("next({this}) ~= nil");
+                }
 
-        match field.r#type() {
-            Type::Int32 | Type::Uint32 | Type::Float | Type::Double => format!("{this} ~= 0"),
-            Type::String => format!("{this} ~= \"\""),
-            Type::Bool => this,
-            Type::Bytes => format!("buffer.len({this}) > 0"),
-            Type::Enum => format!(
-                "{this} ~= 0 or {this} ~= {}.fromNumber(0)",
-                type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-            ),
-            Type::Message => unreachable!("Message has presence"),
-            other => unimplemented!("Unsupported type: {other:?}"),
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    return format!("#{this} > 0");
+                }
+
+                match field.r#type() {
+                    Type::Int32 | Type::Uint32 | Type::Float | Type::Double => {
+                        format!("{this} ~= 0")
+                    }
+                    Type::String => format!("{this} ~= \"\""),
+                    Type::Bool => this,
+                    Type::Bytes => format!("buffer.len({this}) > 0"),
+                    Type::Enum => format!(
+                        "{this} ~= 0 or {this} ~= {}.fromNumber(0)",
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                    ),
+                    Type::Message => unreachable!("Message has presence"),
+                    other => unimplemented!("Unsupported type: {other:?}"),
+                }
+            }
         }
     }
 
@@ -144,7 +176,43 @@ impl FieldGenerator<'_> {
 
         match &self.field_kind {
             FieldKind::Single(field) => {
-                if field.label.is_some() && field.label() == Label::Repeated {
+                if let Some(map_type) = self.map_type() {
+                    // Maps are { 1: key, 2: value }
+                    encode.push(format!("for key, value in {this} do"));
+
+                    encode.push("local mapBuffer = buffer.create(0)");
+                    encode.push("local mapCursor = 0");
+
+                    encode.push(
+                        encode_field_descriptor_ignore_repeated(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file,
+                            "key",
+                        )
+                        .replace("cursor", "mapCursor")
+                        .replace("output", "mapBuffer"),
+                    );
+
+                    encode.push(
+                        encode_field_descriptor_ignore_repeated(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file,
+                            "value",
+                        )
+                        .replace("cursor", "mapCursor")
+                        .replace("output", "mapBuffer"),
+                    );
+
+                    encode.push(format!("output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)", field.number()));
+                    encode.push(
+                        "output, cursor = proto.writeVarInt(output, cursor, buffer.len(mapBuffer))",
+                    );
+                    encode.push("output, cursor = proto.writeBuffer(output, cursor, mapBuffer)");
+
+                    encode.push("end");
+                } else if field.label.is_some() && field.label() == Label::Repeated {
                     encode.push(format!("for _, value in {this} do"));
                     encode.indent();
 
@@ -192,6 +260,7 @@ impl FieldGenerator<'_> {
         encode
     }
 
+    // TODO: Use json_name
     pub fn json_encode(&self) -> StringBuilder {
         let this = format!("self.{}", self.name());
         let output = format!("output.{}", self.name());
@@ -201,7 +270,27 @@ impl FieldGenerator<'_> {
 
         match &self.field_kind {
             FieldKind::Single(field) => {
-                if field.label.is_some() && field.label() == Label::Repeated {
+                if let Some(map_type) = self.map_type() {
+                    json_encode.push("local newOutput = {}");
+                    json_encode.push(format!("for key, value in {this} do"));
+                    json_encode.push(format!(
+                        "newOutput[{}] = {}",
+                        json_encode_instruction_field_descriptor_ignore_repeated(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file,
+                            "key"
+                        ),
+                        json_encode_instruction_field_descriptor_ignore_repeated(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file,
+                            "value"
+                        )
+                    ));
+                    json_encode.push("end");
+                    json_encode.push(format!("{output} = newOutput"));
+                } else if field.label.is_some() && field.label() == Label::Repeated {
                     json_encode.push("local newOutput = {}");
                     json_encode.push(format!("for _, value in {this} do"));
                     json_encode.push(format!(
@@ -264,7 +353,28 @@ impl FieldGenerator<'_> {
 
             json_decode.push(format!("if input.{name} ~= nil then"));
 
-            if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
+            if let Some(map_info) = self.map_type() {
+                json_decode.push("local newOutput = {}");
+                json_decode.push(format!("for key, value in input.{name} do"));
+                json_decode.push(format!(
+                    "newOutput[{}] = {}",
+                    json_decode_instruction_field_descriptor_ignore_repeated(
+                        &map_info.key,
+                        self.export_map,
+                        self.base_file,
+                        "key"
+                    ),
+                    json_decode_instruction_field_descriptor_ignore_repeated(
+                        &map_info.value,
+                        self.export_map,
+                        self.base_file,
+                        "value"
+                    )
+                ));
+                json_decode.push("end");
+                json_decode.blank();
+                json_decode.push(format!("self.{name} = newOutput"));
+            } else if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
                 json_decode.push("local newOutput = {}");
                 json_decode.push(format!("for _, value in input.{name} do"));
                 json_decode.push(format!(
@@ -312,6 +422,28 @@ impl FieldGenerator<'_> {
             FieldKind::Single(field) => vec![field],
             FieldKind::OneOf { fields, .. } => fields.clone(),
         }
+    }
+
+    pub fn map_type(&self) -> Option<&MapType> {
+        let FieldKind::Single(field) = &self.field_kind else {
+            return None;
+        };
+
+        let type_name = field.type_name();
+        if type_name.is_empty() {
+            return None;
+        }
+
+        assert!(
+            type_name.starts_with('.'),
+            "NYI: Relative type names: {type_name:?}"
+        );
+
+        let Some(export) = self.export_map.get(&type_name[1..]) else {
+            return None;
+        };
+
+        export.map.as_ref()
     }
 
     pub fn default(&self) -> Cow<'static, str> {
@@ -392,6 +524,7 @@ fn type_definition_of_field_descriptor(
     }
 }
 
+#[derive(Clone, Copy)]
 pub enum WireType {
     Varint,
     LengthDelimited,
@@ -585,24 +718,52 @@ fn decode_instruction_field_descriptor_ignore_repeated(
     }
 }
 
+// TODO: Variable for "value" instead of replace
 pub fn decode_field(
     this: &str,
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
     base_file: &FileDescriptorProto,
+    map_type: Option<&MapType>,
     is_oneof: bool,
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
-    if field.label.is_some() && field.label() == Label::Repeated {
-        decode.push(format!("if {this} == nil then"));
-        decode.indent();
-        decode.push(format!("{this} = {{}}"));
-        decode.dedent();
-        decode.push("end");
-        decode.push(format!("assert({this} ~= nil, \"Luau\")"));
+    if let Some(map_type) = map_type {
+        decode.push("local mapKey, mapValue");
         decode.blank();
 
+        decode.push(
+            wire_type_header(wire_type_of_field_descriptor(&map_type.key))
+                .replace("value", "readMapKey"),
+        );
+
+        decode.append(
+            &mut decode_field("mapKey", &map_type.key, export_map, base_file, None, false)
+                .replace("value", "readMapKey"),
+        );
+        decode.blank();
+
+        decode.push(
+            wire_type_header(wire_type_of_field_descriptor(&map_type.value))
+                .replace("value", "readMapValue"),
+        );
+
+        decode.append(
+            &mut decode_field(
+                "mapValue",
+                &map_type.value,
+                export_map,
+                base_file,
+                None,
+                false,
+            )
+            .replace("value", "readMapValue"),
+        );
+        decode.blank();
+
+        decode.push(format!("{this}[mapKey] = mapValue"));
+    } else if field.label.is_some() && field.label() == Label::Repeated {
         decode.push(format!(
             "table.insert({this}, {})",
             decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
@@ -637,4 +798,13 @@ pub fn decode_field(
     }
 
     decode
+}
+
+// TODO: Use this in MESSAGE
+pub fn wire_type_header(wire_type: WireType) -> &'static str {
+    match wire_type {
+        WireType::Varint => "local value\nvalue, cursor = proto.readVarInt(input, cursor)",
+        WireType::LengthDelimited => "local value\nvalue, cursor = proto.readBuffer(input, cursor)",
+        WireType::I32 | WireType::I64 => "",
+    }
 }
