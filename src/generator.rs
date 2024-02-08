@@ -413,6 +413,40 @@ impl Field<'_> {
             Field::OneOf { fields, .. } => fields.clone(),
         }
     }
+
+    fn default(
+        &self,
+        export_map: &ExportMap,
+        base_file: &FileDescriptorProto,
+    ) -> Cow<'static, str> {
+        match self {
+            Field::Normal(field) => {
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    return "{}".into();
+                }
+
+                match field.r#type() {
+                    Type::Int32 | Type::Uint32 | Type::Float | Type::Double => "0".into(),
+                    Type::String => "\"\"".into(),
+                    Type::Bool => "false".into(),
+                    Type::Bytes => "buffer.create(0)".into(),
+                    Type::Enum => format!(
+                        "{}.fromNumber(0)",
+                        type_definition_of_field_descriptor(field, export_map, base_file)
+                    )
+                    .into(),
+                    Type::Message => format!(
+                        "{}.new()",
+                        type_definition_of_field_descriptor(field, export_map, base_file)
+                    )
+                    .into(),
+                    other => unimplemented!("Unsupported type: {other:?}"),
+                }
+            }
+
+            Field::OneOf { .. } => "nil".into(),
+        }
+    }
 }
 
 fn type_definition_of_field_descriptor(
@@ -838,6 +872,12 @@ impl<'a> FileGenerator<'a> {
 
             encode_lines.append(&mut field.encode(self.export_map, &self.file_descriptor_proto));
             encode_lines.blank();
+
+            default_lines.push(format!(
+                "{} = {},",
+                field.name(),
+                field.default(self.export_map, &self.file_descriptor_proto)
+            ));
 
             for inner_field in field.inner_fields() {
                 let decoded = decode_field(
