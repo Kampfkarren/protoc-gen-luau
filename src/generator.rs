@@ -213,7 +213,7 @@ const MESSAGE: &str = r#"<name> = {
         return output
     end,
 
-    jsonDecode = function(input: any): <name>
+    jsonDecode = function(input: { [string]: any }): <name>
         local self = <name>.new()
 
         <json_decode>
@@ -228,7 +228,11 @@ const ENUM: &str = r#"<name> = {
 
     toNumber = function(self: <name>): number
         <to_number>
-    end
+    end,
+
+    fromName = function(name: string): <name>?
+        <from_name>
+    end,
 }"#;
 
 fn create_decoder(fields: BTreeMap<i32, String>) -> String {
@@ -487,6 +491,61 @@ impl Field<'_> {
         json_encode
     }
 
+    fn json_decode(
+        &self,
+        export_map: &ExportMap,
+        base_file: &FileDescriptorProto,
+    ) -> StringBuilder {
+        let mut json_decode = StringBuilder::new();
+
+        for inner_field in self.inner_fields() {
+            let name = inner_field.name();
+
+            json_decode.push(format!("if input.{name} ~= nil then"));
+
+            if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
+                json_decode.push("local newOutput = {}");
+                json_decode.push(format!("for _, value in input.{name} do"));
+                json_decode.push(format!(
+                    "table.insert(newOutput, {})",
+                    json_decode_instruction_field_descriptor_ignore_repeated(
+                        inner_field,
+                        export_map,
+                        base_file,
+                        "value"
+                    )
+                ));
+                json_decode.push("end");
+                json_decode.blank();
+                json_decode.push(format!("self.{name} = newOutput"));
+            } else {
+                let json_decode_instruction =
+                    json_decode_instruction_field_descriptor_ignore_repeated(
+                        inner_field,
+                        export_map,
+                        base_file,
+                        &format!("input.{name}"),
+                    );
+
+                if let Field::OneOf {
+                    name: oneof_name, ..
+                } = self
+                {
+                    json_decode.push(format!(
+                        "self.{oneof_name} = {{ type = \"{name}\", value = {json_decode_instruction} }}",
+                    ));
+                } else {
+                    json_decode.push(format!("self.{name} = {json_decode_instruction}"));
+                }
+            }
+
+            json_decode.push("end");
+            json_decode.blank();
+        }
+
+        json_decode
+    }
+
     fn inner_fields(&self) -> Vec<&FieldDescriptorProto> {
         match self {
             Field::Normal(field) => vec![field],
@@ -720,6 +779,29 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
     }
 }
 
+fn json_decode_instruction_field_descriptor_ignore_repeated(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+    value_var: &str,
+) -> String {
+    match field.r#type() {
+        Type::Int32 | Type::Int64 | Type::Bool | Type::String => value_var.to_owned(),
+        Type::Float | Type::Double => format!("proto.json.deserializeNumber({value_var})"),
+        Type::Bytes => "proto.json.deserializeBuffer({value_var})".to_owned(),
+        Type::Enum => format!(
+            "if typeof({value_var}) == \"number\" then ({qualified_enum}.fromNumber({value_var}) \
+                or {value_var}) else ({qualified_enum}.fromName({value_var}) or {value_var})",
+            qualified_enum = type_definition_of_field_descriptor(field, export_map, base_file)
+        ),
+        Type::Message => format!(
+            "{}.jsonDecode({value_var})",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        ),
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
 fn decode_instruction_field_descriptor_ignore_repeated(
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
@@ -935,6 +1017,9 @@ impl<'a> FileGenerator<'a> {
         let mut json_encode_lines = StringBuilder::new();
         json_encode_lines.indent_n(2);
 
+        let mut json_decode_lines = StringBuilder::new();
+        json_decode_lines.indent_n(2);
+
         let mut varint_fields: BTreeMap<i32, String> = BTreeMap::new();
         let mut len_fields: BTreeMap<i32, String> = BTreeMap::new();
         let mut i32_fields: BTreeMap<i32, String> = BTreeMap::new();
@@ -985,6 +1070,9 @@ impl<'a> FileGenerator<'a> {
             json_encode_lines
                 .append(&mut field.json_encode(self.export_map, &self.file_descriptor_proto));
             json_encode_lines.blank();
+
+            json_decode_lines
+                .append(&mut field.json_decode(self.export_map, &self.file_descriptor_proto));
 
             default_lines.push(format!(
                 "{} = {},",
@@ -1039,7 +1127,7 @@ impl<'a> FileGenerator<'a> {
                 .replace("<decode_i32>", &create_decoder(i32_fields))
                 .replace("<decode_i64>", &create_decoder(i64_fields))
                 .replace("<json_encode>", &json_encode_lines.build())
-                .replace("<json_decode>", "-- NYI")
+                .replace("<json_decode>", &json_decode_lines.build())
                 .replace("<json_type>", &json_type.build()),
         );
         self.implementations.blank();
@@ -1066,6 +1154,9 @@ impl<'a> FileGenerator<'a> {
         let mut to_number = IfBuilder::new();
         to_number.indent_n(2);
 
+        let mut from_name = IfBuilder::new();
+        from_name.indent_n(2);
+
         for (index, field) in descriptor.value.iter().enumerate() {
             self.types.push(format!(
                 "{}\"{}\"",
@@ -1079,6 +1170,10 @@ impl<'a> FileGenerator<'a> {
 
             to_number.add_condition(&format!("self == \"{}\"", field.name()), |builder| {
                 builder.push(format!("return {}", field.number()));
+            });
+
+            from_name.add_condition(&format!("name == \"{}\"", field.name()), |builder| {
+                builder.push(format!("return \"{}\"", field.name()));
             });
         }
 
@@ -1105,6 +1200,15 @@ impl<'a> FileGenerator<'a> {
                     to_number
                         .with_else(|builder| {
                             builder.push("return self");
+                        })
+                        .build()
+                        .trim_start(),
+                )
+                .replace(
+                    "<from_name>",
+                    from_name
+                        .with_else(|builder| {
+                            builder.push("return nil");
                         })
                         .build()
                         .trim_start(),

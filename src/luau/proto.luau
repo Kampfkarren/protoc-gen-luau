@@ -9,10 +9,12 @@ export type Message<T> = {
 	decode: (buffer) -> T,
 
 	jsonEncode: (T) -> any,
-	jsonDecode: (any) -> T,
+	jsonDecode: ({ [string]: any }) -> T,
 }
 
 export type Enum<T> = {
+	fromName: (string) -> T?,
+
 	fromNumber: (number) -> T?,
 	toNumber: (T) -> number,
 }

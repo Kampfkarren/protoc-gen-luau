@@ -21,13 +21,9 @@ impl StringBuilder {
     pub fn push<T: Display>(&mut self, text: T) {
         let text = text.to_string();
 
-        for line in text.lines() {
+        for line in text.split('\n') {
             self.lines
                 .push(format!("{}{line}", "\t".repeat(self.depth)));
-        }
-
-        if text.ends_with('\n') {
-            self.lines.push("".to_owned());
         }
     }
 
