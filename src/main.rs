@@ -4,6 +4,7 @@ use std::io::{Read, Write};
 use color_eyre::eyre::WrapErr;
 use prost::Message;
 
+mod fields;
 mod generator;
 mod if_builder;
 mod string_builder;
