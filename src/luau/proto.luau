@@ -78,6 +78,7 @@ proto.wireTypes = {
 }
 
 -- TODO: Test negative number
+-- TODO: Take sircfenner's implementation for this and read
 function proto.writeVarInt(output: buffer, cursor: number, number: number): (buffer, number)
 	assert(number >= 0, "NYI: Negative varints")
 	-- TODO: Assert against non-32 bit ints

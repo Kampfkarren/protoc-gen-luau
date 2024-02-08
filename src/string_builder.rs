@@ -52,12 +52,6 @@ impl StringBuilder {
     pub fn dedent(&mut self) {
         self.depth -= 1;
     }
-
-    pub fn replace(&mut self, old: &str, new: &str) {
-        for line in &mut self.lines {
-            *line = line.replace(old, new);
-        }
-    }
 }
 
 impl FromIterator<String> for StringBuilder {

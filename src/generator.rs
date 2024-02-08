@@ -207,7 +207,7 @@ const MESSAGE: &str = r#"<name> = {
     end,
 
     jsonEncode = function(self: <name>): any
-        local output: <partial_type> = {}
+        local output: <json_type> = {}
 
         <json_encode>
         return output
@@ -325,6 +325,21 @@ impl Field<'_> {
         definition
     }
 
+    fn json_type(&self, export_map: &ExportMap, base_file: &FileDescriptorProto) -> String {
+        if let Field::OneOf { name, fields, .. } = self {
+            let variants = fields
+                .iter()
+                .map(|field| type_definition_of_field_descriptor(field, export_map, base_file))
+                .collect::<Vec<_>>();
+
+            return format!("{name}: ({})?", variants.join(" | "));
+        }
+
+        let mut definition = self.type_definition_no_presence(export_map, base_file);
+        definition.push('?');
+        definition
+    }
+
     fn should_encode(&self, export_map: &ExportMap, base_file: &FileDescriptorProto) -> String {
         let this = format!("self.{}", self.name());
 
@@ -405,6 +420,71 @@ impl Field<'_> {
 
         encode.push("end");
         encode
+    }
+
+    fn json_encode(
+        &self,
+        export_map: &ExportMap,
+        base_file: &FileDescriptorProto,
+    ) -> StringBuilder {
+        let this = format!("self.{}", self.name());
+        let output = format!("output.{}", self.name());
+
+        let mut json_encode = StringBuilder::new();
+        json_encode.push(format!(
+            "if {} then",
+            self.should_encode(export_map, base_file)
+        ));
+
+        match self {
+            Field::Normal(field) => {
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    json_encode.push("local newOutput = {}");
+                    json_encode.push(format!("for _, value in {this} do"));
+                    json_encode.push(format!(
+                        "table.insert(newOutput, {})",
+                        json_encode_instruction_field_descriptor_ignore_repeated(
+                            field, export_map, base_file, "value"
+                        )
+                    ));
+                    json_encode.push("end");
+                    json_encode.push(format!("{output} = newOutput"));
+                } else {
+                    json_encode.push(format!(
+                        "{output} = {}",
+                        json_encode_instruction_field_descriptor_ignore_repeated(
+                            field, export_map, base_file, &this
+                        )
+                    ));
+                }
+            }
+
+            Field::OneOf { fields, .. } => {
+                let mut if_builder = IfBuilder::new();
+
+                for field in fields {
+                    if_builder.add_condition(
+                        &format!("{this}.type == \"{}\"", field.name()),
+                        |builder| {
+                            builder.push(format!(
+                                "{output} = {}",
+                                json_encode_instruction_field_descriptor_ignore_repeated(
+                                    field,
+                                    export_map,
+                                    base_file,
+                                    &format!("{this}.value")
+                                )
+                            ));
+                        },
+                    );
+                }
+
+                json_encode.append(&mut if_builder.into_string_builder())
+            }
+        }
+
+        json_encode.push("end");
+        json_encode
     }
 
     fn inner_fields(&self) -> Vec<&FieldDescriptorProto> {
@@ -618,6 +698,28 @@ fn encode_field_descriptor_ignore_repeated(
     }
 }
 
+fn json_encode_instruction_field_descriptor_ignore_repeated(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+    value_var: &str,
+) -> String {
+    match field.r#type() {
+        Type::Int32 | Type::Int64 | Type::Bool | Type::String => value_var.to_owned(),
+        Type::Float | Type::Double => format!("proto.json.serializeNumber({value_var})"),
+        Type::Bytes => "proto.json.serializeBuffer({value_var})".to_owned(),
+        Type::Enum => format!(
+            "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var})",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        ),
+        Type::Message => format!(
+            "{}.jsonEncode({value_var})",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        ),
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
 fn decode_instruction_field_descriptor_ignore_repeated(
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
@@ -729,6 +831,8 @@ impl<'a> FileGenerator<'a> {
 
         let mut contents = StringBuilder::new();
         contents.push("--!strict");
+        contents.push("--!nolint LocalUnused");
+        contents.push("--# selene: allow(empty_if, if_same_then_else, unused_variable)");
         contents.push("-- This file was @autogenerated by protoc-gen-luau");
 
         // TODO: Reserve name
@@ -818,9 +922,9 @@ impl<'a> FileGenerator<'a> {
         self.types.push(format!("export type {name} = {{"));
         self.types.indent();
 
-        let mut partial_type = StringBuilder::new();
-        partial_type.push("{");
-        partial_type.indent_n(3);
+        let mut json_type = StringBuilder::new();
+        json_type.push("{");
+        json_type.indent_n(3);
 
         let mut default_lines = StringBuilder::new();
         default_lines.indent_n(3);
@@ -870,8 +974,17 @@ impl<'a> FileGenerator<'a> {
                 field.type_definition(self.export_map, &self.file_descriptor_proto)
             ));
 
+            json_type.push(format!(
+                "{},",
+                field.json_type(self.export_map, &self.file_descriptor_proto)
+            ));
+
             encode_lines.append(&mut field.encode(self.export_map, &self.file_descriptor_proto));
             encode_lines.blank();
+
+            json_encode_lines
+                .append(&mut field.json_encode(self.export_map, &self.file_descriptor_proto));
+            json_encode_lines.blank();
 
             default_lines.push(format!(
                 "{} = {},",
@@ -912,8 +1025,8 @@ impl<'a> FileGenerator<'a> {
         self.types.push("}");
         self.types.blank();
 
-        partial_type.dedent();
-        partial_type.push("}");
+        json_type.dedent();
+        json_type.push("}");
 
         self.implementations.push(
             MESSAGE
@@ -925,9 +1038,9 @@ impl<'a> FileGenerator<'a> {
                 .replace("<decode_len>", &create_decoder(len_fields))
                 .replace("<decode_i32>", &create_decoder(i32_fields))
                 .replace("<decode_i64>", &create_decoder(i64_fields))
-                .replace("<json_encode>", "-- NYI")
+                .replace("<json_encode>", &json_encode_lines.build())
                 .replace("<json_decode>", "-- NYI")
-                .replace("<partial_type>", &partial_type.build()),
+                .replace("<json_type>", &json_type.build()),
         );
         self.implementations.blank();
 
