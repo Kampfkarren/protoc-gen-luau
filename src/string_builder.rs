@@ -1,5 +1,6 @@
 use std::fmt::Display;
 
+// TODO: Remove all this because stylua
 pub struct StringBuilder {
     lines: Vec<String>,
     depth: usize,
@@ -56,5 +57,17 @@ impl StringBuilder {
         for line in &mut self.lines {
             *line = line.replace(old, new);
         }
+    }
+}
+
+impl FromIterator<String> for StringBuilder {
+    fn from_iter<T: IntoIterator<Item = String>>(iter: T) -> Self {
+        let mut builder = StringBuilder::new();
+
+        for line in iter {
+            builder.push(line);
+        }
+
+        builder
     }
 }

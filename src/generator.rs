@@ -1,4 +1,5 @@
 use std::{
+    borrow::Cow,
     collections::{BTreeMap, HashMap},
     path::{Path, PathBuf},
 };
@@ -9,7 +10,7 @@ use prost_types::{
         CodeGeneratorRequest, CodeGeneratorResponse,
     },
     field_descriptor_proto::{Label, Type},
-    DescriptorProto, EnumDescriptorProto, FileDescriptorProto,
+    DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
 };
 
 use crate::{if_builder::IfBuilder, string_builder::StringBuilder};
@@ -250,6 +251,421 @@ fn create_decoder(fields: BTreeMap<i32, String>) -> String {
     lines.build().trim_start().to_owned()
 }
 
+// todo: move all this to a separate file
+// todo: put export_map and base_file as fields in a struct
+#[derive(Debug)]
+enum Field<'a> {
+    Normal(&'a FieldDescriptorProto),
+    OneOf {
+        name: String,
+        fields: Vec<&'a FieldDescriptorProto>,
+    },
+}
+
+impl Field<'_> {
+    // In a simple sense: will this be T? or T
+    fn has_presence(&self) -> bool {
+        match self {
+            Field::Normal(field) => {
+                (field.label.is_some() && field.label() == Label::Optional)
+                    || matches!(field.r#type(), Type::Message)
+            }
+
+            Field::OneOf { .. } => true,
+        }
+    }
+
+    fn name(&self) -> String {
+        match self {
+            Field::Normal(field) => field.name().to_owned(),
+            Field::OneOf { name, .. } => name.to_owned(),
+        }
+    }
+
+    fn type_definition_no_presence(
+        &self,
+        export_map: &ExportMap,
+        base_file: &FileDescriptorProto,
+    ) -> String {
+        match self {
+            Field::Normal(field) => format!("{}: {}", field.name(), {
+                let definition = type_definition_of_field_descriptor(field, export_map, base_file);
+
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    format!("{{ {definition} }}")
+                } else {
+                    definition
+                }
+            }),
+
+            Field::OneOf { name, fields } => {
+                let variants = fields
+                    .iter()
+                    .map(|field| {
+                        format!(
+                            "{{ type: \"{}\", value: {} }}",
+                            field.name(),
+                            type_definition_of_field_descriptor(field, export_map, base_file)
+                        )
+                    })
+                    .collect::<Vec<_>>();
+
+                format!("{}: ({})", name, variants.join(" | "))
+            }
+        }
+    }
+
+    fn type_definition(&self, export_map: &ExportMap, base_file: &FileDescriptorProto) -> String {
+        let mut definition = self.type_definition_no_presence(export_map, base_file);
+
+        if self.has_presence() {
+            definition.push('?');
+        }
+
+        definition
+    }
+
+    fn should_encode(&self, export_map: &ExportMap, base_file: &FileDescriptorProto) -> String {
+        let this = format!("self.{}", self.name());
+
+        if self.has_presence() {
+            return format!("{this} ~= nil");
+        }
+
+        let Field::Normal(field) = self else {
+            unreachable!("OneOf has presence");
+        };
+
+        if field.label.is_some() && field.label() == Label::Repeated {
+            return format!("#{this} > 0");
+        }
+
+        match field.r#type() {
+            Type::Int32 | Type::Uint32 | Type::Float | Type::Double => format!("{this} ~= 0"),
+            Type::String => format!("{this} ~= \"\""),
+            Type::Bool => this,
+            Type::Bytes => format!("buffer.len({this}) > 0"),
+            Type::Enum => format!(
+                "{this} ~= 0 or {this} ~= {}.fromNumber(0)",
+                type_definition_of_field_descriptor(field, export_map, base_file)
+            ),
+            Type::Message => unreachable!("Message has presence"),
+            other => unimplemented!("Unsupported type: {other:?}"),
+        }
+    }
+
+    fn encode(&self, export_map: &ExportMap, base_file: &FileDescriptorProto) -> StringBuilder {
+        let this = format!("self.{}", self.name());
+
+        let mut encode = StringBuilder::new();
+        encode.push(format!(
+            "if {} then",
+            self.should_encode(export_map, base_file)
+        ));
+
+        match self {
+            Field::Normal(field) => {
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    encode.push(format!("for _, value in {this} do"));
+                    encode.indent();
+
+                    encode.push(encode_field_descriptor_ignore_repeated(
+                        field, export_map, base_file, "value",
+                    ));
+
+                    encode.dedent();
+                    encode.push("end");
+                } else {
+                    encode.push(encode_field_descriptor_ignore_repeated(
+                        field, export_map, base_file, &this,
+                    ));
+                }
+            }
+
+            Field::OneOf { fields, .. } => {
+                let mut if_builder = IfBuilder::new();
+
+                for field in fields {
+                    if_builder.add_condition(
+                        &format!("{this}.type == \"{}\"", field.name()),
+                        |builder| {
+                            builder.push(encode_field_descriptor_ignore_repeated(
+                                field,
+                                export_map,
+                                base_file,
+                                &format!("{this}.value"),
+                            ));
+                        },
+                    );
+                }
+
+                encode.append(&mut if_builder.into_string_builder())
+            }
+        }
+
+        encode.push("end");
+        encode
+    }
+
+    fn inner_fields(&self) -> Vec<&FieldDescriptorProto> {
+        match self {
+            Field::Normal(field) => vec![field],
+            Field::OneOf { fields, .. } => fields.clone(),
+        }
+    }
+}
+
+fn type_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    match field.r#type() {
+        Type::Int32 | Type::Uint32 => "number".to_owned(),
+        Type::Float => "number".to_owned(),
+        Type::Double => "number".to_owned(),
+        Type::String => "string".to_owned(),
+        Type::Bool => "boolean".to_owned(),
+        Type::Bytes => "buffer".to_owned(),
+        Type::Enum | Type::Message => {
+            let type_name = field.type_name();
+            assert!(
+                type_name.starts_with('.'),
+                "NYI: Relative type names: {type_name:?}"
+            );
+
+            let type_name = &type_name[1..];
+
+            let mut segments: Vec<&str> = type_name.split('.').collect();
+            let just_type = segments.pop().unwrap();
+            let package = segments.join(".");
+
+            if package == base_file.package() {
+                just_type.to_owned()
+            } else {
+                let export = export_map
+                    .get(&format!("{package}.{just_type}"))
+                    .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
+
+                if export.path == Path::new(base_file.name()).with_extension("") {
+                    format!("{}{just_type}", export.prefix)
+                } else {
+                    format!(
+                        "{}.{}{just_type}",
+                        file_path_export_name(&export.path),
+                        export.prefix,
+                    )
+                }
+            }
+        }
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
+enum WireType {
+    Varint,
+    LengthDelimited,
+    I32,
+    I64,
+}
+
+fn wire_type_of_field_descriptor(field: &FieldDescriptorProto) -> WireType {
+    match field.r#type() {
+        Type::Int32 | Type::Uint32 | Type::Enum | Type::Bool => WireType::Varint,
+        Type::Float => WireType::I32,
+        Type::Double => WireType::I64,
+        Type::String | Type::Bytes | Type::Message => WireType::LengthDelimited,
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
+fn encode_field_descriptor_ignore_repeated(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+    value_var: &str,
+) -> String {
+    match field.r#type() {
+        Type::Int32 | Type::Uint32 => [
+            format!(
+                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
+                field.number()
+            ),
+            format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})"),
+        ]
+        .join("\n"),
+
+        Type::Float => [
+            format!(
+                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
+                field.number()
+            ),
+            format!("output, cursor = proto.writeFloat(output, cursor, {value_var})"),
+        ]
+        .join("\n"),
+
+        Type::Double => [
+            format!(
+                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
+                field.number()
+            ),
+            format!("output, cursor = proto.writeDouble(output, cursor, {value_var})"),
+        ]
+        .join("\n"),
+
+        Type::String => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
+                    field.number()
+                ),
+                format!("output, cursor = proto.writeString(output, cursor, {value_var})"),
+            ]
+            .join("\n")
+        }
+
+        Type::Bool => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
+                    field.number()
+                ),
+                format!(
+                    "output, cursor = proto.writeVarInt(output, cursor, if {value_var} then 1 else 0)",
+                ),
+            ]
+            .join("\n")
+        }
+
+        Type::Bytes => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
+                    field.number()
+                ),
+                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var})"),
+            ]
+            .join("\n")
+        }
+
+        Type::Enum => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
+                    field.number()
+                ),
+                format!(
+                    "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var}))",
+                    type_definition_of_field_descriptor(field, export_map, base_file)
+                ),
+            ]
+            .join("\n")
+        }
+
+        Type::Message => {
+            [
+                format!(
+                    "local encoded = {}.encode({value_var})",
+                    type_definition_of_field_descriptor(field, export_map, base_file)
+                ),
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
+                    field.number()
+                ),
+                format!(
+                    "output, cursor = proto.writeVarInt(output, cursor, buffer.len(encoded))",
+                ),
+                format!("output, cursor = proto.writeBuffer(output, cursor, encoded)"),
+            ]
+            .join("\n")
+        }
+
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
+fn decode_instruction_field_descriptor_ignore_repeated(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> Cow<'static, str> {
+    match field.r#type() {
+        Type::Int32 | Type::Uint32 | Type::Float | Type::Double | Type::Bytes => "value".into(),
+
+        Type::Bool => "value ~= 0".into(),
+
+        Type::String => "buffer.tostring(value)".into(),
+
+        Type::Enum => format!(
+            "{}.fromNumber(value) or value",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        )
+        .into(),
+
+        Type::Message => format!(
+            "{}.decode(value)",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        )
+        .into(),
+
+        other => unimplemented!("Unsupported type: {other:?}"),
+    }
+}
+
+fn decode_field(
+    this: &str,
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+    is_oneof: bool,
+) -> StringBuilder {
+    let mut decode = StringBuilder::new();
+
+    if field.label.is_some() && field.label() == Label::Repeated {
+        decode.push(format!("if {this} == nil then"));
+        decode.indent();
+        decode.push(format!("{this} = {{}}"));
+        decode.dedent();
+        decode.push("end");
+        decode.push(format!("assert({this} ~= nil, \"Luau\")"));
+        decode.blank();
+
+        decode.push(format!(
+            "table.insert({this}, {})",
+            decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
+        ));
+    } else {
+        match field.r#type() {
+            Type::Float => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readFloat(input, cursor)");
+            }
+
+            Type::Double => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readDouble(input, cursor)");
+            }
+
+            _ => {}
+        }
+
+        if is_oneof {
+            decode.push(format!(
+                "{this} = {{ type = \"{}\", value = {} }}",
+                field.name(),
+                decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
+            ));
+        } else {
+            decode.push(format!(
+                "{this} = {}",
+                decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
+            ));
+        }
+    }
+
+    decode
+}
+
 struct FileGenerator<'a> {
     file_descriptor_proto: FileDescriptorProto,
     export_map: &'a ExportMap,
@@ -332,6 +748,8 @@ impl<'a> FileGenerator<'a> {
         contents.push(self.implementations.build());
         contents.push(create_return(self.exports));
 
+        let code = contents.build();
+
         File {
             name: Some(
                 PathBuf::from(self.file_descriptor_proto.name())
@@ -339,7 +757,20 @@ impl<'a> FileGenerator<'a> {
                     .to_string_lossy()
                     .into_owned(),
             ),
-            content: Some(contents.build()),
+            content: Some(
+                match stylua_lib::format_code(
+                    &code,
+                    stylua_lib::Config::default(),
+                    None,
+                    stylua_lib::OutputVerification::None,
+                ) {
+                    Ok(formatted) => formatted,
+                    Err(error) => {
+                        eprintln!("Error formatting code: {error}");
+                        code
+                    }
+                },
+            ),
             ..Default::default()
         }
     }
@@ -371,291 +802,70 @@ impl<'a> FileGenerator<'a> {
         let mut i32_fields: BTreeMap<i32, String> = BTreeMap::new();
         let mut i64_fields: BTreeMap<i32, String> = BTreeMap::new();
 
-        // TODO: Make sure optional and required stuff makes sense between proto2/proto3
+        let mut fields = Vec::new();
         for field in &message.field {
-            let mut var_type;
-            let mut default;
+            if field.oneof_index.is_some() && !field.proto3_optional() {
+                let oneof = message.oneof_decl[field.oneof_index.unwrap() as usize].name();
 
-            let mut encode_builder = StringBuilder::new();
-            let mut encode_check = None;
-
-            let is_optional = field.oneof_index.is_some() || field.r#type() == Type::Message;
-
-            let field_name = field.name();
-            let number = field.number();
-
-            let decode_fields;
-            let mut decode_prep = None;
-            let decode_value;
-
-            let json_encode_method;
-
-            match field.r#type() {
-                Type::Int32
-                | Type::Uint32
-                // | Type::Sint32
-                // | Type::Fixed32
-                // | Type::Sfixed32
-                 => {
-                    var_type = "number".to_owned();
-                    default = "0".to_owned();
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.varint)"));
-                    encode_builder.push("output, cursor = proto.writeVarInt(output, cursor, <value>)");
-
-                    decode_fields = &mut varint_fields;
-                    decode_value = "value".to_owned();
-
-                    json_encode_method = "<value>".to_owned();
-                }
-
-                Type::Float => {
-                    var_type = "number".to_owned();
-                    default = "0".to_owned();
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.i32)"));
-                    encode_builder.push("output, cursor = proto.writeFloat(output, cursor, <value>)");
-
-                    decode_fields = &mut i32_fields;
-                    decode_prep = Some("local value\n\tvalue, cursor = proto.readFloat(input, cursor)".to_owned());
-                    decode_value = "value".to_owned();
-
-                    json_encode_method = "proto.json.serializeNumber(<value>)".to_owned();
-                }
-
-                Type::Double => {
-                    var_type = "number".to_owned();
-                    default = "0".to_owned();
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.i64)"));
-                    encode_builder.push("output, cursor = proto.writeDouble(output, cursor, <value>)");
-
-                    decode_fields = &mut i64_fields;
-                    decode_prep = Some("local value\n\tvalue, cursor = proto.readDouble(input, cursor)".to_owned());
-                    decode_value = "value".to_owned();
-
-                    json_encode_method = "proto.json.serializeNumber(<value>)".to_owned();
-                }
-
-                Type::String => {
-                    var_type = "string".to_owned();
-                    default = "\"\"".to_owned();
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.lengthDelimited)"));
-                    encode_builder.push("output, cursor = proto.writeString(output, cursor, <value>)");
-
-                    decode_fields = &mut len_fields;
-                    decode_value = "buffer.tostring(value)".to_owned();
-
-                    json_encode_method = "<value>".to_owned();
-                }
-
-                Type::Bool => {
-                    var_type = "boolean".to_owned();
-                    default = "false".to_owned();
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.varint)"));
-                    encode_builder.push("output, cursor = proto.writeVarInt(output, cursor, if <value> then 1 else 0)");
-
-                    decode_fields = &mut varint_fields;
-                    decode_value = "value ~= 0".to_owned();
-
-                    json_encode_method = "<value>".to_owned();
-                }
-
-                Type::Bytes => {
-                    var_type = "buffer".to_owned();
-                    default = "buffer.create(0)".to_owned();
-
-                    encode_check = Some(format!("if buffer.len(self.{field_name}) > 0 then"));
-
-                    encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.lengthDelimited)"));
-                    encode_builder.push("output, cursor = proto.writeBuffer(output, cursor, <value>)");
-
-                    decode_fields = &mut len_fields;
-                    decode_value = "value".to_owned();
-
-                    json_encode_method = "proto.json.serializeBuffer(<value>)".to_owned();
-                }
-
-                Type::Enum | Type::Message => {
-                    let type_name = field.type_name();
-                    assert!(
-                        type_name.starts_with('.'),
-                        "NYI: Relative type names: {type_name:?}"
-                    );
-
-                    let type_name = &type_name[1..];
-
-                    let mut segments: Vec<&str> = type_name.split('.').collect();
-                    let just_type = segments.pop().unwrap();
-                    let package = segments.join(".");
-
-                    var_type = if package == self.file_descriptor_proto.package() {
-                        just_type.to_owned()
+                if let Some(Field::OneOf {
+                    fields: ref mut existing_fields,
+                    ..
+                }) = fields.iter_mut().find(|field| {
+                    if let Field::OneOf { name, .. } = field {
+                        name == oneof
                     } else {
-                        let export = self.export_map
-                            .get(&format!("{}.{}", package, just_type))
-                            .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
+                        false
+                    }
+                }) {
+                    existing_fields.push(field);
+                } else {
+                    fields.push(Field::OneOf {
+                        name: oneof.to_owned(),
+                        fields: vec![field],
+                    });
+                }
+            } else {
+                fields.push(Field::Normal(field));
+            }
+        }
 
-                        if export.path == Path::new(self.file_descriptor_proto.name()).with_extension("") {
-                            format!("{}{just_type}", export.prefix)
-                        } else {
-                            format!("{}.{}{just_type}", file_path_export_name(&export.path), export.prefix)
-                        }
-                    };
+        // TODO: Make sure optional and required stuff makes sense between proto2/proto3
+        for field in fields {
+            self.types.push(format!(
+                "{},",
+                field.type_definition(self.export_map, &self.file_descriptor_proto)
+            ));
 
-                    if field.r#type() == Type::Enum {
-                        default = format!("assert({var_type}.fromNumber(0), \"NYI: Proto2 first enum variants as defaults\")");
-                        encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.varint)"));
-                        encode_builder.push(format!("output, cursor = proto.writeVarInt(output, cursor, if typeof(<value>) == \"number\" then <value> else {var_type}.toNumber(<value>))"));
+            encode_lines.append(&mut field.encode(self.export_map, &self.file_descriptor_proto));
+            encode_lines.blank();
 
-                        decode_fields = &mut varint_fields;
-                        decode_value = format!("{var_type}.fromNumber(value) or value");
+            for inner_field in field.inner_fields() {
+                let decoded = decode_field(
+                    &format!("self.{}", field.name()),
+                    inner_field,
+                    self.export_map,
+                    &self.file_descriptor_proto,
+                    matches!(field, Field::OneOf { .. }),
+                );
 
-                        json_encode_method = "<value>".to_owned();
-                    } else {
-                        default = "nil".to_owned();
+                match wire_type_of_field_descriptor(inner_field) {
+                    WireType::Varint => {
+                        varint_fields.insert(inner_field.number(), decoded.build());
+                    }
 
-                        encode_builder.push(format!("local encoded = {var_type}.encode(<value>)"));
-                        encode_builder.push(format!("output, cursor = proto.writeTag(output, cursor, {number}, proto.wireTypes.lengthDelimited)"));
-                        encode_builder.push("output, cursor = proto.writeVarInt(output, cursor, buffer.len(encoded))");
-                        encode_builder.push("output, cursor = proto.writeBuffer(output, cursor, encoded)");
+                    WireType::LengthDelimited => {
+                        len_fields.insert(inner_field.number(), decoded.build());
+                    }
 
-                        decode_fields = &mut len_fields;
-                        decode_value = format!("{var_type}.decode(value)");
+                    WireType::I32 => {
+                        i32_fields.insert(inner_field.number(), decoded.build());
+                    }
 
-                        json_encode_method = format!("{var_type}.jsonEncode(<value>)");
+                    WireType::I64 => {
+                        i64_fields.insert(inner_field.number(), decoded.build());
                     }
                 }
-
-                other => unimplemented!("Unsupported type: {other:?}"),
-            };
-
-            let encode_check = encode_check.unwrap_or_else(|| {
-                format!(
-                    "if self.{field_name} ~= {default} then",
-                    field_name = field_name,
-                    default = default
-                )
-            });
-
-            if is_optional {
-                encode_lines.push(format!("if self.{field_name} ~= nil then"));
-                encode_lines.indent();
-
-                json_encode_lines.push(format!("if self.{field_name} ~= nil then"));
-                json_encode_lines.indent();
             }
-
-            // TODO: proto2 stuff (required/optional)
-            if field.label.is_some() && field.label() == Label::Repeated {
-                var_type = format!("{{ {var_type} }}");
-                default = "{}".to_owned();
-
-                encode_lines.push(format!("for _, value in self.{field_name} do"));
-                encode_lines.indent();
-
-                encode_builder.replace("<value>", "value");
-                encode_lines.append(&mut encode_builder);
-
-                encode_lines.dedent();
-                encode_lines.push("end");
-
-                let mut decode_lines = vec![
-                    format!("if self.{field_name} == nil then"),
-                    format!("\t\tself.{field_name} = {{}}"),
-                    "\tend".to_owned(),
-                    format!("\tassert(self.{field_name} ~= nil, \"Luau\")\n"),
-                ];
-
-                if let Some(decode_prep) = decode_prep {
-                    decode_lines.push(decode_prep);
-                }
-
-                decode_lines.push(format!("\ttable.insert(self.{field_name}, {decode_value})"));
-
-                decode_fields.insert(number, decode_lines.join("\n"));
-
-                json_encode_lines.push(format!("for _, value in self.{field_name} do"));
-                json_encode_lines.indent();
-                json_encode_lines.push(format!(
-                    "if output.{field_name} == nil then",
-                    field_name = field_name
-                ));
-                json_encode_lines.push(format!(
-                    "\toutput.{field_name} = {{}}",
-                    field_name = field_name
-                ));
-                json_encode_lines.push("end");
-                json_encode_lines.push(format!("assert(output.{field_name} ~= nil, \"Luau\")"));
-                json_encode_lines.push(format!(
-                    "table.insert(output.{field_name}, {})",
-                    json_encode_method.replace("<value>", "value")
-                ));
-                json_encode_lines.dedent();
-                json_encode_lines.push("end");
-            } else {
-                if !is_optional {
-                    encode_lines.push(&encode_check);
-                    encode_lines.indent();
-
-                    json_encode_lines.push(&encode_check);
-                    json_encode_lines.indent();
-                }
-
-                encode_builder.replace("<value>", &format!("self.{field_name}"));
-                encode_lines.append(&mut encode_builder);
-
-                json_encode_lines.push(format!(
-                    "output.{field_name} = {}",
-                    json_encode_method.replace("<value>", &format!("self.{field_name}"))
-                ));
-
-                if !is_optional {
-                    encode_lines.dedent();
-                    encode_lines.push("end");
-
-                    json_encode_lines.dedent();
-                    json_encode_lines.push("end");
-                }
-
-                decode_fields.insert(
-                    number,
-                    format!(
-                        "{}self.{field_name} = {decode_value}",
-                        if let Some(decode_prep) = decode_prep {
-                            decode_prep + "\n\t"
-                        } else {
-                            "".to_owned()
-                        }
-                    ),
-                );
-            }
-
-            if is_optional {
-                encode_lines.dedent();
-                encode_lines.push("end");
-
-                json_encode_lines.dedent();
-                json_encode_lines.push("end");
-            }
-
-            encode_lines.blank();
-            json_encode_lines.blank();
-
-            partial_type.push(format!("{field_name}: {var_type}?,"));
-
-            // TODO: proto2?
-            // TODO: "in proto3 the default representation for all user-defined message types is Option<T>"
-            if is_optional {
-                var_type.push('?');
-                default_lines.push(format!("{field_name} = nil,"));
-            } else {
-                default_lines.push(format!("{field_name} = {default},"));
-            }
-
-            self.types.push(format!("{field_name}: {var_type},"));
         }
 
         self.types.dedent();
@@ -675,7 +885,7 @@ impl<'a> FileGenerator<'a> {
                 .replace("<decode_len>", &create_decoder(len_fields))
                 .replace("<decode_i32>", &create_decoder(i32_fields))
                 .replace("<decode_i64>", &create_decoder(i64_fields))
-                .replace("<json_encode>", &json_encode_lines.build().trim_start())
+                .replace("<json_encode>", "-- NYI")
                 .replace("<json_decode>", "-- NYI")
                 .replace("<partial_type>", &partial_type.build()),
         );

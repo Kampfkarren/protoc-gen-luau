@@ -34,15 +34,19 @@ impl IfBuilder {
         self
     }
 
-    pub fn build(mut self) -> String {
-        if self.has_conditions {
-            self.string_builder.push("end");
-        }
-
-        self.string_builder.build()
+    pub fn build(self) -> String {
+        self.into_string_builder().build()
     }
 
     pub fn indent_n(&mut self, n: usize) {
         self.string_builder.indent_n(n);
+    }
+
+    pub fn into_string_builder(mut self) -> StringBuilder {
+        if self.has_conditions {
+            self.string_builder.push("end");
+        }
+
+        self.string_builder
     }
 }

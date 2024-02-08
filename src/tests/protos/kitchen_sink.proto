@@ -15,7 +15,6 @@ message KitchenSink {
 	int32 int32 = 1;
 	optional int32 optionalInt32 = 2;
 
-	// TODO: Do something interesting with oneof
 	oneof oneofValue {
 		int32 x = 3;
 		string y = 4;
