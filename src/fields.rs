@@ -150,8 +150,14 @@ impl FieldGenerator<'_> {
                     return format!("#{this} > 0");
                 }
 
+                // TODO: Remove default branch and explicitly type everything out
                 match field.r#type() {
-                    Type::Int32 | Type::Uint32 | Type::Float | Type::Double => {
+                    Type::Int32
+                    | Type::Uint32
+                    | Type::Int64
+                    | Type::Uint64
+                    | Type::Float
+                    | Type::Double => {
                         format!("{this} ~= 0")
                     }
                     Type::String => format!("{this} ~= \"\""),
@@ -455,7 +461,12 @@ impl FieldGenerator<'_> {
                 }
 
                 match field.r#type() {
-                    Type::Int32 | Type::Uint32 | Type::Float | Type::Double => "0".into(),
+                    Type::Int32
+                    | Type::Uint32
+                    | Type::Int64
+                    | Type::Uint64
+                    | Type::Float
+                    | Type::Double => "0".into(),
                     Type::String => "\"\"".into(),
                     Type::Bool => "false".into(),
                     Type::Bytes => "buffer.create(0)".into(),
@@ -484,9 +495,9 @@ fn type_definition_of_field_descriptor(
     base_file: &FileDescriptorProto,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 => "number".to_owned(),
-        Type::Float => "number".to_owned(),
-        Type::Double => "number".to_owned(),
+        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 | Type::Float | Type::Double => {
+            "number".to_owned()
+        }
         Type::String => "string".to_owned(),
         Type::Bool => "boolean".to_owned(),
         Type::Bytes => "buffer".to_owned(),
@@ -535,7 +546,9 @@ pub enum WireType {
 
 pub fn wire_type_of_field_descriptor(field: &FieldDescriptorProto) -> WireType {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Enum | Type::Bool => WireType::Varint,
+        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 | Type::Enum | Type::Bool => {
+            WireType::Varint
+        }
         Type::Float => WireType::I32,
         Type::Double => WireType::I64,
         Type::String | Type::Bytes | Type::Message => WireType::LengthDelimited,
@@ -550,7 +563,7 @@ fn encode_field_descriptor_ignore_repeated(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 => [
+        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 => [
             format!(
                 "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
                 field.number()
@@ -653,9 +666,11 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Int64 | Type::Bool | Type::String => value_var.to_owned(),
+        Type::Int32 | Type::Int64 | Type::Uint32 | Type::Uint64 | Type::Bool | Type::String => {
+            value_var.to_owned()
+        }
         Type::Float | Type::Double => format!("proto.json.serializeNumber({value_var})"),
-        Type::Bytes => "proto.json.serializeBuffer({value_var})".to_owned(),
+        Type::Bytes => format!("proto.json.serializeBuffer({value_var})"),
         Type::Enum => format!(
             "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var})",
             type_definition_of_field_descriptor(field, export_map, base_file)
@@ -675,7 +690,9 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Int64 | Type::Bool | Type::String => value_var.to_owned(),
+        Type::Int32 | Type::Int64 | Type::Uint32 | Type::Uint64 | Type::Bool | Type::String => {
+            value_var.to_owned()
+        }
         Type::Float | Type::Double => format!("proto.json.deserializeNumber({value_var})"),
         Type::Bytes => "proto.json.deserializeBuffer({value_var})".to_owned(),
         Type::Enum => format!(
@@ -697,7 +714,13 @@ fn decode_instruction_field_descriptor_ignore_repeated(
     base_file: &FileDescriptorProto,
 ) -> Cow<'static, str> {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Float | Type::Double | Type::Bytes => "value".into(),
+        Type::Int32
+        | Type::Uint32
+        | Type::Int64
+        | Type::Uint64
+        | Type::Float
+        | Type::Double
+        | Type::Bytes => "value".into(),
 
         Type::Bool => "value ~= 0".into(),
 
