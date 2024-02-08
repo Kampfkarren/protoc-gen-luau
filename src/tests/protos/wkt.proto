@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/api.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/source_context.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/type.proto";
+import "google/protobuf/wrappers.proto";
+
+message WellKnownTypes {
+	google.protobuf.Any any = 1;
+	google.protobuf.Api api = 2;
+	google.protobuf.BoolValue boolValue = 3;
+	google.protobuf.BytesValue bytesValue = 4;
+	google.protobuf.DoubleValue doubleValue = 5;
+	google.protobuf.Duration duration = 6;
+	google.protobuf.Empty empty = 7;
+	google.protobuf.Enum enum = 8;
+	google.protobuf.EnumValue enumValue = 9;
+	google.protobuf.Field field = 10;
+	// google.protobuf.Cardinality cardinality = 11;
+	// google.protobuf.Kind kind = 12;
+	google.protobuf.FieldMask fieldMask = 13;
+	google.protobuf.FloatValue floatValue = 14;
+	google.protobuf.Int32Value int32Value = 15;
+	google.protobuf.Int64Value int64Value = 16;
+	google.protobuf.ListValue listValue = 17;
+	google.protobuf.Method method = 18;
+	google.protobuf.Mixin mixin = 19;
+	google.protobuf.NullValue nullValue = 20;
+	google.protobuf.Option option = 21;
+	google.protobuf.SourceContext sourceContext = 22;
+	google.protobuf.StringValue stringValue = 23;
+	google.protobuf.Struct struct = 24;
+	google.protobuf.Syntax syntax = 25;
+	google.protobuf.Timestamp timestamp = 26;
+	google.protobuf.Type type = 27;
+	google.protobuf.UInt32Value uInt32Value = 28;
+	google.protobuf.UInt64Value uInt64Value = 29;
+	google.protobuf.Value value = 30;
+}
