@@ -860,7 +860,14 @@ pub fn decode_field(
     let mut decode = StringBuilder::new();
 
     if let Some(map_type) = map_type {
-        decode.push("local mapKey, mapValue");
+        decode.push(format!(
+            "local mapKey: {}",
+            type_definition_of_field_descriptor(&map_type.key, export_map, base_file),
+        ));
+        decode.push(format!(
+            "local mapValue: {}",
+            type_definition_of_field_descriptor(&map_type.value, export_map, base_file),
+        ));
         decode.blank();
 
         decode.push(
