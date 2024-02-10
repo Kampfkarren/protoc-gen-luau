@@ -882,13 +882,13 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Uint64
         | Type::Fixed32
         | Type::Fixed64
+        | Type::Sfixed32
+        | Type::Sfixed64
         | Type::Float
         | Type::Double
         | Type::Bytes => "value".into(),
 
-        Type::Sint32 | Type::Sint64 | Type::Sfixed32 | Type::Sfixed64 => {
-            "proto.decodeZigZag(value)".into()
-        }
+        Type::Sint32 | Type::Sint64 => "proto.decodeZigZag(value)".into(),
 
         Type::Bool => "value ~= 0".into(),
 
@@ -974,14 +974,24 @@ pub fn decode_field(
                 decode.push("value, cursor = proto.readDouble(input, cursor)");
             }
 
-            Type::Fixed32 | Type::Sfixed32 => {
+            Type::Fixed32 => {
                 decode.push("local value");
                 decode.push("value, cursor = proto.readFixed32(input, cursor)");
             }
 
-            Type::Fixed64 | Type::Sfixed64 => {
+            Type::Fixed64 => {
                 decode.push("local value");
                 decode.push("value, cursor = proto.readFixed64(input, cursor)");
+            }
+
+            Type::Sfixed32 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readSignedFixed32(input, cursor)");
+            }
+
+            Type::Sfixed64 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readSignedFixed64(input, cursor)");
             }
 
             _ => {}
