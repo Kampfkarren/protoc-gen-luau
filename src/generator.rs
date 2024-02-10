@@ -339,21 +339,20 @@ impl<'a> FileGenerator<'a> {
         for import in &self.file_descriptor_proto.dependency {
             let import_path = Path::new(import);
 
-            let parent_path = pathdiff::diff_paths(
-                file_path.parent().unwrap_or_else(|| Path::new("")),
-                import_path.parent().unwrap_or_else(|| Path::new("")),
+            let mut relative_import_path = pathdiff::diff_paths(
+                import_path,
+                file_path.parent().expect("couldn't get parent path"),
             )
             .expect("couldn't diff paths");
 
+            if !relative_import_path.starts_with("../") {
+                relative_import_path = PathBuf::from("./").join(relative_import_path);
+            }
+
             contents.push(format!(
-                "local {} = require(\"{}/{}\")",
+                "local {} = require(\"{}\")",
                 file_path_export_name(import_path),
-                if parent_path.as_os_str().is_empty() {
-                    ".".to_owned()
-                } else {
-                    parent_path.to_string_lossy().into_owned()
-                },
-                import_path.with_extension("").display()
+                relative_import_path.with_extension("").display()
             ));
         }
 

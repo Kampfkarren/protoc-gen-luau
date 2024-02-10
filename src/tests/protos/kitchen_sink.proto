@@ -4,6 +4,7 @@ package my.package;
 
 import "include_me.proto";
 import "same_package.proto";
+import "deeper/include_me2.proto";
 
 enum MyEnum {
 	Zero = 0;
@@ -45,6 +46,7 @@ message KitchenSink {
 	double double = 14;
 
 	SamePackageNestedMessage samePackageNestedMessage = 15;
+	my.package3.DeeperNestedMessage deeperNestedMessage = 16;
 }
 
 message MessageTwo {

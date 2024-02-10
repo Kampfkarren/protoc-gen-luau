@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package my.package3;
+
+import "include_me.proto";
+
+message DeeperNestedMessage {
+	int32 x = 1;
+	my.package2.MyEnum y = 2;
+}
