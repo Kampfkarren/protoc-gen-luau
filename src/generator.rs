@@ -1,5 +1,5 @@
 use std::{
-    collections::{BTreeMap, HashMap},
+    collections::{BTreeMap, HashMap, HashSet},
     path::{Path, PathBuf},
 };
 
@@ -562,6 +562,8 @@ impl<'a> FileGenerator<'a> {
         let mut from_number = IfBuilder::new();
         from_number.indent_n(2);
 
+        let mut enum_numbers_used = HashSet::new();
+
         let mut to_number = IfBuilder::new();
         to_number.indent_n(2);
 
@@ -575,9 +577,11 @@ impl<'a> FileGenerator<'a> {
                 field.name()
             ));
 
-            from_number.add_condition(&format!("value == {}", field.number()), |builder| {
-                builder.push(format!("return \"{}\"", field.name()));
-            });
+            if enum_numbers_used.insert(field.number()) {
+                from_number.add_condition(&format!("value == {}", field.number()), |builder| {
+                    builder.push(format!("return \"{}\"", field.name()));
+                });
+            }
 
             to_number.add_condition(&format!("self == \"{}\"", field.name()), |builder| {
                 builder.push(format!("return {}", field.number()));

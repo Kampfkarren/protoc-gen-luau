@@ -195,7 +195,19 @@ impl FieldGenerator<'_> {
             FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
                     // Maps are { 1: key, 2: value }
-                    encode.push(format!("for key, value in {this} do"));
+                    encode.push(format!(
+                        "for key: {}, value: {} in {this} do",
+                        type_definition_of_field_descriptor(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file
+                        ),
+                        type_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file
+                        ),
+                    ));
 
                     encode.push("local mapBuffer = buffer.create(0)");
                     encode.push("local mapCursor = 0");
@@ -291,8 +303,23 @@ impl FieldGenerator<'_> {
         match &self.field_kind {
             FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
-                    json_encode.push("local newOutput = {}");
-                    json_encode.push(format!("for key, value in {this} do"));
+                    json_encode.push(format!(
+                        "local newOutput: {} = {{}}",
+                        self.type_definition()
+                    ));
+                    json_encode.push(format!(
+                        "for key: {}, value: {} in {this} do",
+                        type_definition_of_field_descriptor(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file
+                        ),
+                        type_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file
+                        )
+                    ));
                     json_encode.push(format!(
                         "newOutput[{}] = {}",
                         json_encode_instruction_field_descriptor_ignore_repeated(
@@ -311,7 +338,10 @@ impl FieldGenerator<'_> {
                     json_encode.push("end");
                     json_encode.push(format!("{output} = newOutput"));
                 } else if field.label.is_some() && field.label() == Label::Repeated {
-                    json_encode.push("local newOutput = {}");
+                    json_encode.push(format!(
+                        "local newOutput: {} = {{}}",
+                        self.type_definition()
+                    ));
                     json_encode.push(format!(
                         "for _, value: {} in {this} do",
                         type_definition_of_field_descriptor(field, self.export_map, self.base_file)
@@ -378,7 +408,10 @@ impl FieldGenerator<'_> {
             json_decode.push(format!("if input.{name} ~= nil then"));
 
             if let Some(map_info) = self.map_type() {
-                json_decode.push("local newOutput = {}");
+                json_decode.push(format!(
+                    "local newOutput: {} = {{}}",
+                    self.type_definition()
+                ));
                 json_decode.push(format!("for key, value in input.{name} do"));
                 json_decode.push(format!(
                     "newOutput[{}] = {}",
@@ -399,7 +432,10 @@ impl FieldGenerator<'_> {
                 json_decode.blank();
                 json_decode.push(format!("self.{name} = newOutput"));
             } else if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
-                json_decode.push("local newOutput = {}");
+                json_decode.push(format!(
+                    "local newOutput: {} = {{}}",
+                    self.type_definition()
+                ));
                 json_decode.push(format!(
                     "for _, value: {} in input.{name} do",
                     type_definition_of_field_descriptor(

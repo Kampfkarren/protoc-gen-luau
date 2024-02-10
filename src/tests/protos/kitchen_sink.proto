@@ -60,6 +60,20 @@ message KitchenSink {
 	sfixed64 sfixed64 = 23;
 
 	repeated float floats = 24;
+
+	map<fixed32, fixed32> mapWithSetup = 25;
+	map<int32, MyEnum> mapWithEnums = 26;
+
+	AliasedEnum aliasedEnum = 27;
+}
+
+enum AliasedEnum {
+	option allow_alias = true;
+	AliasedEnum_Zero = 0;
+	AliasedEnum_One = 1;
+	AliasedEnum_Uno = 1;
+	AliasedEnum_Yi = 1;
+	AliasedEnum_Two = 2;
 }
 
 message MessageTwo {
