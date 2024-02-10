@@ -688,5 +688,19 @@ impl<'a> FileGenerator<'a> {
 }
 
 fn message_type_has_special_json(file: &FileDescriptorProto, message: &DescriptorProto) -> bool {
-    file.package() == "google.protobuf" && message.name() == "Duration"
+    file.package() == "google.protobuf"
+        && matches!(
+            message.name(),
+            "Duration"
+                | "BoolValue"
+                | "BytesValue"
+                | "DoubleValue"
+                | "FloatValue"
+                | "Int32Value"
+                | "Int64Value"
+                | "UInt32Value"
+                | "UInt64Value"
+                | "StringValue"
+                | "Timestamp"
+        )
 }
