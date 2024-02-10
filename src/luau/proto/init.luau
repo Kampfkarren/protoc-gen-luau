@@ -206,14 +206,13 @@ function proto.writeTag(output: buffer, cursor: number, field: number, wireType:
 	return proto.writeVarInt(output, cursor, bit32.lshift(field, 3) + wireType)
 end
 
-function proto.writeBuffer(output: buffer, cursor: number, input: buffer): (buffer, number)
-	local bufferLength = buffer.len(input)
-	output, cursor = proto.writeVarInt(output, cursor, bufferLength)
+function proto.writeBuffer(output: buffer, cursor: number, input: buffer, length: number): (buffer, number)
+	output, cursor = proto.writeVarInt(output, cursor, length)
 
-	output = reserveBuffer(output, cursor, bufferLength)
-	buffer.copy(output, cursor, input, 0, bufferLength)
+	output = reserveBuffer(output, cursor, length)
+	buffer.copy(output, cursor, input, 0, length)
 
-	return output, cursor + bufferLength
+	return output, cursor + length
 end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)

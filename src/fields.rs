@@ -236,9 +236,8 @@ impl FieldGenerator<'_> {
 
                     encode.push(format!("output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)", field.number()));
                     encode.push(
-                        "output, cursor = proto.writeVarInt(output, cursor, buffer.len(mapBuffer))",
+                        "output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)",
                     );
-                    encode.push("output, cursor = proto.writeBuffer(output, cursor, mapBuffer)");
 
                     encode.push("end");
                 } else if field.label.is_some() && field.label() == Label::Repeated {
@@ -723,7 +722,7 @@ fn encode_field_descriptor_ignore_repeated(
                     "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
                     field.number()
                 ),
-                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var})"),
+                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var})"),
             ]
             .join("\n")
         }
@@ -752,8 +751,7 @@ fn encode_field_descriptor_ignore_repeated(
                     "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
                     field.number()
                 ),
-                "output, cursor = proto.writeVarInt(output, cursor, buffer.len(encoded))".to_owned(),
-                "output, cursor = proto.writeBuffer(output, cursor, encoded)".to_owned(),
+                "output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))".to_owned(),
             ]
             .join("\n")
         }
@@ -922,6 +920,10 @@ pub fn decode_field(
     let mut decode = StringBuilder::new();
 
     if let Some(map_type) = map_type {
+        decode.push("local _length");
+        decode.push("_length, cursor = proto.readVarInt(input, cursor)");
+        decode.blank();
+
         decode.push(format!(
             "local mapKey: {}",
             type_definition_of_field_descriptor(&map_type.key, export_map, base_file),
