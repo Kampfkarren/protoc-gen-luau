@@ -55,6 +55,9 @@ message KitchenSink {
 
 	fixed32 fixed32 = 20;
 	fixed64 fixed64 = 21;
+
+	sfixed32 sfixed32 = 22;
+	sfixed64 sfixed64 = 23;
 }
 
 message MessageTwo {
