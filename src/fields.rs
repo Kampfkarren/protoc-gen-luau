@@ -694,7 +694,7 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
             value_var.to_owned()
         }
         Type::Float | Type::Double => format!("proto.json.deserializeNumber({value_var})"),
-        Type::Bytes => "proto.json.deserializeBuffer({value_var})".to_owned(),
+        Type::Bytes => format!("proto.json.deserializeBuffer({value_var})"),
         Type::Enum => format!(
             "if typeof({value_var}) == \"number\" then ({qualified_enum}.fromNumber({value_var}) \
                 or {value_var}) else ({qualified_enum}.fromName({value_var}) or {value_var})",
