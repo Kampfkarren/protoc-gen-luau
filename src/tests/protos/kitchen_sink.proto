@@ -49,6 +49,9 @@ message KitchenSink {
 	my.package3.DeeperNestedMessage deeperNestedMessage = 16;
 
 	repeated NestedMessage messages = 17;
+
+	sint32 sint32 = 18;
+	sint64 sint64 = 19;
 }
 
 message MessageTwo {

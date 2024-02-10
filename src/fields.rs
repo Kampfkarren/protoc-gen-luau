@@ -160,6 +160,12 @@ impl FieldGenerator<'_> {
                     | Type::Uint32
                     | Type::Int64
                     | Type::Uint64
+                    | Type::Sint32
+                    | Type::Sint64
+                    | Type::Sfixed32
+                    | Type::Sfixed64
+                    | Type::Fixed32
+                    | Type::Fixed64
                     | Type::Float
                     | Type::Double => {
                         format!("{this} ~= 0")
@@ -172,7 +178,8 @@ impl FieldGenerator<'_> {
                         type_definition_of_field_descriptor(field, self.export_map, self.base_file)
                     ),
                     Type::Message => unreachable!("Message has presence"),
-                    other => unimplemented!("Unsupported type: {other:?}"),
+
+                    Type::Group => unimplemented!("Group"),
                 }
             }
         }
@@ -469,6 +476,12 @@ impl FieldGenerator<'_> {
                     | Type::Uint32
                     | Type::Int64
                     | Type::Uint64
+                    | Type::Fixed32
+                    | Type::Fixed64
+                    | Type::Sint32
+                    | Type::Sint64
+                    | Type::Sfixed32
+                    | Type::Sfixed64
                     | Type::Float
                     | Type::Double => "0".into(),
                     Type::String => "\"\"".into(),
@@ -484,7 +497,7 @@ impl FieldGenerator<'_> {
                         type_definition_of_field_descriptor(field, self.export_map, self.base_file)
                     )
                     .into(),
-                    other => unimplemented!("Unsupported type: {other:?}"),
+                    Type::Group => unimplemented!("Group"),
                 }
             }
 
@@ -499,9 +512,18 @@ fn type_definition_of_field_descriptor(
     base_file: &FileDescriptorProto,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 | Type::Float | Type::Double => {
-            "number".to_owned()
-        }
+        Type::Int32
+        | Type::Uint32
+        | Type::Int64
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Sfixed32
+        | Type::Sfixed64
+        | Type::Float
+        | Type::Double => "number".to_owned(),
         Type::String => "string".to_owned(),
         Type::Bool => "boolean".to_owned(),
         Type::Bytes => "buffer".to_owned(),
@@ -532,7 +554,8 @@ fn type_definition_of_field_descriptor(
                 )
             }
         }
-        other => unimplemented!("Unsupported type: {other:?}"),
+
+        Type::Group => unimplemented!("Group"),
     }
 }
 
@@ -546,13 +569,18 @@ pub enum WireType {
 
 pub fn wire_type_of_field_descriptor(field: &FieldDescriptorProto) -> WireType {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 | Type::Enum | Type::Bool => {
-            WireType::Varint
-        }
-        Type::Float => WireType::I32,
-        Type::Double => WireType::I64,
+        Type::Int32
+        | Type::Uint32
+        | Type::Int64
+        | Type::Uint64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Enum
+        | Type::Bool => WireType::Varint,
+        Type::Float | Type::Fixed32 | Type::Sfixed32 => WireType::I32,
+        Type::Double | Type::Fixed64 | Type::Sfixed64 => WireType::I64,
         Type::String | Type::Bytes | Type::Message => WireType::LengthDelimited,
-        other => unimplemented!("Unsupported type: {other:?}"),
+        Type::Group => unimplemented!("Group"),
     }
 }
 
@@ -571,6 +599,19 @@ fn encode_field_descriptor_ignore_repeated(
             format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})"),
         ]
         .join("\n"),
+
+        Type::Sint32 | Type::Sint64 => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
+                    field.number()
+                ),
+                format!(
+                    "output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag({value_var}))",
+                ),
+            ]
+            .join("\n")
+        }
 
         Type::Float => [
             format!(
@@ -655,7 +696,12 @@ fn encode_field_descriptor_ignore_repeated(
             .join("\n")
         }
 
-        other => unimplemented!("Unsupported type: {other:?}"),
+        Type::Fixed64 => todo!(),
+        Type::Fixed32 => todo!(),
+        Type::Sfixed32 => todo!(),
+        Type::Sfixed64 => todo!(),
+
+        Type::Group => unimplemented!("Group"),
     }
 }
 
@@ -666,9 +712,18 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Int64 | Type::Uint32 | Type::Uint64 | Type::Bool | Type::String => {
-            value_var.to_owned()
-        }
+        Type::Int32
+        | Type::Int64
+        | Type::Uint32
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Sfixed32
+        | Type::Sfixed64
+        | Type::Bool
+        | Type::String => value_var.to_owned(),
         Type::Float | Type::Double => format!("proto.json.serializeNumber({value_var})"),
         Type::Bytes => format!("proto.json.serializeBuffer({value_var})"),
         Type::Enum => format!(
@@ -679,7 +734,7 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
             "{}.jsonEncode({value_var})",
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
-        other => unimplemented!("Unsupported type: {other:?}"),
+        Type::Group => unimplemented!("Group"),
     }
 }
 
@@ -690,9 +745,18 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Int64 | Type::Uint32 | Type::Uint64 | Type::Bool | Type::String => {
-            value_var.to_owned()
-        }
+        Type::Int32
+        | Type::Int64
+        | Type::Uint32
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sfixed32
+        | Type::Sfixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Bool
+        | Type::String => value_var.to_owned(),
         Type::Float | Type::Double => format!("proto.json.deserializeNumber({value_var})"),
         Type::Bytes => format!("proto.json.deserializeBuffer({value_var})"),
         Type::Enum => format!(
@@ -704,7 +768,7 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
             "{}.jsonDecode({value_var})",
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
-        other => unimplemented!("Unsupported type: {other:?}"),
+        Type::Group => unimplemented!("Group"),
     }
 }
 
@@ -718,9 +782,15 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Uint32
         | Type::Int64
         | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
         | Type::Float
         | Type::Double
         | Type::Bytes => "value".into(),
+
+        Type::Sint32 | Type::Sint64 | Type::Sfixed32 | Type::Sfixed64 => {
+            "proto.decodeZigZag(value)".into()
+        }
 
         Type::Bool => "value ~= 0".into(),
 
@@ -738,7 +808,7 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         )
         .into(),
 
-        other => unimplemented!("Unsupported type: {other:?}"),
+        Type::Group => unimplemented!("Group"),
     }
 }
 

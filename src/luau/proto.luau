@@ -19,7 +19,7 @@ export type Enum<T> = {
 	toNumber: (T) -> number,
 }
 
--- TODO: Round-trip every number 1 through 2^31
+-- TODO: Round-trip every number -2^31 through 2^31
 function proto.readVarInt(input: buffer, cursor: number): (number, number)
 	local width = 0
 	repeat
@@ -170,6 +170,14 @@ end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)
 	return proto.writeBuffer(output, cursor, buffer.fromstring(text))
+end
+
+function proto.decodeZigZag(number: number): number
+	return (if number % 2 == 1 then -number // 2 else number // 2)
+end
+
+function proto.encodeZigZag(number: number): number
+	return if number < 0 then -2 * number - 1 else 2 * number
 end
 
 proto.json = {}
