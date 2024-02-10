@@ -216,7 +216,7 @@ function proto.writeBuffer(output: buffer, cursor: number, input: buffer, length
 end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)
-	return proto.writeBuffer(output, cursor, buffer.fromstring(text))
+	return proto.writeBuffer(output, cursor, buffer.fromstring(text), #text)
 end
 
 function proto.decodeZigZag(number: number): number

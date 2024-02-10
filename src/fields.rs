@@ -722,7 +722,7 @@ fn encode_field_descriptor_ignore_repeated(
                     "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
                     field.number()
                 ),
-                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var})"),
+                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"),
             ]
             .join("\n")
         }
