@@ -295,7 +295,7 @@ impl FieldGenerator<'_> {
     // TODO: Use json_name
     pub fn json_encode(&self) -> StringBuilder {
         let this = format!("self.{}", self.name());
-        let output = format!("output.{}", self.name());
+        let output = format!("output.{}", heck::AsLowerCamelCase(self.name()));
 
         let mut json_encode = StringBuilder::new();
         json_encode.push(format!("if {} then", self.should_encode()));
@@ -403,82 +403,91 @@ impl FieldGenerator<'_> {
         let mut json_decode = StringBuilder::new();
 
         for inner_field in self.inner_fields() {
-            let name = inner_field.name();
+            let real_name = inner_field.name();
+            let json_name = heck::AsLowerCamelCase(real_name).to_string();
 
-            json_decode.push(format!("if input.{name} ~= nil then"));
+            let mut decode_name = |input_name: &str| {
+                json_decode.push(format!("if input.{input_name} ~= nil then"));
 
-            if let Some(map_info) = self.map_type() {
-                json_decode.push(format!(
-                    "local newOutput: {} = {{}}",
-                    self.type_definition()
-                ));
-                json_decode.push(format!("for key, value in input.{name} do"));
-                json_decode.push(format!(
-                    "newOutput[{}] = {}",
-                    json_decode_instruction_field_descriptor_ignore_repeated(
-                        &map_info.key,
-                        self.export_map,
-                        self.base_file,
-                        "key"
-                    ),
-                    json_decode_instruction_field_descriptor_ignore_repeated(
-                        &map_info.value,
-                        self.export_map,
-                        self.base_file,
-                        "value"
-                    )
-                ));
-                json_decode.push("end");
-                json_decode.blank();
-                json_decode.push(format!("self.{name} = newOutput"));
-            } else if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
-                json_decode.push(format!(
-                    "local newOutput: {} = {{}}",
-                    self.type_definition()
-                ));
-                json_decode.push(format!(
-                    "for _, value: {} in input.{name} do",
-                    type_definition_of_field_descriptor(
-                        inner_field,
-                        self.export_map,
-                        self.base_file
-                    )
-                ));
-                json_decode.push(format!(
-                    "table.insert(newOutput, {})",
-                    json_decode_instruction_field_descriptor_ignore_repeated(
-                        inner_field,
-                        self.export_map,
-                        self.base_file,
-                        "value"
-                    )
-                ));
-                json_decode.push("end");
-                json_decode.blank();
-                json_decode.push(format!("self.{name} = newOutput"));
-            } else {
-                let json_decode_instruction =
-                    json_decode_instruction_field_descriptor_ignore_repeated(
-                        inner_field,
-                        self.export_map,
-                        self.base_file,
-                        &format!("input.{name}"),
-                    );
-
-                if let FieldKind::OneOf {
-                    name: oneof_name, ..
-                } = &self.field_kind
-                {
+                if let Some(map_info) = self.map_type() {
                     json_decode.push(format!(
-                        "self.{oneof_name} = {{ type = \"{name}\", value = {json_decode_instruction} }}",
+                        "local newOutput: {} = {{}}",
+                        self.type_definition()
                     ));
+                    json_decode.push(format!("for key, value in input.{input_name} do"));
+                    json_decode.push(format!(
+                        "newOutput[{}] = {}",
+                        json_decode_instruction_field_descriptor_ignore_repeated(
+                            &map_info.key,
+                            self.export_map,
+                            self.base_file,
+                            "key"
+                        ),
+                        json_decode_instruction_field_descriptor_ignore_repeated(
+                            &map_info.value,
+                            self.export_map,
+                            self.base_file,
+                            "value"
+                        )
+                    ));
+                    json_decode.push("end");
+                    json_decode.blank();
+                    json_decode.push(format!("self.{real_name} = newOutput"));
+                } else if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
+                    json_decode.push(format!(
+                        "local newOutput: {} = {{}}",
+                        self.type_definition()
+                    ));
+                    json_decode.push(format!(
+                        "for _, value: {} in input.{input_name} do",
+                        type_definition_of_field_descriptor(
+                            inner_field,
+                            self.export_map,
+                            self.base_file
+                        )
+                    ));
+                    json_decode.push(format!(
+                        "table.insert(newOutput, {})",
+                        json_decode_instruction_field_descriptor_ignore_repeated(
+                            inner_field,
+                            self.export_map,
+                            self.base_file,
+                            "value"
+                        )
+                    ));
+                    json_decode.push("end");
+                    json_decode.blank();
+                    json_decode.push(format!("self.{real_name} = newOutput"));
                 } else {
-                    json_decode.push(format!("self.{name} = {json_decode_instruction}"));
-                }
-            }
+                    let json_decode_instruction =
+                        json_decode_instruction_field_descriptor_ignore_repeated(
+                            inner_field,
+                            self.export_map,
+                            self.base_file,
+                            &format!("input.{input_name}"),
+                        );
 
-            json_decode.push("end");
-            json_decode.blank();
+                    if let FieldKind::OneOf {
+                        name: oneof_name, ..
+                    } = &self.field_kind
+                    {
+                        json_decode.push(format!(
+                        "self.{oneof_name} = {{ type = \"{real_name}\", value = {json_decode_instruction} }}",
+                    ));
+                    } else {
+                        json_decode.push(format!("self.{real_name} = {json_decode_instruction}"));
+                    }
+                }
+
+                json_decode.push("end");
+                json_decode.blank();
+            };
+
+            decode_name(real_name);
+
+            if real_name != json_name {
+                decode_name(&json_name);
+            }
         }
 
         json_decode

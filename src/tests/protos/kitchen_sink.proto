@@ -65,6 +65,8 @@ message KitchenSink {
 	map<int32, MyEnum> mapWithEnums = 26;
 
 	AliasedEnum aliasedEnum = 27;
+
+	int32 NotCamelCase = 28;
 }
 
 enum AliasedEnum {

@@ -606,6 +606,7 @@ name = "protoc-gen-luau"
 version = "0.1.0"
 dependencies = [
  "color-eyre",
+ "heck",
  "pathdiff",
  "prost",
  "prost-types",
