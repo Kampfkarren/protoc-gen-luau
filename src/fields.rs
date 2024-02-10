@@ -514,22 +514,18 @@ fn type_definition_of_field_descriptor(
             let just_type = segments.pop().unwrap();
             let package = segments.join(".");
 
-            if package == base_file.package() {
-                just_type.to_owned()
-            } else {
-                let export = export_map
-                    .get(&format!("{package}.{just_type}"))
-                    .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
+            let export = export_map
+                .get(&format!("{package}.{just_type}"))
+                .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
 
-                if export.path == Path::new(base_file.name()).with_extension("") {
-                    format!("{}{just_type}", export.prefix)
-                } else {
-                    format!(
-                        "{}.{}{just_type}",
-                        file_path_export_name(&export.path),
-                        export.prefix,
-                    )
-                }
+            if export.path == Path::new(base_file.name()).with_extension("") {
+                format!("{}{just_type}", export.prefix)
+            } else {
+                format!(
+                    "{}.{}{just_type}",
+                    file_path_export_name(&export.path),
+                    export.prefix,
+                )
             }
         }
         other => unimplemented!("Unsupported type: {other:?}"),

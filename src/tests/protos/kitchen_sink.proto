@@ -3,6 +3,7 @@ syntax = "proto3";
 package my.package;
 
 import "include_me.proto";
+import "same_package.proto";
 
 enum MyEnum {
 	Zero = 0;
@@ -42,6 +43,8 @@ message KitchenSink {
 
 	float float = 13;
 	double double = 14;
+
+	SamePackageNestedMessage samePackageNestedMessage = 15;
 }
 
 message MessageTwo {
