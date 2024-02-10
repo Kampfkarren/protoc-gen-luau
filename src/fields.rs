@@ -56,7 +56,7 @@ impl FieldGenerator<'_> {
 
     pub fn type_definition_no_presence(&self) -> String {
         match &self.field_kind {
-            FieldKind::Single(field) => format!("{}: {}", field.name(), {
+            FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
                     format!(
                         "{{ [{}]: {} }}",
@@ -81,9 +81,9 @@ impl FieldGenerator<'_> {
                         definition
                     }
                 }
-            }),
+            }
 
-            FieldKind::OneOf { name, fields } => {
+            FieldKind::OneOf { fields, .. } => {
                 let variants = fields
                     .iter()
                     .map(|field| {
@@ -99,7 +99,7 @@ impl FieldGenerator<'_> {
                     })
                     .collect::<Vec<_>>();
 
-                format!("{}: ({})", name, variants.join(" | "))
+                format!("({})", variants.join(" | "))
             }
         }
     }
@@ -122,7 +122,7 @@ impl FieldGenerator<'_> {
                 definition
             }
 
-            FieldKind::OneOf { name, fields, .. } => {
+            FieldKind::OneOf { fields, .. } => {
                 let variants = fields
                     .iter()
                     .map(|field| {
@@ -130,7 +130,7 @@ impl FieldGenerator<'_> {
                     })
                     .collect::<Vec<_>>();
 
-                format!("{name}: ({})?", variants.join(" | "))
+                format!("({})?", variants.join(" | "))
             }
         }
     }
@@ -230,7 +230,10 @@ impl FieldGenerator<'_> {
 
                     encode.push("end");
                 } else if field.label.is_some() && field.label() == Label::Repeated {
-                    encode.push(format!("for _, value in {this} do"));
+                    encode.push(format!(
+                        "for _, value: {} in {this} do",
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                    ));
                     encode.indent();
 
                     encode.push(encode_field_descriptor_ignore_repeated(
@@ -309,7 +312,10 @@ impl FieldGenerator<'_> {
                     json_encode.push(format!("{output} = newOutput"));
                 } else if field.label.is_some() && field.label() == Label::Repeated {
                     json_encode.push("local newOutput = {}");
-                    json_encode.push(format!("for _, value in {this} do"));
+                    json_encode.push(format!(
+                        "for _, value: {} in {this} do",
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                    ));
                     json_encode.push(format!(
                         "table.insert(newOutput, {})",
                         json_encode_instruction_field_descriptor_ignore_repeated(
@@ -394,7 +400,14 @@ impl FieldGenerator<'_> {
                 json_decode.push(format!("self.{name} = newOutput"));
             } else if inner_field.label.is_some() && inner_field.label() == Label::Repeated {
                 json_decode.push("local newOutput = {}");
-                json_decode.push(format!("for _, value in input.{name} do"));
+                json_decode.push(format!(
+                    "for _, value: {} in input.{name} do",
+                    type_definition_of_field_descriptor(
+                        inner_field,
+                        self.export_map,
+                        self.base_file
+                    )
+                ));
                 json_decode.push(format!(
                     "table.insert(newOutput, {})",
                     json_decode_instruction_field_descriptor_ignore_repeated(

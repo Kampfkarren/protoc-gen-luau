@@ -469,9 +469,10 @@ impl<'a> FileGenerator<'a> {
 
         // TODO: Make sure optional and required stuff makes sense between proto2/proto3
         for field in fields {
-            self.types.push(format!("{},", field.type_definition()));
+            self.types
+                .push(format!("{}: {},", field.name(), field.type_definition()));
 
-            json_type.push(format!("{},", field.json_type()));
+            json_type.push(format!("{}: {},", field.name(), field.json_type()));
 
             encode_lines.append(&mut field.encode());
             encode_lines.blank();
