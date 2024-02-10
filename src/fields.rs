@@ -893,11 +893,6 @@ pub fn decode_field(
         decode.blank();
 
         decode.push(format!("{this}[mapKey] = mapValue"));
-    } else if field.label.is_some() && field.label() == Label::Repeated {
-        decode.push(format!(
-            "table.insert({this}, {})",
-            decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
-        ));
     } else {
         match field.r#type() {
             Type::Float => {
@@ -923,7 +918,12 @@ pub fn decode_field(
             _ => {}
         }
 
-        if is_oneof {
+        if field.label.is_some() && field.label() == Label::Repeated {
+            decode.push(format!(
+                "table.insert({this}, {})",
+                decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
+            ));
+        } else if is_oneof {
             decode.push(format!(
                 "{this} = {{ type = \"{}\", value = {} }}",
                 field.name(),

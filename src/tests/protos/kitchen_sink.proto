@@ -58,6 +58,8 @@ message KitchenSink {
 
 	sfixed32 sfixed32 = 22;
 	sfixed64 sfixed64 = 23;
+
+	repeated float floats = 24;
 }
 
 message MessageTwo {
