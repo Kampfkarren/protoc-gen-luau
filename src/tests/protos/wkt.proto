@@ -12,6 +12,7 @@ import "google/protobuf/type.proto";
 import "google/protobuf/wrappers.proto";
 
 message WellKnownTypes {
+	// TODO: Any will not be supported for JSON -- document and block?
 	google.protobuf.Any any = 1;
 	google.protobuf.Api api = 2;
 	google.protobuf.BoolValue boolValue = 3;

@@ -1,6 +1,7 @@
 /target
 
 /conformance
-conformance_test_runner
+conformance/conformance_test_runner
+conformance/last_message.bin
 
 /generated

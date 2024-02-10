@@ -1,5 +1,5 @@
 --!strict
-local proto = require("./proto")
+local proto = require("./")
 
 local function assertEquals<T>(x: T, y: T)
 	if x ~= y then
