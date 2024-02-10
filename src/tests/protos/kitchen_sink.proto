@@ -47,6 +47,8 @@ message KitchenSink {
 
 	SamePackageNestedMessage samePackageNestedMessage = 15;
 	my.package3.DeeperNestedMessage deeperNestedMessage = 16;
+
+	repeated NestedMessage messages = 17;
 }
 
 message MessageTwo {

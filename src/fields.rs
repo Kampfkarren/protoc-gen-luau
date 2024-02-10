@@ -35,7 +35,11 @@ impl FieldGenerator<'_> {
                     return false;
                 }
 
-                (field.label.is_some() && field.label() == Label::Optional)
+                if field.label == Some(Label::Repeated as i32) {
+                    return false;
+                }
+
+                field.label == Some(Label::Optional as i32)
                     || matches!(field.r#type(), Type::Message)
             }
 
