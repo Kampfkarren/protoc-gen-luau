@@ -12,7 +12,10 @@ use prost_types::{
 };
 
 use crate::{
-    fields::{decode_field, wire_type_of_field_descriptor, FieldGenerator, FieldKind, WireType},
+    fields::{
+        decode_field, decode_packed, is_packed, wire_type_of_field_descriptor, FieldGenerator,
+        FieldKind, WireType,
+    },
     if_builder::IfBuilder,
     string_builder::StringBuilder,
 };
@@ -227,14 +230,8 @@ const MESSAGE: &str = r#"<name> = {
             field, wireType, cursor = proto.readTag(input, cursor)
 
             if wireType == proto.wireTypes.varint then
-                local value
-                value, cursor = proto.readVarInt(input, cursor)
-
                 <decode_varint>
             elseif wireType == proto.wireTypes.lengthDelimited then
-                local value
-                value, cursor = proto.readBuffer(input, cursor)
-
                 <decode_len>
             elseif wireType == proto.wireTypes.i32 then
                 <decode_i32>
@@ -511,8 +508,10 @@ impl<'a> FileGenerator<'a> {
             default_lines.push(format!("{} = {},", field.name(), field.default()));
 
             for inner_field in field.inner_fields() {
+                let output = &format!("self.{}", field.name());
+
                 let decoded = decode_field(
-                    &format!("self.{}", field.name()),
+                    output,
                     inner_field,
                     self.export_map,
                     &self.file_descriptor_proto,
@@ -536,6 +535,10 @@ impl<'a> FileGenerator<'a> {
                     WireType::I64 => {
                         i64_fields.insert(inner_field.number(), decoded.build());
                     }
+                }
+
+                if is_packed(inner_field) {
+                    len_fields.insert(inner_field.number(), decode_packed(inner_field, output));
                 }
             }
         }

@@ -67,6 +67,8 @@ message KitchenSink {
 	AliasedEnum aliasedEnum = 27;
 
 	int32 NotCamelCase = 28;
+
+	repeated string strings = 29;
 }
 
 enum AliasedEnum {

@@ -1,4 +1,4 @@
-use std::{borrow::Cow, path::Path};
+use std::{borrow::Cow, collections::HashMap, path::Path};
 
 use prost_types::{
     field_descriptor_proto::{Label, Type},
@@ -932,21 +932,11 @@ pub fn decode_field(
         ));
         decode.blank();
 
-        decode.push(
-            wire_type_header(wire_type_of_field_descriptor(&map_type.key))
-                .replace("value", "readMapKey"),
-        );
-
         decode.append(
             &mut decode_field("mapKey", &map_type.key, export_map, base_file, None, false)
                 .replace("value", "readMapKey"),
         );
         decode.blank();
-
-        decode.push(
-            wire_type_header(wire_type_of_field_descriptor(&map_type.value))
-                .replace("value", "readMapValue"),
-        );
 
         decode.append(
             &mut decode_field(
@@ -994,7 +984,19 @@ pub fn decode_field(
                 decode.push("value, cursor = proto.readSignedFixed64(input, cursor)");
             }
 
-            _ => {}
+            _ => match wire_type_of_field_descriptor(field) {
+                WireType::Varint => {
+                    decode.push("local value");
+                    decode.push("value, cursor = proto.readVarInt(input, cursor)");
+                }
+
+                WireType::LengthDelimited => {
+                    decode.push("local value");
+                    decode.push("value, cursor = proto.readBuffer(input, cursor)");
+                }
+
+                WireType::I32 | WireType::I64 => {}
+            },
         }
 
         if field.label.is_some() && field.label() == Label::Repeated {
@@ -1019,11 +1021,56 @@ pub fn decode_field(
     decode
 }
 
-// TODO: Use this in MESSAGE
-pub fn wire_type_header(wire_type: WireType) -> &'static str {
-    match wire_type {
-        WireType::Varint => "local value\nvalue, cursor = proto.readVarInt(input, cursor)",
-        WireType::LengthDelimited => "local value\nvalue, cursor = proto.readBuffer(input, cursor)",
-        WireType::I32 | WireType::I64 => "",
+pub fn is_packed(field_descriptor: &FieldDescriptorProto) -> bool {
+    if field_descriptor.label.is_none() || field_descriptor.label() != Label::Repeated {
+        return false;
     }
+
+    if !matches!(
+        field_descriptor.r#type(),
+        Type::Double
+            | Type::Float
+            | Type::Int32
+            | Type::Int64
+            | Type::Sint32
+            | Type::Sint64
+            | Type::Uint32
+            | Type::Uint64
+            | Type::Fixed32
+            | Type::Fixed64
+            | Type::Sfixed32
+            | Type::Sfixed64
+            | Type::Bool
+    ) {
+        return false;
+    }
+
+    match field_descriptor.options {
+        // proto2: packed is not default
+        Some(ref options) => options.packed != Some(false),
+        None => true,
+    }
+}
+
+pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> String {
+    let entry_decode = decode_field(
+        output,
+        field_descriptor,
+        &HashMap::new(),
+        &FileDescriptorProto::default(),
+        None,
+        false,
+    )
+    .build();
+
+    indoc::formatdoc! {"
+        local length
+        length, cursor = proto.readVarInt(input, cursor)
+
+        local limit = cursor + length
+
+        while cursor < limit do
+            {entry_decode}
+        end
+    "}
 }
