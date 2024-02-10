@@ -62,6 +62,19 @@ function proto.readDouble(input: buffer, cursor: number): (number, number)
 	return buffer.readf64(input, cursor), cursor + 8
 end
 
+function proto.readFixed32(input: buffer, cursor: number): (number, number)
+	return buffer.readu32(input, cursor), cursor + 4
+end
+
+-- TODO: Test with 0 to 2^32
+function proto.readFixed64(output: buffer, cursor: number): (number, number)
+	-- =(
+	local hex = string.format("%08x", buffer.readu32(output, cursor + 4))
+		.. string.format("%08x", buffer.readu32(output, cursor))
+
+	return assert(tonumber(hex, 16), "Couldn't parse created hex"), cursor + 8
+end
+
 function proto.readTag(input: buffer, cursor: number): (number, number, number)
 	local varInt, newCursor = proto.readVarInt(input, cursor)
 	return bit32.rshift(varInt, 3), bit32.band(varInt, 0b111), newCursor
@@ -151,6 +164,23 @@ end
 function proto.writeDouble(output: buffer, cursor: number, double: number): (buffer, number)
 	output = reserveBuffer(output, cursor, 8)
 	buffer.writef64(output, cursor, double)
+	return output, cursor + 8
+end
+
+function proto.writeFixed32(output: buffer, cursor: number, input: number): (buffer, number)
+	output = reserveBuffer(output, cursor, 4)
+	buffer.writeu32(output, cursor, input)
+	return output, cursor + 4
+end
+
+function proto.writeFixed64(output: buffer, cursor: number, input: number): (buffer, number)
+	output = reserveBuffer(output, cursor, 8)
+
+	-- =(
+	local formatted = string.format("%016x", input)
+	buffer.writeu32(output, cursor, (assert(tonumber(formatted:sub(9, 16), 16), "Couldn't parse created hex")))
+	buffer.writeu32(output, cursor + 4, (assert(tonumber(formatted:sub(1, 8), 16), "Couldn't parse created hex")))
+
 	return output, cursor + 8
 end
 

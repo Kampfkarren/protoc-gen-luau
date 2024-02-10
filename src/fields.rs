@@ -696,8 +696,27 @@ fn encode_field_descriptor_ignore_repeated(
             .join("\n")
         }
 
-        Type::Fixed64 => todo!(),
-        Type::Fixed32 => todo!(),
+        Type::Fixed32 => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
+                    field.number()
+                ),
+                format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
+            ]
+            .join("\n")
+        },
+
+        Type::Fixed64 => {
+            [
+                format!(
+                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
+                    field.number()
+                ),
+                format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
+            ].join("\n")
+        },
+
         Type::Sfixed32 => todo!(),
         Type::Sfixed64 => todo!(),
 
@@ -872,6 +891,16 @@ pub fn decode_field(
             Type::Double => {
                 decode.push("local value");
                 decode.push("value, cursor = proto.readDouble(input, cursor)");
+            }
+
+            Type::Fixed32 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readFixed32(input, cursor)");
+            }
+
+            Type::Fixed64 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readFixed64(input, cursor)");
             }
 
             _ => {}

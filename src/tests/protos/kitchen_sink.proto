@@ -52,6 +52,9 @@ message KitchenSink {
 
 	sint32 sint32 = 18;
 	sint64 sint64 = 19;
+
+	fixed32 fixed32 = 20;
+	fixed64 fixed64 = 21;
 }
 
 message MessageTwo {
