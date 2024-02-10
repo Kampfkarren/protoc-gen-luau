@@ -514,6 +514,10 @@ impl FieldGenerator<'_> {
     }
 
     pub fn default(&self) -> Cow<'static, str> {
+        if self.has_presence() {
+            return "nil".into();
+        }
+
         match self.field_kind {
             FieldKind::Single(field) => {
                 if field.label.is_some() && field.label() == Label::Repeated {
