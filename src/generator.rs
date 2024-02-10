@@ -249,7 +249,6 @@ const MESSAGE: &str = r#"<name> = {
         <json_encode>
     end,
 
-    -- TODO: This doesn't work with Duration and stuff
     jsonDecode = function(input: { [string]: any }): <name>
         <json_decode>
     end
@@ -416,7 +415,15 @@ impl<'a> FileGenerator<'a> {
 
     fn generate_message(&mut self, message: &DescriptorProto, prefix: &str) {
         let name = format!("{prefix}{}", message.name());
-        self.exports.push(name.clone());
+
+        if !message
+            .options
+            .as_ref()
+            .map(|options| options.map_entry())
+            .unwrap_or(false)
+        {
+            self.exports.push(name.clone());
+        }
 
         self.types
             .push(format!("local {name}: proto.Message<{name}>"));
@@ -595,12 +602,6 @@ impl<'a> FileGenerator<'a> {
         self.implementations.blank();
 
         for nested_message in &message.nested_type {
-            if let Some(options) = &nested_message.options {
-                if options.map_entry() {
-                    continue;
-                }
-            }
-
             self.generate_message(nested_message, &format!("{name}_"));
         }
 

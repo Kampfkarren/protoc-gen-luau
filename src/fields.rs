@@ -919,41 +919,19 @@ pub fn decode_field(
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
-    if let Some(map_type) = map_type {
-        decode.push("local _length");
-        decode.push("_length, cursor = proto.readVarInt(input, cursor)");
-        decode.blank();
+    if map_type.is_some() {
+        let map_entry_type = type_definition_of_field_descriptor(field, export_map, base_file);
 
-        decode.push(format!(
-            "local mapKey: {}",
-            type_definition_of_field_descriptor(&map_type.key, export_map, base_file),
-        ));
-        decode.push(format!(
-            "local mapValue: {}",
-            type_definition_of_field_descriptor(&map_type.value, export_map, base_file),
-        ));
-        decode.blank();
+        decode.push(indoc::formatdoc! {"
+            local value
+            value, cursor = proto.readBuffer(input, cursor)
 
-        decode.append(
-            &mut decode_field("mapKey", &map_type.key, export_map, base_file, None, false)
-                .replace("value", "readMapKey"),
-        );
-        decode.blank();
+            local mapEntry = {map_entry_type}.decode(value)
 
-        decode.append(
-            &mut decode_field(
-                "mapValue",
-                &map_type.value,
-                export_map,
-                base_file,
-                None,
-                false,
-            )
-            .replace("value", "readMapValue"),
-        );
-        decode.blank();
-
-        decode.push(format!("{this}[mapKey] = mapValue"));
+            if mapEntry.key ~= nil and mapEntry.value ~= nil then
+                {this}[mapEntry.key] = mapEntry.value
+            end
+        "});
     } else {
         match field.r#type() {
             Type::Float => {
