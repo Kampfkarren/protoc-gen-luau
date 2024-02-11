@@ -259,8 +259,26 @@ function proto.json.serializeNumber(input: number): string | number
 		else input
 end
 
+function proto.json.deserializeNumber(input: string): number
+	if input == "Infinity" then
+		return math.huge
+	elseif input == "-Infinity" then
+		return -math.huge
+	elseif input == "NaN" then
+		return 0 / 0
+	else
+		local number = tonumber(input)
+		assert(number ~= nil, "Number given that could not be parsed")
+		return number
+	end
+end
+
 function proto.json.serializeBuffer(input: buffer): string
-	return base64.decode(buffer.tostring(input))
+	return base64.encode(buffer.tostring(input))
+end
+
+function proto.json.deserializeBuffer(input: string): buffer
+	return buffer.fromstring(base64.decode(input))
 end
 
 return proto

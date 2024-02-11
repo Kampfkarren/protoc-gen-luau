@@ -254,21 +254,49 @@ impl FieldGenerator<'_> {
 
                     encode.push("end");
                 } else if field.label.is_some() && field.label() == Label::Repeated {
-                    encode.push(format!(
-                        "for _, value: {} in {this} do",
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                    ));
-                    encode.indent();
+                    if is_packed(field) {
+                        let field_number = field.number();
+                        let write_value = encode_field_descriptor_ignore_repeated_instruction(
+                            field,
+                            self.export_map,
+                            self.base_file,
+                            "value",
+                        )
+                        .replace("cursor", "packedCursor")
+                        .replace("output", "packedBuffer");
 
-                    encode.push(encode_field_descriptor_ignore_repeated(
-                        field,
-                        self.export_map,
-                        self.base_file,
-                        "value",
-                    ));
+                        encode.push(indoc::formatdoc!{"
+                            local packedBuffer = buffer.create(0)
+                            local packedCursor = 0
 
-                    encode.dedent();
-                    encode.push("end");
+                            for _, value in {this} do
+                                {write_value}
+                            end
+
+                            output, cursor = proto.writeTag(output, cursor, {field_number}, proto.wireTypes.lengthDelimited)
+                            output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+                        "});
+                    } else {
+                        encode.push(format!(
+                            "for _, value: {} in {this} do",
+                            type_definition_of_field_descriptor(
+                                field,
+                                self.export_map,
+                                self.base_file
+                            )
+                        ));
+                        encode.indent();
+
+                        encode.push(encode_field_descriptor_ignore_repeated(
+                            field,
+                            self.export_map,
+                            self.base_file,
+                            "value",
+                        ));
+
+                        encode.dedent();
+                        encode.push("end");
+                    }
                 } else {
                     encode.push(encode_field_descriptor_ignore_repeated(
                         field,
@@ -648,160 +676,93 @@ pub fn wire_type_of_field_descriptor(field: &FieldDescriptorProto) -> WireType {
     }
 }
 
-fn encode_field_descriptor_ignore_repeated(
+fn encode_field_descriptor_ignore_repeated_instruction(
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
     base_file: &FileDescriptorProto,
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 => [
-            format!(
-                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
-                field.number()
-            ),
+        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 =>
             format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})"),
-        ]
-        .join("\n"),
 
-        Type::Sint32 | Type::Sint64 => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
-                    field.number()
-                ),
-                format!(
-                    "output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag({value_var}))",
-                ),
-            ]
-            .join("\n")
-        }
+        Type::Sint32 | Type::Sint64 => format!(
+            "output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag({value_var}))",
+        ),
 
-        Type::Float => [
-            format!(
-                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
-                field.number()
-            ),
-            format!("output, cursor = proto.writeFloat(output, cursor, {value_var})"),
-        ]
-        .join("\n"),
+        Type::Float => format!("output, cursor = proto.writeFloat(output, cursor, {value_var})"),
+        Type::Double => format!("output, cursor = proto.writeDouble(output, cursor, {value_var})"),
+        Type::String => format!("output, cursor = proto.writeString(output, cursor, {value_var})"),
 
-        Type::Double => [
-            format!(
-                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
-                field.number()
-            ),
-            format!("output, cursor = proto.writeDouble(output, cursor, {value_var})"),
-        ]
-        .join("\n"),
+        Type::Bool => format!(
+            "output, cursor = proto.writeVarInt(output, cursor, if {value_var} then 1 else 0)",
+        ),
 
-        Type::String => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeString(output, cursor, {value_var})"),
-            ]
-            .join("\n")
-        }
+        Type::Bytes => format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"),
 
-        Type::Bool => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
-                    field.number()
-                ),
-                format!(
-                    "output, cursor = proto.writeVarInt(output, cursor, if {value_var} then 1 else 0)",
-                ),
-            ]
-            .join("\n")
-        }
+        Type::Enum => format!(
+            "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var}))",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        ),
 
-        Type::Bytes => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"),
-            ]
-            .join("\n")
-        }
+        Type::Message => unimplemented!(),
 
-        Type::Enum => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
-                    field.number()
-                ),
-                format!(
-                    "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var}))",
-                    type_definition_of_field_descriptor(field, export_map, base_file)
-                ),
-            ]
-            .join("\n")
-        }
+        Type::Fixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
+        Type::Fixed64 => format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
 
-        Type::Message => {
-            [
-                format!(
-                    "local encoded = {}.encode({value_var})",
-                    type_definition_of_field_descriptor(field, export_map, base_file)
-                ),
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
-                    field.number()
-                ),
-                "output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))".to_owned(),
-            ]
-            .join("\n")
-        }
-
-        Type::Fixed32 => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
-            ]
-            .join("\n")
-        },
-
-        Type::Fixed64 => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
-            ].join("\n")
-        },
-
-        Type::Sfixed32 => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeFixed32(output, cursor, proto.encodeZigZag({value_var}))"),
-            ].join("\n")
-        },
-
-        Type::Sfixed64 => {
-            [
-                format!(
-                    "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
-                    field.number()
-                ),
-                format!("output, cursor = proto.writeFixed64(output, cursor, proto.encodeZigZag({value_var}))"),
-            ].join("\n")
-        },
+        Type::Sfixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, proto.encodeZigZag({value_var}))"),
+        Type::Sfixed64 =>  format!("output, cursor = proto.writeFixed64(output, cursor, proto.encodeZigZag({value_var}))"),
 
         Type::Group => unimplemented!("Group"),
     }
+}
+
+fn encode_field_descriptor_ignore_repeated(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+    value_var: &str,
+) -> String {
+    if field.r#type() == Type::Message {
+        return [
+            format!(
+                "local encoded = {}.encode({value_var})",
+                type_definition_of_field_descriptor(field, export_map, base_file)
+            ),
+            format!(
+                "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
+                field.number()
+            ),
+            "output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))".to_owned(),
+        ]
+        .join("\n");
+    }
+
+    let setup = match wire_type_of_field_descriptor(field) {
+        WireType::Varint => format!(
+            "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.varint)",
+            field.number()
+        ),
+        WireType::LengthDelimited => format!(
+            "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
+            field.number()
+        ),
+        WireType::I32 => format!(
+            "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i32)",
+            field.number()
+        ),
+        WireType::I64 => format!(
+            "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.i64)",
+            field.number()
+        ),
+    };
+
+    format!(
+        "{setup}\n{}",
+        encode_field_descriptor_ignore_repeated_instruction(
+            field, export_map, base_file, value_var
+        )
+    )
 }
 
 fn json_encode_instruction_field_descriptor_ignore_repeated(
