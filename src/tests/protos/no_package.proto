@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message NoPackage {
+	message NestedMessage {
+		int32 x = 1;
+	}
+	NestedMessage message = 1;
+}

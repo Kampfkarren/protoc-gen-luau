@@ -346,7 +346,7 @@ impl FieldGenerator<'_> {
 
         match &self.field_kind {
             FieldKind::Single(field) => {
-                let output = json_name(field);
+                let output = format!("output.{}", json_name(field));
 
                 if let Some(map_type) = self.map_type() {
                     json_encode.push(format!(
