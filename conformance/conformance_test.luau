@@ -8,6 +8,8 @@ local stdio = require("@lune/stdio")
 local conformance = require("./generated/conformance")
 local test_messages_proto3 = require("./generated/test_messages_proto3")
 
+local jsonEncode = require("jsonEncode")
+
 local file = buffer.fromstring(fs.readFile(process.args[1]))
 
 local request = conformance.ConformanceRequest.decode(file)
@@ -97,7 +99,7 @@ local ok, problem: any = pcall(function()
 	if request.requested_output_format == "JSON" then
 		response.result = {
 			type = "json_payload",
-			value = net.jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes)),
+			value = jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes)),
 		}
 	elseif request.requested_output_format == "PROTOBUF" then
 		response.result = {
