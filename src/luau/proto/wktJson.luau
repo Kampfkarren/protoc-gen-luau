@@ -172,13 +172,14 @@ wktJson.NullValue = {
 	end,
 } :: WellKnownType<NullValue, nil>
 
-type Value =
-	{ type: "null_value", value: NullValue }
-	| { type: "number_value", value: number }
-	| { type: "string_value", value: string }
-	| { type: "bool_value", value: boolean }
-	| { type: "struct_value", value: Struct }
-	| { type: "list_value", value: ListValue }
+type Value = {
+	kind: { type: "null_value", value: NullValue }
+		| { type: "number_value", value: number }
+		| { type: "string_value", value: string }
+		| { type: "bool_value", value: boolean }
+		| { type: "struct_value", value: Struct }
+		| { type: "list_value", value: ListValue },
+}
 
 -- Going to redeclare soon
 wktJson.ListValue = {} :: WellKnownType<ListValue, { any }>
@@ -186,29 +187,31 @@ wktJson.Struct = {} :: WellKnownType<Struct, { [string]: any }>
 
 wktJson.Value = {
 	serialize = function(input: Value)
-		if input.type == "null_value" then
+		local kind = input.kind
+
+		if kind.type == "null_value" then
 			return nil
-		elseif input.type == "number_value" or input.type == "string_value" or input.type == "bool_value" then
-			return input.value
-		elseif input.type == "list_value" then
-			return wktJson.ListValue.serialize(input.value)
-		elseif input.type == "struct_value" then
-			return wktJson.Struct.serialize(input.value)
+		elseif kind.type == "number_value" or kind.type == "string_value" or kind.type == "bool_value" then
+			return kind.value
+		elseif kind.type == "list_value" then
+			return wktJson.ListValue.serialize(kind.value)
+		elseif kind.type == "struct_value" then
+			return wktJson.Struct.serialize(kind.value)
 		else
-			local exhaustiveMatch: never = input.type
+			local exhaustiveMatch: never = kind.type
 			return exhaustiveMatch
 		end
 	end,
 
 	deserialize = function(input: any): Value
 		if input == nil then
-			return { type = "null_value", value = "NULL_VALUE" }
+			return { kind = { type = "null_value", value = "NULL_VALUE" } }
 		elseif typeof(input) == "number" then
-			return { type = "number_value", value = input }
+			return { kind = { type = "number_value", value = input } }
 		elseif typeof(input) == "string" then
-			return { type = "string_value", value = input }
+			return { kind = { type = "string_value", value = input } }
 		elseif typeof(input) == "boolean" then
-			return { type = "bool_value", value = input }
+			return { kind = { type = "bool_value", value = input } }
 		elseif typeof(input) == "table" then
 			local isArray = true
 			local count = 0
@@ -223,9 +226,9 @@ wktJson.Value = {
 			isArray = count == #input
 
 			if isArray then
-				return { type = "list_value", value = wktJson.ListValue.deserialize(input) }
+				return { kind = { type = "list_value", value = wktJson.ListValue.deserialize(input) } }
 			else
-				return { type = "struct_value", value = wktJson.Struct.deserialize(input) }
+				return { kind = { type = "struct_value", value = wktJson.Struct.deserialize(input) } }
 			end
 		else
 			error(`Unknown input type: {typeof(input)}`)
