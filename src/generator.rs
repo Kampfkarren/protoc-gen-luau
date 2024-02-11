@@ -701,6 +701,10 @@ fn message_type_has_special_json(file: &FileDescriptorProto, message: &Descripto
                 | "UInt32Value"
                 | "UInt64Value"
                 | "StringValue"
+                | "NullValue"
+                | "Value"
+                | "Struct"
+                | "ListValue"
                 | "Timestamp"
         )
 }

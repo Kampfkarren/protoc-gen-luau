@@ -161,4 +161,128 @@ wktJson.UInt32Value = createRawValue() :: RawValue<number>
 wktJson.UInt64Value = createRawValue() :: RawValue<number>
 wktJson.StringValue = createRawValue() :: RawValue<string>
 
+type NullValue = "NULL_VALUE" | number
+wktJson.NullValue = {
+	serialize = function()
+		return nil
+	end,
+
+	deserialize = function()
+		return "NULL_VALUE"
+	end,
+} :: WellKnownType<NullValue, nil>
+
+type Value =
+	{ type: "null_value", value: NullValue }
+	| { type: "number_value", value: number }
+	| { type: "string_value", value: string }
+	| { type: "bool_value", value: boolean }
+	| { type: "struct_value", value: Struct }
+	| { type: "list_value", value: ListValue }
+
+-- Going to redeclare soon
+wktJson.ListValue = {} :: WellKnownType<ListValue, { any }>
+wktJson.Struct = {} :: WellKnownType<Struct, { [string]: any }>
+
+wktJson.Value = {
+	serialize = function(input: Value)
+		if input.type == "null_value" then
+			return nil
+		elseif input.type == "number_value" or input.type == "string_value" or input.type == "bool_value" then
+			return input.value
+		elseif input.type == "list_value" then
+			return wktJson.ListValue.serialize(input.value)
+		elseif input.type == "struct_value" then
+			return wktJson.Struct.serialize(input.value)
+		else
+			local exhaustiveMatch: never = input.type
+			return exhaustiveMatch
+		end
+	end,
+
+	deserialize = function(input: any): Value
+		if input == nil then
+			return { type = "null_value", value = "NULL_VALUE" }
+		elseif typeof(input) == "number" then
+			return { type = "number_value", value = input }
+		elseif typeof(input) == "string" then
+			return { type = "string_value", value = input }
+		elseif typeof(input) == "table" then
+			local isArray = true
+			local count = 0
+			for _ in input do
+				count += 1
+				if count > #input then
+					isArray = false
+					break
+				end
+			end
+
+			isArray = count == #input
+
+			if isArray then
+				return { type = "list_value", value = wktJson.ListValue.deserialize(input) }
+			else
+				return { type = "struct_value", value = wktJson.Struct.deserialize(input) }
+			end
+		else
+			error(`Unknown input type: {typeof(input)}`)
+		end
+	end,
+} :: WellKnownType<Value, any>
+
+type Struct = {
+	fields: { [string]: Value },
+}
+wktJson.Struct = {
+	serialize = function(struct: Struct): { [string]: any }
+		local serialized = {}
+
+		for key, value in struct.fields do
+			serialized[key] = wktJson.Value.deserialize(value)
+		end
+
+		return serialized
+	end,
+
+	deserialize = function(input: { [string]: any }): Struct
+		local fields = {}
+
+		for key, serializedValue in input do
+			fields[key] = wktJson.Value.deserialize(serializedValue)
+		end
+
+		return {
+			fields = fields,
+		}
+	end,
+}
+
+type ListValue = {
+	values: { Value },
+}
+wktJson.ListValue = {
+	serialize = function(list: ListValue): { any }
+		local serialized = {}
+
+		for _, value in list.values do
+			table.insert(serialized, wktJson.Value.serialize(value))
+		end
+
+		return serialized
+	end,
+
+	deserialize = function(input: { any }): ListValue
+		local values = {}
+
+		for _, value in input do
+			table.insert(values, wktJson.Value.deserialize(value))
+		end
+
+		return {
+			values = values,
+		}
+	end,
+} :: WellKnownType<ListValue, { any }>
+
 return wktJson

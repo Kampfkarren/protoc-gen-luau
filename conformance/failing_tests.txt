@@ -80,9 +80,7 @@ Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotStrin
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotMessage
-Required.Proto3.JsonInput.RepeatedListValue.JsonOutput
 Required.Proto3.JsonInput.RepeatedListValue.ProtobufOutput
-Required.Proto3.JsonInput.RepeatedValue.JsonOutput
 Required.Proto3.JsonInput.RepeatedValue.ProtobufOutput
 Required.Proto3.JsonInput.StringFieldNotAString
 Required.Proto3.JsonInput.Struct.JsonOutput
@@ -117,17 +115,13 @@ Required.Proto3.JsonInput.Uint64FieldNotNumber
 Required.Proto3.JsonInput.Uint64FieldTooLarge
 Required.Proto3.JsonInput.ValueAcceptBool.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptBool.ProtobufOutput
-Required.Proto3.JsonInput.ValueAcceptFloat.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptFloat.ProtobufOutput
-Required.Proto3.JsonInput.ValueAcceptInteger.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptInteger.ProtobufOutput
-Required.Proto3.JsonInput.ValueAcceptList.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptList.ProtobufOutput
 Required.Proto3.JsonInput.ValueAcceptNull.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptNull.ProtobufOutput
 Required.Proto3.JsonInput.ValueAcceptObject.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptObject.ProtobufOutput
-Required.Proto3.JsonInput.ValueAcceptString.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptString.ProtobufOutput
 Required.Proto3.ProtobufInput.IllegalZeroFieldNum_Case_1
 Required.Proto3.ProtobufInput.PrematureEofBeforeUnknownValue.BOOL
