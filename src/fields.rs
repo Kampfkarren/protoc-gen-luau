@@ -114,12 +114,25 @@ impl FieldGenerator<'_> {
         definition
     }
 
+    fn json_map_type_definition(&self) -> String {
+        let map_type = self.map_type().unwrap();
+
+        format!(
+            "{{ [string]: {} }}",
+            type_definition_of_field_descriptor(&map_type.value, self.export_map, self.base_file)
+        )
+    }
+
     pub fn json_type(&self) -> String {
         match &self.field_kind {
             FieldKind::Single(_) => {
-                let mut definition = self.type_definition_no_presence();
-                definition.push('?');
-                definition
+                if self.map_type().is_some() {
+                    format!("{}?", self.json_map_type_definition())
+                } else {
+                    let mut definition = self.type_definition_no_presence();
+                    definition.push('?');
+                    definition
+                }
             }
 
             FieldKind::OneOf { fields, .. } => {
@@ -304,7 +317,7 @@ impl FieldGenerator<'_> {
                 if let Some(map_type) = self.map_type() {
                     json_encode.push(format!(
                         "local newOutput: {} = {{}}",
-                        self.type_definition()
+                        self.json_map_type_definition()
                     ));
                     json_encode.push(format!(
                         "for key: {}, value: {} in {this} do",
@@ -321,12 +334,7 @@ impl FieldGenerator<'_> {
                     ));
                     json_encode.push(format!(
                         "newOutput[{}] = {}",
-                        json_encode_instruction_field_descriptor_ignore_repeated(
-                            &map_type.key,
-                            self.export_map,
-                            self.base_file,
-                            "key"
-                        ),
+                        json_key_to_string(&map_type.key).encode,
                         json_encode_instruction_field_descriptor_ignore_repeated(
                             &map_type.value,
                             self.export_map,
@@ -408,7 +416,7 @@ impl FieldGenerator<'_> {
             let mut decode_name = |input_name: &str| {
                 json_decode.push(format!("if input.{input_name} ~= nil then"));
 
-                if let Some(map_info) = self.map_type() {
+                if let Some(map_type) = self.map_type() {
                     json_decode.push(format!(
                         "local newOutput: {} = {{}}",
                         self.type_definition()
@@ -416,14 +424,9 @@ impl FieldGenerator<'_> {
                     json_decode.push(format!("for key, value in input.{input_name} do"));
                     json_decode.push(format!(
                         "newOutput[{}] = {}",
+                        json_key_to_string(&map_type.key).decode,
                         json_decode_instruction_field_descriptor_ignore_repeated(
-                            &map_info.key,
-                            self.export_map,
-                            self.base_file,
-                            "key"
-                        ),
-                        json_decode_instruction_field_descriptor_ignore_repeated(
-                            &map_info.value,
+                            &map_type.value,
                             self.export_map,
                             self.base_file,
                             "value"
@@ -865,6 +868,42 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
         Type::Group => unimplemented!("Group"),
+    }
+}
+
+struct JsonKeyToString {
+    encode: &'static str,
+    decode: &'static str,
+}
+fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
+    match field.r#type() {
+        Type::Bool => JsonKeyToString {
+            encode: "tostring(key)",
+            decode: "if key == \"true\" then true else false",
+        },
+
+        Type::String => JsonKeyToString {
+            encode: "key",
+            decode: "key",
+        },
+
+        Type::Int32
+        | Type::Int64
+        | Type::Uint32
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Sfixed32
+        | Type::Sfixed64 => JsonKeyToString {
+            encode: "tostring(key)",
+            decode: "(assert(tonumber(key), \"Invalid number provided as key\"))",
+        },
+
+        Type::Double | Type::Float | Type::Group | Type::Message | Type::Bytes | Type::Enum => {
+            unreachable!("Invalid type for map key")
+        }
     }
 }
 
