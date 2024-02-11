@@ -596,13 +596,13 @@ fn type_definition_of_field_descriptor(
         Type::Bool => "boolean".to_owned(),
         Type::Bytes => "buffer".to_owned(),
         Type::Enum | Type::Message => {
-            let type_name = field.type_name();
+            let original_type_name = field.type_name();
             assert!(
-                type_name.starts_with('.'),
-                "NYI: Relative type names: {type_name:?}"
+                original_type_name.starts_with('.'),
+                "NYI: Relative type names: {original_type_name}"
             );
 
-            let type_name = &type_name[1..];
+            let type_name = &original_type_name[1..];
 
             let mut segments: Vec<&str> = type_name.split('.').collect();
             let just_type = segments.pop().unwrap();
@@ -610,6 +610,7 @@ fn type_definition_of_field_descriptor(
 
             let export = export_map
                 .get(&format!("{package}.{just_type}"))
+                .or_else(|| export_map.get(original_type_name))
                 .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
 
             if export.path == Path::new(base_file.name()).with_extension("") {
