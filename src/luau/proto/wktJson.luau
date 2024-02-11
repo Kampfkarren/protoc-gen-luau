@@ -207,6 +207,8 @@ wktJson.Value = {
 			return { type = "number_value", value = input }
 		elseif typeof(input) == "string" then
 			return { type = "string_value", value = input }
+		elseif typeof(input) == "boolean" then
+			return { type = "bool_value", value = input }
 		elseif typeof(input) == "table" then
 			local isArray = true
 			local count = 0

@@ -113,7 +113,6 @@ Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.JsonOutput
 Required.Proto3.JsonInput.Uint64FieldNotInteger
 Required.Proto3.JsonInput.Uint64FieldNotNumber
 Required.Proto3.JsonInput.Uint64FieldTooLarge
-Required.Proto3.JsonInput.ValueAcceptBool.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptBool.ProtobufOutput
 Required.Proto3.JsonInput.ValueAcceptFloat.ProtobufOutput
 Required.Proto3.JsonInput.ValueAcceptInteger.ProtobufOutput

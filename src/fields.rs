@@ -940,6 +940,7 @@ pub fn decode_field(
         let value_default =
             default_of_type_descriptor_ignore_presence(&map_type.value, export_map, base_file);
 
+        // TODO: Type keyDefault and valueDefault
         decode.push(indoc::formatdoc! {"
             local value
             value, cursor = proto.readBuffer(input, cursor)
