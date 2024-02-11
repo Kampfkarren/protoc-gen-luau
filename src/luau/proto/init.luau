@@ -132,6 +132,8 @@ function proto.writeVarInt(output: buffer, cursor: number, number: number): (buf
 	else
 		local comp = 2 ^ 53 + number -- precision lost, could error
 
+		output = reserveBuffer(output, cursor, 10)
+
 		buffer.writeu8(output, cursor + 0, bit32.bor(highestBitMask, comp % highestBitMask))
 		buffer.writeu8(output, cursor + 1, bit32.bor(highestBitMask, comp // highestBitMask % highestBitMask))
 		buffer.writeu8(output, cursor + 2, bit32.bor(highestBitMask, comp // (highestBitMask ^ 2) % highestBitMask))
@@ -159,7 +161,7 @@ function proto.writeVarInt(output: buffer, cursor: number, number: number): (buf
 		buffer.writeu8(output, cursor + 8, 0b1111_1111)
 		buffer.writeu8(output, cursor + 9, 0b0000_0001)
 
-		return output, cursor
+		return output, cursor + 10
 	end
 end
 
@@ -225,6 +227,17 @@ end
 
 function proto.encodeZigZag(number: number): number
 	return if number < 0 then -2 * number - 1 else 2 * number
+end
+
+function proto.limitInt32(number: number): number
+	local overflow = math.sign(number) * (math.abs(number) % (2 ^ 32))
+	if overflow >= 2 ^ 31 then
+		overflow -= 2 ^ 31
+	elseif overflow <= -2 ^ 31 then
+		overflow += 2 ^ 31
+	end
+
+	return overflow
 end
 
 proto.json = {}

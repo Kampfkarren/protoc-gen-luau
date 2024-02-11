@@ -885,8 +885,7 @@ fn decode_instruction_field_descriptor_ignore_repeated(
     base_file: &FileDescriptorProto,
 ) -> Cow<'static, str> {
     match field.r#type() {
-        Type::Int32
-        | Type::Uint32
+        Type::Uint32
         | Type::Int64
         | Type::Uint64
         | Type::Fixed32
@@ -896,6 +895,8 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Float
         | Type::Double
         | Type::Bytes => "value".into(),
+
+        Type::Int32 => "proto.limitInt32(value)".into(),
 
         Type::Sint32 | Type::Sint64 => "proto.decodeZigZag(value)".into(),
 

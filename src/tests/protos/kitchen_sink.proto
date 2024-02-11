@@ -25,7 +25,7 @@ message KitchenSink {
 	MyEnum enum = 5;
 	my.package2.MyEnum enum2 = 6;
 
-	repeated int32 ints = 7;
+	repeated int32 ints = 7 [packed = false];
 
 	map<bool, string> map = 8;
 
