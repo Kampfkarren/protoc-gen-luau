@@ -125,8 +125,8 @@ impl FieldGenerator<'_> {
 
     pub fn json_type_and_names(&self) -> StringBuilder {
         match &self.field_kind {
-            FieldKind::Single(_) => {
-                let name = heck::AsLowerCamelCase(self.name());
+            FieldKind::Single(field) => {
+                let name = json_name(field);
 
                 if self.map_type().is_some() {
                     StringBuilder::from(format!("{name}: {}?,", self.json_map_type_definition()))
@@ -143,7 +143,7 @@ impl FieldGenerator<'_> {
                 for field in fields {
                     json_type_and_names.push(format!(
                         "{}: {}?,",
-                        heck::AsLowerCamelCase(field.name()),
+                        json_name(field),
                         type_definition_of_field_descriptor(field, self.export_map, self.base_file)
                     ));
                 }
@@ -340,13 +340,14 @@ impl FieldGenerator<'_> {
     // TODO: Use json_name
     pub fn json_encode(&self) -> StringBuilder {
         let this = format!("self.{}", self.name());
-        let output = format!("output.{}", heck::AsLowerCamelCase(self.name()));
 
         let mut json_encode = StringBuilder::new();
         json_encode.push(format!("if {} then", self.should_encode()));
 
         match &self.field_kind {
             FieldKind::Single(field) => {
+                let output = json_name(field);
+
                 if let Some(map_type) = self.map_type() {
                     json_encode.push(format!(
                         "local newOutput: {} = {{}}",
@@ -419,7 +420,7 @@ impl FieldGenerator<'_> {
                         |builder| {
                             builder.push(format!(
                                 "output.{} = {}",
-                                heck::AsLowerCamelCase(field.name()),
+                                json_name(field),
                                 json_encode_instruction_field_descriptor_ignore_repeated(
                                     field,
                                     self.export_map,
@@ -445,7 +446,7 @@ impl FieldGenerator<'_> {
 
         for inner_field in self.inner_fields() {
             let real_name = inner_field.name();
-            let json_name = heck::AsLowerCamelCase(real_name).to_string();
+            let json_name = json_name(inner_field);
 
             let mut decode_name = |input_name: &str| {
                 json_decode.push(format!("if input.{input_name} ~= nil then"));
@@ -837,6 +838,14 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
         Type::Double | Type::Float | Type::Group | Type::Message | Type::Bytes | Type::Enum => {
             unreachable!("Invalid type for map key")
         }
+    }
+}
+
+fn json_name(field: &FieldDescriptorProto) -> Cow<str> {
+    if let Some(json_name) = &field.json_name {
+        json_name.into()
+    } else {
+        heck::AsLowerCamelCase(field.name()).to_string().into()
     }
 }
 

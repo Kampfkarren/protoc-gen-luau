@@ -70,6 +70,8 @@ message KitchenSink {
 
 	repeated string strings = 29;
 	repeated bool bools = 30;
+
+	string customJson = 31 [json_name = "MyCustomJson"];
 }
 
 enum AliasedEnum {
