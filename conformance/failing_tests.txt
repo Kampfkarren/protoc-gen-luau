@@ -163,7 +163,6 @@ Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.INT32.JsonOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.INT32.ProtobufOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.INT64.JsonOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.INT64.ProtobufOutput
-Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.SFIXED32.ProtobufOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.SFIXED64.JsonOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.SFIXED64.ProtobufOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.SINT32.JsonOutput
@@ -174,11 +173,6 @@ Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.UINT32.ProtobufOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.UINT64.JsonOutput
 Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.UINT64.ProtobufOutput
 Required.Proto3.ProtobufInput.UnknownVarint.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataMap.SFIXED32.SFIXED32.DuplicateKey.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataMap.SFIXED32.SFIXED32.DuplicateKeyInMapEntry.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataMap.SFIXED32.SFIXED32.DuplicateValueInMapEntry.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataMap.SFIXED32.SFIXED32.NonDefault.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataMap.SFIXED32.SFIXED32.Unordered.ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataMap.SFIXED64.SFIXED64.Default.JsonOutput
 Required.Proto3.ProtobufInput.ValidDataMap.SFIXED64.SFIXED64.Default.ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataMap.SFIXED64.SFIXED64.DuplicateKey.JsonOutput
@@ -209,8 +203,6 @@ Required.Proto3.ProtobufInput.ValidDataRepeated.INT64.PackedInput.JsonOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.INT64.PackedInput.ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.INT64.UnpackedInput.JsonOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.INT64.UnpackedInput.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataRepeated.SFIXED32.PackedInput.ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataRepeated.SFIXED32.UnpackedInput.ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.SFIXED64.PackedInput.JsonOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.SFIXED64.PackedInput.ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataRepeated.SFIXED64.UnpackedInput.JsonOutput
@@ -246,9 +238,6 @@ Required.Proto3.ProtobufInput.ValidDataScalar.INT64[2].JsonOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.INT64[2].ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.INT64[3].JsonOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.INT64[3].ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED32[1].ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED32[2].ProtobufOutput
-Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED32[3].ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED64[0].JsonOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED64[0].ProtobufOutput
 Required.Proto3.ProtobufInput.ValidDataScalar.SFIXED64[1].JsonOutput

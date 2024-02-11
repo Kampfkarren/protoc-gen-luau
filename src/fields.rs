@@ -682,11 +682,8 @@ fn encode_field_descriptor_ignore_repeated_instruction(
 
         Type::Message => unimplemented!(),
 
-        Type::Fixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
-        Type::Fixed64 => format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
-
-        Type::Sfixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, proto.encodeZigZag({value_var}))"),
-        Type::Sfixed64 =>  format!("output, cursor = proto.writeFixed64(output, cursor, proto.encodeZigZag({value_var}))"),
+        Type::Fixed32 | Type::Sfixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
+        Type::Fixed64 | Type::Sfixed64 => format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
 
         Type::Group => unimplemented!("Group"),
     }
