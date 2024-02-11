@@ -496,11 +496,7 @@ impl<'a> FileGenerator<'a> {
             self.types
                 .push(format!("{}: {},", field.name(), field.type_definition()));
 
-            json_type.push(format!(
-                "{}: {},",
-                heck::AsLowerCamelCase(field.name()),
-                field.json_type()
-            ));
+            json_type.append(&mut field.json_type_and_names());
 
             encode_lines.append(&mut field.encode());
             encode_lines.blank();

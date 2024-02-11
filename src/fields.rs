@@ -123,27 +123,32 @@ impl FieldGenerator<'_> {
         )
     }
 
-    pub fn json_type(&self) -> String {
+    pub fn json_type_and_names(&self) -> StringBuilder {
         match &self.field_kind {
             FieldKind::Single(_) => {
+                let name = heck::AsLowerCamelCase(self.name());
+
                 if self.map_type().is_some() {
-                    format!("{}?", self.json_map_type_definition())
+                    StringBuilder::from(format!("{name}: {}?,", self.json_map_type_definition()))
                 } else {
                     let mut definition = self.type_definition_no_presence();
                     definition.push('?');
-                    definition
+                    StringBuilder::from(format!("{name}: {definition},"))
                 }
             }
 
             FieldKind::OneOf { fields, .. } => {
-                let variants = fields
-                    .iter()
-                    .map(|field| {
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                    })
-                    .collect::<Vec<_>>();
+                let mut json_type_and_names = StringBuilder::new();
 
-                format!("({})?", variants.join(" | "))
+                for field in fields {
+                    json_type_and_names.push(format!(
+                        "{}: {}?,",
+                        heck::AsLowerCamelCase(field.name()),
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                    ));
+                }
+
+                json_type_and_names
             }
         }
     }
@@ -413,7 +418,8 @@ impl FieldGenerator<'_> {
                         &format!("{this}.type == \"{}\"", field.name()),
                         |builder| {
                             builder.push(format!(
-                                "{output} = {}",
+                                "output.{} = {}",
+                                heck::AsLowerCamelCase(field.name()),
                                 json_encode_instruction_field_descriptor_ignore_repeated(
                                     field,
                                     self.export_map,

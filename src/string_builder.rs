@@ -58,6 +58,14 @@ impl StringBuilder {
     }
 }
 
+impl From<String> for StringBuilder {
+    fn from(text: String) -> Self {
+        let mut builder = StringBuilder::new();
+        builder.push(text);
+        builder
+    }
+}
+
 impl FromIterator<String> for StringBuilder {
     fn from_iter<T: IntoIterator<Item = String>>(iter: T) -> Self {
         let mut builder = StringBuilder::new();
