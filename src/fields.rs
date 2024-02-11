@@ -565,38 +565,7 @@ impl FieldGenerator<'_> {
 
         match self.field_kind {
             FieldKind::Single(field) => {
-                if field.label.is_some() && field.label() == Label::Repeated {
-                    return "{}".into();
-                }
-
-                match field.r#type() {
-                    Type::Int32
-                    | Type::Uint32
-                    | Type::Int64
-                    | Type::Uint64
-                    | Type::Fixed32
-                    | Type::Fixed64
-                    | Type::Sint32
-                    | Type::Sint64
-                    | Type::Sfixed32
-                    | Type::Sfixed64
-                    | Type::Float
-                    | Type::Double => "0".into(),
-                    Type::String => "\"\"".into(),
-                    Type::Bool => "false".into(),
-                    Type::Bytes => "buffer.create(0)".into(),
-                    Type::Enum => format!(
-                        "{}.fromNumber(0)",
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                    )
-                    .into(),
-                    Type::Message => format!(
-                        "{}.new()",
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                    )
-                    .into(),
-                    Type::Group => unimplemented!("Group"),
-                }
+                default_of_type_descriptor_ignore_presence(field, self.export_map, self.base_file)
             }
 
             FieldKind::OneOf { .. } => "nil".into(),
@@ -874,6 +843,45 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
     }
 }
 
+fn default_of_type_descriptor_ignore_presence(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> Cow<'static, str> {
+    if field.label.is_some() && field.label() == Label::Repeated {
+        return "{}".into();
+    }
+
+    match field.r#type() {
+        Type::Int32
+        | Type::Uint32
+        | Type::Int64
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Sfixed32
+        | Type::Sfixed64
+        | Type::Float
+        | Type::Double => "0".into(),
+        Type::String => "\"\"".into(),
+        Type::Bool => "false".into(),
+        Type::Bytes => "buffer.create(0)".into(),
+        Type::Enum => format!(
+            "{}.fromNumber(0)",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        )
+        .into(),
+        Type::Message => format!(
+            "{}.new()",
+            type_definition_of_field_descriptor(field, export_map, base_file)
+        )
+        .into(),
+        Type::Group => unimplemented!("Group"),
+    }
+}
+
 fn decode_instruction_field_descriptor_ignore_repeated(
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
@@ -925,8 +933,14 @@ pub fn decode_field(
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
-    if map_type.is_some() {
+    if let Some(map_type) = map_type {
         let map_entry_type = type_definition_of_field_descriptor(field, export_map, base_file);
+
+        let key_default =
+            default_of_type_descriptor_ignore_presence(&map_type.key, export_map, base_file);
+
+        let value_default =
+            default_of_type_descriptor_ignore_presence(&map_type.value, export_map, base_file);
 
         decode.push(indoc::formatdoc! {"
             local value
@@ -934,10 +948,11 @@ pub fn decode_field(
 
             local mapEntry = {map_entry_type}.decode(value)
 
-            if mapEntry.key ~= nil and mapEntry.value ~= nil then
-                {this}[mapEntry.key] = mapEntry.value
-            end
-        "});
+            local keyDefault = {key_default}
+            local valueDefault = {value_default}
+
+            {this}[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+        "})
     } else {
         match field.r#type() {
             Type::Float => {
