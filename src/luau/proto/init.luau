@@ -79,7 +79,7 @@ function proto.readFixed64(output: buffer, cursor: number): (number, number)
 	return assert(tonumber(hex, 16), "Couldn't parse created hex"), cursor + 8
 end
 
-function proto.readSignedFixed64(output: buffer, cursor: number): (number, number)
+function proto.readSignedFixed64(_output: buffer, _cursor: number): (number, number)
 	error("TODO: Read sfixed64")
 end
 
@@ -200,7 +200,7 @@ function proto.writeFixed64(output: buffer, cursor: number, input: number): (buf
 	return output, cursor + 8
 end
 
-function proto.writeSignedFixed64(output: buffer, cursor: number, input: number): (buffer, number)
+function proto.writeSignedFixed64(_output: buffer, _cursor: number, _input: number): (buffer, number)
 	error("TODO: Write sfixed64")
 end
 
@@ -241,28 +241,6 @@ function proto.limitInt32(number: number): number
 end
 
 proto.json = {}
-
--- selene: allow(undefined_variable)
-function proto.json.jsonEncode(input: any): string
-	if game == nil then
-		return game:GetService("HttpService"):JSONEncode(input)
-	elseif string.match(_VERSION, "^Lune") ~= nil then
-		return require("@lune/net").jsonEncode(input)
-	else
-		error("No JSON encoding available")
-	end
-end
-
--- selene: allow(undefined_variable)
-function proto.json.jsonDecode(input: string): any
-	if game == nil then
-		return game:GetService("HttpService"):JSONDecode(input)
-	elseif string.match(_VERSION, "^Lune") ~= nil then
-		return require("@lune/net").jsonDecode(input)
-	else
-		error("No JSON decoding available")
-	end
-end
 
 function proto.json.serializeNumber(input: number): string | number
 	return if input == math.huge
