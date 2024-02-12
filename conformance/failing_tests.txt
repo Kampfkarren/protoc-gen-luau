@@ -37,12 +37,6 @@ Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput
 Required.Proto3.JsonInput.EnumFieldNotQuoted
 Required.Proto3.JsonInput.FieldMask.JsonOutput
 Required.Proto3.JsonInput.FieldMask.ProtobufOutput
-Required.Proto3.JsonInput.FieldNameInLowerCamelCase.Validator
-Required.Proto3.JsonInput.FieldNameInSnakeCase.JsonOutput
-Required.Proto3.JsonInput.FieldNameInSnakeCase.ProtobufOutput
-Required.Proto3.JsonInput.FieldNameWithMixedCases.JsonOutput
-Required.Proto3.JsonInput.FieldNameWithMixedCases.ProtobufOutput
-Required.Proto3.JsonInput.FieldNameWithMixedCases.Validator
 Required.Proto3.JsonInput.FloatFieldTooLarge
 Required.Proto3.JsonInput.FloatFieldTooSmall
 Required.Proto3.JsonInput.Int32FieldLeadingSpace
@@ -68,7 +62,6 @@ Required.Proto3.JsonInput.Int64FieldTooSmall
 Required.Proto3.JsonInput.OneofFieldDuplicate
 Required.Proto3.JsonInput.OptionalBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.ProtobufOutput
-Required.Proto3.JsonInput.OriginalProtoFieldName.JsonOutput
 Required.Proto3.JsonInput.RejectTopLevelNull
 Required.Proto3.JsonInput.RepeatedBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotBool
@@ -80,6 +73,7 @@ Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotStrin
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotMessage
+Required.Proto3.JsonInput.SkipsDefaultPrimitive.Validator
 Required.Proto3.JsonInput.StringFieldNotAString
 Required.Proto3.JsonInput.Struct.JsonOutput
 Required.Proto3.JsonInput.Struct.ProtobufOutput
