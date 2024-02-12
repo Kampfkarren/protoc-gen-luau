@@ -610,7 +610,7 @@ impl<'a> FileGenerator<'a> {
             final_code = final_code
                 .replace(
                     "<json_encode>",
-                    &format!("return {wkt_json_namespace}.serialize(self)"),
+                    &format!("return {wkt_json_namespace}.serialize(self :: any)"),
                 )
                 .replace(
                     "<json_decode>",

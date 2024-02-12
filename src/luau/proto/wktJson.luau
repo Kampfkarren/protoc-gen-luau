@@ -173,12 +173,14 @@ wktJson.NullValue = {
 } :: WellKnownType<NullValue, nil>
 
 type Value = {
-	kind: { type: "null_value", value: NullValue }
+	kind: (
+		{ type: "null_value", value: NullValue }
 		| { type: "number_value", value: number }
 		| { type: "string_value", value: string }
 		| { type: "bool_value", value: boolean }
 		| { type: "struct_value", value: Struct }
-		| { type: "list_value", value: ListValue },
+		| { type: "list_value", value: ListValue }
+	)?,
 }
 
 -- Going to redeclare soon
@@ -189,7 +191,7 @@ wktJson.Value = {
 	serialize = function(input: Value)
 		local kind = input.kind
 
-		if kind.type == "null_value" then
+		if kind == nil or kind.type == "null_value" then
 			return nil
 		elseif kind.type == "number_value" or kind.type == "string_value" or kind.type == "bool_value" then
 			return kind.value
