@@ -250,17 +250,19 @@ function proto.json.serializeNumber(input: number): string | number
 		else input
 end
 
-function proto.json.deserializeNumber(input: string): number
+function proto.json.deserializeNumber(input: string | number): number
 	if input == "Infinity" then
 		return math.huge
 	elseif input == "-Infinity" then
 		return -math.huge
 	elseif input == "NaN" then
 		return 0 / 0
-	else
+	elseif typeof(input) == "string" then
 		local number = tonumber(input)
 		assert(number ~= nil, "Number given that could not be parsed")
 		return number
+	else
+		return input
 	end
 end
 

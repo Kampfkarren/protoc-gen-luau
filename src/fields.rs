@@ -119,7 +119,11 @@ impl FieldGenerator<'_> {
 
         format!(
             "{{ [string]: {} }}",
-            type_definition_of_field_descriptor(&map_type.value, self.export_map, self.base_file)
+            json_type_definition_of_field_descriptor(
+                &map_type.value,
+                self.export_map,
+                self.base_file
+            )
         )
     }
 
@@ -131,7 +135,16 @@ impl FieldGenerator<'_> {
                 if self.map_type().is_some() {
                     StringBuilder::from(format!("{name}: {}?,", self.json_map_type_definition()))
                 } else {
-                    let mut definition = self.type_definition_no_presence();
+                    let mut definition = json_type_definition_of_field_descriptor(
+                        field,
+                        self.export_map,
+                        self.base_file,
+                    );
+
+                    if field.label.is_some() && field.label() == Label::Repeated {
+                        definition = format!("{{ {definition} }}");
+                    }
+
                     definition.push('?');
                     StringBuilder::from(format!("{name}: {definition},"))
                 }
@@ -144,7 +157,11 @@ impl FieldGenerator<'_> {
                     json_type_and_names.push(format!(
                         "{}: {}?,",
                         json_name(field),
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                        json_type_definition_of_field_descriptor(
+                            field,
+                            self.export_map,
+                            self.base_file
+                        )
                     ));
                 }
 
@@ -337,7 +354,6 @@ impl FieldGenerator<'_> {
         encode
     }
 
-    // TODO: Use json_name
     pub fn json_encode(&self) -> StringBuilder {
         let this = format!("self.{}", self.name());
 
@@ -380,8 +396,12 @@ impl FieldGenerator<'_> {
                     json_encode.push(format!("{output} = newOutput"));
                 } else if field.label.is_some() && field.label() == Label::Repeated {
                     json_encode.push(format!(
-                        "local newOutput: {} = {{}}",
-                        self.type_definition()
+                        "local newOutput: {{ {} }} = {{}}",
+                        json_type_definition_of_field_descriptor(
+                            field,
+                            self.export_map,
+                            self.base_file
+                        )
                     ));
                     json_encode.push(format!(
                         "for _, value: {} in {this} do",
@@ -629,6 +649,17 @@ fn type_definition_of_field_descriptor(
         }
 
         Type::Group => unimplemented!("Group"),
+    }
+}
+
+fn json_type_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    match field.r#type() {
+        Type::Float | Type::Double => "(number | string)".to_owned(),
+        _ => type_definition_of_field_descriptor(field, export_map, base_file),
     }
 }
 
