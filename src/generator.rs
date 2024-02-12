@@ -38,9 +38,16 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         })
         .unwrap_or_default();
 
+    let roblox_imports = options.get("roblox_imports").map(|x| x.as_str()) == Some("true");
+
+    let mut proto_init = include_str!("./luau/proto/init.luau").to_owned();
+    if roblox_imports {
+        proto_init = proto_init.replace("require(\"./base64\")", "require(script.base64)");
+    }
+
     files.push(File {
         name: Some("proto/init.luau".to_owned()),
-        content: Some(include_str!("./luau/proto/init.luau").to_owned()),
+        content: Some(proto_init),
         ..Default::default()
     });
 
@@ -73,7 +80,7 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
                 } else {
                     let mut generator = FileGenerator::new(file, &export_map);
 
-                    if options.get("roblox_imports").map(|x| x.as_str()) == Some("true") {
+                    if roblox_imports {
                         generator.enable_roblox_imports();
                     }
 
@@ -724,16 +731,26 @@ impl<'a> FileGenerator<'a> {
         use std::path::Component;
 
         if self.roblox_imports {
-            path.components()
-                .map(|component| match component {
-                    Component::CurDir => "script.Parent".into(),
-                    Component::ParentDir => "Parent".into(),
-                    Component::Normal(name) => name.to_string_lossy(),
+            let mut pieces = Vec::new();
+            pieces.push("script.Parent".to_owned());
+
+            for component in path.components() {
+                match component {
+                    Component::CurDir => {}
+
+                    Component::ParentDir => {
+                        pieces.push("Parent".to_owned());
+                    }
+
+                    Component::Normal(name) => {
+                        pieces.push(name.to_string_lossy().to_string());
+                    }
+
                     Component::RootDir | Component::Prefix(_) => unreachable!(),
-                })
-                .map(Cow::into_owned)
-                .collect::<Vec<String>>()
-                .join(".")
+                }
+            }
+
+            pieces.join(".")
         } else {
             format!("\"{}\"", path.display())
         }
