@@ -1,8 +1,12 @@
 syntax = "proto3";
 
+import "google/protobuf/struct.proto";
+
 message NoPackage {
 	message NestedMessage {
 		int32 x = 1;
 	}
 	NestedMessage message = 1;
+
+	map<string, google.protobuf.Value> mapOfValues = 2;
 }
