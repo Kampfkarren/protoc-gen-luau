@@ -39,8 +39,7 @@ impl FieldGenerator<'_> {
                     return false;
                 }
 
-                field.label == Some(Label::Optional as i32)
-                    || matches!(field.r#type(), Type::Message)
+                field.proto3_optional() || matches!(field.r#type(), Type::Message)
             }
 
             FieldKind::OneOf { .. } => true,
@@ -910,8 +909,9 @@ fn default_of_type_descriptor_ignore_presence(
         Type::String => "\"\"".into(),
         Type::Bool => "false".into(),
         Type::Bytes => "buffer.create(0)".into(),
+        // proto2: Enums default to first value
         Type::Enum => format!(
-            "{}.fromNumber(0)",
+            "assert({}.fromNumber(0), \"Enum has no 0 default\")",
             type_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
