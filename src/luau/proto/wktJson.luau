@@ -26,8 +26,8 @@ local function deserializeFractionalNanos(nanosText: string): number
 end
 
 type Duration = {
-	seconds: number?,
-	nanos: number?,
+	seconds: number,
+	nanos: number,
 }
 wktJson.Duration = {
 	serialize = function(duration: Duration): string
@@ -59,7 +59,7 @@ wktJson.Duration = {
 
 			return {
 				seconds = simpleSeconds,
-				nanos = nil,
+				nanos = 0,
 			}
 		end
 
@@ -76,8 +76,8 @@ wktJson.Duration = {
 } :: WellKnownType<Duration, string>
 
 type Timestamp = {
-	seconds: number?,
-	nanos: number?,
+	seconds: number,
+	nanos: number,
 }
 wktJson.Timestamp = {
 	serialize = function(timestamp: Timestamp): string
@@ -90,7 +90,7 @@ wktJson.Timestamp = {
 			dateInfo.hour,
 			dateInfo.min,
 			dateInfo.sec,
-			if timestamp.nanos == nil or timestamp.nanos == 0 then "" else serializeFractionalNanos(timestamp.nanos)
+			if timestamp.nanos == 0 then "" else serializeFractionalNanos(timestamp.nanos)
 		)
 	end,
 
@@ -130,7 +130,7 @@ wktJson.Timestamp = {
 		})
 
 		return {
-			sec = totalSeconds,
+			seconds = totalSeconds,
 			nanos = nanos,
 		}
 	end,
