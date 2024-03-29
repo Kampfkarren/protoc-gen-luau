@@ -1,4 +1,6 @@
-use std::{borrow::Cow, collections::HashMap, path::Path};
+use std::{borrow::Cow, collections::HashMap};
+
+use typed_path::UnixPath as Path;
 
 use prost_types::{
     field_descriptor_proto::{Label, Type},
