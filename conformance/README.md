@@ -17,5 +17,6 @@
 
 ## Conformance status
 
-See [conformance/failing_tests.txt](./failing_tests.txt) for a list of currently
-failing conformance tests.
+See
+[conformance/failing_tests.txt](https://github.com/Kampfkarren/protoc-gen-luau/blob/main/conformance/failing_tests.txt)
+for a list of currently failing conformance tests.
