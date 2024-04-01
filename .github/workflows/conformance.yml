@@ -19,6 +19,8 @@ jobs:
       uses: cargo-bins/cargo-binstall@main
     - name: Download lune
       run: cargo binstall lune -y
+    - name: Download Protoc
+      uses: arduino/setup-protoc@v3
     - name: Download protobuf-conformance
       run: |
         wget $(curl "https://latest-github-release.upliftgames.cloud/bufbuild/protobuf-conformance" | sed -nr 's/.*"browser_download_url":"(https:\/\/github\.com\/bufbuild\/protobuf-conformance\/releases\/download.+-linux-x86_64\.zip)".*/\1/p') -O conformance_test_runner.zip
