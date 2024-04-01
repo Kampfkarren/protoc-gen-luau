@@ -571,13 +571,10 @@ impl FieldGenerator<'_> {
             "NYI: Relative type names: {type_name:?}"
         );
 
-        let Some(export) = self
+        let export = self
             .export_map
             .get(&type_name[1..])
-            .or_else(|| self.export_map.get(type_name))
-        else {
-            return None;
-        };
+            .or_else(|| self.export_map.get(type_name))?;
 
         export.map.as_ref()
     }
