@@ -1,5 +1,4 @@
 use std::{
-    borrow::Cow,
     collections::{BTreeMap, HashMap, HashSet},
     path::{Path, PathBuf},
 };
@@ -174,11 +173,7 @@ fn add_message_descriptors(
 }
 
 fn extract_map(descriptor: &DescriptorProto) -> Option<MapType> {
-    let Some(options) = &descriptor.options else {
-        return None;
-    };
-
-    if !options.map_entry() {
+    if !descriptor.options.as_ref()?.map_entry() {
         return None;
     }
 

@@ -48,14 +48,6 @@ impl StringBuilder {
     pub fn dedent(&mut self) {
         self.depth -= 1;
     }
-
-    pub fn replace(mut self, old: &str, new: &str) -> Self {
-        for line in &mut self.lines {
-            *line = line.replace(old, new);
-        }
-
-        self
-    }
 }
 
 impl From<String> for StringBuilder {
