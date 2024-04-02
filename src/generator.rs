@@ -759,7 +759,7 @@ impl<'a> FileGenerator<'a> {
                     }
 
                     Component::Normal(name) => {
-                        pieces.push(std::str::from_utf8(&name).unwrap().to_string());
+                        pieces.push(std::str::from_utf8(name).unwrap().to_string());
                     }
 
                     Component::RootDir => unreachable!(),
