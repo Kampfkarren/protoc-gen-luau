@@ -1,7 +1,9 @@
 use std::{
     collections::{BTreeMap, HashMap, HashSet},
-    path::{Path, PathBuf},
+    path::Path as StdPath,
 };
+
+use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use prost_types::{
     compiler::{
@@ -389,13 +391,32 @@ impl<'a> FileGenerator<'a> {
         }
 
         for import in &self.file_descriptor_proto.dependency {
-            let import_path = Path::new(import);
-
-            let mut relative_import_path = pathdiff::diff_paths(
-                import_path,
-                file_path.parent().expect("couldn't get parent path"),
+            let path_diff = pathdiff::diff_paths(
+                StdPath::new(&import),
+                StdPath::new(
+                    &file_path
+                        .parent()
+                        .expect("couldn't get parent path")
+                        .to_string_lossy()
+                        .to_string(),
+                ),
             )
             .expect("couldn't diff paths");
+
+            let path_diff_str = path_diff.to_string_lossy().to_string();
+
+            // TypedPath::derive() doesn't work with relative paths; it always considers them to be
+            // Unix paths. So we need an explicit Windows check here.
+            let path_type = if cfg!(windows) {
+                PathType::Windows
+            } else {
+                PathType::Unix
+            };
+            let path_diff = TypedPath::new(&path_diff_str, path_type);
+            let unix_path_diff = path_diff.with_unix_encoding();
+
+            let mut relative_import_path =
+                PathBuf::from(unix_path_diff.to_string_lossy().to_string());
 
             if !relative_import_path.starts_with("../") {
                 relative_import_path = PathBuf::from("./").join(relative_import_path);
@@ -403,7 +424,7 @@ impl<'a> FileGenerator<'a> {
 
             contents.push(format!(
                 "local {} = require({})",
-                file_path_export_name(import_path),
+                file_path_export_name(Path::new(&import)),
                 self.require_path(&relative_import_path.with_extension(""))
             ));
         }
@@ -723,7 +744,7 @@ impl<'a> FileGenerator<'a> {
     }
 
     fn require_path(&self, path: &Path) -> String {
-        use std::path::Component;
+        use typed_path::UnixComponent as Component;
 
         if self.roblox_imports {
             let mut pieces = Vec::new();
@@ -738,10 +759,10 @@ impl<'a> FileGenerator<'a> {
                     }
 
                     Component::Normal(name) => {
-                        pieces.push(name.to_string_lossy().to_string());
+                        pieces.push(std::str::from_utf8(name).unwrap().to_string());
                     }
 
-                    Component::RootDir | Component::Prefix(_) => unreachable!(),
+                    Component::RootDir => unreachable!(),
                 }
             }
 
