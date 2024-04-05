@@ -285,8 +285,6 @@ const ENUM: &str = r#"<name> = {
         <from_number>
     end,
 
-    -- test
-
     toNumber = function(self: <name>): number
         <to_number>
     end,
