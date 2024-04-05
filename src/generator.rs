@@ -1,9 +1,4 @@
-use std::{
-    collections::{BTreeMap, HashMap, HashSet},
-    path::Path as StdPath,
-};
-
-use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
+use std::collections::{BTreeMap, HashMap, HashSet};
 
 use prost_types::{
     compiler::{
@@ -12,6 +7,7 @@ use prost_types::{
     },
     DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
 };
+use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
     fields::{
@@ -392,8 +388,8 @@ impl<'a> FileGenerator<'a> {
 
         for import in &self.file_descriptor_proto.dependency {
             let path_diff = pathdiff::diff_paths(
-                StdPath::new(&import),
-                StdPath::new(
+                std::path::Path::new(&import),
+                std::path::Path::new(
                     &file_path
                         .parent()
                         .expect("couldn't get parent path")
