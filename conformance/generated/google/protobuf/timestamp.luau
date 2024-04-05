@@ -5,79 +5,90 @@
 local proto = require("../../proto")
 local wktJson = require("../../proto/wktJson")
 
-local Timestamp: proto.Message<Timestamp>
-export type Timestamp = {
+type _TimestampImpl = {
+	__index: _TimestampImpl,
+	new: () -> Timestamp,
+	encode: (self: Timestamp) -> string,
+	decode: (input: buffer) -> Timestamp,
+	jsonEncode: (self: Timestamp) -> any,
+	jsonDecode: (input: { [string]: any }) -> Timestamp,
+}
+
+type _TimestampFields = {
 	seconds: number,
 	nanos: number,
 }
 
-Timestamp = {
-	new = function()
-		return {
-			seconds = 0,
-			nanos = 0,
-		}
-	end,
+export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
 
-	encode = function(self: Timestamp): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+local Timestamp: proto.Message<_TimestampImpl> = {} :: _TimestampImpl
+Timestamp.__index = Timestamp
 
-		if self.seconds ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.seconds)
-		end
+function Timestamp.new(data: _TimestampFields?): Timestamp
+	return setmetatable({
+		seconds = data and data["seconds"] or 0,
+		nanos = data and data["nanos"] or 0,
+	}, Timestamp)
+end
 
-		if self.nanos ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.nanos)
-		end
+function Timestamp.encode(self: Timestamp): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.seconds ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.seconds)
+	end
 
-	decode = function(input: buffer): Timestamp
-		local self = Timestamp.new()
-		local cursor = 0
+	if self.nanos ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.nanos)
+	end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.seconds = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.nanos = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+function Timestamp.decode(input: buffer): Timestamp
+	local self = Timestamp.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.seconds = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.nanos = proto.limitInt32(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: Timestamp): any
-		return wktJson.Timestamp.serialize(self :: any)
-	end,
+function Timestamp.jsonEncode(self: Timestamp): any
+	return wktJson.Timestamp.serialize(self :: any)
+end
 
-	jsonDecode = function(input: { [string]: any }): Timestamp
-		return wktJson.Timestamp.deserialize(input :: any) -- any cast because we have a special jsonDecode
-	end,
-}
+function Timestamp.jsonDecode(input: { [string]: any }): Timestamp
+	return wktJson.Timestamp.deserialize(input :: any, Timestamp.new) -- any cast because we have a special jsonDecode
+end
 
 return {
 	Timestamp = Timestamp,

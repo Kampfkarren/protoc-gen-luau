@@ -3,7 +3,7 @@ local wktJson = {}
 
 export type WellKnownType<T, TSerialized> = {
 	serialize: (T) -> TSerialized,
-	deserialize: (TSerialized) -> T,
+	deserialize: <M>(TSerialized, new: (T) -> M) -> M,
 }
 
 local function serializeFractionalNanos(nanos: number): string
@@ -49,7 +49,7 @@ wktJson.Duration = {
 		return string.format("%s%d%s", nanoSign, duration.seconds or 0, serializeFractionalNanos(duration.nanos))
 	end,
 
-	deserialize = function(durationString: string): Duration
+	deserialize = function<M>(durationString: string, new: (Duration) -> M): M
 		local simpleSecondsText = string.match(durationString, "^([%-0-9]+)s$")
 		if simpleSecondsText ~= nil then
 			local simpleSeconds = assert(
@@ -57,10 +57,10 @@ wktJson.Duration = {
 				"Invalid duration string received--was formatted as just having seconds, but wasn't a properly formatted int"
 			)
 
-			return {
+			return new({
 				seconds = simpleSeconds,
 				nanos = 0,
-			}
+			})
 		end
 
 		local secondsText, nanosText = string.match(durationString, "^([%-0-9]+)%.([0-9]+)s$")
@@ -94,7 +94,7 @@ wktJson.Timestamp = {
 		)
 	end,
 
-	deserialize = function(text: string): Timestamp
+	deserialize = function<M>(text: string, new: (Timestamp) -> M): M
 		local year, month, day, hour, min, sec, nanosWithDot =
 			string.match(text, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 
@@ -129,10 +129,10 @@ wktJson.Timestamp = {
 			sec = assert(tonumber(sec), "Invalid formatted sec"),
 		})
 
-		return {
+		return new({
 			seconds = totalSeconds,
 			nanos = nanos,
-		}
+		})
 	end,
 } :: WellKnownType<Timestamp, string>
 
@@ -143,10 +143,10 @@ local function createRawValue<T>(): RawValue<T>
 			return input.value
 		end,
 
-		deserialize = function(value: T): { value: T }
-			return {
+		deserialize = function<M>(value: T, new: (T) -> M): M
+			return new({
 				value = value,
-			}
+			})
 		end,
 	}
 end
@@ -205,15 +205,15 @@ wktJson.Value = {
 		end
 	end,
 
-	deserialize = function(input: any): Value
+	deserialize = function<M>(input: any, new: (Value) -> M): M
 		if input == nil then
-			return { kind = { type = "null_value", value = "NULL_VALUE" } }
+			return new({ kind = { type = "null_value", value = "NULL_VALUE" } })
 		elseif typeof(input) == "number" then
-			return { kind = { type = "number_value", value = input } }
+			return new({ kind = { type = "number_value", value = input } })
 		elseif typeof(input) == "string" then
-			return { kind = { type = "string_value", value = input } }
+			return new({ kind = { type = "string_value", value = input } })
 		elseif typeof(input) == "boolean" then
-			return { kind = { type = "bool_value", value = input } }
+			return new({ kind = { type = "bool_value", value = input } })
 		elseif typeof(input) == "table" then
 			local isArray = true
 			local count = 0
@@ -228,9 +228,9 @@ wktJson.Value = {
 			isArray = count == #input
 
 			if isArray then
-				return { kind = { type = "list_value", value = wktJson.ListValue.deserialize(input) } }
+				return new({ kind = { type = "list_value", value = wktJson.ListValue.deserialize(input) } })
 			else
-				return { kind = { type = "struct_value", value = wktJson.Struct.deserialize(input) } }
+				return new({ kind = { type = "struct_value", value = wktJson.Struct.deserialize(input) } })
 			end
 		else
 			error(`Unknown input type: {typeof(input)}`)
@@ -252,16 +252,16 @@ wktJson.Struct = {
 		return serialized
 	end,
 
-	deserialize = function(input: { [string]: any }): Struct
+	deserialize = function<M>(input: { [string]: any }, new: (Struct) -> M): M
 		local fields = {}
 
 		for key, serializedValue in input do
 			fields[key] = wktJson.Value.deserialize(serializedValue)
 		end
 
-		return {
+		return new({
 			fields = fields,
-		}
+		})
 	end,
 }
 
@@ -279,16 +279,16 @@ wktJson.ListValue = {
 		return serialized
 	end,
 
-	deserialize = function(input: { any }): ListValue
+	deserialize = function<M>(input: { any }, new: (ListValue) -> M): M
 		local values = {}
 
 		for _, value in input do
 			table.insert(values, wktJson.Value.deserialize(value))
 		end
 
-		return {
+		return new({
 			values = values,
-		}
+		})
 	end,
 } :: WellKnownType<ListValue, { any }>
 

@@ -5,19 +5,45 @@
 local proto = require("../../proto")
 local wktJson = require("../../proto/wktJson")
 
-local Struct: proto.Message<Struct>
-export type Struct = {
+type _StructImpl = {
+	__index: _StructImpl,
+	new: () -> Struct,
+	encode: (self: Struct) -> string,
+	decode: (input: buffer) -> Struct,
+	jsonEncode: (self: Struct) -> any,
+	jsonDecode: (input: { [string]: any }) -> Struct,
+}
+
+type _StructFields = {
 	fields: { [string]: Value },
 }
 
-local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry>
-export type Struct_FieldsEntry = {
+export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
+type _Struct_FieldsEntryImpl = {
+	__index: _Struct_FieldsEntryImpl,
+	new: () -> Struct_FieldsEntry,
+	encode: (self: Struct_FieldsEntry) -> string,
+	decode: (input: buffer) -> Struct_FieldsEntry,
+	jsonEncode: (self: Struct_FieldsEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> Struct_FieldsEntry,
+}
+
+type _Struct_FieldsEntryFields = {
 	key: string,
 	value: Value?,
 }
 
-local Value: proto.Message<Value>
-export type Value = {
+export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
+type _ValueImpl = {
+	__index: _ValueImpl,
+	new: () -> Value,
+	encode: (self: Value) -> string,
+	decode: (input: buffer) -> Value,
+	jsonEncode: (self: Value) -> any,
+	jsonDecode: (input: { [string]: any }) -> Value,
+}
+
+type _ValueFields = {
 	kind: (
 		{ type: "null_value", value: NullValue }
 		| { type: "number_value", value: number }
@@ -28,336 +54,350 @@ export type Value = {
 	)?,
 }
 
-local ListValue: proto.Message<ListValue>
-export type ListValue = {
+export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
+type _ListValueImpl = {
+	__index: _ListValueImpl,
+	new: () -> ListValue,
+	encode: (self: ListValue) -> string,
+	decode: (input: buffer) -> ListValue,
+	jsonEncode: (self: ListValue) -> any,
+	jsonDecode: (input: { [string]: any }) -> ListValue,
+}
+
+type _ListValueFields = {
 	values: { Value },
 }
 
+export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
 local NullValue: proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
 
-Struct = {
-	new = function()
-		return {
-			fields = {},
-		}
-	end,
+local Struct: proto.Message<_StructImpl> = {} :: _StructImpl
+Struct.__index = Struct
 
-	encode = function(self: Struct): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function Struct.new(data: _StructFields?): Struct
+	return setmetatable({
+		fields = data and data["fields"] or {},
+	}, Struct)
+end
 
-		if next(self.fields) ~= nil then
-			for key: string, value: Value in self.fields do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				local encoded = Value.encode(value)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
-				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
+function Struct.encode(self: Struct): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): Struct
-		local self = Struct.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = Struct_FieldsEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = Value.new()
-
-					self.fields[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: Struct): any
-		return wktJson.Struct.serialize(self :: any)
-	end,
-
-	jsonDecode = function(input: { [string]: any }): Struct
-		return wktJson.Struct.deserialize(input :: any) -- any cast because we have a special jsonDecode
-	end,
-}
-
-Struct_FieldsEntry = {
-	new = function()
-		return {
-			key = "",
-			value = nil,
-		}
-	end,
-
-	encode = function(self: Struct_FieldsEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= "" then
+	if next(self.fields) ~= nil then
+		for key: string, value: Value in self.fields do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			local encoded = Value.encode(value)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
 		end
+	end
 
-		if self.value ~= nil then
-			local encoded = Value.encode(self.value)
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function Struct.decode(input: buffer): Struct
+	local self = Struct.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = Struct_FieldsEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = Value.new()
+
+				self.fields[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function Struct.jsonEncode(self: Struct): any
+	return wktJson.Struct.serialize(self :: any)
+end
+
+function Struct.jsonDecode(input: { [string]: any }): Struct
+	return wktJson.Struct.deserialize(input :: any, Struct.new) -- any cast because we have a special jsonDecode
+end
+
+local Struct_FieldsEntry: proto.Message<_Struct_FieldsEntryImpl> = {} :: _Struct_FieldsEntryImpl
+Struct_FieldsEntry.__index = Struct_FieldsEntry
+
+function Struct_FieldsEntry.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or nil,
+	}, Struct_FieldsEntry)
+end
+
+function Struct_FieldsEntry.encode(self: Struct_FieldsEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= nil then
+		local encoded = Value.encode(self.value)
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function Struct_FieldsEntry.decode(input: buffer): Struct_FieldsEntry
+	local self = Struct_FieldsEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.value = Value.decode(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function Struct_FieldsEntry.jsonEncode(self: Struct_FieldsEntry): any
+	local output: {
+		key: string?,
+		value: Value?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= nil then
+		output.value = Value.jsonEncode(self.value)
+	end
+
+	return output
+end
+
+function Struct_FieldsEntry.jsonDecode(input: { [string]: any }): Struct_FieldsEntry
+	local self = Struct_FieldsEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = Value.jsonDecode(input.value)
+	end
+
+	return self
+end
+
+local Value: proto.Message<_ValueImpl> = {} :: _ValueImpl
+Value.__index = Value
+
+function Value.new(data: _ValueFields?): Value
+	return setmetatable({
+		kind = data and data["kind"] or nil,
+	}, Value)
+end
+
+function Value.encode(self: Value): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.kind ~= nil then
+		if self.kind.type == "null_value" then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, NullValue.toNumber(self.kind.value))
+		elseif self.kind.type == "number_value" then
+			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
+			output, cursor = proto.writeDouble(output, cursor, self.kind.value)
+		elseif self.kind.type == "string_value" then
+			output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, self.kind.value)
+		elseif self.kind.type == "bool_value" then
+			output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if self.kind.value then 1 else 0)
+		elseif self.kind.type == "struct_value" then
+			local encoded = Struct.encode(self.kind.value)
+			output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		elseif self.kind.type == "list_value" then
+			local encoded = ListValue.encode(self.kind.value)
+			output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		end
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-	decode = function(input: buffer): Struct_FieldsEntry
-		local self = Struct_FieldsEntry.new()
-		local cursor = 0
+function Value.decode(input: buffer): Value
+	local self = Value.new()
+	local cursor = 0
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.value = Value.decode(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.kind = { type = "null_value", value = NullValue.fromNumber(value) or value }
+			elseif field == 4 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.kind = { type = "bool_value", value = value ~= 0 }
 			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: Struct_FieldsEntry): any
-		local output: {
-			key: string?,
-			value: Value?,
-		} = {}
-
-		if self.key ~= "" then
-			output.key = self.key
-		end
-
-		if self.value ~= nil then
-			output.value = Value.jsonEncode(self.value)
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): Struct_FieldsEntry
-		local self = Struct_FieldsEntry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = Value.jsonDecode(input.value)
-		end
-
-		return self
-	end,
-}
-
-Value = {
-	new = function()
-		return {
-			kind = nil,
-		}
-	end,
-
-	encode = function(self: Value): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.kind ~= nil then
-			if self.kind.type == "null_value" then
-				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, NullValue.toNumber(self.kind.value))
-			elseif self.kind.type == "number_value" then
-				output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
-				output, cursor = proto.writeDouble(output, cursor, self.kind.value)
-			elseif self.kind.type == "string_value" then
-				output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeString(output, cursor, self.kind.value)
-			elseif self.kind.type == "bool_value" then
-				output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, if self.kind.value then 1 else 0)
-			elseif self.kind.type == "struct_value" then
-				local encoded = Struct.encode(self.kind.value)
-				output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			elseif self.kind.type == "list_value" then
-				local encoded = ListValue.encode(self.kind.value)
-				output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 3 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.kind = { type = "string_value", value = buffer.tostring(value) }
+			elseif field == 5 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.kind = { type = "struct_value", value = Struct.decode(value) }
+			elseif field == 6 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.kind = { type = "list_value", value = ListValue.decode(value) }
 			end
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): Value
-		local self = Value.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.kind = { type = "null_value", value = NullValue.fromNumber(value) or value }
-				elseif field == 4 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.kind = { type = "bool_value", value = value ~= 0 }
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 3 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.kind = { type = "string_value", value = buffer.tostring(value) }
-				elseif field == 5 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.kind = { type = "struct_value", value = Struct.decode(value) }
-				elseif field == 6 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.kind = { type = "list_value", value = ListValue.decode(value) }
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				if field == 2 then
-					local value
-					value, cursor = proto.readDouble(input, cursor)
-					self.kind = { type = "number_value", value = value }
-				end
-			else
-				error("Unsupported wire type: " .. wireType)
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			if field == 2 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				self.kind = { type = "number_value", value = value }
 			end
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: Value): any
-		return wktJson.Value.serialize(self :: any)
-	end,
+function Value.jsonEncode(self: Value): any
+	return wktJson.Value.serialize(self :: any)
+end
 
-	jsonDecode = function(input: { [string]: any }): Value
-		return wktJson.Value.deserialize(input :: any) -- any cast because we have a special jsonDecode
-	end,
-}
+function Value.jsonDecode(input: { [string]: any }): Value
+	return wktJson.Value.deserialize(input :: any, Value.new) -- any cast because we have a special jsonDecode
+end
 
-ListValue = {
-	new = function()
-		return {
-			values = {},
-		}
-	end,
+local ListValue: proto.Message<_ListValueImpl> = {} :: _ListValueImpl
+ListValue.__index = ListValue
 
-	encode = function(self: ListValue): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function ListValue.new(data: _ListValueFields?): ListValue
+	return setmetatable({
+		values = data and data["values"] or {},
+	}, ListValue)
+end
 
-		if #self.values > 0 then
-			for _, value: Value in self.values do
-				local encoded = Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+function ListValue.encode(self: ListValue): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if #self.values > 0 then
+		for _, value: Value in self.values do
+			local encoded = Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function ListValue.decode(input: buffer): ListValue
+	local self = ListValue.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.values, Value.decode(value))
 			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	return self
+end
 
-	decode = function(input: buffer): ListValue
-		local self = ListValue.new()
-		local cursor = 0
+function ListValue.jsonEncode(self: ListValue): any
+	return wktJson.ListValue.serialize(self :: any)
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.values, Value.decode(value))
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: ListValue): any
-		return wktJson.ListValue.serialize(self :: any)
-	end,
-
-	jsonDecode = function(input: { [string]: any }): ListValue
-		return wktJson.ListValue.deserialize(input :: any) -- any cast because we have a special jsonDecode
-	end,
-}
+function ListValue.jsonDecode(input: { [string]: any }): ListValue
+	return wktJson.ListValue.deserialize(input :: any, ListValue.new) -- any cast because we have a special jsonDecode
+end
 
 NullValue = {
 	fromNumber = function(value: number): NullValue?

@@ -10,8 +10,16 @@ local _google_protobuf_struct = require("./google/protobuf/struct")
 local _google_protobuf_timestamp = require("./google/protobuf/timestamp")
 local _google_protobuf_wrappers = require("./google/protobuf/wrappers")
 
-local TestAllTypesProto3: proto.Message<TestAllTypesProto3>
-export type TestAllTypesProto3 = {
+type _TestAllTypesProto3Impl = {
+	__index: _TestAllTypesProto3Impl,
+	new: () -> TestAllTypesProto3,
+	encode: (self: TestAllTypesProto3) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3,
+	jsonEncode: (self: TestAllTypesProto3) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3,
+}
+
+type _TestAllTypesProto3Fields = {
 	optional_int32: number,
 	optional_int64: number,
 	optional_uint32: number,
@@ -167,7636 +175,8009 @@ export type TestAllTypesProto3 = {
 	Field_name18__: number,
 }
 
-local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage>
-export type TestAllTypesProto3_NestedMessage = {
+export type TestAllTypesProto3 = typeof(setmetatable({} :: _TestAllTypesProto3Fields, {} :: _TestAllTypesProto3Impl))
+type _TestAllTypesProto3_NestedMessageImpl = {
+	__index: _TestAllTypesProto3_NestedMessageImpl,
+	new: () -> TestAllTypesProto3_NestedMessage,
+	encode: (self: TestAllTypesProto3_NestedMessage) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_NestedMessage,
+	jsonEncode: (self: TestAllTypesProto3_NestedMessage) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_NestedMessage,
+}
+
+type _TestAllTypesProto3_NestedMessageFields = {
 	a: number,
 	corecursive: TestAllTypesProto3?,
 }
 
-local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry>
-export type TestAllTypesProto3_MapInt32Int32Entry = {
+export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_NestedMessageFields,
+	{} :: _TestAllTypesProto3_NestedMessageImpl
+))
+type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
+	__index: _TestAllTypesProto3_MapInt32Int32EntryImpl,
+	new: () -> TestAllTypesProto3_MapInt32Int32Entry,
+	encode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapInt32Int32Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32Int32Entry,
+}
+
+type _TestAllTypesProto3_MapInt32Int32EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry>
-export type TestAllTypesProto3_MapInt64Int64Entry = {
+export type TestAllTypesProto3_MapInt32Int32Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapInt32Int32EntryFields,
+	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
+))
+type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
+	__index: _TestAllTypesProto3_MapInt64Int64EntryImpl,
+	new: () -> TestAllTypesProto3_MapInt64Int64Entry,
+	encode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapInt64Int64Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt64Int64Entry,
+}
+
+type _TestAllTypesProto3_MapInt64Int64EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry>
-export type TestAllTypesProto3_MapUint32Uint32Entry = {
+export type TestAllTypesProto3_MapInt64Int64Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapInt64Int64EntryFields,
+	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
+))
+type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
+	__index: _TestAllTypesProto3_MapUint32Uint32EntryImpl,
+	new: () -> TestAllTypesProto3_MapUint32Uint32Entry,
+	encode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapUint32Uint32Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint32Uint32Entry,
+}
+
+type _TestAllTypesProto3_MapUint32Uint32EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry>
-export type TestAllTypesProto3_MapUint64Uint64Entry = {
+export type TestAllTypesProto3_MapUint32Uint32Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapUint32Uint32EntryFields,
+	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
+))
+type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
+	__index: _TestAllTypesProto3_MapUint64Uint64EntryImpl,
+	new: () -> TestAllTypesProto3_MapUint64Uint64Entry,
+	encode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapUint64Uint64Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint64Uint64Entry,
+}
+
+type _TestAllTypesProto3_MapUint64Uint64EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry>
-export type TestAllTypesProto3_MapSint32Sint32Entry = {
+export type TestAllTypesProto3_MapUint64Uint64Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapUint64Uint64EntryFields,
+	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
+))
+type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
+	__index: _TestAllTypesProto3_MapSint32Sint32EntryImpl,
+	new: () -> TestAllTypesProto3_MapSint32Sint32Entry,
+	encode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapSint32Sint32Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint32Sint32Entry,
+}
+
+type _TestAllTypesProto3_MapSint32Sint32EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry>
-export type TestAllTypesProto3_MapSint64Sint64Entry = {
+export type TestAllTypesProto3_MapSint32Sint32Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapSint32Sint32EntryFields,
+	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
+))
+type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
+	__index: _TestAllTypesProto3_MapSint64Sint64EntryImpl,
+	new: () -> TestAllTypesProto3_MapSint64Sint64Entry,
+	encode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapSint64Sint64Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint64Sint64Entry,
+}
+
+type _TestAllTypesProto3_MapSint64Sint64EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<TestAllTypesProto3_MapFixed32Fixed32Entry>
-export type TestAllTypesProto3_MapFixed32Fixed32Entry = {
+export type TestAllTypesProto3_MapSint64Sint64Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapSint64Sint64EntryFields,
+	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
+))
+type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
+	__index: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl,
+	new: () -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+	encode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+}
+
+type _TestAllTypesProto3_MapFixed32Fixed32EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<TestAllTypesProto3_MapFixed64Fixed64Entry>
-export type TestAllTypesProto3_MapFixed64Fixed64Entry = {
+export type TestAllTypesProto3_MapFixed32Fixed32Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryFields,
+	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
+))
+type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
+	__index: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl,
+	new: () -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+	encode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+}
+
+type _TestAllTypesProto3_MapFixed64Fixed64EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<TestAllTypesProto3_MapSfixed32Sfixed32Entry>
-export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = {
+export type TestAllTypesProto3_MapFixed64Fixed64Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryFields,
+	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
+))
+type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
+	__index: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl,
+	new: () -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	encode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+}
+
+type _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<TestAllTypesProto3_MapSfixed64Sfixed64Entry>
-export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = {
+export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields,
+	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
+))
+type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
+	__index: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl,
+	new: () -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	encode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	jsonEncode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+}
+
+type _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry>
-export type TestAllTypesProto3_MapInt32FloatEntry = {
+export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields,
+	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
+))
+type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
+	__index: _TestAllTypesProto3_MapInt32FloatEntryImpl,
+	new: () -> TestAllTypesProto3_MapInt32FloatEntry,
+	encode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapInt32FloatEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32FloatEntry,
+}
+
+type _TestAllTypesProto3_MapInt32FloatEntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry>
-export type TestAllTypesProto3_MapInt32DoubleEntry = {
+export type TestAllTypesProto3_MapInt32FloatEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapInt32FloatEntryFields,
+	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
+))
+type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
+	__index: _TestAllTypesProto3_MapInt32DoubleEntryImpl,
+	new: () -> TestAllTypesProto3_MapInt32DoubleEntry,
+	encode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapInt32DoubleEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32DoubleEntry,
+}
+
+type _TestAllTypesProto3_MapInt32DoubleEntryFields = {
 	key: number,
 	value: number,
 }
 
-local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry>
-export type TestAllTypesProto3_MapBoolBoolEntry = {
+export type TestAllTypesProto3_MapInt32DoubleEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapInt32DoubleEntryFields,
+	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
+))
+type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
+	__index: _TestAllTypesProto3_MapBoolBoolEntryImpl,
+	new: () -> TestAllTypesProto3_MapBoolBoolEntry,
+	encode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapBoolBoolEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapBoolBoolEntry,
+}
+
+type _TestAllTypesProto3_MapBoolBoolEntryFields = {
 	key: boolean,
 	value: boolean,
 }
 
-local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry>
-export type TestAllTypesProto3_MapStringStringEntry = {
+export type TestAllTypesProto3_MapBoolBoolEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapBoolBoolEntryFields,
+	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
+))
+type _TestAllTypesProto3_MapStringStringEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringStringEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringStringEntry,
+	encode: (self: TestAllTypesProto3_MapStringStringEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringStringEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringStringEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringStringEntry,
+}
+
+type _TestAllTypesProto3_MapStringStringEntryFields = {
 	key: string,
 	value: string,
 }
 
-local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry>
-export type TestAllTypesProto3_MapStringBytesEntry = {
+export type TestAllTypesProto3_MapStringStringEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringStringEntryFields,
+	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
+))
+type _TestAllTypesProto3_MapStringBytesEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringBytesEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringBytesEntry,
+	encode: (self: TestAllTypesProto3_MapStringBytesEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringBytesEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringBytesEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringBytesEntry,
+}
+
+type _TestAllTypesProto3_MapStringBytesEntryFields = {
 	key: string,
 	value: buffer,
 }
 
-local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<TestAllTypesProto3_MapStringNestedMessageEntry>
-export type TestAllTypesProto3_MapStringNestedMessageEntry = {
+export type TestAllTypesProto3_MapStringBytesEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringBytesEntryFields,
+	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
+))
+type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringNestedMessageEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringNestedMessageEntry,
+	encode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedMessageEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedMessageEntry,
+}
+
+type _TestAllTypesProto3_MapStringNestedMessageEntryFields = {
 	key: string,
 	value: TestAllTypesProto3_NestedMessage?,
 }
 
-local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<TestAllTypesProto3_MapStringForeignMessageEntry>
-export type TestAllTypesProto3_MapStringForeignMessageEntry = {
+export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryFields,
+	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
+))
+type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringForeignMessageEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringForeignMessageEntry,
+	encode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignMessageEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignMessageEntry,
+}
+
+type _TestAllTypesProto3_MapStringForeignMessageEntryFields = {
 	key: string,
 	value: ForeignMessage?,
 }
 
-local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<TestAllTypesProto3_MapStringNestedEnumEntry>
-export type TestAllTypesProto3_MapStringNestedEnumEntry = {
+export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryFields,
+	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
+))
+type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringNestedEnumEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringNestedEnumEntry,
+	encode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedEnumEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedEnumEntry,
+}
+
+type _TestAllTypesProto3_MapStringNestedEnumEntryFields = {
 	key: string,
 	value: TestAllTypesProto3_NestedEnum,
 }
 
-local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<TestAllTypesProto3_MapStringForeignEnumEntry>
-export type TestAllTypesProto3_MapStringForeignEnumEntry = {
+export type TestAllTypesProto3_MapStringNestedEnumEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryFields,
+	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
+))
+type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
+	__index: _TestAllTypesProto3_MapStringForeignEnumEntryImpl,
+	new: () -> TestAllTypesProto3_MapStringForeignEnumEntry,
+	encode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> string,
+	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignEnumEntry,
+	jsonEncode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> any,
+	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignEnumEntry,
+}
+
+type _TestAllTypesProto3_MapStringForeignEnumEntryFields = {
 	key: string,
 	value: ForeignEnum,
 }
 
+export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
+	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryFields,
+	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
+))
 local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
 
 local TestAllTypesProto3_AliasedEnum: proto.Enum<TestAllTypesProto3_AliasedEnum>
 export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_BAZ" | "MOO" | "moo" | "bAz" | number -- Unknown
 
-local ForeignMessage: proto.Message<ForeignMessage>
-export type ForeignMessage = {
+type _ForeignMessageImpl = {
+	__index: _ForeignMessageImpl,
+	new: () -> ForeignMessage,
+	encode: (self: ForeignMessage) -> string,
+	decode: (input: buffer) -> ForeignMessage,
+	jsonEncode: (self: ForeignMessage) -> any,
+	jsonDecode: (input: { [string]: any }) -> ForeignMessage,
+}
+
+type _ForeignMessageFields = {
 	c: number,
 }
 
-local NullHypothesisProto3: proto.Message<NullHypothesisProto3>
-export type NullHypothesisProto3 = {}
+export type ForeignMessage = typeof(setmetatable({} :: _ForeignMessageFields, {} :: _ForeignMessageImpl))
+type _NullHypothesisProto3Impl = {
+	__index: _NullHypothesisProto3Impl,
+	new: () -> NullHypothesisProto3,
+	encode: (self: NullHypothesisProto3) -> string,
+	decode: (input: buffer) -> NullHypothesisProto3,
+	jsonEncode: (self: NullHypothesisProto3) -> any,
+	jsonDecode: (input: { [string]: any }) -> NullHypothesisProto3,
+}
 
-local EnumOnlyProto3: proto.Message<EnumOnlyProto3>
-export type EnumOnlyProto3 = {}
+type _NullHypothesisProto3Fields = {}
 
+export type NullHypothesisProto3 = typeof(setmetatable(
+	{} :: _NullHypothesisProto3Fields,
+	{} :: _NullHypothesisProto3Impl
+))
+type _EnumOnlyProto3Impl = {
+	__index: _EnumOnlyProto3Impl,
+	new: () -> EnumOnlyProto3,
+	encode: (self: EnumOnlyProto3) -> string,
+	decode: (input: buffer) -> EnumOnlyProto3,
+	jsonEncode: (self: EnumOnlyProto3) -> any,
+	jsonDecode: (input: { [string]: any }) -> EnumOnlyProto3,
+}
+
+type _EnumOnlyProto3Fields = {}
+
+export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
 local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
 
 local ForeignEnum: proto.Enum<ForeignEnum>
 export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number -- Unknown
 
-TestAllTypesProto3 = {
-	new = function()
-		return {
-			optional_int32 = 0,
-			optional_int64 = 0,
-			optional_uint32 = 0,
-			optional_uint64 = 0,
-			optional_sint32 = 0,
-			optional_sint64 = 0,
-			optional_fixed32 = 0,
-			optional_fixed64 = 0,
-			optional_sfixed32 = 0,
-			optional_sfixed64 = 0,
-			optional_float = 0,
-			optional_double = 0,
-			optional_bool = false,
-			optional_string = "",
-			optional_bytes = buffer.create(0),
-			optional_nested_message = nil,
-			optional_foreign_message = nil,
-			optional_nested_enum = assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
-			optional_foreign_enum = assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
-			optional_aliased_enum = assert(TestAllTypesProto3_AliasedEnum.fromNumber(0), "Enum has no 0 default"),
-			optional_string_piece = "",
-			optional_cord = "",
-			recursive_message = nil,
-			repeated_int32 = {},
-			repeated_int64 = {},
-			repeated_uint32 = {},
-			repeated_uint64 = {},
-			repeated_sint32 = {},
-			repeated_sint64 = {},
-			repeated_fixed32 = {},
-			repeated_fixed64 = {},
-			repeated_sfixed32 = {},
-			repeated_sfixed64 = {},
-			repeated_float = {},
-			repeated_double = {},
-			repeated_bool = {},
-			repeated_string = {},
-			repeated_bytes = {},
-			repeated_nested_message = {},
-			repeated_foreign_message = {},
-			repeated_nested_enum = {},
-			repeated_foreign_enum = {},
-			repeated_string_piece = {},
-			repeated_cord = {},
-			packed_int32 = {},
-			packed_int64 = {},
-			packed_uint32 = {},
-			packed_uint64 = {},
-			packed_sint32 = {},
-			packed_sint64 = {},
-			packed_fixed32 = {},
-			packed_fixed64 = {},
-			packed_sfixed32 = {},
-			packed_sfixed64 = {},
-			packed_float = {},
-			packed_double = {},
-			packed_bool = {},
-			packed_nested_enum = {},
-			unpacked_int32 = {},
-			unpacked_int64 = {},
-			unpacked_uint32 = {},
-			unpacked_uint64 = {},
-			unpacked_sint32 = {},
-			unpacked_sint64 = {},
-			unpacked_fixed32 = {},
-			unpacked_fixed64 = {},
-			unpacked_sfixed32 = {},
-			unpacked_sfixed64 = {},
-			unpacked_float = {},
-			unpacked_double = {},
-			unpacked_bool = {},
-			unpacked_nested_enum = {},
-			map_int32_int32 = {},
-			map_int64_int64 = {},
-			map_uint32_uint32 = {},
-			map_uint64_uint64 = {},
-			map_sint32_sint32 = {},
-			map_sint64_sint64 = {},
-			map_fixed32_fixed32 = {},
-			map_fixed64_fixed64 = {},
-			map_sfixed32_sfixed32 = {},
-			map_sfixed64_sfixed64 = {},
-			map_int32_float = {},
-			map_int32_double = {},
-			map_bool_bool = {},
-			map_string_string = {},
-			map_string_bytes = {},
-			map_string_nested_message = {},
-			map_string_foreign_message = {},
-			map_string_nested_enum = {},
-			map_string_foreign_enum = {},
-			oneof_field = nil,
-			optional_bool_wrapper = nil,
-			optional_int32_wrapper = nil,
-			optional_int64_wrapper = nil,
-			optional_uint32_wrapper = nil,
-			optional_uint64_wrapper = nil,
-			optional_float_wrapper = nil,
-			optional_double_wrapper = nil,
-			optional_string_wrapper = nil,
-			optional_bytes_wrapper = nil,
-			repeated_bool_wrapper = {},
-			repeated_int32_wrapper = {},
-			repeated_int64_wrapper = {},
-			repeated_uint32_wrapper = {},
-			repeated_uint64_wrapper = {},
-			repeated_float_wrapper = {},
-			repeated_double_wrapper = {},
-			repeated_string_wrapper = {},
-			repeated_bytes_wrapper = {},
-			optional_duration = nil,
-			optional_timestamp = nil,
-			optional_field_mask = nil,
-			optional_struct = nil,
-			optional_any = nil,
-			optional_value = nil,
-			optional_null_value = assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default"),
-			repeated_duration = {},
-			repeated_timestamp = {},
-			repeated_fieldmask = {},
-			repeated_struct = {},
-			repeated_any = {},
-			repeated_value = {},
-			repeated_list_value = {},
-			fieldname1 = 0,
-			field_name2 = 0,
-			_field_name3 = 0,
-			field__name4_ = 0,
-			field0name5 = 0,
-			field_0_name6 = 0,
-			fieldName7 = 0,
-			FieldName8 = 0,
-			field_Name9 = 0,
-			Field_Name10 = 0,
-			FIELD_NAME11 = 0,
-			FIELD_name12 = 0,
-			__field_name13 = 0,
-			__Field_name14 = 0,
-			field__name15 = 0,
-			field__Name16 = 0,
-			field_name17__ = 0,
-			Field_name18__ = 0,
-		}
-	end,
+local TestAllTypesProto3: proto.Message<_TestAllTypesProto3Impl> = {} :: _TestAllTypesProto3Impl
+TestAllTypesProto3.__index = TestAllTypesProto3
 
-	encode = function(self: TestAllTypesProto3): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3.new(data: _TestAllTypesProto3Fields?): TestAllTypesProto3
+	return setmetatable({
+		optional_int32 = data and data["optional_int32"] or 0,
+		optional_int64 = data and data["optional_int64"] or 0,
+		optional_uint32 = data and data["optional_uint32"] or 0,
+		optional_uint64 = data and data["optional_uint64"] or 0,
+		optional_sint32 = data and data["optional_sint32"] or 0,
+		optional_sint64 = data and data["optional_sint64"] or 0,
+		optional_fixed32 = data and data["optional_fixed32"] or 0,
+		optional_fixed64 = data and data["optional_fixed64"] or 0,
+		optional_sfixed32 = data and data["optional_sfixed32"] or 0,
+		optional_sfixed64 = data and data["optional_sfixed64"] or 0,
+		optional_float = data and data["optional_float"] or 0,
+		optional_double = data and data["optional_double"] or 0,
+		optional_bool = data and data["optional_bool"] or false,
+		optional_string = data and data["optional_string"] or "",
+		optional_bytes = data and data["optional_bytes"] or buffer.create(0),
+		optional_nested_message = data and data["optional_nested_message"] or nil,
+		optional_foreign_message = data and data["optional_foreign_message"] or nil,
+		optional_nested_enum = data and data["optional_nested_enum"]
+			or assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
+		optional_foreign_enum = data and data["optional_foreign_enum"]
+			or assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
+		optional_aliased_enum = data and data["optional_aliased_enum"]
+			or assert(TestAllTypesProto3_AliasedEnum.fromNumber(0), "Enum has no 0 default"),
+		optional_string_piece = data and data["optional_string_piece"] or "",
+		optional_cord = data and data["optional_cord"] or "",
+		recursive_message = data and data["recursive_message"] or nil,
+		repeated_int32 = data and data["repeated_int32"] or {},
+		repeated_int64 = data and data["repeated_int64"] or {},
+		repeated_uint32 = data and data["repeated_uint32"] or {},
+		repeated_uint64 = data and data["repeated_uint64"] or {},
+		repeated_sint32 = data and data["repeated_sint32"] or {},
+		repeated_sint64 = data and data["repeated_sint64"] or {},
+		repeated_fixed32 = data and data["repeated_fixed32"] or {},
+		repeated_fixed64 = data and data["repeated_fixed64"] or {},
+		repeated_sfixed32 = data and data["repeated_sfixed32"] or {},
+		repeated_sfixed64 = data and data["repeated_sfixed64"] or {},
+		repeated_float = data and data["repeated_float"] or {},
+		repeated_double = data and data["repeated_double"] or {},
+		repeated_bool = data and data["repeated_bool"] or {},
+		repeated_string = data and data["repeated_string"] or {},
+		repeated_bytes = data and data["repeated_bytes"] or {},
+		repeated_nested_message = data and data["repeated_nested_message"] or {},
+		repeated_foreign_message = data and data["repeated_foreign_message"] or {},
+		repeated_nested_enum = data and data["repeated_nested_enum"] or {},
+		repeated_foreign_enum = data and data["repeated_foreign_enum"] or {},
+		repeated_string_piece = data and data["repeated_string_piece"] or {},
+		repeated_cord = data and data["repeated_cord"] or {},
+		packed_int32 = data and data["packed_int32"] or {},
+		packed_int64 = data and data["packed_int64"] or {},
+		packed_uint32 = data and data["packed_uint32"] or {},
+		packed_uint64 = data and data["packed_uint64"] or {},
+		packed_sint32 = data and data["packed_sint32"] or {},
+		packed_sint64 = data and data["packed_sint64"] or {},
+		packed_fixed32 = data and data["packed_fixed32"] or {},
+		packed_fixed64 = data and data["packed_fixed64"] or {},
+		packed_sfixed32 = data and data["packed_sfixed32"] or {},
+		packed_sfixed64 = data and data["packed_sfixed64"] or {},
+		packed_float = data and data["packed_float"] or {},
+		packed_double = data and data["packed_double"] or {},
+		packed_bool = data and data["packed_bool"] or {},
+		packed_nested_enum = data and data["packed_nested_enum"] or {},
+		unpacked_int32 = data and data["unpacked_int32"] or {},
+		unpacked_int64 = data and data["unpacked_int64"] or {},
+		unpacked_uint32 = data and data["unpacked_uint32"] or {},
+		unpacked_uint64 = data and data["unpacked_uint64"] or {},
+		unpacked_sint32 = data and data["unpacked_sint32"] or {},
+		unpacked_sint64 = data and data["unpacked_sint64"] or {},
+		unpacked_fixed32 = data and data["unpacked_fixed32"] or {},
+		unpacked_fixed64 = data and data["unpacked_fixed64"] or {},
+		unpacked_sfixed32 = data and data["unpacked_sfixed32"] or {},
+		unpacked_sfixed64 = data and data["unpacked_sfixed64"] or {},
+		unpacked_float = data and data["unpacked_float"] or {},
+		unpacked_double = data and data["unpacked_double"] or {},
+		unpacked_bool = data and data["unpacked_bool"] or {},
+		unpacked_nested_enum = data and data["unpacked_nested_enum"] or {},
+		map_int32_int32 = data and data["map_int32_int32"] or {},
+		map_int64_int64 = data and data["map_int64_int64"] or {},
+		map_uint32_uint32 = data and data["map_uint32_uint32"] or {},
+		map_uint64_uint64 = data and data["map_uint64_uint64"] or {},
+		map_sint32_sint32 = data and data["map_sint32_sint32"] or {},
+		map_sint64_sint64 = data and data["map_sint64_sint64"] or {},
+		map_fixed32_fixed32 = data and data["map_fixed32_fixed32"] or {},
+		map_fixed64_fixed64 = data and data["map_fixed64_fixed64"] or {},
+		map_sfixed32_sfixed32 = data and data["map_sfixed32_sfixed32"] or {},
+		map_sfixed64_sfixed64 = data and data["map_sfixed64_sfixed64"] or {},
+		map_int32_float = data and data["map_int32_float"] or {},
+		map_int32_double = data and data["map_int32_double"] or {},
+		map_bool_bool = data and data["map_bool_bool"] or {},
+		map_string_string = data and data["map_string_string"] or {},
+		map_string_bytes = data and data["map_string_bytes"] or {},
+		map_string_nested_message = data and data["map_string_nested_message"] or {},
+		map_string_foreign_message = data and data["map_string_foreign_message"] or {},
+		map_string_nested_enum = data and data["map_string_nested_enum"] or {},
+		map_string_foreign_enum = data and data["map_string_foreign_enum"] or {},
+		oneof_field = data and data["oneof_field"] or nil,
+		optional_bool_wrapper = data and data["optional_bool_wrapper"] or nil,
+		optional_int32_wrapper = data and data["optional_int32_wrapper"] or nil,
+		optional_int64_wrapper = data and data["optional_int64_wrapper"] or nil,
+		optional_uint32_wrapper = data and data["optional_uint32_wrapper"] or nil,
+		optional_uint64_wrapper = data and data["optional_uint64_wrapper"] or nil,
+		optional_float_wrapper = data and data["optional_float_wrapper"] or nil,
+		optional_double_wrapper = data and data["optional_double_wrapper"] or nil,
+		optional_string_wrapper = data and data["optional_string_wrapper"] or nil,
+		optional_bytes_wrapper = data and data["optional_bytes_wrapper"] or nil,
+		repeated_bool_wrapper = data and data["repeated_bool_wrapper"] or {},
+		repeated_int32_wrapper = data and data["repeated_int32_wrapper"] or {},
+		repeated_int64_wrapper = data and data["repeated_int64_wrapper"] or {},
+		repeated_uint32_wrapper = data and data["repeated_uint32_wrapper"] or {},
+		repeated_uint64_wrapper = data and data["repeated_uint64_wrapper"] or {},
+		repeated_float_wrapper = data and data["repeated_float_wrapper"] or {},
+		repeated_double_wrapper = data and data["repeated_double_wrapper"] or {},
+		repeated_string_wrapper = data and data["repeated_string_wrapper"] or {},
+		repeated_bytes_wrapper = data and data["repeated_bytes_wrapper"] or {},
+		optional_duration = data and data["optional_duration"] or nil,
+		optional_timestamp = data and data["optional_timestamp"] or nil,
+		optional_field_mask = data and data["optional_field_mask"] or nil,
+		optional_struct = data and data["optional_struct"] or nil,
+		optional_any = data and data["optional_any"] or nil,
+		optional_value = data and data["optional_value"] or nil,
+		optional_null_value = data and data["optional_null_value"]
+			or assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default"),
+		repeated_duration = data and data["repeated_duration"] or {},
+		repeated_timestamp = data and data["repeated_timestamp"] or {},
+		repeated_fieldmask = data and data["repeated_fieldmask"] or {},
+		repeated_struct = data and data["repeated_struct"] or {},
+		repeated_any = data and data["repeated_any"] or {},
+		repeated_value = data and data["repeated_value"] or {},
+		repeated_list_value = data and data["repeated_list_value"] or {},
+		fieldname1 = data and data["fieldname1"] or 0,
+		field_name2 = data and data["field_name2"] or 0,
+		_field_name3 = data and data["_field_name3"] or 0,
+		field__name4_ = data and data["field__name4_"] or 0,
+		field0name5 = data and data["field0name5"] or 0,
+		field_0_name6 = data and data["field_0_name6"] or 0,
+		fieldName7 = data and data["fieldName7"] or 0,
+		FieldName8 = data and data["FieldName8"] or 0,
+		field_Name9 = data and data["field_Name9"] or 0,
+		Field_Name10 = data and data["Field_Name10"] or 0,
+		FIELD_NAME11 = data and data["FIELD_NAME11"] or 0,
+		FIELD_name12 = data and data["FIELD_name12"] or 0,
+		__field_name13 = data and data["__field_name13"] or 0,
+		__Field_name14 = data and data["__Field_name14"] or 0,
+		field__name15 = data and data["field__name15"] or 0,
+		field__Name16 = data and data["field__Name16"] or 0,
+		field_name17__ = data and data["field_name17__"] or 0,
+		Field_name18__ = data and data["Field_name18__"] or 0,
+	}, TestAllTypesProto3)
+end
 
-		if self.optional_int32 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.optional_int32)
+function TestAllTypesProto3.encode(self: TestAllTypesProto3): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.optional_int32 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.optional_int32)
+	end
+
+	if self.optional_int64 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.optional_int64)
+	end
+
+	if self.optional_uint32 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.optional_uint32)
+	end
+
+	if self.optional_uint64 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.optional_uint64)
+	end
+
+	if self.optional_sint32 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint32))
+	end
+
+	if self.optional_sint64 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint64))
+	end
+
+	if self.optional_fixed32 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.optional_fixed32)
+	end
+
+	if self.optional_fixed64 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.optional_fixed64)
+	end
+
+	if self.optional_sfixed32 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.optional_sfixed32)
+	end
+
+	if self.optional_sfixed64 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 10, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.optional_sfixed64)
+	end
+
+	if self.optional_float ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 11, proto.wireTypes.i32)
+		output, cursor = proto.writeFloat(output, cursor, self.optional_float)
+	end
+
+	if self.optional_double ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 12, proto.wireTypes.i64)
+		output, cursor = proto.writeDouble(output, cursor, self.optional_double)
+	end
+
+	if self.optional_bool then
+		output, cursor = proto.writeTag(output, cursor, 13, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, if self.optional_bool then 1 else 0)
+	end
+
+	if self.optional_string ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 14, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.optional_string)
+	end
+
+	if buffer.len(self.optional_bytes) > 0 then
+		output, cursor = proto.writeTag(output, cursor, 15, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, self.optional_bytes, buffer.len(self.optional_bytes))
+	end
+
+	if self.optional_nested_message ~= nil then
+		local encoded = TestAllTypesProto3_NestedMessage.encode(self.optional_nested_message)
+		output, cursor = proto.writeTag(output, cursor, 18, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_foreign_message ~= nil then
+		local encoded = ForeignMessage.encode(self.optional_foreign_message)
+		output, cursor = proto.writeTag(output, cursor, 19, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_nested_enum ~= 0 or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
+		output, cursor = proto.writeTag(output, cursor, 21, proto.wireTypes.varint)
+		output, cursor =
+			proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum))
+	end
+
+	if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
+		output, cursor = proto.writeTag(output, cursor, 22, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.optional_foreign_enum))
+	end
+
+	if
+		self.optional_aliased_enum ~= 0
+		or self.optional_aliased_enum ~= TestAllTypesProto3_AliasedEnum.fromNumber(0)
+	then
+		output, cursor = proto.writeTag(output, cursor, 23, proto.wireTypes.varint)
+		output, cursor =
+			proto.writeVarInt(output, cursor, TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum))
+	end
+
+	if self.optional_string_piece ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 24, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.optional_string_piece)
+	end
+
+	if self.optional_cord ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 25, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.optional_cord)
+	end
+
+	if self.recursive_message ~= nil then
+		local encoded = TestAllTypesProto3.encode(self.recursive_message)
+		output, cursor = proto.writeTag(output, cursor, 27, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if #self.repeated_int32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_int32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_int64 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.optional_int64)
+		output, cursor = proto.writeTag(output, cursor, 31, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_int64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_int64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_uint32 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.optional_uint32)
+		output, cursor = proto.writeTag(output, cursor, 32, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_uint32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_uint32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_uint64 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.optional_uint64)
+		output, cursor = proto.writeTag(output, cursor, 33, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_uint64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_uint64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_sint32 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint32))
+		output, cursor = proto.writeTag(output, cursor, 34, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_sint32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_sint32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
 		end
 
-		if self.optional_sint64 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint64))
+		output, cursor = proto.writeTag(output, cursor, 35, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_sint64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_sint64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
 		end
 
-		if self.optional_fixed32 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.optional_fixed32)
+		output, cursor = proto.writeTag(output, cursor, 36, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_fixed32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_fixed32 do
+			packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_fixed64 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.optional_fixed64)
+		output, cursor = proto.writeTag(output, cursor, 37, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_fixed64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_fixed64 do
+			packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_sfixed32 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.optional_sfixed32)
+		output, cursor = proto.writeTag(output, cursor, 38, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_sfixed32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_sfixed32 do
+			packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_sfixed64 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 10, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.optional_sfixed64)
+		output, cursor = proto.writeTag(output, cursor, 39, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_sfixed64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_sfixed64 do
+			packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_float ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 11, proto.wireTypes.i32)
-			output, cursor = proto.writeFloat(output, cursor, self.optional_float)
+		output, cursor = proto.writeTag(output, cursor, 40, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_float > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_float do
+			packedBuffer, packedCursor = proto.writeFloat(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_double ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 12, proto.wireTypes.i64)
-			output, cursor = proto.writeDouble(output, cursor, self.optional_double)
+		output, cursor = proto.writeTag(output, cursor, 41, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_double > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_double do
+			packedBuffer, packedCursor = proto.writeDouble(packedBuffer, packedCursor, value)
 		end
 
-		if self.optional_bool then
-			output, cursor = proto.writeTag(output, cursor, 13, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, if self.optional_bool then 1 else 0)
+		output, cursor = proto.writeTag(output, cursor, 42, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.repeated_bool > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.repeated_bool do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, if value then 1 else 0)
 		end
 
-		if self.optional_string ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 14, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.optional_string)
-		end
+		output, cursor = proto.writeTag(output, cursor, 43, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
 
-		if buffer.len(self.optional_bytes) > 0 then
-			output, cursor = proto.writeTag(output, cursor, 15, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, self.optional_bytes, buffer.len(self.optional_bytes))
+	if #self.repeated_string > 0 then
+		for _, value: string in self.repeated_string do
+			output, cursor = proto.writeTag(output, cursor, 44, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, value)
 		end
+	end
 
-		if self.optional_nested_message ~= nil then
-			local encoded = TestAllTypesProto3_NestedMessage.encode(self.optional_nested_message)
-			output, cursor = proto.writeTag(output, cursor, 18, proto.wireTypes.lengthDelimited)
+	if #self.repeated_bytes > 0 then
+		for _, value: buffer in self.repeated_bytes do
+			output, cursor = proto.writeTag(output, cursor, 45, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, value, buffer.len(value))
+		end
+	end
+
+	if #self.repeated_nested_message > 0 then
+		for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
+			local encoded = TestAllTypesProto3_NestedMessage.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 48, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		end
+	end
 
-		if self.optional_foreign_message ~= nil then
-			local encoded = ForeignMessage.encode(self.optional_foreign_message)
-			output, cursor = proto.writeTag(output, cursor, 19, proto.wireTypes.lengthDelimited)
+	if #self.repeated_foreign_message > 0 then
+		for _, value: ForeignMessage in self.repeated_foreign_message do
+			local encoded = ForeignMessage.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 49, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		end
+	end
 
-		if
-			self.optional_nested_enum ~= 0
-			or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0)
-		then
-			output, cursor = proto.writeTag(output, cursor, 21, proto.wireTypes.varint)
+	if #self.repeated_nested_enum > 0 then
+		for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
+			output, cursor = proto.writeTag(output, cursor, 51, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+		end
+	end
+
+	if #self.repeated_foreign_enum > 0 then
+		for _, value: ForeignEnum in self.repeated_foreign_enum do
+			output, cursor = proto.writeTag(output, cursor, 52, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(value))
+		end
+	end
+
+	if #self.repeated_string_piece > 0 then
+		for _, value: string in self.repeated_string_piece do
+			output, cursor = proto.writeTag(output, cursor, 54, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, value)
+		end
+	end
+
+	if #self.repeated_cord > 0 then
+		for _, value: string in self.repeated_cord do
+			output, cursor = proto.writeTag(output, cursor, 55, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, value)
+		end
+	end
+
+	if #self.packed_int32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_int32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 75, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_int64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_int64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 76, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_uint32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_uint32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 77, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_uint64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_uint64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 78, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_sint32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_sint32 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 79, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_sint64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_sint64 do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 80, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_fixed32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_fixed32 do
+			packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 81, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_fixed64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_fixed64 do
+			packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 82, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_sfixed32 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_sfixed32 do
+			packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 83, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_sfixed64 > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_sfixed64 do
+			packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 84, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_float > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_float do
+			packedBuffer, packedCursor = proto.writeFloat(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 85, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_double > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_double do
+			packedBuffer, packedCursor = proto.writeDouble(packedBuffer, packedCursor, value)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 86, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_bool > 0 then
+		local packedBuffer = buffer.create(0)
+		local packedCursor = 0
+
+		for _, value in self.packed_bool do
+			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, if value then 1 else 0)
+		end
+
+		output, cursor = proto.writeTag(output, cursor, 87, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
+	end
+
+	if #self.packed_nested_enum > 0 then
+		for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
+			output, cursor = proto.writeTag(output, cursor, 88, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+		end
+	end
+
+	if #self.unpacked_int32 > 0 then
+		for _, value: number in self.unpacked_int32 do
+			output, cursor = proto.writeTag(output, cursor, 89, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_int64 > 0 then
+		for _, value: number in self.unpacked_int64 do
+			output, cursor = proto.writeTag(output, cursor, 90, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_uint32 > 0 then
+		for _, value: number in self.unpacked_uint32 do
+			output, cursor = proto.writeTag(output, cursor, 91, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_uint64 > 0 then
+		for _, value: number in self.unpacked_uint64 do
+			output, cursor = proto.writeTag(output, cursor, 92, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_sint32 > 0 then
+		for _, value: number in self.unpacked_sint32 do
+			output, cursor = proto.writeTag(output, cursor, 93, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
+		end
+	end
+
+	if #self.unpacked_sint64 > 0 then
+		for _, value: number in self.unpacked_sint64 do
+			output, cursor = proto.writeTag(output, cursor, 94, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
+		end
+	end
+
+	if #self.unpacked_fixed32 > 0 then
+		for _, value: number in self.unpacked_fixed32 do
+			output, cursor = proto.writeTag(output, cursor, 95, proto.wireTypes.i32)
+			output, cursor = proto.writeFixed32(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_fixed64 > 0 then
+		for _, value: number in self.unpacked_fixed64 do
+			output, cursor = proto.writeTag(output, cursor, 96, proto.wireTypes.i64)
+			output, cursor = proto.writeFixed64(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_sfixed32 > 0 then
+		for _, value: number in self.unpacked_sfixed32 do
+			output, cursor = proto.writeTag(output, cursor, 97, proto.wireTypes.i32)
+			output, cursor = proto.writeFixed32(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_sfixed64 > 0 then
+		for _, value: number in self.unpacked_sfixed64 do
+			output, cursor = proto.writeTag(output, cursor, 98, proto.wireTypes.i64)
+			output, cursor = proto.writeFixed64(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_float > 0 then
+		for _, value: number in self.unpacked_float do
+			output, cursor = proto.writeTag(output, cursor, 99, proto.wireTypes.i32)
+			output, cursor = proto.writeFloat(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_double > 0 then
+		for _, value: number in self.unpacked_double do
+			output, cursor = proto.writeTag(output, cursor, 100, proto.wireTypes.i64)
+			output, cursor = proto.writeDouble(output, cursor, value)
+		end
+	end
+
+	if #self.unpacked_bool > 0 then
+		for _, value: boolean in self.unpacked_bool do
+			output, cursor = proto.writeTag(output, cursor, 101, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if value then 1 else 0)
+		end
+	end
+
+	if #self.unpacked_nested_enum > 0 then
+		for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
+			output, cursor = proto.writeTag(output, cursor, 102, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+		end
+	end
+
+	if next(self.map_int32_int32) ~= nil then
+		for key: number, value: number in self.map_int32_int32 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 56, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_int64_int64) ~= nil then
+		for key: number, value: number in self.map_int64_int64 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 57, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_uint32_uint32) ~= nil then
+		for key: number, value: number in self.map_uint32_uint32 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 58, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_uint64_uint64) ~= nil then
+		for key: number, value: number in self.map_uint64_uint64 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 59, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_sint32_sint32) ~= nil then
+		for key: number, value: number in self.map_sint32_sint32 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
+			output, cursor = proto.writeTag(output, cursor, 60, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_sint64_sint64) ~= nil then
+		for key: number, value: number in self.map_sint64_sint64 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
+			output, cursor = proto.writeTag(output, cursor, 61, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_fixed32_fixed32) ~= nil then
+		for key: number, value: number in self.map_fixed32_fixed32 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
+			mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
+			mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 62, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_fixed64_fixed64) ~= nil then
+		for key: number, value: number in self.map_fixed64_fixed64 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
+			mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
+			mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 63, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_sfixed32_sfixed32) ~= nil then
+		for key: number, value: number in self.map_sfixed32_sfixed32 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
+			mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
+			mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 64, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_sfixed64_sfixed64) ~= nil then
+		for key: number, value: number in self.map_sfixed64_sfixed64 do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
+			mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
+			mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 65, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_int32_float) ~= nil then
+		for key: number, value: number in self.map_int32_float do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
+			mapBuffer, mapCursor = proto.writeFloat(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 66, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_int32_double) ~= nil then
+		for key: number, value: number in self.map_int32_double do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
+			mapBuffer, mapCursor = proto.writeDouble(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 67, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_bool_bool) ~= nil then
+		for key: boolean, value: boolean in self.map_bool_bool do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, if key then 1 else 0)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, if value then 1 else 0)
+			output, cursor = proto.writeTag(output, cursor, 68, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_string) ~= nil then
+		for key: string, value: string in self.map_string_string do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, value)
+			output, cursor = proto.writeTag(output, cursor, 69, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_bytes) ~= nil then
+		for key: string, value: buffer in self.map_string_bytes do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, value, buffer.len(value))
+			output, cursor = proto.writeTag(output, cursor, 70, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_nested_message) ~= nil then
+		for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			local encoded = TestAllTypesProto3_NestedMessage.encode(value)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
+			output, cursor = proto.writeTag(output, cursor, 71, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_foreign_message) ~= nil then
+		for key: string, value: ForeignMessage in self.map_string_foreign_message do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			local encoded = ForeignMessage.encode(value)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
+			output, cursor = proto.writeTag(output, cursor, 72, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_nested_enum) ~= nil then
+		for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor =
+				proto.writeVarInt(mapBuffer, mapCursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+			output, cursor = proto.writeTag(output, cursor, 73, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if next(self.map_string_foreign_enum) ~= nil then
+		for key: string, value: ForeignEnum in self.map_string_foreign_enum do
+			local mapBuffer = buffer.create(0)
+			local mapCursor = 0
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
+			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
+			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, ForeignEnum.toNumber(value))
+			output, cursor = proto.writeTag(output, cursor, 74, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
+		end
+	end
+
+	if self.oneof_field ~= nil then
+		if self.oneof_field.type == "oneof_uint32" then
+			output, cursor = proto.writeTag(output, cursor, 111, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_nested_message" then
+			local encoded = TestAllTypesProto3_NestedMessage.encode(self.oneof_field.value)
+			output, cursor = proto.writeTag(output, cursor, 112, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		elseif self.oneof_field.type == "oneof_string" then
+			output, cursor = proto.writeTag(output, cursor, 113, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_bytes" then
+			output, cursor = proto.writeTag(output, cursor, 114, proto.wireTypes.lengthDelimited)
 			output, cursor =
-				proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum))
-		end
-
-		if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
-			output, cursor = proto.writeTag(output, cursor, 22, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.optional_foreign_enum))
-		end
-
-		if
-			self.optional_aliased_enum ~= 0
-			or self.optional_aliased_enum ~= TestAllTypesProto3_AliasedEnum.fromNumber(0)
-		then
-			output, cursor = proto.writeTag(output, cursor, 23, proto.wireTypes.varint)
+				proto.writeBuffer(output, cursor, self.oneof_field.value, buffer.len(self.oneof_field.value))
+		elseif self.oneof_field.type == "oneof_bool" then
+			output, cursor = proto.writeTag(output, cursor, 115, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if self.oneof_field.value then 1 else 0)
+		elseif self.oneof_field.type == "oneof_uint64" then
+			output, cursor = proto.writeTag(output, cursor, 116, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_float" then
+			output, cursor = proto.writeTag(output, cursor, 117, proto.wireTypes.i32)
+			output, cursor = proto.writeFloat(output, cursor, self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_double" then
+			output, cursor = proto.writeTag(output, cursor, 118, proto.wireTypes.i64)
+			output, cursor = proto.writeDouble(output, cursor, self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_enum" then
+			output, cursor = proto.writeTag(output, cursor, 119, proto.wireTypes.varint)
 			output, cursor =
-				proto.writeVarInt(output, cursor, TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum))
-		end
-
-		if self.optional_string_piece ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 24, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.optional_string_piece)
-		end
-
-		if self.optional_cord ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 25, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.optional_cord)
-		end
-
-		if self.recursive_message ~= nil then
-			local encoded = TestAllTypesProto3.encode(self.recursive_message)
-			output, cursor = proto.writeTag(output, cursor, 27, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if #self.repeated_int32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_int32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 31, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_int64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_int64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 32, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_uint32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_uint32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 33, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_uint64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_uint64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 34, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_sint32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_sint32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 35, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_sint64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_sint64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 36, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_fixed32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_fixed32 do
-				packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 37, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_fixed64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_fixed64 do
-				packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 38, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_sfixed32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_sfixed32 do
-				packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 39, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_sfixed64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_sfixed64 do
-				packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 40, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_float > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_float do
-				packedBuffer, packedCursor = proto.writeFloat(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 41, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_double > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_double do
-				packedBuffer, packedCursor = proto.writeDouble(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 42, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_bool > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.repeated_bool do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, if value then 1 else 0)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 43, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.repeated_string > 0 then
-			for _, value: string in self.repeated_string do
-				output, cursor = proto.writeTag(output, cursor, 44, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeString(output, cursor, value)
-			end
-		end
-
-		if #self.repeated_bytes > 0 then
-			for _, value: buffer in self.repeated_bytes do
-				output, cursor = proto.writeTag(output, cursor, 45, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, value, buffer.len(value))
-			end
-		end
-
-		if #self.repeated_nested_message > 0 then
-			for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
-				local encoded = TestAllTypesProto3_NestedMessage.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 48, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_foreign_message > 0 then
-			for _, value: ForeignMessage in self.repeated_foreign_message do
-				local encoded = ForeignMessage.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 49, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_nested_enum > 0 then
-			for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
-				output, cursor = proto.writeTag(output, cursor, 51, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
-			end
-		end
-
-		if #self.repeated_foreign_enum > 0 then
-			for _, value: ForeignEnum in self.repeated_foreign_enum do
-				output, cursor = proto.writeTag(output, cursor, 52, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(value))
-			end
-		end
-
-		if #self.repeated_string_piece > 0 then
-			for _, value: string in self.repeated_string_piece do
-				output, cursor = proto.writeTag(output, cursor, 54, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeString(output, cursor, value)
-			end
-		end
-
-		if #self.repeated_cord > 0 then
-			for _, value: string in self.repeated_cord do
-				output, cursor = proto.writeTag(output, cursor, 55, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeString(output, cursor, value)
-			end
-		end
-
-		if #self.packed_int32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_int32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 75, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_int64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_int64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 76, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_uint32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_uint32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 77, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_uint64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_uint64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 78, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_sint32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_sint32 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 79, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_sint64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_sint64 do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 80, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_fixed32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_fixed32 do
-				packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 81, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_fixed64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_fixed64 do
-				packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 82, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_sfixed32 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_sfixed32 do
-				packedBuffer, packedCursor = proto.writeFixed32(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 83, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_sfixed64 > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_sfixed64 do
-				packedBuffer, packedCursor = proto.writeFixed64(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 84, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_float > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_float do
-				packedBuffer, packedCursor = proto.writeFloat(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 85, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_double > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_double do
-				packedBuffer, packedCursor = proto.writeDouble(packedBuffer, packedCursor, value)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 86, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_bool > 0 then
-			local packedBuffer = buffer.create(0)
-			local packedCursor = 0
-
-			for _, value in self.packed_bool do
-				packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, if value then 1 else 0)
-			end
-
-			output, cursor = proto.writeTag(output, cursor, 87, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
-		end
-
-		if #self.packed_nested_enum > 0 then
-			for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
-				output, cursor = proto.writeTag(output, cursor, 88, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
-			end
-		end
-
-		if #self.unpacked_int32 > 0 then
-			for _, value: number in self.unpacked_int32 do
-				output, cursor = proto.writeTag(output, cursor, 89, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_int64 > 0 then
-			for _, value: number in self.unpacked_int64 do
-				output, cursor = proto.writeTag(output, cursor, 90, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_uint32 > 0 then
-			for _, value: number in self.unpacked_uint32 do
-				output, cursor = proto.writeTag(output, cursor, 91, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_uint64 > 0 then
-			for _, value: number in self.unpacked_uint64 do
-				output, cursor = proto.writeTag(output, cursor, 92, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_sint32 > 0 then
-			for _, value: number in self.unpacked_sint32 do
-				output, cursor = proto.writeTag(output, cursor, 93, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
-			end
-		end
-
-		if #self.unpacked_sint64 > 0 then
-			for _, value: number in self.unpacked_sint64 do
-				output, cursor = proto.writeTag(output, cursor, 94, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
-			end
-		end
-
-		if #self.unpacked_fixed32 > 0 then
-			for _, value: number in self.unpacked_fixed32 do
-				output, cursor = proto.writeTag(output, cursor, 95, proto.wireTypes.i32)
-				output, cursor = proto.writeFixed32(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_fixed64 > 0 then
-			for _, value: number in self.unpacked_fixed64 do
-				output, cursor = proto.writeTag(output, cursor, 96, proto.wireTypes.i64)
-				output, cursor = proto.writeFixed64(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_sfixed32 > 0 then
-			for _, value: number in self.unpacked_sfixed32 do
-				output, cursor = proto.writeTag(output, cursor, 97, proto.wireTypes.i32)
-				output, cursor = proto.writeFixed32(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_sfixed64 > 0 then
-			for _, value: number in self.unpacked_sfixed64 do
-				output, cursor = proto.writeTag(output, cursor, 98, proto.wireTypes.i64)
-				output, cursor = proto.writeFixed64(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_float > 0 then
-			for _, value: number in self.unpacked_float do
-				output, cursor = proto.writeTag(output, cursor, 99, proto.wireTypes.i32)
-				output, cursor = proto.writeFloat(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_double > 0 then
-			for _, value: number in self.unpacked_double do
-				output, cursor = proto.writeTag(output, cursor, 100, proto.wireTypes.i64)
-				output, cursor = proto.writeDouble(output, cursor, value)
-			end
-		end
-
-		if #self.unpacked_bool > 0 then
-			for _, value: boolean in self.unpacked_bool do
-				output, cursor = proto.writeTag(output, cursor, 101, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, if value then 1 else 0)
-			end
-		end
-
-		if #self.unpacked_nested_enum > 0 then
-			for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
-				output, cursor = proto.writeTag(output, cursor, 102, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
-			end
-		end
-
-		if next(self.map_int32_int32) ~= nil then
-			for key: number, value: number in self.map_int32_int32 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 56, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_int64_int64) ~= nil then
-			for key: number, value: number in self.map_int64_int64 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 57, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_uint32_uint32) ~= nil then
-			for key: number, value: number in self.map_uint32_uint32 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 58, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_uint64_uint64) ~= nil then
-			for key: number, value: number in self.map_uint64_uint64 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 59, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_sint32_sint32) ~= nil then
-			for key: number, value: number in self.map_sint32_sint32 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
-				output, cursor = proto.writeTag(output, cursor, 60, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_sint64_sint64) ~= nil then
-			for key: number, value: number in self.map_sint64_sint64 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
-				output, cursor = proto.writeTag(output, cursor, 61, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_fixed32_fixed32) ~= nil then
-			for key: number, value: number in self.map_fixed32_fixed32 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
-				mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
-				mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 62, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_fixed64_fixed64) ~= nil then
-			for key: number, value: number in self.map_fixed64_fixed64 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
-				mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
-				mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 63, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_sfixed32_sfixed32) ~= nil then
-			for key: number, value: number in self.map_sfixed32_sfixed32 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
-				mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
-				mapBuffer, mapCursor = proto.writeFixed32(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 64, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_sfixed64_sfixed64) ~= nil then
-			for key: number, value: number in self.map_sfixed64_sfixed64 do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
-				mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
-				mapBuffer, mapCursor = proto.writeFixed64(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 65, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_int32_float) ~= nil then
-			for key: number, value: number in self.map_int32_float do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i32)
-				mapBuffer, mapCursor = proto.writeFloat(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 66, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_int32_double) ~= nil then
-			for key: number, value: number in self.map_int32_double do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.i64)
-				mapBuffer, mapCursor = proto.writeDouble(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 67, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_bool_bool) ~= nil then
-			for key: boolean, value: boolean in self.map_bool_bool do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, if key then 1 else 0)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, if value then 1 else 0)
-				output, cursor = proto.writeTag(output, cursor, 68, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_string) ~= nil then
-			for key: string, value: string in self.map_string_string do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, value)
-				output, cursor = proto.writeTag(output, cursor, 69, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_bytes) ~= nil then
-			for key: string, value: buffer in self.map_string_bytes do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, value, buffer.len(value))
-				output, cursor = proto.writeTag(output, cursor, 70, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_nested_message) ~= nil then
-			for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				local encoded = TestAllTypesProto3_NestedMessage.encode(value)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
-				output, cursor = proto.writeTag(output, cursor, 71, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_foreign_message) ~= nil then
-			for key: string, value: ForeignMessage in self.map_string_foreign_message do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				local encoded = ForeignMessage.encode(value)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
-				output, cursor = proto.writeTag(output, cursor, 72, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_nested_enum) ~= nil then
-			for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor =
-					proto.writeVarInt(mapBuffer, mapCursor, TestAllTypesProto3_NestedEnum.toNumber(value))
-				output, cursor = proto.writeTag(output, cursor, 73, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if next(self.map_string_foreign_enum) ~= nil then
-			for key: string, value: ForeignEnum in self.map_string_foreign_enum do
-				local mapBuffer = buffer.create(0)
-				local mapCursor = 0
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
-				mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-				mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, ForeignEnum.toNumber(value))
-				output, cursor = proto.writeTag(output, cursor, 74, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
-			end
-		end
-
-		if self.oneof_field ~= nil then
-			if self.oneof_field.type == "oneof_uint32" then
-				output, cursor = proto.writeTag(output, cursor, 111, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_nested_message" then
-				local encoded = TestAllTypesProto3_NestedMessage.encode(self.oneof_field.value)
-				output, cursor = proto.writeTag(output, cursor, 112, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			elseif self.oneof_field.type == "oneof_string" then
-				output, cursor = proto.writeTag(output, cursor, 113, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeString(output, cursor, self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_bytes" then
-				output, cursor = proto.writeTag(output, cursor, 114, proto.wireTypes.lengthDelimited)
-				output, cursor =
-					proto.writeBuffer(output, cursor, self.oneof_field.value, buffer.len(self.oneof_field.value))
-			elseif self.oneof_field.type == "oneof_bool" then
-				output, cursor = proto.writeTag(output, cursor, 115, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, if self.oneof_field.value then 1 else 0)
-			elseif self.oneof_field.type == "oneof_uint64" then
-				output, cursor = proto.writeTag(output, cursor, 116, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(output, cursor, self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_float" then
-				output, cursor = proto.writeTag(output, cursor, 117, proto.wireTypes.i32)
-				output, cursor = proto.writeFloat(output, cursor, self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_double" then
-				output, cursor = proto.writeTag(output, cursor, 118, proto.wireTypes.i64)
-				output, cursor = proto.writeDouble(output, cursor, self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_enum" then
-				output, cursor = proto.writeTag(output, cursor, 119, proto.wireTypes.varint)
-				output, cursor =
-					proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value))
-			elseif self.oneof_field.type == "oneof_null_value" then
-				output, cursor = proto.writeTag(output, cursor, 120, proto.wireTypes.varint)
-				output, cursor = proto.writeVarInt(
-					output,
-					cursor,
-					_google_protobuf_struct.NullValue.toNumber(self.oneof_field.value)
-				)
-			end
-		end
-
-		if self.optional_bool_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.BoolValue.encode(self.optional_bool_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 201, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_int32_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.Int32Value.encode(self.optional_int32_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 202, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_int64_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.Int64Value.encode(self.optional_int64_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 203, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_uint32_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.UInt32Value.encode(self.optional_uint32_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 204, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_uint64_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.UInt64Value.encode(self.optional_uint64_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 205, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_float_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.FloatValue.encode(self.optional_float_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 206, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_double_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.DoubleValue.encode(self.optional_double_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 207, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_string_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.StringValue.encode(self.optional_string_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 208, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_bytes_wrapper ~= nil then
-			local encoded = _google_protobuf_wrappers.BytesValue.encode(self.optional_bytes_wrapper)
-			output, cursor = proto.writeTag(output, cursor, 209, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if #self.repeated_bool_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
-				local encoded = _google_protobuf_wrappers.BoolValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 211, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_int32_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
-				local encoded = _google_protobuf_wrappers.Int32Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 212, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_int64_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
-				local encoded = _google_protobuf_wrappers.Int64Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 213, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_uint32_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
-				local encoded = _google_protobuf_wrappers.UInt32Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 214, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_uint64_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
-				local encoded = _google_protobuf_wrappers.UInt64Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 215, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_float_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
-				local encoded = _google_protobuf_wrappers.FloatValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 216, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_double_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
-				local encoded = _google_protobuf_wrappers.DoubleValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 217, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_string_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
-				local encoded = _google_protobuf_wrappers.StringValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 218, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_bytes_wrapper > 0 then
-			for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
-				local encoded = _google_protobuf_wrappers.BytesValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 219, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if self.optional_duration ~= nil then
-			local encoded = _google_protobuf_duration.Duration.encode(self.optional_duration)
-			output, cursor = proto.writeTag(output, cursor, 301, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_timestamp ~= nil then
-			local encoded = _google_protobuf_timestamp.Timestamp.encode(self.optional_timestamp)
-			output, cursor = proto.writeTag(output, cursor, 302, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_field_mask ~= nil then
-			local encoded = _google_protobuf_field_mask.FieldMask.encode(self.optional_field_mask)
-			output, cursor = proto.writeTag(output, cursor, 303, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_struct ~= nil then
-			local encoded = _google_protobuf_struct.Struct.encode(self.optional_struct)
-			output, cursor = proto.writeTag(output, cursor, 304, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_any ~= nil then
-			local encoded = _google_protobuf_any.Any.encode(self.optional_any)
-			output, cursor = proto.writeTag(output, cursor, 305, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if self.optional_value ~= nil then
-			local encoded = _google_protobuf_struct.Value.encode(self.optional_value)
-			output, cursor = proto.writeTag(output, cursor, 306, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		if
-			self.optional_null_value ~= 0
-			or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0)
-		then
-			output, cursor = proto.writeTag(output, cursor, 307, proto.wireTypes.varint)
+				proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value))
+		elseif self.oneof_field.type == "oneof_null_value" then
+			output, cursor = proto.writeTag(output, cursor, 120, proto.wireTypes.varint)
 			output, cursor =
-				proto.writeVarInt(output, cursor, _google_protobuf_struct.NullValue.toNumber(self.optional_null_value))
+				proto.writeVarInt(output, cursor, _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value))
 		end
+	end
 
-		if #self.repeated_duration > 0 then
-			for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
-				local encoded = _google_protobuf_duration.Duration.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 311, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	if self.optional_bool_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.BoolValue.encode(self.optional_bool_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 201, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_int32_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.Int32Value.encode(self.optional_int32_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 202, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_int64_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.Int64Value.encode(self.optional_int64_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 203, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_uint32_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.UInt32Value.encode(self.optional_uint32_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 204, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_uint64_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.UInt64Value.encode(self.optional_uint64_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 205, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_float_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.FloatValue.encode(self.optional_float_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 206, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_double_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.DoubleValue.encode(self.optional_double_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 207, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_string_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.StringValue.encode(self.optional_string_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 208, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_bytes_wrapper ~= nil then
+		local encoded = _google_protobuf_wrappers.BytesValue.encode(self.optional_bytes_wrapper)
+		output, cursor = proto.writeTag(output, cursor, 209, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if #self.repeated_bool_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
+			local encoded = _google_protobuf_wrappers.BoolValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 211, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_int32_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
+			local encoded = _google_protobuf_wrappers.Int32Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 212, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_int64_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
+			local encoded = _google_protobuf_wrappers.Int64Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 213, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_uint32_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
+			local encoded = _google_protobuf_wrappers.UInt32Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 214, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_uint64_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
+			local encoded = _google_protobuf_wrappers.UInt64Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 215, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_float_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
+			local encoded = _google_protobuf_wrappers.FloatValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 216, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_double_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
+			local encoded = _google_protobuf_wrappers.DoubleValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 217, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_string_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
+			local encoded = _google_protobuf_wrappers.StringValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 218, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_bytes_wrapper > 0 then
+		for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
+			local encoded = _google_protobuf_wrappers.BytesValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 219, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if self.optional_duration ~= nil then
+		local encoded = _google_protobuf_duration.Duration.encode(self.optional_duration)
+		output, cursor = proto.writeTag(output, cursor, 301, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_timestamp ~= nil then
+		local encoded = _google_protobuf_timestamp.Timestamp.encode(self.optional_timestamp)
+		output, cursor = proto.writeTag(output, cursor, 302, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_field_mask ~= nil then
+		local encoded = _google_protobuf_field_mask.FieldMask.encode(self.optional_field_mask)
+		output, cursor = proto.writeTag(output, cursor, 303, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_struct ~= nil then
+		local encoded = _google_protobuf_struct.Struct.encode(self.optional_struct)
+		output, cursor = proto.writeTag(output, cursor, 304, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_any ~= nil then
+		local encoded = _google_protobuf_any.Any.encode(self.optional_any)
+		output, cursor = proto.writeTag(output, cursor, 305, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_value ~= nil then
+		local encoded = _google_protobuf_struct.Value.encode(self.optional_value)
+		output, cursor = proto.writeTag(output, cursor, 306, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	if self.optional_null_value ~= 0 or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0) then
+		output, cursor = proto.writeTag(output, cursor, 307, proto.wireTypes.varint)
+		output, cursor =
+			proto.writeVarInt(output, cursor, _google_protobuf_struct.NullValue.toNumber(self.optional_null_value))
+	end
+
+	if #self.repeated_duration > 0 then
+		for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
+			local encoded = _google_protobuf_duration.Duration.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 311, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_timestamp > 0 then
+		for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
+			local encoded = _google_protobuf_timestamp.Timestamp.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 312, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_fieldmask > 0 then
+		for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
+			local encoded = _google_protobuf_field_mask.FieldMask.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 313, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_struct > 0 then
+		for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
+			local encoded = _google_protobuf_struct.Struct.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 324, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_any > 0 then
+		for _, value: _google_protobuf_any.Any in self.repeated_any do
+			local encoded = _google_protobuf_any.Any.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 315, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_value > 0 then
+		for _, value: _google_protobuf_struct.Value in self.repeated_value do
+			local encoded = _google_protobuf_struct.Value.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 316, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if #self.repeated_list_value > 0 then
+		for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
+			local encoded = _google_protobuf_struct.ListValue.encode(value)
+			output, cursor = proto.writeTag(output, cursor, 317, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+	end
+
+	if self.fieldname1 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 401, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.fieldname1)
+	end
+
+	if self.field_name2 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 402, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field_name2)
+	end
+
+	if self._field_name3 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 403, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self._field_name3)
+	end
+
+	if self.field__name4_ ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 404, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field__name4_)
+	end
+
+	if self.field0name5 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 405, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field0name5)
+	end
+
+	if self.field_0_name6 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 406, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field_0_name6)
+	end
+
+	if self.fieldName7 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 407, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.fieldName7)
+	end
+
+	if self.FieldName8 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 408, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.FieldName8)
+	end
+
+	if self.field_Name9 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 409, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field_Name9)
+	end
+
+	if self.Field_Name10 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 410, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.Field_Name10)
+	end
+
+	if self.FIELD_NAME11 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 411, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.FIELD_NAME11)
+	end
+
+	if self.FIELD_name12 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 412, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.FIELD_name12)
+	end
+
+	if self.__field_name13 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 413, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.__field_name13)
+	end
+
+	if self.__Field_name14 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 414, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.__Field_name14)
+	end
+
+	if self.field__name15 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 415, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field__name15)
+	end
+
+	if self.field__Name16 ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 416, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field__Name16)
+	end
+
+	if self.field_name17__ ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 417, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.field_name17__)
+	end
+
+	if self.Field_name18__ ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 418, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.Field_name18__)
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3.decode(input: buffer): TestAllTypesProto3
+	local self = TestAllTypesProto3.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_int32 = proto.limitInt32(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_int64 = value
+			elseif field == 3 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_uint32 = value
+			elseif field == 4 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_uint64 = value
+			elseif field == 5 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_sint32 = proto.decodeZigZag(value)
+			elseif field == 6 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_sint64 = proto.decodeZigZag(value)
+			elseif field == 13 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_bool = value ~= 0
+			elseif field == 21 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_nested_enum = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+			elseif field == 22 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_foreign_enum = ForeignEnum.fromNumber(value) or value
+			elseif field == 23 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_aliased_enum = TestAllTypesProto3_AliasedEnum.fromNumber(value) or value
+			elseif field == 31 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_int32, proto.limitInt32(value))
+			elseif field == 32 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_int64, value)
+			elseif field == 33 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_uint32, value)
+			elseif field == 34 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_uint64, value)
+			elseif field == 35 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_sint32, proto.decodeZigZag(value))
+			elseif field == 36 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_sint64, proto.decodeZigZag(value))
+			elseif field == 43 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_bool, value ~= 0)
+			elseif field == 51 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+			elseif field == 52 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.repeated_foreign_enum, ForeignEnum.fromNumber(value) or value)
+			elseif field == 75 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_int32, proto.limitInt32(value))
+			elseif field == 76 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_int64, value)
+			elseif field == 77 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_uint32, value)
+			elseif field == 78 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_uint64, value)
+			elseif field == 79 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_sint32, proto.decodeZigZag(value))
+			elseif field == 80 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_sint64, proto.decodeZigZag(value))
+			elseif field == 87 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_bool, value ~= 0)
+			elseif field == 88 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.packed_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+			elseif field == 89 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_int32, proto.limitInt32(value))
+			elseif field == 90 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_int64, value)
+			elseif field == 91 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_uint32, value)
+			elseif field == 92 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_uint64, value)
+			elseif field == 93 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_sint32, proto.decodeZigZag(value))
+			elseif field == 94 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_sint64, proto.decodeZigZag(value))
+			elseif field == 101 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_bool, value ~= 0)
+			elseif field == 102 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				table.insert(self.unpacked_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+			elseif field == 111 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.oneof_field = { type = "oneof_uint32", value = value }
+			elseif field == 115 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.oneof_field = { type = "oneof_bool", value = value ~= 0 }
+			elseif field == 116 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.oneof_field = { type = "oneof_uint64", value = value }
+			elseif field == 119 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.oneof_field =
+					{ type = "oneof_enum", value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value }
+			elseif field == 120 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.oneof_field =
+					{ type = "oneof_null_value", value = _google_protobuf_struct.NullValue.fromNumber(value) or value }
+			elseif field == 307 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.optional_null_value = _google_protobuf_struct.NullValue.fromNumber(value) or value
+			elseif field == 401 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.fieldname1 = proto.limitInt32(value)
+			elseif field == 402 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field_name2 = proto.limitInt32(value)
+			elseif field == 403 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self._field_name3 = proto.limitInt32(value)
+			elseif field == 404 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field__name4_ = proto.limitInt32(value)
+			elseif field == 405 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field0name5 = proto.limitInt32(value)
+			elseif field == 406 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field_0_name6 = proto.limitInt32(value)
+			elseif field == 407 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.fieldName7 = proto.limitInt32(value)
+			elseif field == 408 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.FieldName8 = proto.limitInt32(value)
+			elseif field == 409 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field_Name9 = proto.limitInt32(value)
+			elseif field == 410 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.Field_Name10 = proto.limitInt32(value)
+			elseif field == 411 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.FIELD_NAME11 = proto.limitInt32(value)
+			elseif field == 412 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.FIELD_name12 = proto.limitInt32(value)
+			elseif field == 413 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.__field_name13 = proto.limitInt32(value)
+			elseif field == 414 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.__Field_name14 = proto.limitInt32(value)
+			elseif field == 415 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field__name15 = proto.limitInt32(value)
+			elseif field == 416 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field__Name16 = proto.limitInt32(value)
+			elseif field == 417 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.field_name17__ = proto.limitInt32(value)
+			elseif field == 418 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.Field_name18__ = proto.limitInt32(value)
 			end
-		end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 14 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_string = buffer.tostring(value)
+			elseif field == 15 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_bytes = value
+			elseif field == 18 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_nested_message = TestAllTypesProto3_NestedMessage.decode(value)
+			elseif field == 19 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_foreign_message = ForeignMessage.decode(value)
+			elseif field == 24 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_string_piece = buffer.tostring(value)
+			elseif field == 25 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_cord = buffer.tostring(value)
+			elseif field == 27 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.recursive_message = TestAllTypesProto3.decode(value)
+			elseif field == 31 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
 
-		if #self.repeated_timestamp > 0 then
-			for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
-				local encoded = _google_protobuf_timestamp.Timestamp.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 312, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
+				local limit = cursor + length
 
-		if #self.repeated_fieldmask > 0 then
-			for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
-				local encoded = _google_protobuf_field_mask.FieldMask.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 313, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_struct > 0 then
-			for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
-				local encoded = _google_protobuf_struct.Struct.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 324, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_any > 0 then
-			for _, value: _google_protobuf_any.Any in self.repeated_any do
-				local encoded = _google_protobuf_any.Any.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 315, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_value > 0 then
-			for _, value: _google_protobuf_struct.Value in self.repeated_value do
-				local encoded = _google_protobuf_struct.Value.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 316, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if #self.repeated_list_value > 0 then
-			for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
-				local encoded = _google_protobuf_struct.ListValue.encode(value)
-				output, cursor = proto.writeTag(output, cursor, 317, proto.wireTypes.lengthDelimited)
-				output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-			end
-		end
-
-		if self.fieldname1 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 401, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.fieldname1)
-		end
-
-		if self.field_name2 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 402, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field_name2)
-		end
-
-		if self._field_name3 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 403, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self._field_name3)
-		end
-
-		if self.field__name4_ ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 404, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field__name4_)
-		end
-
-		if self.field0name5 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 405, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field0name5)
-		end
-
-		if self.field_0_name6 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 406, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field_0_name6)
-		end
-
-		if self.fieldName7 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 407, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.fieldName7)
-		end
-
-		if self.FieldName8 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 408, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.FieldName8)
-		end
-
-		if self.field_Name9 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 409, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field_Name9)
-		end
-
-		if self.Field_Name10 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 410, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.Field_Name10)
-		end
-
-		if self.FIELD_NAME11 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 411, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.FIELD_NAME11)
-		end
-
-		if self.FIELD_name12 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 412, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.FIELD_name12)
-		end
-
-		if self.__field_name13 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 413, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.__field_name13)
-		end
-
-		if self.__Field_name14 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 414, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.__Field_name14)
-		end
-
-		if self.field__name15 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 415, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field__name15)
-		end
-
-		if self.field__Name16 ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 416, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field__Name16)
-		end
-
-		if self.field_name17__ ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 417, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.field_name17__)
-		end
-
-		if self.Field_name18__ ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 418, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.Field_name18__)
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3
-		local self = TestAllTypesProto3.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_int32 = proto.limitInt32(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_int64 = value
-				elseif field == 3 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_uint32 = value
-				elseif field == 4 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_uint64 = value
-				elseif field == 5 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_sint32 = proto.decodeZigZag(value)
-				elseif field == 6 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_sint64 = proto.decodeZigZag(value)
-				elseif field == 13 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_bool = value ~= 0
-				elseif field == 21 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_nested_enum = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
-				elseif field == 22 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_foreign_enum = ForeignEnum.fromNumber(value) or value
-				elseif field == 23 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_aliased_enum = TestAllTypesProto3_AliasedEnum.fromNumber(value) or value
-				elseif field == 31 then
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_int32, proto.limitInt32(value))
-				elseif field == 32 then
+				end
+			elseif field == 32 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_int64, value)
-				elseif field == 33 then
+				end
+			elseif field == 33 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_uint32, value)
-				elseif field == 34 then
+				end
+			elseif field == 34 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_uint64, value)
-				elseif field == 35 then
+				end
+			elseif field == 35 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_sint32, proto.decodeZigZag(value))
-				elseif field == 36 then
+				end
+			elseif field == 36 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readVarInt(input, cursor)
 					table.insert(self.repeated_sint64, proto.decodeZigZag(value))
-				elseif field == 43 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_bool, value ~= 0)
-				elseif field == 51 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-				elseif field == 52 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_foreign_enum, ForeignEnum.fromNumber(value) or value)
-				elseif field == 75 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_int32, proto.limitInt32(value))
-				elseif field == 76 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_int64, value)
-				elseif field == 77 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_uint32, value)
-				elseif field == 78 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_uint64, value)
-				elseif field == 79 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_sint32, proto.decodeZigZag(value))
-				elseif field == 80 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_sint64, proto.decodeZigZag(value))
-				elseif field == 87 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_bool, value ~= 0)
-				elseif field == 88 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-				elseif field == 89 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_int32, proto.limitInt32(value))
-				elseif field == 90 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_int64, value)
-				elseif field == 91 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_uint32, value)
-				elseif field == 92 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_uint64, value)
-				elseif field == 93 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_sint32, proto.decodeZigZag(value))
-				elseif field == 94 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_sint64, proto.decodeZigZag(value))
-				elseif field == 101 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_bool, value ~= 0)
-				elseif field == 102 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.unpacked_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-				elseif field == 111 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.oneof_field = { type = "oneof_uint32", value = value }
-				elseif field == 115 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.oneof_field = { type = "oneof_bool", value = value ~= 0 }
-				elseif field == 116 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.oneof_field = { type = "oneof_uint64", value = value }
-				elseif field == 119 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.oneof_field =
-						{ type = "oneof_enum", value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value }
-				elseif field == 120 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.oneof_field = {
-						type = "oneof_null_value",
-						value = _google_protobuf_struct.NullValue.fromNumber(value) or value,
-					}
-				elseif field == 307 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.optional_null_value = _google_protobuf_struct.NullValue.fromNumber(value) or value
-				elseif field == 401 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.fieldname1 = proto.limitInt32(value)
-				elseif field == 402 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field_name2 = proto.limitInt32(value)
-				elseif field == 403 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self._field_name3 = proto.limitInt32(value)
-				elseif field == 404 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field__name4_ = proto.limitInt32(value)
-				elseif field == 405 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field0name5 = proto.limitInt32(value)
-				elseif field == 406 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field_0_name6 = proto.limitInt32(value)
-				elseif field == 407 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.fieldName7 = proto.limitInt32(value)
-				elseif field == 408 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.FieldName8 = proto.limitInt32(value)
-				elseif field == 409 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field_Name9 = proto.limitInt32(value)
-				elseif field == 410 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.Field_Name10 = proto.limitInt32(value)
-				elseif field == 411 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.FIELD_NAME11 = proto.limitInt32(value)
-				elseif field == 412 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.FIELD_name12 = proto.limitInt32(value)
-				elseif field == 413 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.__field_name13 = proto.limitInt32(value)
-				elseif field == 414 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.__Field_name14 = proto.limitInt32(value)
-				elseif field == 415 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field__name15 = proto.limitInt32(value)
-				elseif field == 416 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field__Name16 = proto.limitInt32(value)
-				elseif field == 417 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.field_name17__ = proto.limitInt32(value)
-				elseif field == 418 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.Field_name18__ = proto.limitInt32(value)
 				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 14 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_string = buffer.tostring(value)
-				elseif field == 15 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_bytes = value
-				elseif field == 18 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_nested_message = TestAllTypesProto3_NestedMessage.decode(value)
-				elseif field == 19 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_foreign_message = ForeignMessage.decode(value)
-				elseif field == 24 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_string_piece = buffer.tostring(value)
-				elseif field == 25 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_cord = buffer.tostring(value)
-				elseif field == 27 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.recursive_message = TestAllTypesProto3.decode(value)
-				elseif field == 31 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
+			elseif field == 37 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
 
-					local limit = cursor + length
+				local limit = cursor + length
 
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_int32, proto.limitInt32(value))
-					end
-				elseif field == 32 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_int64, value)
-					end
-				elseif field == 33 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_uint32, value)
-					end
-				elseif field == 34 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_uint64, value)
-					end
-				elseif field == 35 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_sint32, proto.decodeZigZag(value))
-					end
-				elseif field == 36 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_sint64, proto.decodeZigZag(value))
-					end
-				elseif field == 37 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFixed32(input, cursor)
-						table.insert(self.repeated_fixed32, value)
-					end
-				elseif field == 38 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFixed64(input, cursor)
-						table.insert(self.repeated_fixed64, value)
-					end
-				elseif field == 39 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readSignedFixed32(input, cursor)
-						table.insert(self.repeated_sfixed32, value)
-					end
-				elseif field == 40 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readSignedFixed64(input, cursor)
-						table.insert(self.repeated_sfixed64, value)
-					end
-				elseif field == 41 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFloat(input, cursor)
-						table.insert(self.repeated_float, value)
-					end
-				elseif field == 42 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readDouble(input, cursor)
-						table.insert(self.repeated_double, value)
-					end
-				elseif field == 43 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.repeated_bool, value ~= 0)
-					end
-				elseif field == 44 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_string, buffer.tostring(value))
-				elseif field == 45 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_bytes, value)
-				elseif field == 48 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_nested_message, TestAllTypesProto3_NestedMessage.decode(value))
-				elseif field == 49 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_foreign_message, ForeignMessage.decode(value))
-				elseif field == 54 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_string_piece, buffer.tostring(value))
-				elseif field == 55 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_cord, buffer.tostring(value))
-				elseif field == 56 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapInt32Int32Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_int32_int32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 57 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapInt64Int64Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_int64_int64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 58 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapUint32Uint32Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_uint32_uint32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 59 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapUint64Uint64Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_uint64_uint64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 60 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapSint32Sint32Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_sint32_sint32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 61 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapSint64Sint64Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_sint64_sint64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 62 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapFixed32Fixed32Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_fixed32_fixed32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 63 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapFixed64Fixed64Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_fixed64_fixed64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 64 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapSfixed32Sfixed32Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_sfixed32_sfixed32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 65 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapSfixed64Sfixed64Entry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_sfixed64_sfixed64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 66 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapInt32FloatEntry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_int32_float[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 67 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapInt32DoubleEntry.decode(value)
-
-					local keyDefault = 0
-					local valueDefault = 0
-
-					self.map_int32_double[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 68 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapBoolBoolEntry.decode(value)
-
-					local keyDefault = false
-					local valueDefault = false
-
-					self.map_bool_bool[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 69 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringStringEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = ""
-
-					self.map_string_string[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 70 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringBytesEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = buffer.create(0)
-
-					self.map_string_bytes[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 71 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringNestedMessageEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = TestAllTypesProto3_NestedMessage.new()
-
-					self.map_string_nested_message[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 72 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringForeignMessageEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = ForeignMessage.new()
-
-					self.map_string_foreign_message[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 73 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringNestedEnumEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
-
-					self.map_string_nested_enum[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 74 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-
-					local mapEntry = TestAllTypesProto3_MapStringForeignEnumEntry.decode(value)
-
-					local keyDefault = ""
-					local valueDefault = assert(ForeignEnum.fromNumber(0), "Enum has no 0 default")
-
-					self.map_string_foreign_enum[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
-				elseif field == 75 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_int32, proto.limitInt32(value))
-					end
-				elseif field == 76 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_int64, value)
-					end
-				elseif field == 77 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_uint32, value)
-					end
-				elseif field == 78 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_uint64, value)
-					end
-				elseif field == 79 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_sint32, proto.decodeZigZag(value))
-					end
-				elseif field == 80 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_sint64, proto.decodeZigZag(value))
-					end
-				elseif field == 81 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFixed32(input, cursor)
-						table.insert(self.packed_fixed32, value)
-					end
-				elseif field == 82 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFixed64(input, cursor)
-						table.insert(self.packed_fixed64, value)
-					end
-				elseif field == 83 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readSignedFixed32(input, cursor)
-						table.insert(self.packed_sfixed32, value)
-					end
-				elseif field == 84 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readSignedFixed64(input, cursor)
-						table.insert(self.packed_sfixed64, value)
-					end
-				elseif field == 85 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readFloat(input, cursor)
-						table.insert(self.packed_float, value)
-					end
-				elseif field == 86 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readDouble(input, cursor)
-						table.insert(self.packed_double, value)
-					end
-				elseif field == 87 then
-					local length
-					length, cursor = proto.readVarInt(input, cursor)
-
-					local limit = cursor + length
-
-					while cursor < limit do
-						local value
-						value, cursor = proto.readVarInt(input, cursor)
-						table.insert(self.packed_bool, value ~= 0)
-					end
-				elseif field == 112 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.oneof_field =
-						{ type = "oneof_nested_message", value = TestAllTypesProto3_NestedMessage.decode(value) }
-				elseif field == 113 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.oneof_field = { type = "oneof_string", value = buffer.tostring(value) }
-				elseif field == 114 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.oneof_field = { type = "oneof_bytes", value = value }
-				elseif field == 201 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.decode(value)
-				elseif field == 202 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.decode(value)
-				elseif field == 203 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.decode(value)
-				elseif field == 204 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.decode(value)
-				elseif field == 205 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.decode(value)
-				elseif field == 206 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.decode(value)
-				elseif field == 207 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.decode(value)
-				elseif field == 208 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.decode(value)
-				elseif field == 209 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.decode(value)
-				elseif field == 211 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_bool_wrapper, _google_protobuf_wrappers.BoolValue.decode(value))
-				elseif field == 212 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_int32_wrapper, _google_protobuf_wrappers.Int32Value.decode(value))
-				elseif field == 213 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_int64_wrapper, _google_protobuf_wrappers.Int64Value.decode(value))
-				elseif field == 214 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_uint32_wrapper, _google_protobuf_wrappers.UInt32Value.decode(value))
-				elseif field == 215 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_uint64_wrapper, _google_protobuf_wrappers.UInt64Value.decode(value))
-				elseif field == 216 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_float_wrapper, _google_protobuf_wrappers.FloatValue.decode(value))
-				elseif field == 217 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_double_wrapper, _google_protobuf_wrappers.DoubleValue.decode(value))
-				elseif field == 218 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_string_wrapper, _google_protobuf_wrappers.StringValue.decode(value))
-				elseif field == 219 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_bytes_wrapper, _google_protobuf_wrappers.BytesValue.decode(value))
-				elseif field == 301 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_duration = _google_protobuf_duration.Duration.decode(value)
-				elseif field == 302 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_timestamp = _google_protobuf_timestamp.Timestamp.decode(value)
-				elseif field == 303 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_field_mask = _google_protobuf_field_mask.FieldMask.decode(value)
-				elseif field == 304 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_struct = _google_protobuf_struct.Struct.decode(value)
-				elseif field == 305 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_any = _google_protobuf_any.Any.decode(value)
-				elseif field == 306 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_value = _google_protobuf_struct.Value.decode(value)
-				elseif field == 311 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_duration, _google_protobuf_duration.Duration.decode(value))
-				elseif field == 312 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_timestamp, _google_protobuf_timestamp.Timestamp.decode(value))
-				elseif field == 313 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_fieldmask, _google_protobuf_field_mask.FieldMask.decode(value))
-				elseif field == 315 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_any, _google_protobuf_any.Any.decode(value))
-				elseif field == 316 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_value, _google_protobuf_struct.Value.decode(value))
-				elseif field == 317 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_list_value, _google_protobuf_struct.ListValue.decode(value))
-				elseif field == 324 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_struct, _google_protobuf_struct.Struct.decode(value))
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				if field == 7 then
-					local value
-					value, cursor = proto.readFixed32(input, cursor)
-					self.optional_fixed32 = value
-				elseif field == 9 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					self.optional_sfixed32 = value
-				elseif field == 11 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					self.optional_float = value
-				elseif field == 37 then
+				while cursor < limit do
 					local value
 					value, cursor = proto.readFixed32(input, cursor)
 					table.insert(self.repeated_fixed32, value)
-				elseif field == 39 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					table.insert(self.repeated_sfixed32, value)
-				elseif field == 41 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					table.insert(self.repeated_float, value)
-				elseif field == 81 then
-					local value
-					value, cursor = proto.readFixed32(input, cursor)
-					table.insert(self.packed_fixed32, value)
-				elseif field == 83 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					table.insert(self.packed_sfixed32, value)
-				elseif field == 85 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					table.insert(self.packed_float, value)
-				elseif field == 95 then
-					local value
-					value, cursor = proto.readFixed32(input, cursor)
-					table.insert(self.unpacked_fixed32, value)
-				elseif field == 97 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					table.insert(self.unpacked_sfixed32, value)
-				elseif field == 99 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					table.insert(self.unpacked_float, value)
-				elseif field == 117 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					self.oneof_field = { type = "oneof_float", value = value }
 				end
-			elseif wireType == proto.wireTypes.i64 then
-				if field == 8 then
-					local value
-					value, cursor = proto.readFixed64(input, cursor)
-					self.optional_fixed64 = value
-				elseif field == 10 then
-					local value
-					value, cursor = proto.readSignedFixed64(input, cursor)
-					self.optional_sfixed64 = value
-				elseif field == 12 then
-					local value
-					value, cursor = proto.readDouble(input, cursor)
-					self.optional_double = value
-				elseif field == 38 then
+			elseif field == 38 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readFixed64(input, cursor)
 					table.insert(self.repeated_fixed64, value)
-				elseif field == 40 then
+				end
+			elseif field == 39 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readSignedFixed32(input, cursor)
+					table.insert(self.repeated_sfixed32, value)
+				end
+			elseif field == 40 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readSignedFixed64(input, cursor)
 					table.insert(self.repeated_sfixed64, value)
-				elseif field == 42 then
+				end
+			elseif field == 41 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readFloat(input, cursor)
+					table.insert(self.repeated_float, value)
+				end
+			elseif field == 42 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readDouble(input, cursor)
 					table.insert(self.repeated_double, value)
-				elseif field == 82 then
+				end
+			elseif field == 43 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.repeated_bool, value ~= 0)
+				end
+			elseif field == 44 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_string, buffer.tostring(value))
+			elseif field == 45 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_bytes, value)
+			elseif field == 48 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_nested_message, TestAllTypesProto3_NestedMessage.decode(value))
+			elseif field == 49 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_foreign_message, ForeignMessage.decode(value))
+			elseif field == 54 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_string_piece, buffer.tostring(value))
+			elseif field == 55 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_cord, buffer.tostring(value))
+			elseif field == 56 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapInt32Int32Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_int32_int32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 57 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapInt64Int64Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_int64_int64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 58 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapUint32Uint32Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_uint32_uint32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 59 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapUint64Uint64Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_uint64_uint64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 60 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapSint32Sint32Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_sint32_sint32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 61 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapSint64Sint64Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_sint64_sint64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 62 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapFixed32Fixed32Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_fixed32_fixed32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 63 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapFixed64Fixed64Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_fixed64_fixed64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 64 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapSfixed32Sfixed32Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_sfixed32_sfixed32[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 65 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapSfixed64Sfixed64Entry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_sfixed64_sfixed64[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 66 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapInt32FloatEntry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_int32_float[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 67 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapInt32DoubleEntry.decode(value)
+
+				local keyDefault = 0
+				local valueDefault = 0
+
+				self.map_int32_double[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 68 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapBoolBoolEntry.decode(value)
+
+				local keyDefault = false
+				local valueDefault = false
+
+				self.map_bool_bool[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 69 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringStringEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = ""
+
+				self.map_string_string[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 70 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringBytesEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = buffer.create(0)
+
+				self.map_string_bytes[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 71 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringNestedMessageEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = TestAllTypesProto3_NestedMessage.new()
+
+				self.map_string_nested_message[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 72 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringForeignMessageEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = ForeignMessage.new()
+
+				self.map_string_foreign_message[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 73 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringNestedEnumEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
+
+				self.map_string_nested_enum[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 74 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+
+				local mapEntry = TestAllTypesProto3_MapStringForeignEnumEntry.decode(value)
+
+				local keyDefault = ""
+				local valueDefault = assert(ForeignEnum.fromNumber(0), "Enum has no 0 default")
+
+				self.map_string_foreign_enum[mapEntry.key or keyDefault] = mapEntry.value or valueDefault
+			elseif field == 75 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_int32, proto.limitInt32(value))
+				end
+			elseif field == 76 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_int64, value)
+				end
+			elseif field == 77 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_uint32, value)
+				end
+			elseif field == 78 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_uint64, value)
+				end
+			elseif field == 79 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_sint32, proto.decodeZigZag(value))
+				end
+			elseif field == 80 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_sint64, proto.decodeZigZag(value))
+				end
+			elseif field == 81 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readFixed32(input, cursor)
+					table.insert(self.packed_fixed32, value)
+				end
+			elseif field == 82 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readFixed64(input, cursor)
 					table.insert(self.packed_fixed64, value)
-				elseif field == 84 then
+				end
+			elseif field == 83 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readSignedFixed32(input, cursor)
+					table.insert(self.packed_sfixed32, value)
+				end
+			elseif field == 84 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readSignedFixed64(input, cursor)
 					table.insert(self.packed_sfixed64, value)
-				elseif field == 86 then
+				end
+			elseif field == 85 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readFloat(input, cursor)
+					table.insert(self.packed_float, value)
+				end
+			elseif field == 86 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
 					local value
 					value, cursor = proto.readDouble(input, cursor)
 					table.insert(self.packed_double, value)
-				elseif field == 96 then
-					local value
-					value, cursor = proto.readFixed64(input, cursor)
-					table.insert(self.unpacked_fixed64, value)
-				elseif field == 98 then
-					local value
-					value, cursor = proto.readSignedFixed64(input, cursor)
-					table.insert(self.unpacked_sfixed64, value)
-				elseif field == 100 then
-					local value
-					value, cursor = proto.readDouble(input, cursor)
-					table.insert(self.unpacked_double, value)
-				elseif field == 118 then
-					local value
-					value, cursor = proto.readDouble(input, cursor)
-					self.oneof_field = { type = "oneof_double", value = value }
 				end
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3): any
-		local output: {
-			optionalInt32: number?,
-			optionalInt64: number?,
-			optionalUint32: number?,
-			optionalUint64: number?,
-			optionalSint32: number?,
-			optionalSint64: number?,
-			optionalFixed32: number?,
-			optionalFixed64: number?,
-			optionalSfixed32: number?,
-			optionalSfixed64: number?,
-			optionalFloat: (number | string)?,
-			optionalDouble: (number | string)?,
-			optionalBool: boolean?,
-			optionalString: string?,
-			optionalBytes: buffer?,
-			optionalNestedMessage: TestAllTypesProto3_NestedMessage?,
-			optionalForeignMessage: ForeignMessage?,
-			optionalNestedEnum: TestAllTypesProto3_NestedEnum?,
-			optionalForeignEnum: ForeignEnum?,
-			optionalAliasedEnum: TestAllTypesProto3_AliasedEnum?,
-			optionalStringPiece: string?,
-			optionalCord: string?,
-			recursiveMessage: TestAllTypesProto3?,
-			repeatedInt32: { number }?,
-			repeatedInt64: { number }?,
-			repeatedUint32: { number }?,
-			repeatedUint64: { number }?,
-			repeatedSint32: { number }?,
-			repeatedSint64: { number }?,
-			repeatedFixed32: { number }?,
-			repeatedFixed64: { number }?,
-			repeatedSfixed32: { number }?,
-			repeatedSfixed64: { number }?,
-			repeatedFloat: { number | string }?,
-			repeatedDouble: { number | string }?,
-			repeatedBool: { boolean }?,
-			repeatedString: { string }?,
-			repeatedBytes: { buffer }?,
-			repeatedNestedMessage: { TestAllTypesProto3_NestedMessage }?,
-			repeatedForeignMessage: { ForeignMessage }?,
-			repeatedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
-			repeatedForeignEnum: { ForeignEnum }?,
-			repeatedStringPiece: { string }?,
-			repeatedCord: { string }?,
-			packedInt32: { number }?,
-			packedInt64: { number }?,
-			packedUint32: { number }?,
-			packedUint64: { number }?,
-			packedSint32: { number }?,
-			packedSint64: { number }?,
-			packedFixed32: { number }?,
-			packedFixed64: { number }?,
-			packedSfixed32: { number }?,
-			packedSfixed64: { number }?,
-			packedFloat: { number | string }?,
-			packedDouble: { number | string }?,
-			packedBool: { boolean }?,
-			packedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
-			unpackedInt32: { number }?,
-			unpackedInt64: { number }?,
-			unpackedUint32: { number }?,
-			unpackedUint64: { number }?,
-			unpackedSint32: { number }?,
-			unpackedSint64: { number }?,
-			unpackedFixed32: { number }?,
-			unpackedFixed64: { number }?,
-			unpackedSfixed32: { number }?,
-			unpackedSfixed64: { number }?,
-			unpackedFloat: { number | string }?,
-			unpackedDouble: { number | string }?,
-			unpackedBool: { boolean }?,
-			unpackedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
-			mapInt32Int32: { [string]: number }?,
-			mapInt64Int64: { [string]: number }?,
-			mapUint32Uint32: { [string]: number }?,
-			mapUint64Uint64: { [string]: number }?,
-			mapSint32Sint32: { [string]: number }?,
-			mapSint64Sint64: { [string]: number }?,
-			mapFixed32Fixed32: { [string]: number }?,
-			mapFixed64Fixed64: { [string]: number }?,
-			mapSfixed32Sfixed32: { [string]: number }?,
-			mapSfixed64Sfixed64: { [string]: number }?,
-			mapInt32Float: { [string]: number | string }?,
-			mapInt32Double: { [string]: number | string }?,
-			mapBoolBool: { [string]: boolean }?,
-			mapStringString: { [string]: string }?,
-			mapStringBytes: { [string]: buffer }?,
-			mapStringNestedMessage: { [string]: TestAllTypesProto3_NestedMessage }?,
-			mapStringForeignMessage: { [string]: ForeignMessage }?,
-			mapStringNestedEnum: { [string]: TestAllTypesProto3_NestedEnum }?,
-			mapStringForeignEnum: { [string]: ForeignEnum }?,
-			oneofUint32: number?,
-			oneofNestedMessage: TestAllTypesProto3_NestedMessage?,
-			oneofString: string?,
-			oneofBytes: buffer?,
-			oneofBool: boolean?,
-			oneofUint64: number?,
-			oneofFloat: (number | string)?,
-			oneofDouble: (number | string)?,
-			oneofEnum: TestAllTypesProto3_NestedEnum?,
-			oneofNullValue: _google_protobuf_struct.NullValue?,
-			optionalBoolWrapper: _google_protobuf_wrappers.BoolValue?,
-			optionalInt32Wrapper: _google_protobuf_wrappers.Int32Value?,
-			optionalInt64Wrapper: _google_protobuf_wrappers.Int64Value?,
-			optionalUint32Wrapper: _google_protobuf_wrappers.UInt32Value?,
-			optionalUint64Wrapper: _google_protobuf_wrappers.UInt64Value?,
-			optionalFloatWrapper: _google_protobuf_wrappers.FloatValue?,
-			optionalDoubleWrapper: _google_protobuf_wrappers.DoubleValue?,
-			optionalStringWrapper: _google_protobuf_wrappers.StringValue?,
-			optionalBytesWrapper: _google_protobuf_wrappers.BytesValue?,
-			repeatedBoolWrapper: { _google_protobuf_wrappers.BoolValue }?,
-			repeatedInt32Wrapper: { _google_protobuf_wrappers.Int32Value }?,
-			repeatedInt64Wrapper: { _google_protobuf_wrappers.Int64Value }?,
-			repeatedUint32Wrapper: { _google_protobuf_wrappers.UInt32Value }?,
-			repeatedUint64Wrapper: { _google_protobuf_wrappers.UInt64Value }?,
-			repeatedFloatWrapper: { _google_protobuf_wrappers.FloatValue }?,
-			repeatedDoubleWrapper: { _google_protobuf_wrappers.DoubleValue }?,
-			repeatedStringWrapper: { _google_protobuf_wrappers.StringValue }?,
-			repeatedBytesWrapper: { _google_protobuf_wrappers.BytesValue }?,
-			optionalDuration: _google_protobuf_duration.Duration?,
-			optionalTimestamp: _google_protobuf_timestamp.Timestamp?,
-			optionalFieldMask: _google_protobuf_field_mask.FieldMask?,
-			optionalStruct: _google_protobuf_struct.Struct?,
-			optionalAny: _google_protobuf_any.Any?,
-			optionalValue: _google_protobuf_struct.Value?,
-			optionalNullValue: _google_protobuf_struct.NullValue?,
-			repeatedDuration: { _google_protobuf_duration.Duration }?,
-			repeatedTimestamp: { _google_protobuf_timestamp.Timestamp }?,
-			repeatedFieldmask: { _google_protobuf_field_mask.FieldMask }?,
-			repeatedStruct: { _google_protobuf_struct.Struct }?,
-			repeatedAny: { _google_protobuf_any.Any }?,
-			repeatedValue: { _google_protobuf_struct.Value }?,
-			repeatedListValue: { _google_protobuf_struct.ListValue }?,
-			fieldname1: number?,
-			fieldName2: number?,
-			FieldName3: number?,
-			fieldName4: number?,
-			field0name5: number?,
-			field0Name6: number?,
-			fieldName7: number?,
-			FieldName8: number?,
-			fieldName9: number?,
-			FieldName10: number?,
-			FIELDNAME11: number?,
-			FIELDName12: number?,
-			FieldName13: number?,
-			FieldName14: number?,
-			fieldName15: number?,
-			fieldName16: number?,
-			fieldName17: number?,
-			FieldName18: number?,
-		} =
-			{}
-
-		if self.optional_int32 ~= 0 then
-			output.optionalInt32 = self.optional_int32
-		end
-
-		if self.optional_int64 ~= 0 then
-			output.optionalInt64 = self.optional_int64
-		end
-
-		if self.optional_uint32 ~= 0 then
-			output.optionalUint32 = self.optional_uint32
-		end
-
-		if self.optional_uint64 ~= 0 then
-			output.optionalUint64 = self.optional_uint64
-		end
-
-		if self.optional_sint32 ~= 0 then
-			output.optionalSint32 = self.optional_sint32
-		end
-
-		if self.optional_sint64 ~= 0 then
-			output.optionalSint64 = self.optional_sint64
-		end
-
-		if self.optional_fixed32 ~= 0 then
-			output.optionalFixed32 = self.optional_fixed32
-		end
-
-		if self.optional_fixed64 ~= 0 then
-			output.optionalFixed64 = self.optional_fixed64
-		end
-
-		if self.optional_sfixed32 ~= 0 then
-			output.optionalSfixed32 = self.optional_sfixed32
-		end
-
-		if self.optional_sfixed64 ~= 0 then
-			output.optionalSfixed64 = self.optional_sfixed64
-		end
-
-		if self.optional_float ~= 0 then
-			output.optionalFloat = proto.json.serializeNumber(self.optional_float)
-		end
-
-		if self.optional_double ~= 0 then
-			output.optionalDouble = proto.json.serializeNumber(self.optional_double)
-		end
-
-		if self.optional_bool then
-			output.optionalBool = self.optional_bool
-		end
-
-		if self.optional_string ~= "" then
-			output.optionalString = self.optional_string
-		end
-
-		if buffer.len(self.optional_bytes) > 0 then
-			output.optionalBytes = proto.json.serializeBuffer(self.optional_bytes)
-		end
-
-		if self.optional_nested_message ~= nil then
-			output.optionalNestedMessage = TestAllTypesProto3_NestedMessage.jsonEncode(self.optional_nested_message)
-		end
-
-		if self.optional_foreign_message ~= nil then
-			output.optionalForeignMessage = ForeignMessage.jsonEncode(self.optional_foreign_message)
-		end
-
-		if
-			self.optional_nested_enum ~= 0
-			or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0)
-		then
-			output.optionalNestedEnum = if typeof(self.optional_nested_enum) == "number"
-				then self.optional_nested_enum
-				else TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum)
-		end
-
-		if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
-			output.optionalForeignEnum = if typeof(self.optional_foreign_enum) == "number"
-				then self.optional_foreign_enum
-				else ForeignEnum.toNumber(self.optional_foreign_enum)
-		end
-
-		if
-			self.optional_aliased_enum ~= 0
-			or self.optional_aliased_enum ~= TestAllTypesProto3_AliasedEnum.fromNumber(0)
-		then
-			output.optionalAliasedEnum = if typeof(self.optional_aliased_enum) == "number"
-				then self.optional_aliased_enum
-				else TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum)
-		end
-
-		if self.optional_string_piece ~= "" then
-			output.optionalStringPiece = self.optional_string_piece
-		end
-
-		if self.optional_cord ~= "" then
-			output.optionalCord = self.optional_cord
-		end
-
-		if self.recursive_message ~= nil then
-			output.recursiveMessage = TestAllTypesProto3.jsonEncode(self.recursive_message)
-		end
-
-		if #self.repeated_int32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_int32 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedInt32 = newOutput
-		end
-
-		if #self.repeated_int64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_int64 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedInt64 = newOutput
-		end
-
-		if #self.repeated_uint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_uint32 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedUint32 = newOutput
-		end
-
-		if #self.repeated_uint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_uint64 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedUint64 = newOutput
-		end
-
-		if #self.repeated_sint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_sint32 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedSint32 = newOutput
-		end
-
-		if #self.repeated_sint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_sint64 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedSint64 = newOutput
-		end
-
-		if #self.repeated_fixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_fixed32 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedFixed32 = newOutput
-		end
-
-		if #self.repeated_fixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_fixed64 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedFixed64 = newOutput
-		end
-
-		if #self.repeated_sfixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_sfixed32 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedSfixed32 = newOutput
-		end
-
-		if #self.repeated_sfixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.repeated_sfixed64 do
-				table.insert(newOutput, value)
-			end
-			output.repeatedSfixed64 = newOutput
-		end
-
-		if #self.repeated_float > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.repeated_float do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.repeatedFloat = newOutput
-		end
-
-		if #self.repeated_double > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.repeated_double do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.repeatedDouble = newOutput
-		end
-
-		if #self.repeated_bool > 0 then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in self.repeated_bool do
-				table.insert(newOutput, value)
-			end
-			output.repeatedBool = newOutput
-		end
-
-		if #self.repeated_string > 0 then
-			local newOutput: { string } = {}
-			for _, value: string in self.repeated_string do
-				table.insert(newOutput, value)
-			end
-			output.repeatedString = newOutput
-		end
-
-		if #self.repeated_bytes > 0 then
-			local newOutput: { buffer } = {}
-			for _, value: buffer in self.repeated_bytes do
-				table.insert(newOutput, proto.json.serializeBuffer(value))
-			end
-			output.repeatedBytes = newOutput
-		end
-
-		if #self.repeated_nested_message > 0 then
-			local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-			for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
-				table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonEncode(value))
-			end
-			output.repeatedNestedMessage = newOutput
-		end
-
-		if #self.repeated_foreign_message > 0 then
-			local newOutput: { ForeignMessage } = {}
-			for _, value: ForeignMessage in self.repeated_foreign_message do
-				table.insert(newOutput, ForeignMessage.jsonEncode(value))
-			end
-			output.repeatedForeignMessage = newOutput
-		end
-
-		if #self.repeated_nested_enum > 0 then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
-				)
-			end
-			output.repeatedNestedEnum = newOutput
-		end
-
-		if #self.repeated_foreign_enum > 0 then
-			local newOutput: { ForeignEnum } = {}
-			for _, value: ForeignEnum in self.repeated_foreign_enum do
-				table.insert(newOutput, if typeof(value) == "number" then value else ForeignEnum.toNumber(value))
-			end
-			output.repeatedForeignEnum = newOutput
-		end
-
-		if #self.repeated_string_piece > 0 then
-			local newOutput: { string } = {}
-			for _, value: string in self.repeated_string_piece do
-				table.insert(newOutput, value)
-			end
-			output.repeatedStringPiece = newOutput
-		end
-
-		if #self.repeated_cord > 0 then
-			local newOutput: { string } = {}
-			for _, value: string in self.repeated_cord do
-				table.insert(newOutput, value)
-			end
-			output.repeatedCord = newOutput
-		end
-
-		if #self.packed_int32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_int32 do
-				table.insert(newOutput, value)
-			end
-			output.packedInt32 = newOutput
-		end
-
-		if #self.packed_int64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_int64 do
-				table.insert(newOutput, value)
-			end
-			output.packedInt64 = newOutput
-		end
-
-		if #self.packed_uint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_uint32 do
-				table.insert(newOutput, value)
-			end
-			output.packedUint32 = newOutput
-		end
-
-		if #self.packed_uint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_uint64 do
-				table.insert(newOutput, value)
-			end
-			output.packedUint64 = newOutput
-		end
-
-		if #self.packed_sint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_sint32 do
-				table.insert(newOutput, value)
-			end
-			output.packedSint32 = newOutput
-		end
-
-		if #self.packed_sint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_sint64 do
-				table.insert(newOutput, value)
-			end
-			output.packedSint64 = newOutput
-		end
-
-		if #self.packed_fixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_fixed32 do
-				table.insert(newOutput, value)
-			end
-			output.packedFixed32 = newOutput
-		end
-
-		if #self.packed_fixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_fixed64 do
-				table.insert(newOutput, value)
-			end
-			output.packedFixed64 = newOutput
-		end
-
-		if #self.packed_sfixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_sfixed32 do
-				table.insert(newOutput, value)
-			end
-			output.packedSfixed32 = newOutput
-		end
-
-		if #self.packed_sfixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.packed_sfixed64 do
-				table.insert(newOutput, value)
-			end
-			output.packedSfixed64 = newOutput
-		end
-
-		if #self.packed_float > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.packed_float do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.packedFloat = newOutput
-		end
-
-		if #self.packed_double > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.packed_double do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.packedDouble = newOutput
-		end
-
-		if #self.packed_bool > 0 then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in self.packed_bool do
-				table.insert(newOutput, value)
-			end
-			output.packedBool = newOutput
-		end
-
-		if #self.packed_nested_enum > 0 then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
-				)
-			end
-			output.packedNestedEnum = newOutput
-		end
-
-		if #self.unpacked_int32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_int32 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedInt32 = newOutput
-		end
-
-		if #self.unpacked_int64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_int64 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedInt64 = newOutput
-		end
-
-		if #self.unpacked_uint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_uint32 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedUint32 = newOutput
-		end
-
-		if #self.unpacked_uint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_uint64 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedUint64 = newOutput
-		end
-
-		if #self.unpacked_sint32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_sint32 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedSint32 = newOutput
-		end
-
-		if #self.unpacked_sint64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_sint64 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedSint64 = newOutput
-		end
-
-		if #self.unpacked_fixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_fixed32 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedFixed32 = newOutput
-		end
-
-		if #self.unpacked_fixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_fixed64 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedFixed64 = newOutput
-		end
-
-		if #self.unpacked_sfixed32 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_sfixed32 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedSfixed32 = newOutput
-		end
-
-		if #self.unpacked_sfixed64 > 0 then
-			local newOutput: { number } = {}
-			for _, value: number in self.unpacked_sfixed64 do
-				table.insert(newOutput, value)
-			end
-			output.unpackedSfixed64 = newOutput
-		end
-
-		if #self.unpacked_float > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.unpacked_float do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.unpackedFloat = newOutput
-		end
-
-		if #self.unpacked_double > 0 then
-			local newOutput: { number | string } = {}
-			for _, value: number in self.unpacked_double do
-				table.insert(newOutput, proto.json.serializeNumber(value))
-			end
-			output.unpackedDouble = newOutput
-		end
-
-		if #self.unpacked_bool > 0 then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in self.unpacked_bool do
-				table.insert(newOutput, value)
-			end
-			output.unpackedBool = newOutput
-		end
-
-		if #self.unpacked_nested_enum > 0 then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
-				)
-			end
-			output.unpackedNestedEnum = newOutput
-		end
-
-		if next(self.map_int32_int32) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_int32_int32 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapInt32Int32 = newOutput
-		end
-
-		if next(self.map_int64_int64) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_int64_int64 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapInt64Int64 = newOutput
-		end
-
-		if next(self.map_uint32_uint32) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_uint32_uint32 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapUint32Uint32 = newOutput
-		end
-
-		if next(self.map_uint64_uint64) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_uint64_uint64 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapUint64Uint64 = newOutput
-		end
-
-		if next(self.map_sint32_sint32) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_sint32_sint32 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapSint32Sint32 = newOutput
-		end
-
-		if next(self.map_sint64_sint64) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_sint64_sint64 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapSint64Sint64 = newOutput
-		end
-
-		if next(self.map_fixed32_fixed32) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_fixed32_fixed32 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapFixed32Fixed32 = newOutput
-		end
-
-		if next(self.map_fixed64_fixed64) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_fixed64_fixed64 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapFixed64Fixed64 = newOutput
-		end
-
-		if next(self.map_sfixed32_sfixed32) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_sfixed32_sfixed32 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapSfixed32Sfixed32 = newOutput
-		end
-
-		if next(self.map_sfixed64_sfixed64) ~= nil then
-			local newOutput: { [string]: number } = {}
-			for key: number, value: number in self.map_sfixed64_sfixed64 do
-				newOutput[tostring(key)] = value
-			end
-			output.mapSfixed64Sfixed64 = newOutput
-		end
-
-		if next(self.map_int32_float) ~= nil then
-			local newOutput: { [string]: number | string } = {}
-			for key: number, value: number in self.map_int32_float do
-				newOutput[tostring(key)] = proto.json.serializeNumber(value)
-			end
-			output.mapInt32Float = newOutput
-		end
-
-		if next(self.map_int32_double) ~= nil then
-			local newOutput: { [string]: number | string } = {}
-			for key: number, value: number in self.map_int32_double do
-				newOutput[tostring(key)] = proto.json.serializeNumber(value)
-			end
-			output.mapInt32Double = newOutput
-		end
-
-		if next(self.map_bool_bool) ~= nil then
-			local newOutput: { [string]: boolean } = {}
-			for key: boolean, value: boolean in self.map_bool_bool do
-				newOutput[tostring(key)] = value
-			end
-			output.mapBoolBool = newOutput
-		end
-
-		if next(self.map_string_string) ~= nil then
-			local newOutput: { [string]: string } = {}
-			for key: string, value: string in self.map_string_string do
-				newOutput[key] = value
-			end
-			output.mapStringString = newOutput
-		end
-
-		if next(self.map_string_bytes) ~= nil then
-			local newOutput: { [string]: buffer } = {}
-			for key: string, value: buffer in self.map_string_bytes do
-				newOutput[key] = proto.json.serializeBuffer(value)
-			end
-			output.mapStringBytes = newOutput
-		end
-
-		if next(self.map_string_nested_message) ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
-			for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
-				newOutput[key] = TestAllTypesProto3_NestedMessage.jsonEncode(value)
-			end
-			output.mapStringNestedMessage = newOutput
-		end
-
-		if next(self.map_string_foreign_message) ~= nil then
-			local newOutput: { [string]: ForeignMessage } = {}
-			for key: string, value: ForeignMessage in self.map_string_foreign_message do
-				newOutput[key] = ForeignMessage.jsonEncode(value)
-			end
-			output.mapStringForeignMessage = newOutput
-		end
-
-		if next(self.map_string_nested_enum) ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
-			for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
-				newOutput[key] = if typeof(value) == "number"
-					then value
-					else TestAllTypesProto3_NestedEnum.toNumber(value)
-			end
-			output.mapStringNestedEnum = newOutput
-		end
-
-		if next(self.map_string_foreign_enum) ~= nil then
-			local newOutput: { [string]: ForeignEnum } = {}
-			for key: string, value: ForeignEnum in self.map_string_foreign_enum do
-				newOutput[key] = if typeof(value) == "number" then value else ForeignEnum.toNumber(value)
-			end
-			output.mapStringForeignEnum = newOutput
-		end
-
-		if self.oneof_field ~= nil then
-			if self.oneof_field.type == "oneof_uint32" then
-				output.oneofUint32 = self.oneof_field.value
-			elseif self.oneof_field.type == "oneof_nested_message" then
-				output.oneofNestedMessage = TestAllTypesProto3_NestedMessage.jsonEncode(self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_string" then
-				output.oneofString = self.oneof_field.value
-			elseif self.oneof_field.type == "oneof_bytes" then
-				output.oneofBytes = proto.json.serializeBuffer(self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_bool" then
-				output.oneofBool = self.oneof_field.value
-			elseif self.oneof_field.type == "oneof_uint64" then
-				output.oneofUint64 = self.oneof_field.value
-			elseif self.oneof_field.type == "oneof_float" then
-				output.oneofFloat = proto.json.serializeNumber(self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_double" then
-				output.oneofDouble = proto.json.serializeNumber(self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_enum" then
-				output.oneofEnum = if typeof(self.oneof_field.value) == "number"
-					then self.oneof_field.value
-					else TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value)
-			elseif self.oneof_field.type == "oneof_null_value" then
-				output.oneofNullValue = if typeof(self.oneof_field.value) == "number"
-					then self.oneof_field.value
-					else _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value)
-			end
-		end
-
-		if self.optional_bool_wrapper ~= nil then
-			output.optionalBoolWrapper = _google_protobuf_wrappers.BoolValue.jsonEncode(self.optional_bool_wrapper)
-		end
-
-		if self.optional_int32_wrapper ~= nil then
-			output.optionalInt32Wrapper = _google_protobuf_wrappers.Int32Value.jsonEncode(self.optional_int32_wrapper)
-		end
-
-		if self.optional_int64_wrapper ~= nil then
-			output.optionalInt64Wrapper = _google_protobuf_wrappers.Int64Value.jsonEncode(self.optional_int64_wrapper)
-		end
-
-		if self.optional_uint32_wrapper ~= nil then
-			output.optionalUint32Wrapper =
-				_google_protobuf_wrappers.UInt32Value.jsonEncode(self.optional_uint32_wrapper)
-		end
-
-		if self.optional_uint64_wrapper ~= nil then
-			output.optionalUint64Wrapper =
-				_google_protobuf_wrappers.UInt64Value.jsonEncode(self.optional_uint64_wrapper)
-		end
-
-		if self.optional_float_wrapper ~= nil then
-			output.optionalFloatWrapper = _google_protobuf_wrappers.FloatValue.jsonEncode(self.optional_float_wrapper)
-		end
-
-		if self.optional_double_wrapper ~= nil then
-			output.optionalDoubleWrapper =
-				_google_protobuf_wrappers.DoubleValue.jsonEncode(self.optional_double_wrapper)
-		end
-
-		if self.optional_string_wrapper ~= nil then
-			output.optionalStringWrapper =
-				_google_protobuf_wrappers.StringValue.jsonEncode(self.optional_string_wrapper)
-		end
-
-		if self.optional_bytes_wrapper ~= nil then
-			output.optionalBytesWrapper = _google_protobuf_wrappers.BytesValue.jsonEncode(self.optional_bytes_wrapper)
-		end
-
-		if #self.repeated_bool_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-			for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonEncode(value))
-			end
-			output.repeatedBoolWrapper = newOutput
-		end
-
-		if #self.repeated_int32_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-			for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonEncode(value))
-			end
-			output.repeatedInt32Wrapper = newOutput
-		end
-
-		if #self.repeated_int64_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-			for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonEncode(value))
-			end
-			output.repeatedInt64Wrapper = newOutput
-		end
-
-		if #self.repeated_uint32_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonEncode(value))
-			end
-			output.repeatedUint32Wrapper = newOutput
-		end
-
-		if #self.repeated_uint64_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonEncode(value))
-			end
-			output.repeatedUint64Wrapper = newOutput
-		end
-
-		if #self.repeated_float_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-			for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonEncode(value))
-			end
-			output.repeatedFloatWrapper = newOutput
-		end
-
-		if #self.repeated_double_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-			for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonEncode(value))
-			end
-			output.repeatedDoubleWrapper = newOutput
-		end
-
-		if #self.repeated_string_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-			for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonEncode(value))
-			end
-			output.repeatedStringWrapper = newOutput
-		end
-
-		if #self.repeated_bytes_wrapper > 0 then
-			local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-			for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonEncode(value))
-			end
-			output.repeatedBytesWrapper = newOutput
-		end
-
-		if self.optional_duration ~= nil then
-			output.optionalDuration = _google_protobuf_duration.Duration.jsonEncode(self.optional_duration)
-		end
-
-		if self.optional_timestamp ~= nil then
-			output.optionalTimestamp = _google_protobuf_timestamp.Timestamp.jsonEncode(self.optional_timestamp)
-		end
-
-		if self.optional_field_mask ~= nil then
-			output.optionalFieldMask = _google_protobuf_field_mask.FieldMask.jsonEncode(self.optional_field_mask)
-		end
-
-		if self.optional_struct ~= nil then
-			output.optionalStruct = _google_protobuf_struct.Struct.jsonEncode(self.optional_struct)
-		end
-
-		if self.optional_any ~= nil then
-			output.optionalAny = _google_protobuf_any.Any.jsonEncode(self.optional_any)
-		end
-
-		if self.optional_value ~= nil then
-			output.optionalValue = _google_protobuf_struct.Value.jsonEncode(self.optional_value)
-		end
-
-		if
-			self.optional_null_value ~= 0
-			or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0)
-		then
-			output.optionalNullValue = if typeof(self.optional_null_value) == "number"
-				then self.optional_null_value
-				else _google_protobuf_struct.NullValue.toNumber(self.optional_null_value)
-		end
-
-		if #self.repeated_duration > 0 then
-			local newOutput: { _google_protobuf_duration.Duration } = {}
-			for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
-				table.insert(newOutput, _google_protobuf_duration.Duration.jsonEncode(value))
-			end
-			output.repeatedDuration = newOutput
-		end
-
-		if #self.repeated_timestamp > 0 then
-			local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-			for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
-				table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonEncode(value))
-			end
-			output.repeatedTimestamp = newOutput
-		end
-
-		if #self.repeated_fieldmask > 0 then
-			local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-			for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
-				table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonEncode(value))
-			end
-			output.repeatedFieldmask = newOutput
-		end
-
-		if #self.repeated_struct > 0 then
-			local newOutput: { _google_protobuf_struct.Struct } = {}
-			for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
-				table.insert(newOutput, _google_protobuf_struct.Struct.jsonEncode(value))
-			end
-			output.repeatedStruct = newOutput
-		end
-
-		if #self.repeated_any > 0 then
-			local newOutput: { _google_protobuf_any.Any } = {}
-			for _, value: _google_protobuf_any.Any in self.repeated_any do
-				table.insert(newOutput, _google_protobuf_any.Any.jsonEncode(value))
-			end
-			output.repeatedAny = newOutput
-		end
-
-		if #self.repeated_value > 0 then
-			local newOutput: { _google_protobuf_struct.Value } = {}
-			for _, value: _google_protobuf_struct.Value in self.repeated_value do
-				table.insert(newOutput, _google_protobuf_struct.Value.jsonEncode(value))
-			end
-			output.repeatedValue = newOutput
-		end
-
-		if #self.repeated_list_value > 0 then
-			local newOutput: { _google_protobuf_struct.ListValue } = {}
-			for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
-				table.insert(newOutput, _google_protobuf_struct.ListValue.jsonEncode(value))
-			end
-			output.repeatedListValue = newOutput
-		end
-
-		if self.fieldname1 ~= 0 then
-			output.fieldname1 = self.fieldname1
-		end
-
-		if self.field_name2 ~= 0 then
-			output.fieldName2 = self.field_name2
-		end
-
-		if self._field_name3 ~= 0 then
-			output.FieldName3 = self._field_name3
-		end
-
-		if self.field__name4_ ~= 0 then
-			output.fieldName4 = self.field__name4_
-		end
-
-		if self.field0name5 ~= 0 then
-			output.field0name5 = self.field0name5
-		end
-
-		if self.field_0_name6 ~= 0 then
-			output.field0Name6 = self.field_0_name6
-		end
-
-		if self.fieldName7 ~= 0 then
-			output.fieldName7 = self.fieldName7
-		end
-
-		if self.FieldName8 ~= 0 then
-			output.FieldName8 = self.FieldName8
-		end
-
-		if self.field_Name9 ~= 0 then
-			output.fieldName9 = self.field_Name9
-		end
-
-		if self.Field_Name10 ~= 0 then
-			output.FieldName10 = self.Field_Name10
-		end
-
-		if self.FIELD_NAME11 ~= 0 then
-			output.FIELDNAME11 = self.FIELD_NAME11
-		end
-
-		if self.FIELD_name12 ~= 0 then
-			output.FIELDName12 = self.FIELD_name12
-		end
-
-		if self.__field_name13 ~= 0 then
-			output.FieldName13 = self.__field_name13
-		end
-
-		if self.__Field_name14 ~= 0 then
-			output.FieldName14 = self.__Field_name14
-		end
-
-		if self.field__name15 ~= 0 then
-			output.fieldName15 = self.field__name15
-		end
-
-		if self.field__Name16 ~= 0 then
-			output.fieldName16 = self.field__Name16
-		end
-
-		if self.field_name17__ ~= 0 then
-			output.fieldName17 = self.field_name17__
-		end
-
-		if self.Field_name18__ ~= 0 then
-			output.FieldName18 = self.Field_name18__
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3
-		local self = TestAllTypesProto3.new()
-
-		if input.optional_int32 ~= nil then
-			self.optional_int32 = input.optional_int32
-		end
-
-		if input.optionalInt32 ~= nil then
-			self.optional_int32 = input.optionalInt32
-		end
-
-		if input.optional_int64 ~= nil then
-			self.optional_int64 = input.optional_int64
-		end
-
-		if input.optionalInt64 ~= nil then
-			self.optional_int64 = input.optionalInt64
-		end
-
-		if input.optional_uint32 ~= nil then
-			self.optional_uint32 = input.optional_uint32
-		end
-
-		if input.optionalUint32 ~= nil then
-			self.optional_uint32 = input.optionalUint32
-		end
-
-		if input.optional_uint64 ~= nil then
-			self.optional_uint64 = input.optional_uint64
-		end
-
-		if input.optionalUint64 ~= nil then
-			self.optional_uint64 = input.optionalUint64
-		end
-
-		if input.optional_sint32 ~= nil then
-			self.optional_sint32 = input.optional_sint32
-		end
-
-		if input.optionalSint32 ~= nil then
-			self.optional_sint32 = input.optionalSint32
-		end
-
-		if input.optional_sint64 ~= nil then
-			self.optional_sint64 = input.optional_sint64
-		end
-
-		if input.optionalSint64 ~= nil then
-			self.optional_sint64 = input.optionalSint64
-		end
-
-		if input.optional_fixed32 ~= nil then
-			self.optional_fixed32 = input.optional_fixed32
-		end
-
-		if input.optionalFixed32 ~= nil then
-			self.optional_fixed32 = input.optionalFixed32
-		end
-
-		if input.optional_fixed64 ~= nil then
-			self.optional_fixed64 = input.optional_fixed64
-		end
-
-		if input.optionalFixed64 ~= nil then
-			self.optional_fixed64 = input.optionalFixed64
-		end
-
-		if input.optional_sfixed32 ~= nil then
-			self.optional_sfixed32 = input.optional_sfixed32
-		end
-
-		if input.optionalSfixed32 ~= nil then
-			self.optional_sfixed32 = input.optionalSfixed32
-		end
-
-		if input.optional_sfixed64 ~= nil then
-			self.optional_sfixed64 = input.optional_sfixed64
-		end
-
-		if input.optionalSfixed64 ~= nil then
-			self.optional_sfixed64 = input.optionalSfixed64
-		end
-
-		if input.optional_float ~= nil then
-			self.optional_float = proto.json.deserializeNumber(input.optional_float)
-		end
-
-		if input.optionalFloat ~= nil then
-			self.optional_float = proto.json.deserializeNumber(input.optionalFloat)
-		end
-
-		if input.optional_double ~= nil then
-			self.optional_double = proto.json.deserializeNumber(input.optional_double)
-		end
-
-		if input.optionalDouble ~= nil then
-			self.optional_double = proto.json.deserializeNumber(input.optionalDouble)
-		end
-
-		if input.optional_bool ~= nil then
-			self.optional_bool = input.optional_bool
-		end
-
-		if input.optionalBool ~= nil then
-			self.optional_bool = input.optionalBool
-		end
-
-		if input.optional_string ~= nil then
-			self.optional_string = input.optional_string
-		end
-
-		if input.optionalString ~= nil then
-			self.optional_string = input.optionalString
-		end
-
-		if input.optional_bytes ~= nil then
-			self.optional_bytes = proto.json.deserializeBuffer(input.optional_bytes)
-		end
-
-		if input.optionalBytes ~= nil then
-			self.optional_bytes = proto.json.deserializeBuffer(input.optionalBytes)
-		end
-
-		if input.optional_nested_message ~= nil then
-			self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optional_nested_message)
-		end
-
-		if input.optionalNestedMessage ~= nil then
-			self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optionalNestedMessage)
-		end
-
-		if input.optional_foreign_message ~= nil then
-			self.optional_foreign_message = ForeignMessage.jsonDecode(input.optional_foreign_message)
-		end
-
-		if input.optionalForeignMessage ~= nil then
-			self.optional_foreign_message = ForeignMessage.jsonDecode(input.optionalForeignMessage)
-		end
-
-		if input.optional_nested_enum ~= nil then
-			self.optional_nested_enum = if typeof(input.optional_nested_enum) == "number"
-				then (TestAllTypesProto3_NestedEnum.fromNumber(input.optional_nested_enum) or input.optional_nested_enum)
-				else (TestAllTypesProto3_NestedEnum.fromName(input.optional_nested_enum) or input.optional_nested_enum)
-		end
-
-		if input.optionalNestedEnum ~= nil then
-			self.optional_nested_enum = if typeof(input.optionalNestedEnum) == "number"
-				then (TestAllTypesProto3_NestedEnum.fromNumber(input.optionalNestedEnum) or input.optionalNestedEnum)
-				else (TestAllTypesProto3_NestedEnum.fromName(input.optionalNestedEnum) or input.optionalNestedEnum)
-		end
-
-		if input.optional_foreign_enum ~= nil then
-			self.optional_foreign_enum = if typeof(input.optional_foreign_enum) == "number"
-				then (ForeignEnum.fromNumber(input.optional_foreign_enum) or input.optional_foreign_enum)
-				else (ForeignEnum.fromName(input.optional_foreign_enum) or input.optional_foreign_enum)
-		end
-
-		if input.optionalForeignEnum ~= nil then
-			self.optional_foreign_enum = if typeof(input.optionalForeignEnum) == "number"
-				then (ForeignEnum.fromNumber(input.optionalForeignEnum) or input.optionalForeignEnum)
-				else (ForeignEnum.fromName(input.optionalForeignEnum) or input.optionalForeignEnum)
-		end
-
-		if input.optional_aliased_enum ~= nil then
-			self.optional_aliased_enum = if typeof(input.optional_aliased_enum) == "number"
-				then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optional_aliased_enum) or input.optional_aliased_enum)
-				else (
-					TestAllTypesProto3_AliasedEnum.fromName(input.optional_aliased_enum) or input.optional_aliased_enum
-				)
-		end
-
-		if input.optionalAliasedEnum ~= nil then
-			self.optional_aliased_enum = if typeof(input.optionalAliasedEnum) == "number"
-				then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optionalAliasedEnum) or input.optionalAliasedEnum)
-				else (TestAllTypesProto3_AliasedEnum.fromName(input.optionalAliasedEnum) or input.optionalAliasedEnum)
-		end
-
-		if input.optional_string_piece ~= nil then
-			self.optional_string_piece = input.optional_string_piece
-		end
-
-		if input.optionalStringPiece ~= nil then
-			self.optional_string_piece = input.optionalStringPiece
-		end
-
-		if input.optional_cord ~= nil then
-			self.optional_cord = input.optional_cord
-		end
-
-		if input.optionalCord ~= nil then
-			self.optional_cord = input.optionalCord
-		end
-
-		if input.recursive_message ~= nil then
-			self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursive_message)
-		end
-
-		if input.recursiveMessage ~= nil then
-			self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursiveMessage)
-		end
-
-		if input.repeated_int32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_int32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_int32 = newOutput
-		end
-
-		if input.repeatedInt32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedInt32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_int32 = newOutput
-		end
-
-		if input.repeated_int64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_int64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_int64 = newOutput
-		end
-
-		if input.repeatedInt64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedInt64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_int64 = newOutput
-		end
-
-		if input.repeated_uint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_uint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_uint32 = newOutput
-		end
-
-		if input.repeatedUint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedUint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_uint32 = newOutput
-		end
-
-		if input.repeated_uint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_uint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_uint64 = newOutput
-		end
-
-		if input.repeatedUint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedUint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_uint64 = newOutput
-		end
-
-		if input.repeated_sint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_sint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sint32 = newOutput
-		end
-
-		if input.repeatedSint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedSint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sint32 = newOutput
-		end
-
-		if input.repeated_sint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_sint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sint64 = newOutput
-		end
-
-		if input.repeatedSint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedSint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sint64 = newOutput
-		end
-
-		if input.repeated_fixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_fixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_fixed32 = newOutput
-		end
-
-		if input.repeatedFixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedFixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_fixed32 = newOutput
-		end
-
-		if input.repeated_fixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_fixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_fixed64 = newOutput
-		end
-
-		if input.repeatedFixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedFixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_fixed64 = newOutput
-		end
-
-		if input.repeated_sfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_sfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sfixed32 = newOutput
-		end
-
-		if input.repeatedSfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedSfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sfixed32 = newOutput
-		end
-
-		if input.repeated_sfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_sfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sfixed64 = newOutput
-		end
-
-		if input.repeatedSfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedSfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_sfixed64 = newOutput
-		end
-
-		if input.repeated_float ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_float do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.repeated_float = newOutput
-		end
-
-		if input.repeatedFloat ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedFloat do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.repeated_float = newOutput
-		end
-
-		if input.repeated_double ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeated_double do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.repeated_double = newOutput
-		end
-
-		if input.repeatedDouble ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.repeatedDouble do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.repeated_double = newOutput
-		end
-
-		if input.repeated_bool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.repeated_bool do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_bool = newOutput
-		end
-
-		if input.repeatedBool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.repeatedBool do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_bool = newOutput
-		end
-
-		if input.repeated_string ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeated_string do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_string = newOutput
-		end
-
-		if input.repeatedString ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeatedString do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_string = newOutput
-		end
-
-		if input.repeated_bytes ~= nil then
-			local newOutput: { buffer } = {}
-			for _, value: buffer in input.repeated_bytes do
-				table.insert(newOutput, proto.json.deserializeBuffer(value))
-			end
-
-			self.repeated_bytes = newOutput
-		end
-
-		if input.repeatedBytes ~= nil then
-			local newOutput: { buffer } = {}
-			for _, value: buffer in input.repeatedBytes do
-				table.insert(newOutput, proto.json.deserializeBuffer(value))
-			end
-
-			self.repeated_bytes = newOutput
-		end
-
-		if input.repeated_nested_message ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-			for _, value: TestAllTypesProto3_NestedMessage in input.repeated_nested_message do
-				table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
-			end
-
-			self.repeated_nested_message = newOutput
-		end
-
-		if input.repeatedNestedMessage ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-			for _, value: TestAllTypesProto3_NestedMessage in input.repeatedNestedMessage do
-				table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
-			end
-
-			self.repeated_nested_message = newOutput
-		end
-
-		if input.repeated_foreign_message ~= nil then
-			local newOutput: { ForeignMessage } = {}
-			for _, value: ForeignMessage in input.repeated_foreign_message do
-				table.insert(newOutput, ForeignMessage.jsonDecode(value))
-			end
-
-			self.repeated_foreign_message = newOutput
-		end
-
-		if input.repeatedForeignMessage ~= nil then
-			local newOutput: { ForeignMessage } = {}
-			for _, value: ForeignMessage in input.repeatedForeignMessage do
-				table.insert(newOutput, ForeignMessage.jsonDecode(value))
-			end
-
-			self.repeated_foreign_message = newOutput
-		end
-
-		if input.repeated_nested_enum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.repeated_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.repeated_nested_enum = newOutput
-		end
-
-		if input.repeatedNestedEnum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.repeatedNestedEnum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.repeated_nested_enum = newOutput
-		end
-
-		if input.repeated_foreign_enum ~= nil then
-			local newOutput: { ForeignEnum } = {}
-			for _, value: ForeignEnum in input.repeated_foreign_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (ForeignEnum.fromNumber(value) or value)
-						else (ForeignEnum.fromName(value) or value)
-				)
-			end
-
-			self.repeated_foreign_enum = newOutput
-		end
-
-		if input.repeatedForeignEnum ~= nil then
-			local newOutput: { ForeignEnum } = {}
-			for _, value: ForeignEnum in input.repeatedForeignEnum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (ForeignEnum.fromNumber(value) or value)
-						else (ForeignEnum.fromName(value) or value)
-				)
-			end
-
-			self.repeated_foreign_enum = newOutput
-		end
-
-		if input.repeated_string_piece ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeated_string_piece do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_string_piece = newOutput
-		end
-
-		if input.repeatedStringPiece ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeatedStringPiece do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_string_piece = newOutput
-		end
-
-		if input.repeated_cord ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeated_cord do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_cord = newOutput
-		end
-
-		if input.repeatedCord ~= nil then
-			local newOutput: { string } = {}
-			for _, value: string in input.repeatedCord do
-				table.insert(newOutput, value)
-			end
-
-			self.repeated_cord = newOutput
-		end
-
-		if input.packed_int32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_int32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_int32 = newOutput
-		end
-
-		if input.packedInt32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedInt32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_int32 = newOutput
-		end
-
-		if input.packed_int64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_int64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_int64 = newOutput
-		end
-
-		if input.packedInt64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedInt64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_int64 = newOutput
-		end
-
-		if input.packed_uint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_uint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_uint32 = newOutput
-		end
-
-		if input.packedUint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedUint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_uint32 = newOutput
-		end
-
-		if input.packed_uint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_uint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_uint64 = newOutput
-		end
-
-		if input.packedUint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedUint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_uint64 = newOutput
-		end
-
-		if input.packed_sint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_sint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sint32 = newOutput
-		end
-
-		if input.packedSint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedSint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sint32 = newOutput
-		end
-
-		if input.packed_sint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_sint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sint64 = newOutput
-		end
-
-		if input.packedSint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedSint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sint64 = newOutput
-		end
-
-		if input.packed_fixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_fixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_fixed32 = newOutput
-		end
-
-		if input.packedFixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedFixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_fixed32 = newOutput
-		end
-
-		if input.packed_fixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_fixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_fixed64 = newOutput
-		end
-
-		if input.packedFixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedFixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_fixed64 = newOutput
-		end
-
-		if input.packed_sfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_sfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sfixed32 = newOutput
-		end
-
-		if input.packedSfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedSfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sfixed32 = newOutput
-		end
-
-		if input.packed_sfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_sfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sfixed64 = newOutput
-		end
-
-		if input.packedSfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedSfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_sfixed64 = newOutput
-		end
-
-		if input.packed_float ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_float do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.packed_float = newOutput
-		end
-
-		if input.packedFloat ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedFloat do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.packed_float = newOutput
-		end
-
-		if input.packed_double ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packed_double do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.packed_double = newOutput
-		end
-
-		if input.packedDouble ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.packedDouble do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.packed_double = newOutput
-		end
-
-		if input.packed_bool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.packed_bool do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_bool = newOutput
-		end
-
-		if input.packedBool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.packedBool do
-				table.insert(newOutput, value)
-			end
-
-			self.packed_bool = newOutput
-		end
-
-		if input.packed_nested_enum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.packed_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.packed_nested_enum = newOutput
-		end
-
-		if input.packedNestedEnum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.packedNestedEnum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.packed_nested_enum = newOutput
-		end
-
-		if input.unpacked_int32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_int32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_int32 = newOutput
-		end
-
-		if input.unpackedInt32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedInt32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_int32 = newOutput
-		end
-
-		if input.unpacked_int64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_int64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_int64 = newOutput
-		end
-
-		if input.unpackedInt64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedInt64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_int64 = newOutput
-		end
-
-		if input.unpacked_uint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_uint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_uint32 = newOutput
-		end
-
-		if input.unpackedUint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedUint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_uint32 = newOutput
-		end
-
-		if input.unpacked_uint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_uint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_uint64 = newOutput
-		end
-
-		if input.unpackedUint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedUint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_uint64 = newOutput
-		end
-
-		if input.unpacked_sint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_sint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sint32 = newOutput
-		end
-
-		if input.unpackedSint32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedSint32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sint32 = newOutput
-		end
-
-		if input.unpacked_sint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_sint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sint64 = newOutput
-		end
-
-		if input.unpackedSint64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedSint64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sint64 = newOutput
-		end
-
-		if input.unpacked_fixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_fixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_fixed32 = newOutput
-		end
-
-		if input.unpackedFixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedFixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_fixed32 = newOutput
-		end
-
-		if input.unpacked_fixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_fixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_fixed64 = newOutput
-		end
-
-		if input.unpackedFixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedFixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_fixed64 = newOutput
-		end
-
-		if input.unpacked_sfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_sfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sfixed32 = newOutput
-		end
-
-		if input.unpackedSfixed32 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedSfixed32 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sfixed32 = newOutput
-		end
-
-		if input.unpacked_sfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_sfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sfixed64 = newOutput
-		end
-
-		if input.unpackedSfixed64 ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedSfixed64 do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_sfixed64 = newOutput
-		end
-
-		if input.unpacked_float ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_float do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.unpacked_float = newOutput
-		end
-
-		if input.unpackedFloat ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedFloat do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.unpacked_float = newOutput
-		end
-
-		if input.unpacked_double ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpacked_double do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.unpacked_double = newOutput
-		end
-
-		if input.unpackedDouble ~= nil then
-			local newOutput: { number } = {}
-			for _, value: number in input.unpackedDouble do
-				table.insert(newOutput, proto.json.deserializeNumber(value))
-			end
-
-			self.unpacked_double = newOutput
-		end
-
-		if input.unpacked_bool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.unpacked_bool do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_bool = newOutput
-		end
-
-		if input.unpackedBool ~= nil then
-			local newOutput: { boolean } = {}
-			for _, value: boolean in input.unpackedBool do
-				table.insert(newOutput, value)
-			end
-
-			self.unpacked_bool = newOutput
-		end
-
-		if input.unpacked_nested_enum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.unpacked_nested_enum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.unpacked_nested_enum = newOutput
-		end
-
-		if input.unpackedNestedEnum ~= nil then
-			local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-			for _, value: TestAllTypesProto3_NestedEnum in input.unpackedNestedEnum do
-				table.insert(
-					newOutput,
-					if typeof(value) == "number"
-						then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
-						else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-				)
-			end
-
-			self.unpacked_nested_enum = newOutput
-		end
-
-		if input.map_int32_int32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_int32_int32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_int32_int32 = newOutput
-		end
-
-		if input.mapInt32Int32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapInt32Int32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_int32_int32 = newOutput
-		end
-
-		if input.map_int64_int64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_int64_int64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_int64_int64 = newOutput
-		end
-
-		if input.mapInt64Int64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapInt64Int64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_int64_int64 = newOutput
-		end
-
-		if input.map_uint32_uint32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_uint32_uint32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_uint32_uint32 = newOutput
-		end
-
-		if input.mapUint32Uint32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapUint32Uint32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_uint32_uint32 = newOutput
-		end
-
-		if input.map_uint64_uint64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_uint64_uint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_uint64_uint64 = newOutput
-		end
-
-		if input.mapUint64Uint64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapUint64Uint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_uint64_uint64 = newOutput
-		end
-
-		if input.map_sint32_sint32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_sint32_sint32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sint32_sint32 = newOutput
-		end
-
-		if input.mapSint32Sint32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapSint32Sint32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sint32_sint32 = newOutput
-		end
-
-		if input.map_sint64_sint64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_sint64_sint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sint64_sint64 = newOutput
-		end
-
-		if input.mapSint64Sint64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapSint64Sint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sint64_sint64 = newOutput
-		end
-
-		if input.map_fixed32_fixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_fixed32_fixed32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_fixed32_fixed32 = newOutput
-		end
-
-		if input.mapFixed32Fixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapFixed32Fixed32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_fixed32_fixed32 = newOutput
-		end
-
-		if input.map_fixed64_fixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_fixed64_fixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_fixed64_fixed64 = newOutput
-		end
-
-		if input.mapFixed64Fixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapFixed64Fixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_fixed64_fixed64 = newOutput
-		end
-
-		if input.map_sfixed32_sfixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_sfixed32_sfixed32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sfixed32_sfixed32 = newOutput
-		end
-
-		if input.mapSfixed32Sfixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapSfixed32Sfixed32 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sfixed32_sfixed32 = newOutput
-		end
-
-		if input.map_sfixed64_sfixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_sfixed64_sfixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sfixed64_sfixed64 = newOutput
-		end
-
-		if input.mapSfixed64Sfixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapSfixed64Sfixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
-			end
-
-			self.map_sfixed64_sfixed64 = newOutput
-		end
-
-		if input.map_int32_float ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_int32_float do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
-					proto.json.deserializeNumber(value)
-			end
-
-			self.map_int32_float = newOutput
-		end
-
-		if input.mapInt32Float ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapInt32Float do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
-					proto.json.deserializeNumber(value)
-			end
-
-			self.map_int32_float = newOutput
-		end
-
-		if input.map_int32_double ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.map_int32_double do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
-					proto.json.deserializeNumber(value)
-			end
-
-			self.map_int32_double = newOutput
-		end
-
-		if input.mapInt32Double ~= nil then
-			local newOutput: { [number]: number } = {}
-			for key, value in input.mapInt32Double do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
-					proto.json.deserializeNumber(value)
-			end
-
-			self.map_int32_double = newOutput
-		end
-
-		if input.map_bool_bool ~= nil then
-			local newOutput: { [boolean]: boolean } = {}
-			for key, value in input.map_bool_bool do
-				newOutput[if key == "true" then true else false] = value
-			end
-
-			self.map_bool_bool = newOutput
-		end
-
-		if input.mapBoolBool ~= nil then
-			local newOutput: { [boolean]: boolean } = {}
-			for key, value in input.mapBoolBool do
-				newOutput[if key == "true" then true else false] = value
-			end
-
-			self.map_bool_bool = newOutput
-		end
-
-		if input.map_string_string ~= nil then
-			local newOutput: { [string]: string } = {}
-			for key, value in input.map_string_string do
-				newOutput[key] = value
-			end
-
-			self.map_string_string = newOutput
-		end
-
-		if input.mapStringString ~= nil then
-			local newOutput: { [string]: string } = {}
-			for key, value in input.mapStringString do
-				newOutput[key] = value
-			end
-
-			self.map_string_string = newOutput
-		end
-
-		if input.map_string_bytes ~= nil then
-			local newOutput: { [string]: buffer } = {}
-			for key, value in input.map_string_bytes do
-				newOutput[key] = proto.json.deserializeBuffer(value)
-			end
-
-			self.map_string_bytes = newOutput
-		end
-
-		if input.mapStringBytes ~= nil then
-			local newOutput: { [string]: buffer } = {}
-			for key, value in input.mapStringBytes do
-				newOutput[key] = proto.json.deserializeBuffer(value)
-			end
-
-			self.map_string_bytes = newOutput
-		end
-
-		if input.map_string_nested_message ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
-			for key, value in input.map_string_nested_message do
-				newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
-			end
-
-			self.map_string_nested_message = newOutput
-		end
-
-		if input.mapStringNestedMessage ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
-			for key, value in input.mapStringNestedMessage do
-				newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
-			end
-
-			self.map_string_nested_message = newOutput
-		end
-
-		if input.map_string_foreign_message ~= nil then
-			local newOutput: { [string]: ForeignMessage } = {}
-			for key, value in input.map_string_foreign_message do
-				newOutput[key] = ForeignMessage.jsonDecode(value)
-			end
-
-			self.map_string_foreign_message = newOutput
-		end
-
-		if input.mapStringForeignMessage ~= nil then
-			local newOutput: { [string]: ForeignMessage } = {}
-			for key, value in input.mapStringForeignMessage do
-				newOutput[key] = ForeignMessage.jsonDecode(value)
-			end
-
-			self.map_string_foreign_message = newOutput
-		end
-
-		if input.map_string_nested_enum ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
-			for key, value in input.map_string_nested_enum do
-				newOutput[key] = if typeof(value) == "number"
+			elseif field == 87 then
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				local limit = cursor + length
+
+				while cursor < limit do
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					table.insert(self.packed_bool, value ~= 0)
+				end
+			elseif field == 112 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.oneof_field =
+					{ type = "oneof_nested_message", value = TestAllTypesProto3_NestedMessage.decode(value) }
+			elseif field == 113 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.oneof_field = { type = "oneof_string", value = buffer.tostring(value) }
+			elseif field == 114 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.oneof_field = { type = "oneof_bytes", value = value }
+			elseif field == 201 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.decode(value)
+			elseif field == 202 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.decode(value)
+			elseif field == 203 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.decode(value)
+			elseif field == 204 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.decode(value)
+			elseif field == 205 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.decode(value)
+			elseif field == 206 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.decode(value)
+			elseif field == 207 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.decode(value)
+			elseif field == 208 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.decode(value)
+			elseif field == 209 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.decode(value)
+			elseif field == 211 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_bool_wrapper, _google_protobuf_wrappers.BoolValue.decode(value))
+			elseif field == 212 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_int32_wrapper, _google_protobuf_wrappers.Int32Value.decode(value))
+			elseif field == 213 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_int64_wrapper, _google_protobuf_wrappers.Int64Value.decode(value))
+			elseif field == 214 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_uint32_wrapper, _google_protobuf_wrappers.UInt32Value.decode(value))
+			elseif field == 215 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_uint64_wrapper, _google_protobuf_wrappers.UInt64Value.decode(value))
+			elseif field == 216 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_float_wrapper, _google_protobuf_wrappers.FloatValue.decode(value))
+			elseif field == 217 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_double_wrapper, _google_protobuf_wrappers.DoubleValue.decode(value))
+			elseif field == 218 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_string_wrapper, _google_protobuf_wrappers.StringValue.decode(value))
+			elseif field == 219 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_bytes_wrapper, _google_protobuf_wrappers.BytesValue.decode(value))
+			elseif field == 301 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_duration = _google_protobuf_duration.Duration.decode(value)
+			elseif field == 302 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_timestamp = _google_protobuf_timestamp.Timestamp.decode(value)
+			elseif field == 303 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_field_mask = _google_protobuf_field_mask.FieldMask.decode(value)
+			elseif field == 304 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_struct = _google_protobuf_struct.Struct.decode(value)
+			elseif field == 305 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_any = _google_protobuf_any.Any.decode(value)
+			elseif field == 306 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.optional_value = _google_protobuf_struct.Value.decode(value)
+			elseif field == 311 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_duration, _google_protobuf_duration.Duration.decode(value))
+			elseif field == 312 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_timestamp, _google_protobuf_timestamp.Timestamp.decode(value))
+			elseif field == 313 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_fieldmask, _google_protobuf_field_mask.FieldMask.decode(value))
+			elseif field == 315 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_any, _google_protobuf_any.Any.decode(value))
+			elseif field == 316 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_value, _google_protobuf_struct.Value.decode(value))
+			elseif field == 317 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_list_value, _google_protobuf_struct.ListValue.decode(value))
+			elseif field == 324 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				table.insert(self.repeated_struct, _google_protobuf_struct.Struct.decode(value))
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			if field == 7 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				self.optional_fixed32 = value
+			elseif field == 9 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				self.optional_sfixed32 = value
+			elseif field == 11 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				self.optional_float = value
+			elseif field == 37 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				table.insert(self.repeated_fixed32, value)
+			elseif field == 39 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				table.insert(self.repeated_sfixed32, value)
+			elseif field == 41 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				table.insert(self.repeated_float, value)
+			elseif field == 81 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				table.insert(self.packed_fixed32, value)
+			elseif field == 83 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				table.insert(self.packed_sfixed32, value)
+			elseif field == 85 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				table.insert(self.packed_float, value)
+			elseif field == 95 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				table.insert(self.unpacked_fixed32, value)
+			elseif field == 97 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				table.insert(self.unpacked_sfixed32, value)
+			elseif field == 99 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				table.insert(self.unpacked_float, value)
+			elseif field == 117 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				self.oneof_field = { type = "oneof_float", value = value }
+			end
+		elseif wireType == proto.wireTypes.i64 then
+			if field == 8 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				self.optional_fixed64 = value
+			elseif field == 10 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				self.optional_sfixed64 = value
+			elseif field == 12 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				self.optional_double = value
+			elseif field == 38 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				table.insert(self.repeated_fixed64, value)
+			elseif field == 40 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				table.insert(self.repeated_sfixed64, value)
+			elseif field == 42 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				table.insert(self.repeated_double, value)
+			elseif field == 82 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				table.insert(self.packed_fixed64, value)
+			elseif field == 84 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				table.insert(self.packed_sfixed64, value)
+			elseif field == 86 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				table.insert(self.packed_double, value)
+			elseif field == 96 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				table.insert(self.unpacked_fixed64, value)
+			elseif field == 98 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				table.insert(self.unpacked_sfixed64, value)
+			elseif field == 100 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				table.insert(self.unpacked_double, value)
+			elseif field == 118 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				self.oneof_field = { type = "oneof_double", value = value }
+			end
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function TestAllTypesProto3.jsonEncode(self: TestAllTypesProto3): any
+	local output: {
+		optionalInt32: number?,
+		optionalInt64: number?,
+		optionalUint32: number?,
+		optionalUint64: number?,
+		optionalSint32: number?,
+		optionalSint64: number?,
+		optionalFixed32: number?,
+		optionalFixed64: number?,
+		optionalSfixed32: number?,
+		optionalSfixed64: number?,
+		optionalFloat: (number | string)?,
+		optionalDouble: (number | string)?,
+		optionalBool: boolean?,
+		optionalString: string?,
+		optionalBytes: buffer?,
+		optionalNestedMessage: TestAllTypesProto3_NestedMessage?,
+		optionalForeignMessage: ForeignMessage?,
+		optionalNestedEnum: TestAllTypesProto3_NestedEnum?,
+		optionalForeignEnum: ForeignEnum?,
+		optionalAliasedEnum: TestAllTypesProto3_AliasedEnum?,
+		optionalStringPiece: string?,
+		optionalCord: string?,
+		recursiveMessage: TestAllTypesProto3?,
+		repeatedInt32: { number }?,
+		repeatedInt64: { number }?,
+		repeatedUint32: { number }?,
+		repeatedUint64: { number }?,
+		repeatedSint32: { number }?,
+		repeatedSint64: { number }?,
+		repeatedFixed32: { number }?,
+		repeatedFixed64: { number }?,
+		repeatedSfixed32: { number }?,
+		repeatedSfixed64: { number }?,
+		repeatedFloat: { number | string }?,
+		repeatedDouble: { number | string }?,
+		repeatedBool: { boolean }?,
+		repeatedString: { string }?,
+		repeatedBytes: { buffer }?,
+		repeatedNestedMessage: { TestAllTypesProto3_NestedMessage }?,
+		repeatedForeignMessage: { ForeignMessage }?,
+		repeatedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
+		repeatedForeignEnum: { ForeignEnum }?,
+		repeatedStringPiece: { string }?,
+		repeatedCord: { string }?,
+		packedInt32: { number }?,
+		packedInt64: { number }?,
+		packedUint32: { number }?,
+		packedUint64: { number }?,
+		packedSint32: { number }?,
+		packedSint64: { number }?,
+		packedFixed32: { number }?,
+		packedFixed64: { number }?,
+		packedSfixed32: { number }?,
+		packedSfixed64: { number }?,
+		packedFloat: { number | string }?,
+		packedDouble: { number | string }?,
+		packedBool: { boolean }?,
+		packedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
+		unpackedInt32: { number }?,
+		unpackedInt64: { number }?,
+		unpackedUint32: { number }?,
+		unpackedUint64: { number }?,
+		unpackedSint32: { number }?,
+		unpackedSint64: { number }?,
+		unpackedFixed32: { number }?,
+		unpackedFixed64: { number }?,
+		unpackedSfixed32: { number }?,
+		unpackedSfixed64: { number }?,
+		unpackedFloat: { number | string }?,
+		unpackedDouble: { number | string }?,
+		unpackedBool: { boolean }?,
+		unpackedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
+		mapInt32Int32: { [string]: number }?,
+		mapInt64Int64: { [string]: number }?,
+		mapUint32Uint32: { [string]: number }?,
+		mapUint64Uint64: { [string]: number }?,
+		mapSint32Sint32: { [string]: number }?,
+		mapSint64Sint64: { [string]: number }?,
+		mapFixed32Fixed32: { [string]: number }?,
+		mapFixed64Fixed64: { [string]: number }?,
+		mapSfixed32Sfixed32: { [string]: number }?,
+		mapSfixed64Sfixed64: { [string]: number }?,
+		mapInt32Float: { [string]: number | string }?,
+		mapInt32Double: { [string]: number | string }?,
+		mapBoolBool: { [string]: boolean }?,
+		mapStringString: { [string]: string }?,
+		mapStringBytes: { [string]: buffer }?,
+		mapStringNestedMessage: { [string]: TestAllTypesProto3_NestedMessage }?,
+		mapStringForeignMessage: { [string]: ForeignMessage }?,
+		mapStringNestedEnum: { [string]: TestAllTypesProto3_NestedEnum }?,
+		mapStringForeignEnum: { [string]: ForeignEnum }?,
+		oneofUint32: number?,
+		oneofNestedMessage: TestAllTypesProto3_NestedMessage?,
+		oneofString: string?,
+		oneofBytes: buffer?,
+		oneofBool: boolean?,
+		oneofUint64: number?,
+		oneofFloat: (number | string)?,
+		oneofDouble: (number | string)?,
+		oneofEnum: TestAllTypesProto3_NestedEnum?,
+		oneofNullValue: _google_protobuf_struct.NullValue?,
+		optionalBoolWrapper: _google_protobuf_wrappers.BoolValue?,
+		optionalInt32Wrapper: _google_protobuf_wrappers.Int32Value?,
+		optionalInt64Wrapper: _google_protobuf_wrappers.Int64Value?,
+		optionalUint32Wrapper: _google_protobuf_wrappers.UInt32Value?,
+		optionalUint64Wrapper: _google_protobuf_wrappers.UInt64Value?,
+		optionalFloatWrapper: _google_protobuf_wrappers.FloatValue?,
+		optionalDoubleWrapper: _google_protobuf_wrappers.DoubleValue?,
+		optionalStringWrapper: _google_protobuf_wrappers.StringValue?,
+		optionalBytesWrapper: _google_protobuf_wrappers.BytesValue?,
+		repeatedBoolWrapper: { _google_protobuf_wrappers.BoolValue }?,
+		repeatedInt32Wrapper: { _google_protobuf_wrappers.Int32Value }?,
+		repeatedInt64Wrapper: { _google_protobuf_wrappers.Int64Value }?,
+		repeatedUint32Wrapper: { _google_protobuf_wrappers.UInt32Value }?,
+		repeatedUint64Wrapper: { _google_protobuf_wrappers.UInt64Value }?,
+		repeatedFloatWrapper: { _google_protobuf_wrappers.FloatValue }?,
+		repeatedDoubleWrapper: { _google_protobuf_wrappers.DoubleValue }?,
+		repeatedStringWrapper: { _google_protobuf_wrappers.StringValue }?,
+		repeatedBytesWrapper: { _google_protobuf_wrappers.BytesValue }?,
+		optionalDuration: _google_protobuf_duration.Duration?,
+		optionalTimestamp: _google_protobuf_timestamp.Timestamp?,
+		optionalFieldMask: _google_protobuf_field_mask.FieldMask?,
+		optionalStruct: _google_protobuf_struct.Struct?,
+		optionalAny: _google_protobuf_any.Any?,
+		optionalValue: _google_protobuf_struct.Value?,
+		optionalNullValue: _google_protobuf_struct.NullValue?,
+		repeatedDuration: { _google_protobuf_duration.Duration }?,
+		repeatedTimestamp: { _google_protobuf_timestamp.Timestamp }?,
+		repeatedFieldmask: { _google_protobuf_field_mask.FieldMask }?,
+		repeatedStruct: { _google_protobuf_struct.Struct }?,
+		repeatedAny: { _google_protobuf_any.Any }?,
+		repeatedValue: { _google_protobuf_struct.Value }?,
+		repeatedListValue: { _google_protobuf_struct.ListValue }?,
+		fieldname1: number?,
+		fieldName2: number?,
+		FieldName3: number?,
+		fieldName4: number?,
+		field0name5: number?,
+		field0Name6: number?,
+		fieldName7: number?,
+		FieldName8: number?,
+		fieldName9: number?,
+		FieldName10: number?,
+		FIELDNAME11: number?,
+		FIELDName12: number?,
+		FieldName13: number?,
+		FieldName14: number?,
+		fieldName15: number?,
+		fieldName16: number?,
+		fieldName17: number?,
+		FieldName18: number?,
+	} =
+		{}
+
+	if self.optional_int32 ~= 0 then
+		output.optionalInt32 = self.optional_int32
+	end
+
+	if self.optional_int64 ~= 0 then
+		output.optionalInt64 = self.optional_int64
+	end
+
+	if self.optional_uint32 ~= 0 then
+		output.optionalUint32 = self.optional_uint32
+	end
+
+	if self.optional_uint64 ~= 0 then
+		output.optionalUint64 = self.optional_uint64
+	end
+
+	if self.optional_sint32 ~= 0 then
+		output.optionalSint32 = self.optional_sint32
+	end
+
+	if self.optional_sint64 ~= 0 then
+		output.optionalSint64 = self.optional_sint64
+	end
+
+	if self.optional_fixed32 ~= 0 then
+		output.optionalFixed32 = self.optional_fixed32
+	end
+
+	if self.optional_fixed64 ~= 0 then
+		output.optionalFixed64 = self.optional_fixed64
+	end
+
+	if self.optional_sfixed32 ~= 0 then
+		output.optionalSfixed32 = self.optional_sfixed32
+	end
+
+	if self.optional_sfixed64 ~= 0 then
+		output.optionalSfixed64 = self.optional_sfixed64
+	end
+
+	if self.optional_float ~= 0 then
+		output.optionalFloat = proto.json.serializeNumber(self.optional_float)
+	end
+
+	if self.optional_double ~= 0 then
+		output.optionalDouble = proto.json.serializeNumber(self.optional_double)
+	end
+
+	if self.optional_bool then
+		output.optionalBool = self.optional_bool
+	end
+
+	if self.optional_string ~= "" then
+		output.optionalString = self.optional_string
+	end
+
+	if buffer.len(self.optional_bytes) > 0 then
+		output.optionalBytes = proto.json.serializeBuffer(self.optional_bytes)
+	end
+
+	if self.optional_nested_message ~= nil then
+		output.optionalNestedMessage = TestAllTypesProto3_NestedMessage.jsonEncode(self.optional_nested_message)
+	end
+
+	if self.optional_foreign_message ~= nil then
+		output.optionalForeignMessage = ForeignMessage.jsonEncode(self.optional_foreign_message)
+	end
+
+	if self.optional_nested_enum ~= 0 or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
+		output.optionalNestedEnum = if typeof(self.optional_nested_enum) == "number"
+			then self.optional_nested_enum
+			else TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum)
+	end
+
+	if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
+		output.optionalForeignEnum = if typeof(self.optional_foreign_enum) == "number"
+			then self.optional_foreign_enum
+			else ForeignEnum.toNumber(self.optional_foreign_enum)
+	end
+
+	if
+		self.optional_aliased_enum ~= 0
+		or self.optional_aliased_enum ~= TestAllTypesProto3_AliasedEnum.fromNumber(0)
+	then
+		output.optionalAliasedEnum = if typeof(self.optional_aliased_enum) == "number"
+			then self.optional_aliased_enum
+			else TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum)
+	end
+
+	if self.optional_string_piece ~= "" then
+		output.optionalStringPiece = self.optional_string_piece
+	end
+
+	if self.optional_cord ~= "" then
+		output.optionalCord = self.optional_cord
+	end
+
+	if self.recursive_message ~= nil then
+		output.recursiveMessage = TestAllTypesProto3.jsonEncode(self.recursive_message)
+	end
+
+	if #self.repeated_int32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_int32 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedInt32 = newOutput
+	end
+
+	if #self.repeated_int64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_int64 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedInt64 = newOutput
+	end
+
+	if #self.repeated_uint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_uint32 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedUint32 = newOutput
+	end
+
+	if #self.repeated_uint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_uint64 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedUint64 = newOutput
+	end
+
+	if #self.repeated_sint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_sint32 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedSint32 = newOutput
+	end
+
+	if #self.repeated_sint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_sint64 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedSint64 = newOutput
+	end
+
+	if #self.repeated_fixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_fixed32 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedFixed32 = newOutput
+	end
+
+	if #self.repeated_fixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_fixed64 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedFixed64 = newOutput
+	end
+
+	if #self.repeated_sfixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_sfixed32 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedSfixed32 = newOutput
+	end
+
+	if #self.repeated_sfixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.repeated_sfixed64 do
+			table.insert(newOutput, value)
+		end
+		output.repeatedSfixed64 = newOutput
+	end
+
+	if #self.repeated_float > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.repeated_float do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.repeatedFloat = newOutput
+	end
+
+	if #self.repeated_double > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.repeated_double do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.repeatedDouble = newOutput
+	end
+
+	if #self.repeated_bool > 0 then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in self.repeated_bool do
+			table.insert(newOutput, value)
+		end
+		output.repeatedBool = newOutput
+	end
+
+	if #self.repeated_string > 0 then
+		local newOutput: { string } = {}
+		for _, value: string in self.repeated_string do
+			table.insert(newOutput, value)
+		end
+		output.repeatedString = newOutput
+	end
+
+	if #self.repeated_bytes > 0 then
+		local newOutput: { buffer } = {}
+		for _, value: buffer in self.repeated_bytes do
+			table.insert(newOutput, proto.json.serializeBuffer(value))
+		end
+		output.repeatedBytes = newOutput
+	end
+
+	if #self.repeated_nested_message > 0 then
+		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
+		for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
+			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonEncode(value))
+		end
+		output.repeatedNestedMessage = newOutput
+	end
+
+	if #self.repeated_foreign_message > 0 then
+		local newOutput: { ForeignMessage } = {}
+		for _, value: ForeignMessage in self.repeated_foreign_message do
+			table.insert(newOutput, ForeignMessage.jsonEncode(value))
+		end
+		output.repeatedForeignMessage = newOutput
+	end
+
+	if #self.repeated_nested_enum > 0 then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+			)
+		end
+		output.repeatedNestedEnum = newOutput
+	end
+
+	if #self.repeated_foreign_enum > 0 then
+		local newOutput: { ForeignEnum } = {}
+		for _, value: ForeignEnum in self.repeated_foreign_enum do
+			table.insert(newOutput, if typeof(value) == "number" then value else ForeignEnum.toNumber(value))
+		end
+		output.repeatedForeignEnum = newOutput
+	end
+
+	if #self.repeated_string_piece > 0 then
+		local newOutput: { string } = {}
+		for _, value: string in self.repeated_string_piece do
+			table.insert(newOutput, value)
+		end
+		output.repeatedStringPiece = newOutput
+	end
+
+	if #self.repeated_cord > 0 then
+		local newOutput: { string } = {}
+		for _, value: string in self.repeated_cord do
+			table.insert(newOutput, value)
+		end
+		output.repeatedCord = newOutput
+	end
+
+	if #self.packed_int32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_int32 do
+			table.insert(newOutput, value)
+		end
+		output.packedInt32 = newOutput
+	end
+
+	if #self.packed_int64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_int64 do
+			table.insert(newOutput, value)
+		end
+		output.packedInt64 = newOutput
+	end
+
+	if #self.packed_uint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_uint32 do
+			table.insert(newOutput, value)
+		end
+		output.packedUint32 = newOutput
+	end
+
+	if #self.packed_uint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_uint64 do
+			table.insert(newOutput, value)
+		end
+		output.packedUint64 = newOutput
+	end
+
+	if #self.packed_sint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_sint32 do
+			table.insert(newOutput, value)
+		end
+		output.packedSint32 = newOutput
+	end
+
+	if #self.packed_sint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_sint64 do
+			table.insert(newOutput, value)
+		end
+		output.packedSint64 = newOutput
+	end
+
+	if #self.packed_fixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_fixed32 do
+			table.insert(newOutput, value)
+		end
+		output.packedFixed32 = newOutput
+	end
+
+	if #self.packed_fixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_fixed64 do
+			table.insert(newOutput, value)
+		end
+		output.packedFixed64 = newOutput
+	end
+
+	if #self.packed_sfixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_sfixed32 do
+			table.insert(newOutput, value)
+		end
+		output.packedSfixed32 = newOutput
+	end
+
+	if #self.packed_sfixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.packed_sfixed64 do
+			table.insert(newOutput, value)
+		end
+		output.packedSfixed64 = newOutput
+	end
+
+	if #self.packed_float > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.packed_float do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.packedFloat = newOutput
+	end
+
+	if #self.packed_double > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.packed_double do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.packedDouble = newOutput
+	end
+
+	if #self.packed_bool > 0 then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in self.packed_bool do
+			table.insert(newOutput, value)
+		end
+		output.packedBool = newOutput
+	end
+
+	if #self.packed_nested_enum > 0 then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+			)
+		end
+		output.packedNestedEnum = newOutput
+	end
+
+	if #self.unpacked_int32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_int32 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedInt32 = newOutput
+	end
+
+	if #self.unpacked_int64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_int64 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedInt64 = newOutput
+	end
+
+	if #self.unpacked_uint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_uint32 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedUint32 = newOutput
+	end
+
+	if #self.unpacked_uint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_uint64 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedUint64 = newOutput
+	end
+
+	if #self.unpacked_sint32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_sint32 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedSint32 = newOutput
+	end
+
+	if #self.unpacked_sint64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_sint64 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedSint64 = newOutput
+	end
+
+	if #self.unpacked_fixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_fixed32 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedFixed32 = newOutput
+	end
+
+	if #self.unpacked_fixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_fixed64 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedFixed64 = newOutput
+	end
+
+	if #self.unpacked_sfixed32 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_sfixed32 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedSfixed32 = newOutput
+	end
+
+	if #self.unpacked_sfixed64 > 0 then
+		local newOutput: { number } = {}
+		for _, value: number in self.unpacked_sfixed64 do
+			table.insert(newOutput, value)
+		end
+		output.unpackedSfixed64 = newOutput
+	end
+
+	if #self.unpacked_float > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.unpacked_float do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.unpackedFloat = newOutput
+	end
+
+	if #self.unpacked_double > 0 then
+		local newOutput: { number | string } = {}
+		for _, value: number in self.unpacked_double do
+			table.insert(newOutput, proto.json.serializeNumber(value))
+		end
+		output.unpackedDouble = newOutput
+	end
+
+	if #self.unpacked_bool > 0 then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in self.unpacked_bool do
+			table.insert(newOutput, value)
+		end
+		output.unpackedBool = newOutput
+	end
+
+	if #self.unpacked_nested_enum > 0 then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+			)
+		end
+		output.unpackedNestedEnum = newOutput
+	end
+
+	if next(self.map_int32_int32) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_int32_int32 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapInt32Int32 = newOutput
+	end
+
+	if next(self.map_int64_int64) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_int64_int64 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapInt64Int64 = newOutput
+	end
+
+	if next(self.map_uint32_uint32) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_uint32_uint32 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapUint32Uint32 = newOutput
+	end
+
+	if next(self.map_uint64_uint64) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_uint64_uint64 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapUint64Uint64 = newOutput
+	end
+
+	if next(self.map_sint32_sint32) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_sint32_sint32 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapSint32Sint32 = newOutput
+	end
+
+	if next(self.map_sint64_sint64) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_sint64_sint64 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapSint64Sint64 = newOutput
+	end
+
+	if next(self.map_fixed32_fixed32) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_fixed32_fixed32 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapFixed32Fixed32 = newOutput
+	end
+
+	if next(self.map_fixed64_fixed64) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_fixed64_fixed64 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapFixed64Fixed64 = newOutput
+	end
+
+	if next(self.map_sfixed32_sfixed32) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_sfixed32_sfixed32 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapSfixed32Sfixed32 = newOutput
+	end
+
+	if next(self.map_sfixed64_sfixed64) ~= nil then
+		local newOutput: { [string]: number } = {}
+		for key: number, value: number in self.map_sfixed64_sfixed64 do
+			newOutput[tostring(key)] = value
+		end
+		output.mapSfixed64Sfixed64 = newOutput
+	end
+
+	if next(self.map_int32_float) ~= nil then
+		local newOutput: { [string]: number | string } = {}
+		for key: number, value: number in self.map_int32_float do
+			newOutput[tostring(key)] = proto.json.serializeNumber(value)
+		end
+		output.mapInt32Float = newOutput
+	end
+
+	if next(self.map_int32_double) ~= nil then
+		local newOutput: { [string]: number | string } = {}
+		for key: number, value: number in self.map_int32_double do
+			newOutput[tostring(key)] = proto.json.serializeNumber(value)
+		end
+		output.mapInt32Double = newOutput
+	end
+
+	if next(self.map_bool_bool) ~= nil then
+		local newOutput: { [string]: boolean } = {}
+		for key: boolean, value: boolean in self.map_bool_bool do
+			newOutput[tostring(key)] = value
+		end
+		output.mapBoolBool = newOutput
+	end
+
+	if next(self.map_string_string) ~= nil then
+		local newOutput: { [string]: string } = {}
+		for key: string, value: string in self.map_string_string do
+			newOutput[key] = value
+		end
+		output.mapStringString = newOutput
+	end
+
+	if next(self.map_string_bytes) ~= nil then
+		local newOutput: { [string]: buffer } = {}
+		for key: string, value: buffer in self.map_string_bytes do
+			newOutput[key] = proto.json.serializeBuffer(value)
+		end
+		output.mapStringBytes = newOutput
+	end
+
+	if next(self.map_string_nested_message) ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
+		for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
+			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonEncode(value)
+		end
+		output.mapStringNestedMessage = newOutput
+	end
+
+	if next(self.map_string_foreign_message) ~= nil then
+		local newOutput: { [string]: ForeignMessage } = {}
+		for key: string, value: ForeignMessage in self.map_string_foreign_message do
+			newOutput[key] = ForeignMessage.jsonEncode(value)
+		end
+		output.mapStringForeignMessage = newOutput
+	end
+
+	if next(self.map_string_nested_enum) ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
+		for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
+			newOutput[key] = if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+		end
+		output.mapStringNestedEnum = newOutput
+	end
+
+	if next(self.map_string_foreign_enum) ~= nil then
+		local newOutput: { [string]: ForeignEnum } = {}
+		for key: string, value: ForeignEnum in self.map_string_foreign_enum do
+			newOutput[key] = if typeof(value) == "number" then value else ForeignEnum.toNumber(value)
+		end
+		output.mapStringForeignEnum = newOutput
+	end
+
+	if self.oneof_field ~= nil then
+		if self.oneof_field.type == "oneof_uint32" then
+			output.oneofUint32 = self.oneof_field.value
+		elseif self.oneof_field.type == "oneof_nested_message" then
+			output.oneofNestedMessage = TestAllTypesProto3_NestedMessage.jsonEncode(self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_string" then
+			output.oneofString = self.oneof_field.value
+		elseif self.oneof_field.type == "oneof_bytes" then
+			output.oneofBytes = proto.json.serializeBuffer(self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_bool" then
+			output.oneofBool = self.oneof_field.value
+		elseif self.oneof_field.type == "oneof_uint64" then
+			output.oneofUint64 = self.oneof_field.value
+		elseif self.oneof_field.type == "oneof_float" then
+			output.oneofFloat = proto.json.serializeNumber(self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_double" then
+			output.oneofDouble = proto.json.serializeNumber(self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_enum" then
+			output.oneofEnum = if typeof(self.oneof_field.value) == "number"
+				then self.oneof_field.value
+				else TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value)
+		elseif self.oneof_field.type == "oneof_null_value" then
+			output.oneofNullValue = if typeof(self.oneof_field.value) == "number"
+				then self.oneof_field.value
+				else _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value)
+		end
+	end
+
+	if self.optional_bool_wrapper ~= nil then
+		output.optionalBoolWrapper = _google_protobuf_wrappers.BoolValue.jsonEncode(self.optional_bool_wrapper)
+	end
+
+	if self.optional_int32_wrapper ~= nil then
+		output.optionalInt32Wrapper = _google_protobuf_wrappers.Int32Value.jsonEncode(self.optional_int32_wrapper)
+	end
+
+	if self.optional_int64_wrapper ~= nil then
+		output.optionalInt64Wrapper = _google_protobuf_wrappers.Int64Value.jsonEncode(self.optional_int64_wrapper)
+	end
+
+	if self.optional_uint32_wrapper ~= nil then
+		output.optionalUint32Wrapper = _google_protobuf_wrappers.UInt32Value.jsonEncode(self.optional_uint32_wrapper)
+	end
+
+	if self.optional_uint64_wrapper ~= nil then
+		output.optionalUint64Wrapper = _google_protobuf_wrappers.UInt64Value.jsonEncode(self.optional_uint64_wrapper)
+	end
+
+	if self.optional_float_wrapper ~= nil then
+		output.optionalFloatWrapper = _google_protobuf_wrappers.FloatValue.jsonEncode(self.optional_float_wrapper)
+	end
+
+	if self.optional_double_wrapper ~= nil then
+		output.optionalDoubleWrapper = _google_protobuf_wrappers.DoubleValue.jsonEncode(self.optional_double_wrapper)
+	end
+
+	if self.optional_string_wrapper ~= nil then
+		output.optionalStringWrapper = _google_protobuf_wrappers.StringValue.jsonEncode(self.optional_string_wrapper)
+	end
+
+	if self.optional_bytes_wrapper ~= nil then
+		output.optionalBytesWrapper = _google_protobuf_wrappers.BytesValue.jsonEncode(self.optional_bytes_wrapper)
+	end
+
+	if #self.repeated_bool_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
+		for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonEncode(value))
+		end
+		output.repeatedBoolWrapper = newOutput
+	end
+
+	if #self.repeated_int32_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
+		for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonEncode(value))
+		end
+		output.repeatedInt32Wrapper = newOutput
+	end
+
+	if #self.repeated_int64_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
+		for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonEncode(value))
+		end
+		output.repeatedInt64Wrapper = newOutput
+	end
+
+	if #self.repeated_uint32_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonEncode(value))
+		end
+		output.repeatedUint32Wrapper = newOutput
+	end
+
+	if #self.repeated_uint64_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonEncode(value))
+		end
+		output.repeatedUint64Wrapper = newOutput
+	end
+
+	if #self.repeated_float_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
+		for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonEncode(value))
+		end
+		output.repeatedFloatWrapper = newOutput
+	end
+
+	if #self.repeated_double_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
+		for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonEncode(value))
+		end
+		output.repeatedDoubleWrapper = newOutput
+	end
+
+	if #self.repeated_string_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
+		for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonEncode(value))
+		end
+		output.repeatedStringWrapper = newOutput
+	end
+
+	if #self.repeated_bytes_wrapper > 0 then
+		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
+		for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonEncode(value))
+		end
+		output.repeatedBytesWrapper = newOutput
+	end
+
+	if self.optional_duration ~= nil then
+		output.optionalDuration = _google_protobuf_duration.Duration.jsonEncode(self.optional_duration)
+	end
+
+	if self.optional_timestamp ~= nil then
+		output.optionalTimestamp = _google_protobuf_timestamp.Timestamp.jsonEncode(self.optional_timestamp)
+	end
+
+	if self.optional_field_mask ~= nil then
+		output.optionalFieldMask = _google_protobuf_field_mask.FieldMask.jsonEncode(self.optional_field_mask)
+	end
+
+	if self.optional_struct ~= nil then
+		output.optionalStruct = _google_protobuf_struct.Struct.jsonEncode(self.optional_struct)
+	end
+
+	if self.optional_any ~= nil then
+		output.optionalAny = _google_protobuf_any.Any.jsonEncode(self.optional_any)
+	end
+
+	if self.optional_value ~= nil then
+		output.optionalValue = _google_protobuf_struct.Value.jsonEncode(self.optional_value)
+	end
+
+	if self.optional_null_value ~= 0 or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0) then
+		output.optionalNullValue = if typeof(self.optional_null_value) == "number"
+			then self.optional_null_value
+			else _google_protobuf_struct.NullValue.toNumber(self.optional_null_value)
+	end
+
+	if #self.repeated_duration > 0 then
+		local newOutput: { _google_protobuf_duration.Duration } = {}
+		for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
+			table.insert(newOutput, _google_protobuf_duration.Duration.jsonEncode(value))
+		end
+		output.repeatedDuration = newOutput
+	end
+
+	if #self.repeated_timestamp > 0 then
+		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
+		for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
+			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonEncode(value))
+		end
+		output.repeatedTimestamp = newOutput
+	end
+
+	if #self.repeated_fieldmask > 0 then
+		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
+		for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
+			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonEncode(value))
+		end
+		output.repeatedFieldmask = newOutput
+	end
+
+	if #self.repeated_struct > 0 then
+		local newOutput: { _google_protobuf_struct.Struct } = {}
+		for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
+			table.insert(newOutput, _google_protobuf_struct.Struct.jsonEncode(value))
+		end
+		output.repeatedStruct = newOutput
+	end
+
+	if #self.repeated_any > 0 then
+		local newOutput: { _google_protobuf_any.Any } = {}
+		for _, value: _google_protobuf_any.Any in self.repeated_any do
+			table.insert(newOutput, _google_protobuf_any.Any.jsonEncode(value))
+		end
+		output.repeatedAny = newOutput
+	end
+
+	if #self.repeated_value > 0 then
+		local newOutput: { _google_protobuf_struct.Value } = {}
+		for _, value: _google_protobuf_struct.Value in self.repeated_value do
+			table.insert(newOutput, _google_protobuf_struct.Value.jsonEncode(value))
+		end
+		output.repeatedValue = newOutput
+	end
+
+	if #self.repeated_list_value > 0 then
+		local newOutput: { _google_protobuf_struct.ListValue } = {}
+		for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
+			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonEncode(value))
+		end
+		output.repeatedListValue = newOutput
+	end
+
+	if self.fieldname1 ~= 0 then
+		output.fieldname1 = self.fieldname1
+	end
+
+	if self.field_name2 ~= 0 then
+		output.fieldName2 = self.field_name2
+	end
+
+	if self._field_name3 ~= 0 then
+		output.FieldName3 = self._field_name3
+	end
+
+	if self.field__name4_ ~= 0 then
+		output.fieldName4 = self.field__name4_
+	end
+
+	if self.field0name5 ~= 0 then
+		output.field0name5 = self.field0name5
+	end
+
+	if self.field_0_name6 ~= 0 then
+		output.field0Name6 = self.field_0_name6
+	end
+
+	if self.fieldName7 ~= 0 then
+		output.fieldName7 = self.fieldName7
+	end
+
+	if self.FieldName8 ~= 0 then
+		output.FieldName8 = self.FieldName8
+	end
+
+	if self.field_Name9 ~= 0 then
+		output.fieldName9 = self.field_Name9
+	end
+
+	if self.Field_Name10 ~= 0 then
+		output.FieldName10 = self.Field_Name10
+	end
+
+	if self.FIELD_NAME11 ~= 0 then
+		output.FIELDNAME11 = self.FIELD_NAME11
+	end
+
+	if self.FIELD_name12 ~= 0 then
+		output.FIELDName12 = self.FIELD_name12
+	end
+
+	if self.__field_name13 ~= 0 then
+		output.FieldName13 = self.__field_name13
+	end
+
+	if self.__Field_name14 ~= 0 then
+		output.FieldName14 = self.__Field_name14
+	end
+
+	if self.field__name15 ~= 0 then
+		output.fieldName15 = self.field__name15
+	end
+
+	if self.field__Name16 ~= 0 then
+		output.fieldName16 = self.field__Name16
+	end
+
+	if self.field_name17__ ~= 0 then
+		output.fieldName17 = self.field_name17__
+	end
+
+	if self.Field_name18__ ~= 0 then
+		output.FieldName18 = self.Field_name18__
+	end
+
+	return output
+end
+
+function TestAllTypesProto3.jsonDecode(input: { [string]: any }): TestAllTypesProto3
+	local self = TestAllTypesProto3.new()
+
+	if input.optional_int32 ~= nil then
+		self.optional_int32 = input.optional_int32
+	end
+
+	if input.optionalInt32 ~= nil then
+		self.optional_int32 = input.optionalInt32
+	end
+
+	if input.optional_int64 ~= nil then
+		self.optional_int64 = input.optional_int64
+	end
+
+	if input.optionalInt64 ~= nil then
+		self.optional_int64 = input.optionalInt64
+	end
+
+	if input.optional_uint32 ~= nil then
+		self.optional_uint32 = input.optional_uint32
+	end
+
+	if input.optionalUint32 ~= nil then
+		self.optional_uint32 = input.optionalUint32
+	end
+
+	if input.optional_uint64 ~= nil then
+		self.optional_uint64 = input.optional_uint64
+	end
+
+	if input.optionalUint64 ~= nil then
+		self.optional_uint64 = input.optionalUint64
+	end
+
+	if input.optional_sint32 ~= nil then
+		self.optional_sint32 = input.optional_sint32
+	end
+
+	if input.optionalSint32 ~= nil then
+		self.optional_sint32 = input.optionalSint32
+	end
+
+	if input.optional_sint64 ~= nil then
+		self.optional_sint64 = input.optional_sint64
+	end
+
+	if input.optionalSint64 ~= nil then
+		self.optional_sint64 = input.optionalSint64
+	end
+
+	if input.optional_fixed32 ~= nil then
+		self.optional_fixed32 = input.optional_fixed32
+	end
+
+	if input.optionalFixed32 ~= nil then
+		self.optional_fixed32 = input.optionalFixed32
+	end
+
+	if input.optional_fixed64 ~= nil then
+		self.optional_fixed64 = input.optional_fixed64
+	end
+
+	if input.optionalFixed64 ~= nil then
+		self.optional_fixed64 = input.optionalFixed64
+	end
+
+	if input.optional_sfixed32 ~= nil then
+		self.optional_sfixed32 = input.optional_sfixed32
+	end
+
+	if input.optionalSfixed32 ~= nil then
+		self.optional_sfixed32 = input.optionalSfixed32
+	end
+
+	if input.optional_sfixed64 ~= nil then
+		self.optional_sfixed64 = input.optional_sfixed64
+	end
+
+	if input.optionalSfixed64 ~= nil then
+		self.optional_sfixed64 = input.optionalSfixed64
+	end
+
+	if input.optional_float ~= nil then
+		self.optional_float = proto.json.deserializeNumber(input.optional_float)
+	end
+
+	if input.optionalFloat ~= nil then
+		self.optional_float = proto.json.deserializeNumber(input.optionalFloat)
+	end
+
+	if input.optional_double ~= nil then
+		self.optional_double = proto.json.deserializeNumber(input.optional_double)
+	end
+
+	if input.optionalDouble ~= nil then
+		self.optional_double = proto.json.deserializeNumber(input.optionalDouble)
+	end
+
+	if input.optional_bool ~= nil then
+		self.optional_bool = input.optional_bool
+	end
+
+	if input.optionalBool ~= nil then
+		self.optional_bool = input.optionalBool
+	end
+
+	if input.optional_string ~= nil then
+		self.optional_string = input.optional_string
+	end
+
+	if input.optionalString ~= nil then
+		self.optional_string = input.optionalString
+	end
+
+	if input.optional_bytes ~= nil then
+		self.optional_bytes = proto.json.deserializeBuffer(input.optional_bytes)
+	end
+
+	if input.optionalBytes ~= nil then
+		self.optional_bytes = proto.json.deserializeBuffer(input.optionalBytes)
+	end
+
+	if input.optional_nested_message ~= nil then
+		self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optional_nested_message)
+	end
+
+	if input.optionalNestedMessage ~= nil then
+		self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optionalNestedMessage)
+	end
+
+	if input.optional_foreign_message ~= nil then
+		self.optional_foreign_message = ForeignMessage.jsonDecode(input.optional_foreign_message)
+	end
+
+	if input.optionalForeignMessage ~= nil then
+		self.optional_foreign_message = ForeignMessage.jsonDecode(input.optionalForeignMessage)
+	end
+
+	if input.optional_nested_enum ~= nil then
+		self.optional_nested_enum = if typeof(input.optional_nested_enum) == "number"
+			then (TestAllTypesProto3_NestedEnum.fromNumber(input.optional_nested_enum) or input.optional_nested_enum)
+			else (TestAllTypesProto3_NestedEnum.fromName(input.optional_nested_enum) or input.optional_nested_enum)
+	end
+
+	if input.optionalNestedEnum ~= nil then
+		self.optional_nested_enum = if typeof(input.optionalNestedEnum) == "number"
+			then (TestAllTypesProto3_NestedEnum.fromNumber(input.optionalNestedEnum) or input.optionalNestedEnum)
+			else (TestAllTypesProto3_NestedEnum.fromName(input.optionalNestedEnum) or input.optionalNestedEnum)
+	end
+
+	if input.optional_foreign_enum ~= nil then
+		self.optional_foreign_enum = if typeof(input.optional_foreign_enum) == "number"
+			then (ForeignEnum.fromNumber(input.optional_foreign_enum) or input.optional_foreign_enum)
+			else (ForeignEnum.fromName(input.optional_foreign_enum) or input.optional_foreign_enum)
+	end
+
+	if input.optionalForeignEnum ~= nil then
+		self.optional_foreign_enum = if typeof(input.optionalForeignEnum) == "number"
+			then (ForeignEnum.fromNumber(input.optionalForeignEnum) or input.optionalForeignEnum)
+			else (ForeignEnum.fromName(input.optionalForeignEnum) or input.optionalForeignEnum)
+	end
+
+	if input.optional_aliased_enum ~= nil then
+		self.optional_aliased_enum = if typeof(input.optional_aliased_enum) == "number"
+			then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optional_aliased_enum) or input.optional_aliased_enum)
+			else (TestAllTypesProto3_AliasedEnum.fromName(input.optional_aliased_enum) or input.optional_aliased_enum)
+	end
+
+	if input.optionalAliasedEnum ~= nil then
+		self.optional_aliased_enum = if typeof(input.optionalAliasedEnum) == "number"
+			then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optionalAliasedEnum) or input.optionalAliasedEnum)
+			else (TestAllTypesProto3_AliasedEnum.fromName(input.optionalAliasedEnum) or input.optionalAliasedEnum)
+	end
+
+	if input.optional_string_piece ~= nil then
+		self.optional_string_piece = input.optional_string_piece
+	end
+
+	if input.optionalStringPiece ~= nil then
+		self.optional_string_piece = input.optionalStringPiece
+	end
+
+	if input.optional_cord ~= nil then
+		self.optional_cord = input.optional_cord
+	end
+
+	if input.optionalCord ~= nil then
+		self.optional_cord = input.optionalCord
+	end
+
+	if input.recursive_message ~= nil then
+		self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursive_message)
+	end
+
+	if input.recursiveMessage ~= nil then
+		self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursiveMessage)
+	end
+
+	if input.repeated_int32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_int32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_int32 = newOutput
+	end
+
+	if input.repeatedInt32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedInt32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_int32 = newOutput
+	end
+
+	if input.repeated_int64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_int64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_int64 = newOutput
+	end
+
+	if input.repeatedInt64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedInt64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_int64 = newOutput
+	end
+
+	if input.repeated_uint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_uint32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_uint32 = newOutput
+	end
+
+	if input.repeatedUint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedUint32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_uint32 = newOutput
+	end
+
+	if input.repeated_uint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_uint64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_uint64 = newOutput
+	end
+
+	if input.repeatedUint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedUint64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_uint64 = newOutput
+	end
+
+	if input.repeated_sint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_sint32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sint32 = newOutput
+	end
+
+	if input.repeatedSint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedSint32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sint32 = newOutput
+	end
+
+	if input.repeated_sint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_sint64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sint64 = newOutput
+	end
+
+	if input.repeatedSint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedSint64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sint64 = newOutput
+	end
+
+	if input.repeated_fixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_fixed32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_fixed32 = newOutput
+	end
+
+	if input.repeatedFixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedFixed32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_fixed32 = newOutput
+	end
+
+	if input.repeated_fixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_fixed64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_fixed64 = newOutput
+	end
+
+	if input.repeatedFixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedFixed64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_fixed64 = newOutput
+	end
+
+	if input.repeated_sfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_sfixed32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sfixed32 = newOutput
+	end
+
+	if input.repeatedSfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedSfixed32 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sfixed32 = newOutput
+	end
+
+	if input.repeated_sfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_sfixed64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sfixed64 = newOutput
+	end
+
+	if input.repeatedSfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedSfixed64 do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_sfixed64 = newOutput
+	end
+
+	if input.repeated_float ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_float do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
+		end
+
+		self.repeated_float = newOutput
+	end
+
+	if input.repeatedFloat ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedFloat do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
+		end
+
+		self.repeated_float = newOutput
+	end
+
+	if input.repeated_double ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeated_double do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
+		end
+
+		self.repeated_double = newOutput
+	end
+
+	if input.repeatedDouble ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.repeatedDouble do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
+		end
+
+		self.repeated_double = newOutput
+	end
+
+	if input.repeated_bool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.repeated_bool do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_bool = newOutput
+	end
+
+	if input.repeatedBool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.repeatedBool do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_bool = newOutput
+	end
+
+	if input.repeated_string ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeated_string do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_string = newOutput
+	end
+
+	if input.repeatedString ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeatedString do
+			table.insert(newOutput, value)
+		end
+
+		self.repeated_string = newOutput
+	end
+
+	if input.repeated_bytes ~= nil then
+		local newOutput: { buffer } = {}
+		for _, value: buffer in input.repeated_bytes do
+			table.insert(newOutput, proto.json.deserializeBuffer(value))
+		end
+
+		self.repeated_bytes = newOutput
+	end
+
+	if input.repeatedBytes ~= nil then
+		local newOutput: { buffer } = {}
+		for _, value: buffer in input.repeatedBytes do
+			table.insert(newOutput, proto.json.deserializeBuffer(value))
+		end
+
+		self.repeated_bytes = newOutput
+	end
+
+	if input.repeated_nested_message ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
+		for _, value: TestAllTypesProto3_NestedMessage in input.repeated_nested_message do
+			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
+		end
+
+		self.repeated_nested_message = newOutput
+	end
+
+	if input.repeatedNestedMessage ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
+		for _, value: TestAllTypesProto3_NestedMessage in input.repeatedNestedMessage do
+			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
+		end
+
+		self.repeated_nested_message = newOutput
+	end
+
+	if input.repeated_foreign_message ~= nil then
+		local newOutput: { ForeignMessage } = {}
+		for _, value: ForeignMessage in input.repeated_foreign_message do
+			table.insert(newOutput, ForeignMessage.jsonDecode(value))
+		end
+
+		self.repeated_foreign_message = newOutput
+	end
+
+	if input.repeatedForeignMessage ~= nil then
+		local newOutput: { ForeignMessage } = {}
+		for _, value: ForeignMessage in input.repeatedForeignMessage do
+			table.insert(newOutput, ForeignMessage.jsonDecode(value))
+		end
+
+		self.repeated_foreign_message = newOutput
+	end
+
+	if input.repeated_nested_enum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.repeated_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
 					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
 					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-			end
-
-			self.map_string_nested_enum = newOutput
+			)
 		end
 
-		if input.mapStringNestedEnum ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
-			for key, value in input.mapStringNestedEnum do
-				newOutput[key] = if typeof(value) == "number"
+		self.repeated_nested_enum = newOutput
+	end
+
+	if input.repeatedNestedEnum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.repeatedNestedEnum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
 					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
 					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
-			end
-
-			self.map_string_nested_enum = newOutput
+			)
 		end
 
-		if input.map_string_foreign_enum ~= nil then
-			local newOutput: { [string]: ForeignEnum } = {}
-			for key, value in input.map_string_foreign_enum do
-				newOutput[key] = if typeof(value) == "number"
+		self.repeated_nested_enum = newOutput
+	end
+
+	if input.repeated_foreign_enum ~= nil then
+		local newOutput: { ForeignEnum } = {}
+		for _, value: ForeignEnum in input.repeated_foreign_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
 					then (ForeignEnum.fromNumber(value) or value)
 					else (ForeignEnum.fromName(value) or value)
-			end
-
-			self.map_string_foreign_enum = newOutput
+			)
 		end
 
-		if input.mapStringForeignEnum ~= nil then
-			local newOutput: { [string]: ForeignEnum } = {}
-			for key, value in input.mapStringForeignEnum do
-				newOutput[key] = if typeof(value) == "number"
+		self.repeated_foreign_enum = newOutput
+	end
+
+	if input.repeatedForeignEnum ~= nil then
+		local newOutput: { ForeignEnum } = {}
+		for _, value: ForeignEnum in input.repeatedForeignEnum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
 					then (ForeignEnum.fromNumber(value) or value)
 					else (ForeignEnum.fromName(value) or value)
-			end
-
-			self.map_string_foreign_enum = newOutput
+			)
 		end
 
-		if input.oneof_uint32 ~= nil then
-			self.oneof_field = { type = "oneof_uint32", value = input.oneof_uint32 }
-		end
+		self.repeated_foreign_enum = newOutput
+	end
 
-		if input.oneofUint32 ~= nil then
-			self.oneof_field = { type = "oneof_uint32", value = input.oneofUint32 }
+	if input.repeated_string_piece ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeated_string_piece do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_nested_message ~= nil then
-			self.oneof_field = {
-				type = "oneof_nested_message",
-				value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneof_nested_message),
-			}
-		end
+		self.repeated_string_piece = newOutput
+	end
 
-		if input.oneofNestedMessage ~= nil then
-			self.oneof_field = {
-				type = "oneof_nested_message",
-				value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneofNestedMessage),
-			}
+	if input.repeatedStringPiece ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeatedStringPiece do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_string ~= nil then
-			self.oneof_field = { type = "oneof_string", value = input.oneof_string }
-		end
+		self.repeated_string_piece = newOutput
+	end
 
-		if input.oneofString ~= nil then
-			self.oneof_field = { type = "oneof_string", value = input.oneofString }
+	if input.repeated_cord ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeated_cord do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_bytes ~= nil then
-			self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneof_bytes) }
-		end
+		self.repeated_cord = newOutput
+	end
 
-		if input.oneofBytes ~= nil then
-			self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneofBytes) }
+	if input.repeatedCord ~= nil then
+		local newOutput: { string } = {}
+		for _, value: string in input.repeatedCord do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_bool ~= nil then
-			self.oneof_field = { type = "oneof_bool", value = input.oneof_bool }
-		end
+		self.repeated_cord = newOutput
+	end
 
-		if input.oneofBool ~= nil then
-			self.oneof_field = { type = "oneof_bool", value = input.oneofBool }
+	if input.packed_int32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_int32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_uint64 ~= nil then
-			self.oneof_field = { type = "oneof_uint64", value = input.oneof_uint64 }
-		end
+		self.packed_int32 = newOutput
+	end
 
-		if input.oneofUint64 ~= nil then
-			self.oneof_field = { type = "oneof_uint64", value = input.oneofUint64 }
+	if input.packedInt32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedInt32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_float ~= nil then
-			self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneof_float) }
-		end
+		self.packed_int32 = newOutput
+	end
 
-		if input.oneofFloat ~= nil then
-			self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneofFloat) }
+	if input.packed_int64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_int64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_double ~= nil then
-			self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneof_double) }
-		end
+		self.packed_int64 = newOutput
+	end
 
-		if input.oneofDouble ~= nil then
-			self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneofDouble) }
+	if input.packedInt64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedInt64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_enum ~= nil then
-			self.oneof_field = {
-				type = "oneof_enum",
-				value = if typeof(input.oneof_enum) == "number"
-					then (TestAllTypesProto3_NestedEnum.fromNumber(input.oneof_enum) or input.oneof_enum)
-					else (TestAllTypesProto3_NestedEnum.fromName(input.oneof_enum) or input.oneof_enum),
-			}
-		end
+		self.packed_int64 = newOutput
+	end
 
-		if input.oneofEnum ~= nil then
-			self.oneof_field = {
-				type = "oneof_enum",
-				value = if typeof(input.oneofEnum) == "number"
-					then (TestAllTypesProto3_NestedEnum.fromNumber(input.oneofEnum) or input.oneofEnum)
-					else (TestAllTypesProto3_NestedEnum.fromName(input.oneofEnum) or input.oneofEnum),
-			}
+	if input.packed_uint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_uint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.oneof_null_value ~= nil then
-			self.oneof_field = {
-				type = "oneof_null_value",
-				value = if typeof(input.oneof_null_value) == "number"
-					then (_google_protobuf_struct.NullValue.fromNumber(input.oneof_null_value) or input.oneof_null_value)
-					else (_google_protobuf_struct.NullValue.fromName(input.oneof_null_value) or input.oneof_null_value),
-			}
-		end
+		self.packed_uint32 = newOutput
+	end
 
-		if input.oneofNullValue ~= nil then
-			self.oneof_field = {
-				type = "oneof_null_value",
-				value = if typeof(input.oneofNullValue) == "number"
-					then (_google_protobuf_struct.NullValue.fromNumber(input.oneofNullValue) or input.oneofNullValue)
-					else (_google_protobuf_struct.NullValue.fromName(input.oneofNullValue) or input.oneofNullValue),
-			}
+	if input.packedUint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedUint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_bool_wrapper ~= nil then
-			self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optional_bool_wrapper)
-		end
+		self.packed_uint32 = newOutput
+	end
 
-		if input.optionalBoolWrapper ~= nil then
-			self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optionalBoolWrapper)
+	if input.packed_uint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_uint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_int32_wrapper ~= nil then
-			self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optional_int32_wrapper)
-		end
+		self.packed_uint64 = newOutput
+	end
 
-		if input.optionalInt32Wrapper ~= nil then
-			self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optionalInt32Wrapper)
+	if input.packedUint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedUint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_int64_wrapper ~= nil then
-			self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optional_int64_wrapper)
-		end
+		self.packed_uint64 = newOutput
+	end
 
-		if input.optionalInt64Wrapper ~= nil then
-			self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optionalInt64Wrapper)
+	if input.packed_sint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_sint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_uint32_wrapper ~= nil then
-			self.optional_uint32_wrapper =
-				_google_protobuf_wrappers.UInt32Value.jsonDecode(input.optional_uint32_wrapper)
-		end
+		self.packed_sint32 = newOutput
+	end
 
-		if input.optionalUint32Wrapper ~= nil then
-			self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.jsonDecode(input.optionalUint32Wrapper)
+	if input.packedSint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedSint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_uint64_wrapper ~= nil then
-			self.optional_uint64_wrapper =
-				_google_protobuf_wrappers.UInt64Value.jsonDecode(input.optional_uint64_wrapper)
-		end
+		self.packed_sint32 = newOutput
+	end
 
-		if input.optionalUint64Wrapper ~= nil then
-			self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.jsonDecode(input.optionalUint64Wrapper)
+	if input.packed_sint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_sint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_float_wrapper ~= nil then
-			self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optional_float_wrapper)
-		end
+		self.packed_sint64 = newOutput
+	end
 
-		if input.optionalFloatWrapper ~= nil then
-			self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optionalFloatWrapper)
+	if input.packedSint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedSint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_double_wrapper ~= nil then
-			self.optional_double_wrapper =
-				_google_protobuf_wrappers.DoubleValue.jsonDecode(input.optional_double_wrapper)
-		end
+		self.packed_sint64 = newOutput
+	end
 
-		if input.optionalDoubleWrapper ~= nil then
-			self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.jsonDecode(input.optionalDoubleWrapper)
+	if input.packed_fixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_fixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_string_wrapper ~= nil then
-			self.optional_string_wrapper =
-				_google_protobuf_wrappers.StringValue.jsonDecode(input.optional_string_wrapper)
-		end
+		self.packed_fixed32 = newOutput
+	end
 
-		if input.optionalStringWrapper ~= nil then
-			self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.jsonDecode(input.optionalStringWrapper)
+	if input.packedFixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedFixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_bytes_wrapper ~= nil then
-			self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optional_bytes_wrapper)
+		self.packed_fixed32 = newOutput
+	end
+
+	if input.packed_fixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_fixed64 do
+			table.insert(newOutput, value)
 		end
+
+		self.packed_fixed64 = newOutput
+	end
 
-		if input.optionalBytesWrapper ~= nil then
-			self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optionalBytesWrapper)
+	if input.packedFixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedFixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_bool_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-			for _, value: _google_protobuf_wrappers.BoolValue in input.repeated_bool_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
-			end
+		self.packed_fixed64 = newOutput
+	end
 
-			self.repeated_bool_wrapper = newOutput
+	if input.packed_sfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_sfixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedBoolWrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-			for _, value: _google_protobuf_wrappers.BoolValue in input.repeatedBoolWrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
-			end
+		self.packed_sfixed32 = newOutput
+	end
 
-			self.repeated_bool_wrapper = newOutput
+	if input.packedSfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedSfixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_int32_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-			for _, value: _google_protobuf_wrappers.Int32Value in input.repeated_int32_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
-			end
+		self.packed_sfixed32 = newOutput
+	end
 
-			self.repeated_int32_wrapper = newOutput
+	if input.packed_sfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_sfixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedInt32Wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-			for _, value: _google_protobuf_wrappers.Int32Value in input.repeatedInt32Wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
-			end
+		self.packed_sfixed64 = newOutput
+	end
 
-			self.repeated_int32_wrapper = newOutput
+	if input.packedSfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedSfixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_int64_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-			for _, value: _google_protobuf_wrappers.Int64Value in input.repeated_int64_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
-			end
+		self.packed_sfixed64 = newOutput
+	end
 
-			self.repeated_int64_wrapper = newOutput
+	if input.packed_float ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_float do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeatedInt64Wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-			for _, value: _google_protobuf_wrappers.Int64Value in input.repeatedInt64Wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
-			end
+		self.packed_float = newOutput
+	end
 
-			self.repeated_int64_wrapper = newOutput
+	if input.packedFloat ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedFloat do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeated_uint32_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt32Value in input.repeated_uint32_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
-			end
+		self.packed_float = newOutput
+	end
 
-			self.repeated_uint32_wrapper = newOutput
+	if input.packed_double ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packed_double do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeatedUint32Wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt32Value in input.repeatedUint32Wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
-			end
+		self.packed_double = newOutput
+	end
 
-			self.repeated_uint32_wrapper = newOutput
+	if input.packedDouble ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.packedDouble do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeated_uint64_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt64Value in input.repeated_uint64_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
-			end
+		self.packed_double = newOutput
+	end
 
-			self.repeated_uint64_wrapper = newOutput
+	if input.packed_bool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.packed_bool do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedUint64Wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-			for _, value: _google_protobuf_wrappers.UInt64Value in input.repeatedUint64Wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
-			end
+		self.packed_bool = newOutput
+	end
 
-			self.repeated_uint64_wrapper = newOutput
+	if input.packedBool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.packedBool do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_float_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-			for _, value: _google_protobuf_wrappers.FloatValue in input.repeated_float_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
-			end
+		self.packed_bool = newOutput
+	end
 
-			self.repeated_float_wrapper = newOutput
+	if input.packed_nested_enum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.packed_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
+					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
+			)
 		end
 
-		if input.repeatedFloatWrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-			for _, value: _google_protobuf_wrappers.FloatValue in input.repeatedFloatWrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
-			end
+		self.packed_nested_enum = newOutput
+	end
 
-			self.repeated_float_wrapper = newOutput
+	if input.packedNestedEnum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.packedNestedEnum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
+					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
+			)
 		end
 
-		if input.repeated_double_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-			for _, value: _google_protobuf_wrappers.DoubleValue in input.repeated_double_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
-			end
+		self.packed_nested_enum = newOutput
+	end
 
-			self.repeated_double_wrapper = newOutput
+	if input.unpacked_int32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_int32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedDoubleWrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-			for _, value: _google_protobuf_wrappers.DoubleValue in input.repeatedDoubleWrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
-			end
+		self.unpacked_int32 = newOutput
+	end
 
-			self.repeated_double_wrapper = newOutput
+	if input.unpackedInt32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedInt32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_string_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-			for _, value: _google_protobuf_wrappers.StringValue in input.repeated_string_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
-			end
+		self.unpacked_int32 = newOutput
+	end
 
-			self.repeated_string_wrapper = newOutput
+	if input.unpacked_int64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_int64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedStringWrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-			for _, value: _google_protobuf_wrappers.StringValue in input.repeatedStringWrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
-			end
+		self.unpacked_int64 = newOutput
+	end
 
-			self.repeated_string_wrapper = newOutput
+	if input.unpackedInt64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedInt64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_bytes_wrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-			for _, value: _google_protobuf_wrappers.BytesValue in input.repeated_bytes_wrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
-			end
+		self.unpacked_int64 = newOutput
+	end
 
-			self.repeated_bytes_wrapper = newOutput
+	if input.unpacked_uint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_uint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedBytesWrapper ~= nil then
-			local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-			for _, value: _google_protobuf_wrappers.BytesValue in input.repeatedBytesWrapper do
-				table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
-			end
+		self.unpacked_uint32 = newOutput
+	end
 
-			self.repeated_bytes_wrapper = newOutput
+	if input.unpackedUint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedUint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_duration ~= nil then
-			self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optional_duration)
+		self.unpacked_uint32 = newOutput
+	end
+
+	if input.unpacked_uint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_uint64 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_uint64 = newOutput
+	end
 
-		if input.optionalDuration ~= nil then
-			self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optionalDuration)
+	if input.unpackedUint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedUint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_timestamp ~= nil then
-			self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optional_timestamp)
+		self.unpacked_uint64 = newOutput
+	end
+
+	if input.unpacked_sint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_sint32 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_sint32 = newOutput
+	end
 
-		if input.optionalTimestamp ~= nil then
-			self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optionalTimestamp)
+	if input.unpackedSint32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedSint32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_field_mask ~= nil then
-			self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optional_field_mask)
+		self.unpacked_sint32 = newOutput
+	end
+
+	if input.unpacked_sint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_sint64 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_sint64 = newOutput
+	end
 
-		if input.optionalFieldMask ~= nil then
-			self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optionalFieldMask)
+	if input.unpackedSint64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedSint64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_struct ~= nil then
-			self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optional_struct)
+		self.unpacked_sint64 = newOutput
+	end
+
+	if input.unpacked_fixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_fixed32 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_fixed32 = newOutput
+	end
 
-		if input.optionalStruct ~= nil then
-			self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optionalStruct)
+	if input.unpackedFixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedFixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_any ~= nil then
-			self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optional_any)
+		self.unpacked_fixed32 = newOutput
+	end
+
+	if input.unpacked_fixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_fixed64 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_fixed64 = newOutput
+	end
 
-		if input.optionalAny ~= nil then
-			self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optionalAny)
+	if input.unpackedFixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedFixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optional_value ~= nil then
-			self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optional_value)
+		self.unpacked_fixed64 = newOutput
+	end
+
+	if input.unpacked_sfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_sfixed32 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optionalValue ~= nil then
-			self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optionalValue)
+		self.unpacked_sfixed32 = newOutput
+	end
+
+	if input.unpackedSfixed32 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedSfixed32 do
+			table.insert(newOutput, value)
 		end
+
+		self.unpacked_sfixed32 = newOutput
+	end
 
-		if input.optional_null_value ~= nil then
-			self.optional_null_value = if typeof(input.optional_null_value) == "number"
-				then (_google_protobuf_struct.NullValue.fromNumber(input.optional_null_value) or input.optional_null_value)
-				else (
-					_google_protobuf_struct.NullValue.fromName(input.optional_null_value) or input.optional_null_value
-				)
+	if input.unpacked_sfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_sfixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.optionalNullValue ~= nil then
-			self.optional_null_value = if typeof(input.optionalNullValue) == "number"
-				then (_google_protobuf_struct.NullValue.fromNumber(input.optionalNullValue) or input.optionalNullValue)
-				else (_google_protobuf_struct.NullValue.fromName(input.optionalNullValue) or input.optionalNullValue)
+		self.unpacked_sfixed64 = newOutput
+	end
+
+	if input.unpackedSfixed64 ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedSfixed64 do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_duration ~= nil then
-			local newOutput: { _google_protobuf_duration.Duration } = {}
-			for _, value: _google_protobuf_duration.Duration in input.repeated_duration do
-				table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
-			end
+		self.unpacked_sfixed64 = newOutput
+	end
 
-			self.repeated_duration = newOutput
+	if input.unpacked_float ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_float do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeatedDuration ~= nil then
-			local newOutput: { _google_protobuf_duration.Duration } = {}
-			for _, value: _google_protobuf_duration.Duration in input.repeatedDuration do
-				table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
-			end
+		self.unpacked_float = newOutput
+	end
 
-			self.repeated_duration = newOutput
+	if input.unpackedFloat ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedFloat do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeated_timestamp ~= nil then
-			local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-			for _, value: _google_protobuf_timestamp.Timestamp in input.repeated_timestamp do
-				table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
-			end
+		self.unpacked_float = newOutput
+	end
 
-			self.repeated_timestamp = newOutput
+	if input.unpacked_double ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpacked_double do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeatedTimestamp ~= nil then
-			local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-			for _, value: _google_protobuf_timestamp.Timestamp in input.repeatedTimestamp do
-				table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
-			end
+		self.unpacked_double = newOutput
+	end
 
-			self.repeated_timestamp = newOutput
+	if input.unpackedDouble ~= nil then
+		local newOutput: { number } = {}
+		for _, value: number in input.unpackedDouble do
+			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
-		if input.repeated_fieldmask ~= nil then
-			local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-			for _, value: _google_protobuf_field_mask.FieldMask in input.repeated_fieldmask do
-				table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
-			end
+		self.unpacked_double = newOutput
+	end
 
-			self.repeated_fieldmask = newOutput
+	if input.unpacked_bool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.unpacked_bool do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeatedFieldmask ~= nil then
-			local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-			for _, value: _google_protobuf_field_mask.FieldMask in input.repeatedFieldmask do
-				table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
-			end
+		self.unpacked_bool = newOutput
+	end
 
-			self.repeated_fieldmask = newOutput
+	if input.unpackedBool ~= nil then
+		local newOutput: { boolean } = {}
+		for _, value: boolean in input.unpackedBool do
+			table.insert(newOutput, value)
 		end
 
-		if input.repeated_struct ~= nil then
-			local newOutput: { _google_protobuf_struct.Struct } = {}
-			for _, value: _google_protobuf_struct.Struct in input.repeated_struct do
-				table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
-			end
+		self.unpacked_bool = newOutput
+	end
 
-			self.repeated_struct = newOutput
+	if input.unpacked_nested_enum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.unpacked_nested_enum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
+					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
+			)
 		end
 
-		if input.repeatedStruct ~= nil then
-			local newOutput: { _google_protobuf_struct.Struct } = {}
-			for _, value: _google_protobuf_struct.Struct in input.repeatedStruct do
-				table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
-			end
+		self.unpacked_nested_enum = newOutput
+	end
 
-			self.repeated_struct = newOutput
+	if input.unpackedNestedEnum ~= nil then
+		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
+		for _, value: TestAllTypesProto3_NestedEnum in input.unpackedNestedEnum do
+			table.insert(
+				newOutput,
+				if typeof(value) == "number"
+					then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+					else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
+			)
 		end
 
-		if input.repeated_any ~= nil then
-			local newOutput: { _google_protobuf_any.Any } = {}
-			for _, value: _google_protobuf_any.Any in input.repeated_any do
-				table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
-			end
+		self.unpacked_nested_enum = newOutput
+	end
 
-			self.repeated_any = newOutput
+	if input.map_int32_int32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_int32_int32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.repeatedAny ~= nil then
-			local newOutput: { _google_protobuf_any.Any } = {}
-			for _, value: _google_protobuf_any.Any in input.repeatedAny do
-				table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
-			end
+		self.map_int32_int32 = newOutput
+	end
 
-			self.repeated_any = newOutput
+	if input.mapInt32Int32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapInt32Int32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.repeated_value ~= nil then
-			local newOutput: { _google_protobuf_struct.Value } = {}
-			for _, value: _google_protobuf_struct.Value in input.repeated_value do
-				table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
-			end
+		self.map_int32_int32 = newOutput
+	end
 
-			self.repeated_value = newOutput
+	if input.map_int64_int64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_int64_int64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.repeatedValue ~= nil then
-			local newOutput: { _google_protobuf_struct.Value } = {}
-			for _, value: _google_protobuf_struct.Value in input.repeatedValue do
-				table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
-			end
+		self.map_int64_int64 = newOutput
+	end
 
-			self.repeated_value = newOutput
+	if input.mapInt64Int64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapInt64Int64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.repeated_list_value ~= nil then
-			local newOutput: { _google_protobuf_struct.ListValue } = {}
-			for _, value: _google_protobuf_struct.ListValue in input.repeated_list_value do
-				table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
-			end
+		self.map_int64_int64 = newOutput
+	end
 
-			self.repeated_list_value = newOutput
+	if input.map_uint32_uint32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_uint32_uint32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.repeatedListValue ~= nil then
-			local newOutput: { _google_protobuf_struct.ListValue } = {}
-			for _, value: _google_protobuf_struct.ListValue in input.repeatedListValue do
-				table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
-			end
+		self.map_uint32_uint32 = newOutput
+	end
 
-			self.repeated_list_value = newOutput
+	if input.mapUint32Uint32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapUint32Uint32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_uint32_uint32 = newOutput
+	end
 
-		if input.fieldname1 ~= nil then
-			self.fieldname1 = input.fieldname1
+	if input.map_uint64_uint64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_uint64_uint64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.field_name2 ~= nil then
-			self.field_name2 = input.field_name2
+		self.map_uint64_uint64 = newOutput
+	end
+
+	if input.mapUint64Uint64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapUint64Uint64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_uint64_uint64 = newOutput
+	end
 
-		if input.fieldName2 ~= nil then
-			self.field_name2 = input.fieldName2
+	if input.map_sint32_sint32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_sint32_sint32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input._field_name3 ~= nil then
-			self._field_name3 = input._field_name3
+		self.map_sint32_sint32 = newOutput
+	end
+
+	if input.mapSint32Sint32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapSint32Sint32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_sint32_sint32 = newOutput
+	end
 
-		if input.FieldName3 ~= nil then
-			self._field_name3 = input.FieldName3
+	if input.map_sint64_sint64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_sint64_sint64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.field__name4_ ~= nil then
-			self.field__name4_ = input.field__name4_
+		self.map_sint64_sint64 = newOutput
+	end
+
+	if input.mapSint64Sint64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapSint64Sint64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_sint64_sint64 = newOutput
+	end
 
-		if input.fieldName4 ~= nil then
-			self.field__name4_ = input.fieldName4
+	if input.map_fixed32_fixed32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_fixed32_fixed32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.field0name5 ~= nil then
-			self.field0name5 = input.field0name5
+		self.map_fixed32_fixed32 = newOutput
+	end
+
+	if input.mapFixed32Fixed32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapFixed32Fixed32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_fixed32_fixed32 = newOutput
+	end
 
-		if input.field_0_name6 ~= nil then
-			self.field_0_name6 = input.field_0_name6
+	if input.map_fixed64_fixed64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_fixed64_fixed64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.field0Name6 ~= nil then
-			self.field_0_name6 = input.field0Name6
+		self.map_fixed64_fixed64 = newOutput
+	end
+
+	if input.mapFixed64Fixed64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapFixed64Fixed64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_fixed64_fixed64 = newOutput
+	end
 
-		if input.fieldName7 ~= nil then
-			self.fieldName7 = input.fieldName7
+	if input.map_sfixed32_sfixed32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_sfixed32_sfixed32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.FieldName8 ~= nil then
-			self.FieldName8 = input.FieldName8
+		self.map_sfixed32_sfixed32 = newOutput
+	end
+
+	if input.mapSfixed32Sfixed32 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapSfixed32Sfixed32 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
+
+		self.map_sfixed32_sfixed32 = newOutput
+	end
 
-		if input.field_Name9 ~= nil then
-			self.field_Name9 = input.field_Name9
+	if input.map_sfixed64_sfixed64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_sfixed64_sfixed64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.fieldName9 ~= nil then
-			self.field_Name9 = input.fieldName9
+		self.map_sfixed64_sfixed64 = newOutput
+	end
+
+	if input.mapSfixed64Sfixed64 ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapSfixed64Sfixed64 do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
-		if input.Field_Name10 ~= nil then
-			self.Field_Name10 = input.Field_Name10
+		self.map_sfixed64_sfixed64 = newOutput
+	end
+
+	if input.map_int32_float ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_int32_float do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
+
+		self.map_int32_float = newOutput
+	end
 
-		if input.FieldName10 ~= nil then
-			self.Field_Name10 = input.FieldName10
+	if input.mapInt32Float ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapInt32Float do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
-		if input.FIELD_NAME11 ~= nil then
-			self.FIELD_NAME11 = input.FIELD_NAME11
+		self.map_int32_float = newOutput
+	end
+
+	if input.map_int32_double ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.map_int32_double do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
+
+		self.map_int32_double = newOutput
+	end
 
-		if input.FIELDNAME11 ~= nil then
-			self.FIELD_NAME11 = input.FIELDNAME11
+	if input.mapInt32Double ~= nil then
+		local newOutput: { [number]: number } = {}
+		for key, value in input.mapInt32Double do
+			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
-		if input.FIELD_name12 ~= nil then
-			self.FIELD_name12 = input.FIELD_name12
+		self.map_int32_double = newOutput
+	end
+
+	if input.map_bool_bool ~= nil then
+		local newOutput: { [boolean]: boolean } = {}
+		for key, value in input.map_bool_bool do
+			newOutput[if key == "true" then true else false] = value
 		end
+
+		self.map_bool_bool = newOutput
+	end
 
-		if input.FIELDName12 ~= nil then
-			self.FIELD_name12 = input.FIELDName12
+	if input.mapBoolBool ~= nil then
+		local newOutput: { [boolean]: boolean } = {}
+		for key, value in input.mapBoolBool do
+			newOutput[if key == "true" then true else false] = value
 		end
 
-		if input.__field_name13 ~= nil then
-			self.__field_name13 = input.__field_name13
+		self.map_bool_bool = newOutput
+	end
+
+	if input.map_string_string ~= nil then
+		local newOutput: { [string]: string } = {}
+		for key, value in input.map_string_string do
+			newOutput[key] = value
 		end
+
+		self.map_string_string = newOutput
+	end
 
-		if input.FieldName13 ~= nil then
-			self.__field_name13 = input.FieldName13
+	if input.mapStringString ~= nil then
+		local newOutput: { [string]: string } = {}
+		for key, value in input.mapStringString do
+			newOutput[key] = value
 		end
 
-		if input.__Field_name14 ~= nil then
-			self.__Field_name14 = input.__Field_name14
+		self.map_string_string = newOutput
+	end
+
+	if input.map_string_bytes ~= nil then
+		local newOutput: { [string]: buffer } = {}
+		for key, value in input.map_string_bytes do
+			newOutput[key] = proto.json.deserializeBuffer(value)
 		end
 
-		if input.FieldName14 ~= nil then
-			self.__Field_name14 = input.FieldName14
+		self.map_string_bytes = newOutput
+	end
+
+	if input.mapStringBytes ~= nil then
+		local newOutput: { [string]: buffer } = {}
+		for key, value in input.mapStringBytes do
+			newOutput[key] = proto.json.deserializeBuffer(value)
 		end
+
+		self.map_string_bytes = newOutput
+	end
 
-		if input.field__name15 ~= nil then
-			self.field__name15 = input.field__name15
+	if input.map_string_nested_message ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
+		for key, value in input.map_string_nested_message do
+			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
 		end
 
-		if input.fieldName15 ~= nil then
-			self.field__name15 = input.fieldName15
+		self.map_string_nested_message = newOutput
+	end
+
+	if input.mapStringNestedMessage ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
+		for key, value in input.mapStringNestedMessage do
+			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
 		end
+
+		self.map_string_nested_message = newOutput
+	end
 
-		if input.field__Name16 ~= nil then
-			self.field__Name16 = input.field__Name16
+	if input.map_string_foreign_message ~= nil then
+		local newOutput: { [string]: ForeignMessage } = {}
+		for key, value in input.map_string_foreign_message do
+			newOutput[key] = ForeignMessage.jsonDecode(value)
 		end
 
-		if input.fieldName16 ~= nil then
-			self.field__Name16 = input.fieldName16
+		self.map_string_foreign_message = newOutput
+	end
+
+	if input.mapStringForeignMessage ~= nil then
+		local newOutput: { [string]: ForeignMessage } = {}
+		for key, value in input.mapStringForeignMessage do
+			newOutput[key] = ForeignMessage.jsonDecode(value)
 		end
+
+		self.map_string_foreign_message = newOutput
+	end
 
-		if input.field_name17__ ~= nil then
-			self.field_name17__ = input.field_name17__
+	if input.map_string_nested_enum ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
+		for key, value in input.map_string_nested_enum do
+			newOutput[key] = if typeof(value) == "number"
+				then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
 		end
 
-		if input.fieldName17 ~= nil then
-			self.field_name17__ = input.fieldName17
+		self.map_string_nested_enum = newOutput
+	end
+
+	if input.mapStringNestedEnum ~= nil then
+		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
+		for key, value in input.mapStringNestedEnum do
+			newOutput[key] = if typeof(value) == "number"
+				then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
 		end
+
+		self.map_string_nested_enum = newOutput
+	end
 
-		if input.Field_name18__ ~= nil then
-			self.Field_name18__ = input.Field_name18__
+	if input.map_string_foreign_enum ~= nil then
+		local newOutput: { [string]: ForeignEnum } = {}
+		for key, value in input.map_string_foreign_enum do
+			newOutput[key] = if typeof(value) == "number"
+				then (ForeignEnum.fromNumber(value) or value)
+				else (ForeignEnum.fromName(value) or value)
 		end
 
-		if input.FieldName18 ~= nil then
-			self.Field_name18__ = input.FieldName18
+		self.map_string_foreign_enum = newOutput
+	end
+
+	if input.mapStringForeignEnum ~= nil then
+		local newOutput: { [string]: ForeignEnum } = {}
+		for key, value in input.mapStringForeignEnum do
+			newOutput[key] = if typeof(value) == "number"
+				then (ForeignEnum.fromNumber(value) or value)
+				else (ForeignEnum.fromName(value) or value)
 		end
+
+		self.map_string_foreign_enum = newOutput
+	end
+
+	if input.oneof_uint32 ~= nil then
+		self.oneof_field = { type = "oneof_uint32", value = input.oneof_uint32 }
+	end
 
-		return self
-	end,
-}
+	if input.oneofUint32 ~= nil then
+		self.oneof_field = { type = "oneof_uint32", value = input.oneofUint32 }
+	end
 
-TestAllTypesProto3_NestedMessage = {
-	new = function()
-		return {
-			a = 0,
-			corecursive = nil,
+	if input.oneof_nested_message ~= nil then
+		self.oneof_field = {
+			type = "oneof_nested_message",
+			value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneof_nested_message),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_NestedMessage): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.a ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.a)
-		end
-
-		if self.corecursive ~= nil then
-			local encoded = TestAllTypesProto3.encode(self.corecursive)
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_NestedMessage
-		local self = TestAllTypesProto3_NestedMessage.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.a = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.corecursive = TestAllTypesProto3.decode(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_NestedMessage): any
-		local output: {
-			a: number?,
-			corecursive: TestAllTypesProto3?,
-		} = {}
-
-		if self.a ~= 0 then
-			output.a = self.a
-		end
-
-		if self.corecursive ~= nil then
-			output.corecursive = TestAllTypesProto3.jsonEncode(self.corecursive)
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_NestedMessage
-		local self = TestAllTypesProto3_NestedMessage.new()
-
-		if input.a ~= nil then
-			self.a = input.a
-		end
-
-		if input.corecursive ~= nil then
-			self.corecursive = TestAllTypesProto3.jsonDecode(input.corecursive)
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapInt32Int32Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
+	if input.oneofNestedMessage ~= nil then
+		self.oneof_field = {
+			type = "oneof_nested_message",
+			value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneofNestedMessage),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_MapInt32Int32Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+	if input.oneof_string ~= nil then
+		self.oneof_field = { type = "oneof_string", value = input.oneof_string }
+	end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
+	if input.oneofString ~= nil then
+		self.oneof_field = { type = "oneof_string", value = input.oneofString }
+	end
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.value)
-		end
+	if input.oneof_bytes ~= nil then
+		self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneof_bytes) }
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if input.oneofBytes ~= nil then
+		self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneofBytes) }
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapInt32Int32Entry
-		local self = TestAllTypesProto3_MapInt32Int32Entry.new()
-		local cursor = 0
+	if input.oneof_bool ~= nil then
+		self.oneof_field = { type = "oneof_bool", value = input.oneof_bool }
+	end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+	if input.oneofBool ~= nil then
+		self.oneof_field = { type = "oneof_bool", value = input.oneofBool }
+	end
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = proto.limitInt32(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
+	if input.oneof_uint64 ~= nil then
+		self.oneof_field = { type = "oneof_uint64", value = input.oneof_uint64 }
+	end
 
-		return self
-	end,
+	if input.oneofUint64 ~= nil then
+		self.oneof_field = { type = "oneof_uint64", value = input.oneofUint64 }
+	end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapInt32Int32Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+	if input.oneof_float ~= nil then
+		self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneof_float) }
+	end
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if input.oneofFloat ~= nil then
+		self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneofFloat) }
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if input.oneof_double ~= nil then
+		self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneof_double) }
+	end
 
-		return output
-	end,
+	if input.oneofDouble ~= nil then
+		self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneofDouble) }
+	end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapInt32Int32Entry
-		local self = TestAllTypesProto3_MapInt32Int32Entry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = input.value
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapInt64Int64Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
+	if input.oneof_enum ~= nil then
+		self.oneof_field = {
+			type = "oneof_enum",
+			value = if typeof(input.oneof_enum) == "number"
+				then (TestAllTypesProto3_NestedEnum.fromNumber(input.oneof_enum) or input.oneof_enum)
+				else (TestAllTypesProto3_NestedEnum.fromName(input.oneof_enum) or input.oneof_enum),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_MapInt64Int64Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
-
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.value)
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_MapInt64Int64Entry
-		local self = TestAllTypesProto3_MapInt64Int64Entry.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_MapInt64Int64Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
-
-		if self.key ~= 0 then
-			output.key = self.key
-		end
-
-		if self.value ~= 0 then
-			output.value = self.value
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapInt64Int64Entry
-		local self = TestAllTypesProto3_MapInt64Int64Entry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = input.value
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapUint32Uint32Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
+	if input.oneofEnum ~= nil then
+		self.oneof_field = {
+			type = "oneof_enum",
+			value = if typeof(input.oneofEnum) == "number"
+				then (TestAllTypesProto3_NestedEnum.fromNumber(input.oneofEnum) or input.oneofEnum)
+				else (TestAllTypesProto3_NestedEnum.fromName(input.oneofEnum) or input.oneofEnum),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_MapUint32Uint32Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
-
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.value)
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_MapUint32Uint32Entry
-		local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_MapUint32Uint32Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
-
-		if self.key ~= 0 then
-			output.key = self.key
-		end
-
-		if self.value ~= 0 then
-			output.value = self.value
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapUint32Uint32Entry
-		local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = input.value
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapUint64Uint64Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
+	if input.oneof_null_value ~= nil then
+		self.oneof_field = {
+			type = "oneof_null_value",
+			value = if typeof(input.oneof_null_value) == "number"
+				then (_google_protobuf_struct.NullValue.fromNumber(input.oneof_null_value) or input.oneof_null_value)
+				else (_google_protobuf_struct.NullValue.fromName(input.oneof_null_value) or input.oneof_null_value),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_MapUint64Uint64Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
-
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.value)
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_MapUint64Uint64Entry
-		local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_MapUint64Uint64Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
-
-		if self.key ~= 0 then
-			output.key = self.key
-		end
-
-		if self.value ~= 0 then
-			output.value = self.value
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapUint64Uint64Entry
-		local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = input.value
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapSint32Sint32Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
+	if input.oneofNullValue ~= nil then
+		self.oneof_field = {
+			type = "oneof_null_value",
+			value = if typeof(input.oneofNullValue) == "number"
+				then (_google_protobuf_struct.NullValue.fromNumber(input.oneofNullValue) or input.oneofNullValue)
+				else (_google_protobuf_struct.NullValue.fromName(input.oneofNullValue) or input.oneofNullValue),
 		}
-	end,
+	end
 
-	encode = function(self: TestAllTypesProto3_MapSint32Sint32Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+	if input.optional_bool_wrapper ~= nil then
+		self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optional_bool_wrapper)
+	end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
+	if input.optionalBoolWrapper ~= nil then
+		self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optionalBoolWrapper)
+	end
+
+	if input.optional_int32_wrapper ~= nil then
+		self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optional_int32_wrapper)
+	end
+
+	if input.optionalInt32Wrapper ~= nil then
+		self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optionalInt32Wrapper)
+	end
+
+	if input.optional_int64_wrapper ~= nil then
+		self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optional_int64_wrapper)
+	end
+
+	if input.optionalInt64Wrapper ~= nil then
+		self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optionalInt64Wrapper)
+	end
+
+	if input.optional_uint32_wrapper ~= nil then
+		self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.jsonDecode(input.optional_uint32_wrapper)
+	end
+
+	if input.optionalUint32Wrapper ~= nil then
+		self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.jsonDecode(input.optionalUint32Wrapper)
+	end
+
+	if input.optional_uint64_wrapper ~= nil then
+		self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.jsonDecode(input.optional_uint64_wrapper)
+	end
+
+	if input.optionalUint64Wrapper ~= nil then
+		self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.jsonDecode(input.optionalUint64Wrapper)
+	end
+
+	if input.optional_float_wrapper ~= nil then
+		self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optional_float_wrapper)
+	end
+
+	if input.optionalFloatWrapper ~= nil then
+		self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optionalFloatWrapper)
+	end
+
+	if input.optional_double_wrapper ~= nil then
+		self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.jsonDecode(input.optional_double_wrapper)
+	end
+
+	if input.optionalDoubleWrapper ~= nil then
+		self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.jsonDecode(input.optionalDoubleWrapper)
+	end
+
+	if input.optional_string_wrapper ~= nil then
+		self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.jsonDecode(input.optional_string_wrapper)
+	end
+
+	if input.optionalStringWrapper ~= nil then
+		self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.jsonDecode(input.optionalStringWrapper)
+	end
+
+	if input.optional_bytes_wrapper ~= nil then
+		self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optional_bytes_wrapper)
+	end
+
+	if input.optionalBytesWrapper ~= nil then
+		self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optionalBytesWrapper)
+	end
+
+	if input.repeated_bool_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
+		for _, value: _google_protobuf_wrappers.BoolValue in input.repeated_bool_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
+		self.repeated_bool_wrapper = newOutput
+	end
+
+	if input.repeatedBoolWrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
+		for _, value: _google_protobuf_wrappers.BoolValue in input.repeatedBoolWrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+		self.repeated_bool_wrapper = newOutput
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapSint32Sint32Entry
-		local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
-		local cursor = 0
+	if input.repeated_int32_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
+		for _, value: _google_protobuf_wrappers.Int32Value in input.repeated_int32_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
+		end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+		self.repeated_int32_wrapper = newOutput
+	end
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = proto.decodeZigZag(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = proto.decodeZigZag(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	if input.repeatedInt32Wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
+		for _, value: _google_protobuf_wrappers.Int32Value in input.repeatedInt32Wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
+		end
+
+		self.repeated_int32_wrapper = newOutput
+	end
+
+	if input.repeated_int64_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
+		for _, value: _google_protobuf_wrappers.Int64Value in input.repeated_int64_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
+		end
+
+		self.repeated_int64_wrapper = newOutput
+	end
+
+	if input.repeatedInt64Wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
+		for _, value: _google_protobuf_wrappers.Int64Value in input.repeatedInt64Wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
+		end
+
+		self.repeated_int64_wrapper = newOutput
+	end
+
+	if input.repeated_uint32_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt32Value in input.repeated_uint32_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
+		end
+
+		self.repeated_uint32_wrapper = newOutput
+	end
+
+	if input.repeatedUint32Wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt32Value in input.repeatedUint32Wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
+		end
+
+		self.repeated_uint32_wrapper = newOutput
+	end
+
+	if input.repeated_uint64_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt64Value in input.repeated_uint64_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
+		end
+
+		self.repeated_uint64_wrapper = newOutput
+	end
+
+	if input.repeatedUint64Wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
+		for _, value: _google_protobuf_wrappers.UInt64Value in input.repeatedUint64Wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
+		end
+
+		self.repeated_uint64_wrapper = newOutput
+	end
+
+	if input.repeated_float_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
+		for _, value: _google_protobuf_wrappers.FloatValue in input.repeated_float_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
+		end
+
+		self.repeated_float_wrapper = newOutput
+	end
+
+	if input.repeatedFloatWrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
+		for _, value: _google_protobuf_wrappers.FloatValue in input.repeatedFloatWrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
+		end
+
+		self.repeated_float_wrapper = newOutput
+	end
+
+	if input.repeated_double_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
+		for _, value: _google_protobuf_wrappers.DoubleValue in input.repeated_double_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
+		end
+
+		self.repeated_double_wrapper = newOutput
+	end
+
+	if input.repeatedDoubleWrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
+		for _, value: _google_protobuf_wrappers.DoubleValue in input.repeatedDoubleWrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
+		end
+
+		self.repeated_double_wrapper = newOutput
+	end
+
+	if input.repeated_string_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
+		for _, value: _google_protobuf_wrappers.StringValue in input.repeated_string_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
+		end
+
+		self.repeated_string_wrapper = newOutput
+	end
+
+	if input.repeatedStringWrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
+		for _, value: _google_protobuf_wrappers.StringValue in input.repeatedStringWrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
+		end
+
+		self.repeated_string_wrapper = newOutput
+	end
+
+	if input.repeated_bytes_wrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
+		for _, value: _google_protobuf_wrappers.BytesValue in input.repeated_bytes_wrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
+		end
+
+		self.repeated_bytes_wrapper = newOutput
+	end
+
+	if input.repeatedBytesWrapper ~= nil then
+		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
+		for _, value: _google_protobuf_wrappers.BytesValue in input.repeatedBytesWrapper do
+			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
+		end
+
+		self.repeated_bytes_wrapper = newOutput
+	end
+
+	if input.optional_duration ~= nil then
+		self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optional_duration)
+	end
+
+	if input.optionalDuration ~= nil then
+		self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optionalDuration)
+	end
+
+	if input.optional_timestamp ~= nil then
+		self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optional_timestamp)
+	end
+
+	if input.optionalTimestamp ~= nil then
+		self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optionalTimestamp)
+	end
+
+	if input.optional_field_mask ~= nil then
+		self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optional_field_mask)
+	end
+
+	if input.optionalFieldMask ~= nil then
+		self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optionalFieldMask)
+	end
+
+	if input.optional_struct ~= nil then
+		self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optional_struct)
+	end
+
+	if input.optionalStruct ~= nil then
+		self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optionalStruct)
+	end
+
+	if input.optional_any ~= nil then
+		self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optional_any)
+	end
+
+	if input.optionalAny ~= nil then
+		self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optionalAny)
+	end
+
+	if input.optional_value ~= nil then
+		self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optional_value)
+	end
+
+	if input.optionalValue ~= nil then
+		self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optionalValue)
+	end
+
+	if input.optional_null_value ~= nil then
+		self.optional_null_value = if typeof(input.optional_null_value) == "number"
+			then (_google_protobuf_struct.NullValue.fromNumber(input.optional_null_value) or input.optional_null_value)
+			else (_google_protobuf_struct.NullValue.fromName(input.optional_null_value) or input.optional_null_value)
+	end
+
+	if input.optionalNullValue ~= nil then
+		self.optional_null_value = if typeof(input.optionalNullValue) == "number"
+			then (_google_protobuf_struct.NullValue.fromNumber(input.optionalNullValue) or input.optionalNullValue)
+			else (_google_protobuf_struct.NullValue.fromName(input.optionalNullValue) or input.optionalNullValue)
+	end
+
+	if input.repeated_duration ~= nil then
+		local newOutput: { _google_protobuf_duration.Duration } = {}
+		for _, value: _google_protobuf_duration.Duration in input.repeated_duration do
+			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
+		end
+
+		self.repeated_duration = newOutput
+	end
+
+	if input.repeatedDuration ~= nil then
+		local newOutput: { _google_protobuf_duration.Duration } = {}
+		for _, value: _google_protobuf_duration.Duration in input.repeatedDuration do
+			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
+		end
+
+		self.repeated_duration = newOutput
+	end
+
+	if input.repeated_timestamp ~= nil then
+		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
+		for _, value: _google_protobuf_timestamp.Timestamp in input.repeated_timestamp do
+			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
+		end
+
+		self.repeated_timestamp = newOutput
+	end
+
+	if input.repeatedTimestamp ~= nil then
+		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
+		for _, value: _google_protobuf_timestamp.Timestamp in input.repeatedTimestamp do
+			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
+		end
+
+		self.repeated_timestamp = newOutput
+	end
+
+	if input.repeated_fieldmask ~= nil then
+		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
+		for _, value: _google_protobuf_field_mask.FieldMask in input.repeated_fieldmask do
+			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
+		end
+
+		self.repeated_fieldmask = newOutput
+	end
+
+	if input.repeatedFieldmask ~= nil then
+		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
+		for _, value: _google_protobuf_field_mask.FieldMask in input.repeatedFieldmask do
+			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
+		end
+
+		self.repeated_fieldmask = newOutput
+	end
+
+	if input.repeated_struct ~= nil then
+		local newOutput: { _google_protobuf_struct.Struct } = {}
+		for _, value: _google_protobuf_struct.Struct in input.repeated_struct do
+			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
+		end
+
+		self.repeated_struct = newOutput
+	end
+
+	if input.repeatedStruct ~= nil then
+		local newOutput: { _google_protobuf_struct.Struct } = {}
+		for _, value: _google_protobuf_struct.Struct in input.repeatedStruct do
+			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
+		end
+
+		self.repeated_struct = newOutput
+	end
+
+	if input.repeated_any ~= nil then
+		local newOutput: { _google_protobuf_any.Any } = {}
+		for _, value: _google_protobuf_any.Any in input.repeated_any do
+			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
+		end
+
+		self.repeated_any = newOutput
+	end
+
+	if input.repeatedAny ~= nil then
+		local newOutput: { _google_protobuf_any.Any } = {}
+		for _, value: _google_protobuf_any.Any in input.repeatedAny do
+			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
+		end
+
+		self.repeated_any = newOutput
+	end
+
+	if input.repeated_value ~= nil then
+		local newOutput: { _google_protobuf_struct.Value } = {}
+		for _, value: _google_protobuf_struct.Value in input.repeated_value do
+			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
+		end
+
+		self.repeated_value = newOutput
+	end
+
+	if input.repeatedValue ~= nil then
+		local newOutput: { _google_protobuf_struct.Value } = {}
+		for _, value: _google_protobuf_struct.Value in input.repeatedValue do
+			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
+		end
+
+		self.repeated_value = newOutput
+	end
+
+	if input.repeated_list_value ~= nil then
+		local newOutput: { _google_protobuf_struct.ListValue } = {}
+		for _, value: _google_protobuf_struct.ListValue in input.repeated_list_value do
+			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
+		end
+
+		self.repeated_list_value = newOutput
+	end
+
+	if input.repeatedListValue ~= nil then
+		local newOutput: { _google_protobuf_struct.ListValue } = {}
+		for _, value: _google_protobuf_struct.ListValue in input.repeatedListValue do
+			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
+		end
+
+		self.repeated_list_value = newOutput
+	end
+
+	if input.fieldname1 ~= nil then
+		self.fieldname1 = input.fieldname1
+	end
+
+	if input.field_name2 ~= nil then
+		self.field_name2 = input.field_name2
+	end
+
+	if input.fieldName2 ~= nil then
+		self.field_name2 = input.fieldName2
+	end
+
+	if input._field_name3 ~= nil then
+		self._field_name3 = input._field_name3
+	end
+
+	if input.FieldName3 ~= nil then
+		self._field_name3 = input.FieldName3
+	end
+
+	if input.field__name4_ ~= nil then
+		self.field__name4_ = input.field__name4_
+	end
+
+	if input.fieldName4 ~= nil then
+		self.field__name4_ = input.fieldName4
+	end
+
+	if input.field0name5 ~= nil then
+		self.field0name5 = input.field0name5
+	end
+
+	if input.field_0_name6 ~= nil then
+		self.field_0_name6 = input.field_0_name6
+	end
+
+	if input.field0Name6 ~= nil then
+		self.field_0_name6 = input.field0Name6
+	end
+
+	if input.fieldName7 ~= nil then
+		self.fieldName7 = input.fieldName7
+	end
+
+	if input.FieldName8 ~= nil then
+		self.FieldName8 = input.FieldName8
+	end
+
+	if input.field_Name9 ~= nil then
+		self.field_Name9 = input.field_Name9
+	end
+
+	if input.fieldName9 ~= nil then
+		self.field_Name9 = input.fieldName9
+	end
+
+	if input.Field_Name10 ~= nil then
+		self.Field_Name10 = input.Field_Name10
+	end
+
+	if input.FieldName10 ~= nil then
+		self.Field_Name10 = input.FieldName10
+	end
+
+	if input.FIELD_NAME11 ~= nil then
+		self.FIELD_NAME11 = input.FIELD_NAME11
+	end
+
+	if input.FIELDNAME11 ~= nil then
+		self.FIELD_NAME11 = input.FIELDNAME11
+	end
+
+	if input.FIELD_name12 ~= nil then
+		self.FIELD_name12 = input.FIELD_name12
+	end
+
+	if input.FIELDName12 ~= nil then
+		self.FIELD_name12 = input.FIELDName12
+	end
+
+	if input.__field_name13 ~= nil then
+		self.__field_name13 = input.__field_name13
+	end
+
+	if input.FieldName13 ~= nil then
+		self.__field_name13 = input.FieldName13
+	end
+
+	if input.__Field_name14 ~= nil then
+		self.__Field_name14 = input.__Field_name14
+	end
+
+	if input.FieldName14 ~= nil then
+		self.__Field_name14 = input.FieldName14
+	end
+
+	if input.field__name15 ~= nil then
+		self.field__name15 = input.field__name15
+	end
+
+	if input.fieldName15 ~= nil then
+		self.field__name15 = input.fieldName15
+	end
+
+	if input.field__Name16 ~= nil then
+		self.field__Name16 = input.field__Name16
+	end
+
+	if input.fieldName16 ~= nil then
+		self.field__Name16 = input.fieldName16
+	end
+
+	if input.field_name17__ ~= nil then
+		self.field_name17__ = input.field_name17__
+	end
+
+	if input.fieldName17 ~= nil then
+		self.field_name17__ = input.fieldName17
+	end
+
+	if input.Field_name18__ ~= nil then
+		self.Field_name18__ = input.Field_name18__
+	end
+
+	if input.FieldName18 ~= nil then
+		self.Field_name18__ = input.FieldName18
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_NestedMessage: proto.Message<_TestAllTypesProto3_NestedMessageImpl> =
+	{} :: _TestAllTypesProto3_NestedMessageImpl
+TestAllTypesProto3_NestedMessage.__index = TestAllTypesProto3_NestedMessage
+
+function TestAllTypesProto3_NestedMessage.new(
+	data: _TestAllTypesProto3_NestedMessageFields?
+): TestAllTypesProto3_NestedMessage
+	return setmetatable({
+		a = data and data["a"] or 0,
+		corecursive = data and data["corecursive"] or nil,
+	}, TestAllTypesProto3_NestedMessage)
+end
+
+function TestAllTypesProto3_NestedMessage.encode(self: TestAllTypesProto3_NestedMessage): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.a ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.a)
+	end
+
+	if self.corecursive ~= nil then
+		local encoded = TestAllTypesProto3.encode(self.corecursive)
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_NestedMessage.decode(input: buffer): TestAllTypesProto3_NestedMessage
+	local self = TestAllTypesProto3_NestedMessage.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.a = proto.limitInt32(value)
 			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_MapSint32Sint32Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
-
-		if self.key ~= 0 then
-			output.key = self.key
-		end
-
-		if self.value ~= 0 then
-			output.value = self.value
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapSint32Sint32Entry
-		local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = input.value
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapSint64Sint64Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
-
-	encode = function(self: TestAllTypesProto3_MapSint64Sint64Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
-		end
-
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_MapSint64Sint64Entry
-		local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = proto.decodeZigZag(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = proto.decodeZigZag(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.corecursive = TestAllTypesProto3.decode(value)
 			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapSint64Sint64Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+function TestAllTypesProto3_NestedMessage.jsonEncode(self: TestAllTypesProto3_NestedMessage): any
+	local output: {
+		a: number?,
+		corecursive: TestAllTypesProto3?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.a ~= 0 then
+		output.a = self.a
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if self.corecursive ~= nil then
+		output.corecursive = TestAllTypesProto3.jsonEncode(self.corecursive)
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapSint64Sint64Entry
-		local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
+function TestAllTypesProto3_NestedMessage.jsonDecode(input: { [string]: any }): TestAllTypesProto3_NestedMessage
+	local self = TestAllTypesProto3_NestedMessage.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.a ~= nil then
+		self.a = input.a
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.corecursive ~= nil then
+		self.corecursive = TestAllTypesProto3.jsonDecode(input.corecursive)
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapFixed32Fixed32Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<_TestAllTypesProto3_MapInt32Int32EntryImpl> =
+	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
+TestAllTypesProto3_MapInt32Int32Entry.__index = TestAllTypesProto3_MapInt32Int32Entry
 
-	encode = function(self: TestAllTypesProto3_MapFixed32Fixed32Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapInt32Int32Entry.new(
+	data: _TestAllTypesProto3_MapInt32Int32EntryFields?
+): TestAllTypesProto3_MapInt32Int32Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapInt32Int32Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapInt32Int32Entry.encode(self: TestAllTypesProto3_MapInt32Int32Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapFixed32Fixed32Entry
-		local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapInt32Int32Entry.decode(input: buffer): TestAllTypesProto3_MapInt32Int32Entry
+	local self = TestAllTypesProto3_MapInt32Int32Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				if field == 1 then
-					local value
-					value, cursor = proto.readFixed32(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readFixed32(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = proto.limitInt32(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = proto.limitInt32(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapFixed32Fixed32Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+function TestAllTypesProto3_MapInt32Int32Entry.jsonEncode(self: TestAllTypesProto3_MapInt32Int32Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapFixed32Fixed32Entry
-		local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
+function TestAllTypesProto3_MapInt32Int32Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapInt32Int32Entry
+	local self = TestAllTypesProto3_MapInt32Int32Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapFixed64Fixed64Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<_TestAllTypesProto3_MapInt64Int64EntryImpl> =
+	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
+TestAllTypesProto3_MapInt64Int64Entry.__index = TestAllTypesProto3_MapInt64Int64Entry
 
-	encode = function(self: TestAllTypesProto3_MapFixed64Fixed64Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapInt64Int64Entry.new(
+	data: _TestAllTypesProto3_MapInt64Int64EntryFields?
+): TestAllTypesProto3_MapInt64Int64Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapInt64Int64Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapInt64Int64Entry.encode(self: TestAllTypesProto3_MapInt64Int64Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapFixed64Fixed64Entry
-		local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapInt64Int64Entry.decode(input: buffer): TestAllTypesProto3_MapInt64Int64Entry
+	local self = TestAllTypesProto3_MapInt64Int64Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				if field == 1 then
-					local value
-					value, cursor = proto.readFixed64(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readFixed64(input, cursor)
-					self.value = value
-				end
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapFixed64Fixed64Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+function TestAllTypesProto3_MapInt64Int64Entry.jsonEncode(self: TestAllTypesProto3_MapInt64Int64Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapFixed64Fixed64Entry
-		local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
+function TestAllTypesProto3_MapInt64Int64Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapInt64Int64Entry
+	local self = TestAllTypesProto3_MapInt64Int64Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapSfixed32Sfixed32Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<_TestAllTypesProto3_MapUint32Uint32EntryImpl> =
+	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
+TestAllTypesProto3_MapUint32Uint32Entry.__index = TestAllTypesProto3_MapUint32Uint32Entry
 
-	encode = function(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapUint32Uint32Entry.new(
+	data: _TestAllTypesProto3_MapUint32Uint32EntryFields?
+): TestAllTypesProto3_MapUint32Uint32Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapUint32Uint32Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapUint32Uint32Entry.encode(self: TestAllTypesProto3_MapUint32Uint32Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
-			output, cursor = proto.writeFixed32(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapSfixed32Sfixed32Entry
-		local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapUint32Uint32Entry.decode(input: buffer): TestAllTypesProto3_MapUint32Uint32Entry
+	local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				if field == 1 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readSignedFixed32(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+function TestAllTypesProto3_MapUint32Uint32Entry.jsonEncode(self: TestAllTypesProto3_MapUint32Uint32Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapSfixed32Sfixed32Entry
-		local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
+function TestAllTypesProto3_MapUint32Uint32Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapUint32Uint32Entry
+	local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapSfixed64Sfixed64Entry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<_TestAllTypesProto3_MapUint64Uint64EntryImpl> =
+	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
+TestAllTypesProto3_MapUint64Uint64Entry.__index = TestAllTypesProto3_MapUint64Uint64Entry
 
-	encode = function(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapUint64Uint64Entry.new(
+	data: _TestAllTypesProto3_MapUint64Uint64EntryFields?
+): TestAllTypesProto3_MapUint64Uint64Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapUint64Uint64Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapUint64Uint64Entry.encode(self: TestAllTypesProto3_MapUint64Uint64Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
-			output, cursor = proto.writeFixed64(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapSfixed64Sfixed64Entry
-		local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapUint64Uint64Entry.decode(input: buffer): TestAllTypesProto3_MapUint64Uint64Entry
+	local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				if field == 1 then
-					local value
-					value, cursor = proto.readSignedFixed64(input, cursor)
-					self.key = value
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readSignedFixed64(input, cursor)
-					self.value = value
-				end
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): any
-		local output: {
-			key: number?,
-			value: number?,
-		} = {}
+function TestAllTypesProto3_MapUint64Uint64Entry.jsonEncode(self: TestAllTypesProto3_MapUint64Uint64Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapSfixed64Sfixed64Entry
-		local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
+function TestAllTypesProto3_MapUint64Uint64Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapUint64Uint64Entry
+	local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapInt32FloatEntry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<_TestAllTypesProto3_MapSint32Sint32EntryImpl> =
+	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
+TestAllTypesProto3_MapSint32Sint32Entry.__index = TestAllTypesProto3_MapSint32Sint32Entry
 
-	encode = function(self: TestAllTypesProto3_MapInt32FloatEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapSint32Sint32Entry.new(
+	data: _TestAllTypesProto3_MapSint32Sint32EntryFields?
+): TestAllTypesProto3_MapSint32Sint32Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapSint32Sint32Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapSint32Sint32Entry.encode(self: TestAllTypesProto3_MapSint32Sint32Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
-			output, cursor = proto.writeFloat(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapInt32FloatEntry
-		local self = TestAllTypesProto3_MapInt32FloatEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapSint32Sint32Entry.decode(input: buffer): TestAllTypesProto3_MapSint32Sint32Entry
+	local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				if field == 2 then
-					local value
-					value, cursor = proto.readFloat(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = proto.decodeZigZag(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = proto.decodeZigZag(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapInt32FloatEntry): any
-		local output: {
-			key: number?,
-			value: (number | string)?,
-		} = {}
+function TestAllTypesProto3_MapSint32Sint32Entry.jsonEncode(self: TestAllTypesProto3_MapSint32Sint32Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = proto.json.serializeNumber(self.value)
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapInt32FloatEntry
-		local self = TestAllTypesProto3_MapInt32FloatEntry.new()
+function TestAllTypesProto3_MapSint32Sint32Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapSint32Sint32Entry
+	local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = proto.json.deserializeNumber(input.value)
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapInt32DoubleEntry = {
-	new = function()
-		return {
-			key = 0,
-			value = 0,
-		}
-	end,
+local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<_TestAllTypesProto3_MapSint64Sint64EntryImpl> =
+	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
+TestAllTypesProto3_MapSint64Sint64Entry.__index = TestAllTypesProto3_MapSint64Sint64Entry
 
-	encode = function(self: TestAllTypesProto3_MapInt32DoubleEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapSint64Sint64Entry.new(
+	data: _TestAllTypesProto3_MapSint64Sint64EntryFields?
+): TestAllTypesProto3_MapSint64Sint64Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapSint64Sint64Entry)
+end
 
-		if self.key ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapSint64Sint64Entry.encode(self: TestAllTypesProto3_MapSint64Sint64Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
-			output, cursor = proto.writeDouble(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapInt32DoubleEntry
-		local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapSint64Sint64Entry.decode(input: buffer): TestAllTypesProto3_MapSint64Sint64Entry
+	local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				if field == 2 then
-					local value
-					value, cursor = proto.readDouble(input, cursor)
-					self.value = value
-				end
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = proto.decodeZigZag(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = proto.decodeZigZag(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapInt32DoubleEntry): any
-		local output: {
-			key: number?,
-			value: (number | string)?,
-		} = {}
+function TestAllTypesProto3_MapSint64Sint64Entry.jsonEncode(self: TestAllTypesProto3_MapSint64Sint64Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= 0 then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 then
-			output.value = proto.json.serializeNumber(self.value)
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapInt32DoubleEntry
-		local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
+function TestAllTypesProto3_MapSint64Sint64Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapSint64Sint64Entry
+	local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = proto.json.deserializeNumber(input.value)
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapBoolBoolEntry = {
-	new = function()
-		return {
-			key = false,
-			value = false,
-		}
-	end,
+local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<_TestAllTypesProto3_MapFixed32Fixed32EntryImpl> =
+	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
+TestAllTypesProto3_MapFixed32Fixed32Entry.__index = TestAllTypesProto3_MapFixed32Fixed32Entry
 
-	encode = function(self: TestAllTypesProto3_MapBoolBoolEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapFixed32Fixed32Entry.new(
+	data: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?
+): TestAllTypesProto3_MapFixed32Fixed32Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapFixed32Fixed32Entry)
+end
 
-		if self.key then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, if self.key then 1 else 0)
-		end
+function TestAllTypesProto3_MapFixed32Fixed32Entry.encode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, if self.value then 1 else 0)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapBoolBoolEntry
-		local self = TestAllTypesProto3_MapBoolBoolEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapFixed32Fixed32Entry.decode(input: buffer): TestAllTypesProto3_MapFixed32Fixed32Entry
+	local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.key = value ~= 0
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = value ~= 0
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			if field == 1 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readFixed32(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapBoolBoolEntry): any
-		local output: {
-			key: boolean?,
-			value: boolean?,
-		} = {}
+function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonEncode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapBoolBoolEntry
-		local self = TestAllTypesProto3_MapBoolBoolEntry.new()
+function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapFixed32Fixed32Entry
+	local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapStringStringEntry = {
-	new = function()
-		return {
-			key = "",
-			value = "",
-		}
-	end,
+local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<_TestAllTypesProto3_MapFixed64Fixed64EntryImpl> =
+	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
+TestAllTypesProto3_MapFixed64Fixed64Entry.__index = TestAllTypesProto3_MapFixed64Fixed64Entry
 
-	encode = function(self: TestAllTypesProto3_MapStringStringEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapFixed64Fixed64Entry.new(
+	data: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?
+): TestAllTypesProto3_MapFixed64Fixed64Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapFixed64Fixed64Entry)
+end
 
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapFixed64Fixed64Entry.encode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.value)
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapStringStringEntry
-		local self = TestAllTypesProto3_MapStringStringEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapFixed64Fixed64Entry.decode(input: buffer): TestAllTypesProto3_MapFixed64Fixed64Entry
+	local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.value = buffer.tostring(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			if field == 1 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readFixed64(input, cursor)
+				self.value = value
 			end
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapStringStringEntry): any
-		local output: {
-			key: string?,
-			value: string?,
-		} = {}
+function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonEncode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= "" then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= "" then
-			output.value = self.value
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringStringEntry
-		local self = TestAllTypesProto3_MapStringStringEntry.new()
+function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapFixed64Fixed64Entry
+	local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = input.value
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapStringBytesEntry = {
-	new = function()
-		return {
-			key = "",
-			value = buffer.create(0),
-		}
-	end,
+local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<_TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl> =
+	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
+TestAllTypesProto3_MapSfixed32Sfixed32Entry.__index = TestAllTypesProto3_MapSfixed32Sfixed32Entry
 
-	encode = function(self: TestAllTypesProto3_MapStringBytesEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapSfixed32Sfixed32Entry.new(
+	data: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?
+): TestAllTypesProto3_MapSfixed32Sfixed32Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapSfixed32Sfixed32Entry)
+end
 
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapSfixed32Sfixed32Entry.encode(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if buffer.len(self.value) > 0 then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
+		output, cursor = proto.writeFixed32(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapStringBytesEntry
-		local self = TestAllTypesProto3_MapStringBytesEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapSfixed32Sfixed32Entry.decode(input: buffer): TestAllTypesProto3_MapSfixed32Sfixed32Entry
+	local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.value = value
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			if field == 1 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readSignedFixed32(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapStringBytesEntry): any
-		local output: {
-			key: string?,
-			value: buffer?,
-		} = {}
+function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonEncode(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= "" then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if buffer.len(self.value) > 0 then
-			output.value = proto.json.serializeBuffer(self.value)
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringBytesEntry
-		local self = TestAllTypesProto3_MapStringBytesEntry.new()
+function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapSfixed32Sfixed32Entry
+	local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = proto.json.deserializeBuffer(input.value)
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapStringNestedMessageEntry = {
-	new = function()
-		return {
-			key = "",
-			value = nil,
-		}
-	end,
+local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl> =
+	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
+TestAllTypesProto3_MapSfixed64Sfixed64Entry.__index = TestAllTypesProto3_MapSfixed64Sfixed64Entry
 
-	encode = function(self: TestAllTypesProto3_MapStringNestedMessageEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapSfixed64Sfixed64Entry.new(
+	data: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?
+): TestAllTypesProto3_MapSfixed64Sfixed64Entry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapSfixed64Sfixed64Entry)
+end
 
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapSfixed64Sfixed64Entry.encode(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= nil then
-			local encoded = TestAllTypesProto3_NestedMessage.encode(self.value)
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
+		output, cursor = proto.writeFixed64(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapStringNestedMessageEntry
-		local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapSfixed64Sfixed64Entry.decode(input: buffer): TestAllTypesProto3_MapSfixed64Sfixed64Entry
+	local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.value = TestAllTypesProto3_NestedMessage.decode(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			if field == 1 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				self.key = value
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readSignedFixed64(input, cursor)
+				self.value = value
 			end
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapStringNestedMessageEntry): any
-		local output: {
-			key: string?,
-			value: TestAllTypesProto3_NestedMessage?,
-		} = {}
+function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonEncode(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): any
+	local output: {
+		key: number?,
+		value: number?,
+	} = {}
 
-		if self.key ~= "" then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= nil then
-			output.value = TestAllTypesProto3_NestedMessage.jsonEncode(self.value)
-		end
+	if self.value ~= 0 then
+		output.value = self.value
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringNestedMessageEntry
-		local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
+function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapSfixed64Sfixed64Entry
+	local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = TestAllTypesProto3_NestedMessage.jsonDecode(input.value)
-		end
+	if input.value ~= nil then
+		self.value = input.value
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapStringForeignMessageEntry = {
-	new = function()
-		return {
-			key = "",
-			value = nil,
-		}
-	end,
+local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<_TestAllTypesProto3_MapInt32FloatEntryImpl> =
+	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
+TestAllTypesProto3_MapInt32FloatEntry.__index = TestAllTypesProto3_MapInt32FloatEntry
 
-	encode = function(self: TestAllTypesProto3_MapStringForeignMessageEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapInt32FloatEntry.new(
+	data: _TestAllTypesProto3_MapInt32FloatEntryFields?
+): TestAllTypesProto3_MapInt32FloatEntry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapInt32FloatEntry)
+end
 
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapInt32FloatEntry.encode(self: TestAllTypesProto3_MapInt32FloatEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= nil then
-			local encoded = ForeignMessage.encode(self.value)
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i32)
+		output, cursor = proto.writeFloat(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapStringForeignMessageEntry
-		local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapInt32FloatEntry.decode(input: buffer): TestAllTypesProto3_MapInt32FloatEntry
+	local self = TestAllTypesProto3_MapInt32FloatEntry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				elseif field == 2 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.value = ForeignMessage.decode(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = proto.limitInt32(value)
 			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: TestAllTypesProto3_MapStringForeignMessageEntry): any
-		local output: {
-			key: string?,
-			value: ForeignMessage?,
-		} = {}
-
-		if self.key ~= "" then
-			output.key = self.key
-		end
-
-		if self.value ~= nil then
-			output.value = ForeignMessage.jsonEncode(self.value)
-		end
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringForeignMessageEntry
-		local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
-
-		if input.key ~= nil then
-			self.key = input.key
-		end
-
-		if input.value ~= nil then
-			self.value = ForeignMessage.jsonDecode(input.value)
-		end
-
-		return self
-	end,
-}
-
-TestAllTypesProto3_MapStringNestedEnumEntry = {
-	new = function()
-		return {
-			key = "",
-			value = assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
-		}
-	end,
-
-	encode = function(self: TestAllTypesProto3_MapStringNestedEnumEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
-
-		if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.value))
-		end
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): TestAllTypesProto3_MapStringNestedEnumEntry
-		local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				if field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			if field == 2 then
+				local value
+				value, cursor = proto.readFloat(input, cursor)
+				self.value = value
 			end
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapStringNestedEnumEntry): any
-		local output: {
-			key: string?,
-			value: TestAllTypesProto3_NestedEnum?,
-		} = {}
+function TestAllTypesProto3_MapInt32FloatEntry.jsonEncode(self: TestAllTypesProto3_MapInt32FloatEntry): any
+	local output: {
+		key: number?,
+		value: (number | string)?,
+	} = {}
 
-		if self.key ~= "" then
-			output.key = self.key
-		end
+	if self.key ~= 0 then
+		output.key = self.key
+	end
 
-		if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
-			output.value = if typeof(self.value) == "number"
-				then self.value
-				else TestAllTypesProto3_NestedEnum.toNumber(self.value)
-		end
+	if self.value ~= 0 then
+		output.value = proto.json.serializeNumber(self.value)
+	end
 
-		return output
-	end,
+	return output
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringNestedEnumEntry
-		local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
+function TestAllTypesProto3_MapInt32FloatEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapInt32FloatEntry
+	local self = TestAllTypesProto3_MapInt32FloatEntry.new()
 
-		if input.key ~= nil then
-			self.key = input.key
-		end
+	if input.key ~= nil then
+		self.key = input.key
+	end
 
-		if input.value ~= nil then
-			self.value = if typeof(input.value) == "number"
-				then (TestAllTypesProto3_NestedEnum.fromNumber(input.value) or input.value)
-				else (TestAllTypesProto3_NestedEnum.fromName(input.value) or input.value)
-		end
+	if input.value ~= nil then
+		self.value = proto.json.deserializeNumber(input.value)
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-TestAllTypesProto3_MapStringForeignEnumEntry = {
-	new = function()
-		return {
-			key = "",
-			value = assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
-		}
-	end,
+local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<_TestAllTypesProto3_MapInt32DoubleEntryImpl> =
+	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
+TestAllTypesProto3_MapInt32DoubleEntry.__index = TestAllTypesProto3_MapInt32DoubleEntry
 
-	encode = function(self: TestAllTypesProto3_MapStringForeignEnumEntry): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function TestAllTypesProto3_MapInt32DoubleEntry.new(
+	data: _TestAllTypesProto3_MapInt32DoubleEntryFields?
+): TestAllTypesProto3_MapInt32DoubleEntry
+	return setmetatable({
+		key = data and data["key"] or 0,
+		value = data and data["value"] or 0,
+	}, TestAllTypesProto3_MapInt32DoubleEntry)
+end
 
-		if self.key ~= "" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.key)
-		end
+function TestAllTypesProto3_MapInt32DoubleEntry.encode(self: TestAllTypesProto3_MapInt32DoubleEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.value))
-		end
+	if self.key ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.key)
+	end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.value ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
+		output, cursor = proto.writeDouble(output, cursor, self.value)
+	end
 
-	decode = function(input: buffer): TestAllTypesProto3_MapStringForeignEnumEntry
-		local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function TestAllTypesProto3_MapInt32DoubleEntry.decode(input: buffer): TestAllTypesProto3_MapInt32DoubleEntry
+	local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				if field == 2 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.value = ForeignEnum.fromNumber(value) or value
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				if field == 1 then
-					local value
-					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
-				end
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = proto.limitInt32(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			if field == 2 then
+				local value
+				value, cursor = proto.readDouble(input, cursor)
+				self.value = value
+			end
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: TestAllTypesProto3_MapStringForeignEnumEntry): any
-		local output: {
-			key: string?,
-			value: ForeignEnum?,
-		} = {}
+function TestAllTypesProto3_MapInt32DoubleEntry.jsonEncode(self: TestAllTypesProto3_MapInt32DoubleEntry): any
+	local output: {
+		key: number?,
+		value: (number | string)?,
+	} = {}
 
-		if self.key ~= "" then
-			output.key = self.key
+	if self.key ~= 0 then
+		output.key = self.key
+	end
+
+	if self.value ~= 0 then
+		output.value = proto.json.serializeNumber(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapInt32DoubleEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapInt32DoubleEntry
+	local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = proto.json.deserializeNumber(input.value)
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<_TestAllTypesProto3_MapBoolBoolEntryImpl> =
+	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
+TestAllTypesProto3_MapBoolBoolEntry.__index = TestAllTypesProto3_MapBoolBoolEntry
+
+function TestAllTypesProto3_MapBoolBoolEntry.new(
+	data: _TestAllTypesProto3_MapBoolBoolEntryFields?
+): TestAllTypesProto3_MapBoolBoolEntry
+	return setmetatable({
+		key = data and data["key"] or false,
+		value = data and data["value"] or false,
+	}, TestAllTypesProto3_MapBoolBoolEntry)
+end
+
+function TestAllTypesProto3_MapBoolBoolEntry.encode(self: TestAllTypesProto3_MapBoolBoolEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, if self.key then 1 else 0)
+	end
+
+	if self.value then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, if self.value then 1 else 0)
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapBoolBoolEntry.decode(input: buffer): TestAllTypesProto3_MapBoolBoolEntry
+	local self = TestAllTypesProto3_MapBoolBoolEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.key = value ~= 0
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = value ~= 0
+			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
-			output.value = if typeof(self.value) == "number" then self.value else ForeignEnum.toNumber(self.value)
+	return self
+end
+
+function TestAllTypesProto3_MapBoolBoolEntry.jsonEncode(self: TestAllTypesProto3_MapBoolBoolEntry): any
+	local output: {
+		key: boolean?,
+		value: boolean?,
+	} = {}
+
+	if self.key then
+		output.key = self.key
+	end
+
+	if self.value then
+		output.value = self.value
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapBoolBoolEntry.jsonDecode(input: { [string]: any }): TestAllTypesProto3_MapBoolBoolEntry
+	local self = TestAllTypesProto3_MapBoolBoolEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = input.value
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringStringEntry: proto.Message<_TestAllTypesProto3_MapStringStringEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
+TestAllTypesProto3_MapStringStringEntry.__index = TestAllTypesProto3_MapStringStringEntry
+
+function TestAllTypesProto3_MapStringStringEntry.new(
+	data: _TestAllTypesProto3_MapStringStringEntryFields?
+): TestAllTypesProto3_MapStringStringEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or "",
+	}, TestAllTypesProto3_MapStringStringEntry)
+end
+
+function TestAllTypesProto3_MapStringStringEntry.encode(self: TestAllTypesProto3_MapStringStringEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.value)
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringStringEntry.decode(input: buffer): TestAllTypesProto3_MapStringStringEntry
+	local self = TestAllTypesProto3_MapStringStringEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.value = buffer.tostring(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return output
-	end,
+	return self
+end
 
-	jsonDecode = function(input: { [string]: any }): TestAllTypesProto3_MapStringForeignEnumEntry
-		local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
+function TestAllTypesProto3_MapStringStringEntry.jsonEncode(self: TestAllTypesProto3_MapStringStringEntry): any
+	local output: {
+		key: string?,
+		value: string?,
+	} = {}
 
-		if input.key ~= nil then
-			self.key = input.key
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= "" then
+		output.value = self.value
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringStringEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringStringEntry
+	local self = TestAllTypesProto3_MapStringStringEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = input.value
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringBytesEntry: proto.Message<_TestAllTypesProto3_MapStringBytesEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
+TestAllTypesProto3_MapStringBytesEntry.__index = TestAllTypesProto3_MapStringBytesEntry
+
+function TestAllTypesProto3_MapStringBytesEntry.new(
+	data: _TestAllTypesProto3_MapStringBytesEntryFields?
+): TestAllTypesProto3_MapStringBytesEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or buffer.create(0),
+	}, TestAllTypesProto3_MapStringBytesEntry)
+end
+
+function TestAllTypesProto3_MapStringBytesEntry.encode(self: TestAllTypesProto3_MapStringBytesEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if buffer.len(self.value) > 0 then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringBytesEntry.decode(input: buffer): TestAllTypesProto3_MapStringBytesEntry
+	local self = TestAllTypesProto3_MapStringBytesEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.value = value
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		if input.value ~= nil then
-			self.value = if typeof(input.value) == "number"
-				then (ForeignEnum.fromNumber(input.value) or input.value)
-				else (ForeignEnum.fromName(input.value) or input.value)
+	return self
+end
+
+function TestAllTypesProto3_MapStringBytesEntry.jsonEncode(self: TestAllTypesProto3_MapStringBytesEntry): any
+	local output: {
+		key: string?,
+		value: buffer?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if buffer.len(self.value) > 0 then
+		output.value = proto.json.serializeBuffer(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringBytesEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringBytesEntry
+	local self = TestAllTypesProto3_MapStringBytesEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = proto.json.deserializeBuffer(input.value)
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<_TestAllTypesProto3_MapStringNestedMessageEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
+TestAllTypesProto3_MapStringNestedMessageEntry.__index = TestAllTypesProto3_MapStringNestedMessageEntry
+
+function TestAllTypesProto3_MapStringNestedMessageEntry.new(
+	data: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
+): TestAllTypesProto3_MapStringNestedMessageEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or nil,
+	}, TestAllTypesProto3_MapStringNestedMessageEntry)
+end
+
+function TestAllTypesProto3_MapStringNestedMessageEntry.encode(
+	self: TestAllTypesProto3_MapStringNestedMessageEntry
+): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= nil then
+		local encoded = TestAllTypesProto3_NestedMessage.encode(self.value)
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringNestedMessageEntry.decode(
+	input: buffer
+): TestAllTypesProto3_MapStringNestedMessageEntry
+	local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.value = TestAllTypesProto3_NestedMessage.decode(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
-}
+	return self
+end
+
+function TestAllTypesProto3_MapStringNestedMessageEntry.jsonEncode(
+	self: TestAllTypesProto3_MapStringNestedMessageEntry
+): any
+	local output: {
+		key: string?,
+		value: TestAllTypesProto3_NestedMessage?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= nil then
+		output.value = TestAllTypesProto3_NestedMessage.jsonEncode(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringNestedMessageEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringNestedMessageEntry
+	local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = TestAllTypesProto3_NestedMessage.jsonDecode(input.value)
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<_TestAllTypesProto3_MapStringForeignMessageEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
+TestAllTypesProto3_MapStringForeignMessageEntry.__index = TestAllTypesProto3_MapStringForeignMessageEntry
+
+function TestAllTypesProto3_MapStringForeignMessageEntry.new(
+	data: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
+): TestAllTypesProto3_MapStringForeignMessageEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or nil,
+	}, TestAllTypesProto3_MapStringForeignMessageEntry)
+end
+
+function TestAllTypesProto3_MapStringForeignMessageEntry.encode(
+	self: TestAllTypesProto3_MapStringForeignMessageEntry
+): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= nil then
+		local encoded = ForeignMessage.encode(self.value)
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringForeignMessageEntry.decode(
+	input: buffer
+): TestAllTypesProto3_MapStringForeignMessageEntry
+	local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			elseif field == 2 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.value = ForeignMessage.decode(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function TestAllTypesProto3_MapStringForeignMessageEntry.jsonEncode(
+	self: TestAllTypesProto3_MapStringForeignMessageEntry
+): any
+	local output: {
+		key: string?,
+		value: ForeignMessage?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= nil then
+		output.value = ForeignMessage.jsonEncode(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringForeignMessageEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringForeignMessageEntry
+	local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = ForeignMessage.jsonDecode(input.value)
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<_TestAllTypesProto3_MapStringNestedEnumEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
+TestAllTypesProto3_MapStringNestedEnumEntry.__index = TestAllTypesProto3_MapStringNestedEnumEntry
+
+function TestAllTypesProto3_MapStringNestedEnumEntry.new(
+	data: _TestAllTypesProto3_MapStringNestedEnumEntryFields?
+): TestAllTypesProto3_MapStringNestedEnumEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
+	}, TestAllTypesProto3_MapStringNestedEnumEntry)
+end
+
+function TestAllTypesProto3_MapStringNestedEnumEntry.encode(self: TestAllTypesProto3_MapStringNestedEnumEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.value))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringNestedEnumEntry.decode(input: buffer): TestAllTypesProto3_MapStringNestedEnumEntry
+	local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function TestAllTypesProto3_MapStringNestedEnumEntry.jsonEncode(self: TestAllTypesProto3_MapStringNestedEnumEntry): any
+	local output: {
+		key: string?,
+		value: TestAllTypesProto3_NestedEnum?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
+		output.value = if typeof(self.value) == "number"
+			then self.value
+			else TestAllTypesProto3_NestedEnum.toNumber(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringNestedEnumEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringNestedEnumEntry
+	local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = if typeof(input.value) == "number"
+			then (TestAllTypesProto3_NestedEnum.fromNumber(input.value) or input.value)
+			else (TestAllTypesProto3_NestedEnum.fromName(input.value) or input.value)
+	end
+
+	return self
+end
+
+local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<_TestAllTypesProto3_MapStringForeignEnumEntryImpl> =
+	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
+TestAllTypesProto3_MapStringForeignEnumEntry.__index = TestAllTypesProto3_MapStringForeignEnumEntry
+
+function TestAllTypesProto3_MapStringForeignEnumEntry.new(
+	data: _TestAllTypesProto3_MapStringForeignEnumEntryFields?
+): TestAllTypesProto3_MapStringForeignEnumEntry
+	return setmetatable({
+		key = data and data["key"] or "",
+		value = data and data["value"] or assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
+	}, TestAllTypesProto3_MapStringForeignEnumEntry)
+end
+
+function TestAllTypesProto3_MapStringForeignEnumEntry.encode(self: TestAllTypesProto3_MapStringForeignEnumEntry): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	if self.key ~= "" then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+		output, cursor = proto.writeString(output, cursor, self.key)
+	end
+
+	if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
+		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.value))
+	end
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function TestAllTypesProto3_MapStringForeignEnumEntry.decode(
+	input: buffer
+): TestAllTypesProto3_MapStringForeignEnumEntry
+	local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 2 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = ForeignEnum.fromNumber(value) or value
+			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			if field == 1 then
+				local value
+				value, cursor = proto.readBuffer(input, cursor)
+				self.key = buffer.tostring(value)
+			end
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
+		end
+	end
+
+	return self
+end
+
+function TestAllTypesProto3_MapStringForeignEnumEntry.jsonEncode(
+	self: TestAllTypesProto3_MapStringForeignEnumEntry
+): any
+	local output: {
+		key: string?,
+		value: ForeignEnum?,
+	} = {}
+
+	if self.key ~= "" then
+		output.key = self.key
+	end
+
+	if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
+		output.value = if typeof(self.value) == "number" then self.value else ForeignEnum.toNumber(self.value)
+	end
+
+	return output
+end
+
+function TestAllTypesProto3_MapStringForeignEnumEntry.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapStringForeignEnumEntry
+	local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
+
+	if input.key ~= nil then
+		self.key = input.key
+	end
+
+	if input.value ~= nil then
+		self.value = if typeof(input.value) == "number"
+			then (ForeignEnum.fromNumber(input.value) or input.value)
+			else (ForeignEnum.fromName(input.value) or input.value)
+	end
+
+	return self
+end
 
 TestAllTypesProto3_NestedEnum = {
 	fromNumber = function(value: number): TestAllTypesProto3_NestedEnum?
@@ -7892,179 +8273,182 @@ TestAllTypesProto3_AliasedEnum = {
 	end,
 }
 
-ForeignMessage = {
-	new = function()
-		return {
-			c = 0,
-		}
-	end,
+local ForeignMessage: proto.Message<_ForeignMessageImpl> = {} :: _ForeignMessageImpl
+ForeignMessage.__index = ForeignMessage
 
-	encode = function(self: ForeignMessage): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+function ForeignMessage.new(data: _ForeignMessageFields?): ForeignMessage
+	return setmetatable({
+		c = data and data["c"] or 0,
+	}, ForeignMessage)
+end
 
-		if self.c ~= 0 then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, self.c)
-		end
+function ForeignMessage.encode(self: ForeignMessage): buffer
+	local output = buffer.create(0)
+	local cursor = 0
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+	if self.c ~= 0 then
+		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+		output, cursor = proto.writeVarInt(output, cursor, self.c)
+	end
 
-	decode = function(input: buffer): ForeignMessage
-		local self = ForeignMessage.new()
-		local cursor = 0
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
 
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
+function ForeignMessage.decode(input: buffer): ForeignMessage
+	local self = ForeignMessage.new()
+	local cursor = 0
 
-			if wireType == proto.wireTypes.varint then
-				if field == 1 then
-					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					self.c = proto.limitInt32(value)
-				end
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			if field == 1 then
+				local value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.c = proto.limitInt32(value)
 			end
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
+	return self
+end
 
-	jsonEncode = function(self: ForeignMessage): any
-		local output: {
-			c: number?,
-		} = {}
+function ForeignMessage.jsonEncode(self: ForeignMessage): any
+	local output: {
+		c: number?,
+	} = {}
 
-		if self.c ~= 0 then
-			output.c = self.c
+	if self.c ~= 0 then
+		output.c = self.c
+	end
+
+	return output
+end
+
+function ForeignMessage.jsonDecode(input: { [string]: any }): ForeignMessage
+	local self = ForeignMessage.new()
+
+	if input.c ~= nil then
+		self.c = input.c
+	end
+
+	return self
+end
+
+local NullHypothesisProto3: proto.Message<_NullHypothesisProto3Impl> = {} :: _NullHypothesisProto3Impl
+NullHypothesisProto3.__index = NullHypothesisProto3
+
+function NullHypothesisProto3.new(data: _NullHypothesisProto3Fields?): NullHypothesisProto3
+	return setmetatable({}, NullHypothesisProto3)
+end
+
+function NullHypothesisProto3.encode(self: NullHypothesisProto3): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function NullHypothesisProto3.decode(input: buffer): NullHypothesisProto3
+	local self = NullHypothesisProto3.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return output
-	end,
+	return self
+end
 
-	jsonDecode = function(input: { [string]: any }): ForeignMessage
-		local self = ForeignMessage.new()
+function NullHypothesisProto3.jsonEncode(self: NullHypothesisProto3): any
+	local output: {} = {}
 
-		if input.c ~= nil then
-			self.c = input.c
+	return output
+end
+
+function NullHypothesisProto3.jsonDecode(input: { [string]: any }): NullHypothesisProto3
+	local self = NullHypothesisProto3.new()
+
+	return self
+end
+
+local EnumOnlyProto3: proto.Message<_EnumOnlyProto3Impl> = {} :: _EnumOnlyProto3Impl
+EnumOnlyProto3.__index = EnumOnlyProto3
+
+function EnumOnlyProto3.new(data: _EnumOnlyProto3Fields?): EnumOnlyProto3
+	return setmetatable({}, EnumOnlyProto3)
+end
+
+function EnumOnlyProto3.encode(self: EnumOnlyProto3): buffer
+	local output = buffer.create(0)
+	local cursor = 0
+
+	local shrunkBuffer = buffer.create(cursor)
+	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+	return shrunkBuffer
+end
+
+function EnumOnlyProto3.decode(input: buffer): EnumOnlyProto3
+	local self = EnumOnlyProto3.new()
+	local cursor = 0
+
+	while cursor < buffer.len(input) do
+		local field, wireType
+		field, wireType, cursor = proto.readTag(input, cursor)
+
+		if wireType == proto.wireTypes.varint then
+			-- No fields
+		elseif wireType == proto.wireTypes.lengthDelimited then
+			-- No fields
+		elseif wireType == proto.wireTypes.i32 then
+			-- No fields
+		elseif wireType == proto.wireTypes.i64 then
+			-- No fields
+		else
+			error("Unsupported wire type: " .. wireType)
 		end
+	end
 
-		return self
-	end,
-}
+	return self
+end
 
-NullHypothesisProto3 = {
-	new = function()
-		return {}
-	end,
+function EnumOnlyProto3.jsonEncode(self: EnumOnlyProto3): any
+	local output: {} = {}
 
-	encode = function(self: NullHypothesisProto3): buffer
-		local output = buffer.create(0)
-		local cursor = 0
+	return output
+end
 
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
+function EnumOnlyProto3.jsonDecode(input: { [string]: any }): EnumOnlyProto3
+	local self = EnumOnlyProto3.new()
 
-	decode = function(input: buffer): NullHypothesisProto3
-		local self = NullHypothesisProto3.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: NullHypothesisProto3): any
-		local output: {} = {}
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): NullHypothesisProto3
-		local self = NullHypothesisProto3.new()
-
-		return self
-	end,
-}
-
-EnumOnlyProto3 = {
-	new = function()
-		return {}
-	end,
-
-	encode = function(self: EnumOnlyProto3): buffer
-		local output = buffer.create(0)
-		local cursor = 0
-
-		local shrunkBuffer = buffer.create(cursor)
-		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-		return shrunkBuffer
-	end,
-
-	decode = function(input: buffer): EnumOnlyProto3
-		local self = EnumOnlyProto3.new()
-		local cursor = 0
-
-		while cursor < buffer.len(input) do
-			local field, wireType
-			field, wireType, cursor = proto.readTag(input, cursor)
-
-			if wireType == proto.wireTypes.varint then
-				-- No fields
-			elseif wireType == proto.wireTypes.lengthDelimited then
-				-- No fields
-			elseif wireType == proto.wireTypes.i32 then
-				-- No fields
-			elseif wireType == proto.wireTypes.i64 then
-				-- No fields
-			else
-				error("Unsupported wire type: " .. wireType)
-			end
-		end
-
-		return self
-	end,
-
-	jsonEncode = function(self: EnumOnlyProto3): any
-		local output: {} = {}
-
-		return output
-	end,
-
-	jsonDecode = function(input: { [string]: any }): EnumOnlyProto3
-		local self = EnumOnlyProto3.new()
-
-		return self
-	end,
-}
+	return self
+end
 
 EnumOnlyProto3_Bool = {
 	fromNumber = function(value: number): EnumOnlyProto3_Bool?
