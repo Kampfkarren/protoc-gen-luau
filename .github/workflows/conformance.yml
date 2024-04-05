@@ -1,0 +1,32 @@
+name: Conformance
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  conformance_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download Rust
+      uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: Download just
+      run: sudo snap install --edge --classic just
+    - name: Download cargo binstall (for lune)
+      uses: cargo-bins/cargo-binstall@main
+    - name: Download lune
+      run: cargo binstall lune -y
+    - name: Download Protoc
+      uses: arduino/setup-protoc@v3
+    - name: Download protobuf-conformance
+      run: |
+        wget $(curl "https://latest-github-release.upliftgames.cloud/bufbuild/protobuf-conformance" | sed -nr 's/.*"browser_download_url":"(https:\/\/github\.com\/bufbuild\/protobuf-conformance\/releases\/download.+-linux-x86_64\.zip)".*/\1/p') -O conformance_test_runner.zip
+        unzip conformance_test_runner.zip -d conformance_test_runner
+        mv ./conformance_test_runner/bin/conformance_test_runner ./conformance/conformance_test_runner
+    - name: Run conformance tests
+      run: just generate-conformance
+    - name: Check if conformance tests changed
+      run: git diff --exit-code conformance/generated
