@@ -13,12 +13,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Download Rust
       uses: actions-rust-lang/setup-rust-toolchain@v1
-    - name: Cache lune
-      id: cache-lune
-      uses: actions/cache@v4
-      with:
-        path: ~/.cargo/bin/lune
-        key: ${{ runner.os }}-lune
+    - name: Cache Rust dependencies
+      uses: Swatinem/rust-cache@v2
     - name: Download just
       run: sudo snap install --edge --classic just
     - name: Download cargo binstall (for lune)
