@@ -618,6 +618,7 @@ dependencies = [
  "prost",
  "prost-types",
  "stylua",
+ "typed-path",
 ]
 
 [[package]]
@@ -950,6 +951,12 @@ dependencies = [
  "thread_local",
  "tracing-core",
 ]
+
+[[package]]
+name = "typed-path"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6069e2cc1d241fd4ff5fa067e8882996fcfce20986d078696e05abccbcf27b43"
 
 [[package]]
 name = "unicode-ident"

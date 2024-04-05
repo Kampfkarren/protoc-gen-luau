@@ -12,6 +12,7 @@ pathdiff = "0.2.1"
 prost = "0.12.3"
 prost-types = "0.12.3"
 stylua = { version = "0.20.0", default-features = false, features = ["luau"] }
+typed-path = "0.8.0"
 
 [profile.dev.package.stylua]
 opt-level = 3
