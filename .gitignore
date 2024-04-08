@@ -3,4 +3,6 @@
 conformance/conformance_test_runner
 conformance/last_message.bin
 
+src/tests/samples
+
 /generated

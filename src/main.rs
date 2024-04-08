@@ -9,6 +9,9 @@ mod generator;
 mod if_builder;
 mod string_builder;
 
+#[cfg(test)]
+mod luau_tests;
+
 fn main() -> color_eyre::Result<()> {
     let stdin = std::io::stdin();
     let mut bytes: Vec<u8> = Vec::new();
