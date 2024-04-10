@@ -206,15 +206,11 @@ wktJson.Value = {
 	end,
 
 	deserialize = function<M>(input: any, new: (Value) -> M): M
-		print('value input is: ')
-		print(input)
-		print(typeof(input))
 		if input == nil then
 			return new({ kind = { type = "null_value", value = "NULL_VALUE" } })
 		elseif typeof(input) == "number" then
 			return new({ kind = { type = "number_value", value = input } })
 		elseif typeof(input) == "string" then
-			print('oh hi')
 			return new({ kind = { type = "string_value", value = input } })
 		elseif typeof(input) == "boolean" then
 			return new({ kind = { type = "bool_value", value = input } })
@@ -285,8 +281,6 @@ wktJson.ListValue = {
 
 	deserialize = function<M>(input: { any }, new: (ListValue) -> M): M
 		local values = {}
-		print('input is...')
-		print(input)
 
 		for _, value in input do
 			table.insert(values, wktJson.Value.deserialize(value))
@@ -297,5 +291,25 @@ wktJson.ListValue = {
 		})
 	end,
 } :: WellKnownType<ListValue, { any }>
+
+type FieldMask = {
+	paths: { string },
+}
+wktJson.FieldMask = {
+	serialize = function(fieldMask: FieldMask): string
+		return table.concat(fieldMask.paths, ",")
+	end,
+
+	deserialize = function<M>(input: string, new: (FieldMask) -> M): M
+		local paths = {}
+		for path in string.gmatch(input, "[^,]+") do
+			table.insert(paths, path)
+		end
+
+		return new({
+			paths = paths,
+		})
+	end,
+} :: WellKnownType<FieldMask, string>
 
 return wktJson
