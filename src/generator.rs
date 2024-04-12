@@ -7,6 +7,7 @@ use prost_types::{
     },
     DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
 };
+use std::path::PathBuf as StdPathBuf;
 use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
@@ -53,18 +54,6 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         content: Some(include_str!("./luau/proto/base64.luau").to_owned()),
         ..Default::default()
     });
-
-    if request.proto_file.iter().any(|file| {
-        file.message_type
-            .iter()
-            .any(|message| message_type_has_special_json(file, message))
-    }) {
-        files.push(File {
-            name: Some("proto/wktJson.luau".to_owned()),
-            content: Some(include_str!("./luau/proto/wktJson.luau").to_owned()),
-            ..Default::default()
-        });
-    }
 
     files.append(
         &mut request
@@ -223,55 +212,62 @@ pub fn file_path_export_name(path: &Path) -> String {
     )
 }
 
-const MESSAGE: &str = r#"<name> = {
-    new = function()
-        return {
-<default>
-        }
-    end,
+const MESSAGE: &str = r#"
+local <name>: proto.Message<_<name>Impl> = {} :: _<name>Impl
+<name>.__index = <name>
 
-    encode = function(self: <name>): buffer
-        local output = buffer.create(0)
-        local cursor = 0
+function <name>.new(data: _<name>Fields?): <name>
+    return setmetatable({
+<default>
+    }, <name>)
+end
+
+function <name>.encode(self: <name>): buffer
+    local output = buffer.create(0)
+    local cursor = 0
 
 <encode>
-        local shrunkBuffer = buffer.create(cursor)
-        buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-        return shrunkBuffer
-    end,
+    local shrunkBuffer = buffer.create(cursor)
+    buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+    return shrunkBuffer
+end
 
-    decode = function(input: buffer): <name>
-        local self = <name>.new()
-        local cursor = 0
+function <name>.decode(input: buffer): <name>
+    local self = <name>.new()
+    local cursor = 0
 
-        while cursor < buffer.len(input) do
-            local field, wireType
-            field, wireType, cursor = proto.readTag(input, cursor)
+    while cursor < buffer.len(input) do
+        local field, wireType
+        field, wireType, cursor = proto.readTag(input, cursor)
 
-            if wireType == proto.wireTypes.varint then
-                <decode_varint>
-            elseif wireType == proto.wireTypes.lengthDelimited then
-                <decode_len>
-            elseif wireType == proto.wireTypes.i32 then
-                <decode_i32>
-            elseif wireType == proto.wireTypes.i64 then
-                <decode_i64>
-            else
-                error("Unsupported wire type: " .. wireType)
-            end
+        if wireType == proto.wireTypes.varint then
+            <decode_varint>
+        elseif wireType == proto.wireTypes.lengthDelimited then
+            <decode_len>
+        elseif wireType == proto.wireTypes.i32 then
+            <decode_i32>
+        elseif wireType == proto.wireTypes.i64 then
+            <decode_i64>
+        else
+            error("Unsupported wire type: " .. wireType)
         end
-
-        return self
-    end,
-
-    jsonEncode = function(self: <name>): any
-        <json_encode>
-    end,
-
-    jsonDecode = function(input: { [string]: any }): <name>
-        <json_decode>
     end
-}"#;
+
+    return self
+end
+
+<json>
+"#;
+
+const JSON: &str = r#"
+function <name>.jsonEncode(self: <name>): any
+    <json_encode>
+end
+
+function <name>.jsonDecode(input: { [string]: any }): <name>
+    <json_decode>
+end
+"#;
 
 const ENUM: &str = r#"<name> = {
     fromNumber = function(value: number): <name>?
@@ -316,6 +312,8 @@ struct FileGenerator<'a> {
     exports: Vec<String>,
 
     roblox_imports: bool,
+
+    wkt_json: HashMap<&'static str, &'static str>,
 }
 
 impl<'a> FileGenerator<'a> {
@@ -332,6 +330,13 @@ impl<'a> FileGenerator<'a> {
             exports: Vec::new(),
 
             roblox_imports: false,
+
+            wkt_json: HashMap::from([
+                ("duration", include_str!("./luau/proto/wkt/duration.luau")),
+                ("timestamp", include_str!("./luau/proto/wkt/timestamp.luau")),
+                ("struct", include_str!("./luau/proto/wkt/struct.luau")),
+                ("wrappers", include_str!("./luau/proto/wkt/wrappers.luau")),
+            ]),
         }
     }
 
@@ -370,21 +375,6 @@ impl<'a> FileGenerator<'a> {
             "local proto = require({})",
             self.require_path(&proto_require_path)
         ));
-
-        if self
-            .file_descriptor_proto
-            .message_type
-            .iter()
-            .any(|message| message_type_has_special_json(&self.file_descriptor_proto, message))
-        {
-            let mut wkt_json_path = proto_require_path.clone();
-            wkt_json_path.push("wktJson");
-
-            contents.push(format!(
-                "local wktJson = require({})",
-                self.require_path(&wkt_json_path)
-            ));
-        }
 
         for import in &self.file_descriptor_proto.dependency {
             let path_diff = pathdiff::diff_paths(
@@ -437,6 +427,18 @@ impl<'a> FileGenerator<'a> {
 
         contents.push(self.types.build());
         contents.push(self.implementations.build());
+
+        // If the file is in google/protobuf and there's a corresponding file in wkt_json, include
+        // it.
+        if self.file_descriptor_proto.package() == "google.protobuf" {
+            let filename = StdPathBuf::from(self.file_descriptor_proto.name());
+            let name = filename.file_stem().unwrap().to_str().unwrap();
+
+            if self.wkt_json.contains_key(name) {
+                contents.push(self.wkt_json.get(name).unwrap());
+            }
+        }
+
         contents.push(create_return(self.exports));
 
         let code = contents.build();
@@ -478,9 +480,26 @@ impl<'a> FileGenerator<'a> {
             self.exports.push(name.clone());
         }
 
-        self.types
-            .push(format!("local {name}: proto.Message<{name}>"));
-        self.types.push(format!("export type {name} = {{"));
+        let mut json_type = "{ [string]: any }";
+        let special_json_type = message_special_json_type(&self.file_descriptor_proto, message);
+        if special_json_type.is_some() {
+            json_type = special_json_type.unwrap();
+        }
+
+        self.types.push(format!(
+            r#"type _{name}Impl = {{
+                __index: _{name}Impl,
+                new: () -> {name},
+                encode: (self: {name}) -> buffer,
+                decode: (input: buffer) -> {name},
+                jsonEncode: (self: {name}) -> {json_type},
+                jsonDecode: (input: {json_type}) -> {name},
+            }}
+            "#
+        ));
+
+        self.types.push(format!(r#"type _{name}Fields = {{"#));
+
         self.types.indent();
 
         let mut json_type = StringBuilder::new();
@@ -554,14 +573,19 @@ impl<'a> FileGenerator<'a> {
             encode_lines.append(&mut field.encode());
             encode_lines.blank();
 
-            if !message_type_has_special_json(&self.file_descriptor_proto, message) {
+            if message_special_json_type(&self.file_descriptor_proto, message).is_none() {
                 json_encode_lines.append(&mut field.json_encode());
                 json_encode_lines.blank();
 
                 json_decode_lines.append(&mut field.json_decode());
             }
 
-            default_lines.push(format!("{} = {},", field.name(), field.default()));
+            default_lines.push(format!(
+                r#"{} = data and data["{}"] or {},"#,
+                field.name(),
+                field.name(),
+                field.default()
+            ));
 
             for inner_field in field.inner_fields() {
                 let output = &format!("self.{}", field.name());
@@ -603,6 +627,10 @@ impl<'a> FileGenerator<'a> {
         self.types.push("}");
         self.types.blank();
 
+        self.types.push(format!(
+            r#"export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"#
+        ));
+
         json_type.dedent();
         json_type.push("}");
 
@@ -616,35 +644,29 @@ impl<'a> FileGenerator<'a> {
             .replace("<decode_i32>", &create_decoder(i32_fields))
             .replace("<decode_i64>", &create_decoder(i64_fields));
 
-        if message_type_has_special_json(&self.file_descriptor_proto, message) {
-            let wkt_json_namespace = format!("wktJson.{name}");
-
-            final_code = final_code
-                .replace(
-                    "<json_encode>",
-                    &format!("return {wkt_json_namespace}.serialize(self :: any)"),
-                )
-                .replace(
-                    "<json_decode>",
-                    &format!("return {wkt_json_namespace}.deserialize(input :: any) -- any cast because we have a special jsonDecode"),
-                );
+        if message_special_json_type(&self.file_descriptor_proto, message).is_some() {
+            final_code = final_code.replace("<json>", "");
         } else {
-            final_code = final_code
-                .replace(
-                    "<json_encode>",
-                    &format!(
-                        "local output: {} = {{}}\n\n{}\nreturn output",
-                        json_type.build(),
-                        &json_encode_lines.build()
+            final_code = final_code.replace(
+                "<json>",
+                &JSON
+                    .replace("<name>", &name)
+                    .replace(
+                        "<json_encode>",
+                        &format!(
+                            "local output: {} = {{}}\n\n{}\nreturn output",
+                            json_type.build(),
+                            &json_encode_lines.build()
+                        ),
+                    )
+                    .replace(
+                        "<json_decode>",
+                        &format!(
+                            "local self = {name}.new()\n\n{}\nreturn self",
+                            &json_decode_lines.build()
+                        ),
                     ),
-                )
-                .replace(
-                    "<json_decode>",
-                    &format!(
-                        "local self = {name}.new()\n\n{}\nreturn self",
-                        &json_decode_lines.build()
-                    ),
-                )
+            )
         }
 
         self.implementations.push(final_code);
@@ -769,24 +791,35 @@ impl<'a> FileGenerator<'a> {
     }
 }
 
-fn message_type_has_special_json(file: &FileDescriptorProto, message: &DescriptorProto) -> bool {
-    file.package() == "google.protobuf"
-        && matches!(
-            message.name(),
-            "Duration"
-                | "BoolValue"
-                | "BytesValue"
-                | "DoubleValue"
-                | "FloatValue"
-                | "Int32Value"
-                | "Int64Value"
-                | "UInt32Value"
-                | "UInt64Value"
-                | "StringValue"
-                | "NullValue"
-                | "Value"
-                | "Struct"
-                | "ListValue"
-                | "Timestamp"
-        )
+fn message_special_json_type<'a>(
+    file: &'a FileDescriptorProto,
+    message: &'a DescriptorProto,
+) -> Option<&'a str> {
+    let json_type_map: HashMap<&'static str, &'static str> = HashMap::from([
+        ("BoolValue", "boolean"),
+        ("BytesValue", "buffer"),
+        ("DoubleValue", "number"),
+        ("FloatValue", "number"),
+        ("Int32Value", "number"),
+        ("Int64Value", "number"),
+        ("UInt32Value", "number"),
+        ("UInt64Value", "number"),
+        ("StringValue", "string"),
+        ("Duration", "string"),
+        ("Timestamp", "string"),
+        ("Value", "any"),
+        ("NullValue", "nil"),
+        ("Struct", "{ [string]: any }"),
+        ("ListValue", "{ any }"),
+    ]);
+
+    if file.package() != "google.protobuf" {
+        return None;
+    }
+
+    if !json_type_map.contains_key(message.name()) {
+        return None;
+    }
+
+    return json_type_map.get(message.name()).copied();
 }

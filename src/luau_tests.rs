@@ -28,7 +28,7 @@ fn wait_for_samples() {
 }
 
 fn generate_samples() {
-    let files = ["kitchen_sink.proto"];
+    let files = ["kitchen_sink.proto", "wkt.proto"];
 
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()
@@ -75,4 +75,5 @@ async fn run_luau_test(filename: &Path) {
 #[tokio::test]
 async fn basic() {
     run_luau_test(Path::new("basic.luau")).await;
+    run_luau_test(Path::new("wkt_json.luau")).await;
 }
