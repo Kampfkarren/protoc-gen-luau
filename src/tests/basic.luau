@@ -3,7 +3,6 @@ local tests = require("./tests")
 local kitchen_sink = require("./samples/kitchen_sink")
 
 local assertEquals = tests.assertEquals
-local assertTablesEquivalent = tests.assertTablesEquivalent
 local describe = tests.describe
 local it = tests.it
 
@@ -22,8 +21,7 @@ describe("json deserializing", function()
 		local kitchenSink = kitchen_sink.KitchenSink.jsonDecode(json)
 
 		assertEquals(kitchenSink.int32, 1)
-
-		assertTablesEquivalent(kitchenSink:jsonEncode(), json)
+		assertEquals(kitchenSink:jsonEncode(), json)
 	end)
 end)
 

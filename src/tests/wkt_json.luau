@@ -6,7 +6,6 @@ local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
 
 local assertEquals = tests.assertEquals
-local assertTablesEquivalent = tests.assertTablesEquivalent
 local describe = tests.describe
 local it = tests.it
 
@@ -20,7 +19,7 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_value.kind.type, "null_value")
 			assertEquals(deserialized_value.kind.value, "NULL_VALUE")
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 
 		it("with number value", function()
@@ -31,18 +30,18 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_value.kind.type, "number_value")
 			assertEquals(deserialized_value.kind.value, 3.14)
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 
 		it("with string value", function()
-			local json ="Hello, World!"
+			local json = "Hello, World!"
 
 			local deserialized_value = struct.Value.jsonDecode(json)
 
 			assertEquals(deserialized_value.kind.type, "string_value")
 			assertEquals(deserialized_value.kind.value, "Hello, World!")
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 
 		it("with boolean value", function()
@@ -53,7 +52,7 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_value.kind.type, "bool_value")
 			assertEquals(deserialized_value.kind.value, true)
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 
 		it("with struct value", function()
@@ -70,11 +69,11 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_value.kind.type, "struct_value")
 			assertEquals(deserialized_value.kind.value.fields.name.kind.value.fields.family.kind.value, "Doe")
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 
 		it("with list value", function()
-			local json ={
+			local json = {
 				3.14,
 				"Hello, World!",
 				true,
@@ -93,7 +92,7 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_value.kind.value.values[3].kind.type, "bool_value")
 			assertEquals(deserialized_value.kind.value.values[3].kind.value, true)
 
-			assertTablesEquivalent(deserialized_value:jsonEncode(), json)
+			assertEquals(deserialized_value:jsonEncode(), json)
 		end)
 	end)
 
@@ -147,87 +146,87 @@ describe("JSON round-trips should work for", function()
 
 	describe("wrapper for", function()
 		it("bool", function()
-			local bool_value = wrappers.BoolValue.new({value = true})
+			local bool_value = wrappers.BoolValue.new({ value = true })
 
 			local json = bool_value:jsonEncode()
 			assertEquals(json, true)
 
 			local deserialized_bool_value = wrappers.BoolValue.jsonDecode(json)
-			assertTablesEquivalent(bool_value, deserialized_bool_value)
+			assertEquals(bool_value, deserialized_bool_value)
 		end)
 
 		it("int32", function()
-			local int32_value = wrappers.Int32Value.new({value = 42})
+			local int32_value = wrappers.Int32Value.new({ value = 42 })
 
 			local json = int32_value:jsonEncode()
 			assertEquals(json, 42)
 
 			local deserialized_int32_value = wrappers.Int32Value.jsonDecode(json)
-			assertTablesEquivalent(int32_value, deserialized_int32_value)
+			assertEquals(int32_value, deserialized_int32_value)
 		end)
 
 		it("int64", function()
-			local int64_value = wrappers.Int64Value.new({value = 42})
+			local int64_value = wrappers.Int64Value.new({ value = 42 })
 
 			local json = int64_value:jsonEncode()
 			assertEquals(json, 42)
 
 			local deserialized_int64_value = wrappers.Int64Value.jsonDecode(json)
-			assertTablesEquivalent(int64_value, deserialized_int64_value)
+			assertEquals(int64_value, deserialized_int64_value)
 		end)
 
 		it("uint32", function()
-			local uint32_value = wrappers.UInt32Value.new({value = 42})
+			local uint32_value = wrappers.UInt32Value.new({ value = 42 })
 
 			local json = uint32_value:jsonEncode()
 			assertEquals(json, 42)
 
 			local deserialized_uint32_value = wrappers.UInt32Value.jsonDecode(json)
-			assertTablesEquivalent(uint32_value, deserialized_uint32_value)
+			assertEquals(uint32_value, deserialized_uint32_value)
 		end)
 
 		it("uint64", function()
-			local uint64_value = wrappers.UInt64Value.new({value = 42})
+			local uint64_value = wrappers.UInt64Value.new({ value = 42 })
 
 			local json = uint64_value:jsonEncode()
 			assertEquals(json, 42)
 
 			local deserialized_uint64_value = wrappers.UInt64Value.jsonDecode(json)
-			assertTablesEquivalent(uint64_value, deserialized_uint64_value)
+			assertEquals(uint64_value, deserialized_uint64_value)
 		end)
 
 		it("float", function()
-			local float_value = wrappers.FloatValue.new({value = 3.14})
+			local float_value = wrappers.FloatValue.new({ value = 3.14 })
 
 			local json = float_value:jsonEncode()
 			assertEquals(json, 3.14)
 
 			local deserialized_float_value = wrappers.FloatValue.jsonDecode(json)
-			assertTablesEquivalent(float_value, deserialized_float_value)
+			assertEquals(float_value, deserialized_float_value)
 		end)
 
 		it("double", function()
-			local double_value = wrappers.DoubleValue.new({value = 3.14})
+			local double_value = wrappers.DoubleValue.new({ value = 3.14 })
 
 			local json = double_value:jsonEncode()
 			assertEquals(json, 3.14)
 
 			local deserialized_double_value = wrappers.DoubleValue.jsonDecode(json)
-			assertTablesEquivalent(double_value, deserialized_double_value)
+			assertEquals(double_value, deserialized_double_value)
 		end)
 
 		it("string", function()
-			local string_value = wrappers.StringValue.new({value = "Hello, World!"})
+			local string_value = wrappers.StringValue.new({ value = "Hello, World!" })
 
 			local json = string_value:jsonEncode()
 			assertEquals(json, "Hello, World!")
 
 			local deserialized_string_value = wrappers.StringValue.jsonDecode(json)
-			assertTablesEquivalent(string_value, deserialized_string_value)
+			assertEquals(string_value, deserialized_string_value)
 		end)
 
 		it("bytes", function()
-			local bytes_value = wrappers.BytesValue.new({value = "Hello, World!"})
+			local bytes_value = wrappers.BytesValue.new({ value = "Hello, World!" })
 
 			local json = bytes_value:jsonEncode()
 
@@ -235,10 +234,9 @@ describe("JSON round-trips should work for", function()
 			assertEquals(json, "Hello, World!")
 
 			local deserialized_bytes_value = wrappers.BytesValue.jsonDecode(json)
-			assertTablesEquivalent(bytes_value, deserialized_bytes_value)
+			assertEquals(bytes_value, deserialized_bytes_value)
 		end)
 	end)
-
 end)
 
 tests.finish()
