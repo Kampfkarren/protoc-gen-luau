@@ -312,8 +312,6 @@ struct FileGenerator<'a> {
     exports: Vec<String>,
 
     roblox_imports: bool,
-
-    wkt_json: HashMap<&'static str, &'static str>,
 }
 
 impl<'a> FileGenerator<'a> {
@@ -330,13 +328,6 @@ impl<'a> FileGenerator<'a> {
             exports: Vec::new(),
 
             roblox_imports: false,
-
-            wkt_json: HashMap::from([
-                ("duration", include_str!("./luau/proto/wkt/duration.luau")),
-                ("timestamp", include_str!("./luau/proto/wkt/timestamp.luau")),
-                ("struct", include_str!("./luau/proto/wkt/struct.luau")),
-                ("wrappers", include_str!("./luau/proto/wkt/wrappers.luau")),
-            ]),
         }
     }
 
@@ -434,8 +425,8 @@ impl<'a> FileGenerator<'a> {
             let filename = StdPathBuf::from(self.file_descriptor_proto.name());
             let name = filename.file_stem().unwrap().to_str().unwrap();
 
-            if self.wkt_json.contains_key(name) {
-                contents.push(self.wkt_json.get(name).unwrap());
+            if let Some(native_wkt_implementation) = native_wkt_implementation(name) {
+                contents.push(native_wkt_implementation);
             }
         }
 
@@ -788,35 +779,40 @@ impl<'a> FileGenerator<'a> {
     }
 }
 
-fn message_special_json_type<'a>(
-    file: &'a FileDescriptorProto,
-    message: &'a DescriptorProto,
-) -> Option<&'a str> {
-    let json_type_map: HashMap<&'static str, &'static str> = HashMap::from([
-        ("BoolValue", "boolean"),
-        ("BytesValue", "buffer"),
-        ("DoubleValue", "number"),
-        ("FloatValue", "number"),
-        ("Int32Value", "number"),
-        ("Int64Value", "number"),
-        ("UInt32Value", "number"),
-        ("UInt64Value", "number"),
-        ("StringValue", "string"),
-        ("Duration", "string"),
-        ("Timestamp", "string"),
-        ("Value", "any"),
-        ("NullValue", "nil"),
-        ("Struct", "{ [string]: any }"),
-        ("ListValue", "{ any }"),
-    ]);
+fn native_wkt_implementation(name: &str) -> Option<&'static str> {
+    match name {
+        "duration" => Some(include_str!("./luau/proto/wkt/duration.luau")),
+        "timestamp" => Some(include_str!("./luau/proto/wkt/timestamp.luau")),
+        "struct" => Some(include_str!("./luau/proto/wkt/struct.luau")),
+        "wrappers" => Some(include_str!("./luau/proto/wkt/wrappers.luau")),
+        _ => None,
+    }
+}
 
+fn message_special_json_type(
+    file: &FileDescriptorProto,
+    message: &DescriptorProto,
+) -> Option<&'static str> {
     if file.package() != "google.protobuf" {
         return None;
     }
 
-    if !json_type_map.contains_key(message.name()) {
-        return None;
+    match message.name() {
+        "BoolValue" => Some("boolean"),
+        "BytesValue" => Some("buffer"),
+        "DoubleValue" => Some("number"),
+        "FloatValue" => Some("number"),
+        "Int32Value" => Some("number"),
+        "Int64Value" => Some("number"),
+        "UInt32Value" => Some("number"),
+        "UInt64Value" => Some("number"),
+        "StringValue" => Some("string"),
+        "Duration" => Some("string"),
+        "Timestamp" => Some("string"),
+        "Value" => Some("any"),
+        "NullValue" => Some("nil"),
+        "Struct" => Some("{ [string]: any }"),
+        "ListValue" => Some("{ any }"),
+        _ => None,
     }
-
-    return json_type_map.get(message.name()).copied();
 }
