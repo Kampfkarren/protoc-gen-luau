@@ -18,6 +18,8 @@ type _DoubleValueFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
+local DoubleValue: proto.Message<DoubleValue>
+
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
 	new: () -> FloatValue,
@@ -32,6 +34,8 @@ type _FloatValueFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
+local FloatValue: proto.Message<FloatValue>
+
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
 	new: () -> Int64Value,
@@ -46,6 +50,8 @@ type _Int64ValueFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
+local Int64Value: proto.Message<Int64Value>
+
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
 	new: () -> UInt64Value,
@@ -60,6 +66,8 @@ type _UInt64ValueFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
+local UInt64Value: proto.Message<UInt64Value>
+
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
 	new: () -> Int32Value,
@@ -74,6 +82,8 @@ type _Int32ValueFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
+local Int32Value: proto.Message<Int32Value>
+
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
 	new: () -> UInt32Value,
@@ -88,6 +98,8 @@ type _UInt32ValueFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
+local UInt32Value: proto.Message<UInt32Value>
+
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
 	new: () -> BoolValue,
@@ -102,6 +114,8 @@ type _BoolValueFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
+local BoolValue: proto.Message<BoolValue>
+
 type _StringValueImpl = {
 	__index: _StringValueImpl,
 	new: () -> StringValue,
@@ -116,6 +130,8 @@ type _StringValueFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
+local StringValue: proto.Message<StringValue>
+
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
 	new: () -> BytesValue,
@@ -130,17 +146,18 @@ type _BytesValueFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
+local BytesValue: proto.Message<BytesValue>
 
-local DoubleValue: proto.Message<_DoubleValueImpl> = {} :: _DoubleValueImpl
-DoubleValue.__index = DoubleValue
+local _DoubleValueImpl = {}
+_DoubleValueImpl.__index = _DoubleValueImpl
 
-function DoubleValue.new(data: _DoubleValueFields?): DoubleValue
+function _DoubleValueImpl.new(data: _DoubleValueFields?): DoubleValue
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, DoubleValue)
+	}, _DoubleValueImpl)
 end
 
-function DoubleValue.encode(self: DoubleValue): buffer
+function _DoubleValueImpl.encode(self: DoubleValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -154,8 +171,8 @@ function DoubleValue.encode(self: DoubleValue): buffer
 	return shrunkBuffer
 end
 
-function DoubleValue.decode(input: buffer): DoubleValue
-	local self = DoubleValue.new()
+function _DoubleValueImpl.decode(input: buffer): DoubleValue
+	local self = _DoubleValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -182,16 +199,18 @@ function DoubleValue.decode(input: buffer): DoubleValue
 	return self
 end
 
-local FloatValue: proto.Message<_FloatValueImpl> = {} :: _FloatValueImpl
-FloatValue.__index = FloatValue
+DoubleValue = _DoubleValueImpl
 
-function FloatValue.new(data: _FloatValueFields?): FloatValue
+local _FloatValueImpl = {}
+_FloatValueImpl.__index = _FloatValueImpl
+
+function _FloatValueImpl.new(data: _FloatValueFields?): FloatValue
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, FloatValue)
+	}, _FloatValueImpl)
 end
 
-function FloatValue.encode(self: FloatValue): buffer
+function _FloatValueImpl.encode(self: FloatValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -205,8 +224,8 @@ function FloatValue.encode(self: FloatValue): buffer
 	return shrunkBuffer
 end
 
-function FloatValue.decode(input: buffer): FloatValue
-	local self = FloatValue.new()
+function _FloatValueImpl.decode(input: buffer): FloatValue
+	local self = _FloatValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -233,16 +252,18 @@ function FloatValue.decode(input: buffer): FloatValue
 	return self
 end
 
-local Int64Value: proto.Message<_Int64ValueImpl> = {} :: _Int64ValueImpl
-Int64Value.__index = Int64Value
+FloatValue = _FloatValueImpl
 
-function Int64Value.new(data: _Int64ValueFields?): Int64Value
+local _Int64ValueImpl = {}
+_Int64ValueImpl.__index = _Int64ValueImpl
+
+function _Int64ValueImpl.new(data: _Int64ValueFields?): Int64Value
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, Int64Value)
+	}, _Int64ValueImpl)
 end
 
-function Int64Value.encode(self: Int64Value): buffer
+function _Int64ValueImpl.encode(self: Int64Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -256,8 +277,8 @@ function Int64Value.encode(self: Int64Value): buffer
 	return shrunkBuffer
 end
 
-function Int64Value.decode(input: buffer): Int64Value
-	local self = Int64Value.new()
+function _Int64ValueImpl.decode(input: buffer): Int64Value
+	local self = _Int64ValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -284,16 +305,18 @@ function Int64Value.decode(input: buffer): Int64Value
 	return self
 end
 
-local UInt64Value: proto.Message<_UInt64ValueImpl> = {} :: _UInt64ValueImpl
-UInt64Value.__index = UInt64Value
+Int64Value = _Int64ValueImpl
 
-function UInt64Value.new(data: _UInt64ValueFields?): UInt64Value
+local _UInt64ValueImpl = {}
+_UInt64ValueImpl.__index = _UInt64ValueImpl
+
+function _UInt64ValueImpl.new(data: _UInt64ValueFields?): UInt64Value
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, UInt64Value)
+	}, _UInt64ValueImpl)
 end
 
-function UInt64Value.encode(self: UInt64Value): buffer
+function _UInt64ValueImpl.encode(self: UInt64Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -307,8 +330,8 @@ function UInt64Value.encode(self: UInt64Value): buffer
 	return shrunkBuffer
 end
 
-function UInt64Value.decode(input: buffer): UInt64Value
-	local self = UInt64Value.new()
+function _UInt64ValueImpl.decode(input: buffer): UInt64Value
+	local self = _UInt64ValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -335,16 +358,18 @@ function UInt64Value.decode(input: buffer): UInt64Value
 	return self
 end
 
-local Int32Value: proto.Message<_Int32ValueImpl> = {} :: _Int32ValueImpl
-Int32Value.__index = Int32Value
+UInt64Value = _UInt64ValueImpl
 
-function Int32Value.new(data: _Int32ValueFields?): Int32Value
+local _Int32ValueImpl = {}
+_Int32ValueImpl.__index = _Int32ValueImpl
+
+function _Int32ValueImpl.new(data: _Int32ValueFields?): Int32Value
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, Int32Value)
+	}, _Int32ValueImpl)
 end
 
-function Int32Value.encode(self: Int32Value): buffer
+function _Int32ValueImpl.encode(self: Int32Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -358,8 +383,8 @@ function Int32Value.encode(self: Int32Value): buffer
 	return shrunkBuffer
 end
 
-function Int32Value.decode(input: buffer): Int32Value
-	local self = Int32Value.new()
+function _Int32ValueImpl.decode(input: buffer): Int32Value
+	local self = _Int32ValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -386,16 +411,18 @@ function Int32Value.decode(input: buffer): Int32Value
 	return self
 end
 
-local UInt32Value: proto.Message<_UInt32ValueImpl> = {} :: _UInt32ValueImpl
-UInt32Value.__index = UInt32Value
+Int32Value = _Int32ValueImpl
 
-function UInt32Value.new(data: _UInt32ValueFields?): UInt32Value
+local _UInt32ValueImpl = {}
+_UInt32ValueImpl.__index = _UInt32ValueImpl
+
+function _UInt32ValueImpl.new(data: _UInt32ValueFields?): UInt32Value
 	return setmetatable({
 		value = if data == nil then 0 else data.value,
-	}, UInt32Value)
+	}, _UInt32ValueImpl)
 end
 
-function UInt32Value.encode(self: UInt32Value): buffer
+function _UInt32ValueImpl.encode(self: UInt32Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -409,8 +436,8 @@ function UInt32Value.encode(self: UInt32Value): buffer
 	return shrunkBuffer
 end
 
-function UInt32Value.decode(input: buffer): UInt32Value
-	local self = UInt32Value.new()
+function _UInt32ValueImpl.decode(input: buffer): UInt32Value
+	local self = _UInt32ValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -437,16 +464,18 @@ function UInt32Value.decode(input: buffer): UInt32Value
 	return self
 end
 
-local BoolValue: proto.Message<_BoolValueImpl> = {} :: _BoolValueImpl
-BoolValue.__index = BoolValue
+UInt32Value = _UInt32ValueImpl
 
-function BoolValue.new(data: _BoolValueFields?): BoolValue
+local _BoolValueImpl = {}
+_BoolValueImpl.__index = _BoolValueImpl
+
+function _BoolValueImpl.new(data: _BoolValueFields?): BoolValue
 	return setmetatable({
 		value = if data == nil then false else data.value,
-	}, BoolValue)
+	}, _BoolValueImpl)
 end
 
-function BoolValue.encode(self: BoolValue): buffer
+function _BoolValueImpl.encode(self: BoolValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -460,8 +489,8 @@ function BoolValue.encode(self: BoolValue): buffer
 	return shrunkBuffer
 end
 
-function BoolValue.decode(input: buffer): BoolValue
-	local self = BoolValue.new()
+function _BoolValueImpl.decode(input: buffer): BoolValue
+	local self = _BoolValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -488,16 +517,18 @@ function BoolValue.decode(input: buffer): BoolValue
 	return self
 end
 
-local StringValue: proto.Message<_StringValueImpl> = {} :: _StringValueImpl
-StringValue.__index = StringValue
+BoolValue = _BoolValueImpl
 
-function StringValue.new(data: _StringValueFields?): StringValue
+local _StringValueImpl = {}
+_StringValueImpl.__index = _StringValueImpl
+
+function _StringValueImpl.new(data: _StringValueFields?): StringValue
 	return setmetatable({
 		value = if data == nil then "" else data.value,
-	}, StringValue)
+	}, _StringValueImpl)
 end
 
-function StringValue.encode(self: StringValue): buffer
+function _StringValueImpl.encode(self: StringValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -511,8 +542,8 @@ function StringValue.encode(self: StringValue): buffer
 	return shrunkBuffer
 end
 
-function StringValue.decode(input: buffer): StringValue
-	local self = StringValue.new()
+function _StringValueImpl.decode(input: buffer): StringValue
+	local self = _StringValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -539,16 +570,18 @@ function StringValue.decode(input: buffer): StringValue
 	return self
 end
 
-local BytesValue: proto.Message<_BytesValueImpl> = {} :: _BytesValueImpl
-BytesValue.__index = BytesValue
+StringValue = _StringValueImpl
 
-function BytesValue.new(data: _BytesValueFields?): BytesValue
+local _BytesValueImpl = {}
+_BytesValueImpl.__index = _BytesValueImpl
+
+function _BytesValueImpl.new(data: _BytesValueFields?): BytesValue
 	return setmetatable({
 		value = if data == nil then buffer.create(0) else data.value,
-	}, BytesValue)
+	}, _BytesValueImpl)
 end
 
-function BytesValue.encode(self: BytesValue): buffer
+function _BytesValueImpl.encode(self: BytesValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -562,8 +595,8 @@ function BytesValue.encode(self: BytesValue): buffer
 	return shrunkBuffer
 end
 
-function BytesValue.decode(input: buffer): BytesValue
-	local self = BytesValue.new()
+function _BytesValueImpl.decode(input: buffer): BytesValue
+	local self = _BytesValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -589,6 +622,8 @@ function BytesValue.decode(input: buffer): BytesValue
 
 	return self
 end
+
+BytesValue = _BytesValueImpl
 
 function BoolValue.jsonEncode(value: BoolValue): boolean
 	return value.value

@@ -176,6 +176,8 @@ type _TestAllTypesProto3Fields = {
 }
 
 export type TestAllTypesProto3 = typeof(setmetatable({} :: _TestAllTypesProto3Fields, {} :: _TestAllTypesProto3Impl))
+local TestAllTypesProto3: proto.Message<TestAllTypesProto3>
+
 type _TestAllTypesProto3_NestedMessageImpl = {
 	__index: _TestAllTypesProto3_NestedMessageImpl,
 	new: () -> TestAllTypesProto3_NestedMessage,
@@ -194,6 +196,8 @@ export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_NestedMessageFields,
 	{} :: _TestAllTypesProto3_NestedMessageImpl
 ))
+local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage>
+
 type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32Int32EntryImpl,
 	new: () -> TestAllTypesProto3_MapInt32Int32Entry,
@@ -212,6 +216,8 @@ export type TestAllTypesProto3_MapInt32Int32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryFields,
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
 ))
+local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry>
+
 type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt64Int64EntryImpl,
 	new: () -> TestAllTypesProto3_MapInt64Int64Entry,
@@ -230,6 +236,8 @@ export type TestAllTypesProto3_MapInt64Int64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryFields,
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
 ))
+local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry>
+
 type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint32Uint32EntryImpl,
 	new: () -> TestAllTypesProto3_MapUint32Uint32Entry,
@@ -248,6 +256,8 @@ export type TestAllTypesProto3_MapUint32Uint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryFields,
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
 ))
+local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry>
+
 type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint64Uint64EntryImpl,
 	new: () -> TestAllTypesProto3_MapUint64Uint64Entry,
@@ -266,6 +276,8 @@ export type TestAllTypesProto3_MapUint64Uint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryFields,
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
 ))
+local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry>
+
 type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint32Sint32EntryImpl,
 	new: () -> TestAllTypesProto3_MapSint32Sint32Entry,
@@ -284,6 +296,8 @@ export type TestAllTypesProto3_MapSint32Sint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryFields,
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
 ))
+local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry>
+
 type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint64Sint64EntryImpl,
 	new: () -> TestAllTypesProto3_MapSint64Sint64Entry,
@@ -302,6 +316,8 @@ export type TestAllTypesProto3_MapSint64Sint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryFields,
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
 ))
+local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry>
+
 type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl,
 	new: () -> TestAllTypesProto3_MapFixed32Fixed32Entry,
@@ -320,6 +336,8 @@ export type TestAllTypesProto3_MapFixed32Fixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 ))
+local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<TestAllTypesProto3_MapFixed32Fixed32Entry>
+
 type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl,
 	new: () -> TestAllTypesProto3_MapFixed64Fixed64Entry,
@@ -338,6 +356,8 @@ export type TestAllTypesProto3_MapFixed64Fixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 ))
+local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<TestAllTypesProto3_MapFixed64Fixed64Entry>
+
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl,
 	new: () -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
@@ -356,6 +376,8 @@ export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 ))
+local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<TestAllTypesProto3_MapSfixed32Sfixed32Entry>
+
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl,
 	new: () -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
@@ -374,6 +396,8 @@ export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 ))
+local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<TestAllTypesProto3_MapSfixed64Sfixed64Entry>
+
 type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32FloatEntryImpl,
 	new: () -> TestAllTypesProto3_MapInt32FloatEntry,
@@ -392,6 +416,8 @@ export type TestAllTypesProto3_MapInt32FloatEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
 ))
+local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry>
+
 type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32DoubleEntryImpl,
 	new: () -> TestAllTypesProto3_MapInt32DoubleEntry,
@@ -410,6 +436,8 @@ export type TestAllTypesProto3_MapInt32DoubleEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
 ))
+local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry>
+
 type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	__index: _TestAllTypesProto3_MapBoolBoolEntryImpl,
 	new: () -> TestAllTypesProto3_MapBoolBoolEntry,
@@ -428,6 +456,8 @@ export type TestAllTypesProto3_MapBoolBoolEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryFields,
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
 ))
+local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry>
+
 type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringStringEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringStringEntry,
@@ -446,6 +476,8 @@ export type TestAllTypesProto3_MapStringStringEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringStringEntryFields,
 	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
 ))
+local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry>
+
 type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringBytesEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringBytesEntry,
@@ -464,6 +496,8 @@ export type TestAllTypesProto3_MapStringBytesEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringBytesEntryFields,
 	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
 ))
+local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry>
+
 type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedMessageEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringNestedMessageEntry,
@@ -482,6 +516,8 @@ export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 ))
+local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<TestAllTypesProto3_MapStringNestedMessageEntry>
+
 type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignMessageEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringForeignMessageEntry,
@@ -500,6 +536,8 @@ export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatabl
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 ))
+local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<TestAllTypesProto3_MapStringForeignMessageEntry>
+
 type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedEnumEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringNestedEnumEntry,
@@ -518,6 +556,8 @@ export type TestAllTypesProto3_MapStringNestedEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 ))
+local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<TestAllTypesProto3_MapStringNestedEnumEntry>
+
 type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignEnumEntryImpl,
 	new: () -> TestAllTypesProto3_MapStringForeignEnumEntry,
@@ -536,6 +576,8 @@ export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 ))
+local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<TestAllTypesProto3_MapStringForeignEnumEntry>
+
 local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
 
@@ -556,6 +598,8 @@ type _ForeignMessageFields = {
 }
 
 export type ForeignMessage = typeof(setmetatable({} :: _ForeignMessageFields, {} :: _ForeignMessageImpl))
+local ForeignMessage: proto.Message<ForeignMessage>
+
 type _NullHypothesisProto3Impl = {
 	__index: _NullHypothesisProto3Impl,
 	new: () -> NullHypothesisProto3,
@@ -571,6 +615,8 @@ export type NullHypothesisProto3 = typeof(setmetatable(
 	{} :: _NullHypothesisProto3Fields,
 	{} :: _NullHypothesisProto3Impl
 ))
+local NullHypothesisProto3: proto.Message<NullHypothesisProto3>
+
 type _EnumOnlyProto3Impl = {
 	__index: _EnumOnlyProto3Impl,
 	new: () -> EnumOnlyProto3,
@@ -583,16 +629,18 @@ type _EnumOnlyProto3Impl = {
 type _EnumOnlyProto3Fields = {}
 
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
+local EnumOnlyProto3: proto.Message<EnumOnlyProto3>
+
 local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
 
 local ForeignEnum: proto.Enum<ForeignEnum>
 export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number -- Unknown
 
-local TestAllTypesProto3: proto.Message<_TestAllTypesProto3Impl> = {} :: _TestAllTypesProto3Impl
-TestAllTypesProto3.__index = TestAllTypesProto3
+local _TestAllTypesProto3Impl = {}
+_TestAllTypesProto3Impl.__index = _TestAllTypesProto3Impl
 
-function TestAllTypesProto3.new(data: _TestAllTypesProto3Fields?): TestAllTypesProto3
+function _TestAllTypesProto3Impl.new(data: _TestAllTypesProto3Fields?): TestAllTypesProto3
 	return setmetatable({
 		optional_int32 = if data == nil then 0 else data.optional_int32,
 		optional_int64 = if data == nil then 0 else data.optional_int64,
@@ -744,10 +792,10 @@ function TestAllTypesProto3.new(data: _TestAllTypesProto3Fields?): TestAllTypesP
 		field__Name16 = if data == nil then 0 else data.field__Name16,
 		field_name17__ = if data == nil then 0 else data.field_name17__,
 		Field_name18__ = if data == nil then 0 else data.Field_name18__,
-	}, TestAllTypesProto3)
+	}, _TestAllTypesProto3Impl)
 end
 
-function TestAllTypesProto3.encode(self: TestAllTypesProto3): buffer
+function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -1956,8 +2004,8 @@ function TestAllTypesProto3.encode(self: TestAllTypesProto3): buffer
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3.decode(input: buffer): TestAllTypesProto3
-	local self = TestAllTypesProto3.new()
+function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
+	local self = _TestAllTypesProto3Impl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -2987,7 +3035,7 @@ function TestAllTypesProto3.decode(input: buffer): TestAllTypesProto3
 	return self
 end
 
-function TestAllTypesProto3.jsonEncode(self: TestAllTypesProto3): any
+function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 	local output: {
 		optionalInt32: number?,
 		optionalInt64: number?,
@@ -4094,7 +4142,7 @@ function TestAllTypesProto3.jsonEncode(self: TestAllTypesProto3): any
 	return output
 end
 
-function TestAllTypesProto3.jsonDecode(input: { [string]: any }): TestAllTypesProto3
+function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTypesProto3
 	local self = TestAllTypesProto3.new()
 
 	if input.optional_int32 ~= nil then
@@ -6222,20 +6270,21 @@ function TestAllTypesProto3.jsonDecode(input: { [string]: any }): TestAllTypesPr
 	return self
 end
 
-local TestAllTypesProto3_NestedMessage: proto.Message<_TestAllTypesProto3_NestedMessageImpl> =
-	{} :: _TestAllTypesProto3_NestedMessageImpl
-TestAllTypesProto3_NestedMessage.__index = TestAllTypesProto3_NestedMessage
+TestAllTypesProto3 = _TestAllTypesProto3Impl
 
-function TestAllTypesProto3_NestedMessage.new(
+local _TestAllTypesProto3_NestedMessageImpl = {}
+_TestAllTypesProto3_NestedMessageImpl.__index = _TestAllTypesProto3_NestedMessageImpl
+
+function _TestAllTypesProto3_NestedMessageImpl.new(
 	data: _TestAllTypesProto3_NestedMessageFields?
 ): TestAllTypesProto3_NestedMessage
 	return setmetatable({
 		a = if data == nil then 0 else data.a,
 		corecursive = if data == nil then nil else data.corecursive,
-	}, TestAllTypesProto3_NestedMessage)
+	}, _TestAllTypesProto3_NestedMessageImpl)
 end
 
-function TestAllTypesProto3_NestedMessage.encode(self: TestAllTypesProto3_NestedMessage): buffer
+function _TestAllTypesProto3_NestedMessageImpl.encode(self: TestAllTypesProto3_NestedMessage): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6255,8 +6304,8 @@ function TestAllTypesProto3_NestedMessage.encode(self: TestAllTypesProto3_Nested
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_NestedMessage.decode(input: buffer): TestAllTypesProto3_NestedMessage
-	local self = TestAllTypesProto3_NestedMessage.new()
+function _TestAllTypesProto3_NestedMessageImpl.decode(input: buffer): TestAllTypesProto3_NestedMessage
+	local self = _TestAllTypesProto3_NestedMessageImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6287,7 +6336,7 @@ function TestAllTypesProto3_NestedMessage.decode(input: buffer): TestAllTypesPro
 	return self
 end
 
-function TestAllTypesProto3_NestedMessage.jsonEncode(self: TestAllTypesProto3_NestedMessage): any
+function _TestAllTypesProto3_NestedMessageImpl.jsonEncode(self: TestAllTypesProto3_NestedMessage): any
 	local output: {
 		a: number?,
 		corecursive: TestAllTypesProto3?,
@@ -6304,7 +6353,7 @@ function TestAllTypesProto3_NestedMessage.jsonEncode(self: TestAllTypesProto3_Ne
 	return output
 end
 
-function TestAllTypesProto3_NestedMessage.jsonDecode(input: { [string]: any }): TestAllTypesProto3_NestedMessage
+function _TestAllTypesProto3_NestedMessageImpl.jsonDecode(input: { [string]: any }): TestAllTypesProto3_NestedMessage
 	local self = TestAllTypesProto3_NestedMessage.new()
 
 	if input.a ~= nil then
@@ -6318,20 +6367,21 @@ function TestAllTypesProto3_NestedMessage.jsonDecode(input: { [string]: any }): 
 	return self
 end
 
-local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<_TestAllTypesProto3_MapInt32Int32EntryImpl> =
-	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
-TestAllTypesProto3_MapInt32Int32Entry.__index = TestAllTypesProto3_MapInt32Int32Entry
+TestAllTypesProto3_NestedMessage = _TestAllTypesProto3_NestedMessageImpl
 
-function TestAllTypesProto3_MapInt32Int32Entry.new(
+local _TestAllTypesProto3_MapInt32Int32EntryImpl = {}
+_TestAllTypesProto3_MapInt32Int32EntryImpl.__index = _TestAllTypesProto3_MapInt32Int32EntryImpl
+
+function _TestAllTypesProto3_MapInt32Int32EntryImpl.new(
 	data: _TestAllTypesProto3_MapInt32Int32EntryFields?
 ): TestAllTypesProto3_MapInt32Int32Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapInt32Int32Entry)
+	}, _TestAllTypesProto3_MapInt32Int32EntryImpl)
 end
 
-function TestAllTypesProto3_MapInt32Int32Entry.encode(self: TestAllTypesProto3_MapInt32Int32Entry): buffer
+function _TestAllTypesProto3_MapInt32Int32EntryImpl.encode(self: TestAllTypesProto3_MapInt32Int32Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6350,8 +6400,8 @@ function TestAllTypesProto3_MapInt32Int32Entry.encode(self: TestAllTypesProto3_M
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapInt32Int32Entry.decode(input: buffer): TestAllTypesProto3_MapInt32Int32Entry
-	local self = TestAllTypesProto3_MapInt32Int32Entry.new()
+function _TestAllTypesProto3_MapInt32Int32EntryImpl.decode(input: buffer): TestAllTypesProto3_MapInt32Int32Entry
+	local self = _TestAllTypesProto3_MapInt32Int32EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6382,7 +6432,7 @@ function TestAllTypesProto3_MapInt32Int32Entry.decode(input: buffer): TestAllTyp
 	return self
 end
 
-function TestAllTypesProto3_MapInt32Int32Entry.jsonEncode(self: TestAllTypesProto3_MapInt32Int32Entry): any
+function _TestAllTypesProto3_MapInt32Int32EntryImpl.jsonEncode(self: TestAllTypesProto3_MapInt32Int32Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6399,7 +6449,7 @@ function TestAllTypesProto3_MapInt32Int32Entry.jsonEncode(self: TestAllTypesProt
 	return output
 end
 
-function TestAllTypesProto3_MapInt32Int32Entry.jsonDecode(
+function _TestAllTypesProto3_MapInt32Int32EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapInt32Int32Entry
 	local self = TestAllTypesProto3_MapInt32Int32Entry.new()
@@ -6415,20 +6465,21 @@ function TestAllTypesProto3_MapInt32Int32Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<_TestAllTypesProto3_MapInt64Int64EntryImpl> =
-	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
-TestAllTypesProto3_MapInt64Int64Entry.__index = TestAllTypesProto3_MapInt64Int64Entry
+TestAllTypesProto3_MapInt32Int32Entry = _TestAllTypesProto3_MapInt32Int32EntryImpl
 
-function TestAllTypesProto3_MapInt64Int64Entry.new(
+local _TestAllTypesProto3_MapInt64Int64EntryImpl = {}
+_TestAllTypesProto3_MapInt64Int64EntryImpl.__index = _TestAllTypesProto3_MapInt64Int64EntryImpl
+
+function _TestAllTypesProto3_MapInt64Int64EntryImpl.new(
 	data: _TestAllTypesProto3_MapInt64Int64EntryFields?
 ): TestAllTypesProto3_MapInt64Int64Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapInt64Int64Entry)
+	}, _TestAllTypesProto3_MapInt64Int64EntryImpl)
 end
 
-function TestAllTypesProto3_MapInt64Int64Entry.encode(self: TestAllTypesProto3_MapInt64Int64Entry): buffer
+function _TestAllTypesProto3_MapInt64Int64EntryImpl.encode(self: TestAllTypesProto3_MapInt64Int64Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6447,8 +6498,8 @@ function TestAllTypesProto3_MapInt64Int64Entry.encode(self: TestAllTypesProto3_M
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapInt64Int64Entry.decode(input: buffer): TestAllTypesProto3_MapInt64Int64Entry
-	local self = TestAllTypesProto3_MapInt64Int64Entry.new()
+function _TestAllTypesProto3_MapInt64Int64EntryImpl.decode(input: buffer): TestAllTypesProto3_MapInt64Int64Entry
+	local self = _TestAllTypesProto3_MapInt64Int64EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6479,7 +6530,7 @@ function TestAllTypesProto3_MapInt64Int64Entry.decode(input: buffer): TestAllTyp
 	return self
 end
 
-function TestAllTypesProto3_MapInt64Int64Entry.jsonEncode(self: TestAllTypesProto3_MapInt64Int64Entry): any
+function _TestAllTypesProto3_MapInt64Int64EntryImpl.jsonEncode(self: TestAllTypesProto3_MapInt64Int64Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6496,7 +6547,7 @@ function TestAllTypesProto3_MapInt64Int64Entry.jsonEncode(self: TestAllTypesProt
 	return output
 end
 
-function TestAllTypesProto3_MapInt64Int64Entry.jsonDecode(
+function _TestAllTypesProto3_MapInt64Int64EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapInt64Int64Entry
 	local self = TestAllTypesProto3_MapInt64Int64Entry.new()
@@ -6512,20 +6563,21 @@ function TestAllTypesProto3_MapInt64Int64Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<_TestAllTypesProto3_MapUint32Uint32EntryImpl> =
-	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
-TestAllTypesProto3_MapUint32Uint32Entry.__index = TestAllTypesProto3_MapUint32Uint32Entry
+TestAllTypesProto3_MapInt64Int64Entry = _TestAllTypesProto3_MapInt64Int64EntryImpl
 
-function TestAllTypesProto3_MapUint32Uint32Entry.new(
+local _TestAllTypesProto3_MapUint32Uint32EntryImpl = {}
+_TestAllTypesProto3_MapUint32Uint32EntryImpl.__index = _TestAllTypesProto3_MapUint32Uint32EntryImpl
+
+function _TestAllTypesProto3_MapUint32Uint32EntryImpl.new(
 	data: _TestAllTypesProto3_MapUint32Uint32EntryFields?
 ): TestAllTypesProto3_MapUint32Uint32Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapUint32Uint32Entry)
+	}, _TestAllTypesProto3_MapUint32Uint32EntryImpl)
 end
 
-function TestAllTypesProto3_MapUint32Uint32Entry.encode(self: TestAllTypesProto3_MapUint32Uint32Entry): buffer
+function _TestAllTypesProto3_MapUint32Uint32EntryImpl.encode(self: TestAllTypesProto3_MapUint32Uint32Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6544,8 +6596,8 @@ function TestAllTypesProto3_MapUint32Uint32Entry.encode(self: TestAllTypesProto3
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapUint32Uint32Entry.decode(input: buffer): TestAllTypesProto3_MapUint32Uint32Entry
-	local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
+function _TestAllTypesProto3_MapUint32Uint32EntryImpl.decode(input: buffer): TestAllTypesProto3_MapUint32Uint32Entry
+	local self = _TestAllTypesProto3_MapUint32Uint32EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6576,7 +6628,7 @@ function TestAllTypesProto3_MapUint32Uint32Entry.decode(input: buffer): TestAllT
 	return self
 end
 
-function TestAllTypesProto3_MapUint32Uint32Entry.jsonEncode(self: TestAllTypesProto3_MapUint32Uint32Entry): any
+function _TestAllTypesProto3_MapUint32Uint32EntryImpl.jsonEncode(self: TestAllTypesProto3_MapUint32Uint32Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6593,7 +6645,7 @@ function TestAllTypesProto3_MapUint32Uint32Entry.jsonEncode(self: TestAllTypesPr
 	return output
 end
 
-function TestAllTypesProto3_MapUint32Uint32Entry.jsonDecode(
+function _TestAllTypesProto3_MapUint32Uint32EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapUint32Uint32Entry
 	local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
@@ -6609,20 +6661,21 @@ function TestAllTypesProto3_MapUint32Uint32Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<_TestAllTypesProto3_MapUint64Uint64EntryImpl> =
-	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
-TestAllTypesProto3_MapUint64Uint64Entry.__index = TestAllTypesProto3_MapUint64Uint64Entry
+TestAllTypesProto3_MapUint32Uint32Entry = _TestAllTypesProto3_MapUint32Uint32EntryImpl
 
-function TestAllTypesProto3_MapUint64Uint64Entry.new(
+local _TestAllTypesProto3_MapUint64Uint64EntryImpl = {}
+_TestAllTypesProto3_MapUint64Uint64EntryImpl.__index = _TestAllTypesProto3_MapUint64Uint64EntryImpl
+
+function _TestAllTypesProto3_MapUint64Uint64EntryImpl.new(
 	data: _TestAllTypesProto3_MapUint64Uint64EntryFields?
 ): TestAllTypesProto3_MapUint64Uint64Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapUint64Uint64Entry)
+	}, _TestAllTypesProto3_MapUint64Uint64EntryImpl)
 end
 
-function TestAllTypesProto3_MapUint64Uint64Entry.encode(self: TestAllTypesProto3_MapUint64Uint64Entry): buffer
+function _TestAllTypesProto3_MapUint64Uint64EntryImpl.encode(self: TestAllTypesProto3_MapUint64Uint64Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6641,8 +6694,8 @@ function TestAllTypesProto3_MapUint64Uint64Entry.encode(self: TestAllTypesProto3
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapUint64Uint64Entry.decode(input: buffer): TestAllTypesProto3_MapUint64Uint64Entry
-	local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
+function _TestAllTypesProto3_MapUint64Uint64EntryImpl.decode(input: buffer): TestAllTypesProto3_MapUint64Uint64Entry
+	local self = _TestAllTypesProto3_MapUint64Uint64EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6673,7 +6726,7 @@ function TestAllTypesProto3_MapUint64Uint64Entry.decode(input: buffer): TestAllT
 	return self
 end
 
-function TestAllTypesProto3_MapUint64Uint64Entry.jsonEncode(self: TestAllTypesProto3_MapUint64Uint64Entry): any
+function _TestAllTypesProto3_MapUint64Uint64EntryImpl.jsonEncode(self: TestAllTypesProto3_MapUint64Uint64Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6690,7 +6743,7 @@ function TestAllTypesProto3_MapUint64Uint64Entry.jsonEncode(self: TestAllTypesPr
 	return output
 end
 
-function TestAllTypesProto3_MapUint64Uint64Entry.jsonDecode(
+function _TestAllTypesProto3_MapUint64Uint64EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapUint64Uint64Entry
 	local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
@@ -6706,20 +6759,21 @@ function TestAllTypesProto3_MapUint64Uint64Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<_TestAllTypesProto3_MapSint32Sint32EntryImpl> =
-	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
-TestAllTypesProto3_MapSint32Sint32Entry.__index = TestAllTypesProto3_MapSint32Sint32Entry
+TestAllTypesProto3_MapUint64Uint64Entry = _TestAllTypesProto3_MapUint64Uint64EntryImpl
 
-function TestAllTypesProto3_MapSint32Sint32Entry.new(
+local _TestAllTypesProto3_MapSint32Sint32EntryImpl = {}
+_TestAllTypesProto3_MapSint32Sint32EntryImpl.__index = _TestAllTypesProto3_MapSint32Sint32EntryImpl
+
+function _TestAllTypesProto3_MapSint32Sint32EntryImpl.new(
 	data: _TestAllTypesProto3_MapSint32Sint32EntryFields?
 ): TestAllTypesProto3_MapSint32Sint32Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapSint32Sint32Entry)
+	}, _TestAllTypesProto3_MapSint32Sint32EntryImpl)
 end
 
-function TestAllTypesProto3_MapSint32Sint32Entry.encode(self: TestAllTypesProto3_MapSint32Sint32Entry): buffer
+function _TestAllTypesProto3_MapSint32Sint32EntryImpl.encode(self: TestAllTypesProto3_MapSint32Sint32Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6738,8 +6792,8 @@ function TestAllTypesProto3_MapSint32Sint32Entry.encode(self: TestAllTypesProto3
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapSint32Sint32Entry.decode(input: buffer): TestAllTypesProto3_MapSint32Sint32Entry
-	local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
+function _TestAllTypesProto3_MapSint32Sint32EntryImpl.decode(input: buffer): TestAllTypesProto3_MapSint32Sint32Entry
+	local self = _TestAllTypesProto3_MapSint32Sint32EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6770,7 +6824,7 @@ function TestAllTypesProto3_MapSint32Sint32Entry.decode(input: buffer): TestAllT
 	return self
 end
 
-function TestAllTypesProto3_MapSint32Sint32Entry.jsonEncode(self: TestAllTypesProto3_MapSint32Sint32Entry): any
+function _TestAllTypesProto3_MapSint32Sint32EntryImpl.jsonEncode(self: TestAllTypesProto3_MapSint32Sint32Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6787,7 +6841,7 @@ function TestAllTypesProto3_MapSint32Sint32Entry.jsonEncode(self: TestAllTypesPr
 	return output
 end
 
-function TestAllTypesProto3_MapSint32Sint32Entry.jsonDecode(
+function _TestAllTypesProto3_MapSint32Sint32EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapSint32Sint32Entry
 	local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
@@ -6803,20 +6857,21 @@ function TestAllTypesProto3_MapSint32Sint32Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<_TestAllTypesProto3_MapSint64Sint64EntryImpl> =
-	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
-TestAllTypesProto3_MapSint64Sint64Entry.__index = TestAllTypesProto3_MapSint64Sint64Entry
+TestAllTypesProto3_MapSint32Sint32Entry = _TestAllTypesProto3_MapSint32Sint32EntryImpl
 
-function TestAllTypesProto3_MapSint64Sint64Entry.new(
+local _TestAllTypesProto3_MapSint64Sint64EntryImpl = {}
+_TestAllTypesProto3_MapSint64Sint64EntryImpl.__index = _TestAllTypesProto3_MapSint64Sint64EntryImpl
+
+function _TestAllTypesProto3_MapSint64Sint64EntryImpl.new(
 	data: _TestAllTypesProto3_MapSint64Sint64EntryFields?
 ): TestAllTypesProto3_MapSint64Sint64Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapSint64Sint64Entry)
+	}, _TestAllTypesProto3_MapSint64Sint64EntryImpl)
 end
 
-function TestAllTypesProto3_MapSint64Sint64Entry.encode(self: TestAllTypesProto3_MapSint64Sint64Entry): buffer
+function _TestAllTypesProto3_MapSint64Sint64EntryImpl.encode(self: TestAllTypesProto3_MapSint64Sint64Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6835,8 +6890,8 @@ function TestAllTypesProto3_MapSint64Sint64Entry.encode(self: TestAllTypesProto3
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapSint64Sint64Entry.decode(input: buffer): TestAllTypesProto3_MapSint64Sint64Entry
-	local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
+function _TestAllTypesProto3_MapSint64Sint64EntryImpl.decode(input: buffer): TestAllTypesProto3_MapSint64Sint64Entry
+	local self = _TestAllTypesProto3_MapSint64Sint64EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6867,7 +6922,7 @@ function TestAllTypesProto3_MapSint64Sint64Entry.decode(input: buffer): TestAllT
 	return self
 end
 
-function TestAllTypesProto3_MapSint64Sint64Entry.jsonEncode(self: TestAllTypesProto3_MapSint64Sint64Entry): any
+function _TestAllTypesProto3_MapSint64Sint64EntryImpl.jsonEncode(self: TestAllTypesProto3_MapSint64Sint64Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6884,7 +6939,7 @@ function TestAllTypesProto3_MapSint64Sint64Entry.jsonEncode(self: TestAllTypesPr
 	return output
 end
 
-function TestAllTypesProto3_MapSint64Sint64Entry.jsonDecode(
+function _TestAllTypesProto3_MapSint64Sint64EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapSint64Sint64Entry
 	local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
@@ -6900,20 +6955,21 @@ function TestAllTypesProto3_MapSint64Sint64Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<_TestAllTypesProto3_MapFixed32Fixed32EntryImpl> =
-	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
-TestAllTypesProto3_MapFixed32Fixed32Entry.__index = TestAllTypesProto3_MapFixed32Fixed32Entry
+TestAllTypesProto3_MapSint64Sint64Entry = _TestAllTypesProto3_MapSint64Sint64EntryImpl
 
-function TestAllTypesProto3_MapFixed32Fixed32Entry.new(
+local _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {}
+_TestAllTypesProto3_MapFixed32Fixed32EntryImpl.__index = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
+
+function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.new(
 	data: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?
 ): TestAllTypesProto3_MapFixed32Fixed32Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapFixed32Fixed32Entry)
+	}, _TestAllTypesProto3_MapFixed32Fixed32EntryImpl)
 end
 
-function TestAllTypesProto3_MapFixed32Fixed32Entry.encode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): buffer
+function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.encode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -6932,8 +6988,8 @@ function TestAllTypesProto3_MapFixed32Fixed32Entry.encode(self: TestAllTypesProt
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapFixed32Fixed32Entry.decode(input: buffer): TestAllTypesProto3_MapFixed32Fixed32Entry
-	local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
+function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.decode(input: buffer): TestAllTypesProto3_MapFixed32Fixed32Entry
+	local self = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -6964,7 +7020,7 @@ function TestAllTypesProto3_MapFixed32Fixed32Entry.decode(input: buffer): TestAl
 	return self
 end
 
-function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonEncode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): any
+function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.jsonEncode(self: TestAllTypesProto3_MapFixed32Fixed32Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -6981,7 +7037,7 @@ function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonEncode(self: TestAllTypes
 	return output
 end
 
-function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonDecode(
+function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapFixed32Fixed32Entry
 	local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
@@ -6997,20 +7053,21 @@ function TestAllTypesProto3_MapFixed32Fixed32Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<_TestAllTypesProto3_MapFixed64Fixed64EntryImpl> =
-	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
-TestAllTypesProto3_MapFixed64Fixed64Entry.__index = TestAllTypesProto3_MapFixed64Fixed64Entry
+TestAllTypesProto3_MapFixed32Fixed32Entry = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 
-function TestAllTypesProto3_MapFixed64Fixed64Entry.new(
+local _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {}
+_TestAllTypesProto3_MapFixed64Fixed64EntryImpl.__index = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
+
+function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.new(
 	data: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?
 ): TestAllTypesProto3_MapFixed64Fixed64Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapFixed64Fixed64Entry)
+	}, _TestAllTypesProto3_MapFixed64Fixed64EntryImpl)
 end
 
-function TestAllTypesProto3_MapFixed64Fixed64Entry.encode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): buffer
+function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.encode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7029,8 +7086,8 @@ function TestAllTypesProto3_MapFixed64Fixed64Entry.encode(self: TestAllTypesProt
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapFixed64Fixed64Entry.decode(input: buffer): TestAllTypesProto3_MapFixed64Fixed64Entry
-	local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
+function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.decode(input: buffer): TestAllTypesProto3_MapFixed64Fixed64Entry
+	local self = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7061,7 +7118,7 @@ function TestAllTypesProto3_MapFixed64Fixed64Entry.decode(input: buffer): TestAl
 	return self
 end
 
-function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonEncode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): any
+function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.jsonEncode(self: TestAllTypesProto3_MapFixed64Fixed64Entry): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -7078,7 +7135,7 @@ function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonEncode(self: TestAllTypes
 	return output
 end
 
-function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonDecode(
+function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapFixed64Fixed64Entry
 	local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
@@ -7094,20 +7151,23 @@ function TestAllTypesProto3_MapFixed64Fixed64Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<_TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl> =
-	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
-TestAllTypesProto3_MapSfixed32Sfixed32Entry.__index = TestAllTypesProto3_MapSfixed32Sfixed32Entry
+TestAllTypesProto3_MapFixed64Fixed64Entry = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 
-function TestAllTypesProto3_MapSfixed32Sfixed32Entry.new(
+local _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {}
+_TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.__index = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
+
+function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.new(
 	data: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?
 ): TestAllTypesProto3_MapSfixed32Sfixed32Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapSfixed32Sfixed32Entry)
+	}, _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl)
 end
 
-function TestAllTypesProto3_MapSfixed32Sfixed32Entry.encode(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): buffer
+function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.encode(
+	self: TestAllTypesProto3_MapSfixed32Sfixed32Entry
+): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7126,8 +7186,10 @@ function TestAllTypesProto3_MapSfixed32Sfixed32Entry.encode(self: TestAllTypesPr
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapSfixed32Sfixed32Entry.decode(input: buffer): TestAllTypesProto3_MapSfixed32Sfixed32Entry
-	local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
+function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.decode(
+	input: buffer
+): TestAllTypesProto3_MapSfixed32Sfixed32Entry
+	local self = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7158,7 +7220,9 @@ function TestAllTypesProto3_MapSfixed32Sfixed32Entry.decode(input: buffer): Test
 	return self
 end
 
-function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonEncode(self: TestAllTypesProto3_MapSfixed32Sfixed32Entry): any
+function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.jsonEncode(
+	self: TestAllTypesProto3_MapSfixed32Sfixed32Entry
+): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -7175,7 +7239,7 @@ function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonEncode(self: TestAllTyp
 	return output
 end
 
-function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonDecode(
+function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapSfixed32Sfixed32Entry
 	local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
@@ -7191,20 +7255,23 @@ function TestAllTypesProto3_MapSfixed32Sfixed32Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl> =
-	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
-TestAllTypesProto3_MapSfixed64Sfixed64Entry.__index = TestAllTypesProto3_MapSfixed64Sfixed64Entry
+TestAllTypesProto3_MapSfixed32Sfixed32Entry = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 
-function TestAllTypesProto3_MapSfixed64Sfixed64Entry.new(
+local _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {}
+_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.__index = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
+
+function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.new(
 	data: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?
 ): TestAllTypesProto3_MapSfixed64Sfixed64Entry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapSfixed64Sfixed64Entry)
+	}, _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl)
 end
 
-function TestAllTypesProto3_MapSfixed64Sfixed64Entry.encode(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): buffer
+function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.encode(
+	self: TestAllTypesProto3_MapSfixed64Sfixed64Entry
+): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7223,8 +7290,10 @@ function TestAllTypesProto3_MapSfixed64Sfixed64Entry.encode(self: TestAllTypesPr
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapSfixed64Sfixed64Entry.decode(input: buffer): TestAllTypesProto3_MapSfixed64Sfixed64Entry
-	local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
+function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.decode(
+	input: buffer
+): TestAllTypesProto3_MapSfixed64Sfixed64Entry
+	local self = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7255,7 +7324,9 @@ function TestAllTypesProto3_MapSfixed64Sfixed64Entry.decode(input: buffer): Test
 	return self
 end
 
-function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonEncode(self: TestAllTypesProto3_MapSfixed64Sfixed64Entry): any
+function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.jsonEncode(
+	self: TestAllTypesProto3_MapSfixed64Sfixed64Entry
+): any
 	local output: {
 		key: number?,
 		value: number?,
@@ -7272,7 +7343,7 @@ function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonEncode(self: TestAllTyp
 	return output
 end
 
-function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonDecode(
+function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapSfixed64Sfixed64Entry
 	local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
@@ -7288,20 +7359,21 @@ function TestAllTypesProto3_MapSfixed64Sfixed64Entry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<_TestAllTypesProto3_MapInt32FloatEntryImpl> =
-	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
-TestAllTypesProto3_MapInt32FloatEntry.__index = TestAllTypesProto3_MapInt32FloatEntry
+TestAllTypesProto3_MapSfixed64Sfixed64Entry = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 
-function TestAllTypesProto3_MapInt32FloatEntry.new(
+local _TestAllTypesProto3_MapInt32FloatEntryImpl = {}
+_TestAllTypesProto3_MapInt32FloatEntryImpl.__index = _TestAllTypesProto3_MapInt32FloatEntryImpl
+
+function _TestAllTypesProto3_MapInt32FloatEntryImpl.new(
 	data: _TestAllTypesProto3_MapInt32FloatEntryFields?
 ): TestAllTypesProto3_MapInt32FloatEntry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapInt32FloatEntry)
+	}, _TestAllTypesProto3_MapInt32FloatEntryImpl)
 end
 
-function TestAllTypesProto3_MapInt32FloatEntry.encode(self: TestAllTypesProto3_MapInt32FloatEntry): buffer
+function _TestAllTypesProto3_MapInt32FloatEntryImpl.encode(self: TestAllTypesProto3_MapInt32FloatEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7320,8 +7392,8 @@ function TestAllTypesProto3_MapInt32FloatEntry.encode(self: TestAllTypesProto3_M
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapInt32FloatEntry.decode(input: buffer): TestAllTypesProto3_MapInt32FloatEntry
-	local self = TestAllTypesProto3_MapInt32FloatEntry.new()
+function _TestAllTypesProto3_MapInt32FloatEntryImpl.decode(input: buffer): TestAllTypesProto3_MapInt32FloatEntry
+	local self = _TestAllTypesProto3_MapInt32FloatEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7352,7 +7424,7 @@ function TestAllTypesProto3_MapInt32FloatEntry.decode(input: buffer): TestAllTyp
 	return self
 end
 
-function TestAllTypesProto3_MapInt32FloatEntry.jsonEncode(self: TestAllTypesProto3_MapInt32FloatEntry): any
+function _TestAllTypesProto3_MapInt32FloatEntryImpl.jsonEncode(self: TestAllTypesProto3_MapInt32FloatEntry): any
 	local output: {
 		key: number?,
 		value: (number | string)?,
@@ -7369,7 +7441,7 @@ function TestAllTypesProto3_MapInt32FloatEntry.jsonEncode(self: TestAllTypesProt
 	return output
 end
 
-function TestAllTypesProto3_MapInt32FloatEntry.jsonDecode(
+function _TestAllTypesProto3_MapInt32FloatEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapInt32FloatEntry
 	local self = TestAllTypesProto3_MapInt32FloatEntry.new()
@@ -7385,20 +7457,21 @@ function TestAllTypesProto3_MapInt32FloatEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<_TestAllTypesProto3_MapInt32DoubleEntryImpl> =
-	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
-TestAllTypesProto3_MapInt32DoubleEntry.__index = TestAllTypesProto3_MapInt32DoubleEntry
+TestAllTypesProto3_MapInt32FloatEntry = _TestAllTypesProto3_MapInt32FloatEntryImpl
 
-function TestAllTypesProto3_MapInt32DoubleEntry.new(
+local _TestAllTypesProto3_MapInt32DoubleEntryImpl = {}
+_TestAllTypesProto3_MapInt32DoubleEntryImpl.__index = _TestAllTypesProto3_MapInt32DoubleEntryImpl
+
+function _TestAllTypesProto3_MapInt32DoubleEntryImpl.new(
 	data: _TestAllTypesProto3_MapInt32DoubleEntryFields?
 ): TestAllTypesProto3_MapInt32DoubleEntry
 	return setmetatable({
 		key = if data == nil then 0 else data.key,
 		value = if data == nil then 0 else data.value,
-	}, TestAllTypesProto3_MapInt32DoubleEntry)
+	}, _TestAllTypesProto3_MapInt32DoubleEntryImpl)
 end
 
-function TestAllTypesProto3_MapInt32DoubleEntry.encode(self: TestAllTypesProto3_MapInt32DoubleEntry): buffer
+function _TestAllTypesProto3_MapInt32DoubleEntryImpl.encode(self: TestAllTypesProto3_MapInt32DoubleEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7417,8 +7490,8 @@ function TestAllTypesProto3_MapInt32DoubleEntry.encode(self: TestAllTypesProto3_
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapInt32DoubleEntry.decode(input: buffer): TestAllTypesProto3_MapInt32DoubleEntry
-	local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
+function _TestAllTypesProto3_MapInt32DoubleEntryImpl.decode(input: buffer): TestAllTypesProto3_MapInt32DoubleEntry
+	local self = _TestAllTypesProto3_MapInt32DoubleEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7449,7 +7522,7 @@ function TestAllTypesProto3_MapInt32DoubleEntry.decode(input: buffer): TestAllTy
 	return self
 end
 
-function TestAllTypesProto3_MapInt32DoubleEntry.jsonEncode(self: TestAllTypesProto3_MapInt32DoubleEntry): any
+function _TestAllTypesProto3_MapInt32DoubleEntryImpl.jsonEncode(self: TestAllTypesProto3_MapInt32DoubleEntry): any
 	local output: {
 		key: number?,
 		value: (number | string)?,
@@ -7466,7 +7539,7 @@ function TestAllTypesProto3_MapInt32DoubleEntry.jsonEncode(self: TestAllTypesPro
 	return output
 end
 
-function TestAllTypesProto3_MapInt32DoubleEntry.jsonDecode(
+function _TestAllTypesProto3_MapInt32DoubleEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapInt32DoubleEntry
 	local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
@@ -7482,20 +7555,21 @@ function TestAllTypesProto3_MapInt32DoubleEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<_TestAllTypesProto3_MapBoolBoolEntryImpl> =
-	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
-TestAllTypesProto3_MapBoolBoolEntry.__index = TestAllTypesProto3_MapBoolBoolEntry
+TestAllTypesProto3_MapInt32DoubleEntry = _TestAllTypesProto3_MapInt32DoubleEntryImpl
 
-function TestAllTypesProto3_MapBoolBoolEntry.new(
+local _TestAllTypesProto3_MapBoolBoolEntryImpl = {}
+_TestAllTypesProto3_MapBoolBoolEntryImpl.__index = _TestAllTypesProto3_MapBoolBoolEntryImpl
+
+function _TestAllTypesProto3_MapBoolBoolEntryImpl.new(
 	data: _TestAllTypesProto3_MapBoolBoolEntryFields?
 ): TestAllTypesProto3_MapBoolBoolEntry
 	return setmetatable({
 		key = if data == nil then false else data.key,
 		value = if data == nil then false else data.value,
-	}, TestAllTypesProto3_MapBoolBoolEntry)
+	}, _TestAllTypesProto3_MapBoolBoolEntryImpl)
 end
 
-function TestAllTypesProto3_MapBoolBoolEntry.encode(self: TestAllTypesProto3_MapBoolBoolEntry): buffer
+function _TestAllTypesProto3_MapBoolBoolEntryImpl.encode(self: TestAllTypesProto3_MapBoolBoolEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7514,8 +7588,8 @@ function TestAllTypesProto3_MapBoolBoolEntry.encode(self: TestAllTypesProto3_Map
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapBoolBoolEntry.decode(input: buffer): TestAllTypesProto3_MapBoolBoolEntry
-	local self = TestAllTypesProto3_MapBoolBoolEntry.new()
+function _TestAllTypesProto3_MapBoolBoolEntryImpl.decode(input: buffer): TestAllTypesProto3_MapBoolBoolEntry
+	local self = _TestAllTypesProto3_MapBoolBoolEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7546,7 +7620,7 @@ function TestAllTypesProto3_MapBoolBoolEntry.decode(input: buffer): TestAllTypes
 	return self
 end
 
-function TestAllTypesProto3_MapBoolBoolEntry.jsonEncode(self: TestAllTypesProto3_MapBoolBoolEntry): any
+function _TestAllTypesProto3_MapBoolBoolEntryImpl.jsonEncode(self: TestAllTypesProto3_MapBoolBoolEntry): any
 	local output: {
 		key: boolean?,
 		value: boolean?,
@@ -7563,7 +7637,9 @@ function TestAllTypesProto3_MapBoolBoolEntry.jsonEncode(self: TestAllTypesProto3
 	return output
 end
 
-function TestAllTypesProto3_MapBoolBoolEntry.jsonDecode(input: { [string]: any }): TestAllTypesProto3_MapBoolBoolEntry
+function _TestAllTypesProto3_MapBoolBoolEntryImpl.jsonDecode(
+	input: { [string]: any }
+): TestAllTypesProto3_MapBoolBoolEntry
 	local self = TestAllTypesProto3_MapBoolBoolEntry.new()
 
 	if input.key ~= nil then
@@ -7577,20 +7653,21 @@ function TestAllTypesProto3_MapBoolBoolEntry.jsonDecode(input: { [string]: any }
 	return self
 end
 
-local TestAllTypesProto3_MapStringStringEntry: proto.Message<_TestAllTypesProto3_MapStringStringEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
-TestAllTypesProto3_MapStringStringEntry.__index = TestAllTypesProto3_MapStringStringEntry
+TestAllTypesProto3_MapBoolBoolEntry = _TestAllTypesProto3_MapBoolBoolEntryImpl
 
-function TestAllTypesProto3_MapStringStringEntry.new(
+local _TestAllTypesProto3_MapStringStringEntryImpl = {}
+_TestAllTypesProto3_MapStringStringEntryImpl.__index = _TestAllTypesProto3_MapStringStringEntryImpl
+
+function _TestAllTypesProto3_MapStringStringEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringStringEntryFields?
 ): TestAllTypesProto3_MapStringStringEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then "" else data.value,
-	}, TestAllTypesProto3_MapStringStringEntry)
+	}, _TestAllTypesProto3_MapStringStringEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringStringEntry.encode(self: TestAllTypesProto3_MapStringStringEntry): buffer
+function _TestAllTypesProto3_MapStringStringEntryImpl.encode(self: TestAllTypesProto3_MapStringStringEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7609,8 +7686,8 @@ function TestAllTypesProto3_MapStringStringEntry.encode(self: TestAllTypesProto3
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringStringEntry.decode(input: buffer): TestAllTypesProto3_MapStringStringEntry
-	local self = TestAllTypesProto3_MapStringStringEntry.new()
+function _TestAllTypesProto3_MapStringStringEntryImpl.decode(input: buffer): TestAllTypesProto3_MapStringStringEntry
+	local self = _TestAllTypesProto3_MapStringStringEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7641,7 +7718,7 @@ function TestAllTypesProto3_MapStringStringEntry.decode(input: buffer): TestAllT
 	return self
 end
 
-function TestAllTypesProto3_MapStringStringEntry.jsonEncode(self: TestAllTypesProto3_MapStringStringEntry): any
+function _TestAllTypesProto3_MapStringStringEntryImpl.jsonEncode(self: TestAllTypesProto3_MapStringStringEntry): any
 	local output: {
 		key: string?,
 		value: string?,
@@ -7658,7 +7735,7 @@ function TestAllTypesProto3_MapStringStringEntry.jsonEncode(self: TestAllTypesPr
 	return output
 end
 
-function TestAllTypesProto3_MapStringStringEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringStringEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringStringEntry
 	local self = TestAllTypesProto3_MapStringStringEntry.new()
@@ -7674,20 +7751,21 @@ function TestAllTypesProto3_MapStringStringEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapStringBytesEntry: proto.Message<_TestAllTypesProto3_MapStringBytesEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
-TestAllTypesProto3_MapStringBytesEntry.__index = TestAllTypesProto3_MapStringBytesEntry
+TestAllTypesProto3_MapStringStringEntry = _TestAllTypesProto3_MapStringStringEntryImpl
 
-function TestAllTypesProto3_MapStringBytesEntry.new(
+local _TestAllTypesProto3_MapStringBytesEntryImpl = {}
+_TestAllTypesProto3_MapStringBytesEntryImpl.__index = _TestAllTypesProto3_MapStringBytesEntryImpl
+
+function _TestAllTypesProto3_MapStringBytesEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringBytesEntryFields?
 ): TestAllTypesProto3_MapStringBytesEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then buffer.create(0) else data.value,
-	}, TestAllTypesProto3_MapStringBytesEntry)
+	}, _TestAllTypesProto3_MapStringBytesEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringBytesEntry.encode(self: TestAllTypesProto3_MapStringBytesEntry): buffer
+function _TestAllTypesProto3_MapStringBytesEntryImpl.encode(self: TestAllTypesProto3_MapStringBytesEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -7706,8 +7784,8 @@ function TestAllTypesProto3_MapStringBytesEntry.encode(self: TestAllTypesProto3_
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringBytesEntry.decode(input: buffer): TestAllTypesProto3_MapStringBytesEntry
-	local self = TestAllTypesProto3_MapStringBytesEntry.new()
+function _TestAllTypesProto3_MapStringBytesEntryImpl.decode(input: buffer): TestAllTypesProto3_MapStringBytesEntry
+	local self = _TestAllTypesProto3_MapStringBytesEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7738,7 +7816,7 @@ function TestAllTypesProto3_MapStringBytesEntry.decode(input: buffer): TestAllTy
 	return self
 end
 
-function TestAllTypesProto3_MapStringBytesEntry.jsonEncode(self: TestAllTypesProto3_MapStringBytesEntry): any
+function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonEncode(self: TestAllTypesProto3_MapStringBytesEntry): any
 	local output: {
 		key: string?,
 		value: buffer?,
@@ -7755,7 +7833,7 @@ function TestAllTypesProto3_MapStringBytesEntry.jsonEncode(self: TestAllTypesPro
 	return output
 end
 
-function TestAllTypesProto3_MapStringBytesEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringBytesEntry
 	local self = TestAllTypesProto3_MapStringBytesEntry.new()
@@ -7771,20 +7849,21 @@ function TestAllTypesProto3_MapStringBytesEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<_TestAllTypesProto3_MapStringNestedMessageEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
-TestAllTypesProto3_MapStringNestedMessageEntry.__index = TestAllTypesProto3_MapStringNestedMessageEntry
+TestAllTypesProto3_MapStringBytesEntry = _TestAllTypesProto3_MapStringBytesEntryImpl
 
-function TestAllTypesProto3_MapStringNestedMessageEntry.new(
+local _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {}
+_TestAllTypesProto3_MapStringNestedMessageEntryImpl.__index = _TestAllTypesProto3_MapStringNestedMessageEntryImpl
+
+function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
 ): TestAllTypesProto3_MapStringNestedMessageEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then nil else data.value,
-	}, TestAllTypesProto3_MapStringNestedMessageEntry)
+	}, _TestAllTypesProto3_MapStringNestedMessageEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringNestedMessageEntry.encode(
+function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.encode(
 	self: TestAllTypesProto3_MapStringNestedMessageEntry
 ): buffer
 	local output = buffer.create(0)
@@ -7806,10 +7885,10 @@ function TestAllTypesProto3_MapStringNestedMessageEntry.encode(
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringNestedMessageEntry.decode(
+function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.decode(
 	input: buffer
 ): TestAllTypesProto3_MapStringNestedMessageEntry
-	local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
+	local self = _TestAllTypesProto3_MapStringNestedMessageEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7840,7 +7919,7 @@ function TestAllTypesProto3_MapStringNestedMessageEntry.decode(
 	return self
 end
 
-function TestAllTypesProto3_MapStringNestedMessageEntry.jsonEncode(
+function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.jsonEncode(
 	self: TestAllTypesProto3_MapStringNestedMessageEntry
 ): any
 	local output: {
@@ -7859,7 +7938,7 @@ function TestAllTypesProto3_MapStringNestedMessageEntry.jsonEncode(
 	return output
 end
 
-function TestAllTypesProto3_MapStringNestedMessageEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringNestedMessageEntry
 	local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
@@ -7875,20 +7954,21 @@ function TestAllTypesProto3_MapStringNestedMessageEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<_TestAllTypesProto3_MapStringForeignMessageEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
-TestAllTypesProto3_MapStringForeignMessageEntry.__index = TestAllTypesProto3_MapStringForeignMessageEntry
+TestAllTypesProto3_MapStringNestedMessageEntry = _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 
-function TestAllTypesProto3_MapStringForeignMessageEntry.new(
+local _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {}
+_TestAllTypesProto3_MapStringForeignMessageEntryImpl.__index = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
+
+function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
 ): TestAllTypesProto3_MapStringForeignMessageEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then nil else data.value,
-	}, TestAllTypesProto3_MapStringForeignMessageEntry)
+	}, _TestAllTypesProto3_MapStringForeignMessageEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringForeignMessageEntry.encode(
+function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.encode(
 	self: TestAllTypesProto3_MapStringForeignMessageEntry
 ): buffer
 	local output = buffer.create(0)
@@ -7910,10 +7990,10 @@ function TestAllTypesProto3_MapStringForeignMessageEntry.encode(
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringForeignMessageEntry.decode(
+function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.decode(
 	input: buffer
 ): TestAllTypesProto3_MapStringForeignMessageEntry
-	local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
+	local self = _TestAllTypesProto3_MapStringForeignMessageEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -7944,7 +8024,7 @@ function TestAllTypesProto3_MapStringForeignMessageEntry.decode(
 	return self
 end
 
-function TestAllTypesProto3_MapStringForeignMessageEntry.jsonEncode(
+function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.jsonEncode(
 	self: TestAllTypesProto3_MapStringForeignMessageEntry
 ): any
 	local output: {
@@ -7963,7 +8043,7 @@ function TestAllTypesProto3_MapStringForeignMessageEntry.jsonEncode(
 	return output
 end
 
-function TestAllTypesProto3_MapStringForeignMessageEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringForeignMessageEntry
 	local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
@@ -7979,11 +8059,12 @@ function TestAllTypesProto3_MapStringForeignMessageEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<_TestAllTypesProto3_MapStringNestedEnumEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
-TestAllTypesProto3_MapStringNestedEnumEntry.__index = TestAllTypesProto3_MapStringNestedEnumEntry
+TestAllTypesProto3_MapStringForeignMessageEntry = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 
-function TestAllTypesProto3_MapStringNestedEnumEntry.new(
+local _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {}
+_TestAllTypesProto3_MapStringNestedEnumEntryImpl.__index = _TestAllTypesProto3_MapStringNestedEnumEntryImpl
+
+function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringNestedEnumEntryFields?
 ): TestAllTypesProto3_MapStringNestedEnumEntry
 	return setmetatable({
@@ -7991,10 +8072,12 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.new(
 		value = if data == nil
 			then assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
 			else data.value,
-	}, TestAllTypesProto3_MapStringNestedEnumEntry)
+	}, _TestAllTypesProto3_MapStringNestedEnumEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringNestedEnumEntry.encode(self: TestAllTypesProto3_MapStringNestedEnumEntry): buffer
+function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.encode(
+	self: TestAllTypesProto3_MapStringNestedEnumEntry
+): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -8013,8 +8096,10 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.encode(self: TestAllTypesPr
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringNestedEnumEntry.decode(input: buffer): TestAllTypesProto3_MapStringNestedEnumEntry
-	local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
+function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.decode(
+	input: buffer
+): TestAllTypesProto3_MapStringNestedEnumEntry
+	local self = _TestAllTypesProto3_MapStringNestedEnumEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -8045,7 +8130,9 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.decode(input: buffer): Test
 	return self
 end
 
-function TestAllTypesProto3_MapStringNestedEnumEntry.jsonEncode(self: TestAllTypesProto3_MapStringNestedEnumEntry): any
+function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonEncode(
+	self: TestAllTypesProto3_MapStringNestedEnumEntry
+): any
 	local output: {
 		key: string?,
 		value: TestAllTypesProto3_NestedEnum?,
@@ -8064,7 +8151,7 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.jsonEncode(self: TestAllTyp
 	return output
 end
 
-function TestAllTypesProto3_MapStringNestedEnumEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringNestedEnumEntry
 	local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
@@ -8082,20 +8169,23 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.jsonDecode(
 	return self
 end
 
-local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<_TestAllTypesProto3_MapStringForeignEnumEntryImpl> =
-	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
-TestAllTypesProto3_MapStringForeignEnumEntry.__index = TestAllTypesProto3_MapStringForeignEnumEntry
+TestAllTypesProto3_MapStringNestedEnumEntry = _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 
-function TestAllTypesProto3_MapStringForeignEnumEntry.new(
+local _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {}
+_TestAllTypesProto3_MapStringForeignEnumEntryImpl.__index = _TestAllTypesProto3_MapStringForeignEnumEntryImpl
+
+function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.new(
 	data: _TestAllTypesProto3_MapStringForeignEnumEntryFields?
 ): TestAllTypesProto3_MapStringForeignEnumEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default") else data.value,
-	}, TestAllTypesProto3_MapStringForeignEnumEntry)
+	}, _TestAllTypesProto3_MapStringForeignEnumEntryImpl)
 end
 
-function TestAllTypesProto3_MapStringForeignEnumEntry.encode(self: TestAllTypesProto3_MapStringForeignEnumEntry): buffer
+function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.encode(
+	self: TestAllTypesProto3_MapStringForeignEnumEntry
+): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -8114,10 +8204,10 @@ function TestAllTypesProto3_MapStringForeignEnumEntry.encode(self: TestAllTypesP
 	return shrunkBuffer
 end
 
-function TestAllTypesProto3_MapStringForeignEnumEntry.decode(
+function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.decode(
 	input: buffer
 ): TestAllTypesProto3_MapStringForeignEnumEntry
-	local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
+	local self = _TestAllTypesProto3_MapStringForeignEnumEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -8148,7 +8238,7 @@ function TestAllTypesProto3_MapStringForeignEnumEntry.decode(
 	return self
 end
 
-function TestAllTypesProto3_MapStringForeignEnumEntry.jsonEncode(
+function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonEncode(
 	self: TestAllTypesProto3_MapStringForeignEnumEntry
 ): any
 	local output: {
@@ -8167,7 +8257,7 @@ function TestAllTypesProto3_MapStringForeignEnumEntry.jsonEncode(
 	return output
 end
 
-function TestAllTypesProto3_MapStringForeignEnumEntry.jsonDecode(
+function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonDecode(
 	input: { [string]: any }
 ): TestAllTypesProto3_MapStringForeignEnumEntry
 	local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
@@ -8184,6 +8274,8 @@ function TestAllTypesProto3_MapStringForeignEnumEntry.jsonDecode(
 
 	return self
 end
+
+TestAllTypesProto3_MapStringForeignEnumEntry = _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 
 TestAllTypesProto3_NestedEnum = {
 	fromNumber = function(value: number): TestAllTypesProto3_NestedEnum?
@@ -8279,16 +8371,16 @@ TestAllTypesProto3_AliasedEnum = {
 	end,
 }
 
-local ForeignMessage: proto.Message<_ForeignMessageImpl> = {} :: _ForeignMessageImpl
-ForeignMessage.__index = ForeignMessage
+local _ForeignMessageImpl = {}
+_ForeignMessageImpl.__index = _ForeignMessageImpl
 
-function ForeignMessage.new(data: _ForeignMessageFields?): ForeignMessage
+function _ForeignMessageImpl.new(data: _ForeignMessageFields?): ForeignMessage
 	return setmetatable({
 		c = if data == nil then 0 else data.c,
-	}, ForeignMessage)
+	}, _ForeignMessageImpl)
 end
 
-function ForeignMessage.encode(self: ForeignMessage): buffer
+function _ForeignMessageImpl.encode(self: ForeignMessage): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -8302,8 +8394,8 @@ function ForeignMessage.encode(self: ForeignMessage): buffer
 	return shrunkBuffer
 end
 
-function ForeignMessage.decode(input: buffer): ForeignMessage
-	local self = ForeignMessage.new()
+function _ForeignMessageImpl.decode(input: buffer): ForeignMessage
+	local self = _ForeignMessageImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -8330,7 +8422,7 @@ function ForeignMessage.decode(input: buffer): ForeignMessage
 	return self
 end
 
-function ForeignMessage.jsonEncode(self: ForeignMessage): any
+function _ForeignMessageImpl.jsonEncode(self: ForeignMessage): any
 	local output: {
 		c: number?,
 	} = {}
@@ -8342,7 +8434,7 @@ function ForeignMessage.jsonEncode(self: ForeignMessage): any
 	return output
 end
 
-function ForeignMessage.jsonDecode(input: { [string]: any }): ForeignMessage
+function _ForeignMessageImpl.jsonDecode(input: { [string]: any }): ForeignMessage
 	local self = ForeignMessage.new()
 
 	if input.c ~= nil then
@@ -8352,14 +8444,16 @@ function ForeignMessage.jsonDecode(input: { [string]: any }): ForeignMessage
 	return self
 end
 
-local NullHypothesisProto3: proto.Message<_NullHypothesisProto3Impl> = {} :: _NullHypothesisProto3Impl
-NullHypothesisProto3.__index = NullHypothesisProto3
+ForeignMessage = _ForeignMessageImpl
 
-function NullHypothesisProto3.new(data: _NullHypothesisProto3Fields?): NullHypothesisProto3
-	return setmetatable({}, NullHypothesisProto3)
+local _NullHypothesisProto3Impl = {}
+_NullHypothesisProto3Impl.__index = _NullHypothesisProto3Impl
+
+function _NullHypothesisProto3Impl.new(data: _NullHypothesisProto3Fields?): NullHypothesisProto3
+	return setmetatable({}, _NullHypothesisProto3Impl)
 end
 
-function NullHypothesisProto3.encode(self: NullHypothesisProto3): buffer
+function _NullHypothesisProto3Impl.encode(self: NullHypothesisProto3): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -8368,8 +8462,8 @@ function NullHypothesisProto3.encode(self: NullHypothesisProto3): buffer
 	return shrunkBuffer
 end
 
-function NullHypothesisProto3.decode(input: buffer): NullHypothesisProto3
-	local self = NullHypothesisProto3.new()
+function _NullHypothesisProto3Impl.decode(input: buffer): NullHypothesisProto3
+	local self = _NullHypothesisProto3Impl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -8392,26 +8486,28 @@ function NullHypothesisProto3.decode(input: buffer): NullHypothesisProto3
 	return self
 end
 
-function NullHypothesisProto3.jsonEncode(self: NullHypothesisProto3): any
+function _NullHypothesisProto3Impl.jsonEncode(self: NullHypothesisProto3): any
 	local output: {} = {}
 
 	return output
 end
 
-function NullHypothesisProto3.jsonDecode(input: { [string]: any }): NullHypothesisProto3
+function _NullHypothesisProto3Impl.jsonDecode(input: { [string]: any }): NullHypothesisProto3
 	local self = NullHypothesisProto3.new()
 
 	return self
 end
 
-local EnumOnlyProto3: proto.Message<_EnumOnlyProto3Impl> = {} :: _EnumOnlyProto3Impl
-EnumOnlyProto3.__index = EnumOnlyProto3
+NullHypothesisProto3 = _NullHypothesisProto3Impl
 
-function EnumOnlyProto3.new(data: _EnumOnlyProto3Fields?): EnumOnlyProto3
-	return setmetatable({}, EnumOnlyProto3)
+local _EnumOnlyProto3Impl = {}
+_EnumOnlyProto3Impl.__index = _EnumOnlyProto3Impl
+
+function _EnumOnlyProto3Impl.new(data: _EnumOnlyProto3Fields?): EnumOnlyProto3
+	return setmetatable({}, _EnumOnlyProto3Impl)
 end
 
-function EnumOnlyProto3.encode(self: EnumOnlyProto3): buffer
+function _EnumOnlyProto3Impl.encode(self: EnumOnlyProto3): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -8420,8 +8516,8 @@ function EnumOnlyProto3.encode(self: EnumOnlyProto3): buffer
 	return shrunkBuffer
 end
 
-function EnumOnlyProto3.decode(input: buffer): EnumOnlyProto3
-	local self = EnumOnlyProto3.new()
+function _EnumOnlyProto3Impl.decode(input: buffer): EnumOnlyProto3
+	local self = _EnumOnlyProto3Impl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -8444,17 +8540,19 @@ function EnumOnlyProto3.decode(input: buffer): EnumOnlyProto3
 	return self
 end
 
-function EnumOnlyProto3.jsonEncode(self: EnumOnlyProto3): any
+function _EnumOnlyProto3Impl.jsonEncode(self: EnumOnlyProto3): any
 	local output: {} = {}
 
 	return output
 end
 
-function EnumOnlyProto3.jsonDecode(input: { [string]: any }): EnumOnlyProto3
+function _EnumOnlyProto3Impl.jsonDecode(input: { [string]: any }): EnumOnlyProto3
 	local self = EnumOnlyProto3.new()
 
 	return self
 end
+
+EnumOnlyProto3 = _EnumOnlyProto3Impl
 
 EnumOnlyProto3_Bool = {
 	fromNumber = function(value: number): EnumOnlyProto3_Bool?

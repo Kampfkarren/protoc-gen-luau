@@ -18,6 +18,8 @@ type _FailureSetFields = {
 }
 
 export type FailureSet = typeof(setmetatable({} :: _FailureSetFields, {} :: _FailureSetImpl))
+local FailureSet: proto.Message<FailureSet>
+
 type _ConformanceRequestImpl = {
 	__index: _ConformanceRequestImpl,
 	new: () -> ConformanceRequest,
@@ -42,6 +44,8 @@ type _ConformanceRequestFields = {
 }
 
 export type ConformanceRequest = typeof(setmetatable({} :: _ConformanceRequestFields, {} :: _ConformanceRequestImpl))
+local ConformanceRequest: proto.Message<ConformanceRequest>
+
 type _ConformanceResponseImpl = {
 	__index: _ConformanceResponseImpl,
 	new: () -> ConformanceResponse,
@@ -66,6 +70,8 @@ type _ConformanceResponseFields = {
 }
 
 export type ConformanceResponse = typeof(setmetatable({} :: _ConformanceResponseFields, {} :: _ConformanceResponseImpl))
+local ConformanceResponse: proto.Message<ConformanceResponse>
+
 type _JspbEncodingConfigImpl = {
 	__index: _JspbEncodingConfigImpl,
 	new: () -> JspbEncodingConfig,
@@ -80,6 +86,8 @@ type _JspbEncodingConfigFields = {
 }
 
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
+local JspbEncodingConfig: proto.Message<JspbEncodingConfig>
+
 local WireFormat: proto.Enum<WireFormat>
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
 
@@ -93,16 +101,16 @@ export type TestCategory =
 	| "TEXT_FORMAT_TEST"
 	| number -- Unknown
 
-local FailureSet: proto.Message<_FailureSetImpl> = {} :: _FailureSetImpl
-FailureSet.__index = FailureSet
+local _FailureSetImpl = {}
+_FailureSetImpl.__index = _FailureSetImpl
 
-function FailureSet.new(data: _FailureSetFields?): FailureSet
+function _FailureSetImpl.new(data: _FailureSetFields?): FailureSet
 	return setmetatable({
 		failure = if data == nil then {} else data.failure,
-	}, FailureSet)
+	}, _FailureSetImpl)
 end
 
-function FailureSet.encode(self: FailureSet): buffer
+function _FailureSetImpl.encode(self: FailureSet): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -118,8 +126,8 @@ function FailureSet.encode(self: FailureSet): buffer
 	return shrunkBuffer
 end
 
-function FailureSet.decode(input: buffer): FailureSet
-	local self = FailureSet.new()
+function _FailureSetImpl.decode(input: buffer): FailureSet
+	local self = _FailureSetImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -146,7 +154,7 @@ function FailureSet.decode(input: buffer): FailureSet
 	return self
 end
 
-function FailureSet.jsonEncode(self: FailureSet): any
+function _FailureSetImpl.jsonEncode(self: FailureSet): any
 	local output: {
 		failure: { string }?,
 	} = {}
@@ -162,7 +170,7 @@ function FailureSet.jsonEncode(self: FailureSet): any
 	return output
 end
 
-function FailureSet.jsonDecode(input: { [string]: any }): FailureSet
+function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
 	local self = FailureSet.new()
 
 	if input.failure ~= nil then
@@ -177,10 +185,12 @@ function FailureSet.jsonDecode(input: { [string]: any }): FailureSet
 	return self
 end
 
-local ConformanceRequest: proto.Message<_ConformanceRequestImpl> = {} :: _ConformanceRequestImpl
-ConformanceRequest.__index = ConformanceRequest
+FailureSet = _FailureSetImpl
 
-function ConformanceRequest.new(data: _ConformanceRequestFields?): ConformanceRequest
+local _ConformanceRequestImpl = {}
+_ConformanceRequestImpl.__index = _ConformanceRequestImpl
+
+function _ConformanceRequestImpl.new(data: _ConformanceRequestFields?): ConformanceRequest
 	return setmetatable({
 		payload = if data == nil then nil else data.payload,
 		requested_output_format = if data == nil
@@ -192,10 +202,10 @@ function ConformanceRequest.new(data: _ConformanceRequestFields?): ConformanceRe
 			else data.test_category,
 		jspb_encoding_options = if data == nil then nil else data.jspb_encoding_options,
 		print_unknown_fields = if data == nil then false else data.print_unknown_fields,
-	}, ConformanceRequest)
+	}, _ConformanceRequestImpl)
 end
 
-function ConformanceRequest.encode(self: ConformanceRequest): buffer
+function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -246,8 +256,8 @@ function ConformanceRequest.encode(self: ConformanceRequest): buffer
 	return shrunkBuffer
 end
 
-function ConformanceRequest.decode(input: buffer): ConformanceRequest
-	local self = ConformanceRequest.new()
+function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
+	local self = _ConformanceRequestImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -306,7 +316,7 @@ function ConformanceRequest.decode(input: buffer): ConformanceRequest
 	return self
 end
 
-function ConformanceRequest.jsonEncode(self: ConformanceRequest): any
+function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 	local output: {
 		protobufPayload: buffer?,
 		jsonPayload: string?,
@@ -359,7 +369,7 @@ function ConformanceRequest.jsonEncode(self: ConformanceRequest): any
 	return output
 end
 
-function ConformanceRequest.jsonDecode(input: { [string]: any }): ConformanceRequest
+function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): ConformanceRequest
 	local self = ConformanceRequest.new()
 
 	if input.protobuf_payload ~= nil then
@@ -445,16 +455,18 @@ function ConformanceRequest.jsonDecode(input: { [string]: any }): ConformanceReq
 	return self
 end
 
-local ConformanceResponse: proto.Message<_ConformanceResponseImpl> = {} :: _ConformanceResponseImpl
-ConformanceResponse.__index = ConformanceResponse
+ConformanceRequest = _ConformanceRequestImpl
 
-function ConformanceResponse.new(data: _ConformanceResponseFields?): ConformanceResponse
+local _ConformanceResponseImpl = {}
+_ConformanceResponseImpl.__index = _ConformanceResponseImpl
+
+function _ConformanceResponseImpl.new(data: _ConformanceResponseFields?): ConformanceResponse
 	return setmetatable({
 		result = if data == nil then nil else data.result,
-	}, ConformanceResponse)
+	}, _ConformanceResponseImpl)
 end
 
-function ConformanceResponse.encode(self: ConformanceResponse): buffer
+function _ConformanceResponseImpl.encode(self: ConformanceResponse): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -494,8 +506,8 @@ function ConformanceResponse.encode(self: ConformanceResponse): buffer
 	return shrunkBuffer
 end
 
-function ConformanceResponse.decode(input: buffer): ConformanceResponse
-	local self = ConformanceResponse.new()
+function _ConformanceResponseImpl.decode(input: buffer): ConformanceResponse
+	local self = _ConformanceResponseImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -554,7 +566,7 @@ function ConformanceResponse.decode(input: buffer): ConformanceResponse
 	return self
 end
 
-function ConformanceResponse.jsonEncode(self: ConformanceResponse): any
+function _ConformanceResponseImpl.jsonEncode(self: ConformanceResponse): any
 	local output: {
 		parseError: string?,
 		serializeError: string?,
@@ -593,7 +605,7 @@ function ConformanceResponse.jsonEncode(self: ConformanceResponse): any
 	return output
 end
 
-function ConformanceResponse.jsonDecode(input: { [string]: any }): ConformanceResponse
+function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): ConformanceResponse
 	local self = ConformanceResponse.new()
 
 	if input.parse_error ~= nil then
@@ -667,16 +679,18 @@ function ConformanceResponse.jsonDecode(input: { [string]: any }): ConformanceRe
 	return self
 end
 
-local JspbEncodingConfig: proto.Message<_JspbEncodingConfigImpl> = {} :: _JspbEncodingConfigImpl
-JspbEncodingConfig.__index = JspbEncodingConfig
+ConformanceResponse = _ConformanceResponseImpl
 
-function JspbEncodingConfig.new(data: _JspbEncodingConfigFields?): JspbEncodingConfig
+local _JspbEncodingConfigImpl = {}
+_JspbEncodingConfigImpl.__index = _JspbEncodingConfigImpl
+
+function _JspbEncodingConfigImpl.new(data: _JspbEncodingConfigFields?): JspbEncodingConfig
 	return setmetatable({
 		use_jspb_array_any_format = if data == nil then false else data.use_jspb_array_any_format,
-	}, JspbEncodingConfig)
+	}, _JspbEncodingConfigImpl)
 end
 
-function JspbEncodingConfig.encode(self: JspbEncodingConfig): buffer
+function _JspbEncodingConfigImpl.encode(self: JspbEncodingConfig): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -690,8 +704,8 @@ function JspbEncodingConfig.encode(self: JspbEncodingConfig): buffer
 	return shrunkBuffer
 end
 
-function JspbEncodingConfig.decode(input: buffer): JspbEncodingConfig
-	local self = JspbEncodingConfig.new()
+function _JspbEncodingConfigImpl.decode(input: buffer): JspbEncodingConfig
+	local self = _JspbEncodingConfigImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -718,7 +732,7 @@ function JspbEncodingConfig.decode(input: buffer): JspbEncodingConfig
 	return self
 end
 
-function JspbEncodingConfig.jsonEncode(self: JspbEncodingConfig): any
+function _JspbEncodingConfigImpl.jsonEncode(self: JspbEncodingConfig): any
 	local output: {
 		useJspbArrayAnyFormat: boolean?,
 	} = {}
@@ -730,7 +744,7 @@ function JspbEncodingConfig.jsonEncode(self: JspbEncodingConfig): any
 	return output
 end
 
-function JspbEncodingConfig.jsonDecode(input: { [string]: any }): JspbEncodingConfig
+function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncodingConfig
 	local self = JspbEncodingConfig.new()
 
 	if input.use_jspb_array_any_format ~= nil then
@@ -743,6 +757,8 @@ function JspbEncodingConfig.jsonDecode(input: { [string]: any }): JspbEncodingCo
 
 	return self
 end
+
+JspbEncodingConfig = _JspbEncodingConfigImpl
 
 WireFormat = {
 	fromNumber = function(value: number): WireFormat?

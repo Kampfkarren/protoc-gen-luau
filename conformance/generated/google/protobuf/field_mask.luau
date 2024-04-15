@@ -18,17 +18,18 @@ type _FieldMaskFields = {
 }
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
+local FieldMask: proto.Message<FieldMask>
 
-local FieldMask: proto.Message<_FieldMaskImpl> = {} :: _FieldMaskImpl
-FieldMask.__index = FieldMask
+local _FieldMaskImpl = {}
+_FieldMaskImpl.__index = _FieldMaskImpl
 
-function FieldMask.new(data: _FieldMaskFields?): FieldMask
+function _FieldMaskImpl.new(data: _FieldMaskFields?): FieldMask
 	return setmetatable({
 		paths = if data == nil then {} else data.paths,
-	}, FieldMask)
+	}, _FieldMaskImpl)
 end
 
-function FieldMask.encode(self: FieldMask): buffer
+function _FieldMaskImpl.encode(self: FieldMask): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -44,8 +45,8 @@ function FieldMask.encode(self: FieldMask): buffer
 	return shrunkBuffer
 end
 
-function FieldMask.decode(input: buffer): FieldMask
-	local self = FieldMask.new()
+function _FieldMaskImpl.decode(input: buffer): FieldMask
+	local self = _FieldMaskImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -72,7 +73,7 @@ function FieldMask.decode(input: buffer): FieldMask
 	return self
 end
 
-function FieldMask.jsonEncode(self: FieldMask): any
+function _FieldMaskImpl.jsonEncode(self: FieldMask): any
 	local output: {
 		paths: { string }?,
 	} = {}
@@ -88,7 +89,7 @@ function FieldMask.jsonEncode(self: FieldMask): any
 	return output
 end
 
-function FieldMask.jsonDecode(input: { [string]: any }): FieldMask
+function _FieldMaskImpl.jsonDecode(input: { [string]: any }): FieldMask
 	local self = FieldMask.new()
 
 	if input.paths ~= nil then
@@ -102,6 +103,8 @@ function FieldMask.jsonDecode(input: { [string]: any }): FieldMask
 
 	return self
 end
+
+FieldMask = _FieldMaskImpl
 
 return {
 	FieldMask = FieldMask,

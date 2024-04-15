@@ -19,18 +19,19 @@ type _DurationFields = {
 }
 
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
+local Duration: proto.Message<Duration>
 
-local Duration: proto.Message<_DurationImpl> = {} :: _DurationImpl
-Duration.__index = Duration
+local _DurationImpl = {}
+_DurationImpl.__index = _DurationImpl
 
-function Duration.new(data: _DurationFields?): Duration
+function _DurationImpl.new(data: _DurationFields?): Duration
 	return setmetatable({
 		seconds = if data == nil then 0 else data.seconds,
 		nanos = if data == nil then 0 else data.nanos,
-	}, Duration)
+	}, _DurationImpl)
 end
 
-function Duration.encode(self: Duration): buffer
+function _DurationImpl.encode(self: Duration): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -49,8 +50,8 @@ function Duration.encode(self: Duration): buffer
 	return shrunkBuffer
 end
 
-function Duration.decode(input: buffer): Duration
-	local self = Duration.new()
+function _DurationImpl.decode(input: buffer): Duration
+	local self = _DurationImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -80,6 +81,8 @@ function Duration.decode(input: buffer): Duration
 
 	return self
 end
+
+Duration = _DurationImpl
 
 local function serializeFractionalNanos(nanos: number): string
 	if nanos % 1e6 == 0 then

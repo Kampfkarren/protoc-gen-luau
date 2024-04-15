@@ -18,6 +18,8 @@ type _StructFields = {
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
+local Struct: proto.Message<Struct>
+
 type _Struct_FieldsEntryImpl = {
 	__index: _Struct_FieldsEntryImpl,
 	new: () -> Struct_FieldsEntry,
@@ -33,6 +35,8 @@ type _Struct_FieldsEntryFields = {
 }
 
 export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
+local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry>
+
 type _ValueImpl = {
 	__index: _ValueImpl,
 	new: () -> Value,
@@ -54,6 +58,8 @@ type _ValueFields = {
 }
 
 export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
+local Value: proto.Message<Value>
+
 type _ListValueImpl = {
 	__index: _ListValueImpl,
 	new: () -> ListValue,
@@ -68,19 +74,21 @@ type _ListValueFields = {
 }
 
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
+local ListValue: proto.Message<ListValue>
+
 local NullValue: proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
 
-local Struct: proto.Message<_StructImpl> = {} :: _StructImpl
-Struct.__index = Struct
+local _StructImpl = {}
+_StructImpl.__index = _StructImpl
 
-function Struct.new(data: _StructFields?): Struct
+function _StructImpl.new(data: _StructFields?): Struct
 	return setmetatable({
 		fields = if data == nil then {} else data.fields,
-	}, Struct)
+	}, _StructImpl)
 end
 
-function Struct.encode(self: Struct): buffer
+function _StructImpl.encode(self: Struct): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -103,8 +111,8 @@ function Struct.encode(self: Struct): buffer
 	return shrunkBuffer
 end
 
-function Struct.decode(input: buffer): Struct
-	local self = Struct.new()
+function _StructImpl.decode(input: buffer): Struct
+	local self = _StructImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -137,17 +145,19 @@ function Struct.decode(input: buffer): Struct
 	return self
 end
 
-local Struct_FieldsEntry: proto.Message<_Struct_FieldsEntryImpl> = {} :: _Struct_FieldsEntryImpl
-Struct_FieldsEntry.__index = Struct_FieldsEntry
+Struct = _StructImpl
 
-function Struct_FieldsEntry.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
+local _Struct_FieldsEntryImpl = {}
+_Struct_FieldsEntryImpl.__index = _Struct_FieldsEntryImpl
+
+function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
 	return setmetatable({
 		key = if data == nil then "" else data.key,
 		value = if data == nil then nil else data.value,
-	}, Struct_FieldsEntry)
+	}, _Struct_FieldsEntryImpl)
 end
 
-function Struct_FieldsEntry.encode(self: Struct_FieldsEntry): buffer
+function _Struct_FieldsEntryImpl.encode(self: Struct_FieldsEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -167,8 +177,8 @@ function Struct_FieldsEntry.encode(self: Struct_FieldsEntry): buffer
 	return shrunkBuffer
 end
 
-function Struct_FieldsEntry.decode(input: buffer): Struct_FieldsEntry
-	local self = Struct_FieldsEntry.new()
+function _Struct_FieldsEntryImpl.decode(input: buffer): Struct_FieldsEntry
+	local self = _Struct_FieldsEntryImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -199,7 +209,7 @@ function Struct_FieldsEntry.decode(input: buffer): Struct_FieldsEntry
 	return self
 end
 
-function Struct_FieldsEntry.jsonEncode(self: Struct_FieldsEntry): any
+function _Struct_FieldsEntryImpl.jsonEncode(self: Struct_FieldsEntry): any
 	local output: {
 		key: string?,
 		value: Value?,
@@ -216,7 +226,7 @@ function Struct_FieldsEntry.jsonEncode(self: Struct_FieldsEntry): any
 	return output
 end
 
-function Struct_FieldsEntry.jsonDecode(input: { [string]: any }): Struct_FieldsEntry
+function _Struct_FieldsEntryImpl.jsonDecode(input: { [string]: any }): Struct_FieldsEntry
 	local self = Struct_FieldsEntry.new()
 
 	if input.key ~= nil then
@@ -230,16 +240,18 @@ function Struct_FieldsEntry.jsonDecode(input: { [string]: any }): Struct_FieldsE
 	return self
 end
 
-local Value: proto.Message<_ValueImpl> = {} :: _ValueImpl
-Value.__index = Value
+Struct_FieldsEntry = _Struct_FieldsEntryImpl
 
-function Value.new(data: _ValueFields?): Value
+local _ValueImpl = {}
+_ValueImpl.__index = _ValueImpl
+
+function _ValueImpl.new(data: _ValueFields?): Value
 	return setmetatable({
 		kind = if data == nil then nil else data.kind,
-	}, Value)
+	}, _ValueImpl)
 end
 
-function Value.encode(self: Value): buffer
+function _ValueImpl.encode(self: Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -272,8 +284,8 @@ function Value.encode(self: Value): buffer
 	return shrunkBuffer
 end
 
-function Value.decode(input: buffer): Value
-	local self = Value.new()
+function _ValueImpl.decode(input: buffer): Value
+	local self = _ValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -320,16 +332,18 @@ function Value.decode(input: buffer): Value
 	return self
 end
 
-local ListValue: proto.Message<_ListValueImpl> = {} :: _ListValueImpl
-ListValue.__index = ListValue
+Value = _ValueImpl
 
-function ListValue.new(data: _ListValueFields?): ListValue
+local _ListValueImpl = {}
+_ListValueImpl.__index = _ListValueImpl
+
+function _ListValueImpl.new(data: _ListValueFields?): ListValue
 	return setmetatable({
 		values = if data == nil then {} else data.values,
-	}, ListValue)
+	}, _ListValueImpl)
 end
 
-function ListValue.encode(self: ListValue): buffer
+function _ListValueImpl.encode(self: ListValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -346,8 +360,8 @@ function ListValue.encode(self: ListValue): buffer
 	return shrunkBuffer
 end
 
-function ListValue.decode(input: buffer): ListValue
-	local self = ListValue.new()
+function _ListValueImpl.decode(input: buffer): ListValue
+	local self = _ListValueImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -373,6 +387,8 @@ function ListValue.decode(input: buffer): ListValue
 
 	return self
 end
+
+ListValue = _ListValueImpl
 
 NullValue = {
 	fromNumber = function(value: number): NullValue?

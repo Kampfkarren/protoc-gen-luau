@@ -19,18 +19,19 @@ type _TimestampFields = {
 }
 
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
+local Timestamp: proto.Message<Timestamp>
 
-local Timestamp: proto.Message<_TimestampImpl> = {} :: _TimestampImpl
-Timestamp.__index = Timestamp
+local _TimestampImpl = {}
+_TimestampImpl.__index = _TimestampImpl
 
-function Timestamp.new(data: _TimestampFields?): Timestamp
+function _TimestampImpl.new(data: _TimestampFields?): Timestamp
 	return setmetatable({
 		seconds = if data == nil then 0 else data.seconds,
 		nanos = if data == nil then 0 else data.nanos,
-	}, Timestamp)
+	}, _TimestampImpl)
 end
 
-function Timestamp.encode(self: Timestamp): buffer
+function _TimestampImpl.encode(self: Timestamp): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -49,8 +50,8 @@ function Timestamp.encode(self: Timestamp): buffer
 	return shrunkBuffer
 end
 
-function Timestamp.decode(input: buffer): Timestamp
-	local self = Timestamp.new()
+function _TimestampImpl.decode(input: buffer): Timestamp
+	local self = _TimestampImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -80,6 +81,8 @@ function Timestamp.decode(input: buffer): Timestamp
 
 	return self
 end
+
+Timestamp = _TimestampImpl
 
 local function serializeFractionalNanos(nanos: number): string
 	if nanos % 1e6 == 0 then

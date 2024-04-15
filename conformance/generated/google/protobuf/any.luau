@@ -19,18 +19,19 @@ type _AnyFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
+local Any: proto.Message<Any>
 
-local Any: proto.Message<_AnyImpl> = {} :: _AnyImpl
-Any.__index = Any
+local _AnyImpl = {}
+_AnyImpl.__index = _AnyImpl
 
-function Any.new(data: _AnyFields?): Any
+function _AnyImpl.new(data: _AnyFields?): Any
 	return setmetatable({
 		type_url = if data == nil then "" else data.type_url,
 		value = if data == nil then buffer.create(0) else data.value,
-	}, Any)
+	}, _AnyImpl)
 end
 
-function Any.encode(self: Any): buffer
+function _AnyImpl.encode(self: Any): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
@@ -49,8 +50,8 @@ function Any.encode(self: Any): buffer
 	return shrunkBuffer
 end
 
-function Any.decode(input: buffer): Any
-	local self = Any.new()
+function _AnyImpl.decode(input: buffer): Any
+	local self = _AnyImpl.new()
 	local cursor = 0
 
 	while cursor < buffer.len(input) do
@@ -81,7 +82,7 @@ function Any.decode(input: buffer): Any
 	return self
 end
 
-function Any.jsonEncode(self: Any): any
+function _AnyImpl.jsonEncode(self: Any): any
 	local output: {
 		typeUrl: string?,
 		value: buffer?,
@@ -98,7 +99,7 @@ function Any.jsonEncode(self: Any): any
 	return output
 end
 
-function Any.jsonDecode(input: { [string]: any }): Any
+function _AnyImpl.jsonDecode(input: { [string]: any }): Any
 	local self = Any.new()
 
 	if input.type_url ~= nil then
@@ -115,6 +116,8 @@ function Any.jsonDecode(input: { [string]: any }): Any
 
 	return self
 end
+
+Any = _AnyImpl
 
 return {
 	Any = Any,
