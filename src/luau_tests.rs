@@ -1,5 +1,6 @@
 use std::{
     path::Path,
+    process::ExitCode,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc, Condvar, Mutex, OnceLock,
@@ -66,10 +67,15 @@ async fn run_luau_test(filename: &Path) {
     let path = Path::new("src/tests/").join(filename);
     let contents = std::fs::read_to_string(&path).unwrap();
 
-    lune::Runtime::new()
+    let exit_code = lune::Runtime::new()
         .run(path.to_string_lossy(), contents)
         .await
         .expect("Error running test");
+
+    // HACK: https://github.com/lune-org/lune/issues/175 must be fixed
+    if format!("{exit_code:?}") == format!("{:?}", ExitCode::FAILURE) {
+        panic!("Test failed. You may need to run again with -- --nocapture to see the output if you haven't already.");
+    }
 }
 
 #[tokio::test]
