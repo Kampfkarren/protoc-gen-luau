@@ -480,11 +480,8 @@ impl<'a> FileGenerator<'a> {
             self.exports.push(name.clone());
         }
 
-        let mut json_type = "{ [string]: any }";
         let special_json_type = message_special_json_type(&self.file_descriptor_proto, message);
-        if special_json_type.is_some() {
-            json_type = special_json_type.unwrap();
-        }
+        let json_type = special_json_type.unwrap_or("{ [string]: any }");
 
         self.types.push(format!(
             r#"type _{name}Impl = {{
