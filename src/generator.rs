@@ -213,16 +213,16 @@ pub fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"
-local <name>: proto.Message<_<name>Impl> = {} :: _<name>Impl
-<name>.__index = <name>
+local _<name>Impl = {}
+_<name>Impl.__index = _<name>Impl
 
-function <name>.new(data: _<name>Fields?): <name>
+function _<name>Impl.new(data: _<name>Fields?): <name>
     return setmetatable({
 <default>
-    }, <name>)
+    }, _<name>Impl)
 end
 
-function <name>.encode(self: <name>): buffer
+function _<name>Impl.encode(self: <name>): buffer
     local output = buffer.create(0)
     local cursor = 0
 
@@ -232,8 +232,8 @@ function <name>.encode(self: <name>): buffer
     return shrunkBuffer
 end
 
-function <name>.decode(input: buffer): <name>
-    local self = <name>.new()
+function _<name>Impl.decode(input: buffer): <name>
+    local self = _<name>Impl.new()
     local cursor = 0
 
     while cursor < buffer.len(input) do
@@ -257,14 +257,16 @@ function <name>.decode(input: buffer): <name>
 end
 
 <json>
+
+<name> = _<name>Impl
 "#;
 
 const JSON: &str = r#"
-function <name>.jsonEncode(self: <name>): any
+function _<name>Impl.jsonEncode(self: <name>): any
     <json_encode>
 end
 
-function <name>.jsonDecode(input: { [string]: any }): <name>
+function _<name>Impl.jsonDecode(input: { [string]: any }): _<name>Impl
     <json_decode>
 end
 "#;
@@ -616,8 +618,13 @@ impl<'a> FileGenerator<'a> {
         self.types.blank();
 
         self.types.push(format!(
-            r#"export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"#
+            "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
+
+        self.types
+            .push(format!("local {name}: proto.Message<{name}>"));
+
+        self.types.blank();
 
         json_type.dedent();
         json_type.push("}");
