@@ -26,8 +26,28 @@ function tests.it(message: string, callback: () -> ())
 	end
 end
 
+local function deepEqual<T>(x: T, y: T): boolean
+	if typeof(x) == "table" and typeof(y) == "table" then
+		for key, value in x :: any do
+			if not deepEqual(value, y[key]) then
+				return false
+			end
+		end
+
+		for key in y :: any do
+			if x[key] == nil then
+				return false
+			end
+		end
+
+		return true
+	end
+
+	return x == y
+end
+
 function tests.assertEquals<T>(x: T, y: T)
-	if x ~= y then
+	if not deepEqual(x, y) then
 		error(`Assertion failed. Expected {x} to equal {y}`)
 	end
 end
