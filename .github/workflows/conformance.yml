@@ -30,7 +30,7 @@ jobs:
         unzip conformance_test_runner.zip -d conformance_test_runner
         mv ./conformance_test_runner/bin/conformance_test_runner ./conformance/conformance_test_runner
     - name: Run conformance tests
-      run: just generate-conformance
+      run: just generate-conformance || true
     - name: Check if conformance tests changed
       run: git diff --exit-code conformance/generated
     - name: Check if failing tests changed
