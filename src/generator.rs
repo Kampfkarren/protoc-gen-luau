@@ -562,8 +562,10 @@ impl<'a> FileGenerator<'a> {
 
         // TODO: Make sure optional and required stuff makes sense between proto2/proto3
         for field in fields {
+            let field_name = field.name();
+
             self.types
-                .push(format!("{}: {},", field.name(), field.type_definition()));
+                .push(format!("{field_name}: {},", field.type_definition()));
 
             json_type.append(&mut field.json_type_and_names());
 
@@ -578,14 +580,12 @@ impl<'a> FileGenerator<'a> {
             }
 
             default_lines.push(format!(
-                r#"{} = data and data["{}"] or {},"#,
-                field.name(),
-                field.name(),
+                r#"{field_name} = if data == nil then {} else data.{field_name},"#,
                 field.default()
             ));
 
             for inner_field in field.inner_fields() {
-                let output = &format!("self.{}", field.name());
+                let output = &format!("self.{field_name}");
 
                 let decoded = decode_field(
                     output,
