@@ -594,152 +594,156 @@ TestAllTypesProto3.__index = TestAllTypesProto3
 
 function TestAllTypesProto3.new(data: _TestAllTypesProto3Fields?): TestAllTypesProto3
 	return setmetatable({
-		optional_int32 = data and data["optional_int32"] or 0,
-		optional_int64 = data and data["optional_int64"] or 0,
-		optional_uint32 = data and data["optional_uint32"] or 0,
-		optional_uint64 = data and data["optional_uint64"] or 0,
-		optional_sint32 = data and data["optional_sint32"] or 0,
-		optional_sint64 = data and data["optional_sint64"] or 0,
-		optional_fixed32 = data and data["optional_fixed32"] or 0,
-		optional_fixed64 = data and data["optional_fixed64"] or 0,
-		optional_sfixed32 = data and data["optional_sfixed32"] or 0,
-		optional_sfixed64 = data and data["optional_sfixed64"] or 0,
-		optional_float = data and data["optional_float"] or 0,
-		optional_double = data and data["optional_double"] or 0,
-		optional_bool = data and data["optional_bool"] or false,
-		optional_string = data and data["optional_string"] or "",
-		optional_bytes = data and data["optional_bytes"] or buffer.create(0),
-		optional_nested_message = data and data["optional_nested_message"] or nil,
-		optional_foreign_message = data and data["optional_foreign_message"] or nil,
-		optional_nested_enum = data and data["optional_nested_enum"]
-			or assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
-		optional_foreign_enum = data and data["optional_foreign_enum"]
-			or assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
-		optional_aliased_enum = data and data["optional_aliased_enum"]
-			or assert(TestAllTypesProto3_AliasedEnum.fromNumber(0), "Enum has no 0 default"),
-		optional_string_piece = data and data["optional_string_piece"] or "",
-		optional_cord = data and data["optional_cord"] or "",
-		recursive_message = data and data["recursive_message"] or nil,
-		repeated_int32 = data and data["repeated_int32"] or {},
-		repeated_int64 = data and data["repeated_int64"] or {},
-		repeated_uint32 = data and data["repeated_uint32"] or {},
-		repeated_uint64 = data and data["repeated_uint64"] or {},
-		repeated_sint32 = data and data["repeated_sint32"] or {},
-		repeated_sint64 = data and data["repeated_sint64"] or {},
-		repeated_fixed32 = data and data["repeated_fixed32"] or {},
-		repeated_fixed64 = data and data["repeated_fixed64"] or {},
-		repeated_sfixed32 = data and data["repeated_sfixed32"] or {},
-		repeated_sfixed64 = data and data["repeated_sfixed64"] or {},
-		repeated_float = data and data["repeated_float"] or {},
-		repeated_double = data and data["repeated_double"] or {},
-		repeated_bool = data and data["repeated_bool"] or {},
-		repeated_string = data and data["repeated_string"] or {},
-		repeated_bytes = data and data["repeated_bytes"] or {},
-		repeated_nested_message = data and data["repeated_nested_message"] or {},
-		repeated_foreign_message = data and data["repeated_foreign_message"] or {},
-		repeated_nested_enum = data and data["repeated_nested_enum"] or {},
-		repeated_foreign_enum = data and data["repeated_foreign_enum"] or {},
-		repeated_string_piece = data and data["repeated_string_piece"] or {},
-		repeated_cord = data and data["repeated_cord"] or {},
-		packed_int32 = data and data["packed_int32"] or {},
-		packed_int64 = data and data["packed_int64"] or {},
-		packed_uint32 = data and data["packed_uint32"] or {},
-		packed_uint64 = data and data["packed_uint64"] or {},
-		packed_sint32 = data and data["packed_sint32"] or {},
-		packed_sint64 = data and data["packed_sint64"] or {},
-		packed_fixed32 = data and data["packed_fixed32"] or {},
-		packed_fixed64 = data and data["packed_fixed64"] or {},
-		packed_sfixed32 = data and data["packed_sfixed32"] or {},
-		packed_sfixed64 = data and data["packed_sfixed64"] or {},
-		packed_float = data and data["packed_float"] or {},
-		packed_double = data and data["packed_double"] or {},
-		packed_bool = data and data["packed_bool"] or {},
-		packed_nested_enum = data and data["packed_nested_enum"] or {},
-		unpacked_int32 = data and data["unpacked_int32"] or {},
-		unpacked_int64 = data and data["unpacked_int64"] or {},
-		unpacked_uint32 = data and data["unpacked_uint32"] or {},
-		unpacked_uint64 = data and data["unpacked_uint64"] or {},
-		unpacked_sint32 = data and data["unpacked_sint32"] or {},
-		unpacked_sint64 = data and data["unpacked_sint64"] or {},
-		unpacked_fixed32 = data and data["unpacked_fixed32"] or {},
-		unpacked_fixed64 = data and data["unpacked_fixed64"] or {},
-		unpacked_sfixed32 = data and data["unpacked_sfixed32"] or {},
-		unpacked_sfixed64 = data and data["unpacked_sfixed64"] or {},
-		unpacked_float = data and data["unpacked_float"] or {},
-		unpacked_double = data and data["unpacked_double"] or {},
-		unpacked_bool = data and data["unpacked_bool"] or {},
-		unpacked_nested_enum = data and data["unpacked_nested_enum"] or {},
-		map_int32_int32 = data and data["map_int32_int32"] or {},
-		map_int64_int64 = data and data["map_int64_int64"] or {},
-		map_uint32_uint32 = data and data["map_uint32_uint32"] or {},
-		map_uint64_uint64 = data and data["map_uint64_uint64"] or {},
-		map_sint32_sint32 = data and data["map_sint32_sint32"] or {},
-		map_sint64_sint64 = data and data["map_sint64_sint64"] or {},
-		map_fixed32_fixed32 = data and data["map_fixed32_fixed32"] or {},
-		map_fixed64_fixed64 = data and data["map_fixed64_fixed64"] or {},
-		map_sfixed32_sfixed32 = data and data["map_sfixed32_sfixed32"] or {},
-		map_sfixed64_sfixed64 = data and data["map_sfixed64_sfixed64"] or {},
-		map_int32_float = data and data["map_int32_float"] or {},
-		map_int32_double = data and data["map_int32_double"] or {},
-		map_bool_bool = data and data["map_bool_bool"] or {},
-		map_string_string = data and data["map_string_string"] or {},
-		map_string_bytes = data and data["map_string_bytes"] or {},
-		map_string_nested_message = data and data["map_string_nested_message"] or {},
-		map_string_foreign_message = data and data["map_string_foreign_message"] or {},
-		map_string_nested_enum = data and data["map_string_nested_enum"] or {},
-		map_string_foreign_enum = data and data["map_string_foreign_enum"] or {},
-		oneof_field = data and data["oneof_field"] or nil,
-		optional_bool_wrapper = data and data["optional_bool_wrapper"] or nil,
-		optional_int32_wrapper = data and data["optional_int32_wrapper"] or nil,
-		optional_int64_wrapper = data and data["optional_int64_wrapper"] or nil,
-		optional_uint32_wrapper = data and data["optional_uint32_wrapper"] or nil,
-		optional_uint64_wrapper = data and data["optional_uint64_wrapper"] or nil,
-		optional_float_wrapper = data and data["optional_float_wrapper"] or nil,
-		optional_double_wrapper = data and data["optional_double_wrapper"] or nil,
-		optional_string_wrapper = data and data["optional_string_wrapper"] or nil,
-		optional_bytes_wrapper = data and data["optional_bytes_wrapper"] or nil,
-		repeated_bool_wrapper = data and data["repeated_bool_wrapper"] or {},
-		repeated_int32_wrapper = data and data["repeated_int32_wrapper"] or {},
-		repeated_int64_wrapper = data and data["repeated_int64_wrapper"] or {},
-		repeated_uint32_wrapper = data and data["repeated_uint32_wrapper"] or {},
-		repeated_uint64_wrapper = data and data["repeated_uint64_wrapper"] or {},
-		repeated_float_wrapper = data and data["repeated_float_wrapper"] or {},
-		repeated_double_wrapper = data and data["repeated_double_wrapper"] or {},
-		repeated_string_wrapper = data and data["repeated_string_wrapper"] or {},
-		repeated_bytes_wrapper = data and data["repeated_bytes_wrapper"] or {},
-		optional_duration = data and data["optional_duration"] or nil,
-		optional_timestamp = data and data["optional_timestamp"] or nil,
-		optional_field_mask = data and data["optional_field_mask"] or nil,
-		optional_struct = data and data["optional_struct"] or nil,
-		optional_any = data and data["optional_any"] or nil,
-		optional_value = data and data["optional_value"] or nil,
-		optional_null_value = data and data["optional_null_value"]
-			or assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default"),
-		repeated_duration = data and data["repeated_duration"] or {},
-		repeated_timestamp = data and data["repeated_timestamp"] or {},
-		repeated_fieldmask = data and data["repeated_fieldmask"] or {},
-		repeated_struct = data and data["repeated_struct"] or {},
-		repeated_any = data and data["repeated_any"] or {},
-		repeated_value = data and data["repeated_value"] or {},
-		repeated_list_value = data and data["repeated_list_value"] or {},
-		fieldname1 = data and data["fieldname1"] or 0,
-		field_name2 = data and data["field_name2"] or 0,
-		_field_name3 = data and data["_field_name3"] or 0,
-		field__name4_ = data and data["field__name4_"] or 0,
-		field0name5 = data and data["field0name5"] or 0,
-		field_0_name6 = data and data["field_0_name6"] or 0,
-		fieldName7 = data and data["fieldName7"] or 0,
-		FieldName8 = data and data["FieldName8"] or 0,
-		field_Name9 = data and data["field_Name9"] or 0,
-		Field_Name10 = data and data["Field_Name10"] or 0,
-		FIELD_NAME11 = data and data["FIELD_NAME11"] or 0,
-		FIELD_name12 = data and data["FIELD_name12"] or 0,
-		__field_name13 = data and data["__field_name13"] or 0,
-		__Field_name14 = data and data["__Field_name14"] or 0,
-		field__name15 = data and data["field__name15"] or 0,
-		field__Name16 = data and data["field__Name16"] or 0,
-		field_name17__ = data and data["field_name17__"] or 0,
-		Field_name18__ = data and data["Field_name18__"] or 0,
+		optional_int32 = if data == nil then 0 else data.optional_int32,
+		optional_int64 = if data == nil then 0 else data.optional_int64,
+		optional_uint32 = if data == nil then 0 else data.optional_uint32,
+		optional_uint64 = if data == nil then 0 else data.optional_uint64,
+		optional_sint32 = if data == nil then 0 else data.optional_sint32,
+		optional_sint64 = if data == nil then 0 else data.optional_sint64,
+		optional_fixed32 = if data == nil then 0 else data.optional_fixed32,
+		optional_fixed64 = if data == nil then 0 else data.optional_fixed64,
+		optional_sfixed32 = if data == nil then 0 else data.optional_sfixed32,
+		optional_sfixed64 = if data == nil then 0 else data.optional_sfixed64,
+		optional_float = if data == nil then 0 else data.optional_float,
+		optional_double = if data == nil then 0 else data.optional_double,
+		optional_bool = if data == nil then false else data.optional_bool,
+		optional_string = if data == nil then "" else data.optional_string,
+		optional_bytes = if data == nil then buffer.create(0) else data.optional_bytes,
+		optional_nested_message = if data == nil then nil else data.optional_nested_message,
+		optional_foreign_message = if data == nil then nil else data.optional_foreign_message,
+		optional_nested_enum = if data == nil
+			then assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
+			else data.optional_nested_enum,
+		optional_foreign_enum = if data == nil
+			then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default")
+			else data.optional_foreign_enum,
+		optional_aliased_enum = if data == nil
+			then assert(TestAllTypesProto3_AliasedEnum.fromNumber(0), "Enum has no 0 default")
+			else data.optional_aliased_enum,
+		optional_string_piece = if data == nil then "" else data.optional_string_piece,
+		optional_cord = if data == nil then "" else data.optional_cord,
+		recursive_message = if data == nil then nil else data.recursive_message,
+		repeated_int32 = if data == nil then {} else data.repeated_int32,
+		repeated_int64 = if data == nil then {} else data.repeated_int64,
+		repeated_uint32 = if data == nil then {} else data.repeated_uint32,
+		repeated_uint64 = if data == nil then {} else data.repeated_uint64,
+		repeated_sint32 = if data == nil then {} else data.repeated_sint32,
+		repeated_sint64 = if data == nil then {} else data.repeated_sint64,
+		repeated_fixed32 = if data == nil then {} else data.repeated_fixed32,
+		repeated_fixed64 = if data == nil then {} else data.repeated_fixed64,
+		repeated_sfixed32 = if data == nil then {} else data.repeated_sfixed32,
+		repeated_sfixed64 = if data == nil then {} else data.repeated_sfixed64,
+		repeated_float = if data == nil then {} else data.repeated_float,
+		repeated_double = if data == nil then {} else data.repeated_double,
+		repeated_bool = if data == nil then {} else data.repeated_bool,
+		repeated_string = if data == nil then {} else data.repeated_string,
+		repeated_bytes = if data == nil then {} else data.repeated_bytes,
+		repeated_nested_message = if data == nil then {} else data.repeated_nested_message,
+		repeated_foreign_message = if data == nil then {} else data.repeated_foreign_message,
+		repeated_nested_enum = if data == nil then {} else data.repeated_nested_enum,
+		repeated_foreign_enum = if data == nil then {} else data.repeated_foreign_enum,
+		repeated_string_piece = if data == nil then {} else data.repeated_string_piece,
+		repeated_cord = if data == nil then {} else data.repeated_cord,
+		packed_int32 = if data == nil then {} else data.packed_int32,
+		packed_int64 = if data == nil then {} else data.packed_int64,
+		packed_uint32 = if data == nil then {} else data.packed_uint32,
+		packed_uint64 = if data == nil then {} else data.packed_uint64,
+		packed_sint32 = if data == nil then {} else data.packed_sint32,
+		packed_sint64 = if data == nil then {} else data.packed_sint64,
+		packed_fixed32 = if data == nil then {} else data.packed_fixed32,
+		packed_fixed64 = if data == nil then {} else data.packed_fixed64,
+		packed_sfixed32 = if data == nil then {} else data.packed_sfixed32,
+		packed_sfixed64 = if data == nil then {} else data.packed_sfixed64,
+		packed_float = if data == nil then {} else data.packed_float,
+		packed_double = if data == nil then {} else data.packed_double,
+		packed_bool = if data == nil then {} else data.packed_bool,
+		packed_nested_enum = if data == nil then {} else data.packed_nested_enum,
+		unpacked_int32 = if data == nil then {} else data.unpacked_int32,
+		unpacked_int64 = if data == nil then {} else data.unpacked_int64,
+		unpacked_uint32 = if data == nil then {} else data.unpacked_uint32,
+		unpacked_uint64 = if data == nil then {} else data.unpacked_uint64,
+		unpacked_sint32 = if data == nil then {} else data.unpacked_sint32,
+		unpacked_sint64 = if data == nil then {} else data.unpacked_sint64,
+		unpacked_fixed32 = if data == nil then {} else data.unpacked_fixed32,
+		unpacked_fixed64 = if data == nil then {} else data.unpacked_fixed64,
+		unpacked_sfixed32 = if data == nil then {} else data.unpacked_sfixed32,
+		unpacked_sfixed64 = if data == nil then {} else data.unpacked_sfixed64,
+		unpacked_float = if data == nil then {} else data.unpacked_float,
+		unpacked_double = if data == nil then {} else data.unpacked_double,
+		unpacked_bool = if data == nil then {} else data.unpacked_bool,
+		unpacked_nested_enum = if data == nil then {} else data.unpacked_nested_enum,
+		map_int32_int32 = if data == nil then {} else data.map_int32_int32,
+		map_int64_int64 = if data == nil then {} else data.map_int64_int64,
+		map_uint32_uint32 = if data == nil then {} else data.map_uint32_uint32,
+		map_uint64_uint64 = if data == nil then {} else data.map_uint64_uint64,
+		map_sint32_sint32 = if data == nil then {} else data.map_sint32_sint32,
+		map_sint64_sint64 = if data == nil then {} else data.map_sint64_sint64,
+		map_fixed32_fixed32 = if data == nil then {} else data.map_fixed32_fixed32,
+		map_fixed64_fixed64 = if data == nil then {} else data.map_fixed64_fixed64,
+		map_sfixed32_sfixed32 = if data == nil then {} else data.map_sfixed32_sfixed32,
+		map_sfixed64_sfixed64 = if data == nil then {} else data.map_sfixed64_sfixed64,
+		map_int32_float = if data == nil then {} else data.map_int32_float,
+		map_int32_double = if data == nil then {} else data.map_int32_double,
+		map_bool_bool = if data == nil then {} else data.map_bool_bool,
+		map_string_string = if data == nil then {} else data.map_string_string,
+		map_string_bytes = if data == nil then {} else data.map_string_bytes,
+		map_string_nested_message = if data == nil then {} else data.map_string_nested_message,
+		map_string_foreign_message = if data == nil then {} else data.map_string_foreign_message,
+		map_string_nested_enum = if data == nil then {} else data.map_string_nested_enum,
+		map_string_foreign_enum = if data == nil then {} else data.map_string_foreign_enum,
+		oneof_field = if data == nil then nil else data.oneof_field,
+		optional_bool_wrapper = if data == nil then nil else data.optional_bool_wrapper,
+		optional_int32_wrapper = if data == nil then nil else data.optional_int32_wrapper,
+		optional_int64_wrapper = if data == nil then nil else data.optional_int64_wrapper,
+		optional_uint32_wrapper = if data == nil then nil else data.optional_uint32_wrapper,
+		optional_uint64_wrapper = if data == nil then nil else data.optional_uint64_wrapper,
+		optional_float_wrapper = if data == nil then nil else data.optional_float_wrapper,
+		optional_double_wrapper = if data == nil then nil else data.optional_double_wrapper,
+		optional_string_wrapper = if data == nil then nil else data.optional_string_wrapper,
+		optional_bytes_wrapper = if data == nil then nil else data.optional_bytes_wrapper,
+		repeated_bool_wrapper = if data == nil then {} else data.repeated_bool_wrapper,
+		repeated_int32_wrapper = if data == nil then {} else data.repeated_int32_wrapper,
+		repeated_int64_wrapper = if data == nil then {} else data.repeated_int64_wrapper,
+		repeated_uint32_wrapper = if data == nil then {} else data.repeated_uint32_wrapper,
+		repeated_uint64_wrapper = if data == nil then {} else data.repeated_uint64_wrapper,
+		repeated_float_wrapper = if data == nil then {} else data.repeated_float_wrapper,
+		repeated_double_wrapper = if data == nil then {} else data.repeated_double_wrapper,
+		repeated_string_wrapper = if data == nil then {} else data.repeated_string_wrapper,
+		repeated_bytes_wrapper = if data == nil then {} else data.repeated_bytes_wrapper,
+		optional_duration = if data == nil then nil else data.optional_duration,
+		optional_timestamp = if data == nil then nil else data.optional_timestamp,
+		optional_field_mask = if data == nil then nil else data.optional_field_mask,
+		optional_struct = if data == nil then nil else data.optional_struct,
+		optional_any = if data == nil then nil else data.optional_any,
+		optional_value = if data == nil then nil else data.optional_value,
+		optional_null_value = if data == nil
+			then assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default")
+			else data.optional_null_value,
+		repeated_duration = if data == nil then {} else data.repeated_duration,
+		repeated_timestamp = if data == nil then {} else data.repeated_timestamp,
+		repeated_fieldmask = if data == nil then {} else data.repeated_fieldmask,
+		repeated_struct = if data == nil then {} else data.repeated_struct,
+		repeated_any = if data == nil then {} else data.repeated_any,
+		repeated_value = if data == nil then {} else data.repeated_value,
+		repeated_list_value = if data == nil then {} else data.repeated_list_value,
+		fieldname1 = if data == nil then 0 else data.fieldname1,
+		field_name2 = if data == nil then 0 else data.field_name2,
+		_field_name3 = if data == nil then 0 else data._field_name3,
+		field__name4_ = if data == nil then 0 else data.field__name4_,
+		field0name5 = if data == nil then 0 else data.field0name5,
+		field_0_name6 = if data == nil then 0 else data.field_0_name6,
+		fieldName7 = if data == nil then 0 else data.fieldName7,
+		FieldName8 = if data == nil then 0 else data.FieldName8,
+		field_Name9 = if data == nil then 0 else data.field_Name9,
+		Field_Name10 = if data == nil then 0 else data.Field_Name10,
+		FIELD_NAME11 = if data == nil then 0 else data.FIELD_NAME11,
+		FIELD_name12 = if data == nil then 0 else data.FIELD_name12,
+		__field_name13 = if data == nil then 0 else data.__field_name13,
+		__Field_name14 = if data == nil then 0 else data.__Field_name14,
+		field__name15 = if data == nil then 0 else data.field__name15,
+		field__Name16 = if data == nil then 0 else data.field__Name16,
+		field_name17__ = if data == nil then 0 else data.field_name17__,
+		Field_name18__ = if data == nil then 0 else data.Field_name18__,
 	}, TestAllTypesProto3)
 end
 
@@ -6226,8 +6230,8 @@ function TestAllTypesProto3_NestedMessage.new(
 	data: _TestAllTypesProto3_NestedMessageFields?
 ): TestAllTypesProto3_NestedMessage
 	return setmetatable({
-		a = data and data["a"] or 0,
-		corecursive = data and data["corecursive"] or nil,
+		a = if data == nil then 0 else data.a,
+		corecursive = if data == nil then nil else data.corecursive,
 	}, TestAllTypesProto3_NestedMessage)
 end
 
@@ -6322,8 +6326,8 @@ function TestAllTypesProto3_MapInt32Int32Entry.new(
 	data: _TestAllTypesProto3_MapInt32Int32EntryFields?
 ): TestAllTypesProto3_MapInt32Int32Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapInt32Int32Entry)
 end
 
@@ -6419,8 +6423,8 @@ function TestAllTypesProto3_MapInt64Int64Entry.new(
 	data: _TestAllTypesProto3_MapInt64Int64EntryFields?
 ): TestAllTypesProto3_MapInt64Int64Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapInt64Int64Entry)
 end
 
@@ -6516,8 +6520,8 @@ function TestAllTypesProto3_MapUint32Uint32Entry.new(
 	data: _TestAllTypesProto3_MapUint32Uint32EntryFields?
 ): TestAllTypesProto3_MapUint32Uint32Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapUint32Uint32Entry)
 end
 
@@ -6613,8 +6617,8 @@ function TestAllTypesProto3_MapUint64Uint64Entry.new(
 	data: _TestAllTypesProto3_MapUint64Uint64EntryFields?
 ): TestAllTypesProto3_MapUint64Uint64Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapUint64Uint64Entry)
 end
 
@@ -6710,8 +6714,8 @@ function TestAllTypesProto3_MapSint32Sint32Entry.new(
 	data: _TestAllTypesProto3_MapSint32Sint32EntryFields?
 ): TestAllTypesProto3_MapSint32Sint32Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapSint32Sint32Entry)
 end
 
@@ -6807,8 +6811,8 @@ function TestAllTypesProto3_MapSint64Sint64Entry.new(
 	data: _TestAllTypesProto3_MapSint64Sint64EntryFields?
 ): TestAllTypesProto3_MapSint64Sint64Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapSint64Sint64Entry)
 end
 
@@ -6904,8 +6908,8 @@ function TestAllTypesProto3_MapFixed32Fixed32Entry.new(
 	data: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?
 ): TestAllTypesProto3_MapFixed32Fixed32Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapFixed32Fixed32Entry)
 end
 
@@ -7001,8 +7005,8 @@ function TestAllTypesProto3_MapFixed64Fixed64Entry.new(
 	data: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?
 ): TestAllTypesProto3_MapFixed64Fixed64Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapFixed64Fixed64Entry)
 end
 
@@ -7098,8 +7102,8 @@ function TestAllTypesProto3_MapSfixed32Sfixed32Entry.new(
 	data: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?
 ): TestAllTypesProto3_MapSfixed32Sfixed32Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapSfixed32Sfixed32Entry)
 end
 
@@ -7195,8 +7199,8 @@ function TestAllTypesProto3_MapSfixed64Sfixed64Entry.new(
 	data: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?
 ): TestAllTypesProto3_MapSfixed64Sfixed64Entry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapSfixed64Sfixed64Entry)
 end
 
@@ -7292,8 +7296,8 @@ function TestAllTypesProto3_MapInt32FloatEntry.new(
 	data: _TestAllTypesProto3_MapInt32FloatEntryFields?
 ): TestAllTypesProto3_MapInt32FloatEntry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapInt32FloatEntry)
 end
 
@@ -7389,8 +7393,8 @@ function TestAllTypesProto3_MapInt32DoubleEntry.new(
 	data: _TestAllTypesProto3_MapInt32DoubleEntryFields?
 ): TestAllTypesProto3_MapInt32DoubleEntry
 	return setmetatable({
-		key = data and data["key"] or 0,
-		value = data and data["value"] or 0,
+		key = if data == nil then 0 else data.key,
+		value = if data == nil then 0 else data.value,
 	}, TestAllTypesProto3_MapInt32DoubleEntry)
 end
 
@@ -7486,8 +7490,8 @@ function TestAllTypesProto3_MapBoolBoolEntry.new(
 	data: _TestAllTypesProto3_MapBoolBoolEntryFields?
 ): TestAllTypesProto3_MapBoolBoolEntry
 	return setmetatable({
-		key = data and data["key"] or false,
-		value = data and data["value"] or false,
+		key = if data == nil then false else data.key,
+		value = if data == nil then false else data.value,
 	}, TestAllTypesProto3_MapBoolBoolEntry)
 end
 
@@ -7581,8 +7585,8 @@ function TestAllTypesProto3_MapStringStringEntry.new(
 	data: _TestAllTypesProto3_MapStringStringEntryFields?
 ): TestAllTypesProto3_MapStringStringEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or "",
+		key = if data == nil then "" else data.key,
+		value = if data == nil then "" else data.value,
 	}, TestAllTypesProto3_MapStringStringEntry)
 end
 
@@ -7678,8 +7682,8 @@ function TestAllTypesProto3_MapStringBytesEntry.new(
 	data: _TestAllTypesProto3_MapStringBytesEntryFields?
 ): TestAllTypesProto3_MapStringBytesEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or buffer.create(0),
+		key = if data == nil then "" else data.key,
+		value = if data == nil then buffer.create(0) else data.value,
 	}, TestAllTypesProto3_MapStringBytesEntry)
 end
 
@@ -7775,8 +7779,8 @@ function TestAllTypesProto3_MapStringNestedMessageEntry.new(
 	data: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
 ): TestAllTypesProto3_MapStringNestedMessageEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or nil,
+		key = if data == nil then "" else data.key,
+		value = if data == nil then nil else data.value,
 	}, TestAllTypesProto3_MapStringNestedMessageEntry)
 end
 
@@ -7879,8 +7883,8 @@ function TestAllTypesProto3_MapStringForeignMessageEntry.new(
 	data: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
 ): TestAllTypesProto3_MapStringForeignMessageEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or nil,
+		key = if data == nil then "" else data.key,
+		value = if data == nil then nil else data.value,
 	}, TestAllTypesProto3_MapStringForeignMessageEntry)
 end
 
@@ -7983,8 +7987,10 @@ function TestAllTypesProto3_MapStringNestedEnumEntry.new(
 	data: _TestAllTypesProto3_MapStringNestedEnumEntryFields?
 ): TestAllTypesProto3_MapStringNestedEnumEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default"),
+		key = if data == nil then "" else data.key,
+		value = if data == nil
+			then assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
+			else data.value,
 	}, TestAllTypesProto3_MapStringNestedEnumEntry)
 end
 
@@ -8084,8 +8090,8 @@ function TestAllTypesProto3_MapStringForeignEnumEntry.new(
 	data: _TestAllTypesProto3_MapStringForeignEnumEntryFields?
 ): TestAllTypesProto3_MapStringForeignEnumEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or assert(ForeignEnum.fromNumber(0), "Enum has no 0 default"),
+		key = if data == nil then "" else data.key,
+		value = if data == nil then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default") else data.value,
 	}, TestAllTypesProto3_MapStringForeignEnumEntry)
 end
 
@@ -8278,7 +8284,7 @@ ForeignMessage.__index = ForeignMessage
 
 function ForeignMessage.new(data: _ForeignMessageFields?): ForeignMessage
 	return setmetatable({
-		c = data and data["c"] or 0,
+		c = if data == nil then 0 else data.c,
 	}, ForeignMessage)
 end
 

@@ -24,7 +24,7 @@ FieldMask.__index = FieldMask
 
 function FieldMask.new(data: _FieldMaskFields?): FieldMask
 	return setmetatable({
-		paths = data and data["paths"] or {},
+		paths = if data == nil then {} else data.paths,
 	}, FieldMask)
 end
 

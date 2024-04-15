@@ -25,8 +25,8 @@ Duration.__index = Duration
 
 function Duration.new(data: _DurationFields?): Duration
 	return setmetatable({
-		seconds = data and data["seconds"] or 0,
-		nanos = data and data["nanos"] or 0,
+		seconds = if data == nil then 0 else data.seconds,
+		nanos = if data == nil then 0 else data.nanos,
 	}, Duration)
 end
 

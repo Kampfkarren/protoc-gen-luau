@@ -98,7 +98,7 @@ FailureSet.__index = FailureSet
 
 function FailureSet.new(data: _FailureSetFields?): FailureSet
 	return setmetatable({
-		failure = data and data["failure"] or {},
+		failure = if data == nil then {} else data.failure,
 	}, FailureSet)
 end
 
@@ -182,13 +182,16 @@ ConformanceRequest.__index = ConformanceRequest
 
 function ConformanceRequest.new(data: _ConformanceRequestFields?): ConformanceRequest
 	return setmetatable({
-		payload = data and data["payload"] or nil,
-		requested_output_format = data and data["requested_output_format"]
-			or assert(WireFormat.fromNumber(0), "Enum has no 0 default"),
-		message_type = data and data["message_type"] or "",
-		test_category = data and data["test_category"] or assert(TestCategory.fromNumber(0), "Enum has no 0 default"),
-		jspb_encoding_options = data and data["jspb_encoding_options"] or nil,
-		print_unknown_fields = data and data["print_unknown_fields"] or false,
+		payload = if data == nil then nil else data.payload,
+		requested_output_format = if data == nil
+			then assert(WireFormat.fromNumber(0), "Enum has no 0 default")
+			else data.requested_output_format,
+		message_type = if data == nil then "" else data.message_type,
+		test_category = if data == nil
+			then assert(TestCategory.fromNumber(0), "Enum has no 0 default")
+			else data.test_category,
+		jspb_encoding_options = if data == nil then nil else data.jspb_encoding_options,
+		print_unknown_fields = if data == nil then false else data.print_unknown_fields,
 	}, ConformanceRequest)
 end
 
@@ -447,7 +450,7 @@ ConformanceResponse.__index = ConformanceResponse
 
 function ConformanceResponse.new(data: _ConformanceResponseFields?): ConformanceResponse
 	return setmetatable({
-		result = data and data["result"] or nil,
+		result = if data == nil then nil else data.result,
 	}, ConformanceResponse)
 end
 
@@ -669,7 +672,7 @@ JspbEncodingConfig.__index = JspbEncodingConfig
 
 function JspbEncodingConfig.new(data: _JspbEncodingConfigFields?): JspbEncodingConfig
 	return setmetatable({
-		use_jspb_array_any_format = data and data["use_jspb_array_any_format"] or false,
+		use_jspb_array_any_format = if data == nil then false else data.use_jspb_array_any_format,
 	}, JspbEncodingConfig)
 end
 

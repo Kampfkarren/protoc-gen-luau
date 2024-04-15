@@ -136,7 +136,7 @@ DoubleValue.__index = DoubleValue
 
 function DoubleValue.new(data: _DoubleValueFields?): DoubleValue
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, DoubleValue)
 end
 
@@ -187,7 +187,7 @@ FloatValue.__index = FloatValue
 
 function FloatValue.new(data: _FloatValueFields?): FloatValue
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, FloatValue)
 end
 
@@ -238,7 +238,7 @@ Int64Value.__index = Int64Value
 
 function Int64Value.new(data: _Int64ValueFields?): Int64Value
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, Int64Value)
 end
 
@@ -289,7 +289,7 @@ UInt64Value.__index = UInt64Value
 
 function UInt64Value.new(data: _UInt64ValueFields?): UInt64Value
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, UInt64Value)
 end
 
@@ -340,7 +340,7 @@ Int32Value.__index = Int32Value
 
 function Int32Value.new(data: _Int32ValueFields?): Int32Value
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, Int32Value)
 end
 
@@ -391,7 +391,7 @@ UInt32Value.__index = UInt32Value
 
 function UInt32Value.new(data: _UInt32ValueFields?): UInt32Value
 	return setmetatable({
-		value = data and data["value"] or 0,
+		value = if data == nil then 0 else data.value,
 	}, UInt32Value)
 end
 
@@ -442,7 +442,7 @@ BoolValue.__index = BoolValue
 
 function BoolValue.new(data: _BoolValueFields?): BoolValue
 	return setmetatable({
-		value = data and data["value"] or false,
+		value = if data == nil then false else data.value,
 	}, BoolValue)
 end
 
@@ -493,7 +493,7 @@ StringValue.__index = StringValue
 
 function StringValue.new(data: _StringValueFields?): StringValue
 	return setmetatable({
-		value = data and data["value"] or "",
+		value = if data == nil then "" else data.value,
 	}, StringValue)
 end
 
@@ -544,7 +544,7 @@ BytesValue.__index = BytesValue
 
 function BytesValue.new(data: _BytesValueFields?): BytesValue
 	return setmetatable({
-		value = data and data["value"] or buffer.create(0),
+		value = if data == nil then buffer.create(0) else data.value,
 	}, BytesValue)
 end
 

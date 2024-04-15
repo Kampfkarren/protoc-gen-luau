@@ -25,8 +25,8 @@ Any.__index = Any
 
 function Any.new(data: _AnyFields?): Any
 	return setmetatable({
-		type_url = data and data["type_url"] or "",
-		value = data and data["value"] or buffer.create(0),
+		type_url = if data == nil then "" else data.type_url,
+		value = if data == nil then buffer.create(0) else data.value,
 	}, Any)
 end
 

@@ -76,7 +76,7 @@ Struct.__index = Struct
 
 function Struct.new(data: _StructFields?): Struct
 	return setmetatable({
-		fields = data and data["fields"] or {},
+		fields = if data == nil then {} else data.fields,
 	}, Struct)
 end
 
@@ -142,8 +142,8 @@ Struct_FieldsEntry.__index = Struct_FieldsEntry
 
 function Struct_FieldsEntry.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
 	return setmetatable({
-		key = data and data["key"] or "",
-		value = data and data["value"] or nil,
+		key = if data == nil then "" else data.key,
+		value = if data == nil then nil else data.value,
 	}, Struct_FieldsEntry)
 end
 
@@ -235,7 +235,7 @@ Value.__index = Value
 
 function Value.new(data: _ValueFields?): Value
 	return setmetatable({
-		kind = data and data["kind"] or nil,
+		kind = if data == nil then nil else data.kind,
 	}, Value)
 end
 
@@ -325,7 +325,7 @@ ListValue.__index = ListValue
 
 function ListValue.new(data: _ListValueFields?): ListValue
 	return setmetatable({
-		values = data and data["values"] or {},
+		values = if data == nil then {} else data.values,
 	}, ListValue)
 end
 

@@ -79,9 +79,6 @@ Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotStrin
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotMessage
-Required.Proto3.JsonInput.RepeatedListValue.JsonOutput
-Required.Proto3.JsonInput.RepeatedListValue.ProtobufOutput
-Required.Proto3.JsonInput.RepeatedValue.JsonOutput
 Required.Proto3.JsonInput.RepeatedValue.ProtobufOutput
 Required.Proto3.JsonInput.StringFieldNotAString
 Required.Proto3.JsonInput.Struct.JsonOutput
@@ -96,8 +93,6 @@ Required.Proto3.JsonInput.TimestampJsonInputTooLarge
 Required.Proto3.JsonInput.TimestampJsonInputTooSmall
 Required.Proto3.JsonInput.TimestampLeap.JsonOutput
 Required.Proto3.JsonInput.TimestampLeap.ProtobufOutput
-Required.Proto3.JsonInput.TimestampMaxValue.JsonOutput
-Required.Proto3.JsonInput.TimestampMaxValue.ProtobufOutput
 Required.Proto3.JsonInput.TimestampMinValue.JsonOutput
 Required.Proto3.JsonInput.TimestampMinValue.ProtobufOutput
 Required.Proto3.JsonInput.TimestampRepeatedValue.JsonOutput
@@ -114,11 +109,9 @@ Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.JsonOutput
 Required.Proto3.JsonInput.Uint64FieldNotInteger
 Required.Proto3.JsonInput.Uint64FieldNotNumber
 Required.Proto3.JsonInput.Uint64FieldTooLarge
-Required.Proto3.JsonInput.ValueAcceptList.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptList.ProtobufOutput
 Required.Proto3.JsonInput.ValueAcceptNull.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptNull.ProtobufOutput
-Required.Proto3.JsonInput.ValueAcceptObject.JsonOutput
 Required.Proto3.JsonInput.ValueAcceptObject.ProtobufOutput
 Required.Proto3.ProtobufInput.IllegalZeroFieldNum_Case_1
 Required.Proto3.ProtobufInput.PrematureEofBeforeUnknownValue.BOOL
