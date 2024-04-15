@@ -1,6 +1,8 @@
+--!strict
 local tests = require("./tests")
 
 local kitchen_sink = require("./samples/kitchen_sink")
+local recursive = require("./samples/recursive")
 
 local assertEquals = tests.assertEquals
 local describe = tests.describe
@@ -22,6 +24,20 @@ describe("json deserializing", function()
 
 		assertEquals(kitchenSink.int32, 1)
 		assertEquals(kitchenSink:jsonEncode(), json)
+	end)
+
+	it("should deserialize recursive protos", function()
+		local json = {
+			b = {
+				a = {
+					number = 100,
+				},
+			},
+		}
+
+		local decoded = recursive.A.jsonDecode(json)
+
+		assertEquals(decoded.b.a.number, 100)
 	end)
 end)
 
