@@ -4343,7 +4343,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_int32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_int32 do
+		for _, value in input.repeated_int32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4352,7 +4352,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedInt32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedInt32 do
+		for _, value in input.repeatedInt32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4361,7 +4361,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_int64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_int64 do
+		for _, value in input.repeated_int64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4370,7 +4370,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedInt64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedInt64 do
+		for _, value in input.repeatedInt64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4379,7 +4379,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_uint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_uint32 do
+		for _, value in input.repeated_uint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4388,7 +4388,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedUint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedUint32 do
+		for _, value in input.repeatedUint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4397,7 +4397,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_uint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_uint64 do
+		for _, value in input.repeated_uint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4406,7 +4406,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedUint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedUint64 do
+		for _, value in input.repeatedUint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4415,7 +4415,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_sint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_sint32 do
+		for _, value in input.repeated_sint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4424,7 +4424,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedSint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedSint32 do
+		for _, value in input.repeatedSint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4433,7 +4433,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_sint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_sint64 do
+		for _, value in input.repeated_sint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4442,7 +4442,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedSint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedSint64 do
+		for _, value in input.repeatedSint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4451,7 +4451,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_fixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_fixed32 do
+		for _, value in input.repeated_fixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4460,7 +4460,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedFixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedFixed32 do
+		for _, value in input.repeatedFixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4469,7 +4469,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_fixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_fixed64 do
+		for _, value in input.repeated_fixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4478,7 +4478,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedFixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedFixed64 do
+		for _, value in input.repeatedFixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4487,7 +4487,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_sfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_sfixed32 do
+		for _, value in input.repeated_sfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4496,7 +4496,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedSfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedSfixed32 do
+		for _, value in input.repeatedSfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4505,7 +4505,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_sfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_sfixed64 do
+		for _, value in input.repeated_sfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4514,7 +4514,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedSfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedSfixed64 do
+		for _, value in input.repeatedSfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4523,7 +4523,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_float ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_float do
+		for _, value in input.repeated_float do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4532,7 +4532,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedFloat ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedFloat do
+		for _, value in input.repeatedFloat do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4541,7 +4541,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_double ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeated_double do
+		for _, value in input.repeated_double do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4550,7 +4550,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedDouble ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.repeatedDouble do
+		for _, value in input.repeatedDouble do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4559,7 +4559,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_bool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.repeated_bool do
+		for _, value in input.repeated_bool do
 			table.insert(newOutput, value)
 		end
 
@@ -4568,7 +4568,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedBool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.repeatedBool do
+		for _, value in input.repeatedBool do
 			table.insert(newOutput, value)
 		end
 
@@ -4577,7 +4577,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_string ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeated_string do
+		for _, value in input.repeated_string do
 			table.insert(newOutput, value)
 		end
 
@@ -4586,7 +4586,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedString ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeatedString do
+		for _, value in input.repeatedString do
 			table.insert(newOutput, value)
 		end
 
@@ -4595,7 +4595,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_bytes ~= nil then
 		local newOutput: { buffer } = {}
-		for _, value: buffer in input.repeated_bytes do
+		for _, value in input.repeated_bytes do
 			table.insert(newOutput, proto.json.deserializeBuffer(value))
 		end
 
@@ -4604,7 +4604,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedBytes ~= nil then
 		local newOutput: { buffer } = {}
-		for _, value: buffer in input.repeatedBytes do
+		for _, value in input.repeatedBytes do
 			table.insert(newOutput, proto.json.deserializeBuffer(value))
 		end
 
@@ -4613,7 +4613,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_nested_message ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-		for _, value: TestAllTypesProto3_NestedMessage in input.repeated_nested_message do
+		for _, value in input.repeated_nested_message do
 			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
 		end
 
@@ -4622,7 +4622,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedNestedMessage ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-		for _, value: TestAllTypesProto3_NestedMessage in input.repeatedNestedMessage do
+		for _, value in input.repeatedNestedMessage do
 			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
 		end
 
@@ -4631,7 +4631,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_foreign_message ~= nil then
 		local newOutput: { ForeignMessage } = {}
-		for _, value: ForeignMessage in input.repeated_foreign_message do
+		for _, value in input.repeated_foreign_message do
 			table.insert(newOutput, ForeignMessage.jsonDecode(value))
 		end
 
@@ -4640,7 +4640,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedForeignMessage ~= nil then
 		local newOutput: { ForeignMessage } = {}
-		for _, value: ForeignMessage in input.repeatedForeignMessage do
+		for _, value in input.repeatedForeignMessage do
 			table.insert(newOutput, ForeignMessage.jsonDecode(value))
 		end
 
@@ -4649,7 +4649,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.repeated_nested_enum do
+		for _, value in input.repeated_nested_enum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -4663,7 +4663,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.repeatedNestedEnum do
+		for _, value in input.repeatedNestedEnum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -4677,7 +4677,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_foreign_enum ~= nil then
 		local newOutput: { ForeignEnum } = {}
-		for _, value: ForeignEnum in input.repeated_foreign_enum do
+		for _, value in input.repeated_foreign_enum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -4691,7 +4691,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedForeignEnum ~= nil then
 		local newOutput: { ForeignEnum } = {}
-		for _, value: ForeignEnum in input.repeatedForeignEnum do
+		for _, value in input.repeatedForeignEnum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -4705,7 +4705,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_string_piece ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeated_string_piece do
+		for _, value in input.repeated_string_piece do
 			table.insert(newOutput, value)
 		end
 
@@ -4714,7 +4714,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedStringPiece ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeatedStringPiece do
+		for _, value in input.repeatedStringPiece do
 			table.insert(newOutput, value)
 		end
 
@@ -4723,7 +4723,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_cord ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeated_cord do
+		for _, value in input.repeated_cord do
 			table.insert(newOutput, value)
 		end
 
@@ -4732,7 +4732,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedCord ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.repeatedCord do
+		for _, value in input.repeatedCord do
 			table.insert(newOutput, value)
 		end
 
@@ -4741,7 +4741,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_int32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_int32 do
+		for _, value in input.packed_int32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4750,7 +4750,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedInt32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedInt32 do
+		for _, value in input.packedInt32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4759,7 +4759,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_int64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_int64 do
+		for _, value in input.packed_int64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4768,7 +4768,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedInt64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedInt64 do
+		for _, value in input.packedInt64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4777,7 +4777,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_uint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_uint32 do
+		for _, value in input.packed_uint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4786,7 +4786,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedUint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedUint32 do
+		for _, value in input.packedUint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4795,7 +4795,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_uint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_uint64 do
+		for _, value in input.packed_uint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4804,7 +4804,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedUint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedUint64 do
+		for _, value in input.packedUint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4813,7 +4813,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_sint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_sint32 do
+		for _, value in input.packed_sint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4822,7 +4822,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedSint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedSint32 do
+		for _, value in input.packedSint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4831,7 +4831,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_sint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_sint64 do
+		for _, value in input.packed_sint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4840,7 +4840,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedSint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedSint64 do
+		for _, value in input.packedSint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4849,7 +4849,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_fixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_fixed32 do
+		for _, value in input.packed_fixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4858,7 +4858,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedFixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedFixed32 do
+		for _, value in input.packedFixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4867,7 +4867,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_fixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_fixed64 do
+		for _, value in input.packed_fixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4876,7 +4876,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedFixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedFixed64 do
+		for _, value in input.packedFixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4885,7 +4885,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_sfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_sfixed32 do
+		for _, value in input.packed_sfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4894,7 +4894,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedSfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedSfixed32 do
+		for _, value in input.packedSfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -4903,7 +4903,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_sfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_sfixed64 do
+		for _, value in input.packed_sfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4912,7 +4912,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedSfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedSfixed64 do
+		for _, value in input.packedSfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -4921,7 +4921,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_float ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_float do
+		for _, value in input.packed_float do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4930,7 +4930,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedFloat ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedFloat do
+		for _, value in input.packedFloat do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4939,7 +4939,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_double ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packed_double do
+		for _, value in input.packed_double do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4948,7 +4948,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedDouble ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.packedDouble do
+		for _, value in input.packedDouble do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4957,7 +4957,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_bool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.packed_bool do
+		for _, value in input.packed_bool do
 			table.insert(newOutput, value)
 		end
 
@@ -4966,7 +4966,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedBool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.packedBool do
+		for _, value in input.packedBool do
 			table.insert(newOutput, value)
 		end
 
@@ -4975,7 +4975,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packed_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.packed_nested_enum do
+		for _, value in input.packed_nested_enum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -4989,7 +4989,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.packedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.packedNestedEnum do
+		for _, value in input.packedNestedEnum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5003,7 +5003,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_int32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_int32 do
+		for _, value in input.unpacked_int32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5012,7 +5012,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedInt32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedInt32 do
+		for _, value in input.unpackedInt32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5021,7 +5021,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_int64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_int64 do
+		for _, value in input.unpacked_int64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5030,7 +5030,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedInt64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedInt64 do
+		for _, value in input.unpackedInt64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5039,7 +5039,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_uint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_uint32 do
+		for _, value in input.unpacked_uint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5048,7 +5048,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedUint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedUint32 do
+		for _, value in input.unpackedUint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5057,7 +5057,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_uint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_uint64 do
+		for _, value in input.unpacked_uint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5066,7 +5066,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedUint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedUint64 do
+		for _, value in input.unpackedUint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5075,7 +5075,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_sint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_sint32 do
+		for _, value in input.unpacked_sint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5084,7 +5084,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedSint32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedSint32 do
+		for _, value in input.unpackedSint32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5093,7 +5093,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_sint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_sint64 do
+		for _, value in input.unpacked_sint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5102,7 +5102,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedSint64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedSint64 do
+		for _, value in input.unpackedSint64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5111,7 +5111,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_fixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_fixed32 do
+		for _, value in input.unpacked_fixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5120,7 +5120,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedFixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedFixed32 do
+		for _, value in input.unpackedFixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5129,7 +5129,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_fixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_fixed64 do
+		for _, value in input.unpacked_fixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5138,7 +5138,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedFixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedFixed64 do
+		for _, value in input.unpackedFixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5147,7 +5147,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_sfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_sfixed32 do
+		for _, value in input.unpacked_sfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5156,7 +5156,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedSfixed32 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedSfixed32 do
+		for _, value in input.unpackedSfixed32 do
 			table.insert(newOutput, value)
 		end
 
@@ -5165,7 +5165,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_sfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_sfixed64 do
+		for _, value in input.unpacked_sfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5174,7 +5174,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedSfixed64 ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedSfixed64 do
+		for _, value in input.unpackedSfixed64 do
 			table.insert(newOutput, value)
 		end
 
@@ -5183,7 +5183,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_float ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_float do
+		for _, value in input.unpacked_float do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5192,7 +5192,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedFloat ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedFloat do
+		for _, value in input.unpackedFloat do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5201,7 +5201,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_double ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpacked_double do
+		for _, value in input.unpacked_double do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5210,7 +5210,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedDouble ~= nil then
 		local newOutput: { number } = {}
-		for _, value: number in input.unpackedDouble do
+		for _, value in input.unpackedDouble do
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5219,7 +5219,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_bool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.unpacked_bool do
+		for _, value in input.unpacked_bool do
 			table.insert(newOutput, value)
 		end
 
@@ -5228,7 +5228,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedBool ~= nil then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in input.unpackedBool do
+		for _, value in input.unpackedBool do
 			table.insert(newOutput, value)
 		end
 
@@ -5237,7 +5237,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpacked_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.unpacked_nested_enum do
+		for _, value in input.unpacked_nested_enum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5251,7 +5251,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.unpackedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in input.unpackedNestedEnum do
+		for _, value in input.unpackedNestedEnum do
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5793,7 +5793,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_bool_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-		for _, value: _google_protobuf_wrappers.BoolValue in input.repeated_bool_wrapper do
+		for _, value in input.repeated_bool_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
@@ -5802,7 +5802,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedBoolWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-		for _, value: _google_protobuf_wrappers.BoolValue in input.repeatedBoolWrapper do
+		for _, value in input.repeatedBoolWrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
@@ -5811,7 +5811,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_int32_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-		for _, value: _google_protobuf_wrappers.Int32Value in input.repeated_int32_wrapper do
+		for _, value in input.repeated_int32_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
 		end
 
@@ -5820,7 +5820,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedInt32Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-		for _, value: _google_protobuf_wrappers.Int32Value in input.repeatedInt32Wrapper do
+		for _, value in input.repeatedInt32Wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
 		end
 
@@ -5829,7 +5829,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_int64_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-		for _, value: _google_protobuf_wrappers.Int64Value in input.repeated_int64_wrapper do
+		for _, value in input.repeated_int64_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
 		end
 
@@ -5838,7 +5838,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedInt64Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-		for _, value: _google_protobuf_wrappers.Int64Value in input.repeatedInt64Wrapper do
+		for _, value in input.repeatedInt64Wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
 		end
 
@@ -5847,7 +5847,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_uint32_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt32Value in input.repeated_uint32_wrapper do
+		for _, value in input.repeated_uint32_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
 		end
 
@@ -5856,7 +5856,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedUint32Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt32Value in input.repeatedUint32Wrapper do
+		for _, value in input.repeatedUint32Wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
 		end
 
@@ -5865,7 +5865,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_uint64_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt64Value in input.repeated_uint64_wrapper do
+		for _, value in input.repeated_uint64_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
 		end
 
@@ -5874,7 +5874,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedUint64Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt64Value in input.repeatedUint64Wrapper do
+		for _, value in input.repeatedUint64Wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
 		end
 
@@ -5883,7 +5883,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_float_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-		for _, value: _google_protobuf_wrappers.FloatValue in input.repeated_float_wrapper do
+		for _, value in input.repeated_float_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
 		end
 
@@ -5892,7 +5892,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedFloatWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-		for _, value: _google_protobuf_wrappers.FloatValue in input.repeatedFloatWrapper do
+		for _, value in input.repeatedFloatWrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
 		end
 
@@ -5901,7 +5901,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_double_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-		for _, value: _google_protobuf_wrappers.DoubleValue in input.repeated_double_wrapper do
+		for _, value in input.repeated_double_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
 		end
 
@@ -5910,7 +5910,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedDoubleWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-		for _, value: _google_protobuf_wrappers.DoubleValue in input.repeatedDoubleWrapper do
+		for _, value in input.repeatedDoubleWrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
 		end
 
@@ -5919,7 +5919,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_string_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-		for _, value: _google_protobuf_wrappers.StringValue in input.repeated_string_wrapper do
+		for _, value in input.repeated_string_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
 		end
 
@@ -5928,7 +5928,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedStringWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-		for _, value: _google_protobuf_wrappers.StringValue in input.repeatedStringWrapper do
+		for _, value in input.repeatedStringWrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
 		end
 
@@ -5937,7 +5937,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_bytes_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-		for _, value: _google_protobuf_wrappers.BytesValue in input.repeated_bytes_wrapper do
+		for _, value in input.repeated_bytes_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
 		end
 
@@ -5946,7 +5946,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedBytesWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-		for _, value: _google_protobuf_wrappers.BytesValue in input.repeatedBytesWrapper do
+		for _, value in input.repeatedBytesWrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
 		end
 
@@ -6015,7 +6015,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_duration ~= nil then
 		local newOutput: { _google_protobuf_duration.Duration } = {}
-		for _, value: _google_protobuf_duration.Duration in input.repeated_duration do
+		for _, value in input.repeated_duration do
 			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
 		end
 
@@ -6024,7 +6024,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedDuration ~= nil then
 		local newOutput: { _google_protobuf_duration.Duration } = {}
-		for _, value: _google_protobuf_duration.Duration in input.repeatedDuration do
+		for _, value in input.repeatedDuration do
 			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
 		end
 
@@ -6033,7 +6033,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_timestamp ~= nil then
 		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-		for _, value: _google_protobuf_timestamp.Timestamp in input.repeated_timestamp do
+		for _, value in input.repeated_timestamp do
 			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
 		end
 
@@ -6042,7 +6042,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedTimestamp ~= nil then
 		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-		for _, value: _google_protobuf_timestamp.Timestamp in input.repeatedTimestamp do
+		for _, value in input.repeatedTimestamp do
 			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
 		end
 
@@ -6051,7 +6051,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_fieldmask ~= nil then
 		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-		for _, value: _google_protobuf_field_mask.FieldMask in input.repeated_fieldmask do
+		for _, value in input.repeated_fieldmask do
 			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
 		end
 
@@ -6060,7 +6060,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedFieldmask ~= nil then
 		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-		for _, value: _google_protobuf_field_mask.FieldMask in input.repeatedFieldmask do
+		for _, value in input.repeatedFieldmask do
 			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
 		end
 
@@ -6069,7 +6069,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_struct ~= nil then
 		local newOutput: { _google_protobuf_struct.Struct } = {}
-		for _, value: _google_protobuf_struct.Struct in input.repeated_struct do
+		for _, value in input.repeated_struct do
 			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
 		end
 
@@ -6078,7 +6078,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedStruct ~= nil then
 		local newOutput: { _google_protobuf_struct.Struct } = {}
-		for _, value: _google_protobuf_struct.Struct in input.repeatedStruct do
+		for _, value in input.repeatedStruct do
 			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
 		end
 
@@ -6087,7 +6087,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_any ~= nil then
 		local newOutput: { _google_protobuf_any.Any } = {}
-		for _, value: _google_protobuf_any.Any in input.repeated_any do
+		for _, value in input.repeated_any do
 			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
 		end
 
@@ -6096,7 +6096,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedAny ~= nil then
 		local newOutput: { _google_protobuf_any.Any } = {}
-		for _, value: _google_protobuf_any.Any in input.repeatedAny do
+		for _, value in input.repeatedAny do
 			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
 		end
 
@@ -6105,7 +6105,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_value ~= nil then
 		local newOutput: { _google_protobuf_struct.Value } = {}
-		for _, value: _google_protobuf_struct.Value in input.repeated_value do
+		for _, value in input.repeated_value do
 			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
 		end
 
@@ -6114,7 +6114,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedValue ~= nil then
 		local newOutput: { _google_protobuf_struct.Value } = {}
-		for _, value: _google_protobuf_struct.Value in input.repeatedValue do
+		for _, value in input.repeatedValue do
 			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
 		end
 
@@ -6123,7 +6123,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeated_list_value ~= nil then
 		local newOutput: { _google_protobuf_struct.ListValue } = {}
-		for _, value: _google_protobuf_struct.ListValue in input.repeated_list_value do
+		for _, value in input.repeated_list_value do
 			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
 		end
 
@@ -6132,7 +6132,7 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 
 	if input.repeatedListValue ~= nil then
 		local newOutput: { _google_protobuf_struct.ListValue } = {}
-		for _, value: _google_protobuf_struct.ListValue in input.repeatedListValue do
+		for _, value in input.repeatedListValue do
 			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
 		end
 

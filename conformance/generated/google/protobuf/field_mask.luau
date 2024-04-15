@@ -94,7 +94,7 @@ function _FieldMaskImpl.jsonDecode(input: { [string]: any }): FieldMask
 
 	if input.paths ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.paths do
+		for _, value in input.paths do
 			table.insert(newOutput, value)
 		end
 

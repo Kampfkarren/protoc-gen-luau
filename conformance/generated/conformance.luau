@@ -175,7 +175,7 @@ function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
 
 	if input.failure ~= nil then
 		local newOutput: { string } = {}
-		for _, value: string in input.failure do
+		for _, value in input.failure do
 			table.insert(newOutput, value)
 		end
 
