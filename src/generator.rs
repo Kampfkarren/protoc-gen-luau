@@ -266,7 +266,7 @@ function _<name>Impl.jsonEncode(self: <name>): any
     <json_encode>
 end
 
-function _<name>Impl.jsonDecode(input: { [string]: any }): _<name>Impl
+function _<name>Impl.jsonDecode(input: { [string]: any }): <name>
     <json_decode>
 end
 "#;
