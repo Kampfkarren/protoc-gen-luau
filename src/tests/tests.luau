@@ -64,7 +64,6 @@ end
 
 function tests.finish()
 	if anyFailed then
-		print("==============")
 		error("Tests failed")
 	end
 end
