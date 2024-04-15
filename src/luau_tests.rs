@@ -29,12 +29,7 @@ fn wait_for_samples() {
 }
 
 fn generate_samples() {
-    let files = [
-        "kitchen_sink.proto",
-        "recursive.proto",
-        "wkt.proto",
-        "VideoProtos.proto",
-    ];
+    let files = ["kitchen_sink.proto", "recursive.proto", "wkt.proto"];
 
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()

@@ -496,14 +496,7 @@ impl FieldGenerator<'_> {
                         "local newOutput: {} = {{}}",
                         self.type_definition()
                     ));
-                    json_decode.push(format!(
-                        "for _, value: {} in input.{input_name} do",
-                        type_definition_of_field_descriptor(
-                            inner_field,
-                            self.export_map,
-                            self.base_file
-                        )
-                    ));
+                    json_decode.push(format!("for _, value in input.{input_name} do"));
                     json_decode.push(format!(
                         "table.insert(newOutput, {})",
                         json_decode_instruction_field_descriptor_ignore_repeated(
