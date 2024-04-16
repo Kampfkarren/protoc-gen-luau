@@ -258,6 +258,11 @@ end
 
 <json>
 
+_<name>Impl.descriptor = {
+    name = "<name>",
+    fullName = "<full_name>",
+}
+
 <name> = _<name>Impl
 "#;
 
@@ -410,8 +415,15 @@ impl<'a> FileGenerator<'a> {
 
         contents.blank();
 
+        let package = self.file_descriptor_proto.package.clone();
+
+        let scope = match package {
+            Some(ref package) => package.as_str(),
+            None => "",
+        };
+
         for message in std::mem::take(&mut self.file_descriptor_proto.message_type) {
-            self.generate_message(&message, "");
+            self.generate_message(&message, "", scope);
         }
 
         for descriptor in std::mem::take(&mut self.file_descriptor_proto.enum_type) {
@@ -461,8 +473,9 @@ impl<'a> FileGenerator<'a> {
         }
     }
 
-    fn generate_message(&mut self, message: &DescriptorProto, prefix: &str) {
+    fn generate_message(&mut self, message: &DescriptorProto, prefix: &str, package: &str) {
         let name = format!("{prefix}{}", message.name());
+        let full_name = format!("{package}.{}", message.name());
 
         if !message
             .options
@@ -484,6 +497,7 @@ impl<'a> FileGenerator<'a> {
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
                 jsonDecode: (input: {json_type}) -> {name},
+                descriptor: proto.Descriptor,
             }}
             "#
         ));
@@ -632,6 +646,7 @@ impl<'a> FileGenerator<'a> {
         let mut final_code = MESSAGE
             .replace("    ", "\t")
             .replace("<name>", &name)
+            .replace("<full_name>", &full_name)
             .replace("<default>", &default_lines.build())
             .replace("<encode>", &encode_lines.build())
             .replace("<decode_varint>", &create_decoder(varint_fields))
@@ -668,7 +683,7 @@ impl<'a> FileGenerator<'a> {
         self.implementations.blank();
 
         for nested_message in &message.nested_type {
-            self.generate_message(nested_message, &format!("{name}_"));
+            self.generate_message(nested_message, &format!("{name}_"), package);
         }
 
         for nested_enum in &message.enum_type {

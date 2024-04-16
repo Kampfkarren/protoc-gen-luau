@@ -11,6 +11,7 @@ type _TimestampImpl = {
 	decode: (input: buffer) -> Timestamp,
 	jsonEncode: (self: Timestamp) -> string,
 	jsonDecode: (input: string) -> Timestamp,
+	descriptor: proto.Descriptor,
 }
 
 type _TimestampFields = {
@@ -81,6 +82,11 @@ function _TimestampImpl.decode(input: buffer): Timestamp
 
 	return self
 end
+
+_TimestampImpl.descriptor = {
+	name = "Timestamp",
+	fullName = "google.protobuf.Timestamp",
+}
 
 Timestamp = _TimestampImpl
 

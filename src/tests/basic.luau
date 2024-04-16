@@ -41,4 +41,14 @@ describe("json deserializing", function()
 	end)
 end)
 
+describe("descriptors can return", function()
+	it("full message name", function()
+		assertEquals(kitchen_sink.KitchenSink.new().descriptor.fullName, "my.package.KitchenSink")
+	end)
+
+	it("unqualified message name", function()
+		assertEquals(kitchen_sink.KitchenSink.new().descriptor.name, "KitchenSink")
+	end)
+end)
+
 tests.finish()

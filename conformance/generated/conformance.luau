@@ -11,6 +11,7 @@ type _FailureSetImpl = {
 	decode: (input: buffer) -> FailureSet,
 	jsonEncode: (self: FailureSet) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> FailureSet,
+	descriptor: proto.Descriptor,
 }
 
 type _FailureSetFields = {
@@ -27,6 +28,7 @@ type _ConformanceRequestImpl = {
 	decode: (input: buffer) -> ConformanceRequest,
 	jsonEncode: (self: ConformanceRequest) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ConformanceRequest,
+	descriptor: proto.Descriptor,
 }
 
 type _ConformanceRequestFields = {
@@ -53,6 +55,7 @@ type _ConformanceResponseImpl = {
 	decode: (input: buffer) -> ConformanceResponse,
 	jsonEncode: (self: ConformanceResponse) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ConformanceResponse,
+	descriptor: proto.Descriptor,
 }
 
 type _ConformanceResponseFields = {
@@ -79,6 +82,7 @@ type _JspbEncodingConfigImpl = {
 	decode: (input: buffer) -> JspbEncodingConfig,
 	jsonEncode: (self: JspbEncodingConfig) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> JspbEncodingConfig,
+	descriptor: proto.Descriptor,
 }
 
 type _JspbEncodingConfigFields = {
@@ -184,6 +188,11 @@ function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
 
 	return self
 end
+
+_FailureSetImpl.descriptor = {
+	name = "FailureSet",
+	fullName = "conformance.FailureSet",
+}
 
 FailureSet = _FailureSetImpl
 
@@ -455,6 +464,11 @@ function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): Conforman
 	return self
 end
 
+_ConformanceRequestImpl.descriptor = {
+	name = "ConformanceRequest",
+	fullName = "conformance.ConformanceRequest",
+}
+
 ConformanceRequest = _ConformanceRequestImpl
 
 local _ConformanceResponseImpl = {}
@@ -679,6 +693,11 @@ function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): Conforma
 	return self
 end
 
+_ConformanceResponseImpl.descriptor = {
+	name = "ConformanceResponse",
+	fullName = "conformance.ConformanceResponse",
+}
+
 ConformanceResponse = _ConformanceResponseImpl
 
 local _JspbEncodingConfigImpl = {}
@@ -757,6 +776,11 @@ function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncod
 
 	return self
 end
+
+_JspbEncodingConfigImpl.descriptor = {
+	name = "JspbEncodingConfig",
+	fullName = "conformance.JspbEncodingConfig",
+}
 
 JspbEncodingConfig = _JspbEncodingConfigImpl
 

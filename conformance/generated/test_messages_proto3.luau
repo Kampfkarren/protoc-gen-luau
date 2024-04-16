@@ -17,6 +17,7 @@ type _TestAllTypesProto3Impl = {
 	decode: (input: buffer) -> TestAllTypesProto3,
 	jsonEncode: (self: TestAllTypesProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3Fields = {
@@ -185,6 +186,7 @@ type _TestAllTypesProto3_NestedMessageImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_NestedMessage,
 	jsonEncode: (self: TestAllTypesProto3_NestedMessage) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_NestedMessage,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_NestedMessageFields = {
@@ -205,6 +207,7 @@ type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32Int32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32Int32Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32Int32EntryFields = {
@@ -225,6 +228,7 @@ type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt64Int64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt64Int64Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt64Int64EntryFields = {
@@ -245,6 +249,7 @@ type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint32Uint32Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapUint32Uint32EntryFields = {
@@ -265,6 +270,7 @@ type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint64Uint64Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapUint64Uint64EntryFields = {
@@ -285,6 +291,7 @@ type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint32Sint32Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSint32Sint32EntryFields = {
@@ -305,6 +312,7 @@ type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint64Sint64Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSint64Sint64EntryFields = {
@@ -325,6 +333,7 @@ type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapFixed32Fixed32EntryFields = {
@@ -345,6 +354,7 @@ type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapFixed64Fixed64EntryFields = {
@@ -365,6 +375,7 @@ type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields = {
@@ -385,6 +396,7 @@ type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields = {
@@ -405,6 +417,7 @@ type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32FloatEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32FloatEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32FloatEntryFields = {
@@ -425,6 +438,7 @@ type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32DoubleEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32DoubleEntryFields = {
@@ -445,6 +459,7 @@ type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapBoolBoolEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapBoolBoolEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapBoolBoolEntryFields = {
@@ -465,6 +480,7 @@ type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringStringEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringStringEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringStringEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringStringEntryFields = {
@@ -485,6 +501,7 @@ type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringBytesEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringBytesEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringBytesEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringBytesEntryFields = {
@@ -505,6 +522,7 @@ type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedMessageEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringNestedMessageEntryFields = {
@@ -525,6 +543,7 @@ type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignMessageEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringForeignMessageEntryFields = {
@@ -545,6 +564,7 @@ type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedEnumEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringNestedEnumEntryFields = {
@@ -565,6 +585,7 @@ type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignEnumEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringForeignEnumEntryFields = {
@@ -591,6 +612,7 @@ type _ForeignMessageImpl = {
 	decode: (input: buffer) -> ForeignMessage,
 	jsonEncode: (self: ForeignMessage) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ForeignMessage,
+	descriptor: proto.Descriptor,
 }
 
 type _ForeignMessageFields = {
@@ -607,6 +629,7 @@ type _NullHypothesisProto3Impl = {
 	decode: (input: buffer) -> NullHypothesisProto3,
 	jsonEncode: (self: NullHypothesisProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> NullHypothesisProto3,
+	descriptor: proto.Descriptor,
 }
 
 type _NullHypothesisProto3Fields = {}
@@ -624,6 +647,7 @@ type _EnumOnlyProto3Impl = {
 	decode: (input: buffer) -> EnumOnlyProto3,
 	jsonEncode: (self: EnumOnlyProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> EnumOnlyProto3,
+	descriptor: proto.Descriptor,
 }
 
 type _EnumOnlyProto3Fields = {}
@@ -6270,6 +6294,11 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	return self
 end
 
+_TestAllTypesProto3Impl.descriptor = {
+	name = "TestAllTypesProto3",
+	fullName = "protobuf_test_messages.proto3.TestAllTypesProto3",
+}
+
 TestAllTypesProto3 = _TestAllTypesProto3Impl
 
 local _TestAllTypesProto3_NestedMessageImpl = {}
@@ -6366,6 +6395,11 @@ function _TestAllTypesProto3_NestedMessageImpl.jsonDecode(input: { [string]: any
 
 	return self
 end
+
+_TestAllTypesProto3_NestedMessageImpl.descriptor = {
+	name = "TestAllTypesProto3_NestedMessage",
+	fullName = "protobuf_test_messages.proto3.NestedMessage",
+}
 
 TestAllTypesProto3_NestedMessage = _TestAllTypesProto3_NestedMessageImpl
 
@@ -6465,6 +6499,11 @@ function _TestAllTypesProto3_MapInt32Int32EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapInt32Int32EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapInt32Int32Entry",
+	fullName = "protobuf_test_messages.proto3.MapInt32Int32Entry",
+}
+
 TestAllTypesProto3_MapInt32Int32Entry = _TestAllTypesProto3_MapInt32Int32EntryImpl
 
 local _TestAllTypesProto3_MapInt64Int64EntryImpl = {}
@@ -6562,6 +6601,11 @@ function _TestAllTypesProto3_MapInt64Int64EntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapInt64Int64EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapInt64Int64Entry",
+	fullName = "protobuf_test_messages.proto3.MapInt64Int64Entry",
+}
 
 TestAllTypesProto3_MapInt64Int64Entry = _TestAllTypesProto3_MapInt64Int64EntryImpl
 
@@ -6661,6 +6705,11 @@ function _TestAllTypesProto3_MapUint32Uint32EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapUint32Uint32EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapUint32Uint32Entry",
+	fullName = "protobuf_test_messages.proto3.MapUint32Uint32Entry",
+}
+
 TestAllTypesProto3_MapUint32Uint32Entry = _TestAllTypesProto3_MapUint32Uint32EntryImpl
 
 local _TestAllTypesProto3_MapUint64Uint64EntryImpl = {}
@@ -6758,6 +6807,11 @@ function _TestAllTypesProto3_MapUint64Uint64EntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapUint64Uint64EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapUint64Uint64Entry",
+	fullName = "protobuf_test_messages.proto3.MapUint64Uint64Entry",
+}
 
 TestAllTypesProto3_MapUint64Uint64Entry = _TestAllTypesProto3_MapUint64Uint64EntryImpl
 
@@ -6857,6 +6911,11 @@ function _TestAllTypesProto3_MapSint32Sint32EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapSint32Sint32EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapSint32Sint32Entry",
+	fullName = "protobuf_test_messages.proto3.MapSint32Sint32Entry",
+}
+
 TestAllTypesProto3_MapSint32Sint32Entry = _TestAllTypesProto3_MapSint32Sint32EntryImpl
 
 local _TestAllTypesProto3_MapSint64Sint64EntryImpl = {}
@@ -6954,6 +7013,11 @@ function _TestAllTypesProto3_MapSint64Sint64EntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapSint64Sint64EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapSint64Sint64Entry",
+	fullName = "protobuf_test_messages.proto3.MapSint64Sint64Entry",
+}
 
 TestAllTypesProto3_MapSint64Sint64Entry = _TestAllTypesProto3_MapSint64Sint64EntryImpl
 
@@ -7053,6 +7117,11 @@ function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapFixed32Fixed32EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapFixed32Fixed32Entry",
+	fullName = "protobuf_test_messages.proto3.MapFixed32Fixed32Entry",
+}
+
 TestAllTypesProto3_MapFixed32Fixed32Entry = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 
 local _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {}
@@ -7150,6 +7219,11 @@ function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapFixed64Fixed64EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapFixed64Fixed64Entry",
+	fullName = "protobuf_test_messages.proto3.MapFixed64Fixed64Entry",
+}
 
 TestAllTypesProto3_MapFixed64Fixed64Entry = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 
@@ -7255,6 +7329,11 @@ function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapSfixed32Sfixed32Entry",
+	fullName = "protobuf_test_messages.proto3.MapSfixed32Sfixed32Entry",
+}
+
 TestAllTypesProto3_MapSfixed32Sfixed32Entry = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 
 local _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {}
@@ -7359,6 +7438,11 @@ function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapSfixed64Sfixed64Entry",
+	fullName = "protobuf_test_messages.proto3.MapSfixed64Sfixed64Entry",
+}
+
 TestAllTypesProto3_MapSfixed64Sfixed64Entry = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 
 local _TestAllTypesProto3_MapInt32FloatEntryImpl = {}
@@ -7456,6 +7540,11 @@ function _TestAllTypesProto3_MapInt32FloatEntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapInt32FloatEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapInt32FloatEntry",
+	fullName = "protobuf_test_messages.proto3.MapInt32FloatEntry",
+}
 
 TestAllTypesProto3_MapInt32FloatEntry = _TestAllTypesProto3_MapInt32FloatEntryImpl
 
@@ -7555,6 +7644,11 @@ function _TestAllTypesProto3_MapInt32DoubleEntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapInt32DoubleEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapInt32DoubleEntry",
+	fullName = "protobuf_test_messages.proto3.MapInt32DoubleEntry",
+}
+
 TestAllTypesProto3_MapInt32DoubleEntry = _TestAllTypesProto3_MapInt32DoubleEntryImpl
 
 local _TestAllTypesProto3_MapBoolBoolEntryImpl = {}
@@ -7652,6 +7746,11 @@ function _TestAllTypesProto3_MapBoolBoolEntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapBoolBoolEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapBoolBoolEntry",
+	fullName = "protobuf_test_messages.proto3.MapBoolBoolEntry",
+}
 
 TestAllTypesProto3_MapBoolBoolEntry = _TestAllTypesProto3_MapBoolBoolEntryImpl
 
@@ -7751,6 +7850,11 @@ function _TestAllTypesProto3_MapStringStringEntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapStringStringEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringStringEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringStringEntry",
+}
+
 TestAllTypesProto3_MapStringStringEntry = _TestAllTypesProto3_MapStringStringEntryImpl
 
 local _TestAllTypesProto3_MapStringBytesEntryImpl = {}
@@ -7848,6 +7952,11 @@ function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapStringBytesEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringBytesEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringBytesEntry",
+}
 
 TestAllTypesProto3_MapStringBytesEntry = _TestAllTypesProto3_MapStringBytesEntryImpl
 
@@ -7954,6 +8063,11 @@ function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapStringNestedMessageEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringNestedMessageEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringNestedMessageEntry",
+}
+
 TestAllTypesProto3_MapStringNestedMessageEntry = _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 
 local _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {}
@@ -8058,6 +8172,11 @@ function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapStringForeignMessageEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringForeignMessageEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringForeignMessageEntry",
+}
 
 TestAllTypesProto3_MapStringForeignMessageEntry = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 
@@ -8169,6 +8288,11 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonDecode(
 	return self
 end
 
+_TestAllTypesProto3_MapStringNestedEnumEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringNestedEnumEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringNestedEnumEntry",
+}
+
 TestAllTypesProto3_MapStringNestedEnumEntry = _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 
 local _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {}
@@ -8274,6 +8398,11 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonDecode(
 
 	return self
 end
+
+_TestAllTypesProto3_MapStringForeignEnumEntryImpl.descriptor = {
+	name = "TestAllTypesProto3_MapStringForeignEnumEntry",
+	fullName = "protobuf_test_messages.proto3.MapStringForeignEnumEntry",
+}
 
 TestAllTypesProto3_MapStringForeignEnumEntry = _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 
@@ -8444,6 +8573,11 @@ function _ForeignMessageImpl.jsonDecode(input: { [string]: any }): ForeignMessag
 	return self
 end
 
+_ForeignMessageImpl.descriptor = {
+	name = "ForeignMessage",
+	fullName = "protobuf_test_messages.proto3.ForeignMessage",
+}
+
 ForeignMessage = _ForeignMessageImpl
 
 local _NullHypothesisProto3Impl = {}
@@ -8498,6 +8632,11 @@ function _NullHypothesisProto3Impl.jsonDecode(input: { [string]: any }): NullHyp
 	return self
 end
 
+_NullHypothesisProto3Impl.descriptor = {
+	name = "NullHypothesisProto3",
+	fullName = "protobuf_test_messages.proto3.NullHypothesisProto3",
+}
+
 NullHypothesisProto3 = _NullHypothesisProto3Impl
 
 local _EnumOnlyProto3Impl = {}
@@ -8551,6 +8690,11 @@ function _EnumOnlyProto3Impl.jsonDecode(input: { [string]: any }): EnumOnlyProto
 
 	return self
 end
+
+_EnumOnlyProto3Impl.descriptor = {
+	name = "EnumOnlyProto3",
+	fullName = "protobuf_test_messages.proto3.EnumOnlyProto3",
+}
 
 EnumOnlyProto3 = _EnumOnlyProto3Impl
 

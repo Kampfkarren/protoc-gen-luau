@@ -2,6 +2,11 @@ local base64 = require("./base64")
 
 local proto = {}
 
+export type Descriptor = {
+	name: string,
+	fullName: string,
+}
+
 export type Message<T> = {
 	new: () -> T,
 
@@ -10,6 +15,8 @@ export type Message<T> = {
 
 	jsonEncode: (T) -> any,
 	jsonDecode: ({ [string]: any }) -> T,
+
+	descriptor: Descriptor,
 }
 
 export type Enum<T> = {

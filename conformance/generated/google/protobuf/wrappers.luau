@@ -11,6 +11,7 @@ type _DoubleValueImpl = {
 	decode: (input: buffer) -> DoubleValue,
 	jsonEncode: (self: DoubleValue) -> number,
 	jsonDecode: (input: number) -> DoubleValue,
+	descriptor: proto.Descriptor,
 }
 
 type _DoubleValueFields = {
@@ -27,6 +28,7 @@ type _FloatValueImpl = {
 	decode: (input: buffer) -> FloatValue,
 	jsonEncode: (self: FloatValue) -> number,
 	jsonDecode: (input: number) -> FloatValue,
+	descriptor: proto.Descriptor,
 }
 
 type _FloatValueFields = {
@@ -43,6 +45,7 @@ type _Int64ValueImpl = {
 	decode: (input: buffer) -> Int64Value,
 	jsonEncode: (self: Int64Value) -> number,
 	jsonDecode: (input: number) -> Int64Value,
+	descriptor: proto.Descriptor,
 }
 
 type _Int64ValueFields = {
@@ -59,6 +62,7 @@ type _UInt64ValueImpl = {
 	decode: (input: buffer) -> UInt64Value,
 	jsonEncode: (self: UInt64Value) -> number,
 	jsonDecode: (input: number) -> UInt64Value,
+	descriptor: proto.Descriptor,
 }
 
 type _UInt64ValueFields = {
@@ -75,6 +79,7 @@ type _Int32ValueImpl = {
 	decode: (input: buffer) -> Int32Value,
 	jsonEncode: (self: Int32Value) -> number,
 	jsonDecode: (input: number) -> Int32Value,
+	descriptor: proto.Descriptor,
 }
 
 type _Int32ValueFields = {
@@ -91,6 +96,7 @@ type _UInt32ValueImpl = {
 	decode: (input: buffer) -> UInt32Value,
 	jsonEncode: (self: UInt32Value) -> number,
 	jsonDecode: (input: number) -> UInt32Value,
+	descriptor: proto.Descriptor,
 }
 
 type _UInt32ValueFields = {
@@ -107,6 +113,7 @@ type _BoolValueImpl = {
 	decode: (input: buffer) -> BoolValue,
 	jsonEncode: (self: BoolValue) -> boolean,
 	jsonDecode: (input: boolean) -> BoolValue,
+	descriptor: proto.Descriptor,
 }
 
 type _BoolValueFields = {
@@ -123,6 +130,7 @@ type _StringValueImpl = {
 	decode: (input: buffer) -> StringValue,
 	jsonEncode: (self: StringValue) -> string,
 	jsonDecode: (input: string) -> StringValue,
+	descriptor: proto.Descriptor,
 }
 
 type _StringValueFields = {
@@ -139,6 +147,7 @@ type _BytesValueImpl = {
 	decode: (input: buffer) -> BytesValue,
 	jsonEncode: (self: BytesValue) -> buffer,
 	jsonDecode: (input: buffer) -> BytesValue,
+	descriptor: proto.Descriptor,
 }
 
 type _BytesValueFields = {
@@ -199,6 +208,11 @@ function _DoubleValueImpl.decode(input: buffer): DoubleValue
 	return self
 end
 
+_DoubleValueImpl.descriptor = {
+	name = "DoubleValue",
+	fullName = "google.protobuf.DoubleValue",
+}
+
 DoubleValue = _DoubleValueImpl
 
 local _FloatValueImpl = {}
@@ -251,6 +265,11 @@ function _FloatValueImpl.decode(input: buffer): FloatValue
 
 	return self
 end
+
+_FloatValueImpl.descriptor = {
+	name = "FloatValue",
+	fullName = "google.protobuf.FloatValue",
+}
 
 FloatValue = _FloatValueImpl
 
@@ -305,6 +324,11 @@ function _Int64ValueImpl.decode(input: buffer): Int64Value
 	return self
 end
 
+_Int64ValueImpl.descriptor = {
+	name = "Int64Value",
+	fullName = "google.protobuf.Int64Value",
+}
+
 Int64Value = _Int64ValueImpl
 
 local _UInt64ValueImpl = {}
@@ -357,6 +381,11 @@ function _UInt64ValueImpl.decode(input: buffer): UInt64Value
 
 	return self
 end
+
+_UInt64ValueImpl.descriptor = {
+	name = "UInt64Value",
+	fullName = "google.protobuf.UInt64Value",
+}
 
 UInt64Value = _UInt64ValueImpl
 
@@ -411,6 +440,11 @@ function _Int32ValueImpl.decode(input: buffer): Int32Value
 	return self
 end
 
+_Int32ValueImpl.descriptor = {
+	name = "Int32Value",
+	fullName = "google.protobuf.Int32Value",
+}
+
 Int32Value = _Int32ValueImpl
 
 local _UInt32ValueImpl = {}
@@ -463,6 +497,11 @@ function _UInt32ValueImpl.decode(input: buffer): UInt32Value
 
 	return self
 end
+
+_UInt32ValueImpl.descriptor = {
+	name = "UInt32Value",
+	fullName = "google.protobuf.UInt32Value",
+}
 
 UInt32Value = _UInt32ValueImpl
 
@@ -517,6 +556,11 @@ function _BoolValueImpl.decode(input: buffer): BoolValue
 	return self
 end
 
+_BoolValueImpl.descriptor = {
+	name = "BoolValue",
+	fullName = "google.protobuf.BoolValue",
+}
+
 BoolValue = _BoolValueImpl
 
 local _StringValueImpl = {}
@@ -570,6 +614,11 @@ function _StringValueImpl.decode(input: buffer): StringValue
 	return self
 end
 
+_StringValueImpl.descriptor = {
+	name = "StringValue",
+	fullName = "google.protobuf.StringValue",
+}
+
 StringValue = _StringValueImpl
 
 local _BytesValueImpl = {}
@@ -622,6 +671,11 @@ function _BytesValueImpl.decode(input: buffer): BytesValue
 
 	return self
 end
+
+_BytesValueImpl.descriptor = {
+	name = "BytesValue",
+	fullName = "google.protobuf.BytesValue",
+}
 
 BytesValue = _BytesValueImpl
 

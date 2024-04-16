@@ -11,6 +11,7 @@ type _AnyImpl = {
 	decode: (input: buffer) -> Any,
 	jsonEncode: (self: Any) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Any,
+	descriptor: proto.Descriptor,
 }
 
 type _AnyFields = {
@@ -116,6 +117,11 @@ function _AnyImpl.jsonDecode(input: { [string]: any }): Any
 
 	return self
 end
+
+_AnyImpl.descriptor = {
+	name = "Any",
+	fullName = "google.protobuf.Any",
+}
 
 Any = _AnyImpl
 

@@ -11,6 +11,7 @@ type _FieldMaskImpl = {
 	decode: (input: buffer) -> FieldMask,
 	jsonEncode: (self: FieldMask) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> FieldMask,
+	descriptor: proto.Descriptor,
 }
 
 type _FieldMaskFields = {
@@ -103,6 +104,11 @@ function _FieldMaskImpl.jsonDecode(input: { [string]: any }): FieldMask
 
 	return self
 end
+
+_FieldMaskImpl.descriptor = {
+	name = "FieldMask",
+	fullName = "google.protobuf.FieldMask",
+}
 
 FieldMask = _FieldMaskImpl
 

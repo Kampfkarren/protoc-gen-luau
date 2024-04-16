@@ -11,6 +11,7 @@ type _DurationImpl = {
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
 	jsonDecode: (input: string) -> Duration,
+	descriptor: proto.Descriptor,
 }
 
 type _DurationFields = {
@@ -81,6 +82,11 @@ function _DurationImpl.decode(input: buffer): Duration
 
 	return self
 end
+
+_DurationImpl.descriptor = {
+	name = "Duration",
+	fullName = "google.protobuf.Duration",
+}
 
 Duration = _DurationImpl
 

@@ -11,6 +11,7 @@ type _StructImpl = {
 	decode: (input: buffer) -> Struct,
 	jsonEncode: (self: Struct) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Struct,
+	descriptor: proto.Descriptor,
 }
 
 type _StructFields = {
@@ -27,6 +28,7 @@ type _Struct_FieldsEntryImpl = {
 	decode: (input: buffer) -> Struct_FieldsEntry,
 	jsonEncode: (self: Struct_FieldsEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Struct_FieldsEntry,
+	descriptor: proto.Descriptor,
 }
 
 type _Struct_FieldsEntryFields = {
@@ -44,6 +46,7 @@ type _ValueImpl = {
 	decode: (input: buffer) -> Value,
 	jsonEncode: (self: Value) -> any,
 	jsonDecode: (input: any) -> Value,
+	descriptor: proto.Descriptor,
 }
 
 type _ValueFields = {
@@ -67,6 +70,7 @@ type _ListValueImpl = {
 	decode: (input: buffer) -> ListValue,
 	jsonEncode: (self: ListValue) -> { any },
 	jsonDecode: (input: { any }) -> ListValue,
+	descriptor: proto.Descriptor,
 }
 
 type _ListValueFields = {
@@ -144,6 +148,11 @@ function _StructImpl.decode(input: buffer): Struct
 
 	return self
 end
+
+_StructImpl.descriptor = {
+	name = "Struct",
+	fullName = "google.protobuf.Struct",
+}
 
 Struct = _StructImpl
 
@@ -240,6 +249,11 @@ function _Struct_FieldsEntryImpl.jsonDecode(input: { [string]: any }): Struct_Fi
 	return self
 end
 
+_Struct_FieldsEntryImpl.descriptor = {
+	name = "Struct_FieldsEntry",
+	fullName = "google.protobuf.FieldsEntry",
+}
+
 Struct_FieldsEntry = _Struct_FieldsEntryImpl
 
 local _ValueImpl = {}
@@ -332,6 +346,11 @@ function _ValueImpl.decode(input: buffer): Value
 	return self
 end
 
+_ValueImpl.descriptor = {
+	name = "Value",
+	fullName = "google.protobuf.Value",
+}
+
 Value = _ValueImpl
 
 local _ListValueImpl = {}
@@ -387,6 +406,11 @@ function _ListValueImpl.decode(input: buffer): ListValue
 
 	return self
 end
+
+_ListValueImpl.descriptor = {
+	name = "ListValue",
+	fullName = "google.protobuf.ListValue",
+}
 
 ListValue = _ListValueImpl
 
