@@ -55,6 +55,12 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         ..Default::default()
     });
 
+    files.push(File {
+        name: Some("proto/descriptor.luau".to_owned()),
+        content: Some(include_str!("./luau/proto/descriptor.luau").to_owned()),
+        ..Default::default()
+    });
+
     files.append(
         &mut request
             .proto_file
@@ -258,6 +264,13 @@ end
 
 <json>
 
+function _<name>Impl.descriptor() : descriptor.Descriptor
+    local descriptor = descriptor.Descriptor.new()
+    descriptor.name = function() return "<name>" end
+    descriptor.full_name = function() return "<full_name>" end
+    return descriptor
+end
+
 <name> = _<name>Impl
 "#;
 
@@ -369,6 +382,13 @@ impl<'a> FileGenerator<'a> {
             self.require_path(&proto_require_path)
         ));
 
+        let mut descriptor_require_path = proto_require_path.clone();
+        descriptor_require_path.push("descriptor");
+        contents.push(format!(
+            "local descriptor = require({})",
+            self.require_path(&descriptor_require_path)
+        ));
+
         for import in &self.file_descriptor_proto.dependency {
             let path_diff = pathdiff::diff_paths(
                 std::path::Path::new(&import),
@@ -410,8 +430,15 @@ impl<'a> FileGenerator<'a> {
 
         contents.blank();
 
+        let package = self.file_descriptor_proto.package.clone();
+
+        let scope = match package {
+            Some(ref package) => package.as_str(),
+            None => "",
+        };
+
         for message in std::mem::take(&mut self.file_descriptor_proto.message_type) {
-            self.generate_message(&message, "");
+            self.generate_message(&message, "", scope);
         }
 
         for descriptor in std::mem::take(&mut self.file_descriptor_proto.enum_type) {
@@ -461,8 +488,9 @@ impl<'a> FileGenerator<'a> {
         }
     }
 
-    fn generate_message(&mut self, message: &DescriptorProto, prefix: &str) {
+    fn generate_message(&mut self, message: &DescriptorProto, prefix: &str, package: &str) {
         let name = format!("{prefix}{}", message.name());
+        let full_name = format!("{package}.{}", message.name());
 
         if !message
             .options
@@ -484,6 +512,7 @@ impl<'a> FileGenerator<'a> {
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
                 jsonDecode: (input: {json_type}) -> {name},
+                descriptor: () -> descriptor.Descriptor,
             }}
             "#
         ));
@@ -632,6 +661,7 @@ impl<'a> FileGenerator<'a> {
         let mut final_code = MESSAGE
             .replace("    ", "\t")
             .replace("<name>", &name)
+            .replace("<full_name>", &full_name)
             .replace("<default>", &default_lines.build())
             .replace("<encode>", &encode_lines.build())
             .replace("<decode_varint>", &create_decoder(varint_fields))
@@ -668,7 +698,7 @@ impl<'a> FileGenerator<'a> {
         self.implementations.blank();
 
         for nested_message in &message.nested_type {
-            self.generate_message(nested_message, &format!("{name}_"));
+            self.generate_message(nested_message, &format!("{name}_"), package);
         }
 
         for nested_enum in &message.enum_type {
