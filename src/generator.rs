@@ -55,12 +55,6 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         ..Default::default()
     });
 
-    files.push(File {
-        name: Some("proto/descriptor.luau".to_owned()),
-        content: Some(include_str!("./luau/proto/descriptor.luau").to_owned()),
-        ..Default::default()
-    });
-
     files.append(
         &mut request
             .proto_file
@@ -264,12 +258,10 @@ end
 
 <json>
 
-function _<name>Impl.descriptor() : descriptor.Descriptor
-    local descriptor = descriptor.Descriptor.new()
-    descriptor.name = function() return "<name>" end
-    descriptor.full_name = function() return "<full_name>" end
-    return descriptor
-end
+_<name>Impl.descriptor = {
+    name = "<name>",
+    fullName = "<full_name>",
+}
 
 <name> = _<name>Impl
 "#;
@@ -380,13 +372,6 @@ impl<'a> FileGenerator<'a> {
         contents.push(format!(
             "local proto = require({})",
             self.require_path(&proto_require_path)
-        ));
-
-        let mut descriptor_require_path = proto_require_path.clone();
-        descriptor_require_path.push("descriptor");
-        contents.push(format!(
-            "local descriptor = require({})",
-            self.require_path(&descriptor_require_path)
         ));
 
         for import in &self.file_descriptor_proto.dependency {

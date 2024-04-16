@@ -1,5 +1,4 @@
 local base64 = require("./base64")
-local descriptor = require("./descriptor")
 
 local proto = {}
 
@@ -12,7 +11,10 @@ export type Message<T> = {
 	jsonEncode: (T) -> any,
 	jsonDecode: ({ [string]: any }) -> T,
 
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: {
+		name: string,
+		fullName: string,
+	},
 }
 
 export type Enum<T> = {

@@ -1,31 +1,14 @@
-use std::{
-    path::Path,
-    process::ExitCode,
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc, Condvar, Mutex, OnceLock,
-    },
-};
+use std::{path::Path, process::ExitCode};
 
-fn wait_for_samples() {
-    static SAMPLES_GENERATED: OnceLock<Arc<(Mutex<bool>, Condvar)>> = OnceLock::new();
-    static TRIED_GENERATING: AtomicBool = AtomicBool::new(false);
+use tokio::sync::OnceCell;
 
-    let (lock, cvar) = &*Arc::clone(
-        SAMPLES_GENERATED.get_or_init(|| Arc::new((Mutex::new(false), Condvar::new()))),
-    );
+async fn create_samples_once() {
+    static ONCE: OnceCell<()> = OnceCell::const_new();
 
-    if !TRIED_GENERATING.swap(true, Ordering::SeqCst) {
+    ONCE.get_or_init(|| async {
         generate_samples();
-
-        let mut generated = lock.lock().unwrap();
-        *generated = true;
-    }
-
-    let mut generated = lock.lock().unwrap();
-    while !*generated {
-        generated = cvar.wait(generated).unwrap();
-    }
+    })
+    .await;
 }
 
 fn generate_samples() {
@@ -62,7 +45,7 @@ fn generate_samples() {
 }
 
 async fn run_luau_test(filename: &Path) {
-    wait_for_samples();
+    create_samples_once().await;
 
     let path = Path::new("src/tests/").join(filename);
     let contents = std::fs::read_to_string(&path).unwrap();
@@ -81,5 +64,9 @@ async fn run_luau_test(filename: &Path) {
 #[tokio::test]
 async fn basic() {
     run_luau_test(Path::new("basic.luau")).await;
+}
+
+#[tokio::test]
+async fn wkt_json() {
     run_luau_test(Path::new("wkt_json.luau")).await;
 }
