@@ -497,7 +497,7 @@ impl<'a> FileGenerator<'a> {
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
                 jsonDecode: (input: {json_type}) -> {name},
-                descriptor: () -> descriptor.Descriptor,
+                descriptor: proto.Descriptor,
             }}
             "#
         ));

@@ -11,7 +11,7 @@ type _DoubleValueImpl = {
 	decode: (input: buffer) -> DoubleValue,
 	jsonEncode: (self: DoubleValue) -> number,
 	jsonDecode: (input: number) -> DoubleValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _DoubleValueFields = {
@@ -28,7 +28,7 @@ type _FloatValueImpl = {
 	decode: (input: buffer) -> FloatValue,
 	jsonEncode: (self: FloatValue) -> number,
 	jsonDecode: (input: number) -> FloatValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _FloatValueFields = {
@@ -45,7 +45,7 @@ type _Int64ValueImpl = {
 	decode: (input: buffer) -> Int64Value,
 	jsonEncode: (self: Int64Value) -> number,
 	jsonDecode: (input: number) -> Int64Value,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _Int64ValueFields = {
@@ -62,7 +62,7 @@ type _UInt64ValueImpl = {
 	decode: (input: buffer) -> UInt64Value,
 	jsonEncode: (self: UInt64Value) -> number,
 	jsonDecode: (input: number) -> UInt64Value,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _UInt64ValueFields = {
@@ -79,7 +79,7 @@ type _Int32ValueImpl = {
 	decode: (input: buffer) -> Int32Value,
 	jsonEncode: (self: Int32Value) -> number,
 	jsonDecode: (input: number) -> Int32Value,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _Int32ValueFields = {
@@ -96,7 +96,7 @@ type _UInt32ValueImpl = {
 	decode: (input: buffer) -> UInt32Value,
 	jsonEncode: (self: UInt32Value) -> number,
 	jsonDecode: (input: number) -> UInt32Value,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _UInt32ValueFields = {
@@ -113,7 +113,7 @@ type _BoolValueImpl = {
 	decode: (input: buffer) -> BoolValue,
 	jsonEncode: (self: BoolValue) -> boolean,
 	jsonDecode: (input: boolean) -> BoolValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _BoolValueFields = {
@@ -130,7 +130,7 @@ type _StringValueImpl = {
 	decode: (input: buffer) -> StringValue,
 	jsonEncode: (self: StringValue) -> string,
 	jsonDecode: (input: string) -> StringValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _StringValueFields = {
@@ -147,7 +147,7 @@ type _BytesValueImpl = {
 	decode: (input: buffer) -> BytesValue,
 	jsonEncode: (self: BytesValue) -> buffer,
 	jsonDecode: (input: buffer) -> BytesValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _BytesValueFields = {

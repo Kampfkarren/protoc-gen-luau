@@ -11,7 +11,7 @@ type _FailureSetImpl = {
 	decode: (input: buffer) -> FailureSet,
 	jsonEncode: (self: FailureSet) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> FailureSet,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _FailureSetFields = {
@@ -28,7 +28,7 @@ type _ConformanceRequestImpl = {
 	decode: (input: buffer) -> ConformanceRequest,
 	jsonEncode: (self: ConformanceRequest) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ConformanceRequest,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _ConformanceRequestFields = {
@@ -55,7 +55,7 @@ type _ConformanceResponseImpl = {
 	decode: (input: buffer) -> ConformanceResponse,
 	jsonEncode: (self: ConformanceResponse) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ConformanceResponse,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _ConformanceResponseFields = {
@@ -82,7 +82,7 @@ type _JspbEncodingConfigImpl = {
 	decode: (input: buffer) -> JspbEncodingConfig,
 	jsonEncode: (self: JspbEncodingConfig) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> JspbEncodingConfig,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _JspbEncodingConfigFields = {

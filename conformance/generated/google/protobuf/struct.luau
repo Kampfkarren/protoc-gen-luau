@@ -11,7 +11,7 @@ type _StructImpl = {
 	decode: (input: buffer) -> Struct,
 	jsonEncode: (self: Struct) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Struct,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _StructFields = {
@@ -28,7 +28,7 @@ type _Struct_FieldsEntryImpl = {
 	decode: (input: buffer) -> Struct_FieldsEntry,
 	jsonEncode: (self: Struct_FieldsEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Struct_FieldsEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _Struct_FieldsEntryFields = {
@@ -46,7 +46,7 @@ type _ValueImpl = {
 	decode: (input: buffer) -> Value,
 	jsonEncode: (self: Value) -> any,
 	jsonDecode: (input: any) -> Value,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _ValueFields = {
@@ -70,7 +70,7 @@ type _ListValueImpl = {
 	decode: (input: buffer) -> ListValue,
 	jsonEncode: (self: ListValue) -> { any },
 	jsonDecode: (input: { any }) -> ListValue,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _ListValueFields = {

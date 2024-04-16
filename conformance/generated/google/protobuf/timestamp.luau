@@ -11,7 +11,7 @@ type _TimestampImpl = {
 	decode: (input: buffer) -> Timestamp,
 	jsonEncode: (self: Timestamp) -> string,
 	jsonDecode: (input: string) -> Timestamp,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TimestampFields = {

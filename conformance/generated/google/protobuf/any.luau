@@ -11,7 +11,7 @@ type _AnyImpl = {
 	decode: (input: buffer) -> Any,
 	jsonEncode: (self: Any) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Any,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _AnyFields = {

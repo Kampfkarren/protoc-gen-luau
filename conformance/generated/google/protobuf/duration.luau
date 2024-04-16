@@ -11,7 +11,7 @@ type _DurationImpl = {
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
 	jsonDecode: (input: string) -> Duration,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _DurationFields = {

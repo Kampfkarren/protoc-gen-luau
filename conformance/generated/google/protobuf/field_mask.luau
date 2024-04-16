@@ -11,7 +11,7 @@ type _FieldMaskImpl = {
 	decode: (input: buffer) -> FieldMask,
 	jsonEncode: (self: FieldMask) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> FieldMask,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _FieldMaskFields = {

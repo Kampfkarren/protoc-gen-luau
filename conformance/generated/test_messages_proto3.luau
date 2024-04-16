@@ -17,7 +17,7 @@ type _TestAllTypesProto3Impl = {
 	decode: (input: buffer) -> TestAllTypesProto3,
 	jsonEncode: (self: TestAllTypesProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3Fields = {
@@ -186,7 +186,7 @@ type _TestAllTypesProto3_NestedMessageImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_NestedMessage,
 	jsonEncode: (self: TestAllTypesProto3_NestedMessage) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_NestedMessage,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_NestedMessageFields = {
@@ -207,7 +207,7 @@ type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32Int32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32Int32Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32Int32EntryFields = {
@@ -228,7 +228,7 @@ type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt64Int64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt64Int64Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt64Int64EntryFields = {
@@ -249,7 +249,7 @@ type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint32Uint32Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapUint32Uint32EntryFields = {
@@ -270,7 +270,7 @@ type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapUint64Uint64Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapUint64Uint64EntryFields = {
@@ -291,7 +291,7 @@ type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint32Sint32Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSint32Sint32EntryFields = {
@@ -312,7 +312,7 @@ type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSint64Sint64Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSint64Sint64EntryFields = {
@@ -333,7 +333,7 @@ type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapFixed32Fixed32EntryFields = {
@@ -354,7 +354,7 @@ type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapFixed64Fixed64EntryFields = {
@@ -375,7 +375,7 @@ type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields = {
@@ -396,7 +396,7 @@ type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields = {
@@ -417,7 +417,7 @@ type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32FloatEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32FloatEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32FloatEntryFields = {
@@ -438,7 +438,7 @@ type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapInt32DoubleEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapInt32DoubleEntryFields = {
@@ -459,7 +459,7 @@ type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapBoolBoolEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapBoolBoolEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapBoolBoolEntryFields = {
@@ -480,7 +480,7 @@ type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringStringEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringStringEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringStringEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringStringEntryFields = {
@@ -501,7 +501,7 @@ type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringBytesEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringBytesEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringBytesEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringBytesEntryFields = {
@@ -522,7 +522,7 @@ type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedMessageEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringNestedMessageEntryFields = {
@@ -543,7 +543,7 @@ type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignMessageEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringForeignMessageEntryFields = {
@@ -564,7 +564,7 @@ type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringNestedEnumEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringNestedEnumEntryFields = {
@@ -585,7 +585,7 @@ type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> TestAllTypesProto3_MapStringForeignEnumEntry,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _TestAllTypesProto3_MapStringForeignEnumEntryFields = {
@@ -612,7 +612,7 @@ type _ForeignMessageImpl = {
 	decode: (input: buffer) -> ForeignMessage,
 	jsonEncode: (self: ForeignMessage) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> ForeignMessage,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _ForeignMessageFields = {
@@ -629,7 +629,7 @@ type _NullHypothesisProto3Impl = {
 	decode: (input: buffer) -> NullHypothesisProto3,
 	jsonEncode: (self: NullHypothesisProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> NullHypothesisProto3,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _NullHypothesisProto3Fields = {}
@@ -647,7 +647,7 @@ type _EnumOnlyProto3Impl = {
 	decode: (input: buffer) -> EnumOnlyProto3,
 	jsonEncode: (self: EnumOnlyProto3) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> EnumOnlyProto3,
-	descriptor: () -> descriptor.Descriptor,
+	descriptor: proto.Descriptor,
 }
 
 type _EnumOnlyProto3Fields = {}
