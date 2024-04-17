@@ -36,12 +36,12 @@ function _AnyImpl.encode(self: Any): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.type_url ~= "" then
+	if self.type_url and self.type_url ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.type_url)
 	end
 
-	if buffer.len(self.value) > 0 then
+	if self.value and buffer.len(self.value) > 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
 	end
@@ -89,11 +89,11 @@ function _AnyImpl.jsonEncode(self: Any): any
 		value: buffer?,
 	} = {}
 
-	if self.type_url ~= "" then
+	if self.type_url and self.type_url ~= "" then
 		output.typeUrl = self.type_url
 	end
 
-	if buffer.len(self.value) > 0 then
+	if self.value and buffer.len(self.value) > 0 then
 		output.value = proto.json.serializeBuffer(self.value)
 	end
 

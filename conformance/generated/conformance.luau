@@ -118,7 +118,7 @@ function _FailureSetImpl.encode(self: FailureSet): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if #self.failure > 0 then
+	if self.failure and #self.failure > 0 then
 		for _, value: string in self.failure do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
@@ -163,7 +163,7 @@ function _FailureSetImpl.jsonEncode(self: FailureSet): any
 		failure: { string }?,
 	} = {}
 
-	if #self.failure > 0 then
+	if self.failure and #self.failure > 0 then
 		local newOutput: { string } = {}
 		for _, value: string in self.failure do
 			table.insert(newOutput, value)
@@ -234,17 +234,20 @@ function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
 		end
 	end
 
-	if self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0) then
+	if
+		self.requested_output_format ~= nil
+		and (self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0))
+	then
 		output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, WireFormat.toNumber(self.requested_output_format))
 	end
 
-	if self.message_type ~= "" then
+	if self.message_type and self.message_type ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.message_type)
 	end
 
-	if self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0) then
+	if self.test_category ~= nil and (self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0)) then
 		output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, TestCategory.toNumber(self.test_category))
 	end
@@ -351,17 +354,20 @@ function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 		end
 	end
 
-	if self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0) then
+	if
+		self.requested_output_format ~= nil
+		and (self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0))
+	then
 		output.requestedOutputFormat = if typeof(self.requested_output_format) == "number"
 			then self.requested_output_format
 			else WireFormat.toNumber(self.requested_output_format)
 	end
 
-	if self.message_type ~= "" then
+	if self.message_type and self.message_type ~= "" then
 		output.messageType = self.message_type
 	end
 
-	if self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0) then
+	if self.test_category ~= nil and (self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0)) then
 		output.testCategory = if typeof(self.test_category) == "number"
 			then self.test_category
 			else TestCategory.toNumber(self.test_category)

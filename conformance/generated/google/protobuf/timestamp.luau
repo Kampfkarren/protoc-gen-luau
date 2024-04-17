@@ -36,12 +36,12 @@ function _TimestampImpl.encode(self: Timestamp): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.seconds ~= 0 then
+	if self.seconds ~= nil and self.seconds ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.seconds)
 	end
 
-	if self.nanos ~= 0 then
+	if self.nanos ~= nil and self.nanos ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.nanos)
 	end

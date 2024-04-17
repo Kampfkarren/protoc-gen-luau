@@ -96,7 +96,7 @@ function _StructImpl.encode(self: Struct): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if next(self.fields) ~= nil then
+	if self.fields and next(self.fields) ~= nil then
 		for key: string, value: Value in self.fields do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
@@ -170,7 +170,7 @@ function _Struct_FieldsEntryImpl.encode(self: Struct_FieldsEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.key ~= "" then
+	if self.key and self.key ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.key)
 	end
@@ -224,7 +224,7 @@ function _Struct_FieldsEntryImpl.jsonEncode(self: Struct_FieldsEntry): any
 		value: Value?,
 	} = {}
 
-	if self.key ~= "" then
+	if self.key and self.key ~= "" then
 		output.key = self.key
 	end
 
@@ -366,7 +366,7 @@ function _ListValueImpl.encode(self: ListValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if #self.values > 0 then
+	if self.values and #self.values > 0 then
 		for _, value: Value in self.values do
 			local encoded = Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
