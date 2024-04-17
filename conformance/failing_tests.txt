@@ -1,5 +1,3 @@
-Required.Proto3.DurationProtoInputTooLarge.JsonOutput
-Required.Proto3.DurationProtoInputTooSmall.JsonOutput
 Required.Proto3.JsonInput.Any.JsonOutput
 Required.Proto3.JsonInput.Any.ProtobufOutput
 Required.Proto3.JsonInput.AnyNested.JsonOutput
