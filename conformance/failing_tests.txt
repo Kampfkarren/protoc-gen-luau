@@ -29,7 +29,6 @@ Required.Proto3.JsonInput.DoubleFieldTooSmall
 Required.Proto3.JsonInput.DurationJsonInputTooLarge
 Required.Proto3.JsonInput.DurationJsonInputTooSmall
 Required.Proto3.JsonInput.DurationMinValue.ProtobufOutput
-Required.Proto3.JsonInput.DurationMissingS
 Required.Proto3.JsonInput.DurationNegativeNanos.JsonOutput
 Required.Proto3.JsonInput.DurationNegativeNanos.ProtobufOutput
 Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput
@@ -62,13 +61,10 @@ Required.Proto3.JsonInput.Int64FieldTooSmall
 Required.Proto3.JsonInput.OneofFieldDuplicate
 Required.Proto3.JsonInput.OptionalBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.ProtobufOutput
-Required.Proto3.JsonInput.RejectTopLevelNull
 Required.Proto3.JsonInput.RepeatedBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotBool
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotMessage
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotString
-Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotBool
-Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotInt
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotString
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt
@@ -77,10 +73,6 @@ Required.Proto3.JsonInput.StringFieldNotAString
 Required.Proto3.JsonInput.Struct.JsonOutput
 Required.Proto3.JsonInput.Struct.ProtobufOutput
 Required.Proto3.JsonInput.StructWithEmptyListValue.JsonOutput
-Required.Proto3.JsonInput.TimestampJsonInputLowercaseT
-Required.Proto3.JsonInput.TimestampJsonInputLowercaseZ
-Required.Proto3.JsonInput.TimestampJsonInputMissingT
-Required.Proto3.JsonInput.TimestampJsonInputMissingZ
 Required.Proto3.JsonInput.TimestampJsonInputTooLarge
 Required.Proto3.JsonInput.TimestampJsonInputTooSmall
 Required.Proto3.JsonInput.TimestampLeap.JsonOutput
