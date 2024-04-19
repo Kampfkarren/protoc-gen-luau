@@ -9,8 +9,8 @@ type _FieldMaskImpl = {
 	new: () -> FieldMask,
 	encode: (self: FieldMask) -> buffer,
 	decode: (input: buffer) -> FieldMask,
-	jsonEncode: (self: FieldMask) -> { [string]: any },
-	jsonDecode: (input: { [string]: any }) -> FieldMask,
+	jsonEncode: (self: FieldMask) -> string,
+	jsonDecode: (input: string) -> FieldMask,
 	descriptor: proto.Descriptor,
 }
 
@@ -74,43 +74,27 @@ function _FieldMaskImpl.decode(input: buffer): FieldMask
 	return self
 end
 
-function _FieldMaskImpl.jsonEncode(self: FieldMask): any
-	local output: {
-		paths: { string }?,
-	} = {}
-
-	if #self.paths > 0 then
-		local newOutput: { string } = {}
-		for _, value: string in self.paths do
-			table.insert(newOutput, value)
-		end
-		output.paths = newOutput
-	end
-
-	return output
-end
-
-function _FieldMaskImpl.jsonDecode(input: { [string]: any }): FieldMask
-	local self = FieldMask.new()
-
-	if input.paths ~= nil then
-		local newOutput: { string } = {}
-		for _, value in input.paths do
-			table.insert(newOutput, value)
-		end
-
-		self.paths = newOutput
-	end
-
-	return self
-end
-
 _FieldMaskImpl.descriptor = {
 	name = "FieldMask",
 	fullName = "google.protobuf.FieldMask",
 }
 
 FieldMask = _FieldMaskImpl
+
+function FieldMask.jsonEncode(fieldMask: FieldMask): string
+	return table.concat(fieldMask.paths, ",")
+end
+
+function FieldMask.jsonDecode(input: string): FieldMask
+	local paths = {}
+	for path in string.gmatch(input, "[^,]+") do
+		table.insert(paths, path)
+	end
+
+	return FieldMask.new({
+		paths = paths,
+	})
+end
 
 return {
 	FieldMask = FieldMask,

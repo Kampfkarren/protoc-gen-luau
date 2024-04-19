@@ -1,6 +1,7 @@
 local tests = require("./tests")
 
 local duration = require("./samples/google/protobuf/duration")
+local field_mask = require("./samples/google/protobuf/field_mask")
 local struct = require("./samples/google/protobuf/struct")
 local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
@@ -141,6 +142,31 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_duration.nanos, 1)
 
 			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+	end)
+
+	describe("FieldMask", function()
+		it("with single path", function()
+			local json = "foo"
+
+			local deserialized_field_mask = field_mask.FieldMask.jsonDecode(json)
+
+			assertEquals(#deserialized_field_mask.paths, 1)
+			assertEquals(deserialized_field_mask.paths[1], "foo")
+
+			assertEquals(deserialized_field_mask:jsonEncode(), json)
+		end)
+
+		it("with multiple paths", function()
+			local json = "foo,bar.baz"
+
+			local deserialized_field_mask = field_mask.FieldMask.jsonDecode(json)
+
+			assertEquals(#deserialized_field_mask.paths, 2)
+			assertEquals(deserialized_field_mask.paths[1], "foo")
+			assertEquals(deserialized_field_mask.paths[2], "bar.baz")
+
+			assertEquals(deserialized_field_mask:jsonEncode(), json)
 		end)
 	end)
 

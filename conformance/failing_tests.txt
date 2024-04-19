@@ -34,7 +34,6 @@ Required.Proto3.JsonInput.DurationNegativeNanos.ProtobufOutput
 Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput
 Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput
 Required.Proto3.JsonInput.EnumFieldNotQuoted
-Required.Proto3.JsonInput.FieldMask.JsonOutput
 Required.Proto3.JsonInput.FieldMask.ProtobufOutput
 Required.Proto3.JsonInput.FloatFieldTooLarge
 Required.Proto3.JsonInput.FloatFieldTooSmall
