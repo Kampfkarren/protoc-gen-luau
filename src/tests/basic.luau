@@ -67,49 +67,48 @@ describe("binary encoding", function()
 		local kitchenSink = kitchen_sink.KitchenSink.new({
 			int32 = 1,
 			optionalInt32 = 2,
-			oneofValue = {type = "y", value = "hello"},
+			oneofValue = { type = "y", value = "hello" },
 			enum = "Two",
 			enum2 = "One",
-			ints = {1, 2, 3},
-			map = {[true] = "true", [false] = "false"},
-			nestedMessage = {x = 7},
-			includedMessage = {x = 8},
-			superNestedMessage = {y = 9},
+			ints = { 1, 2, 3 },
+			map = { [true] = "true", [false] = "false" },
+			nestedMessage = { x = 7 },
+			includedMessage = { x = 8 },
+			superNestedMessage = { y = 9 },
 			nestedEnum = "Zero",
 			float = 1.25,
 			double = 2.5,
-			samePackageNestedMessage = {x = 42},
-			deeperNestedMessage = {x = 1, y = "One"},
+			samePackageNestedMessage = { x = 42 },
+			deeperNestedMessage = { x = 1, y = "One" },
 
-			messages = {{x = 1}, {x = 2}},
+			messages = { { x = 1 }, { x = 2 } },
 
 			sint32 = 1,
 			sint64 = 2,
 
-			fixed32 =	1,
-			fixed64 =	2,
+			fixed32 = 1,
+			fixed64 = 2,
 
-			sfixed32 =	1,
+			sfixed32 = 1,
 
 			-- sfixed64 isn't yet supported by this protoc plugin.
 			-- sfixed64 = 2,
 
-			floats =	{1.25, 2.5},
+			floats = { 1.25, 2.5 },
 
-			mapWithSetup =	{[1] = 1, [2] = 4, [3] = 9},
-			mapWithEnums =	{[1] = "One", [2] = "Two"},
+			mapWithSetup = { [1] = 1, [2] = 4, [3] = 9 },
+			mapWithEnums = { [1] = "One", [2] = "Two" },
 
 			aliasedEnum = "AliasedEnum_One",
 
 			NotCamelCase = 11,
 
-			strings = {"a", "b", "c"},
-			bools = {true, false, true},
+			strings = { "a", "b", "c" },
+			bools = { true, false, true },
 
 			customJson = "foo",
 
-			-- At least in Lune, buffer.fromstring("hello") ~= buffer.fromstring("hello")...
-			-- bytes = buffer.fromstring("hello"),
+			bytes = buffer.fromstring("hello"),
 		})
 
 		local encoded = kitchenSink:encode()
@@ -117,9 +116,6 @@ describe("binary encoding", function()
 
 		-- TODO: support sfixed64, remove this, and uncomment the line above setting sfixed64.
 		decoded.sfixed64 = nil
-
-		-- TODO: fix equality check for bytes, remove this, and uncomment the line above setting bytes.
-		decoded.bytes = nil
 
 		assertEquals(decoded, kitchenSink)
 	end)

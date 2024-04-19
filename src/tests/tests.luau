@@ -41,6 +41,8 @@ local function deepEqual<T>(x: T, y: T): boolean
 		end
 
 		return true
+	elseif typeof(x) == "buffer" and typeof(y) == "buffer" then
+		return buffer.tostring(x) == buffer.tostring(y)
 	end
 
 	return x == y
