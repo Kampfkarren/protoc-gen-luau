@@ -132,13 +132,68 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_duration:jsonEncode(), json)
 		end)
 
-		it("with seconds and nanos", function()
+		it("with negative seconds", function()
+			local json = "-1s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, -1)
+			assertEquals(deserialized_duration.nanos, 0)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with nanos", function()
+			local json = "0.000000001s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, 1)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with seconds and many nanos", function()
+			local json = "1.5s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 1)
+			assertEquals(deserialized_duration.nanos, 500000000)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with seconds and one nano", function()
 			local json = "1.000000001s"
 
 			local deserialized_duration = duration.Duration.jsonDecode(json)
 
 			assertEquals(deserialized_duration.seconds, 1)
 			assertEquals(deserialized_duration.nanos, 1)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with many negative nanos", function()
+			local json = "-0.5s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, -500000000)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with one negative nano", function()
+			local json = "-0.000000001s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, -1)
 
 			assertEquals(deserialized_duration:jsonEncode(), json)
 		end)

@@ -28,11 +28,6 @@ Required.Proto3.JsonInput.DoubleFieldTooLarge
 Required.Proto3.JsonInput.DoubleFieldTooSmall
 Required.Proto3.JsonInput.DurationJsonInputTooLarge
 Required.Proto3.JsonInput.DurationJsonInputTooSmall
-Required.Proto3.JsonInput.DurationMinValue.ProtobufOutput
-Required.Proto3.JsonInput.DurationNegativeNanos.JsonOutput
-Required.Proto3.JsonInput.DurationNegativeNanos.ProtobufOutput
-Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput
-Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput
 Required.Proto3.JsonInput.EnumFieldNotQuoted
 Required.Proto3.JsonInput.FieldMask.JsonOutput
 Required.Proto3.JsonInput.FieldMask.ProtobufOutput
