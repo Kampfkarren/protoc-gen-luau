@@ -1544,9 +1544,9 @@ dependencies = [
 
 [[package]]
 name = "lune"
-version = "0.8.2"
+version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0a3db4f955481c67800e3e49ccba7140e05c0e4300c35b28c25fd2aecdc298b2"
+checksum = "a98794d9d507af3f382df7ef137605aac2a4f88eded2c731ce9d59ffafdb4d51"
 dependencies = [
  "anyhow",
  "async-compression",

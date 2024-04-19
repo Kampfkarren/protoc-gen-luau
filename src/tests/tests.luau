@@ -17,13 +17,15 @@ function tests.describe(category: string, callback: () -> ())
 end
 
 function tests.it(message: string, callback: () -> ())
-	local success, problem = pcall(callback)
+	local success, problemWithStackTrace = xpcall(callback, function(problem)
+		return debug.traceback(problem)
+	end)
 
 	print(`{indent()}{if success then "✅" else "❌"} {message}`)
 
 	if not success then
 		anyFailed = true
-		print(problem)
+		print(problemWithStackTrace)
 	end
 end
 
@@ -50,6 +52,12 @@ end
 function tests.assertEquals<T>(x: T, y: T)
 	if not deepEqual(x, y) then
 		error(`Assertion failed. Expected {x} to equal {y}`)
+	end
+end
+
+function tests.assertNotEquals<T>(x: T, y: T)
+	if deepEqual(x, y) then
+		error(`Assertion failed. Expected {x} to not equal {y}`)
 	end
 end
 

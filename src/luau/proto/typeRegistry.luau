@@ -1,4 +1,5 @@
 --!strict
+
 local TypeRegistry = {}
 TypeRegistry.__index = TypeRegistry
 
@@ -27,6 +28,13 @@ function TypeRegistry.findMessage(self: TypeRegistry, fullName: string): message
 	return self.types[fullName]
 end
 
+function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<unknown>)
+	self.types[inputType.descriptor.fullName] = inputType
+end
+
+local default = TypeRegistry.new({})
+
 return {
 	TypeRegistry = TypeRegistry,
+	default = default,
 }

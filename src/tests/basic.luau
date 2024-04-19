@@ -3,8 +3,10 @@ local tests = require("./tests")
 
 local kitchen_sink = require("./samples/kitchen_sink")
 local recursive = require("./samples/recursive")
+local type_registry = require("./samples/proto/typeRegistry")
 
 local assertEquals = tests.assertEquals
+local assertNotEquals = tests.assertNotEquals
 local describe = tests.describe
 local it = tests.it
 
@@ -49,6 +51,28 @@ describe("descriptors can return", function()
 	it("unqualified message name", function()
 		assertEquals(kitchen_sink.KitchenSink.new().descriptor.name, "KitchenSink")
 	end)
+end)
+
+describe("type registry", function()
+	describe("created ad hoc", function()
+		it("should find messages by name", function()
+			local registry = type_registry.TypeRegistry.new({
+				kitchen_sink.KitchenSink,
+			})
+
+			assertNotEquals(registry:findMessage("my.package.KitchenSink"), nil)
+
+			-- Timestamp is not in the registry.
+			assertEquals(registry:findMessage("google.protobuf.Timestamp"), nil)
+		end)
+	end)
+
+	describe("default registry", function()
+		it("should find messages by name", function()
+			assertNotEquals(type_registry.default:findMessage("my.package.KitchenSink"), nil)
+		end)
+	end)
+
 end)
 
 tests.finish()
