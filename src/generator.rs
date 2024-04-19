@@ -40,12 +40,31 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
 
     let mut proto_init = include_str!("./luau/proto/init.luau").to_owned();
     if roblox_imports {
-        proto_init = proto_init.replace("require(\"./base64\")", "require(script.base64)");
+        proto_init = proto_init
+            .replace("require(\"./base64\")", "require(script.base64)")
+            .replace("require(\"./message\")", "require(script.message)");
     }
+
+    let mut type_registry_init = include_str!("./luau/proto/typeRegistry.luau").to_owned();
+    if roblox_imports {
+        type_registry_init =
+            type_registry_init.replace("require(\"./message\")", "require(script.Parent.message)");
+    }
+    files.push(File {
+        name: Some("proto/typeRegistry.luau".to_owned()),
+        content: Some(type_registry_init),
+        ..Default::default()
+    });
 
     files.push(File {
         name: Some("proto/init.luau".to_owned()),
         content: Some(proto_init),
+        ..Default::default()
+    });
+
+    files.push(File {
+        name: Some("proto/message.luau".to_owned()),
+        content: Some(include_str!("./luau/proto/message.luau").to_owned()),
         ..Default::default()
     });
 
