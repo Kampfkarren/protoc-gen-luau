@@ -13,6 +13,7 @@ function tests.describe(category: string, callback: () -> ())
 	print(`{indent()}{category}`)
 	indentCount += 1
 	callback()
+	indentCount -= 1
 end
 
 function tests.it(message: string, callback: () -> ())
