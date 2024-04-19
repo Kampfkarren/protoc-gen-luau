@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
-	new: () -> FieldMask,
+	new: (fields: _FieldMaskFields?) -> FieldMask,
 	encode: (self: FieldMask) -> buffer,
 	decode: (input: buffer) -> FieldMask,
 	jsonEncode: (self: FieldMask) -> { [string]: any },
@@ -19,7 +19,7 @@ type _FieldMaskFields = {
 }
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-local FieldMask: proto.Message<FieldMask>
+local FieldMask: proto.Message<FieldMask, _FieldMaskFields>
 
 local _FieldMaskImpl = {}
 _FieldMaskImpl.__index = _FieldMaskImpl
@@ -35,7 +35,7 @@ function _FieldMaskImpl.encode(self: FieldMask): buffer
 	local cursor = 0
 
 	if #self.paths > 0 then
-		for _, value: string in self.paths do
+		for _, value in self.paths do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
@@ -81,7 +81,7 @@ function _FieldMaskImpl.jsonEncode(self: FieldMask): any
 
 	if #self.paths > 0 then
 		local newOutput: { string } = {}
-		for _, value: string in self.paths do
+		for _, value in self.paths do
 			table.insert(newOutput, value)
 		end
 		output.paths = newOutput

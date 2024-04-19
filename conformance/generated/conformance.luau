@@ -6,7 +6,7 @@ local proto = require("./proto")
 
 type _FailureSetImpl = {
 	__index: _FailureSetImpl,
-	new: () -> FailureSet,
+	new: (fields: _FailureSetFields?) -> FailureSet,
 	encode: (self: FailureSet) -> buffer,
 	decode: (input: buffer) -> FailureSet,
 	jsonEncode: (self: FailureSet) -> { [string]: any },
@@ -19,11 +19,11 @@ type _FailureSetFields = {
 }
 
 export type FailureSet = typeof(setmetatable({} :: _FailureSetFields, {} :: _FailureSetImpl))
-local FailureSet: proto.Message<FailureSet>
+local FailureSet: proto.Message<FailureSet, _FailureSetFields>
 
 type _ConformanceRequestImpl = {
 	__index: _ConformanceRequestImpl,
-	new: () -> ConformanceRequest,
+	new: (fields: _ConformanceRequestFields?) -> ConformanceRequest,
 	encode: (self: ConformanceRequest) -> buffer,
 	decode: (input: buffer) -> ConformanceRequest,
 	jsonEncode: (self: ConformanceRequest) -> { [string]: any },
@@ -46,11 +46,11 @@ type _ConformanceRequestFields = {
 }
 
 export type ConformanceRequest = typeof(setmetatable({} :: _ConformanceRequestFields, {} :: _ConformanceRequestImpl))
-local ConformanceRequest: proto.Message<ConformanceRequest>
+local ConformanceRequest: proto.Message<ConformanceRequest, _ConformanceRequestFields>
 
 type _ConformanceResponseImpl = {
 	__index: _ConformanceResponseImpl,
-	new: () -> ConformanceResponse,
+	new: (fields: _ConformanceResponseFields?) -> ConformanceResponse,
 	encode: (self: ConformanceResponse) -> buffer,
 	decode: (input: buffer) -> ConformanceResponse,
 	jsonEncode: (self: ConformanceResponse) -> { [string]: any },
@@ -73,11 +73,11 @@ type _ConformanceResponseFields = {
 }
 
 export type ConformanceResponse = typeof(setmetatable({} :: _ConformanceResponseFields, {} :: _ConformanceResponseImpl))
-local ConformanceResponse: proto.Message<ConformanceResponse>
+local ConformanceResponse: proto.Message<ConformanceResponse, _ConformanceResponseFields>
 
 type _JspbEncodingConfigImpl = {
 	__index: _JspbEncodingConfigImpl,
-	new: () -> JspbEncodingConfig,
+	new: (fields: _JspbEncodingConfigFields?) -> JspbEncodingConfig,
 	encode: (self: JspbEncodingConfig) -> buffer,
 	decode: (input: buffer) -> JspbEncodingConfig,
 	jsonEncode: (self: JspbEncodingConfig) -> { [string]: any },
@@ -90,7 +90,7 @@ type _JspbEncodingConfigFields = {
 }
 
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
-local JspbEncodingConfig: proto.Message<JspbEncodingConfig>
+local JspbEncodingConfig: proto.Message<JspbEncodingConfig, _JspbEncodingConfigFields>
 
 local WireFormat: proto.Enum<WireFormat>
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
@@ -119,7 +119,7 @@ function _FailureSetImpl.encode(self: FailureSet): buffer
 	local cursor = 0
 
 	if #self.failure > 0 then
-		for _, value: string in self.failure do
+		for _, value in self.failure do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
@@ -165,7 +165,7 @@ function _FailureSetImpl.jsonEncode(self: FailureSet): any
 
 	if #self.failure > 0 then
 		local newOutput: { string } = {}
-		for _, value: string in self.failure do
+		for _, value in self.failure do
 			table.insert(newOutput, value)
 		end
 		output.failure = newOutput
@@ -236,7 +236,7 @@ function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
 
 	if self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, WireFormat.toNumber(self.requested_output_format))
+		output, cursor = proto.writeVarInt(output, cursor, WireFormat.toNumber(self.requested_output_format :: any))
 	end
 
 	if self.message_type ~= "" then
@@ -246,7 +246,7 @@ function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
 
 	if self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, TestCategory.toNumber(self.test_category))
+		output, cursor = proto.writeVarInt(output, cursor, TestCategory.toNumber(self.test_category :: any))
 	end
 
 	if self.jspb_encoding_options ~= nil then
@@ -327,7 +327,7 @@ end
 
 function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 	local output: {
-		protobufPayload: buffer?,
+		protobufPayload: string?,
 		jsonPayload: string?,
 		jspbPayload: string?,
 		textPayload: string?,
@@ -354,7 +354,7 @@ function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 	if self.requested_output_format ~= 0 or self.requested_output_format ~= WireFormat.fromNumber(0) then
 		output.requestedOutputFormat = if typeof(self.requested_output_format) == "number"
 			then self.requested_output_format
-			else WireFormat.toNumber(self.requested_output_format)
+			else WireFormat.toNumber(self.requested_output_format :: any)
 	end
 
 	if self.message_type ~= "" then
@@ -364,7 +364,7 @@ function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 	if self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0) then
 		output.testCategory = if typeof(self.test_category) == "number"
 			then self.test_category
-			else TestCategory.toNumber(self.test_category)
+			else TestCategory.toNumber(self.test_category :: any)
 	end
 
 	if self.jspb_encoding_options ~= nil then
@@ -586,7 +586,7 @@ function _ConformanceResponseImpl.jsonEncode(self: ConformanceResponse): any
 		serializeError: string?,
 		timeoutError: string?,
 		runtimeError: string?,
-		protobufPayload: buffer?,
+		protobufPayload: string?,
 		jsonPayload: string?,
 		skipped: string?,
 		jspbPayload: string?,

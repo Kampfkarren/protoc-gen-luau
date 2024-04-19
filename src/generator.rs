@@ -511,7 +511,7 @@ impl<'a> FileGenerator<'a> {
         self.types.push(format!(
             r#"type _{name}Impl = {{
                 __index: _{name}Impl,
-                new: () -> {name},
+                new: (fields: _{name}Fields?) -> {name},
                 encode: (self: {name}) -> buffer,
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
@@ -654,8 +654,9 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        self.types
-            .push(format!("local {name}: proto.Message<{name}>"));
+        self.types.push(format!(
+            "local {name}: proto.Message<{name}, _{name}Fields>"
+        ));
 
         self.types.blank();
 

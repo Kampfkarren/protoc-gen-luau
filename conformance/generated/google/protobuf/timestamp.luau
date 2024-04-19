@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _TimestampImpl = {
 	__index: _TimestampImpl,
-	new: () -> Timestamp,
+	new: (fields: _TimestampFields?) -> Timestamp,
 	encode: (self: Timestamp) -> buffer,
 	decode: (input: buffer) -> Timestamp,
 	jsonEncode: (self: Timestamp) -> string,
@@ -20,7 +20,7 @@ type _TimestampFields = {
 }
 
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
-local Timestamp: proto.Message<Timestamp>
+local Timestamp: proto.Message<Timestamp, _TimestampFields>
 
 local _TimestampImpl = {}
 _TimestampImpl.__index = _TimestampImpl

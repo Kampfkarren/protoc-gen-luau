@@ -25,3 +25,13 @@ jobs:
     - uses: actions/checkout@v4
     - name: Run tests
       run: cargo test --release -- --nocapture
+  luau-analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup foreman
+      uses: Roblox/setup-foreman@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Analyze
+      run: luau-lsp analyze --settings ./.vscode/settings.json ./conformance/generated

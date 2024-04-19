@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DoubleValueImpl = {
 	__index: _DoubleValueImpl,
-	new: () -> DoubleValue,
+	new: (fields: _DoubleValueFields?) -> DoubleValue,
 	encode: (self: DoubleValue) -> buffer,
 	decode: (input: buffer) -> DoubleValue,
 	jsonEncode: (self: DoubleValue) -> number,
@@ -19,11 +19,11 @@ type _DoubleValueFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
-local DoubleValue: proto.Message<DoubleValue>
+local DoubleValue: proto.Message<DoubleValue, _DoubleValueFields>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
-	new: () -> FloatValue,
+	new: (fields: _FloatValueFields?) -> FloatValue,
 	encode: (self: FloatValue) -> buffer,
 	decode: (input: buffer) -> FloatValue,
 	jsonEncode: (self: FloatValue) -> number,
@@ -36,11 +36,11 @@ type _FloatValueFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
-local FloatValue: proto.Message<FloatValue>
+local FloatValue: proto.Message<FloatValue, _FloatValueFields>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
-	new: () -> Int64Value,
+	new: (fields: _Int64ValueFields?) -> Int64Value,
 	encode: (self: Int64Value) -> buffer,
 	decode: (input: buffer) -> Int64Value,
 	jsonEncode: (self: Int64Value) -> number,
@@ -53,11 +53,11 @@ type _Int64ValueFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
-local Int64Value: proto.Message<Int64Value>
+local Int64Value: proto.Message<Int64Value, _Int64ValueFields>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
-	new: () -> UInt64Value,
+	new: (fields: _UInt64ValueFields?) -> UInt64Value,
 	encode: (self: UInt64Value) -> buffer,
 	decode: (input: buffer) -> UInt64Value,
 	jsonEncode: (self: UInt64Value) -> number,
@@ -70,11 +70,11 @@ type _UInt64ValueFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
-local UInt64Value: proto.Message<UInt64Value>
+local UInt64Value: proto.Message<UInt64Value, _UInt64ValueFields>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
-	new: () -> Int32Value,
+	new: (fields: _Int32ValueFields?) -> Int32Value,
 	encode: (self: Int32Value) -> buffer,
 	decode: (input: buffer) -> Int32Value,
 	jsonEncode: (self: Int32Value) -> number,
@@ -87,11 +87,11 @@ type _Int32ValueFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
-local Int32Value: proto.Message<Int32Value>
+local Int32Value: proto.Message<Int32Value, _Int32ValueFields>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
-	new: () -> UInt32Value,
+	new: (fields: _UInt32ValueFields?) -> UInt32Value,
 	encode: (self: UInt32Value) -> buffer,
 	decode: (input: buffer) -> UInt32Value,
 	jsonEncode: (self: UInt32Value) -> number,
@@ -104,11 +104,11 @@ type _UInt32ValueFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
-local UInt32Value: proto.Message<UInt32Value>
+local UInt32Value: proto.Message<UInt32Value, _UInt32ValueFields>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
-	new: () -> BoolValue,
+	new: (fields: _BoolValueFields?) -> BoolValue,
 	encode: (self: BoolValue) -> buffer,
 	decode: (input: buffer) -> BoolValue,
 	jsonEncode: (self: BoolValue) -> boolean,
@@ -121,11 +121,11 @@ type _BoolValueFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
-local BoolValue: proto.Message<BoolValue>
+local BoolValue: proto.Message<BoolValue, _BoolValueFields>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
-	new: () -> StringValue,
+	new: (fields: _StringValueFields?) -> StringValue,
 	encode: (self: StringValue) -> buffer,
 	decode: (input: buffer) -> StringValue,
 	jsonEncode: (self: StringValue) -> string,
@@ -138,11 +138,11 @@ type _StringValueFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
-local StringValue: proto.Message<StringValue>
+local StringValue: proto.Message<StringValue, _StringValueFields>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
-	new: () -> BytesValue,
+	new: (fields: _BytesValueFields?) -> BytesValue,
 	encode: (self: BytesValue) -> buffer,
 	decode: (input: buffer) -> BytesValue,
 	jsonEncode: (self: BytesValue) -> buffer,
@@ -155,7 +155,7 @@ type _BytesValueFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-local BytesValue: proto.Message<BytesValue>
+local BytesValue: proto.Message<BytesValue, _BytesValueFields>
 
 local _DoubleValueImpl = {}
 _DoubleValueImpl.__index = _DoubleValueImpl

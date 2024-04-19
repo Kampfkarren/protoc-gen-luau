@@ -2,7 +2,7 @@ local base64 = require("./base64")
 local message = require("./message")
 
 export type Descriptor = message.Descriptor
-export type Message<T> = message.Message<T>
+export type Message<T, Fields> = message.Message<T, Fields>
 
 local proto = {}
 
@@ -11,6 +11,9 @@ export type Enum<T> = {
 
 	fromNumber: (number) -> T?,
 	toNumber: (T) -> number,
+
+	-- Takes any string or number. You should prefer toNumber if you have a constant.
+	toNumberArbitrary: (string | number) -> number,
 }
 
 -- TODO: Round-trip every number -2^31 through 2^31

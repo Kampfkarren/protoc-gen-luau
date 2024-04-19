@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DurationImpl = {
 	__index: _DurationImpl,
-	new: () -> Duration,
+	new: (fields: _DurationFields?) -> Duration,
 	encode: (self: Duration) -> buffer,
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
@@ -20,7 +20,7 @@ type _DurationFields = {
 }
 
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
-local Duration: proto.Message<Duration>
+local Duration: proto.Message<Duration, _DurationFields>
 
 local _DurationImpl = {}
 _DurationImpl.__index = _DurationImpl
