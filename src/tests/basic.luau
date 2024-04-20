@@ -1,8 +1,11 @@
 --!strict
 local tests = require("./tests")
 
+local deeper_include_me2 = require("./samples/deeper/include_me2")
+local include_me = require("./samples/include_me")
 local kitchen_sink = require("./samples/kitchen_sink")
 local recursive = require("./samples/recursive")
+local same_package = require("./samples/same_package")
 
 local assertEquals = tests.assertEquals
 local describe = tests.describe
@@ -74,16 +77,19 @@ describe("binary encoding", function()
 			enum2 = "One",
 			ints = { 1, 2, 3 },
 			map = { [true] = "true", [false] = "false" },
-			nestedMessage = { x = 7 },
-			includedMessage = { x = 8 },
-			superNestedMessage = { y = 9 },
+			nestedMessage = kitchen_sink.KitchenSink_NestedMessage.new({ x = 7 }),
+			includedMessage = include_me.IncludedMessage.new({ x = 8 }),
+			superNestedMessage = include_me.IncludedMessage_SuperNestedMessage.new({ y = 9 }),
 			nestedEnum = "Zero",
 			float = 1.25,
 			double = 2.5,
-			samePackageNestedMessage = { x = 42 },
-			deeperNestedMessage = { x = 1, y = "One" },
+			samePackageNestedMessage = same_package.SamePackageNestedMessage.new({ x = 42 }),
+			deeperNestedMessage = deeper_include_me2.DeeperNestedMessage.new({ x = 1, y = "One" }),
 
-			messages = { { x = 1 }, { x = 2 } },
+			messages = {
+				kitchen_sink.KitchenSink_NestedMessage.new({ x = 1 }),
+				kitchen_sink.KitchenSink_NestedMessage.new({ x = 2 }),
+			},
 
 			sint32 = 1,
 			sint64 = 2,
@@ -115,9 +121,6 @@ describe("binary encoding", function()
 
 		local encoded = kitchenSink:encode()
 		local decoded = kitchen_sink.KitchenSink.decode(encoded)
-
-		-- TODO: support sfixed64, remove this, and uncomment the line above setting sfixed64.
-		decoded.sfixed64 = nil
 
 		assertEquals(decoded, kitchenSink)
 	end)
