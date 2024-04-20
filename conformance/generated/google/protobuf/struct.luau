@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _StructImpl = {
 	__index: _StructImpl,
-	new: (fields: _StructFields?) -> Struct,
+	new: (fields: _StructPartialFields?) -> Struct,
 	encode: (self: Struct) -> buffer,
 	decode: (input: buffer) -> Struct,
 	jsonEncode: (self: Struct) -> { [string]: any },
@@ -18,12 +18,16 @@ type _StructFields = {
 	fields: { [string]: Value },
 }
 
+type _StructPartialFields = {
+	fields: { [string]: Value }?,
+}
+
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
-local Struct: proto.Message<Struct, _StructFields> & proto.CustomJson<Struct, { [string]: any }>
+local Struct: proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
 
 type _Struct_FieldsEntryImpl = {
 	__index: _Struct_FieldsEntryImpl,
-	new: (fields: _Struct_FieldsEntryFields?) -> Struct_FieldsEntry,
+	new: (fields: _Struct_FieldsEntryPartialFields?) -> Struct_FieldsEntry,
 	encode: (self: Struct_FieldsEntry) -> buffer,
 	decode: (input: buffer) -> Struct_FieldsEntry,
 	jsonEncode: (self: Struct_FieldsEntry) -> { [string]: any },
@@ -36,12 +40,17 @@ type _Struct_FieldsEntryFields = {
 	value: Value?,
 }
 
+type _Struct_FieldsEntryPartialFields = {
+	key: string?,
+	value: Value?,
+}
+
 export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
-local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryFields>
+local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
 
 type _ValueImpl = {
 	__index: _ValueImpl,
-	new: (fields: _ValueFields?) -> Value,
+	new: (fields: _ValuePartialFields?) -> Value,
 	encode: (self: Value) -> buffer,
 	decode: (input: buffer) -> Value,
 	jsonEncode: (self: Value) -> any,
@@ -60,12 +69,23 @@ type _ValueFields = {
 	)?,
 }
 
+type _ValuePartialFields = {
+	kind: (
+		{ type: "null_value", value: NullValue }
+		| { type: "number_value", value: number }
+		| { type: "string_value", value: string }
+		| { type: "bool_value", value: boolean }
+		| { type: "struct_value", value: Struct }
+		| { type: "list_value", value: ListValue }
+	)?,
+}
+
 export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
-local Value: proto.Message<Value, _ValueFields> & proto.CustomJson<Value, any>
+local Value: proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
 
 type _ListValueImpl = {
 	__index: _ListValueImpl,
-	new: (fields: _ListValueFields?) -> ListValue,
+	new: (fields: _ListValuePartialFields?) -> ListValue,
 	encode: (self: ListValue) -> buffer,
 	decode: (input: buffer) -> ListValue,
 	jsonEncode: (self: ListValue) -> { any },
@@ -77,8 +97,12 @@ type _ListValueFields = {
 	values: { Value },
 }
 
+type _ListValuePartialFields = {
+	values: { Value }?,
+}
+
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
-local ListValue: proto.Message<ListValue, _ListValueFields> & proto.CustomJson<ListValue, { any }>
+local ListValue: proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
 
 local NullValue: proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
@@ -86,9 +110,9 @@ export type NullValue = "NULL_VALUE" | number -- Unknown
 local _StructImpl = {}
 _StructImpl.__index = _StructImpl
 
-function _StructImpl.new(data: _StructFields?): Struct
+function _StructImpl.new(data: _StructPartialFields?): Struct
 	return setmetatable({
-		fields = if data == nil then {} else data.fields,
+		fields = if data == nil or data.fields == nil then {} else data.fields,
 	}, _StructImpl)
 end
 
@@ -181,10 +205,10 @@ Struct = _StructImpl
 local _Struct_FieldsEntryImpl = {}
 _Struct_FieldsEntryImpl.__index = _Struct_FieldsEntryImpl
 
-function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
+function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryPartialFields?): Struct_FieldsEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then nil else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then nil else data.value,
 	}, _Struct_FieldsEntryImpl)
 end
 
@@ -281,9 +305,9 @@ Struct_FieldsEntry = _Struct_FieldsEntryImpl
 local _ValueImpl = {}
 _ValueImpl.__index = _ValueImpl
 
-function _ValueImpl.new(data: _ValueFields?): Value
+function _ValueImpl.new(data: _ValuePartialFields?): Value
 	return setmetatable({
-		kind = if data == nil then nil else data.kind,
+		kind = if data == nil or data.kind == nil then nil else data.kind,
 	}, _ValueImpl)
 end
 
@@ -430,9 +454,9 @@ Value = _ValueImpl
 local _ListValueImpl = {}
 _ListValueImpl.__index = _ListValueImpl
 
-function _ListValueImpl.new(data: _ListValueFields?): ListValue
+function _ListValueImpl.new(data: _ListValuePartialFields?): ListValue
 	return setmetatable({
-		values = if data == nil then {} else data.values,
+		values = if data == nil or data.values == nil then {} else data.values,
 	}, _ListValueImpl)
 end
 

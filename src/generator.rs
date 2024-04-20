@@ -235,7 +235,7 @@ const MESSAGE: &str = r#"
 local _<name>Impl = {}
 _<name>Impl.__index = _<name>Impl
 
-function _<name>Impl.new(data: _<name>Fields?): <name>
+function _<name>Impl.new(data: _<name>PartialFields?): <name>
     return setmetatable({
 <default>
     }, _<name>Impl)
@@ -503,7 +503,7 @@ impl<'a> FileGenerator<'a> {
         self.types.push(format!(
             r#"type _{name}Impl = {{
                 __index: _{name}Impl,
-                new: (fields: _{name}Fields?) -> {name},
+                new: (fields: _{name}PartialFields?) -> {name},
                 encode: (self: {name}) -> buffer,
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
@@ -513,9 +513,14 @@ impl<'a> FileGenerator<'a> {
             "#
         ));
 
-        self.types.push(format!(r#"type _{name}Fields = {{"#));
+        let mut fields_builder = StringBuilder::new();
+        let mut partial_fields_builder = StringBuilder::new();
 
-        self.types.indent();
+        fields_builder.push(format!(r#"type _{name}Fields = {{"#));
+        fields_builder.indent();
+
+        partial_fields_builder.push(format!(r#"type _{name}PartialFields = {{"#));
+        partial_fields_builder.indent();
 
         let mut json_type = StringBuilder::new();
         json_type.push("{");
@@ -582,8 +587,11 @@ impl<'a> FileGenerator<'a> {
         for field in fields {
             let field_name = field.name();
 
-            self.types
-                .push(format!("{field_name}: {},", field.type_definition()));
+            fields_builder.push(format!("{field_name}: {},", field.type_definition()));
+            partial_fields_builder.push(format!(
+                "{field_name}: {}?,",
+                field.type_definition_no_presence()
+            ));
 
             json_type.append(&mut field.json_type_and_names());
 
@@ -598,7 +606,7 @@ impl<'a> FileGenerator<'a> {
             }
 
             default_lines.push(format!(
-                r#"{field_name} = if data == nil then {} else data.{field_name},"#,
+                r#"{field_name} = if data == nil or data.{field_name} == nil then {} else data.{field_name},"#,
                 field.default()
             ));
 
@@ -638,15 +646,23 @@ impl<'a> FileGenerator<'a> {
             }
         }
 
-        self.types.dedent();
-        self.types.push("}");
+        fields_builder.dedent();
+        fields_builder.push("}");
+        fields_builder.blank();
+
+        partial_fields_builder.dedent();
+        partial_fields_builder.push("}");
+        partial_fields_builder.blank();
+
+        self.types.append(&mut fields_builder);
         self.types.blank();
+        self.types.append(&mut partial_fields_builder);
 
         self.types.push(format!(
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}Fields>");
+        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}PartialFields>");
         if let Some(wkt_json) = wkt_json.as_ref() {
             declaration.push_str(&format!(
                 " & proto.CustomJson<{name}, {}>",

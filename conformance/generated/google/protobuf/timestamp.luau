@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _TimestampImpl = {
 	__index: _TimestampImpl,
-	new: (fields: _TimestampFields?) -> Timestamp,
+	new: (fields: _TimestampPartialFields?) -> Timestamp,
 	encode: (self: Timestamp) -> buffer,
 	decode: (input: buffer) -> Timestamp,
 	jsonEncode: (self: Timestamp) -> string,
@@ -19,16 +19,21 @@ type _TimestampFields = {
 	nanos: number,
 }
 
+type _TimestampPartialFields = {
+	seconds: number?,
+	nanos: number?,
+}
+
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
-local Timestamp: proto.Message<Timestamp, _TimestampFields> & proto.CustomJson<Timestamp, string>
+local Timestamp: proto.Message<Timestamp, _TimestampPartialFields> & proto.CustomJson<Timestamp, string>
 
 local _TimestampImpl = {}
 _TimestampImpl.__index = _TimestampImpl
 
-function _TimestampImpl.new(data: _TimestampFields?): Timestamp
+function _TimestampImpl.new(data: _TimestampPartialFields?): Timestamp
 	return setmetatable({
-		seconds = if data == nil then 0 else data.seconds,
-		nanos = if data == nil then 0 else data.nanos,
+		seconds = if data == nil or data.seconds == nil then 0 else data.seconds,
+		nanos = if data == nil or data.nanos == nil then 0 else data.nanos,
 	}, _TimestampImpl)
 end
 
