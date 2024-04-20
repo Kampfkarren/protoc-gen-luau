@@ -59,6 +59,12 @@ function tests.assertEquals<T>(x: T, y: T)
 	end
 end
 
+function tests.assertNotEquals<T>(x: T, y: T)
+	if deepEqual(x, y) then
+		error(`Assertion failed. Expected {x} to not equal {y}`)
+	end
+end
+
 function tests.finish()
 	if anyFailed then
 		error("Tests failed")

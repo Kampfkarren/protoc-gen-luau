@@ -19,6 +19,6 @@ opt-level = 3
 
 [dev-dependencies]
 # CLI not actually required, bug from https://github.com/lune-org/lune/issues/174
-lune = { version = "0.8.2", default_features = false, features = ["cli"] }
+lune = { version = "0.8.3", default_features = false, features = ["cli"] }
 protox = "0.6.0"
 tokio = { version = "1.37.0", features = ["test-util"] }

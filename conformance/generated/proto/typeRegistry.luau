@@ -6,12 +6,12 @@ local message = require("./message")
 
 export type TypeRegistry = typeof(setmetatable(
 	{} :: {
-		types: { [string]: message.Message<unknown, unknown> },
+		_types: { [string]: message.Message<unknown, unknown> },
 	},
 	TypeRegistry
 ))
 
-function TypeRegistry.new(inputTypes: { message.Message<unknown, unknown> })
+function TypeRegistry.new(inputTypes: { message.Message<any, any> })
 	local types = {}
 
 	for _, inputType in inputTypes do
@@ -19,14 +19,21 @@ function TypeRegistry.new(inputTypes: { message.Message<unknown, unknown> })
 	end
 
 	return setmetatable({
-		types = types,
+		_types = types,
 	}, TypeRegistry)
 end
 
 function TypeRegistry.findMessage(self: TypeRegistry, fullName: string): message.Message<unknown, unknown>?
-	return self.types[fullName]
+	return self._types[fullName]
 end
+
+function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<any, any>)
+	self._types[inputType.descriptor.fullName] = inputType
+end
+
+local default = TypeRegistry.new({})
 
 return {
 	TypeRegistry = TypeRegistry,
+	default = default,
 }
