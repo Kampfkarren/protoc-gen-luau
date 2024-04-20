@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DurationImpl = {
 	__index: _DurationImpl,
-	new: () -> Duration,
+	new: (fields: _DurationPartialFields?) -> Duration,
 	encode: (self: Duration) -> buffer,
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
@@ -19,16 +19,21 @@ type _DurationFields = {
 	nanos: number,
 }
 
+type _DurationPartialFields = {
+	seconds: number?,
+	nanos: number?,
+}
+
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
-local Duration: proto.Message<Duration>
+local Duration: proto.Message<Duration, _DurationPartialFields> & proto.CustomJson<Duration, string>
 
 local _DurationImpl = {}
 _DurationImpl.__index = _DurationImpl
 
-function _DurationImpl.new(data: _DurationFields?): Duration
+function _DurationImpl.new(data: _DurationPartialFields?): Duration
 	return setmetatable({
-		seconds = if data == nil then 0 else data.seconds,
-		nanos = if data == nil then 0 else data.nanos,
+		seconds = if data == nil or data.seconds == nil then 0 else data.seconds,
+		nanos = if data == nil or data.nanos == nil then 0 else data.nanos,
 	}, _DurationImpl)
 end
 
@@ -36,12 +41,12 @@ function _DurationImpl.encode(self: Duration): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.seconds ~= 0 then
+	if self.seconds ~= nil and self.seconds ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.seconds)
 	end
 
-	if self.nanos ~= 0 then
+	if self.nanos ~= nil and self.nanos ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.nanos)
 	end
@@ -83,33 +88,40 @@ function _DurationImpl.decode(input: buffer): Duration
 	return self
 end
 
-_DurationImpl.descriptor = {
-	name = "Duration",
-	fullName = "google.protobuf.Duration",
-}
-
-Duration = _DurationImpl
-
+-- Converts a number of nanos to a string representation.
+-- Sign and trailing zeroes are dropped.
+-- 500000000 -> ".5s"
+-- 500000001 -> ".500000001s"
+-- 0 -> ".0s"
+-- 1 -> ".000000001s"
+-- -1 -> "-.000000001s"
 local function serializeFractionalNanos(nanos: number): string
-	if nanos % 1e6 == 0 then
-		return string.format(".%03ds", nanos)
-	elseif nanos % 1e3 == 0 then
-		return string.format(".%06ds", nanos)
-	else
-		return string.format(".%09ds", nanos)
+	nanos = nanos * math.sign(nanos)
+
+	local nanosText = tostring(nanos)
+	local nanosTextLength = #nanosText
+
+	local leadingZeroes = 9 - nanosTextLength
+	local leadingZeroesText = string.rep("0", leadingZeroes)
+
+	-- remove trailing zeroes
+	while nanosText:sub(-1) == "0" do
+		nanosText = nanosText:sub(1, -2)
 	end
+
+	return `.{leadingZeroesText}{nanosText}s`
 end
 
 local function deserializeFractionalNanos(nanosText: string): number
 	local nanos = assert(tonumber(nanosText), "Invalid nanos string received, couldn't turn into a number")
 	for digit = #nanosText + 1, 9 do
-		nanos += 10 ^ (digit - 1)
+		nanos *= 10
 	end
 
 	return nanos
 end
 
-function Duration.jsonEncode(duration: Duration): string
+function _DurationImpl.jsonEncode(duration: Duration): string
 	assert(
 		duration.seconds == nil or (duration.seconds >= -315576000000 and duration.seconds <= 315576000000),
 		"Seconds out of range"
@@ -128,7 +140,8 @@ function Duration.jsonEncode(duration: Duration): string
 	return string.format("%s%d%s", nanoSign, duration.seconds or 0, serializeFractionalNanos(duration.nanos))
 end
 
-function Duration.jsonDecode(durationString: string): Duration
+function _DurationImpl.jsonDecode(anyValue: any): Duration
+	local durationString: string = anyValue
 	local simpleSecondsText = string.match(durationString, "^([%-0-9]+)s$")
 	if simpleSecondsText ~= nil then
 		local simpleSeconds = assert(
@@ -143,15 +156,24 @@ function Duration.jsonDecode(durationString: string): Duration
 	end
 
 	local secondsText, nanosText = string.match(durationString, "^([%-0-9]+)%.([0-9]+)s$")
+	assert(secondsText ~= nil, "Invalid duration string received--seconds provided are invalid")
 	assert(nanosText ~= nil, "Invalid duration string received--nanos provided are invalid")
 
 	local seconds = assert(tonumber(secondsText), "Invalid duration string received--seconds provided are invalid")
+	local nanos = deserializeFractionalNanos(nanosText) * (secondsText:sub(1, 1) == "-" and -1 or 1)
 
 	return Duration.new({
 		seconds = seconds,
-		nanos = deserializeFractionalNanos(nanosText),
+		nanos = nanos,
 	})
 end
+
+_DurationImpl.descriptor = {
+	name = "Duration",
+	fullName = "google.protobuf.Duration",
+}
+
+Duration = _DurationImpl
 
 return {
 	Duration = Duration,

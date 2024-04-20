@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+enum NullValue {
+	NULL_VALUE = 0;
+}
+
+message Value {
+	oneof kind {
+		NullValue null_value = 1;
+	}
+}
+
+message ListValue {
+	repeated Value values = 1;
+}
