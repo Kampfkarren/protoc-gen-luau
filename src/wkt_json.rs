@@ -27,6 +27,11 @@ impl WktJson {
                 code: include_str!("./luau/wkt_mixins/Duration.luau").into(),
             }),
 
+            "FieldMask" => Some(WktJson {
+                luau_type: "string",
+                code: include_str!("./luau/wkt_mixins/FieldMask.luau").into(),
+            }),
+
             "ListValue" => Some(WktJson {
                 luau_type: "{ any }",
                 code: include_str!("./luau/wkt_mixins/ListValue.luau").into(),
