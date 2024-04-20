@@ -12,7 +12,12 @@ async fn create_samples_once() {
 }
 
 fn generate_samples() {
-    let files = ["kitchen_sink.proto", "recursive.proto", "wkt.proto"];
+    let files = [
+        "enum_regression.proto",
+        "kitchen_sink.proto",
+        "recursive.proto",
+        "wkt.proto",
+    ];
 
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()

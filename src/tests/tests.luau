@@ -17,13 +17,17 @@ function tests.describe(category: string, callback: () -> ())
 end
 
 function tests.it(message: string, callback: () -> ())
-	local success, problem = pcall(callback)
+	local success, problemWithStackTrace = xpcall(function()
+		callback()
+	end, function(problem)
+		return debug.traceback(problem)
+	end)
 
 	print(`{indent()}{if success then "✅" else "❌"} {message}`)
 
 	if not success then
 		anyFailed = true
-		print(problem)
+		print(problemWithStackTrace)
 	end
 end
 

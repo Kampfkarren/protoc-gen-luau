@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DoubleValueImpl = {
 	__index: _DoubleValueImpl,
-	new: () -> DoubleValue,
+	new: (fields: _DoubleValueFields?) -> DoubleValue,
 	encode: (self: DoubleValue) -> buffer,
 	decode: (input: buffer) -> DoubleValue,
 	jsonEncode: (self: DoubleValue) -> number,
@@ -19,11 +19,11 @@ type _DoubleValueFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
-local DoubleValue: proto.Message<DoubleValue>
+local DoubleValue: proto.Message<DoubleValue, _DoubleValueFields> & proto.CustomJson<DoubleValue, number>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
-	new: () -> FloatValue,
+	new: (fields: _FloatValueFields?) -> FloatValue,
 	encode: (self: FloatValue) -> buffer,
 	decode: (input: buffer) -> FloatValue,
 	jsonEncode: (self: FloatValue) -> number,
@@ -36,11 +36,11 @@ type _FloatValueFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
-local FloatValue: proto.Message<FloatValue>
+local FloatValue: proto.Message<FloatValue, _FloatValueFields> & proto.CustomJson<FloatValue, number>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
-	new: () -> Int64Value,
+	new: (fields: _Int64ValueFields?) -> Int64Value,
 	encode: (self: Int64Value) -> buffer,
 	decode: (input: buffer) -> Int64Value,
 	jsonEncode: (self: Int64Value) -> number,
@@ -53,11 +53,11 @@ type _Int64ValueFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
-local Int64Value: proto.Message<Int64Value>
+local Int64Value: proto.Message<Int64Value, _Int64ValueFields> & proto.CustomJson<Int64Value, number>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
-	new: () -> UInt64Value,
+	new: (fields: _UInt64ValueFields?) -> UInt64Value,
 	encode: (self: UInt64Value) -> buffer,
 	decode: (input: buffer) -> UInt64Value,
 	jsonEncode: (self: UInt64Value) -> number,
@@ -70,11 +70,11 @@ type _UInt64ValueFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
-local UInt64Value: proto.Message<UInt64Value>
+local UInt64Value: proto.Message<UInt64Value, _UInt64ValueFields> & proto.CustomJson<UInt64Value, number>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
-	new: () -> Int32Value,
+	new: (fields: _Int32ValueFields?) -> Int32Value,
 	encode: (self: Int32Value) -> buffer,
 	decode: (input: buffer) -> Int32Value,
 	jsonEncode: (self: Int32Value) -> number,
@@ -87,11 +87,11 @@ type _Int32ValueFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
-local Int32Value: proto.Message<Int32Value>
+local Int32Value: proto.Message<Int32Value, _Int32ValueFields> & proto.CustomJson<Int32Value, number>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
-	new: () -> UInt32Value,
+	new: (fields: _UInt32ValueFields?) -> UInt32Value,
 	encode: (self: UInt32Value) -> buffer,
 	decode: (input: buffer) -> UInt32Value,
 	jsonEncode: (self: UInt32Value) -> number,
@@ -104,11 +104,11 @@ type _UInt32ValueFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
-local UInt32Value: proto.Message<UInt32Value>
+local UInt32Value: proto.Message<UInt32Value, _UInt32ValueFields> & proto.CustomJson<UInt32Value, number>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
-	new: () -> BoolValue,
+	new: (fields: _BoolValueFields?) -> BoolValue,
 	encode: (self: BoolValue) -> buffer,
 	decode: (input: buffer) -> BoolValue,
 	jsonEncode: (self: BoolValue) -> boolean,
@@ -121,11 +121,11 @@ type _BoolValueFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
-local BoolValue: proto.Message<BoolValue>
+local BoolValue: proto.Message<BoolValue, _BoolValueFields> & proto.CustomJson<BoolValue, boolean>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
-	new: () -> StringValue,
+	new: (fields: _StringValueFields?) -> StringValue,
 	encode: (self: StringValue) -> buffer,
 	decode: (input: buffer) -> StringValue,
 	jsonEncode: (self: StringValue) -> string,
@@ -138,15 +138,15 @@ type _StringValueFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
-local StringValue: proto.Message<StringValue>
+local StringValue: proto.Message<StringValue, _StringValueFields> & proto.CustomJson<StringValue, string>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
-	new: () -> BytesValue,
+	new: (fields: _BytesValueFields?) -> BytesValue,
 	encode: (self: BytesValue) -> buffer,
 	decode: (input: buffer) -> BytesValue,
-	jsonEncode: (self: BytesValue) -> buffer,
-	jsonDecode: (input: buffer) -> BytesValue,
+	jsonEncode: (self: BytesValue) -> string,
+	jsonDecode: (input: string) -> BytesValue,
 	descriptor: proto.Descriptor,
 }
 
@@ -155,7 +155,7 @@ type _BytesValueFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-local BytesValue: proto.Message<BytesValue>
+local BytesValue: proto.Message<BytesValue, _BytesValueFields> & proto.CustomJson<BytesValue, string>
 
 local _DoubleValueImpl = {}
 _DoubleValueImpl.__index = _DoubleValueImpl
@@ -206,6 +206,17 @@ function _DoubleValueImpl.decode(input: buffer): DoubleValue
 	end
 
 	return self
+end
+
+function _DoubleValueImpl.jsonEncode(self: DoubleValue): number
+	return self.value
+end
+
+function _DoubleValueImpl.jsonDecode(anyValue: any): DoubleValue
+	local value: number = anyValue
+	return DoubleValue.new({
+		value = value,
+	})
 end
 
 _DoubleValueImpl.descriptor = {
@@ -266,6 +277,17 @@ function _FloatValueImpl.decode(input: buffer): FloatValue
 	return self
 end
 
+function _FloatValueImpl.jsonEncode(self: FloatValue): number
+	return self.value
+end
+
+function _FloatValueImpl.jsonDecode(anyValue: any): FloatValue
+	local value: number = anyValue
+	return FloatValue.new({
+		value = value,
+	})
+end
+
 _FloatValueImpl.descriptor = {
 	name = "FloatValue",
 	fullName = "google.protobuf.FloatValue",
@@ -322,6 +344,17 @@ function _Int64ValueImpl.decode(input: buffer): Int64Value
 	end
 
 	return self
+end
+
+function _Int64ValueImpl.jsonEncode(self: Int64Value): number
+	return self.value
+end
+
+function _Int64ValueImpl.jsonDecode(anyValue: any): Int64Value
+	local value: number = anyValue
+	return Int64Value.new({
+		value = value,
+	})
 end
 
 _Int64ValueImpl.descriptor = {
@@ -382,6 +415,17 @@ function _UInt64ValueImpl.decode(input: buffer): UInt64Value
 	return self
 end
 
+function _UInt64ValueImpl.jsonEncode(self: UInt64Value): number
+	return self.value
+end
+
+function _UInt64ValueImpl.jsonDecode(anyValue: any): UInt64Value
+	local value: number = anyValue
+	return UInt64Value.new({
+		value = value,
+	})
+end
+
 _UInt64ValueImpl.descriptor = {
 	name = "UInt64Value",
 	fullName = "google.protobuf.UInt64Value",
@@ -438,6 +482,17 @@ function _Int32ValueImpl.decode(input: buffer): Int32Value
 	end
 
 	return self
+end
+
+function _Int32ValueImpl.jsonEncode(self: Int32Value): number
+	return self.value
+end
+
+function _Int32ValueImpl.jsonDecode(anyValue: any): Int32Value
+	local value: number = anyValue
+	return Int32Value.new({
+		value = value,
+	})
 end
 
 _Int32ValueImpl.descriptor = {
@@ -498,6 +553,17 @@ function _UInt32ValueImpl.decode(input: buffer): UInt32Value
 	return self
 end
 
+function _UInt32ValueImpl.jsonEncode(self: UInt32Value): number
+	return self.value
+end
+
+function _UInt32ValueImpl.jsonDecode(anyValue: any): UInt32Value
+	local value: number = anyValue
+	return UInt32Value.new({
+		value = value,
+	})
+end
+
 _UInt32ValueImpl.descriptor = {
 	name = "UInt32Value",
 	fullName = "google.protobuf.UInt32Value",
@@ -554,6 +620,17 @@ function _BoolValueImpl.decode(input: buffer): BoolValue
 	end
 
 	return self
+end
+
+function _BoolValueImpl.jsonEncode(self: BoolValue): boolean
+	return self.value
+end
+
+function _BoolValueImpl.jsonDecode(anyValue: any): BoolValue
+	local value: boolean = anyValue
+	return BoolValue.new({
+		value = value,
+	})
 end
 
 _BoolValueImpl.descriptor = {
@@ -614,6 +691,17 @@ function _StringValueImpl.decode(input: buffer): StringValue
 	return self
 end
 
+function _StringValueImpl.jsonEncode(self: StringValue): string
+	return self.value
+end
+
+function _StringValueImpl.jsonDecode(anyValue: any): StringValue
+	local value: string = anyValue
+	return StringValue.new({
+		value = value,
+	})
+end
+
 _StringValueImpl.descriptor = {
 	name = "StringValue",
 	fullName = "google.protobuf.StringValue",
@@ -672,6 +760,17 @@ function _BytesValueImpl.decode(input: buffer): BytesValue
 	return self
 end
 
+function _BytesValueImpl.jsonEncode(self: BytesValue): string
+	return buffer.tostring(self.value)
+end
+
+function _BytesValueImpl.jsonDecode(anyValue: any): BytesValue
+	local value: string = anyValue
+	return BytesValue.new({
+		value = buffer.fromstring(value),
+	})
+end
+
 _BytesValueImpl.descriptor = {
 	name = "BytesValue",
 	fullName = "google.protobuf.BytesValue",
@@ -679,95 +778,6 @@ _BytesValueImpl.descriptor = {
 
 BytesValue = _BytesValueImpl
 
-function BoolValue.jsonEncode(value: BoolValue): boolean
-	return value.value
-end
-
-function BoolValue.jsonDecode(value: boolean): BoolValue
-	return BoolValue.new({
-		value = value,
-	})
-end
-
-function BytesValue.jsonEncode(value: BytesValue): buffer
-	return value.value
-end
-
-function BytesValue.jsonDecode(value: buffer): BytesValue
-	return BytesValue.new({
-		value = value,
-	})
-end
-
-function DoubleValue.jsonEncode(value: DoubleValue): number
-	return value.value
-end
-
-function DoubleValue.jsonDecode(value: number): DoubleValue
-	return DoubleValue.new({
-		value = value,
-	})
-end
-
-function FloatValue.jsonEncode(value: FloatValue): number
-	return value.value
-end
-
-function FloatValue.jsonDecode(value: number): FloatValue
-	return FloatValue.new({
-		value = value,
-	})
-end
-
-function Int32Value.jsonEncode(value: Int32Value): number
-	return value.value
-end
-
-function Int32Value.jsonDecode(value: number): Int32Value
-	return Int32Value.new({
-		value = value,
-	})
-end
-
-function Int64Value.jsonEncode(value: Int64Value): number
-	return value.value
-end
-
-function Int64Value.jsonDecode(value: number): Int64Value
-	return Int64Value.new({
-		value = value,
-	})
-end
-
-function UInt32Value.jsonEncode(value: UInt32Value): number
-	return value.value
-end
-
-function UInt32Value.jsonDecode(value: number): UInt32Value
-	return UInt32Value.new({
-		value = value,
-	})
-end
-
-function UInt64Value.jsonEncode(value: UInt64Value): number
-	return value.value
-end
-
-function UInt64Value.jsonDecode(value: number): UInt64Value
-	return UInt64Value.new({
-		value = value,
-	})
-end
-
-function StringValue.jsonEncode(value: StringValue): string
-	return value.value
-end
-
-function StringValue.jsonDecode(value: string): StringValue
-	return StringValue.new({
-		value = value,
-	})
-end
 return {
 	DoubleValue = DoubleValue,
 	FloatValue = FloatValue,
