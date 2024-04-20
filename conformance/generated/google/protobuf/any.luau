@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _AnyImpl = {
 	__index: _AnyImpl,
-	new: () -> Any,
+	new: (fields: _AnyFields?) -> Any,
 	encode: (self: Any) -> buffer,
 	decode: (input: buffer) -> Any,
 	jsonEncode: (self: Any) -> { [string]: any },
@@ -20,7 +20,7 @@ type _AnyFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-local Any: proto.Message<Any>
+local Any: proto.Message<Any, _AnyFields>
 
 local _AnyImpl = {}
 _AnyImpl.__index = _AnyImpl
@@ -86,7 +86,7 @@ end
 function _AnyImpl.jsonEncode(self: Any): any
 	local output: {
 		typeUrl: string?,
-		value: buffer?,
+		value: string?,
 	} = {}
 
 	if self.type_url ~= "" then
