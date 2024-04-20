@@ -8,7 +8,9 @@ function _ListValueImpl.jsonEncode(list: ListValue): { any }
 	return serialized
 end
 
-function _ListValueImpl.jsonDecode(input: { any }): ListValue
+function _ListValueImpl.jsonDecode(anyValue: any): ListValue
+	local input: { any } = anyValue
+
 	local values = {}
 
 	for _, value in input do

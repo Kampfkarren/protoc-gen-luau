@@ -3,6 +3,7 @@ local message = require("./message")
 
 export type Descriptor = message.Descriptor
 export type Message<T, Fields> = message.Message<T, Fields>
+export type CustomJson<T, Json> = message.CustomJson<T, Json>
 
 local proto = {}
 

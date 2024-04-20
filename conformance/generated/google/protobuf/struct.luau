@@ -19,7 +19,7 @@ type _StructFields = {
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
-local Struct: proto.Message<Struct, _StructFields>
+local Struct: proto.Message<Struct, _StructFields> & proto.CustomJson<Struct, { [string]: any }>
 
 type _Struct_FieldsEntryImpl = {
 	__index: _Struct_FieldsEntryImpl,
@@ -61,7 +61,7 @@ type _ValueFields = {
 }
 
 export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
-local Value: proto.Message<Value, _ValueFields>
+local Value: proto.Message<Value, _ValueFields> & proto.CustomJson<Value, any>
 
 type _ListValueImpl = {
 	__index: _ListValueImpl,
@@ -78,7 +78,7 @@ type _ListValueFields = {
 }
 
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
-local ListValue: proto.Message<ListValue, _ListValueFields>
+local ListValue: proto.Message<ListValue, _ListValueFields> & proto.CustomJson<ListValue, { any }>
 
 local NullValue: proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
@@ -332,7 +332,10 @@ function _ValueImpl.decode(input: buffer): Value
 			if field == 1 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.kind = { type = "null_value", value = NullValue.fromNumber(value) or value }
+				self.kind = {
+					type = "null_value",
+					value = (NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 4 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -488,7 +491,9 @@ function _ListValueImpl.jsonEncode(list: ListValue): { any }
 	return serialized
 end
 
-function _ListValueImpl.jsonDecode(input: { any }): ListValue
+function _ListValueImpl.jsonDecode(anyValue: any): ListValue
+	local input: { any } = anyValue
+
 	local values = {}
 
 	for _, value in input do

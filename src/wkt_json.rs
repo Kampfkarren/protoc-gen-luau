@@ -17,6 +17,11 @@ impl WktJson {
         }
 
         match message.name() {
+            "BytesValue" => Some(WktJson {
+                luau_type: "string",
+                code: include_str!("./luau/wkt_mixins/BytesValue.luau").into(),
+            }),
+
             "Duration" => Some(WktJson {
                 luau_type: "string",
                 code: include_str!("./luau/wkt_mixins/Duration.luau").into(),
@@ -43,7 +48,6 @@ impl WktJson {
             }),
 
             "BoolValue" => Some(trivial_value("boolean", "BoolValue")),
-            "BytesValue" => Some(trivial_value("string", "BytesValue")),
             "DoubleValue" => Some(trivial_value("number", "DoubleValue")),
             "FloatValue" => Some(trivial_value("number", "FloatValue")),
             "Int32Value" => Some(trivial_value("number", "Int32Value")),
@@ -61,7 +65,8 @@ const TRIVIAL_VALUE: &str = r#"function _<message_name>Impl.jsonEncode(self: <me
 	return self.value
 end
 
-function _<message_name>Impl.jsonDecode(value: <type>): <message_name>
+function _<message_name>Impl.jsonDecode(anyValue: any): <message_name>
+	local value: <type> = anyValue
 	return <message_name>.new({
 		value = value
 	})

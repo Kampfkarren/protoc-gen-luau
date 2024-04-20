@@ -646,9 +646,15 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        self.types.push(format!(
-            "local {name}: proto.Message<{name}, _{name}Fields>"
-        ));
+        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}Fields>");
+        if let Some(wkt_json) = wkt_json.as_ref() {
+            declaration.push_str(&format!(
+                " & proto.CustomJson<{name}, {}>",
+                wkt_json.luau_type
+            ));
+        }
+
+        self.types.push(declaration);
 
         self.types.blank();
 

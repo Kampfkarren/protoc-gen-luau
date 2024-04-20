@@ -277,11 +277,11 @@ function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
 			if field == 3 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.requested_output_format = WireFormat.fromNumber(value) or value
+				self.requested_output_format = (WireFormat.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 5 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.test_category = TestCategory.fromNumber(value) or value
+				self.test_category = (TestCategory.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 9 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)

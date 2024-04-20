@@ -36,6 +36,8 @@ describe("json deserializing", function()
 		}
 
 		local decoded = recursive.A.jsonDecode(json)
+		assert(decoded.b ~= nil, "No decoded.b")
+		assert(decoded.b.a ~= nil, "No decoded.b.a")
 
 		assertEquals(decoded.b.a.number, 100)
 	end)

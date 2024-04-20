@@ -20,7 +20,7 @@ type _TimestampFields = {
 }
 
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
-local Timestamp: proto.Message<Timestamp, _TimestampFields>
+local Timestamp: proto.Message<Timestamp, _TimestampFields> & proto.CustomJson<Timestamp, string>
 
 local _TimestampImpl = {}
 _TimestampImpl.__index = _TimestampImpl
@@ -116,7 +116,9 @@ function _TimestampImpl.jsonEncode(timestamp: Timestamp): string
 	)
 end
 
-function _TimestampImpl.jsonDecode(text: string): Timestamp
+function _TimestampImpl.jsonDecode(anyValue: any): Timestamp
+	local text: string = anyValue
+
 	local year, month, day, hour, min, sec, nanosWithDot =
 		string.match(text, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 

@@ -31,7 +31,9 @@ function _TimestampImpl.jsonEncode(timestamp: Timestamp): string
 	)
 end
 
-function _TimestampImpl.jsonDecode(text: string): Timestamp
+function _TimestampImpl.jsonDecode(anyValue: any): Timestamp
+	local text: string = anyValue
+
 	local year, month, day, hour, min, sec, nanosWithDot =
 		string.match(text, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 

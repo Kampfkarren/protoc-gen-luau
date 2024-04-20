@@ -911,7 +911,7 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         Type::String => "buffer.tostring(value)".into(),
 
         Type::Enum => format!(
-            "{}.fromNumber(value) or value",
+            "({}.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]",
             type_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),

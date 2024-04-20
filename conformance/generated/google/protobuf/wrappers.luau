@@ -19,7 +19,7 @@ type _DoubleValueFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
-local DoubleValue: proto.Message<DoubleValue, _DoubleValueFields>
+local DoubleValue: proto.Message<DoubleValue, _DoubleValueFields> & proto.CustomJson<DoubleValue, number>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
@@ -36,7 +36,7 @@ type _FloatValueFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
-local FloatValue: proto.Message<FloatValue, _FloatValueFields>
+local FloatValue: proto.Message<FloatValue, _FloatValueFields> & proto.CustomJson<FloatValue, number>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
@@ -53,7 +53,7 @@ type _Int64ValueFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
-local Int64Value: proto.Message<Int64Value, _Int64ValueFields>
+local Int64Value: proto.Message<Int64Value, _Int64ValueFields> & proto.CustomJson<Int64Value, number>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
@@ -70,7 +70,7 @@ type _UInt64ValueFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
-local UInt64Value: proto.Message<UInt64Value, _UInt64ValueFields>
+local UInt64Value: proto.Message<UInt64Value, _UInt64ValueFields> & proto.CustomJson<UInt64Value, number>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
@@ -87,7 +87,7 @@ type _Int32ValueFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
-local Int32Value: proto.Message<Int32Value, _Int32ValueFields>
+local Int32Value: proto.Message<Int32Value, _Int32ValueFields> & proto.CustomJson<Int32Value, number>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
@@ -104,7 +104,7 @@ type _UInt32ValueFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
-local UInt32Value: proto.Message<UInt32Value, _UInt32ValueFields>
+local UInt32Value: proto.Message<UInt32Value, _UInt32ValueFields> & proto.CustomJson<UInt32Value, number>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
@@ -121,7 +121,7 @@ type _BoolValueFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
-local BoolValue: proto.Message<BoolValue, _BoolValueFields>
+local BoolValue: proto.Message<BoolValue, _BoolValueFields> & proto.CustomJson<BoolValue, boolean>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
@@ -138,7 +138,7 @@ type _StringValueFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
-local StringValue: proto.Message<StringValue, _StringValueFields>
+local StringValue: proto.Message<StringValue, _StringValueFields> & proto.CustomJson<StringValue, string>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
@@ -155,7 +155,7 @@ type _BytesValueFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-local BytesValue: proto.Message<BytesValue, _BytesValueFields>
+local BytesValue: proto.Message<BytesValue, _BytesValueFields> & proto.CustomJson<BytesValue, string>
 
 local _DoubleValueImpl = {}
 _DoubleValueImpl.__index = _DoubleValueImpl
@@ -212,7 +212,8 @@ function _DoubleValueImpl.jsonEncode(self: DoubleValue): number
 	return self.value
 end
 
-function _DoubleValueImpl.jsonDecode(value: number): DoubleValue
+function _DoubleValueImpl.jsonDecode(anyValue: any): DoubleValue
+	local value: number = anyValue
 	return DoubleValue.new({
 		value = value,
 	})
@@ -280,7 +281,8 @@ function _FloatValueImpl.jsonEncode(self: FloatValue): number
 	return self.value
 end
 
-function _FloatValueImpl.jsonDecode(value: number): FloatValue
+function _FloatValueImpl.jsonDecode(anyValue: any): FloatValue
+	local value: number = anyValue
 	return FloatValue.new({
 		value = value,
 	})
@@ -348,7 +350,8 @@ function _Int64ValueImpl.jsonEncode(self: Int64Value): number
 	return self.value
 end
 
-function _Int64ValueImpl.jsonDecode(value: number): Int64Value
+function _Int64ValueImpl.jsonDecode(anyValue: any): Int64Value
+	local value: number = anyValue
 	return Int64Value.new({
 		value = value,
 	})
@@ -416,7 +419,8 @@ function _UInt64ValueImpl.jsonEncode(self: UInt64Value): number
 	return self.value
 end
 
-function _UInt64ValueImpl.jsonDecode(value: number): UInt64Value
+function _UInt64ValueImpl.jsonDecode(anyValue: any): UInt64Value
+	local value: number = anyValue
 	return UInt64Value.new({
 		value = value,
 	})
@@ -484,7 +488,8 @@ function _Int32ValueImpl.jsonEncode(self: Int32Value): number
 	return self.value
 end
 
-function _Int32ValueImpl.jsonDecode(value: number): Int32Value
+function _Int32ValueImpl.jsonDecode(anyValue: any): Int32Value
+	local value: number = anyValue
 	return Int32Value.new({
 		value = value,
 	})
@@ -552,7 +557,8 @@ function _UInt32ValueImpl.jsonEncode(self: UInt32Value): number
 	return self.value
 end
 
-function _UInt32ValueImpl.jsonDecode(value: number): UInt32Value
+function _UInt32ValueImpl.jsonDecode(anyValue: any): UInt32Value
+	local value: number = anyValue
 	return UInt32Value.new({
 		value = value,
 	})
@@ -620,7 +626,8 @@ function _BoolValueImpl.jsonEncode(self: BoolValue): boolean
 	return self.value
 end
 
-function _BoolValueImpl.jsonDecode(value: boolean): BoolValue
+function _BoolValueImpl.jsonDecode(anyValue: any): BoolValue
+	local value: boolean = anyValue
 	return BoolValue.new({
 		value = value,
 	})
@@ -688,7 +695,8 @@ function _StringValueImpl.jsonEncode(self: StringValue): string
 	return self.value
 end
 
-function _StringValueImpl.jsonDecode(value: string): StringValue
+function _StringValueImpl.jsonDecode(anyValue: any): StringValue
+	local value: string = anyValue
 	return StringValue.new({
 		value = value,
 	})
@@ -753,12 +761,13 @@ function _BytesValueImpl.decode(input: buffer): BytesValue
 end
 
 function _BytesValueImpl.jsonEncode(self: BytesValue): string
-	return self.value
+	return buffer.tostring(self.value)
 end
 
-function _BytesValueImpl.jsonDecode(value: string): BytesValue
+function _BytesValueImpl.jsonDecode(anyValue: any): BytesValue
+	local value: string = anyValue
 	return BytesValue.new({
-		value = value,
+		value = buffer.fromstring(value),
 	})
 end
 

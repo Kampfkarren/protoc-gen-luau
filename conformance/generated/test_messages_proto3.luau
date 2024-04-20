@@ -2087,15 +2087,15 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 21 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_nested_enum = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+				self.optional_nested_enum = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 22 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_foreign_enum = ForeignEnum.fromNumber(value) or value
+				self.optional_foreign_enum = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 23 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_aliased_enum = TestAllTypesProto3_AliasedEnum.fromNumber(value) or value
+				self.optional_aliased_enum = (TestAllTypesProto3_AliasedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 31 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2127,11 +2127,17 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 51 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.repeated_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 52 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_foreign_enum, ForeignEnum.fromNumber(value) or value)
+				table.insert(
+					self.repeated_foreign_enum,
+					(ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 75 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2163,7 +2169,10 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 88 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.packed_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.packed_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 89 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2195,7 +2204,10 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 102 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.unpacked_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.unpacked_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 111 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2211,17 +2223,21 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 119 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.oneof_field =
-					{ type = "oneof_enum", value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value }
+				self.oneof_field = {
+					type = "oneof_enum",
+					value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 120 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.oneof_field =
-					{ type = "oneof_null_value", value = _google_protobuf_struct.NullValue.fromNumber(value) or value }
+				self.oneof_field = {
+					type = "oneof_null_value",
+					value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 307 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_null_value = _google_protobuf_struct.NullValue.fromNumber(value) or value
+				self.optional_null_value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 401 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -8250,7 +8266,7 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.decode(
 			if field == 2 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+				self.value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
@@ -8363,7 +8379,7 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.decode(
 			if field == 2 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.value = ForeignEnum.fromNumber(value) or value
+				self.value = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then

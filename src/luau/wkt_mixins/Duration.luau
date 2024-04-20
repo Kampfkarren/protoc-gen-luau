@@ -17,7 +17,7 @@ local function deserializeFractionalNanos(nanosText: string): number
 	return nanos
 end
 
-function _DurationImpl.jsonEncode(duration: _DurationImpl): string
+function _DurationImpl.jsonEncode(duration: Duration): string
 	assert(
 		duration.seconds == nil or (duration.seconds >= -315576000000 and duration.seconds <= 315576000000),
 		"Seconds out of range"
@@ -36,7 +36,8 @@ function _DurationImpl.jsonEncode(duration: _DurationImpl): string
 	return string.format("%s%d%s", nanoSign, duration.seconds or 0, serializeFractionalNanos(duration.nanos))
 end
 
-function _DurationImpl.jsonDecode(durationString: string): Duration
+function _DurationImpl.jsonDecode(anyValue: any): Duration
+	local durationString: string = anyValue
 	local simpleSecondsText = string.match(durationString, "^([%-0-9]+)s$")
 	if simpleSecondsText ~= nil then
 		local simpleSeconds = assert(
