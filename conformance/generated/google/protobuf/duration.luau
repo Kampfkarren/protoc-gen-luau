@@ -83,20 +83,34 @@ function _DurationImpl.decode(input: buffer): Duration
 	return self
 end
 
+-- Converts a number of nanos to a string representation.
+-- Sign and trailing zeroes are dropped.
+-- 500000000 -> ".5s"
+-- 500000001 -> ".500000001s"
+-- 0 -> ".0s"
+-- 1 -> ".000000001s"
+-- -1 -> "-.000000001s"
 local function serializeFractionalNanos(nanos: number): string
-	if nanos % 1e6 == 0 then
-		return string.format(".%03ds", nanos)
-	elseif nanos % 1e3 == 0 then
-		return string.format(".%06ds", nanos)
-	else
-		return string.format(".%09ds", nanos)
+	nanos = nanos * math.sign(nanos)
+
+	local nanosText = tostring(nanos)
+	local nanosTextLength = #nanosText
+
+	local leadingZeroes = 9 - nanosTextLength
+	local leadingZeroesText = string.rep("0", leadingZeroes)
+
+	-- remove trailing zeroes
+	while nanosText:sub(-1) == "0" do
+		nanosText = nanosText:sub(1, -2)
 	end
+
+	return `.{leadingZeroesText}{nanosText}s`
 end
 
 local function deserializeFractionalNanos(nanosText: string): number
 	local nanos = assert(tonumber(nanosText), "Invalid nanos string received, couldn't turn into a number")
 	for digit = #nanosText + 1, 9 do
-		nanos += 10 ^ (digit - 1)
+		nanos *= 10
 	end
 
 	return nanos
@@ -137,13 +151,15 @@ function _DurationImpl.jsonDecode(anyValue: any): Duration
 	end
 
 	local secondsText, nanosText = string.match(durationString, "^([%-0-9]+)%.([0-9]+)s$")
+	assert(secondsText ~= nil, "Invalid duration string received--seconds provided are invalid")
 	assert(nanosText ~= nil, "Invalid duration string received--nanos provided are invalid")
 
 	local seconds = assert(tonumber(secondsText), "Invalid duration string received--seconds provided are invalid")
+	local nanos = deserializeFractionalNanos(nanosText) * (secondsText:sub(1, 1) == "-" and -1 or 1)
 
 	return Duration.new({
 		seconds = seconds,
-		nanos = deserializeFractionalNanos(nanosText),
+		nanos = nanos,
 	})
 end
 
