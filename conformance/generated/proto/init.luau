@@ -11,9 +11,6 @@ export type Enum<T> = {
 
 	fromNumber: (number) -> T?,
 	toNumber: (T) -> number,
-
-	-- Takes any string or number. You should prefer toNumber if you have a constant.
-	toNumberArbitrary: (string | number) -> number,
 }
 
 -- TODO: Round-trip every number -2^31 through 2^31
