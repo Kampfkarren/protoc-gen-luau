@@ -206,7 +206,7 @@ function _DoubleValueImpl.encode(self: DoubleValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
 		output, cursor = proto.writeDouble(output, cursor, self.value)
 	end
@@ -275,7 +275,7 @@ function _FloatValueImpl.encode(self: FloatValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
 		output, cursor = proto.writeFloat(output, cursor, self.value)
 	end
@@ -344,7 +344,7 @@ function _Int64ValueImpl.encode(self: Int64Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.value)
 	end
@@ -413,7 +413,7 @@ function _UInt64ValueImpl.encode(self: UInt64Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.value)
 	end
@@ -482,7 +482,7 @@ function _Int32ValueImpl.encode(self: Int32Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.value)
 	end
@@ -551,7 +551,7 @@ function _UInt32ValueImpl.encode(self: UInt32Value): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= 0 then
+	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
 		output, cursor = proto.writeVarInt(output, cursor, self.value)
 	end
@@ -689,7 +689,7 @@ function _StringValueImpl.encode(self: StringValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value ~= "" then
+	if self.value ~= nil and self.value ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.value)
 	end
@@ -758,7 +758,7 @@ function _BytesValueImpl.encode(self: BytesValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if buffer.len(self.value) > 0 then
+	if self.value ~= nil and buffer.len(self.value) > 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
 	end
