@@ -3,8 +3,8 @@ export type Descriptor = {
 	fullName: string,
 }
 
-export type Message<T> = {
-	new: () -> T,
+export type Message<T, Fields> = {
+	new: (fields: Fields?) -> T,
 
 	encode: (T) -> buffer,
 	decode: (buffer) -> T,
@@ -13,6 +13,13 @@ export type Message<T> = {
 	jsonDecode: ({ [string]: any }) -> T,
 
 	descriptor: Descriptor,
+}
+
+-- Note that all consumers of CustomJson intentionally `any` their jsonDecode.
+-- This is because it's the best way we can get Luau to actually "override".
+export type CustomJson<T, Json> = {
+	jsonEncode: (T) -> Json,
+	jsonDecode: (Json) -> T,
 }
 
 return nil

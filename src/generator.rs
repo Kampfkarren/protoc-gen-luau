@@ -7,7 +7,6 @@ use prost_types::{
     },
     DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
 };
-use std::path::PathBuf as StdPathBuf;
 use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
@@ -17,6 +16,7 @@ use crate::{
     },
     if_builder::IfBuilder,
     string_builder::StringBuilder,
+    wkt_json::WktJson,
 };
 
 pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse {
@@ -452,17 +452,6 @@ impl<'a> FileGenerator<'a> {
         contents.push(self.types.build());
         contents.push(self.implementations.build());
 
-        // If the file is in google/protobuf and there's a corresponding file in wkt_json, include
-        // it.
-        if self.file_descriptor_proto.package() == "google.protobuf" {
-            let filename = StdPathBuf::from(self.file_descriptor_proto.name());
-            let name = filename.file_stem().unwrap().to_str().unwrap();
-
-            if let Some(native_wkt_implementation) = native_wkt_implementation(name) {
-                contents.push(native_wkt_implementation);
-            }
-        }
-
         contents.push(create_return(self.exports));
 
         let code = contents.build();
@@ -505,13 +494,16 @@ impl<'a> FileGenerator<'a> {
             self.exports.push(name.clone());
         }
 
-        let special_json_type = message_special_json_type(&self.file_descriptor_proto, message);
-        let json_type = special_json_type.unwrap_or("{ [string]: any }");
+        let wkt_json = WktJson::try_create(&self.file_descriptor_proto, message);
+        let json_type = match wkt_json.as_ref() {
+            Some(wkt_json) => wkt_json.luau_type,
+            None => "{ [string]: any }",
+        };
 
         self.types.push(format!(
             r#"type _{name}Impl = {{
                 __index: _{name}Impl,
-                new: () -> {name},
+                new: (fields: _{name}Fields?) -> {name},
                 encode: (self: {name}) -> buffer,
                 decode: (input: buffer) -> {name},
                 jsonEncode: (self: {name}) -> {json_type},
@@ -598,7 +590,7 @@ impl<'a> FileGenerator<'a> {
             encode_lines.append(&mut field.encode());
             encode_lines.blank();
 
-            if message_special_json_type(&self.file_descriptor_proto, message).is_none() {
+            if wkt_json.is_none() {
                 json_encode_lines.append(&mut field.json_encode());
                 json_encode_lines.blank();
 
@@ -654,8 +646,15 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        self.types
-            .push(format!("local {name}: proto.Message<{name}>"));
+        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}Fields>");
+        if let Some(wkt_json) = wkt_json.as_ref() {
+            declaration.push_str(&format!(
+                " & proto.CustomJson<{name}, {}>",
+                wkt_json.luau_type
+            ));
+        }
+
+        self.types.push(declaration);
 
         self.types.blank();
 
@@ -673,8 +672,8 @@ impl<'a> FileGenerator<'a> {
             .replace("<decode_i32>", &create_decoder(i32_fields))
             .replace("<decode_i64>", &create_decoder(i64_fields));
 
-        if message_special_json_type(&self.file_descriptor_proto, message).is_some() {
-            final_code = final_code.replace("<json>", "");
+        if let Some(wkt_json) = WktJson::try_create(&self.file_descriptor_proto, message) {
+            final_code = final_code.replace("<json>", &wkt_json.code);
         } else {
             final_code = final_code.replace(
                 "<json>",
@@ -817,43 +816,5 @@ impl<'a> FileGenerator<'a> {
         } else {
             format!("\"{}\"", path.display())
         }
-    }
-}
-
-fn native_wkt_implementation(name: &str) -> Option<&'static str> {
-    match name {
-        "duration" => Some(include_str!("./luau/proto/wkt/duration.luau")),
-        "timestamp" => Some(include_str!("./luau/proto/wkt/timestamp.luau")),
-        "struct" => Some(include_str!("./luau/proto/wkt/struct.luau")),
-        "wrappers" => Some(include_str!("./luau/proto/wkt/wrappers.luau")),
-        _ => None,
-    }
-}
-
-fn message_special_json_type(
-    file: &FileDescriptorProto,
-    message: &DescriptorProto,
-) -> Option<&'static str> {
-    if file.package() != "google.protobuf" {
-        return None;
-    }
-
-    match message.name() {
-        "BoolValue" => Some("boolean"),
-        "BytesValue" => Some("buffer"),
-        "DoubleValue" => Some("number"),
-        "FloatValue" => Some("number"),
-        "Int32Value" => Some("number"),
-        "Int64Value" => Some("number"),
-        "UInt32Value" => Some("number"),
-        "UInt64Value" => Some("number"),
-        "StringValue" => Some("string"),
-        "Duration" => Some("string"),
-        "Timestamp" => Some("string"),
-        "Value" => Some("any"),
-        "NullValue" => Some("nil"),
-        "Struct" => Some("{ [string]: any }"),
-        "ListValue" => Some("{ any }"),
-        _ => None,
     }
 }
