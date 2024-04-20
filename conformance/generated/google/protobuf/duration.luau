@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DurationImpl = {
 	__index: _DurationImpl,
-	new: (fields: _DurationFields?) -> Duration,
+	new: (fields: _DurationPartialFields?) -> Duration,
 	encode: (self: Duration) -> buffer,
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
@@ -19,16 +19,21 @@ type _DurationFields = {
 	nanos: number,
 }
 
+type _DurationPartialFields = {
+	seconds: number?,
+	nanos: number?,
+}
+
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
-local Duration: proto.Message<Duration, _DurationFields> & proto.CustomJson<Duration, string>
+local Duration: proto.Message<Duration, _DurationPartialFields> & proto.CustomJson<Duration, string>
 
 local _DurationImpl = {}
 _DurationImpl.__index = _DurationImpl
 
-function _DurationImpl.new(data: _DurationFields?): Duration
+function _DurationImpl.new(data: _DurationPartialFields?): Duration
 	return setmetatable({
-		seconds = if data == nil then 0 else data.seconds,
-		nanos = if data == nil then 0 else data.nanos,
+		seconds = if data == nil or data.seconds == nil then 0 else data.seconds,
+		nanos = if data == nil or data.nanos == nil then 0 else data.nanos,
 	}, _DurationImpl)
 end
 

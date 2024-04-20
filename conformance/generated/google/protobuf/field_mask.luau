@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
-	new: (fields: _FieldMaskFields?) -> FieldMask,
+	new: (fields: _FieldMaskPartialFields?) -> FieldMask,
 	encode: (self: FieldMask) -> buffer,
 	decode: (input: buffer) -> FieldMask,
 	jsonEncode: (self: FieldMask) -> string,
@@ -18,15 +18,19 @@ type _FieldMaskFields = {
 	paths: { string },
 }
 
+type _FieldMaskPartialFields = {
+	paths: { string }?,
+}
+
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-local FieldMask: proto.Message<FieldMask, _FieldMaskFields> & proto.CustomJson<FieldMask, string>
+local FieldMask: proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
 local _FieldMaskImpl = {}
 _FieldMaskImpl.__index = _FieldMaskImpl
 
-function _FieldMaskImpl.new(data: _FieldMaskFields?): FieldMask
+function _FieldMaskImpl.new(data: _FieldMaskPartialFields?): FieldMask
 	return setmetatable({
-		paths = if data == nil then {} else data.paths,
+		paths = if data == nil or data.paths == nil then {} else data.paths,
 	}, _FieldMaskImpl)
 end
 

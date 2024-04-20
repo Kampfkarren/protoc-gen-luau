@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DoubleValueImpl = {
 	__index: _DoubleValueImpl,
-	new: (fields: _DoubleValueFields?) -> DoubleValue,
+	new: (fields: _DoubleValuePartialFields?) -> DoubleValue,
 	encode: (self: DoubleValue) -> buffer,
 	decode: (input: buffer) -> DoubleValue,
 	jsonEncode: (self: DoubleValue) -> number,
@@ -18,12 +18,16 @@ type _DoubleValueFields = {
 	value: number,
 }
 
+type _DoubleValuePartialFields = {
+	value: number?,
+}
+
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
-local DoubleValue: proto.Message<DoubleValue, _DoubleValueFields> & proto.CustomJson<DoubleValue, number>
+local DoubleValue: proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
-	new: (fields: _FloatValueFields?) -> FloatValue,
+	new: (fields: _FloatValuePartialFields?) -> FloatValue,
 	encode: (self: FloatValue) -> buffer,
 	decode: (input: buffer) -> FloatValue,
 	jsonEncode: (self: FloatValue) -> number,
@@ -35,12 +39,16 @@ type _FloatValueFields = {
 	value: number,
 }
 
+type _FloatValuePartialFields = {
+	value: number?,
+}
+
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
-local FloatValue: proto.Message<FloatValue, _FloatValueFields> & proto.CustomJson<FloatValue, number>
+local FloatValue: proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
-	new: (fields: _Int64ValueFields?) -> Int64Value,
+	new: (fields: _Int64ValuePartialFields?) -> Int64Value,
 	encode: (self: Int64Value) -> buffer,
 	decode: (input: buffer) -> Int64Value,
 	jsonEncode: (self: Int64Value) -> number,
@@ -52,12 +60,16 @@ type _Int64ValueFields = {
 	value: number,
 }
 
+type _Int64ValuePartialFields = {
+	value: number?,
+}
+
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
-local Int64Value: proto.Message<Int64Value, _Int64ValueFields> & proto.CustomJson<Int64Value, number>
+local Int64Value: proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
-	new: (fields: _UInt64ValueFields?) -> UInt64Value,
+	new: (fields: _UInt64ValuePartialFields?) -> UInt64Value,
 	encode: (self: UInt64Value) -> buffer,
 	decode: (input: buffer) -> UInt64Value,
 	jsonEncode: (self: UInt64Value) -> number,
@@ -69,12 +81,16 @@ type _UInt64ValueFields = {
 	value: number,
 }
 
+type _UInt64ValuePartialFields = {
+	value: number?,
+}
+
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
-local UInt64Value: proto.Message<UInt64Value, _UInt64ValueFields> & proto.CustomJson<UInt64Value, number>
+local UInt64Value: proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
-	new: (fields: _Int32ValueFields?) -> Int32Value,
+	new: (fields: _Int32ValuePartialFields?) -> Int32Value,
 	encode: (self: Int32Value) -> buffer,
 	decode: (input: buffer) -> Int32Value,
 	jsonEncode: (self: Int32Value) -> number,
@@ -86,12 +102,16 @@ type _Int32ValueFields = {
 	value: number,
 }
 
+type _Int32ValuePartialFields = {
+	value: number?,
+}
+
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
-local Int32Value: proto.Message<Int32Value, _Int32ValueFields> & proto.CustomJson<Int32Value, number>
+local Int32Value: proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
-	new: (fields: _UInt32ValueFields?) -> UInt32Value,
+	new: (fields: _UInt32ValuePartialFields?) -> UInt32Value,
 	encode: (self: UInt32Value) -> buffer,
 	decode: (input: buffer) -> UInt32Value,
 	jsonEncode: (self: UInt32Value) -> number,
@@ -103,12 +123,16 @@ type _UInt32ValueFields = {
 	value: number,
 }
 
+type _UInt32ValuePartialFields = {
+	value: number?,
+}
+
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
-local UInt32Value: proto.Message<UInt32Value, _UInt32ValueFields> & proto.CustomJson<UInt32Value, number>
+local UInt32Value: proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
-	new: (fields: _BoolValueFields?) -> BoolValue,
+	new: (fields: _BoolValuePartialFields?) -> BoolValue,
 	encode: (self: BoolValue) -> buffer,
 	decode: (input: buffer) -> BoolValue,
 	jsonEncode: (self: BoolValue) -> boolean,
@@ -120,12 +144,16 @@ type _BoolValueFields = {
 	value: boolean,
 }
 
+type _BoolValuePartialFields = {
+	value: boolean?,
+}
+
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
-local BoolValue: proto.Message<BoolValue, _BoolValueFields> & proto.CustomJson<BoolValue, boolean>
+local BoolValue: proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
-	new: (fields: _StringValueFields?) -> StringValue,
+	new: (fields: _StringValuePartialFields?) -> StringValue,
 	encode: (self: StringValue) -> buffer,
 	decode: (input: buffer) -> StringValue,
 	jsonEncode: (self: StringValue) -> string,
@@ -137,12 +165,16 @@ type _StringValueFields = {
 	value: string,
 }
 
+type _StringValuePartialFields = {
+	value: string?,
+}
+
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
-local StringValue: proto.Message<StringValue, _StringValueFields> & proto.CustomJson<StringValue, string>
+local StringValue: proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
-	new: (fields: _BytesValueFields?) -> BytesValue,
+	new: (fields: _BytesValuePartialFields?) -> BytesValue,
 	encode: (self: BytesValue) -> buffer,
 	decode: (input: buffer) -> BytesValue,
 	jsonEncode: (self: BytesValue) -> string,
@@ -154,15 +186,19 @@ type _BytesValueFields = {
 	value: buffer,
 }
 
+type _BytesValuePartialFields = {
+	value: buffer?,
+}
+
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-local BytesValue: proto.Message<BytesValue, _BytesValueFields> & proto.CustomJson<BytesValue, string>
+local BytesValue: proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
 
 local _DoubleValueImpl = {}
 _DoubleValueImpl.__index = _DoubleValueImpl
 
-function _DoubleValueImpl.new(data: _DoubleValueFields?): DoubleValue
+function _DoubleValueImpl.new(data: _DoubleValuePartialFields?): DoubleValue
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _DoubleValueImpl)
 end
 
@@ -229,9 +265,9 @@ DoubleValue = _DoubleValueImpl
 local _FloatValueImpl = {}
 _FloatValueImpl.__index = _FloatValueImpl
 
-function _FloatValueImpl.new(data: _FloatValueFields?): FloatValue
+function _FloatValueImpl.new(data: _FloatValuePartialFields?): FloatValue
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _FloatValueImpl)
 end
 
@@ -298,9 +334,9 @@ FloatValue = _FloatValueImpl
 local _Int64ValueImpl = {}
 _Int64ValueImpl.__index = _Int64ValueImpl
 
-function _Int64ValueImpl.new(data: _Int64ValueFields?): Int64Value
+function _Int64ValueImpl.new(data: _Int64ValuePartialFields?): Int64Value
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _Int64ValueImpl)
 end
 
@@ -367,9 +403,9 @@ Int64Value = _Int64ValueImpl
 local _UInt64ValueImpl = {}
 _UInt64ValueImpl.__index = _UInt64ValueImpl
 
-function _UInt64ValueImpl.new(data: _UInt64ValueFields?): UInt64Value
+function _UInt64ValueImpl.new(data: _UInt64ValuePartialFields?): UInt64Value
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _UInt64ValueImpl)
 end
 
@@ -436,9 +472,9 @@ UInt64Value = _UInt64ValueImpl
 local _Int32ValueImpl = {}
 _Int32ValueImpl.__index = _Int32ValueImpl
 
-function _Int32ValueImpl.new(data: _Int32ValueFields?): Int32Value
+function _Int32ValueImpl.new(data: _Int32ValuePartialFields?): Int32Value
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _Int32ValueImpl)
 end
 
@@ -505,9 +541,9 @@ Int32Value = _Int32ValueImpl
 local _UInt32ValueImpl = {}
 _UInt32ValueImpl.__index = _UInt32ValueImpl
 
-function _UInt32ValueImpl.new(data: _UInt32ValueFields?): UInt32Value
+function _UInt32ValueImpl.new(data: _UInt32ValuePartialFields?): UInt32Value
 	return setmetatable({
-		value = if data == nil then 0 else data.value,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _UInt32ValueImpl)
 end
 
@@ -574,9 +610,9 @@ UInt32Value = _UInt32ValueImpl
 local _BoolValueImpl = {}
 _BoolValueImpl.__index = _BoolValueImpl
 
-function _BoolValueImpl.new(data: _BoolValueFields?): BoolValue
+function _BoolValueImpl.new(data: _BoolValuePartialFields?): BoolValue
 	return setmetatable({
-		value = if data == nil then false else data.value,
+		value = if data == nil or data.value == nil then false else data.value,
 	}, _BoolValueImpl)
 end
 
@@ -643,9 +679,9 @@ BoolValue = _BoolValueImpl
 local _StringValueImpl = {}
 _StringValueImpl.__index = _StringValueImpl
 
-function _StringValueImpl.new(data: _StringValueFields?): StringValue
+function _StringValueImpl.new(data: _StringValuePartialFields?): StringValue
 	return setmetatable({
-		value = if data == nil then "" else data.value,
+		value = if data == nil or data.value == nil then "" else data.value,
 	}, _StringValueImpl)
 end
 
@@ -712,9 +748,9 @@ StringValue = _StringValueImpl
 local _BytesValueImpl = {}
 _BytesValueImpl.__index = _BytesValueImpl
 
-function _BytesValueImpl.new(data: _BytesValueFields?): BytesValue
+function _BytesValueImpl.new(data: _BytesValuePartialFields?): BytesValue
 	return setmetatable({
-		value = if data == nil then buffer.create(0) else data.value,
+		value = if data == nil or data.value == nil then buffer.create(0) else data.value,
 	}, _BytesValueImpl)
 end
 

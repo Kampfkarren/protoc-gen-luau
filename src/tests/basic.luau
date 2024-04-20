@@ -123,4 +123,13 @@ describe("binary encoding", function()
 	end)
 end)
 
+it("should accept fields passed to new", function()
+	local kitchenSink = kitchen_sink.KitchenSink.new({
+		int32 = 100,
+	})
+
+	assertEquals(kitchenSink.int32, 100)
+	assertEquals(kitchenSink.float, 0)
+end)
+
 tests.finish()

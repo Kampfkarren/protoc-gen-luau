@@ -12,7 +12,7 @@ local _google_protobuf_wrappers = require("./google/protobuf/wrappers")
 
 type _TestAllTypesProto3Impl = {
 	__index: _TestAllTypesProto3Impl,
-	new: (fields: _TestAllTypesProto3Fields?) -> TestAllTypesProto3,
+	new: (fields: _TestAllTypesProto3PartialFields?) -> TestAllTypesProto3,
 	encode: (self: TestAllTypesProto3) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3,
 	jsonEncode: (self: TestAllTypesProto3) -> { [string]: any },
@@ -176,12 +176,168 @@ type _TestAllTypesProto3Fields = {
 	Field_name18__: number,
 }
 
+type _TestAllTypesProto3PartialFields = {
+	optional_int32: number?,
+	optional_int64: number?,
+	optional_uint32: number?,
+	optional_uint64: number?,
+	optional_sint32: number?,
+	optional_sint64: number?,
+	optional_fixed32: number?,
+	optional_fixed64: number?,
+	optional_sfixed32: number?,
+	optional_sfixed64: number?,
+	optional_float: number?,
+	optional_double: number?,
+	optional_bool: boolean?,
+	optional_string: string?,
+	optional_bytes: buffer?,
+	optional_nested_message: TestAllTypesProto3_NestedMessage?,
+	optional_foreign_message: ForeignMessage?,
+	optional_nested_enum: TestAllTypesProto3_NestedEnum?,
+	optional_foreign_enum: ForeignEnum?,
+	optional_aliased_enum: TestAllTypesProto3_AliasedEnum?,
+	optional_string_piece: string?,
+	optional_cord: string?,
+	recursive_message: TestAllTypesProto3?,
+	repeated_int32: { number }?,
+	repeated_int64: { number }?,
+	repeated_uint32: { number }?,
+	repeated_uint64: { number }?,
+	repeated_sint32: { number }?,
+	repeated_sint64: { number }?,
+	repeated_fixed32: { number }?,
+	repeated_fixed64: { number }?,
+	repeated_sfixed32: { number }?,
+	repeated_sfixed64: { number }?,
+	repeated_float: { number }?,
+	repeated_double: { number }?,
+	repeated_bool: { boolean }?,
+	repeated_string: { string }?,
+	repeated_bytes: { buffer }?,
+	repeated_nested_message: { TestAllTypesProto3_NestedMessage }?,
+	repeated_foreign_message: { ForeignMessage }?,
+	repeated_nested_enum: { TestAllTypesProto3_NestedEnum }?,
+	repeated_foreign_enum: { ForeignEnum }?,
+	repeated_string_piece: { string }?,
+	repeated_cord: { string }?,
+	packed_int32: { number }?,
+	packed_int64: { number }?,
+	packed_uint32: { number }?,
+	packed_uint64: { number }?,
+	packed_sint32: { number }?,
+	packed_sint64: { number }?,
+	packed_fixed32: { number }?,
+	packed_fixed64: { number }?,
+	packed_sfixed32: { number }?,
+	packed_sfixed64: { number }?,
+	packed_float: { number }?,
+	packed_double: { number }?,
+	packed_bool: { boolean }?,
+	packed_nested_enum: { TestAllTypesProto3_NestedEnum }?,
+	unpacked_int32: { number }?,
+	unpacked_int64: { number }?,
+	unpacked_uint32: { number }?,
+	unpacked_uint64: { number }?,
+	unpacked_sint32: { number }?,
+	unpacked_sint64: { number }?,
+	unpacked_fixed32: { number }?,
+	unpacked_fixed64: { number }?,
+	unpacked_sfixed32: { number }?,
+	unpacked_sfixed64: { number }?,
+	unpacked_float: { number }?,
+	unpacked_double: { number }?,
+	unpacked_bool: { boolean }?,
+	unpacked_nested_enum: { TestAllTypesProto3_NestedEnum }?,
+	map_int32_int32: { [number]: number }?,
+	map_int64_int64: { [number]: number }?,
+	map_uint32_uint32: { [number]: number }?,
+	map_uint64_uint64: { [number]: number }?,
+	map_sint32_sint32: { [number]: number }?,
+	map_sint64_sint64: { [number]: number }?,
+	map_fixed32_fixed32: { [number]: number }?,
+	map_fixed64_fixed64: { [number]: number }?,
+	map_sfixed32_sfixed32: { [number]: number }?,
+	map_sfixed64_sfixed64: { [number]: number }?,
+	map_int32_float: { [number]: number }?,
+	map_int32_double: { [number]: number }?,
+	map_bool_bool: { [boolean]: boolean }?,
+	map_string_string: { [string]: string }?,
+	map_string_bytes: { [string]: buffer }?,
+	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage }?,
+	map_string_foreign_message: { [string]: ForeignMessage }?,
+	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum }?,
+	map_string_foreign_enum: { [string]: ForeignEnum }?,
+	oneof_field: (
+		{ type: "oneof_uint32", value: number }
+		| { type: "oneof_nested_message", value: TestAllTypesProto3_NestedMessage }
+		| { type: "oneof_string", value: string }
+		| { type: "oneof_bytes", value: buffer }
+		| { type: "oneof_bool", value: boolean }
+		| { type: "oneof_uint64", value: number }
+		| { type: "oneof_float", value: number }
+		| { type: "oneof_double", value: number }
+		| { type: "oneof_enum", value: TestAllTypesProto3_NestedEnum }
+		| { type: "oneof_null_value", value: _google_protobuf_struct.NullValue }
+	)?,
+	optional_bool_wrapper: _google_protobuf_wrappers.BoolValue?,
+	optional_int32_wrapper: _google_protobuf_wrappers.Int32Value?,
+	optional_int64_wrapper: _google_protobuf_wrappers.Int64Value?,
+	optional_uint32_wrapper: _google_protobuf_wrappers.UInt32Value?,
+	optional_uint64_wrapper: _google_protobuf_wrappers.UInt64Value?,
+	optional_float_wrapper: _google_protobuf_wrappers.FloatValue?,
+	optional_double_wrapper: _google_protobuf_wrappers.DoubleValue?,
+	optional_string_wrapper: _google_protobuf_wrappers.StringValue?,
+	optional_bytes_wrapper: _google_protobuf_wrappers.BytesValue?,
+	repeated_bool_wrapper: { _google_protobuf_wrappers.BoolValue }?,
+	repeated_int32_wrapper: { _google_protobuf_wrappers.Int32Value }?,
+	repeated_int64_wrapper: { _google_protobuf_wrappers.Int64Value }?,
+	repeated_uint32_wrapper: { _google_protobuf_wrappers.UInt32Value }?,
+	repeated_uint64_wrapper: { _google_protobuf_wrappers.UInt64Value }?,
+	repeated_float_wrapper: { _google_protobuf_wrappers.FloatValue }?,
+	repeated_double_wrapper: { _google_protobuf_wrappers.DoubleValue }?,
+	repeated_string_wrapper: { _google_protobuf_wrappers.StringValue }?,
+	repeated_bytes_wrapper: { _google_protobuf_wrappers.BytesValue }?,
+	optional_duration: _google_protobuf_duration.Duration?,
+	optional_timestamp: _google_protobuf_timestamp.Timestamp?,
+	optional_field_mask: _google_protobuf_field_mask.FieldMask?,
+	optional_struct: _google_protobuf_struct.Struct?,
+	optional_any: _google_protobuf_any.Any?,
+	optional_value: _google_protobuf_struct.Value?,
+	optional_null_value: _google_protobuf_struct.NullValue?,
+	repeated_duration: { _google_protobuf_duration.Duration }?,
+	repeated_timestamp: { _google_protobuf_timestamp.Timestamp }?,
+	repeated_fieldmask: { _google_protobuf_field_mask.FieldMask }?,
+	repeated_struct: { _google_protobuf_struct.Struct }?,
+	repeated_any: { _google_protobuf_any.Any }?,
+	repeated_value: { _google_protobuf_struct.Value }?,
+	repeated_list_value: { _google_protobuf_struct.ListValue }?,
+	fieldname1: number?,
+	field_name2: number?,
+	_field_name3: number?,
+	field__name4_: number?,
+	field0name5: number?,
+	field_0_name6: number?,
+	fieldName7: number?,
+	FieldName8: number?,
+	field_Name9: number?,
+	Field_Name10: number?,
+	FIELD_NAME11: number?,
+	FIELD_name12: number?,
+	__field_name13: number?,
+	__Field_name14: number?,
+	field__name15: number?,
+	field__Name16: number?,
+	field_name17__: number?,
+	Field_name18__: number?,
+}
+
 export type TestAllTypesProto3 = typeof(setmetatable({} :: _TestAllTypesProto3Fields, {} :: _TestAllTypesProto3Impl))
-local TestAllTypesProto3: proto.Message<TestAllTypesProto3, _TestAllTypesProto3Fields>
+local TestAllTypesProto3: proto.Message<TestAllTypesProto3, _TestAllTypesProto3PartialFields>
 
 type _TestAllTypesProto3_NestedMessageImpl = {
 	__index: _TestAllTypesProto3_NestedMessageImpl,
-	new: (fields: _TestAllTypesProto3_NestedMessageFields?) -> TestAllTypesProto3_NestedMessage,
+	new: (fields: _TestAllTypesProto3_NestedMessagePartialFields?) -> TestAllTypesProto3_NestedMessage,
 	encode: (self: TestAllTypesProto3_NestedMessage) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_NestedMessage,
 	jsonEncode: (self: TestAllTypesProto3_NestedMessage) -> { [string]: any },
@@ -194,15 +350,20 @@ type _TestAllTypesProto3_NestedMessageFields = {
 	corecursive: TestAllTypesProto3?,
 }
 
+type _TestAllTypesProto3_NestedMessagePartialFields = {
+	a: number?,
+	corecursive: TestAllTypesProto3?,
+}
+
 export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_NestedMessageFields,
 	{} :: _TestAllTypesProto3_NestedMessageImpl
 ))
-local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage, _TestAllTypesProto3_NestedMessageFields>
+local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage, _TestAllTypesProto3_NestedMessagePartialFields>
 
 type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32Int32EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapInt32Int32EntryFields?) -> TestAllTypesProto3_MapInt32Int32Entry,
+	new: (fields: _TestAllTypesProto3_MapInt32Int32EntryPartialFields?) -> TestAllTypesProto3_MapInt32Int32Entry,
 	encode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32Int32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> { [string]: any },
@@ -215,15 +376,20 @@ type _TestAllTypesProto3_MapInt32Int32EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapInt32Int32EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapInt32Int32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryFields,
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
 ))
-local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry, _TestAllTypesProto3_MapInt32Int32EntryFields>
+local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry, _TestAllTypesProto3_MapInt32Int32EntryPartialFields>
 
 type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt64Int64EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapInt64Int64EntryFields?) -> TestAllTypesProto3_MapInt64Int64Entry,
+	new: (fields: _TestAllTypesProto3_MapInt64Int64EntryPartialFields?) -> TestAllTypesProto3_MapInt64Int64Entry,
 	encode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt64Int64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> { [string]: any },
@@ -236,15 +402,20 @@ type _TestAllTypesProto3_MapInt64Int64EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapInt64Int64EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapInt64Int64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryFields,
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
 ))
-local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry, _TestAllTypesProto3_MapInt64Int64EntryFields>
+local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry, _TestAllTypesProto3_MapInt64Int64EntryPartialFields>
 
 type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint32Uint32EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapUint32Uint32EntryFields?) -> TestAllTypesProto3_MapUint32Uint32Entry,
+	new: (fields: _TestAllTypesProto3_MapUint32Uint32EntryPartialFields?) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	encode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> { [string]: any },
@@ -257,15 +428,20 @@ type _TestAllTypesProto3_MapUint32Uint32EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapUint32Uint32EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapUint32Uint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryFields,
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
 ))
-local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry, _TestAllTypesProto3_MapUint32Uint32EntryFields>
+local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry, _TestAllTypesProto3_MapUint32Uint32EntryPartialFields>
 
 type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint64Uint64EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapUint64Uint64EntryFields?) -> TestAllTypesProto3_MapUint64Uint64Entry,
+	new: (fields: _TestAllTypesProto3_MapUint64Uint64EntryPartialFields?) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	encode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> { [string]: any },
@@ -278,15 +454,20 @@ type _TestAllTypesProto3_MapUint64Uint64EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapUint64Uint64EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapUint64Uint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryFields,
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
 ))
-local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry, _TestAllTypesProto3_MapUint64Uint64EntryFields>
+local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry, _TestAllTypesProto3_MapUint64Uint64EntryPartialFields>
 
 type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint32Sint32EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapSint32Sint32EntryFields?) -> TestAllTypesProto3_MapSint32Sint32Entry,
+	new: (fields: _TestAllTypesProto3_MapSint32Sint32EntryPartialFields?) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	encode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> { [string]: any },
@@ -299,15 +480,20 @@ type _TestAllTypesProto3_MapSint32Sint32EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapSint32Sint32EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapSint32Sint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryFields,
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
 ))
-local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry, _TestAllTypesProto3_MapSint32Sint32EntryFields>
+local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry, _TestAllTypesProto3_MapSint32Sint32EntryPartialFields>
 
 type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint64Sint64EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapSint64Sint64EntryFields?) -> TestAllTypesProto3_MapSint64Sint64Entry,
+	new: (fields: _TestAllTypesProto3_MapSint64Sint64EntryPartialFields?) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	encode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> { [string]: any },
@@ -320,15 +506,22 @@ type _TestAllTypesProto3_MapSint64Sint64EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapSint64Sint64EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapSint64Sint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryFields,
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
 ))
-local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry, _TestAllTypesProto3_MapSint64Sint64EntryFields>
+local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry, _TestAllTypesProto3_MapSint64Sint64EntryPartialFields>
 
 type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+	new: (
+		fields: _TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields?
+	) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	encode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> { [string]: any },
@@ -341,15 +534,25 @@ type _TestAllTypesProto3_MapFixed32Fixed32EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapFixed32Fixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 ))
-local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<TestAllTypesProto3_MapFixed32Fixed32Entry, _TestAllTypesProto3_MapFixed32Fixed32EntryFields>
+local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<
+	TestAllTypesProto3_MapFixed32Fixed32Entry,
+	_TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+	new: (
+		fields: _TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields?
+	) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	encode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> { [string]: any },
@@ -362,15 +565,25 @@ type _TestAllTypesProto3_MapFixed64Fixed64EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapFixed64Fixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 ))
-local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<TestAllTypesProto3_MapFixed64Fixed64Entry, _TestAllTypesProto3_MapFixed64Fixed64EntryFields>
+local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<
+	TestAllTypesProto3_MapFixed64Fixed64Entry,
+	_TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	new: (
+		fields: _TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields?
+	) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	encode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> { [string]: any },
@@ -383,15 +596,25 @@ type _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 ))
-local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<TestAllTypesProto3_MapSfixed32Sfixed32Entry, _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields>
+local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<
+	TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	_TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl,
-	new: (fields: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	new: (
+		fields: _TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields?
+	) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	encode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> { [string]: any },
@@ -404,15 +627,23 @@ type _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 ))
-local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<TestAllTypesProto3_MapSfixed64Sfixed64Entry, _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields>
+local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<
+	TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	_TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32FloatEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapInt32FloatEntryFields?) -> TestAllTypesProto3_MapInt32FloatEntry,
+	new: (fields: _TestAllTypesProto3_MapInt32FloatEntryPartialFields?) -> TestAllTypesProto3_MapInt32FloatEntry,
 	encode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32FloatEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> { [string]: any },
@@ -425,15 +656,20 @@ type _TestAllTypesProto3_MapInt32FloatEntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapInt32FloatEntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapInt32FloatEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
 ))
-local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry, _TestAllTypesProto3_MapInt32FloatEntryFields>
+local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry, _TestAllTypesProto3_MapInt32FloatEntryPartialFields>
 
 type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32DoubleEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapInt32DoubleEntryFields?) -> TestAllTypesProto3_MapInt32DoubleEntry,
+	new: (fields: _TestAllTypesProto3_MapInt32DoubleEntryPartialFields?) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	encode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> { [string]: any },
@@ -446,15 +682,20 @@ type _TestAllTypesProto3_MapInt32DoubleEntryFields = {
 	value: number,
 }
 
+type _TestAllTypesProto3_MapInt32DoubleEntryPartialFields = {
+	key: number?,
+	value: number?,
+}
+
 export type TestAllTypesProto3_MapInt32DoubleEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
 ))
-local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry, _TestAllTypesProto3_MapInt32DoubleEntryFields>
+local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry, _TestAllTypesProto3_MapInt32DoubleEntryPartialFields>
 
 type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	__index: _TestAllTypesProto3_MapBoolBoolEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapBoolBoolEntryFields?) -> TestAllTypesProto3_MapBoolBoolEntry,
+	new: (fields: _TestAllTypesProto3_MapBoolBoolEntryPartialFields?) -> TestAllTypesProto3_MapBoolBoolEntry,
 	encode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapBoolBoolEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> { [string]: any },
@@ -467,15 +708,20 @@ type _TestAllTypesProto3_MapBoolBoolEntryFields = {
 	value: boolean,
 }
 
+type _TestAllTypesProto3_MapBoolBoolEntryPartialFields = {
+	key: boolean?,
+	value: boolean?,
+}
+
 export type TestAllTypesProto3_MapBoolBoolEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryFields,
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
 ))
-local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry, _TestAllTypesProto3_MapBoolBoolEntryFields>
+local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry, _TestAllTypesProto3_MapBoolBoolEntryPartialFields>
 
 type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringStringEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapStringStringEntryFields?) -> TestAllTypesProto3_MapStringStringEntry,
+	new: (fields: _TestAllTypesProto3_MapStringStringEntryPartialFields?) -> TestAllTypesProto3_MapStringStringEntry,
 	encode: (self: TestAllTypesProto3_MapStringStringEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringStringEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringStringEntry) -> { [string]: any },
@@ -488,15 +734,20 @@ type _TestAllTypesProto3_MapStringStringEntryFields = {
 	value: string,
 }
 
+type _TestAllTypesProto3_MapStringStringEntryPartialFields = {
+	key: string?,
+	value: string?,
+}
+
 export type TestAllTypesProto3_MapStringStringEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringStringEntryFields,
 	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
 ))
-local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry, _TestAllTypesProto3_MapStringStringEntryFields>
+local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry, _TestAllTypesProto3_MapStringStringEntryPartialFields>
 
 type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringBytesEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapStringBytesEntryFields?) -> TestAllTypesProto3_MapStringBytesEntry,
+	new: (fields: _TestAllTypesProto3_MapStringBytesEntryPartialFields?) -> TestAllTypesProto3_MapStringBytesEntry,
 	encode: (self: TestAllTypesProto3_MapStringBytesEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringBytesEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringBytesEntry) -> { [string]: any },
@@ -509,16 +760,21 @@ type _TestAllTypesProto3_MapStringBytesEntryFields = {
 	value: buffer,
 }
 
+type _TestAllTypesProto3_MapStringBytesEntryPartialFields = {
+	key: string?,
+	value: buffer?,
+}
+
 export type TestAllTypesProto3_MapStringBytesEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringBytesEntryFields,
 	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
 ))
-local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry, _TestAllTypesProto3_MapStringBytesEntryFields>
+local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry, _TestAllTypesProto3_MapStringBytesEntryPartialFields>
 
 type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedMessageEntryImpl,
 	new: (
-		fields: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
+		fields: _TestAllTypesProto3_MapStringNestedMessageEntryPartialFields?
 	) -> TestAllTypesProto3_MapStringNestedMessageEntry,
 	encode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedMessageEntry,
@@ -532,19 +788,24 @@ type _TestAllTypesProto3_MapStringNestedMessageEntryFields = {
 	value: TestAllTypesProto3_NestedMessage?,
 }
 
+type _TestAllTypesProto3_MapStringNestedMessageEntryPartialFields = {
+	key: string?,
+	value: TestAllTypesProto3_NestedMessage?,
+}
+
 export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 ))
 local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<
 	TestAllTypesProto3_MapStringNestedMessageEntry,
-	_TestAllTypesProto3_MapStringNestedMessageEntryFields
+	_TestAllTypesProto3_MapStringNestedMessageEntryPartialFields
 >
 
 type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignMessageEntryImpl,
 	new: (
-		fields: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
+		fields: _TestAllTypesProto3_MapStringForeignMessageEntryPartialFields?
 	) -> TestAllTypesProto3_MapStringForeignMessageEntry,
 	encode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignMessageEntry,
@@ -558,18 +819,25 @@ type _TestAllTypesProto3_MapStringForeignMessageEntryFields = {
 	value: ForeignMessage?,
 }
 
+type _TestAllTypesProto3_MapStringForeignMessageEntryPartialFields = {
+	key: string?,
+	value: ForeignMessage?,
+}
+
 export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 ))
 local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<
 	TestAllTypesProto3_MapStringForeignMessageEntry,
-	_TestAllTypesProto3_MapStringForeignMessageEntryFields
+	_TestAllTypesProto3_MapStringForeignMessageEntryPartialFields
 >
 
 type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedEnumEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapStringNestedEnumEntryFields?) -> TestAllTypesProto3_MapStringNestedEnumEntry,
+	new: (
+		fields: _TestAllTypesProto3_MapStringNestedEnumEntryPartialFields?
+	) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	encode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> { [string]: any },
@@ -582,15 +850,25 @@ type _TestAllTypesProto3_MapStringNestedEnumEntryFields = {
 	value: TestAllTypesProto3_NestedEnum,
 }
 
+type _TestAllTypesProto3_MapStringNestedEnumEntryPartialFields = {
+	key: string?,
+	value: TestAllTypesProto3_NestedEnum?,
+}
+
 export type TestAllTypesProto3_MapStringNestedEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 ))
-local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<TestAllTypesProto3_MapStringNestedEnumEntry, _TestAllTypesProto3_MapStringNestedEnumEntryFields>
+local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<
+	TestAllTypesProto3_MapStringNestedEnumEntry,
+	_TestAllTypesProto3_MapStringNestedEnumEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignEnumEntryImpl,
-	new: (fields: _TestAllTypesProto3_MapStringForeignEnumEntryFields?) -> TestAllTypesProto3_MapStringForeignEnumEntry,
+	new: (
+		fields: _TestAllTypesProto3_MapStringForeignEnumEntryPartialFields?
+	) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	encode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> { [string]: any },
@@ -603,11 +881,19 @@ type _TestAllTypesProto3_MapStringForeignEnumEntryFields = {
 	value: ForeignEnum,
 }
 
+type _TestAllTypesProto3_MapStringForeignEnumEntryPartialFields = {
+	key: string?,
+	value: ForeignEnum?,
+}
+
 export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 ))
-local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<TestAllTypesProto3_MapStringForeignEnumEntry, _TestAllTypesProto3_MapStringForeignEnumEntryFields>
+local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<
+	TestAllTypesProto3_MapStringForeignEnumEntry,
+	_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
+>
 
 local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
@@ -617,7 +903,7 @@ export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_
 
 type _ForeignMessageImpl = {
 	__index: _ForeignMessageImpl,
-	new: (fields: _ForeignMessageFields?) -> ForeignMessage,
+	new: (fields: _ForeignMessagePartialFields?) -> ForeignMessage,
 	encode: (self: ForeignMessage) -> buffer,
 	decode: (input: buffer) -> ForeignMessage,
 	jsonEncode: (self: ForeignMessage) -> { [string]: any },
@@ -629,12 +915,16 @@ type _ForeignMessageFields = {
 	c: number,
 }
 
+type _ForeignMessagePartialFields = {
+	c: number?,
+}
+
 export type ForeignMessage = typeof(setmetatable({} :: _ForeignMessageFields, {} :: _ForeignMessageImpl))
-local ForeignMessage: proto.Message<ForeignMessage, _ForeignMessageFields>
+local ForeignMessage: proto.Message<ForeignMessage, _ForeignMessagePartialFields>
 
 type _NullHypothesisProto3Impl = {
 	__index: _NullHypothesisProto3Impl,
-	new: (fields: _NullHypothesisProto3Fields?) -> NullHypothesisProto3,
+	new: (fields: _NullHypothesisProto3PartialFields?) -> NullHypothesisProto3,
 	encode: (self: NullHypothesisProto3) -> buffer,
 	decode: (input: buffer) -> NullHypothesisProto3,
 	jsonEncode: (self: NullHypothesisProto3) -> { [string]: any },
@@ -644,15 +934,17 @@ type _NullHypothesisProto3Impl = {
 
 type _NullHypothesisProto3Fields = {}
 
+type _NullHypothesisProto3PartialFields = {}
+
 export type NullHypothesisProto3 = typeof(setmetatable(
 	{} :: _NullHypothesisProto3Fields,
 	{} :: _NullHypothesisProto3Impl
 ))
-local NullHypothesisProto3: proto.Message<NullHypothesisProto3, _NullHypothesisProto3Fields>
+local NullHypothesisProto3: proto.Message<NullHypothesisProto3, _NullHypothesisProto3PartialFields>
 
 type _EnumOnlyProto3Impl = {
 	__index: _EnumOnlyProto3Impl,
-	new: (fields: _EnumOnlyProto3Fields?) -> EnumOnlyProto3,
+	new: (fields: _EnumOnlyProto3PartialFields?) -> EnumOnlyProto3,
 	encode: (self: EnumOnlyProto3) -> buffer,
 	decode: (input: buffer) -> EnumOnlyProto3,
 	jsonEncode: (self: EnumOnlyProto3) -> { [string]: any },
@@ -662,8 +954,10 @@ type _EnumOnlyProto3Impl = {
 
 type _EnumOnlyProto3Fields = {}
 
+type _EnumOnlyProto3PartialFields = {}
+
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
-local EnumOnlyProto3: proto.Message<EnumOnlyProto3, _EnumOnlyProto3Fields>
+local EnumOnlyProto3: proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
 
 local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
@@ -674,158 +968,224 @@ export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number
 local _TestAllTypesProto3Impl = {}
 _TestAllTypesProto3Impl.__index = _TestAllTypesProto3Impl
 
-function _TestAllTypesProto3Impl.new(data: _TestAllTypesProto3Fields?): TestAllTypesProto3
+function _TestAllTypesProto3Impl.new(data: _TestAllTypesProto3PartialFields?): TestAllTypesProto3
 	return setmetatable({
-		optional_int32 = if data == nil then 0 else data.optional_int32,
-		optional_int64 = if data == nil then 0 else data.optional_int64,
-		optional_uint32 = if data == nil then 0 else data.optional_uint32,
-		optional_uint64 = if data == nil then 0 else data.optional_uint64,
-		optional_sint32 = if data == nil then 0 else data.optional_sint32,
-		optional_sint64 = if data == nil then 0 else data.optional_sint64,
-		optional_fixed32 = if data == nil then 0 else data.optional_fixed32,
-		optional_fixed64 = if data == nil then 0 else data.optional_fixed64,
-		optional_sfixed32 = if data == nil then 0 else data.optional_sfixed32,
-		optional_sfixed64 = if data == nil then 0 else data.optional_sfixed64,
-		optional_float = if data == nil then 0 else data.optional_float,
-		optional_double = if data == nil then 0 else data.optional_double,
-		optional_bool = if data == nil then false else data.optional_bool,
-		optional_string = if data == nil then "" else data.optional_string,
-		optional_bytes = if data == nil then buffer.create(0) else data.optional_bytes,
-		optional_nested_message = if data == nil then nil else data.optional_nested_message,
-		optional_foreign_message = if data == nil then nil else data.optional_foreign_message,
-		optional_nested_enum = if data == nil
+		optional_int32 = if data == nil or data.optional_int32 == nil then 0 else data.optional_int32,
+		optional_int64 = if data == nil or data.optional_int64 == nil then 0 else data.optional_int64,
+		optional_uint32 = if data == nil or data.optional_uint32 == nil then 0 else data.optional_uint32,
+		optional_uint64 = if data == nil or data.optional_uint64 == nil then 0 else data.optional_uint64,
+		optional_sint32 = if data == nil or data.optional_sint32 == nil then 0 else data.optional_sint32,
+		optional_sint64 = if data == nil or data.optional_sint64 == nil then 0 else data.optional_sint64,
+		optional_fixed32 = if data == nil or data.optional_fixed32 == nil then 0 else data.optional_fixed32,
+		optional_fixed64 = if data == nil or data.optional_fixed64 == nil then 0 else data.optional_fixed64,
+		optional_sfixed32 = if data == nil or data.optional_sfixed32 == nil then 0 else data.optional_sfixed32,
+		optional_sfixed64 = if data == nil or data.optional_sfixed64 == nil then 0 else data.optional_sfixed64,
+		optional_float = if data == nil or data.optional_float == nil then 0 else data.optional_float,
+		optional_double = if data == nil or data.optional_double == nil then 0 else data.optional_double,
+		optional_bool = if data == nil or data.optional_bool == nil then false else data.optional_bool,
+		optional_string = if data == nil or data.optional_string == nil then "" else data.optional_string,
+		optional_bytes = if data == nil or data.optional_bytes == nil then buffer.create(0) else data.optional_bytes,
+		optional_nested_message = if data == nil or data.optional_nested_message == nil
+			then nil
+			else data.optional_nested_message,
+		optional_foreign_message = if data == nil or data.optional_foreign_message == nil
+			then nil
+			else data.optional_foreign_message,
+		optional_nested_enum = if data == nil or data.optional_nested_enum == nil
 			then assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
 			else data.optional_nested_enum,
-		optional_foreign_enum = if data == nil
+		optional_foreign_enum = if data == nil or data.optional_foreign_enum == nil
 			then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default")
 			else data.optional_foreign_enum,
-		optional_aliased_enum = if data == nil
+		optional_aliased_enum = if data == nil or data.optional_aliased_enum == nil
 			then assert(TestAllTypesProto3_AliasedEnum.fromNumber(0), "Enum has no 0 default")
 			else data.optional_aliased_enum,
-		optional_string_piece = if data == nil then "" else data.optional_string_piece,
-		optional_cord = if data == nil then "" else data.optional_cord,
-		recursive_message = if data == nil then nil else data.recursive_message,
-		repeated_int32 = if data == nil then {} else data.repeated_int32,
-		repeated_int64 = if data == nil then {} else data.repeated_int64,
-		repeated_uint32 = if data == nil then {} else data.repeated_uint32,
-		repeated_uint64 = if data == nil then {} else data.repeated_uint64,
-		repeated_sint32 = if data == nil then {} else data.repeated_sint32,
-		repeated_sint64 = if data == nil then {} else data.repeated_sint64,
-		repeated_fixed32 = if data == nil then {} else data.repeated_fixed32,
-		repeated_fixed64 = if data == nil then {} else data.repeated_fixed64,
-		repeated_sfixed32 = if data == nil then {} else data.repeated_sfixed32,
-		repeated_sfixed64 = if data == nil then {} else data.repeated_sfixed64,
-		repeated_float = if data == nil then {} else data.repeated_float,
-		repeated_double = if data == nil then {} else data.repeated_double,
-		repeated_bool = if data == nil then {} else data.repeated_bool,
-		repeated_string = if data == nil then {} else data.repeated_string,
-		repeated_bytes = if data == nil then {} else data.repeated_bytes,
-		repeated_nested_message = if data == nil then {} else data.repeated_nested_message,
-		repeated_foreign_message = if data == nil then {} else data.repeated_foreign_message,
-		repeated_nested_enum = if data == nil then {} else data.repeated_nested_enum,
-		repeated_foreign_enum = if data == nil then {} else data.repeated_foreign_enum,
-		repeated_string_piece = if data == nil then {} else data.repeated_string_piece,
-		repeated_cord = if data == nil then {} else data.repeated_cord,
-		packed_int32 = if data == nil then {} else data.packed_int32,
-		packed_int64 = if data == nil then {} else data.packed_int64,
-		packed_uint32 = if data == nil then {} else data.packed_uint32,
-		packed_uint64 = if data == nil then {} else data.packed_uint64,
-		packed_sint32 = if data == nil then {} else data.packed_sint32,
-		packed_sint64 = if data == nil then {} else data.packed_sint64,
-		packed_fixed32 = if data == nil then {} else data.packed_fixed32,
-		packed_fixed64 = if data == nil then {} else data.packed_fixed64,
-		packed_sfixed32 = if data == nil then {} else data.packed_sfixed32,
-		packed_sfixed64 = if data == nil then {} else data.packed_sfixed64,
-		packed_float = if data == nil then {} else data.packed_float,
-		packed_double = if data == nil then {} else data.packed_double,
-		packed_bool = if data == nil then {} else data.packed_bool,
-		packed_nested_enum = if data == nil then {} else data.packed_nested_enum,
-		unpacked_int32 = if data == nil then {} else data.unpacked_int32,
-		unpacked_int64 = if data == nil then {} else data.unpacked_int64,
-		unpacked_uint32 = if data == nil then {} else data.unpacked_uint32,
-		unpacked_uint64 = if data == nil then {} else data.unpacked_uint64,
-		unpacked_sint32 = if data == nil then {} else data.unpacked_sint32,
-		unpacked_sint64 = if data == nil then {} else data.unpacked_sint64,
-		unpacked_fixed32 = if data == nil then {} else data.unpacked_fixed32,
-		unpacked_fixed64 = if data == nil then {} else data.unpacked_fixed64,
-		unpacked_sfixed32 = if data == nil then {} else data.unpacked_sfixed32,
-		unpacked_sfixed64 = if data == nil then {} else data.unpacked_sfixed64,
-		unpacked_float = if data == nil then {} else data.unpacked_float,
-		unpacked_double = if data == nil then {} else data.unpacked_double,
-		unpacked_bool = if data == nil then {} else data.unpacked_bool,
-		unpacked_nested_enum = if data == nil then {} else data.unpacked_nested_enum,
-		map_int32_int32 = if data == nil then {} else data.map_int32_int32,
-		map_int64_int64 = if data == nil then {} else data.map_int64_int64,
-		map_uint32_uint32 = if data == nil then {} else data.map_uint32_uint32,
-		map_uint64_uint64 = if data == nil then {} else data.map_uint64_uint64,
-		map_sint32_sint32 = if data == nil then {} else data.map_sint32_sint32,
-		map_sint64_sint64 = if data == nil then {} else data.map_sint64_sint64,
-		map_fixed32_fixed32 = if data == nil then {} else data.map_fixed32_fixed32,
-		map_fixed64_fixed64 = if data == nil then {} else data.map_fixed64_fixed64,
-		map_sfixed32_sfixed32 = if data == nil then {} else data.map_sfixed32_sfixed32,
-		map_sfixed64_sfixed64 = if data == nil then {} else data.map_sfixed64_sfixed64,
-		map_int32_float = if data == nil then {} else data.map_int32_float,
-		map_int32_double = if data == nil then {} else data.map_int32_double,
-		map_bool_bool = if data == nil then {} else data.map_bool_bool,
-		map_string_string = if data == nil then {} else data.map_string_string,
-		map_string_bytes = if data == nil then {} else data.map_string_bytes,
-		map_string_nested_message = if data == nil then {} else data.map_string_nested_message,
-		map_string_foreign_message = if data == nil then {} else data.map_string_foreign_message,
-		map_string_nested_enum = if data == nil then {} else data.map_string_nested_enum,
-		map_string_foreign_enum = if data == nil then {} else data.map_string_foreign_enum,
-		oneof_field = if data == nil then nil else data.oneof_field,
-		optional_bool_wrapper = if data == nil then nil else data.optional_bool_wrapper,
-		optional_int32_wrapper = if data == nil then nil else data.optional_int32_wrapper,
-		optional_int64_wrapper = if data == nil then nil else data.optional_int64_wrapper,
-		optional_uint32_wrapper = if data == nil then nil else data.optional_uint32_wrapper,
-		optional_uint64_wrapper = if data == nil then nil else data.optional_uint64_wrapper,
-		optional_float_wrapper = if data == nil then nil else data.optional_float_wrapper,
-		optional_double_wrapper = if data == nil then nil else data.optional_double_wrapper,
-		optional_string_wrapper = if data == nil then nil else data.optional_string_wrapper,
-		optional_bytes_wrapper = if data == nil then nil else data.optional_bytes_wrapper,
-		repeated_bool_wrapper = if data == nil then {} else data.repeated_bool_wrapper,
-		repeated_int32_wrapper = if data == nil then {} else data.repeated_int32_wrapper,
-		repeated_int64_wrapper = if data == nil then {} else data.repeated_int64_wrapper,
-		repeated_uint32_wrapper = if data == nil then {} else data.repeated_uint32_wrapper,
-		repeated_uint64_wrapper = if data == nil then {} else data.repeated_uint64_wrapper,
-		repeated_float_wrapper = if data == nil then {} else data.repeated_float_wrapper,
-		repeated_double_wrapper = if data == nil then {} else data.repeated_double_wrapper,
-		repeated_string_wrapper = if data == nil then {} else data.repeated_string_wrapper,
-		repeated_bytes_wrapper = if data == nil then {} else data.repeated_bytes_wrapper,
-		optional_duration = if data == nil then nil else data.optional_duration,
-		optional_timestamp = if data == nil then nil else data.optional_timestamp,
-		optional_field_mask = if data == nil then nil else data.optional_field_mask,
-		optional_struct = if data == nil then nil else data.optional_struct,
-		optional_any = if data == nil then nil else data.optional_any,
-		optional_value = if data == nil then nil else data.optional_value,
-		optional_null_value = if data == nil
+		optional_string_piece = if data == nil or data.optional_string_piece == nil
+			then ""
+			else data.optional_string_piece,
+		optional_cord = if data == nil or data.optional_cord == nil then "" else data.optional_cord,
+		recursive_message = if data == nil or data.recursive_message == nil then nil else data.recursive_message,
+		repeated_int32 = if data == nil or data.repeated_int32 == nil then {} else data.repeated_int32,
+		repeated_int64 = if data == nil or data.repeated_int64 == nil then {} else data.repeated_int64,
+		repeated_uint32 = if data == nil or data.repeated_uint32 == nil then {} else data.repeated_uint32,
+		repeated_uint64 = if data == nil or data.repeated_uint64 == nil then {} else data.repeated_uint64,
+		repeated_sint32 = if data == nil or data.repeated_sint32 == nil then {} else data.repeated_sint32,
+		repeated_sint64 = if data == nil or data.repeated_sint64 == nil then {} else data.repeated_sint64,
+		repeated_fixed32 = if data == nil or data.repeated_fixed32 == nil then {} else data.repeated_fixed32,
+		repeated_fixed64 = if data == nil or data.repeated_fixed64 == nil then {} else data.repeated_fixed64,
+		repeated_sfixed32 = if data == nil or data.repeated_sfixed32 == nil then {} else data.repeated_sfixed32,
+		repeated_sfixed64 = if data == nil or data.repeated_sfixed64 == nil then {} else data.repeated_sfixed64,
+		repeated_float = if data == nil or data.repeated_float == nil then {} else data.repeated_float,
+		repeated_double = if data == nil or data.repeated_double == nil then {} else data.repeated_double,
+		repeated_bool = if data == nil or data.repeated_bool == nil then {} else data.repeated_bool,
+		repeated_string = if data == nil or data.repeated_string == nil then {} else data.repeated_string,
+		repeated_bytes = if data == nil or data.repeated_bytes == nil then {} else data.repeated_bytes,
+		repeated_nested_message = if data == nil or data.repeated_nested_message == nil
+			then {}
+			else data.repeated_nested_message,
+		repeated_foreign_message = if data == nil or data.repeated_foreign_message == nil
+			then {}
+			else data.repeated_foreign_message,
+		repeated_nested_enum = if data == nil or data.repeated_nested_enum == nil
+			then {}
+			else data.repeated_nested_enum,
+		repeated_foreign_enum = if data == nil or data.repeated_foreign_enum == nil
+			then {}
+			else data.repeated_foreign_enum,
+		repeated_string_piece = if data == nil or data.repeated_string_piece == nil
+			then {}
+			else data.repeated_string_piece,
+		repeated_cord = if data == nil or data.repeated_cord == nil then {} else data.repeated_cord,
+		packed_int32 = if data == nil or data.packed_int32 == nil then {} else data.packed_int32,
+		packed_int64 = if data == nil or data.packed_int64 == nil then {} else data.packed_int64,
+		packed_uint32 = if data == nil or data.packed_uint32 == nil then {} else data.packed_uint32,
+		packed_uint64 = if data == nil or data.packed_uint64 == nil then {} else data.packed_uint64,
+		packed_sint32 = if data == nil or data.packed_sint32 == nil then {} else data.packed_sint32,
+		packed_sint64 = if data == nil or data.packed_sint64 == nil then {} else data.packed_sint64,
+		packed_fixed32 = if data == nil or data.packed_fixed32 == nil then {} else data.packed_fixed32,
+		packed_fixed64 = if data == nil or data.packed_fixed64 == nil then {} else data.packed_fixed64,
+		packed_sfixed32 = if data == nil or data.packed_sfixed32 == nil then {} else data.packed_sfixed32,
+		packed_sfixed64 = if data == nil or data.packed_sfixed64 == nil then {} else data.packed_sfixed64,
+		packed_float = if data == nil or data.packed_float == nil then {} else data.packed_float,
+		packed_double = if data == nil or data.packed_double == nil then {} else data.packed_double,
+		packed_bool = if data == nil or data.packed_bool == nil then {} else data.packed_bool,
+		packed_nested_enum = if data == nil or data.packed_nested_enum == nil then {} else data.packed_nested_enum,
+		unpacked_int32 = if data == nil or data.unpacked_int32 == nil then {} else data.unpacked_int32,
+		unpacked_int64 = if data == nil or data.unpacked_int64 == nil then {} else data.unpacked_int64,
+		unpacked_uint32 = if data == nil or data.unpacked_uint32 == nil then {} else data.unpacked_uint32,
+		unpacked_uint64 = if data == nil or data.unpacked_uint64 == nil then {} else data.unpacked_uint64,
+		unpacked_sint32 = if data == nil or data.unpacked_sint32 == nil then {} else data.unpacked_sint32,
+		unpacked_sint64 = if data == nil or data.unpacked_sint64 == nil then {} else data.unpacked_sint64,
+		unpacked_fixed32 = if data == nil or data.unpacked_fixed32 == nil then {} else data.unpacked_fixed32,
+		unpacked_fixed64 = if data == nil or data.unpacked_fixed64 == nil then {} else data.unpacked_fixed64,
+		unpacked_sfixed32 = if data == nil or data.unpacked_sfixed32 == nil then {} else data.unpacked_sfixed32,
+		unpacked_sfixed64 = if data == nil or data.unpacked_sfixed64 == nil then {} else data.unpacked_sfixed64,
+		unpacked_float = if data == nil or data.unpacked_float == nil then {} else data.unpacked_float,
+		unpacked_double = if data == nil or data.unpacked_double == nil then {} else data.unpacked_double,
+		unpacked_bool = if data == nil or data.unpacked_bool == nil then {} else data.unpacked_bool,
+		unpacked_nested_enum = if data == nil or data.unpacked_nested_enum == nil
+			then {}
+			else data.unpacked_nested_enum,
+		map_int32_int32 = if data == nil or data.map_int32_int32 == nil then {} else data.map_int32_int32,
+		map_int64_int64 = if data == nil or data.map_int64_int64 == nil then {} else data.map_int64_int64,
+		map_uint32_uint32 = if data == nil or data.map_uint32_uint32 == nil then {} else data.map_uint32_uint32,
+		map_uint64_uint64 = if data == nil or data.map_uint64_uint64 == nil then {} else data.map_uint64_uint64,
+		map_sint32_sint32 = if data == nil or data.map_sint32_sint32 == nil then {} else data.map_sint32_sint32,
+		map_sint64_sint64 = if data == nil or data.map_sint64_sint64 == nil then {} else data.map_sint64_sint64,
+		map_fixed32_fixed32 = if data == nil or data.map_fixed32_fixed32 == nil then {} else data.map_fixed32_fixed32,
+		map_fixed64_fixed64 = if data == nil or data.map_fixed64_fixed64 == nil then {} else data.map_fixed64_fixed64,
+		map_sfixed32_sfixed32 = if data == nil or data.map_sfixed32_sfixed32 == nil
+			then {}
+			else data.map_sfixed32_sfixed32,
+		map_sfixed64_sfixed64 = if data == nil or data.map_sfixed64_sfixed64 == nil
+			then {}
+			else data.map_sfixed64_sfixed64,
+		map_int32_float = if data == nil or data.map_int32_float == nil then {} else data.map_int32_float,
+		map_int32_double = if data == nil or data.map_int32_double == nil then {} else data.map_int32_double,
+		map_bool_bool = if data == nil or data.map_bool_bool == nil then {} else data.map_bool_bool,
+		map_string_string = if data == nil or data.map_string_string == nil then {} else data.map_string_string,
+		map_string_bytes = if data == nil or data.map_string_bytes == nil then {} else data.map_string_bytes,
+		map_string_nested_message = if data == nil or data.map_string_nested_message == nil
+			then {}
+			else data.map_string_nested_message,
+		map_string_foreign_message = if data == nil or data.map_string_foreign_message == nil
+			then {}
+			else data.map_string_foreign_message,
+		map_string_nested_enum = if data == nil or data.map_string_nested_enum == nil
+			then {}
+			else data.map_string_nested_enum,
+		map_string_foreign_enum = if data == nil or data.map_string_foreign_enum == nil
+			then {}
+			else data.map_string_foreign_enum,
+		oneof_field = if data == nil or data.oneof_field == nil then nil else data.oneof_field,
+		optional_bool_wrapper = if data == nil or data.optional_bool_wrapper == nil
+			then nil
+			else data.optional_bool_wrapper,
+		optional_int32_wrapper = if data == nil or data.optional_int32_wrapper == nil
+			then nil
+			else data.optional_int32_wrapper,
+		optional_int64_wrapper = if data == nil or data.optional_int64_wrapper == nil
+			then nil
+			else data.optional_int64_wrapper,
+		optional_uint32_wrapper = if data == nil or data.optional_uint32_wrapper == nil
+			then nil
+			else data.optional_uint32_wrapper,
+		optional_uint64_wrapper = if data == nil or data.optional_uint64_wrapper == nil
+			then nil
+			else data.optional_uint64_wrapper,
+		optional_float_wrapper = if data == nil or data.optional_float_wrapper == nil
+			then nil
+			else data.optional_float_wrapper,
+		optional_double_wrapper = if data == nil or data.optional_double_wrapper == nil
+			then nil
+			else data.optional_double_wrapper,
+		optional_string_wrapper = if data == nil or data.optional_string_wrapper == nil
+			then nil
+			else data.optional_string_wrapper,
+		optional_bytes_wrapper = if data == nil or data.optional_bytes_wrapper == nil
+			then nil
+			else data.optional_bytes_wrapper,
+		repeated_bool_wrapper = if data == nil or data.repeated_bool_wrapper == nil
+			then {}
+			else data.repeated_bool_wrapper,
+		repeated_int32_wrapper = if data == nil or data.repeated_int32_wrapper == nil
+			then {}
+			else data.repeated_int32_wrapper,
+		repeated_int64_wrapper = if data == nil or data.repeated_int64_wrapper == nil
+			then {}
+			else data.repeated_int64_wrapper,
+		repeated_uint32_wrapper = if data == nil or data.repeated_uint32_wrapper == nil
+			then {}
+			else data.repeated_uint32_wrapper,
+		repeated_uint64_wrapper = if data == nil or data.repeated_uint64_wrapper == nil
+			then {}
+			else data.repeated_uint64_wrapper,
+		repeated_float_wrapper = if data == nil or data.repeated_float_wrapper == nil
+			then {}
+			else data.repeated_float_wrapper,
+		repeated_double_wrapper = if data == nil or data.repeated_double_wrapper == nil
+			then {}
+			else data.repeated_double_wrapper,
+		repeated_string_wrapper = if data == nil or data.repeated_string_wrapper == nil
+			then {}
+			else data.repeated_string_wrapper,
+		repeated_bytes_wrapper = if data == nil or data.repeated_bytes_wrapper == nil
+			then {}
+			else data.repeated_bytes_wrapper,
+		optional_duration = if data == nil or data.optional_duration == nil then nil else data.optional_duration,
+		optional_timestamp = if data == nil or data.optional_timestamp == nil then nil else data.optional_timestamp,
+		optional_field_mask = if data == nil or data.optional_field_mask == nil then nil else data.optional_field_mask,
+		optional_struct = if data == nil or data.optional_struct == nil then nil else data.optional_struct,
+		optional_any = if data == nil or data.optional_any == nil then nil else data.optional_any,
+		optional_value = if data == nil or data.optional_value == nil then nil else data.optional_value,
+		optional_null_value = if data == nil or data.optional_null_value == nil
 			then assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default")
 			else data.optional_null_value,
-		repeated_duration = if data == nil then {} else data.repeated_duration,
-		repeated_timestamp = if data == nil then {} else data.repeated_timestamp,
-		repeated_fieldmask = if data == nil then {} else data.repeated_fieldmask,
-		repeated_struct = if data == nil then {} else data.repeated_struct,
-		repeated_any = if data == nil then {} else data.repeated_any,
-		repeated_value = if data == nil then {} else data.repeated_value,
-		repeated_list_value = if data == nil then {} else data.repeated_list_value,
-		fieldname1 = if data == nil then 0 else data.fieldname1,
-		field_name2 = if data == nil then 0 else data.field_name2,
-		_field_name3 = if data == nil then 0 else data._field_name3,
-		field__name4_ = if data == nil then 0 else data.field__name4_,
-		field0name5 = if data == nil then 0 else data.field0name5,
-		field_0_name6 = if data == nil then 0 else data.field_0_name6,
-		fieldName7 = if data == nil then 0 else data.fieldName7,
-		FieldName8 = if data == nil then 0 else data.FieldName8,
-		field_Name9 = if data == nil then 0 else data.field_Name9,
-		Field_Name10 = if data == nil then 0 else data.Field_Name10,
-		FIELD_NAME11 = if data == nil then 0 else data.FIELD_NAME11,
-		FIELD_name12 = if data == nil then 0 else data.FIELD_name12,
-		__field_name13 = if data == nil then 0 else data.__field_name13,
-		__Field_name14 = if data == nil then 0 else data.__Field_name14,
-		field__name15 = if data == nil then 0 else data.field__name15,
-		field__Name16 = if data == nil then 0 else data.field__Name16,
-		field_name17__ = if data == nil then 0 else data.field_name17__,
-		Field_name18__ = if data == nil then 0 else data.Field_name18__,
+		repeated_duration = if data == nil or data.repeated_duration == nil then {} else data.repeated_duration,
+		repeated_timestamp = if data == nil or data.repeated_timestamp == nil then {} else data.repeated_timestamp,
+		repeated_fieldmask = if data == nil or data.repeated_fieldmask == nil then {} else data.repeated_fieldmask,
+		repeated_struct = if data == nil or data.repeated_struct == nil then {} else data.repeated_struct,
+		repeated_any = if data == nil or data.repeated_any == nil then {} else data.repeated_any,
+		repeated_value = if data == nil or data.repeated_value == nil then {} else data.repeated_value,
+		repeated_list_value = if data == nil or data.repeated_list_value == nil then {} else data.repeated_list_value,
+		fieldname1 = if data == nil or data.fieldname1 == nil then 0 else data.fieldname1,
+		field_name2 = if data == nil or data.field_name2 == nil then 0 else data.field_name2,
+		_field_name3 = if data == nil or data._field_name3 == nil then 0 else data._field_name3,
+		field__name4_ = if data == nil or data.field__name4_ == nil then 0 else data.field__name4_,
+		field0name5 = if data == nil or data.field0name5 == nil then 0 else data.field0name5,
+		field_0_name6 = if data == nil or data.field_0_name6 == nil then 0 else data.field_0_name6,
+		fieldName7 = if data == nil or data.fieldName7 == nil then 0 else data.fieldName7,
+		FieldName8 = if data == nil or data.FieldName8 == nil then 0 else data.FieldName8,
+		field_Name9 = if data == nil or data.field_Name9 == nil then 0 else data.field_Name9,
+		Field_Name10 = if data == nil or data.Field_Name10 == nil then 0 else data.Field_Name10,
+		FIELD_NAME11 = if data == nil or data.FIELD_NAME11 == nil then 0 else data.FIELD_NAME11,
+		FIELD_name12 = if data == nil or data.FIELD_name12 == nil then 0 else data.FIELD_name12,
+		__field_name13 = if data == nil or data.__field_name13 == nil then 0 else data.__field_name13,
+		__Field_name14 = if data == nil or data.__Field_name14 == nil then 0 else data.__Field_name14,
+		field__name15 = if data == nil or data.field__name15 == nil then 0 else data.field__name15,
+		field__Name16 = if data == nil or data.field__Name16 == nil then 0 else data.field__Name16,
+		field_name17__ = if data == nil or data.field_name17__ == nil then 0 else data.field_name17__,
+		Field_name18__ = if data == nil or data.Field_name18__ == nil then 0 else data.Field_name18__,
 	}, _TestAllTypesProto3Impl)
 end
 
@@ -6384,11 +6744,11 @@ local _TestAllTypesProto3_NestedMessageImpl = {}
 _TestAllTypesProto3_NestedMessageImpl.__index = _TestAllTypesProto3_NestedMessageImpl
 
 function _TestAllTypesProto3_NestedMessageImpl.new(
-	data: _TestAllTypesProto3_NestedMessageFields?
+	data: _TestAllTypesProto3_NestedMessagePartialFields?
 ): TestAllTypesProto3_NestedMessage
 	return setmetatable({
-		a = if data == nil then 0 else data.a,
-		corecursive = if data == nil then nil else data.corecursive,
+		a = if data == nil or data.a == nil then 0 else data.a,
+		corecursive = if data == nil or data.corecursive == nil then nil else data.corecursive,
 	}, _TestAllTypesProto3_NestedMessageImpl)
 end
 
@@ -6486,11 +6846,11 @@ local _TestAllTypesProto3_MapInt32Int32EntryImpl = {}
 _TestAllTypesProto3_MapInt32Int32EntryImpl.__index = _TestAllTypesProto3_MapInt32Int32EntryImpl
 
 function _TestAllTypesProto3_MapInt32Int32EntryImpl.new(
-	data: _TestAllTypesProto3_MapInt32Int32EntryFields?
+	data: _TestAllTypesProto3_MapInt32Int32EntryPartialFields?
 ): TestAllTypesProto3_MapInt32Int32Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapInt32Int32EntryImpl)
 end
 
@@ -6589,11 +6949,11 @@ local _TestAllTypesProto3_MapInt64Int64EntryImpl = {}
 _TestAllTypesProto3_MapInt64Int64EntryImpl.__index = _TestAllTypesProto3_MapInt64Int64EntryImpl
 
 function _TestAllTypesProto3_MapInt64Int64EntryImpl.new(
-	data: _TestAllTypesProto3_MapInt64Int64EntryFields?
+	data: _TestAllTypesProto3_MapInt64Int64EntryPartialFields?
 ): TestAllTypesProto3_MapInt64Int64Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapInt64Int64EntryImpl)
 end
 
@@ -6692,11 +7052,11 @@ local _TestAllTypesProto3_MapUint32Uint32EntryImpl = {}
 _TestAllTypesProto3_MapUint32Uint32EntryImpl.__index = _TestAllTypesProto3_MapUint32Uint32EntryImpl
 
 function _TestAllTypesProto3_MapUint32Uint32EntryImpl.new(
-	data: _TestAllTypesProto3_MapUint32Uint32EntryFields?
+	data: _TestAllTypesProto3_MapUint32Uint32EntryPartialFields?
 ): TestAllTypesProto3_MapUint32Uint32Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapUint32Uint32EntryImpl)
 end
 
@@ -6795,11 +7155,11 @@ local _TestAllTypesProto3_MapUint64Uint64EntryImpl = {}
 _TestAllTypesProto3_MapUint64Uint64EntryImpl.__index = _TestAllTypesProto3_MapUint64Uint64EntryImpl
 
 function _TestAllTypesProto3_MapUint64Uint64EntryImpl.new(
-	data: _TestAllTypesProto3_MapUint64Uint64EntryFields?
+	data: _TestAllTypesProto3_MapUint64Uint64EntryPartialFields?
 ): TestAllTypesProto3_MapUint64Uint64Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapUint64Uint64EntryImpl)
 end
 
@@ -6898,11 +7258,11 @@ local _TestAllTypesProto3_MapSint32Sint32EntryImpl = {}
 _TestAllTypesProto3_MapSint32Sint32EntryImpl.__index = _TestAllTypesProto3_MapSint32Sint32EntryImpl
 
 function _TestAllTypesProto3_MapSint32Sint32EntryImpl.new(
-	data: _TestAllTypesProto3_MapSint32Sint32EntryFields?
+	data: _TestAllTypesProto3_MapSint32Sint32EntryPartialFields?
 ): TestAllTypesProto3_MapSint32Sint32Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapSint32Sint32EntryImpl)
 end
 
@@ -7001,11 +7361,11 @@ local _TestAllTypesProto3_MapSint64Sint64EntryImpl = {}
 _TestAllTypesProto3_MapSint64Sint64EntryImpl.__index = _TestAllTypesProto3_MapSint64Sint64EntryImpl
 
 function _TestAllTypesProto3_MapSint64Sint64EntryImpl.new(
-	data: _TestAllTypesProto3_MapSint64Sint64EntryFields?
+	data: _TestAllTypesProto3_MapSint64Sint64EntryPartialFields?
 ): TestAllTypesProto3_MapSint64Sint64Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapSint64Sint64EntryImpl)
 end
 
@@ -7104,11 +7464,11 @@ local _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {}
 _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.__index = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 
 function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.new(
-	data: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?
+	data: _TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields?
 ): TestAllTypesProto3_MapFixed32Fixed32Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapFixed32Fixed32EntryImpl)
 end
 
@@ -7207,11 +7567,11 @@ local _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {}
 _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.__index = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 
 function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.new(
-	data: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?
+	data: _TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields?
 ): TestAllTypesProto3_MapFixed64Fixed64Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapFixed64Fixed64EntryImpl)
 end
 
@@ -7310,11 +7670,11 @@ local _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {}
 _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.__index = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 
 function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.new(
-	data: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?
+	data: _TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields?
 ): TestAllTypesProto3_MapSfixed32Sfixed32Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl)
 end
 
@@ -7419,11 +7779,11 @@ local _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {}
 _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.__index = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 
 function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.new(
-	data: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?
+	data: _TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields?
 ): TestAllTypesProto3_MapSfixed64Sfixed64Entry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl)
 end
 
@@ -7528,11 +7888,11 @@ local _TestAllTypesProto3_MapInt32FloatEntryImpl = {}
 _TestAllTypesProto3_MapInt32FloatEntryImpl.__index = _TestAllTypesProto3_MapInt32FloatEntryImpl
 
 function _TestAllTypesProto3_MapInt32FloatEntryImpl.new(
-	data: _TestAllTypesProto3_MapInt32FloatEntryFields?
+	data: _TestAllTypesProto3_MapInt32FloatEntryPartialFields?
 ): TestAllTypesProto3_MapInt32FloatEntry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapInt32FloatEntryImpl)
 end
 
@@ -7631,11 +7991,11 @@ local _TestAllTypesProto3_MapInt32DoubleEntryImpl = {}
 _TestAllTypesProto3_MapInt32DoubleEntryImpl.__index = _TestAllTypesProto3_MapInt32DoubleEntryImpl
 
 function _TestAllTypesProto3_MapInt32DoubleEntryImpl.new(
-	data: _TestAllTypesProto3_MapInt32DoubleEntryFields?
+	data: _TestAllTypesProto3_MapInt32DoubleEntryPartialFields?
 ): TestAllTypesProto3_MapInt32DoubleEntry
 	return setmetatable({
-		key = if data == nil then 0 else data.key,
-		value = if data == nil then 0 else data.value,
+		key = if data == nil or data.key == nil then 0 else data.key,
+		value = if data == nil or data.value == nil then 0 else data.value,
 	}, _TestAllTypesProto3_MapInt32DoubleEntryImpl)
 end
 
@@ -7734,11 +8094,11 @@ local _TestAllTypesProto3_MapBoolBoolEntryImpl = {}
 _TestAllTypesProto3_MapBoolBoolEntryImpl.__index = _TestAllTypesProto3_MapBoolBoolEntryImpl
 
 function _TestAllTypesProto3_MapBoolBoolEntryImpl.new(
-	data: _TestAllTypesProto3_MapBoolBoolEntryFields?
+	data: _TestAllTypesProto3_MapBoolBoolEntryPartialFields?
 ): TestAllTypesProto3_MapBoolBoolEntry
 	return setmetatable({
-		key = if data == nil then false else data.key,
-		value = if data == nil then false else data.value,
+		key = if data == nil or data.key == nil then false else data.key,
+		value = if data == nil or data.value == nil then false else data.value,
 	}, _TestAllTypesProto3_MapBoolBoolEntryImpl)
 end
 
@@ -7837,11 +8197,11 @@ local _TestAllTypesProto3_MapStringStringEntryImpl = {}
 _TestAllTypesProto3_MapStringStringEntryImpl.__index = _TestAllTypesProto3_MapStringStringEntryImpl
 
 function _TestAllTypesProto3_MapStringStringEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringStringEntryFields?
+	data: _TestAllTypesProto3_MapStringStringEntryPartialFields?
 ): TestAllTypesProto3_MapStringStringEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then "" else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then "" else data.value,
 	}, _TestAllTypesProto3_MapStringStringEntryImpl)
 end
 
@@ -7940,11 +8300,11 @@ local _TestAllTypesProto3_MapStringBytesEntryImpl = {}
 _TestAllTypesProto3_MapStringBytesEntryImpl.__index = _TestAllTypesProto3_MapStringBytesEntryImpl
 
 function _TestAllTypesProto3_MapStringBytesEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringBytesEntryFields?
+	data: _TestAllTypesProto3_MapStringBytesEntryPartialFields?
 ): TestAllTypesProto3_MapStringBytesEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then buffer.create(0) else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then buffer.create(0) else data.value,
 	}, _TestAllTypesProto3_MapStringBytesEntryImpl)
 end
 
@@ -8043,11 +8403,11 @@ local _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {}
 _TestAllTypesProto3_MapStringNestedMessageEntryImpl.__index = _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 
 function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
+	data: _TestAllTypesProto3_MapStringNestedMessageEntryPartialFields?
 ): TestAllTypesProto3_MapStringNestedMessageEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then nil else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then nil else data.value,
 	}, _TestAllTypesProto3_MapStringNestedMessageEntryImpl)
 end
 
@@ -8153,11 +8513,11 @@ local _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {}
 _TestAllTypesProto3_MapStringForeignMessageEntryImpl.__index = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 
 function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
+	data: _TestAllTypesProto3_MapStringForeignMessageEntryPartialFields?
 ): TestAllTypesProto3_MapStringForeignMessageEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then nil else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then nil else data.value,
 	}, _TestAllTypesProto3_MapStringForeignMessageEntryImpl)
 end
 
@@ -8263,11 +8623,11 @@ local _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {}
 _TestAllTypesProto3_MapStringNestedEnumEntryImpl.__index = _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 
 function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringNestedEnumEntryFields?
+	data: _TestAllTypesProto3_MapStringNestedEnumEntryPartialFields?
 ): TestAllTypesProto3_MapStringNestedEnumEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil
 			then assert(TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
 			else data.value,
 	}, _TestAllTypesProto3_MapStringNestedEnumEntryImpl)
@@ -8384,11 +8744,13 @@ local _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {}
 _TestAllTypesProto3_MapStringForeignEnumEntryImpl.__index = _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 
 function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.new(
-	data: _TestAllTypesProto3_MapStringForeignEnumEntryFields?
+	data: _TestAllTypesProto3_MapStringForeignEnumEntryPartialFields?
 ): TestAllTypesProto3_MapStringForeignEnumEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default") else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil
+			then assert(ForeignEnum.fromNumber(0), "Enum has no 0 default")
+			else data.value,
 	}, _TestAllTypesProto3_MapStringForeignEnumEntryImpl)
 end
 
@@ -8588,9 +8950,9 @@ TestAllTypesProto3_AliasedEnum = {
 local _ForeignMessageImpl = {}
 _ForeignMessageImpl.__index = _ForeignMessageImpl
 
-function _ForeignMessageImpl.new(data: _ForeignMessageFields?): ForeignMessage
+function _ForeignMessageImpl.new(data: _ForeignMessagePartialFields?): ForeignMessage
 	return setmetatable({
-		c = if data == nil then 0 else data.c,
+		c = if data == nil or data.c == nil then 0 else data.c,
 	}, _ForeignMessageImpl)
 end
 
@@ -8668,7 +9030,7 @@ ForeignMessage = _ForeignMessageImpl
 local _NullHypothesisProto3Impl = {}
 _NullHypothesisProto3Impl.__index = _NullHypothesisProto3Impl
 
-function _NullHypothesisProto3Impl.new(data: _NullHypothesisProto3Fields?): NullHypothesisProto3
+function _NullHypothesisProto3Impl.new(data: _NullHypothesisProto3PartialFields?): NullHypothesisProto3
 	return setmetatable({}, _NullHypothesisProto3Impl)
 end
 
@@ -8727,7 +9089,7 @@ NullHypothesisProto3 = _NullHypothesisProto3Impl
 local _EnumOnlyProto3Impl = {}
 _EnumOnlyProto3Impl.__index = _EnumOnlyProto3Impl
 
-function _EnumOnlyProto3Impl.new(data: _EnumOnlyProto3Fields?): EnumOnlyProto3
+function _EnumOnlyProto3Impl.new(data: _EnumOnlyProto3PartialFields?): EnumOnlyProto3
 	return setmetatable({}, _EnumOnlyProto3Impl)
 end
 
