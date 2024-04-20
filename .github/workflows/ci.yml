@@ -23,15 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Run tests
-      run: cargo test --release -- --nocapture
-  luau-analyze:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
     - name: Setup foreman
       uses: Roblox/setup-foreman@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run tests
+      run: cargo test --release -- --nocapture
     - name: Analyze
+      # cargo test will generate files to analyze, so it's worth checking those regardless of if the actual tests pass
+      if: ${{ !cancelled() }}
       run: luau-lsp analyze --settings ./.vscode/settings.json --flag:LuauTinyControlFlowAnalysis=True --flag:LuauInstantiateInSubtyping=True ./conformance/generated ./src/luau/proto ./src/tests
