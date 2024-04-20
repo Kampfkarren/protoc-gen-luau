@@ -1,5 +1,4 @@
 --!strict
-
 local TypeRegistry = {}
 TypeRegistry.__index = TypeRegistry
 
@@ -7,12 +6,12 @@ local message = require("./message")
 
 export type TypeRegistry = typeof(setmetatable(
 	{} :: {
-		types: { [string]: message.Message<unknown> },
+		_types: { [string]: message.Message<unknown, unknown> },
 	},
 	TypeRegistry
 ))
 
-function TypeRegistry.new(inputTypes: { message.Message<unknown> })
+function TypeRegistry.new(inputTypes: { message.Message<unknown, unknown> })
 	local types = {}
 
 	for _, inputType in inputTypes do
@@ -20,16 +19,16 @@ function TypeRegistry.new(inputTypes: { message.Message<unknown> })
 	end
 
 	return setmetatable({
-		types = types,
+		_types = types,
 	}, TypeRegistry)
 end
 
-function TypeRegistry.findMessage(self: TypeRegistry, fullName: string): message.Message<unknown>?
-	return self.types[fullName]
+function TypeRegistry.findMessage(self: TypeRegistry, fullName: string): message.Message<unknown, unknown>?
+	return self._types[fullName]
 end
 
-function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<unknown>)
-	self.types[inputType.descriptor.fullName] = inputType
+function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<unknown, unknown>)
+	self._types[inputType.descriptor.fullName] = inputType
 end
 
 local default = TypeRegistry.new({})
