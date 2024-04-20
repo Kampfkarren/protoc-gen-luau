@@ -78,8 +78,8 @@ function _FieldMaskImpl.jsonEncode(fieldMask: FieldMask): string
 	return table.concat(fieldMask.paths, ",")
 end
 
-function _FieldMaskImpl.jsonDecode(anyValue: any): FieldMask
-	local input: string = anyValue
+function _FieldMaskImpl.jsonDecode(anyInput: any): FieldMask
+	local input: string = anyInput
 
 	local paths = {}
 	for path in string.gmatch(input, "[^,]+") do
