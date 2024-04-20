@@ -103,9 +103,18 @@ local ok, problem: any = pcall(function()
 	end
 
 	if request.requested_output_format == "JSON" then
+		local json
+		if not pcall(function()
+			json = jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes))
+		end) then
+			response.result = { type = "serialize_error", value = "Failed to encode JSON" }
+			writeResponse()
+			return
+		end
+
 		response.result = {
 			type = "json_payload",
-			value = jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes)),
+			value = json,
 		}
 	elseif request.requested_output_format == "PROTOBUF" then
 		response.result = {
