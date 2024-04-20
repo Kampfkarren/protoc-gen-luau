@@ -34,7 +34,7 @@ function _FieldMaskImpl.encode(self: FieldMask): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.paths and #self.paths > 0 then
+	if self.paths ~= nil and #self.paths > 0 then
 		for _, value in self.paths do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)

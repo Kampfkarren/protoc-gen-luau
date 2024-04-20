@@ -183,11 +183,11 @@ impl FieldGenerator<'_> {
 
             FieldKind::Single(field) => {
                 if self.map_type().is_some() {
-                    return format!("{this} and next({this}) ~= nil");
+                    return format!("{this} ~= nil and next({this}) ~= nil");
                 }
 
                 if field.label.is_some() && field.label() == Label::Repeated {
-                    return format!("{this} and #{this} > 0");
+                    return format!("{this} ~= nil and #{this} > 0");
                 }
 
                 // TODO: Remove default branch and explicitly type everything out
@@ -206,11 +206,11 @@ impl FieldGenerator<'_> {
                     | Type::Double => {
                         format!("{this} ~= nil and {this} ~= 0")
                     }
-                    Type::String => format!("{this} and {this} ~= \"\""),
+                    Type::String => format!("{this} ~= nil and {this} ~= \"\""),
                     Type::Bool => this,
-                    Type::Bytes => format!("{this} and buffer.len({this}) > 0"),
+                    Type::Bytes => format!("{this} ~= nil and buffer.len({this}) > 0"),
                     Type::Enum => format!(
-                        "{this} ~= nil and ({this} ~= 0 or {this} ~= {}.fromNumber(0))",
+                        "{this} ~= nil and ({this} ~= nil and {this} ~= 0 or {this} ~= {}.fromNumber(0))",
                         type_definition_of_field_descriptor(field, self.export_map, self.base_file)
                     ),
                     Type::Message => unreachable!("Message has presence"),

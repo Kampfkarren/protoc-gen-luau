@@ -653,7 +653,7 @@ function _StringValueImpl.encode(self: StringValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value and self.value ~= "" then
+	if self.value ~= nil and self.value ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.value)
 	end
@@ -722,7 +722,7 @@ function _BytesValueImpl.encode(self: BytesValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.value and buffer.len(self.value) > 0 then
+	if self.value ~= nil and buffer.len(self.value) > 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
 	end
