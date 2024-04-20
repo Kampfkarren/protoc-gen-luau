@@ -83,13 +83,6 @@ function _TimestampImpl.decode(input: buffer): Timestamp
 	return self
 end
 
-_TimestampImpl.descriptor = {
-	name = "Timestamp",
-	fullName = "google.protobuf.Timestamp",
-}
-
-Timestamp = _TimestampImpl
-
 local function serializeFractionalNanos(nanos: number): string
 	if nanos % 1e6 == 0 then
 		return string.format(".%03d", nanos)
@@ -109,7 +102,7 @@ local function deserializeFractionalNanos(nanosText: string): number
 	return nanos
 end
 
-function Timestamp.jsonEncode(timestamp: Timestamp): string
+function _TimestampImpl.jsonEncode(timestamp: Timestamp): string
 	local dateInfo = os.date("!*t", timestamp.seconds or 0)
 	return string.format(
 		"%04d-%02d-%02dT%02d:%02d:%02d%sZ",
@@ -123,7 +116,7 @@ function Timestamp.jsonEncode(timestamp: Timestamp): string
 	)
 end
 
-function Timestamp.jsonDecode(text: string): Timestamp
+function _TimestampImpl.jsonDecode(text: string): Timestamp
 	local year, month, day, hour, min, sec, nanosWithDot =
 		string.match(text, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 
@@ -155,6 +148,13 @@ function Timestamp.jsonDecode(text: string): Timestamp
 		nanos = nanos,
 	})
 end
+
+_TimestampImpl.descriptor = {
+	name = "Timestamp",
+	fullName = "google.protobuf.Timestamp",
+}
+
+Timestamp = _TimestampImpl
 
 return {
 	Timestamp = Timestamp,

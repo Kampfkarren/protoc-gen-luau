@@ -145,8 +145,8 @@ type _BytesValueImpl = {
 	new: (fields: _BytesValueFields?) -> BytesValue,
 	encode: (self: BytesValue) -> buffer,
 	decode: (input: buffer) -> BytesValue,
-	jsonEncode: (self: BytesValue) -> buffer,
-	jsonDecode: (input: buffer) -> BytesValue,
+	jsonEncode: (self: BytesValue) -> string,
+	jsonDecode: (input: string) -> BytesValue,
 	descriptor: proto.Descriptor,
 }
 
@@ -208,6 +208,16 @@ function _DoubleValueImpl.decode(input: buffer): DoubleValue
 	return self
 end
 
+function _DoubleValueImpl.jsonEncode(self: DoubleValue): number
+	return self.value
+end
+
+function _DoubleValueImpl.jsonDecode(value: number): DoubleValue
+	return DoubleValue.new({
+		value = value,
+	})
+end
+
 _DoubleValueImpl.descriptor = {
 	name = "DoubleValue",
 	fullName = "google.protobuf.DoubleValue",
@@ -264,6 +274,16 @@ function _FloatValueImpl.decode(input: buffer): FloatValue
 	end
 
 	return self
+end
+
+function _FloatValueImpl.jsonEncode(self: FloatValue): number
+	return self.value
+end
+
+function _FloatValueImpl.jsonDecode(value: number): FloatValue
+	return FloatValue.new({
+		value = value,
+	})
 end
 
 _FloatValueImpl.descriptor = {
@@ -324,6 +344,16 @@ function _Int64ValueImpl.decode(input: buffer): Int64Value
 	return self
 end
 
+function _Int64ValueImpl.jsonEncode(self: Int64Value): number
+	return self.value
+end
+
+function _Int64ValueImpl.jsonDecode(value: number): Int64Value
+	return Int64Value.new({
+		value = value,
+	})
+end
+
 _Int64ValueImpl.descriptor = {
 	name = "Int64Value",
 	fullName = "google.protobuf.Int64Value",
@@ -380,6 +410,16 @@ function _UInt64ValueImpl.decode(input: buffer): UInt64Value
 	end
 
 	return self
+end
+
+function _UInt64ValueImpl.jsonEncode(self: UInt64Value): number
+	return self.value
+end
+
+function _UInt64ValueImpl.jsonDecode(value: number): UInt64Value
+	return UInt64Value.new({
+		value = value,
+	})
 end
 
 _UInt64ValueImpl.descriptor = {
@@ -440,6 +480,16 @@ function _Int32ValueImpl.decode(input: buffer): Int32Value
 	return self
 end
 
+function _Int32ValueImpl.jsonEncode(self: Int32Value): number
+	return self.value
+end
+
+function _Int32ValueImpl.jsonDecode(value: number): Int32Value
+	return Int32Value.new({
+		value = value,
+	})
+end
+
 _Int32ValueImpl.descriptor = {
 	name = "Int32Value",
 	fullName = "google.protobuf.Int32Value",
@@ -496,6 +546,16 @@ function _UInt32ValueImpl.decode(input: buffer): UInt32Value
 	end
 
 	return self
+end
+
+function _UInt32ValueImpl.jsonEncode(self: UInt32Value): number
+	return self.value
+end
+
+function _UInt32ValueImpl.jsonDecode(value: number): UInt32Value
+	return UInt32Value.new({
+		value = value,
+	})
 end
 
 _UInt32ValueImpl.descriptor = {
@@ -556,6 +616,16 @@ function _BoolValueImpl.decode(input: buffer): BoolValue
 	return self
 end
 
+function _BoolValueImpl.jsonEncode(self: BoolValue): boolean
+	return self.value
+end
+
+function _BoolValueImpl.jsonDecode(value: boolean): BoolValue
+	return BoolValue.new({
+		value = value,
+	})
+end
+
 _BoolValueImpl.descriptor = {
 	name = "BoolValue",
 	fullName = "google.protobuf.BoolValue",
@@ -612,6 +682,16 @@ function _StringValueImpl.decode(input: buffer): StringValue
 	end
 
 	return self
+end
+
+function _StringValueImpl.jsonEncode(self: StringValue): string
+	return self.value
+end
+
+function _StringValueImpl.jsonDecode(value: string): StringValue
+	return StringValue.new({
+		value = value,
+	})
 end
 
 _StringValueImpl.descriptor = {
@@ -672,6 +752,16 @@ function _BytesValueImpl.decode(input: buffer): BytesValue
 	return self
 end
 
+function _BytesValueImpl.jsonEncode(self: BytesValue): string
+	return self.value
+end
+
+function _BytesValueImpl.jsonDecode(value: string): BytesValue
+	return BytesValue.new({
+		value = value,
+	})
+end
+
 _BytesValueImpl.descriptor = {
 	name = "BytesValue",
 	fullName = "google.protobuf.BytesValue",
@@ -679,95 +769,6 @@ _BytesValueImpl.descriptor = {
 
 BytesValue = _BytesValueImpl
 
-function BoolValue.jsonEncode(value: BoolValue): boolean
-	return value.value
-end
-
-function BoolValue.jsonDecode(value: boolean): BoolValue
-	return BoolValue.new({
-		value = value,
-	})
-end
-
-function BytesValue.jsonEncode(value: BytesValue): buffer
-	return value.value
-end
-
-function BytesValue.jsonDecode(value: buffer): BytesValue
-	return BytesValue.new({
-		value = value,
-	})
-end
-
-function DoubleValue.jsonEncode(value: DoubleValue): number
-	return value.value
-end
-
-function DoubleValue.jsonDecode(value: number): DoubleValue
-	return DoubleValue.new({
-		value = value,
-	})
-end
-
-function FloatValue.jsonEncode(value: FloatValue): number
-	return value.value
-end
-
-function FloatValue.jsonDecode(value: number): FloatValue
-	return FloatValue.new({
-		value = value,
-	})
-end
-
-function Int32Value.jsonEncode(value: Int32Value): number
-	return value.value
-end
-
-function Int32Value.jsonDecode(value: number): Int32Value
-	return Int32Value.new({
-		value = value,
-	})
-end
-
-function Int64Value.jsonEncode(value: Int64Value): number
-	return value.value
-end
-
-function Int64Value.jsonDecode(value: number): Int64Value
-	return Int64Value.new({
-		value = value,
-	})
-end
-
-function UInt32Value.jsonEncode(value: UInt32Value): number
-	return value.value
-end
-
-function UInt32Value.jsonDecode(value: number): UInt32Value
-	return UInt32Value.new({
-		value = value,
-	})
-end
-
-function UInt64Value.jsonEncode(value: UInt64Value): number
-	return value.value
-end
-
-function UInt64Value.jsonDecode(value: number): UInt64Value
-	return UInt64Value.new({
-		value = value,
-	})
-end
-
-function StringValue.jsonEncode(value: StringValue): string
-	return value.value
-end
-
-function StringValue.jsonDecode(value: string): StringValue
-	return StringValue.new({
-		value = value,
-	})
-end
 return {
 	DoubleValue = DoubleValue,
 	FloatValue = FloatValue,

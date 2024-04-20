@@ -1,4 +1,4 @@
-function Value.jsonEncode(input: Value)
+function _ValueImpl.jsonEncode(input: Value)
 	local kind = input.kind
 
 	if kind == nil or kind.type == "null_value" then
@@ -15,7 +15,7 @@ function Value.jsonEncode(input: Value)
 	end
 end
 
-function Value.jsonDecode(input: any): Value
+function _ValueImpl.jsonDecode(input: any): Value
 	if input == nil then
 		return Value.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
 	elseif typeof(input) == "number" then
@@ -45,48 +45,4 @@ function Value.jsonDecode(input: any): Value
 	else
 		error(`Unknown input type: {typeof(input)}`)
 	end
-end
-
-function Struct.jsonEncode(struct: Struct): { [string]: any }
-	local serialized = {}
-
-	for key, value in struct.fields do
-		serialized[key] = Value.jsonEncode(value)
-	end
-
-	return serialized
-end
-
-function Struct.jsonDecode(input: { [string]: any }): Struct
-	local fields = {}
-
-	for key, serializedValue in input do
-		fields[key] = Value.jsonDecode(serializedValue)
-	end
-
-	return Struct.new({
-		fields = fields,
-	})
-end
-
-function ListValue.jsonEncode(list: ListValue): { any }
-	local serialized = {}
-
-	for _, value in list.values do
-		table.insert(serialized, Value.jsonEncode(value))
-	end
-
-	return serialized
-end
-
-function ListValue.jsonDecode(input: { any }): ListValue
-	local values = {}
-
-	for _, value in input do
-		table.insert(values, Value.jsonDecode(value))
-	end
-
-	return ListValue.new({
-		values = values,
-	})
 end
