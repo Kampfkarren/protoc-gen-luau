@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
-	new: () -> FieldMask,
+	new: (fields: _FieldMaskFields?) -> FieldMask,
 	encode: (self: FieldMask) -> buffer,
 	decode: (input: buffer) -> FieldMask,
 	jsonEncode: (self: FieldMask) -> string,
@@ -19,7 +19,7 @@ type _FieldMaskFields = {
 }
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-local FieldMask: proto.Message<FieldMask>
+local FieldMask: proto.Message<FieldMask, _FieldMaskFields> & proto.CustomJson<FieldMask, string>
 
 local _FieldMaskImpl = {}
 _FieldMaskImpl.__index = _FieldMaskImpl
@@ -35,7 +35,7 @@ function _FieldMaskImpl.encode(self: FieldMask): buffer
 	local cursor = 0
 
 	if #self.paths > 0 then
-		for _, value: string in self.paths do
+		for _, value in self.paths do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
@@ -74,18 +74,13 @@ function _FieldMaskImpl.decode(input: buffer): FieldMask
 	return self
 end
 
-_FieldMaskImpl.descriptor = {
-	name = "FieldMask",
-	fullName = "google.protobuf.FieldMask",
-}
-
-FieldMask = _FieldMaskImpl
-
-function FieldMask.jsonEncode(fieldMask: FieldMask): string
+function _FieldMaskImpl.jsonEncode(fieldMask: FieldMask): string
 	return table.concat(fieldMask.paths, ",")
 end
 
-function FieldMask.jsonDecode(input: string): FieldMask
+function _FieldMaskImpl.jsonDecode(anyValue: any): FieldMask
+	local input: string = anyValue
+
 	local paths = {}
 	for path in string.gmatch(input, "[^,]+") do
 		table.insert(paths, path)
@@ -95,6 +90,13 @@ function FieldMask.jsonDecode(input: string): FieldMask
 		paths = paths,
 	})
 end
+
+_FieldMaskImpl.descriptor = {
+	name = "FieldMask",
+	fullName = "google.protobuf.FieldMask",
+}
+
+FieldMask = _FieldMaskImpl
 
 return {
 	FieldMask = FieldMask,

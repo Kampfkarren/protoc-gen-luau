@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _DurationImpl = {
 	__index: _DurationImpl,
-	new: () -> Duration,
+	new: (fields: _DurationFields?) -> Duration,
 	encode: (self: Duration) -> buffer,
 	decode: (input: buffer) -> Duration,
 	jsonEncode: (self: Duration) -> string,
@@ -20,7 +20,7 @@ type _DurationFields = {
 }
 
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
-local Duration: proto.Message<Duration>
+local Duration: proto.Message<Duration, _DurationFields> & proto.CustomJson<Duration, string>
 
 local _DurationImpl = {}
 _DurationImpl.__index = _DurationImpl
@@ -83,13 +83,6 @@ function _DurationImpl.decode(input: buffer): Duration
 	return self
 end
 
-_DurationImpl.descriptor = {
-	name = "Duration",
-	fullName = "google.protobuf.Duration",
-}
-
-Duration = _DurationImpl
-
 local function serializeFractionalNanos(nanos: number): string
 	if nanos % 1e6 == 0 then
 		return string.format(".%03ds", nanos)
@@ -109,7 +102,7 @@ local function deserializeFractionalNanos(nanosText: string): number
 	return nanos
 end
 
-function Duration.jsonEncode(duration: Duration): string
+function _DurationImpl.jsonEncode(duration: Duration): string
 	assert(
 		duration.seconds == nil or (duration.seconds >= -315576000000 and duration.seconds <= 315576000000),
 		"Seconds out of range"
@@ -128,7 +121,8 @@ function Duration.jsonEncode(duration: Duration): string
 	return string.format("%s%d%s", nanoSign, duration.seconds or 0, serializeFractionalNanos(duration.nanos))
 end
 
-function Duration.jsonDecode(durationString: string): Duration
+function _DurationImpl.jsonDecode(anyValue: any): Duration
+	local durationString: string = anyValue
 	local simpleSecondsText = string.match(durationString, "^([%-0-9]+)s$")
 	if simpleSecondsText ~= nil then
 		local simpleSeconds = assert(
@@ -152,6 +146,13 @@ function Duration.jsonDecode(durationString: string): Duration
 		nanos = deserializeFractionalNanos(nanosText),
 	})
 end
+
+_DurationImpl.descriptor = {
+	name = "Duration",
+	fullName = "google.protobuf.Duration",
+}
+
+Duration = _DurationImpl
 
 return {
 	Duration = Duration,

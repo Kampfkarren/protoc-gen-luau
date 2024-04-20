@@ -58,7 +58,6 @@ Required.Proto3.JsonInput.Int64FieldNotNumber
 Required.Proto3.JsonInput.Int64FieldTooLarge
 Required.Proto3.JsonInput.Int64FieldTooSmall
 Required.Proto3.JsonInput.OneofFieldDuplicate
-Required.Proto3.JsonInput.OptionalBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.ProtobufOutput
 Required.Proto3.JsonInput.RepeatedBytesWrapper.ProtobufOutput
 Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotBool

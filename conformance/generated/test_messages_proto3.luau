@@ -12,7 +12,7 @@ local _google_protobuf_wrappers = require("./google/protobuf/wrappers")
 
 type _TestAllTypesProto3Impl = {
 	__index: _TestAllTypesProto3Impl,
-	new: () -> TestAllTypesProto3,
+	new: (fields: _TestAllTypesProto3Fields?) -> TestAllTypesProto3,
 	encode: (self: TestAllTypesProto3) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3,
 	jsonEncode: (self: TestAllTypesProto3) -> { [string]: any },
@@ -177,11 +177,11 @@ type _TestAllTypesProto3Fields = {
 }
 
 export type TestAllTypesProto3 = typeof(setmetatable({} :: _TestAllTypesProto3Fields, {} :: _TestAllTypesProto3Impl))
-local TestAllTypesProto3: proto.Message<TestAllTypesProto3>
+local TestAllTypesProto3: proto.Message<TestAllTypesProto3, _TestAllTypesProto3Fields>
 
 type _TestAllTypesProto3_NestedMessageImpl = {
 	__index: _TestAllTypesProto3_NestedMessageImpl,
-	new: () -> TestAllTypesProto3_NestedMessage,
+	new: (fields: _TestAllTypesProto3_NestedMessageFields?) -> TestAllTypesProto3_NestedMessage,
 	encode: (self: TestAllTypesProto3_NestedMessage) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_NestedMessage,
 	jsonEncode: (self: TestAllTypesProto3_NestedMessage) -> { [string]: any },
@@ -198,11 +198,11 @@ export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_NestedMessageFields,
 	{} :: _TestAllTypesProto3_NestedMessageImpl
 ))
-local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage>
+local TestAllTypesProto3_NestedMessage: proto.Message<TestAllTypesProto3_NestedMessage, _TestAllTypesProto3_NestedMessageFields>
 
 type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32Int32EntryImpl,
-	new: () -> TestAllTypesProto3_MapInt32Int32Entry,
+	new: (fields: _TestAllTypesProto3_MapInt32Int32EntryFields?) -> TestAllTypesProto3_MapInt32Int32Entry,
 	encode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32Int32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32Int32Entry) -> { [string]: any },
@@ -219,11 +219,11 @@ export type TestAllTypesProto3_MapInt32Int32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryFields,
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
 ))
-local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry>
+local TestAllTypesProto3_MapInt32Int32Entry: proto.Message<TestAllTypesProto3_MapInt32Int32Entry, _TestAllTypesProto3_MapInt32Int32EntryFields>
 
 type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt64Int64EntryImpl,
-	new: () -> TestAllTypesProto3_MapInt64Int64Entry,
+	new: (fields: _TestAllTypesProto3_MapInt64Int64EntryFields?) -> TestAllTypesProto3_MapInt64Int64Entry,
 	encode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt64Int64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt64Int64Entry) -> { [string]: any },
@@ -240,11 +240,11 @@ export type TestAllTypesProto3_MapInt64Int64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryFields,
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
 ))
-local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry>
+local TestAllTypesProto3_MapInt64Int64Entry: proto.Message<TestAllTypesProto3_MapInt64Int64Entry, _TestAllTypesProto3_MapInt64Int64EntryFields>
 
 type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint32Uint32EntryImpl,
-	new: () -> TestAllTypesProto3_MapUint32Uint32Entry,
+	new: (fields: _TestAllTypesProto3_MapUint32Uint32EntryFields?) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	encode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint32Uint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint32Uint32Entry) -> { [string]: any },
@@ -261,11 +261,11 @@ export type TestAllTypesProto3_MapUint32Uint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryFields,
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
 ))
-local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry>
+local TestAllTypesProto3_MapUint32Uint32Entry: proto.Message<TestAllTypesProto3_MapUint32Uint32Entry, _TestAllTypesProto3_MapUint32Uint32EntryFields>
 
 type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint64Uint64EntryImpl,
-	new: () -> TestAllTypesProto3_MapUint64Uint64Entry,
+	new: (fields: _TestAllTypesProto3_MapUint64Uint64EntryFields?) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	encode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapUint64Uint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapUint64Uint64Entry) -> { [string]: any },
@@ -282,11 +282,11 @@ export type TestAllTypesProto3_MapUint64Uint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryFields,
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
 ))
-local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry>
+local TestAllTypesProto3_MapUint64Uint64Entry: proto.Message<TestAllTypesProto3_MapUint64Uint64Entry, _TestAllTypesProto3_MapUint64Uint64EntryFields>
 
 type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint32Sint32EntryImpl,
-	new: () -> TestAllTypesProto3_MapSint32Sint32Entry,
+	new: (fields: _TestAllTypesProto3_MapSint32Sint32EntryFields?) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	encode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint32Sint32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint32Sint32Entry) -> { [string]: any },
@@ -303,11 +303,11 @@ export type TestAllTypesProto3_MapSint32Sint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryFields,
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
 ))
-local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry>
+local TestAllTypesProto3_MapSint32Sint32Entry: proto.Message<TestAllTypesProto3_MapSint32Sint32Entry, _TestAllTypesProto3_MapSint32Sint32EntryFields>
 
 type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint64Sint64EntryImpl,
-	new: () -> TestAllTypesProto3_MapSint64Sint64Entry,
+	new: (fields: _TestAllTypesProto3_MapSint64Sint64EntryFields?) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	encode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSint64Sint64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSint64Sint64Entry) -> { [string]: any },
@@ -324,11 +324,11 @@ export type TestAllTypesProto3_MapSint64Sint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryFields,
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
 ))
-local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry>
+local TestAllTypesProto3_MapSint64Sint64Entry: proto.Message<TestAllTypesProto3_MapSint64Sint64Entry, _TestAllTypesProto3_MapSint64Sint64EntryFields>
 
 type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl,
-	new: () -> TestAllTypesProto3_MapFixed32Fixed32Entry,
+	new: (fields: _TestAllTypesProto3_MapFixed32Fixed32EntryFields?) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	encode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed32Fixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed32Fixed32Entry) -> { [string]: any },
@@ -345,11 +345,11 @@ export type TestAllTypesProto3_MapFixed32Fixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 ))
-local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<TestAllTypesProto3_MapFixed32Fixed32Entry>
+local TestAllTypesProto3_MapFixed32Fixed32Entry: proto.Message<TestAllTypesProto3_MapFixed32Fixed32Entry, _TestAllTypesProto3_MapFixed32Fixed32EntryFields>
 
 type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl,
-	new: () -> TestAllTypesProto3_MapFixed64Fixed64Entry,
+	new: (fields: _TestAllTypesProto3_MapFixed64Fixed64EntryFields?) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	encode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapFixed64Fixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapFixed64Fixed64Entry) -> { [string]: any },
@@ -366,11 +366,11 @@ export type TestAllTypesProto3_MapFixed64Fixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 ))
-local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<TestAllTypesProto3_MapFixed64Fixed64Entry>
+local TestAllTypesProto3_MapFixed64Fixed64Entry: proto.Message<TestAllTypesProto3_MapFixed64Fixed64Entry, _TestAllTypesProto3_MapFixed64Fixed64EntryFields>
 
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl,
-	new: () -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	new: (fields: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields?) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	encode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed32Sfixed32Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed32Sfixed32Entry) -> { [string]: any },
@@ -387,11 +387,11 @@ export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 ))
-local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<TestAllTypesProto3_MapSfixed32Sfixed32Entry>
+local TestAllTypesProto3_MapSfixed32Sfixed32Entry: proto.Message<TestAllTypesProto3_MapSfixed32Sfixed32Entry, _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields>
 
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl,
-	new: () -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	new: (fields: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields?) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	encode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapSfixed64Sfixed64Entry,
 	jsonEncode: (self: TestAllTypesProto3_MapSfixed64Sfixed64Entry) -> { [string]: any },
@@ -408,11 +408,11 @@ export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 ))
-local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<TestAllTypesProto3_MapSfixed64Sfixed64Entry>
+local TestAllTypesProto3_MapSfixed64Sfixed64Entry: proto.Message<TestAllTypesProto3_MapSfixed64Sfixed64Entry, _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields>
 
 type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32FloatEntryImpl,
-	new: () -> TestAllTypesProto3_MapInt32FloatEntry,
+	new: (fields: _TestAllTypesProto3_MapInt32FloatEntryFields?) -> TestAllTypesProto3_MapInt32FloatEntry,
 	encode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32FloatEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32FloatEntry) -> { [string]: any },
@@ -429,11 +429,11 @@ export type TestAllTypesProto3_MapInt32FloatEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
 ))
-local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry>
+local TestAllTypesProto3_MapInt32FloatEntry: proto.Message<TestAllTypesProto3_MapInt32FloatEntry, _TestAllTypesProto3_MapInt32FloatEntryFields>
 
 type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32DoubleEntryImpl,
-	new: () -> TestAllTypesProto3_MapInt32DoubleEntry,
+	new: (fields: _TestAllTypesProto3_MapInt32DoubleEntryFields?) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	encode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapInt32DoubleEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapInt32DoubleEntry) -> { [string]: any },
@@ -450,11 +450,11 @@ export type TestAllTypesProto3_MapInt32DoubleEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
 ))
-local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry>
+local TestAllTypesProto3_MapInt32DoubleEntry: proto.Message<TestAllTypesProto3_MapInt32DoubleEntry, _TestAllTypesProto3_MapInt32DoubleEntryFields>
 
 type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	__index: _TestAllTypesProto3_MapBoolBoolEntryImpl,
-	new: () -> TestAllTypesProto3_MapBoolBoolEntry,
+	new: (fields: _TestAllTypesProto3_MapBoolBoolEntryFields?) -> TestAllTypesProto3_MapBoolBoolEntry,
 	encode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapBoolBoolEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapBoolBoolEntry) -> { [string]: any },
@@ -471,11 +471,11 @@ export type TestAllTypesProto3_MapBoolBoolEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryFields,
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
 ))
-local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry>
+local TestAllTypesProto3_MapBoolBoolEntry: proto.Message<TestAllTypesProto3_MapBoolBoolEntry, _TestAllTypesProto3_MapBoolBoolEntryFields>
 
 type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringStringEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringStringEntry,
+	new: (fields: _TestAllTypesProto3_MapStringStringEntryFields?) -> TestAllTypesProto3_MapStringStringEntry,
 	encode: (self: TestAllTypesProto3_MapStringStringEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringStringEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringStringEntry) -> { [string]: any },
@@ -492,11 +492,11 @@ export type TestAllTypesProto3_MapStringStringEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringStringEntryFields,
 	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
 ))
-local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry>
+local TestAllTypesProto3_MapStringStringEntry: proto.Message<TestAllTypesProto3_MapStringStringEntry, _TestAllTypesProto3_MapStringStringEntryFields>
 
 type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringBytesEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringBytesEntry,
+	new: (fields: _TestAllTypesProto3_MapStringBytesEntryFields?) -> TestAllTypesProto3_MapStringBytesEntry,
 	encode: (self: TestAllTypesProto3_MapStringBytesEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringBytesEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringBytesEntry) -> { [string]: any },
@@ -513,11 +513,13 @@ export type TestAllTypesProto3_MapStringBytesEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringBytesEntryFields,
 	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
 ))
-local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry>
+local TestAllTypesProto3_MapStringBytesEntry: proto.Message<TestAllTypesProto3_MapStringBytesEntry, _TestAllTypesProto3_MapStringBytesEntryFields>
 
 type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedMessageEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringNestedMessageEntry,
+	new: (
+		fields: _TestAllTypesProto3_MapStringNestedMessageEntryFields?
+	) -> TestAllTypesProto3_MapStringNestedMessageEntry,
 	encode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedMessageEntry) -> { [string]: any },
@@ -534,11 +536,16 @@ export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 ))
-local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<TestAllTypesProto3_MapStringNestedMessageEntry>
+local TestAllTypesProto3_MapStringNestedMessageEntry: proto.Message<
+	TestAllTypesProto3_MapStringNestedMessageEntry,
+	_TestAllTypesProto3_MapStringNestedMessageEntryFields
+>
 
 type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignMessageEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringForeignMessageEntry,
+	new: (
+		fields: _TestAllTypesProto3_MapStringForeignMessageEntryFields?
+	) -> TestAllTypesProto3_MapStringForeignMessageEntry,
 	encode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignMessageEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignMessageEntry) -> { [string]: any },
@@ -555,11 +562,14 @@ export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatabl
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 ))
-local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<TestAllTypesProto3_MapStringForeignMessageEntry>
+local TestAllTypesProto3_MapStringForeignMessageEntry: proto.Message<
+	TestAllTypesProto3_MapStringForeignMessageEntry,
+	_TestAllTypesProto3_MapStringForeignMessageEntryFields
+>
 
 type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedEnumEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringNestedEnumEntry,
+	new: (fields: _TestAllTypesProto3_MapStringNestedEnumEntryFields?) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	encode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringNestedEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringNestedEnumEntry) -> { [string]: any },
@@ -576,11 +586,11 @@ export type TestAllTypesProto3_MapStringNestedEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 ))
-local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<TestAllTypesProto3_MapStringNestedEnumEntry>
+local TestAllTypesProto3_MapStringNestedEnumEntry: proto.Message<TestAllTypesProto3_MapStringNestedEnumEntry, _TestAllTypesProto3_MapStringNestedEnumEntryFields>
 
 type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignEnumEntryImpl,
-	new: () -> TestAllTypesProto3_MapStringForeignEnumEntry,
+	new: (fields: _TestAllTypesProto3_MapStringForeignEnumEntryFields?) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	encode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> buffer,
 	decode: (input: buffer) -> TestAllTypesProto3_MapStringForeignEnumEntry,
 	jsonEncode: (self: TestAllTypesProto3_MapStringForeignEnumEntry) -> { [string]: any },
@@ -597,7 +607,7 @@ export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 ))
-local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<TestAllTypesProto3_MapStringForeignEnumEntry>
+local TestAllTypesProto3_MapStringForeignEnumEntry: proto.Message<TestAllTypesProto3_MapStringForeignEnumEntry, _TestAllTypesProto3_MapStringForeignEnumEntryFields>
 
 local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
@@ -607,7 +617,7 @@ export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_
 
 type _ForeignMessageImpl = {
 	__index: _ForeignMessageImpl,
-	new: () -> ForeignMessage,
+	new: (fields: _ForeignMessageFields?) -> ForeignMessage,
 	encode: (self: ForeignMessage) -> buffer,
 	decode: (input: buffer) -> ForeignMessage,
 	jsonEncode: (self: ForeignMessage) -> { [string]: any },
@@ -620,11 +630,11 @@ type _ForeignMessageFields = {
 }
 
 export type ForeignMessage = typeof(setmetatable({} :: _ForeignMessageFields, {} :: _ForeignMessageImpl))
-local ForeignMessage: proto.Message<ForeignMessage>
+local ForeignMessage: proto.Message<ForeignMessage, _ForeignMessageFields>
 
 type _NullHypothesisProto3Impl = {
 	__index: _NullHypothesisProto3Impl,
-	new: () -> NullHypothesisProto3,
+	new: (fields: _NullHypothesisProto3Fields?) -> NullHypothesisProto3,
 	encode: (self: NullHypothesisProto3) -> buffer,
 	decode: (input: buffer) -> NullHypothesisProto3,
 	jsonEncode: (self: NullHypothesisProto3) -> { [string]: any },
@@ -638,11 +648,11 @@ export type NullHypothesisProto3 = typeof(setmetatable(
 	{} :: _NullHypothesisProto3Fields,
 	{} :: _NullHypothesisProto3Impl
 ))
-local NullHypothesisProto3: proto.Message<NullHypothesisProto3>
+local NullHypothesisProto3: proto.Message<NullHypothesisProto3, _NullHypothesisProto3Fields>
 
 type _EnumOnlyProto3Impl = {
 	__index: _EnumOnlyProto3Impl,
-	new: () -> EnumOnlyProto3,
+	new: (fields: _EnumOnlyProto3Fields?) -> EnumOnlyProto3,
 	encode: (self: EnumOnlyProto3) -> buffer,
 	decode: (input: buffer) -> EnumOnlyProto3,
 	jsonEncode: (self: EnumOnlyProto3) -> { [string]: any },
@@ -653,7 +663,7 @@ type _EnumOnlyProto3Impl = {
 type _EnumOnlyProto3Fields = {}
 
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
-local EnumOnlyProto3: proto.Message<EnumOnlyProto3>
+local EnumOnlyProto3: proto.Message<EnumOnlyProto3, _EnumOnlyProto3Fields>
 
 local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
@@ -913,12 +923,12 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	if self.optional_nested_enum ~= 0 or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 21, proto.wireTypes.varint)
 		output, cursor =
-			proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum))
+			proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum :: any))
 	end
 
 	if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 22, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.optional_foreign_enum))
+		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.optional_foreign_enum :: any))
 	end
 
 	if
@@ -926,8 +936,11 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		or self.optional_aliased_enum ~= TestAllTypesProto3_AliasedEnum.fromNumber(0)
 	then
 		output, cursor = proto.writeTag(output, cursor, 23, proto.wireTypes.varint)
-		output, cursor =
-			proto.writeVarInt(output, cursor, TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum))
+		output, cursor = proto.writeVarInt(
+			output,
+			cursor,
+			TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum :: any)
+		)
 	end
 
 	if self.optional_string_piece ~= "" then
@@ -1103,21 +1116,21 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_string > 0 then
-		for _, value: string in self.repeated_string do
+		for _, value in self.repeated_string do
 			output, cursor = proto.writeTag(output, cursor, 44, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
 	end
 
 	if #self.repeated_bytes > 0 then
-		for _, value: buffer in self.repeated_bytes do
+		for _, value in self.repeated_bytes do
 			output, cursor = proto.writeTag(output, cursor, 45, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, value, buffer.len(value))
 		end
 	end
 
 	if #self.repeated_nested_message > 0 then
-		for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
+		for _, value in self.repeated_nested_message do
 			local encoded = TestAllTypesProto3_NestedMessage.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 48, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1125,7 +1138,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_foreign_message > 0 then
-		for _, value: ForeignMessage in self.repeated_foreign_message do
+		for _, value in self.repeated_foreign_message do
 			local encoded = ForeignMessage.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 49, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1133,28 +1146,28 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_nested_enum > 0 then
-		for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
+		for _, value in self.repeated_nested_enum do
 			output, cursor = proto.writeTag(output, cursor, 51, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value :: any))
 		end
 	end
 
 	if #self.repeated_foreign_enum > 0 then
-		for _, value: ForeignEnum in self.repeated_foreign_enum do
+		for _, value in self.repeated_foreign_enum do
 			output, cursor = proto.writeTag(output, cursor, 52, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(value))
+			output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(value :: any))
 		end
 	end
 
 	if #self.repeated_string_piece > 0 then
-		for _, value: string in self.repeated_string_piece do
+		for _, value in self.repeated_string_piece do
 			output, cursor = proto.writeTag(output, cursor, 54, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
 	end
 
 	if #self.repeated_cord > 0 then
-		for _, value: string in self.repeated_cord do
+		for _, value in self.repeated_cord do
 			output, cursor = proto.writeTag(output, cursor, 55, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
@@ -1317,112 +1330,112 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.packed_nested_enum > 0 then
-		for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
+		for _, value in self.packed_nested_enum do
 			output, cursor = proto.writeTag(output, cursor, 88, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value :: any))
 		end
 	end
 
 	if #self.unpacked_int32 > 0 then
-		for _, value: number in self.unpacked_int32 do
+		for _, value in self.unpacked_int32 do
 			output, cursor = proto.writeTag(output, cursor, 89, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_int64 > 0 then
-		for _, value: number in self.unpacked_int64 do
+		for _, value in self.unpacked_int64 do
 			output, cursor = proto.writeTag(output, cursor, 90, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_uint32 > 0 then
-		for _, value: number in self.unpacked_uint32 do
+		for _, value in self.unpacked_uint32 do
 			output, cursor = proto.writeTag(output, cursor, 91, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_uint64 > 0 then
-		for _, value: number in self.unpacked_uint64 do
+		for _, value in self.unpacked_uint64 do
 			output, cursor = proto.writeTag(output, cursor, 92, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_sint32 > 0 then
-		for _, value: number in self.unpacked_sint32 do
+		for _, value in self.unpacked_sint32 do
 			output, cursor = proto.writeTag(output, cursor, 93, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
 		end
 	end
 
 	if #self.unpacked_sint64 > 0 then
-		for _, value: number in self.unpacked_sint64 do
+		for _, value in self.unpacked_sint64 do
 			output, cursor = proto.writeTag(output, cursor, 94, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
 		end
 	end
 
 	if #self.unpacked_fixed32 > 0 then
-		for _, value: number in self.unpacked_fixed32 do
+		for _, value in self.unpacked_fixed32 do
 			output, cursor = proto.writeTag(output, cursor, 95, proto.wireTypes.i32)
 			output, cursor = proto.writeFixed32(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_fixed64 > 0 then
-		for _, value: number in self.unpacked_fixed64 do
+		for _, value in self.unpacked_fixed64 do
 			output, cursor = proto.writeTag(output, cursor, 96, proto.wireTypes.i64)
 			output, cursor = proto.writeFixed64(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_sfixed32 > 0 then
-		for _, value: number in self.unpacked_sfixed32 do
+		for _, value in self.unpacked_sfixed32 do
 			output, cursor = proto.writeTag(output, cursor, 97, proto.wireTypes.i32)
 			output, cursor = proto.writeFixed32(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_sfixed64 > 0 then
-		for _, value: number in self.unpacked_sfixed64 do
+		for _, value in self.unpacked_sfixed64 do
 			output, cursor = proto.writeTag(output, cursor, 98, proto.wireTypes.i64)
 			output, cursor = proto.writeFixed64(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_float > 0 then
-		for _, value: number in self.unpacked_float do
+		for _, value in self.unpacked_float do
 			output, cursor = proto.writeTag(output, cursor, 99, proto.wireTypes.i32)
 			output, cursor = proto.writeFloat(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_double > 0 then
-		for _, value: number in self.unpacked_double do
+		for _, value in self.unpacked_double do
 			output, cursor = proto.writeTag(output, cursor, 100, proto.wireTypes.i64)
 			output, cursor = proto.writeDouble(output, cursor, value)
 		end
 	end
 
 	if #self.unpacked_bool > 0 then
-		for _, value: boolean in self.unpacked_bool do
+		for _, value in self.unpacked_bool do
 			output, cursor = proto.writeTag(output, cursor, 101, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, if value then 1 else 0)
 		end
 	end
 
 	if #self.unpacked_nested_enum > 0 then
-		for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
+		for _, value in self.unpacked_nested_enum do
 			output, cursor = proto.writeTag(output, cursor, 102, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+			output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(value :: any))
 		end
 	end
 
 	if next(self.map_int32_int32) ~= nil then
-		for key: number, value: number in self.map_int32_int32 do
+		for key, value in self.map_int32_int32 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1435,7 +1448,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_int64_int64) ~= nil then
-		for key: number, value: number in self.map_int64_int64 do
+		for key, value in self.map_int64_int64 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1448,7 +1461,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_uint32_uint32) ~= nil then
-		for key: number, value: number in self.map_uint32_uint32 do
+		for key, value in self.map_uint32_uint32 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1461,7 +1474,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_uint64_uint64) ~= nil then
-		for key: number, value: number in self.map_uint64_uint64 do
+		for key, value in self.map_uint64_uint64 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1474,7 +1487,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_sint32_sint32) ~= nil then
-		for key: number, value: number in self.map_sint32_sint32 do
+		for key, value in self.map_sint32_sint32 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1487,7 +1500,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_sint64_sint64) ~= nil then
-		for key: number, value: number in self.map_sint64_sint64 do
+		for key, value in self.map_sint64_sint64 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1500,7 +1513,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_fixed32_fixed32) ~= nil then
-		for key: number, value: number in self.map_fixed32_fixed32 do
+		for key, value in self.map_fixed32_fixed32 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
@@ -1513,7 +1526,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_fixed64_fixed64) ~= nil then
-		for key: number, value: number in self.map_fixed64_fixed64 do
+		for key, value in self.map_fixed64_fixed64 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
@@ -1526,7 +1539,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_sfixed32_sfixed32) ~= nil then
-		for key: number, value: number in self.map_sfixed32_sfixed32 do
+		for key, value in self.map_sfixed32_sfixed32 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
@@ -1539,7 +1552,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_sfixed64_sfixed64) ~= nil then
-		for key: number, value: number in self.map_sfixed64_sfixed64 do
+		for key, value in self.map_sfixed64_sfixed64 do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
@@ -1552,7 +1565,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_int32_float) ~= nil then
-		for key: number, value: number in self.map_int32_float do
+		for key, value in self.map_int32_float do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1565,7 +1578,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_int32_double) ~= nil then
-		for key: number, value: number in self.map_int32_double do
+		for key, value in self.map_int32_double do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1578,7 +1591,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_bool_bool) ~= nil then
-		for key: boolean, value: boolean in self.map_bool_bool do
+		for key, value in self.map_bool_bool do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1591,7 +1604,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_string_string) ~= nil then
-		for key: string, value: string in self.map_string_string do
+		for key, value in self.map_string_string do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -1604,7 +1617,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_string_bytes) ~= nil then
-		for key: string, value: buffer in self.map_string_bytes do
+		for key, value in self.map_string_bytes do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -1617,7 +1630,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_string_nested_message) ~= nil then
-		for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
+		for key, value in self.map_string_nested_message do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -1631,7 +1644,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_string_foreign_message) ~= nil then
-		for key: string, value: ForeignMessage in self.map_string_foreign_message do
+		for key, value in self.map_string_foreign_message do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -1645,27 +1658,27 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if next(self.map_string_nested_enum) ~= nil then
-		for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
+		for key, value in self.map_string_nested_enum do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
 			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
 			mapBuffer, mapCursor =
-				proto.writeVarInt(mapBuffer, mapCursor, TestAllTypesProto3_NestedEnum.toNumber(value))
+				proto.writeVarInt(mapBuffer, mapCursor, TestAllTypesProto3_NestedEnum.toNumber(value :: any))
 			output, cursor = proto.writeTag(output, cursor, 73, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
 		end
 	end
 
 	if next(self.map_string_foreign_enum) ~= nil then
-		for key: string, value: ForeignEnum in self.map_string_foreign_enum do
+		for key, value in self.map_string_foreign_enum do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
 			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, ForeignEnum.toNumber(value))
+			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, ForeignEnum.toNumber(value :: any))
 			output, cursor = proto.writeTag(output, cursor, 74, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
 		end
@@ -1701,11 +1714,14 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		elseif self.oneof_field.type == "oneof_enum" then
 			output, cursor = proto.writeTag(output, cursor, 119, proto.wireTypes.varint)
 			output, cursor =
-				proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value))
+				proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value :: any))
 		elseif self.oneof_field.type == "oneof_null_value" then
 			output, cursor = proto.writeTag(output, cursor, 120, proto.wireTypes.varint)
-			output, cursor =
-				proto.writeVarInt(output, cursor, _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value))
+			output, cursor = proto.writeVarInt(
+				output,
+				cursor,
+				_google_protobuf_struct.NullValue.toNumber(self.oneof_field.value :: any)
+			)
 		end
 	end
 
@@ -1764,7 +1780,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_bool_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
+		for _, value in self.repeated_bool_wrapper do
 			local encoded = _google_protobuf_wrappers.BoolValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 211, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1772,7 +1788,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_int32_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
+		for _, value in self.repeated_int32_wrapper do
 			local encoded = _google_protobuf_wrappers.Int32Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 212, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1780,7 +1796,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_int64_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
+		for _, value in self.repeated_int64_wrapper do
 			local encoded = _google_protobuf_wrappers.Int64Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 213, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1788,7 +1804,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_uint32_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
+		for _, value in self.repeated_uint32_wrapper do
 			local encoded = _google_protobuf_wrappers.UInt32Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 214, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1796,7 +1812,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_uint64_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
+		for _, value in self.repeated_uint64_wrapper do
 			local encoded = _google_protobuf_wrappers.UInt64Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 215, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1804,7 +1820,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_float_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
+		for _, value in self.repeated_float_wrapper do
 			local encoded = _google_protobuf_wrappers.FloatValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 216, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1812,7 +1828,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_double_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
+		for _, value in self.repeated_double_wrapper do
 			local encoded = _google_protobuf_wrappers.DoubleValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 217, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1820,7 +1836,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_string_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
+		for _, value in self.repeated_string_wrapper do
 			local encoded = _google_protobuf_wrappers.StringValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 218, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1828,7 +1844,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_bytes_wrapper > 0 then
-		for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
+		for _, value in self.repeated_bytes_wrapper do
 			local encoded = _google_protobuf_wrappers.BytesValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 219, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1873,12 +1889,15 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 
 	if self.optional_null_value ~= 0 or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 307, proto.wireTypes.varint)
-		output, cursor =
-			proto.writeVarInt(output, cursor, _google_protobuf_struct.NullValue.toNumber(self.optional_null_value))
+		output, cursor = proto.writeVarInt(
+			output,
+			cursor,
+			_google_protobuf_struct.NullValue.toNumber(self.optional_null_value :: any)
+		)
 	end
 
 	if #self.repeated_duration > 0 then
-		for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
+		for _, value in self.repeated_duration do
 			local encoded = _google_protobuf_duration.Duration.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 311, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1886,7 +1905,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_timestamp > 0 then
-		for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
+		for _, value in self.repeated_timestamp do
 			local encoded = _google_protobuf_timestamp.Timestamp.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 312, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1894,7 +1913,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_fieldmask > 0 then
-		for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
+		for _, value in self.repeated_fieldmask do
 			local encoded = _google_protobuf_field_mask.FieldMask.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 313, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1902,7 +1921,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_struct > 0 then
-		for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
+		for _, value in self.repeated_struct do
 			local encoded = _google_protobuf_struct.Struct.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 324, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1910,7 +1929,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_any > 0 then
-		for _, value: _google_protobuf_any.Any in self.repeated_any do
+		for _, value in self.repeated_any do
 			local encoded = _google_protobuf_any.Any.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 315, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1918,7 +1937,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_value > 0 then
-		for _, value: _google_protobuf_struct.Value in self.repeated_value do
+		for _, value in self.repeated_value do
 			local encoded = _google_protobuf_struct.Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 316, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -1926,7 +1945,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	end
 
 	if #self.repeated_list_value > 0 then
-		for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
+		for _, value in self.repeated_list_value do
 			local encoded = _google_protobuf_struct.ListValue.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 317, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -2068,15 +2087,15 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 21 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_nested_enum = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+				self.optional_nested_enum = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 22 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_foreign_enum = ForeignEnum.fromNumber(value) or value
+				self.optional_foreign_enum = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 23 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_aliased_enum = TestAllTypesProto3_AliasedEnum.fromNumber(value) or value
+				self.optional_aliased_enum = (TestAllTypesProto3_AliasedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 31 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2108,11 +2127,17 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 51 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.repeated_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 52 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_foreign_enum, ForeignEnum.fromNumber(value) or value)
+				table.insert(
+					self.repeated_foreign_enum,
+					(ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 75 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2144,7 +2169,10 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 88 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.packed_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.packed_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 89 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2176,7 +2204,10 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 102 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.unpacked_nested_enum, TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
+				table.insert(
+					self.unpacked_nested_enum,
+					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				)
 			elseif field == 111 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -2192,17 +2223,21 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 			elseif field == 119 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.oneof_field =
-					{ type = "oneof_enum", value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value }
+				self.oneof_field = {
+					type = "oneof_enum",
+					value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 120 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.oneof_field =
-					{ type = "oneof_null_value", value = _google_protobuf_struct.NullValue.fromNumber(value) or value }
+				self.oneof_field = {
+					type = "oneof_null_value",
+					value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 307 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_null_value = _google_protobuf_struct.NullValue.fromNumber(value) or value
+				self.optional_null_value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 401 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -3075,7 +3110,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 		optionalDouble: (number | string)?,
 		optionalBool: boolean?,
 		optionalString: string?,
-		optionalBytes: buffer?,
+		optionalBytes: string?,
 		optionalNestedMessage: TestAllTypesProto3_NestedMessage?,
 		optionalForeignMessage: ForeignMessage?,
 		optionalNestedEnum: TestAllTypesProto3_NestedEnum?,
@@ -3098,7 +3133,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 		repeatedDouble: { number | string }?,
 		repeatedBool: { boolean }?,
 		repeatedString: { string }?,
-		repeatedBytes: { buffer }?,
+		repeatedBytes: { string }?,
 		repeatedNestedMessage: { TestAllTypesProto3_NestedMessage }?,
 		repeatedForeignMessage: { ForeignMessage }?,
 		repeatedNestedEnum: { TestAllTypesProto3_NestedEnum }?,
@@ -3147,7 +3182,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 		mapInt32Double: { [string]: number | string }?,
 		mapBoolBool: { [string]: boolean }?,
 		mapStringString: { [string]: string }?,
-		mapStringBytes: { [string]: buffer }?,
+		mapStringBytes: { [string]: string }?,
 		mapStringNestedMessage: { [string]: TestAllTypesProto3_NestedMessage }?,
 		mapStringForeignMessage: { [string]: ForeignMessage }?,
 		mapStringNestedEnum: { [string]: TestAllTypesProto3_NestedEnum }?,
@@ -3155,7 +3190,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 		oneofUint32: number?,
 		oneofNestedMessage: TestAllTypesProto3_NestedMessage?,
 		oneofString: string?,
-		oneofBytes: buffer?,
+		oneofBytes: string?,
 		oneofBool: boolean?,
 		oneofUint64: number?,
 		oneofFloat: (number | string)?,
@@ -3286,13 +3321,13 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 	if self.optional_nested_enum ~= 0 or self.optional_nested_enum ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
 		output.optionalNestedEnum = if typeof(self.optional_nested_enum) == "number"
 			then self.optional_nested_enum
-			else TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum)
+			else TestAllTypesProto3_NestedEnum.toNumber(self.optional_nested_enum :: any)
 	end
 
 	if self.optional_foreign_enum ~= 0 or self.optional_foreign_enum ~= ForeignEnum.fromNumber(0) then
 		output.optionalForeignEnum = if typeof(self.optional_foreign_enum) == "number"
 			then self.optional_foreign_enum
-			else ForeignEnum.toNumber(self.optional_foreign_enum)
+			else ForeignEnum.toNumber(self.optional_foreign_enum :: any)
 	end
 
 	if
@@ -3301,7 +3336,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 	then
 		output.optionalAliasedEnum = if typeof(self.optional_aliased_enum) == "number"
 			then self.optional_aliased_enum
-			else TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum)
+			else TestAllTypesProto3_AliasedEnum.toNumber(self.optional_aliased_enum :: any)
 	end
 
 	if self.optional_string_piece ~= "" then
@@ -3318,7 +3353,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_int32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_int32 do
+		for _, value in self.repeated_int32 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedInt32 = newOutput
@@ -3326,7 +3361,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_int64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_int64 do
+		for _, value in self.repeated_int64 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedInt64 = newOutput
@@ -3334,7 +3369,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_uint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_uint32 do
+		for _, value in self.repeated_uint32 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedUint32 = newOutput
@@ -3342,7 +3377,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_uint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_uint64 do
+		for _, value in self.repeated_uint64 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedUint64 = newOutput
@@ -3350,7 +3385,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_sint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_sint32 do
+		for _, value in self.repeated_sint32 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedSint32 = newOutput
@@ -3358,7 +3393,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_sint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_sint64 do
+		for _, value in self.repeated_sint64 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedSint64 = newOutput
@@ -3366,7 +3401,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_fixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_fixed32 do
+		for _, value in self.repeated_fixed32 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedFixed32 = newOutput
@@ -3374,7 +3409,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_fixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_fixed64 do
+		for _, value in self.repeated_fixed64 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedFixed64 = newOutput
@@ -3382,7 +3417,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_sfixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_sfixed32 do
+		for _, value in self.repeated_sfixed32 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedSfixed32 = newOutput
@@ -3390,7 +3425,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_sfixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.repeated_sfixed64 do
+		for _, value in self.repeated_sfixed64 do
 			table.insert(newOutput, value)
 		end
 		output.repeatedSfixed64 = newOutput
@@ -3398,7 +3433,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_float > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.repeated_float do
+		for _, value in self.repeated_float do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.repeatedFloat = newOutput
@@ -3406,7 +3441,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_double > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.repeated_double do
+		for _, value in self.repeated_double do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.repeatedDouble = newOutput
@@ -3414,7 +3449,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_bool > 0 then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in self.repeated_bool do
+		for _, value in self.repeated_bool do
 			table.insert(newOutput, value)
 		end
 		output.repeatedBool = newOutput
@@ -3422,15 +3457,15 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_string > 0 then
 		local newOutput: { string } = {}
-		for _, value: string in self.repeated_string do
+		for _, value in self.repeated_string do
 			table.insert(newOutput, value)
 		end
 		output.repeatedString = newOutput
 	end
 
 	if #self.repeated_bytes > 0 then
-		local newOutput: { buffer } = {}
-		for _, value: buffer in self.repeated_bytes do
+		local newOutput: { string } = {}
+		for _, value in self.repeated_bytes do
 			table.insert(newOutput, proto.json.serializeBuffer(value))
 		end
 		output.repeatedBytes = newOutput
@@ -3438,7 +3473,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_nested_message > 0 then
 		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
-		for _, value: TestAllTypesProto3_NestedMessage in self.repeated_nested_message do
+		for _, value in self.repeated_nested_message do
 			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonEncode(value))
 		end
 		output.repeatedNestedMessage = newOutput
@@ -3446,7 +3481,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_foreign_message > 0 then
 		local newOutput: { ForeignMessage } = {}
-		for _, value: ForeignMessage in self.repeated_foreign_message do
+		for _, value in self.repeated_foreign_message do
 			table.insert(newOutput, ForeignMessage.jsonEncode(value))
 		end
 		output.repeatedForeignMessage = newOutput
@@ -3454,10 +3489,10 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_nested_enum > 0 then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in self.repeated_nested_enum do
+		for _, value in self.repeated_nested_enum do
 			table.insert(
 				newOutput,
-				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value :: any)
 			)
 		end
 		output.repeatedNestedEnum = newOutput
@@ -3465,15 +3500,15 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_foreign_enum > 0 then
 		local newOutput: { ForeignEnum } = {}
-		for _, value: ForeignEnum in self.repeated_foreign_enum do
-			table.insert(newOutput, if typeof(value) == "number" then value else ForeignEnum.toNumber(value))
+		for _, value in self.repeated_foreign_enum do
+			table.insert(newOutput, if typeof(value) == "number" then value else ForeignEnum.toNumber(value :: any))
 		end
 		output.repeatedForeignEnum = newOutput
 	end
 
 	if #self.repeated_string_piece > 0 then
 		local newOutput: { string } = {}
-		for _, value: string in self.repeated_string_piece do
+		for _, value in self.repeated_string_piece do
 			table.insert(newOutput, value)
 		end
 		output.repeatedStringPiece = newOutput
@@ -3481,7 +3516,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_cord > 0 then
 		local newOutput: { string } = {}
-		for _, value: string in self.repeated_cord do
+		for _, value in self.repeated_cord do
 			table.insert(newOutput, value)
 		end
 		output.repeatedCord = newOutput
@@ -3489,7 +3524,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_int32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_int32 do
+		for _, value in self.packed_int32 do
 			table.insert(newOutput, value)
 		end
 		output.packedInt32 = newOutput
@@ -3497,7 +3532,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_int64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_int64 do
+		for _, value in self.packed_int64 do
 			table.insert(newOutput, value)
 		end
 		output.packedInt64 = newOutput
@@ -3505,7 +3540,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_uint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_uint32 do
+		for _, value in self.packed_uint32 do
 			table.insert(newOutput, value)
 		end
 		output.packedUint32 = newOutput
@@ -3513,7 +3548,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_uint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_uint64 do
+		for _, value in self.packed_uint64 do
 			table.insert(newOutput, value)
 		end
 		output.packedUint64 = newOutput
@@ -3521,7 +3556,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_sint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_sint32 do
+		for _, value in self.packed_sint32 do
 			table.insert(newOutput, value)
 		end
 		output.packedSint32 = newOutput
@@ -3529,7 +3564,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_sint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_sint64 do
+		for _, value in self.packed_sint64 do
 			table.insert(newOutput, value)
 		end
 		output.packedSint64 = newOutput
@@ -3537,7 +3572,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_fixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_fixed32 do
+		for _, value in self.packed_fixed32 do
 			table.insert(newOutput, value)
 		end
 		output.packedFixed32 = newOutput
@@ -3545,7 +3580,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_fixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_fixed64 do
+		for _, value in self.packed_fixed64 do
 			table.insert(newOutput, value)
 		end
 		output.packedFixed64 = newOutput
@@ -3553,7 +3588,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_sfixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_sfixed32 do
+		for _, value in self.packed_sfixed32 do
 			table.insert(newOutput, value)
 		end
 		output.packedSfixed32 = newOutput
@@ -3561,7 +3596,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_sfixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.packed_sfixed64 do
+		for _, value in self.packed_sfixed64 do
 			table.insert(newOutput, value)
 		end
 		output.packedSfixed64 = newOutput
@@ -3569,7 +3604,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_float > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.packed_float do
+		for _, value in self.packed_float do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.packedFloat = newOutput
@@ -3577,7 +3612,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_double > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.packed_double do
+		for _, value in self.packed_double do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.packedDouble = newOutput
@@ -3585,7 +3620,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_bool > 0 then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in self.packed_bool do
+		for _, value in self.packed_bool do
 			table.insert(newOutput, value)
 		end
 		output.packedBool = newOutput
@@ -3593,10 +3628,10 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.packed_nested_enum > 0 then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in self.packed_nested_enum do
+		for _, value in self.packed_nested_enum do
 			table.insert(
 				newOutput,
-				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value :: any)
 			)
 		end
 		output.packedNestedEnum = newOutput
@@ -3604,7 +3639,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_int32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_int32 do
+		for _, value in self.unpacked_int32 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedInt32 = newOutput
@@ -3612,7 +3647,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_int64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_int64 do
+		for _, value in self.unpacked_int64 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedInt64 = newOutput
@@ -3620,7 +3655,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_uint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_uint32 do
+		for _, value in self.unpacked_uint32 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedUint32 = newOutput
@@ -3628,7 +3663,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_uint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_uint64 do
+		for _, value in self.unpacked_uint64 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedUint64 = newOutput
@@ -3636,7 +3671,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_sint32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_sint32 do
+		for _, value in self.unpacked_sint32 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedSint32 = newOutput
@@ -3644,7 +3679,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_sint64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_sint64 do
+		for _, value in self.unpacked_sint64 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedSint64 = newOutput
@@ -3652,7 +3687,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_fixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_fixed32 do
+		for _, value in self.unpacked_fixed32 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedFixed32 = newOutput
@@ -3660,7 +3695,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_fixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_fixed64 do
+		for _, value in self.unpacked_fixed64 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedFixed64 = newOutput
@@ -3668,7 +3703,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_sfixed32 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_sfixed32 do
+		for _, value in self.unpacked_sfixed32 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedSfixed32 = newOutput
@@ -3676,7 +3711,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_sfixed64 > 0 then
 		local newOutput: { number } = {}
-		for _, value: number in self.unpacked_sfixed64 do
+		for _, value in self.unpacked_sfixed64 do
 			table.insert(newOutput, value)
 		end
 		output.unpackedSfixed64 = newOutput
@@ -3684,7 +3719,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_float > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.unpacked_float do
+		for _, value in self.unpacked_float do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.unpackedFloat = newOutput
@@ -3692,7 +3727,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_double > 0 then
 		local newOutput: { number | string } = {}
-		for _, value: number in self.unpacked_double do
+		for _, value in self.unpacked_double do
 			table.insert(newOutput, proto.json.serializeNumber(value))
 		end
 		output.unpackedDouble = newOutput
@@ -3700,7 +3735,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_bool > 0 then
 		local newOutput: { boolean } = {}
-		for _, value: boolean in self.unpacked_bool do
+		for _, value in self.unpacked_bool do
 			table.insert(newOutput, value)
 		end
 		output.unpackedBool = newOutput
@@ -3708,10 +3743,10 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.unpacked_nested_enum > 0 then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
-		for _, value: TestAllTypesProto3_NestedEnum in self.unpacked_nested_enum do
+		for _, value in self.unpacked_nested_enum do
 			table.insert(
 				newOutput,
-				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+				if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value :: any)
 			)
 		end
 		output.unpackedNestedEnum = newOutput
@@ -3719,7 +3754,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_int32_int32) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_int32_int32 do
+		for key, value in self.map_int32_int32 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapInt32Int32 = newOutput
@@ -3727,7 +3762,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_int64_int64) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_int64_int64 do
+		for key, value in self.map_int64_int64 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapInt64Int64 = newOutput
@@ -3735,7 +3770,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_uint32_uint32) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_uint32_uint32 do
+		for key, value in self.map_uint32_uint32 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapUint32Uint32 = newOutput
@@ -3743,7 +3778,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_uint64_uint64) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_uint64_uint64 do
+		for key, value in self.map_uint64_uint64 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapUint64Uint64 = newOutput
@@ -3751,7 +3786,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_sint32_sint32) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_sint32_sint32 do
+		for key, value in self.map_sint32_sint32 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapSint32Sint32 = newOutput
@@ -3759,7 +3794,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_sint64_sint64) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_sint64_sint64 do
+		for key, value in self.map_sint64_sint64 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapSint64Sint64 = newOutput
@@ -3767,7 +3802,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_fixed32_fixed32) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_fixed32_fixed32 do
+		for key, value in self.map_fixed32_fixed32 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapFixed32Fixed32 = newOutput
@@ -3775,7 +3810,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_fixed64_fixed64) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_fixed64_fixed64 do
+		for key, value in self.map_fixed64_fixed64 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapFixed64Fixed64 = newOutput
@@ -3783,7 +3818,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_sfixed32_sfixed32) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_sfixed32_sfixed32 do
+		for key, value in self.map_sfixed32_sfixed32 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapSfixed32Sfixed32 = newOutput
@@ -3791,7 +3826,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_sfixed64_sfixed64) ~= nil then
 		local newOutput: { [string]: number } = {}
-		for key: number, value: number in self.map_sfixed64_sfixed64 do
+		for key, value in self.map_sfixed64_sfixed64 do
 			newOutput[tostring(key)] = value
 		end
 		output.mapSfixed64Sfixed64 = newOutput
@@ -3799,7 +3834,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_int32_float) ~= nil then
 		local newOutput: { [string]: number | string } = {}
-		for key: number, value: number in self.map_int32_float do
+		for key, value in self.map_int32_float do
 			newOutput[tostring(key)] = proto.json.serializeNumber(value)
 		end
 		output.mapInt32Float = newOutput
@@ -3807,7 +3842,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_int32_double) ~= nil then
 		local newOutput: { [string]: number | string } = {}
-		for key: number, value: number in self.map_int32_double do
+		for key, value in self.map_int32_double do
 			newOutput[tostring(key)] = proto.json.serializeNumber(value)
 		end
 		output.mapInt32Double = newOutput
@@ -3815,7 +3850,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_bool_bool) ~= nil then
 		local newOutput: { [string]: boolean } = {}
-		for key: boolean, value: boolean in self.map_bool_bool do
+		for key, value in self.map_bool_bool do
 			newOutput[tostring(key)] = value
 		end
 		output.mapBoolBool = newOutput
@@ -3823,15 +3858,15 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_string_string) ~= nil then
 		local newOutput: { [string]: string } = {}
-		for key: string, value: string in self.map_string_string do
+		for key, value in self.map_string_string do
 			newOutput[key] = value
 		end
 		output.mapStringString = newOutput
 	end
 
 	if next(self.map_string_bytes) ~= nil then
-		local newOutput: { [string]: buffer } = {}
-		for key: string, value: buffer in self.map_string_bytes do
+		local newOutput: { [string]: string } = {}
+		for key, value in self.map_string_bytes do
 			newOutput[key] = proto.json.serializeBuffer(value)
 		end
 		output.mapStringBytes = newOutput
@@ -3839,7 +3874,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_string_nested_message) ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
-		for key: string, value: TestAllTypesProto3_NestedMessage in self.map_string_nested_message do
+		for key, value in self.map_string_nested_message do
 			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonEncode(value)
 		end
 		output.mapStringNestedMessage = newOutput
@@ -3847,7 +3882,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_string_foreign_message) ~= nil then
 		local newOutput: { [string]: ForeignMessage } = {}
-		for key: string, value: ForeignMessage in self.map_string_foreign_message do
+		for key, value in self.map_string_foreign_message do
 			newOutput[key] = ForeignMessage.jsonEncode(value)
 		end
 		output.mapStringForeignMessage = newOutput
@@ -3855,16 +3890,18 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if next(self.map_string_nested_enum) ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
-		for key: string, value: TestAllTypesProto3_NestedEnum in self.map_string_nested_enum do
-			newOutput[key] = if typeof(value) == "number" then value else TestAllTypesProto3_NestedEnum.toNumber(value)
+		for key, value in self.map_string_nested_enum do
+			newOutput[key] = if typeof(value) == "number"
+				then value
+				else TestAllTypesProto3_NestedEnum.toNumber(value :: any)
 		end
 		output.mapStringNestedEnum = newOutput
 	end
 
 	if next(self.map_string_foreign_enum) ~= nil then
 		local newOutput: { [string]: ForeignEnum } = {}
-		for key: string, value: ForeignEnum in self.map_string_foreign_enum do
-			newOutput[key] = if typeof(value) == "number" then value else ForeignEnum.toNumber(value)
+		for key, value in self.map_string_foreign_enum do
+			newOutput[key] = if typeof(value) == "number" then value else ForeignEnum.toNumber(value :: any)
 		end
 		output.mapStringForeignEnum = newOutput
 	end
@@ -3889,11 +3926,11 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 		elseif self.oneof_field.type == "oneof_enum" then
 			output.oneofEnum = if typeof(self.oneof_field.value) == "number"
 				then self.oneof_field.value
-				else TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value)
+				else TestAllTypesProto3_NestedEnum.toNumber(self.oneof_field.value :: any)
 		elseif self.oneof_field.type == "oneof_null_value" then
 			output.oneofNullValue = if typeof(self.oneof_field.value) == "number"
 				then self.oneof_field.value
-				else _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value)
+				else _google_protobuf_struct.NullValue.toNumber(self.oneof_field.value :: any)
 		end
 	end
 
@@ -3935,7 +3972,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_bool_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
-		for _, value: _google_protobuf_wrappers.BoolValue in self.repeated_bool_wrapper do
+		for _, value in self.repeated_bool_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonEncode(value))
 		end
 		output.repeatedBoolWrapper = newOutput
@@ -3943,7 +3980,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_int32_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
-		for _, value: _google_protobuf_wrappers.Int32Value in self.repeated_int32_wrapper do
+		for _, value in self.repeated_int32_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonEncode(value))
 		end
 		output.repeatedInt32Wrapper = newOutput
@@ -3951,7 +3988,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_int64_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
-		for _, value: _google_protobuf_wrappers.Int64Value in self.repeated_int64_wrapper do
+		for _, value in self.repeated_int64_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonEncode(value))
 		end
 		output.repeatedInt64Wrapper = newOutput
@@ -3959,7 +3996,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_uint32_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt32Value in self.repeated_uint32_wrapper do
+		for _, value in self.repeated_uint32_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonEncode(value))
 		end
 		output.repeatedUint32Wrapper = newOutput
@@ -3967,7 +4004,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_uint64_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
-		for _, value: _google_protobuf_wrappers.UInt64Value in self.repeated_uint64_wrapper do
+		for _, value in self.repeated_uint64_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonEncode(value))
 		end
 		output.repeatedUint64Wrapper = newOutput
@@ -3975,7 +4012,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_float_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
-		for _, value: _google_protobuf_wrappers.FloatValue in self.repeated_float_wrapper do
+		for _, value in self.repeated_float_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonEncode(value))
 		end
 		output.repeatedFloatWrapper = newOutput
@@ -3983,7 +4020,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_double_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
-		for _, value: _google_protobuf_wrappers.DoubleValue in self.repeated_double_wrapper do
+		for _, value in self.repeated_double_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonEncode(value))
 		end
 		output.repeatedDoubleWrapper = newOutput
@@ -3991,7 +4028,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_string_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
-		for _, value: _google_protobuf_wrappers.StringValue in self.repeated_string_wrapper do
+		for _, value in self.repeated_string_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonEncode(value))
 		end
 		output.repeatedStringWrapper = newOutput
@@ -3999,7 +4036,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_bytes_wrapper > 0 then
 		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
-		for _, value: _google_protobuf_wrappers.BytesValue in self.repeated_bytes_wrapper do
+		for _, value in self.repeated_bytes_wrapper do
 			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonEncode(value))
 		end
 		output.repeatedBytesWrapper = newOutput
@@ -4032,12 +4069,12 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 	if self.optional_null_value ~= 0 or self.optional_null_value ~= _google_protobuf_struct.NullValue.fromNumber(0) then
 		output.optionalNullValue = if typeof(self.optional_null_value) == "number"
 			then self.optional_null_value
-			else _google_protobuf_struct.NullValue.toNumber(self.optional_null_value)
+			else _google_protobuf_struct.NullValue.toNumber(self.optional_null_value :: any)
 	end
 
 	if #self.repeated_duration > 0 then
 		local newOutput: { _google_protobuf_duration.Duration } = {}
-		for _, value: _google_protobuf_duration.Duration in self.repeated_duration do
+		for _, value in self.repeated_duration do
 			table.insert(newOutput, _google_protobuf_duration.Duration.jsonEncode(value))
 		end
 		output.repeatedDuration = newOutput
@@ -4045,7 +4082,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_timestamp > 0 then
 		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
-		for _, value: _google_protobuf_timestamp.Timestamp in self.repeated_timestamp do
+		for _, value in self.repeated_timestamp do
 			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonEncode(value))
 		end
 		output.repeatedTimestamp = newOutput
@@ -4053,7 +4090,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_fieldmask > 0 then
 		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
-		for _, value: _google_protobuf_field_mask.FieldMask in self.repeated_fieldmask do
+		for _, value in self.repeated_fieldmask do
 			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonEncode(value))
 		end
 		output.repeatedFieldmask = newOutput
@@ -4061,7 +4098,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_struct > 0 then
 		local newOutput: { _google_protobuf_struct.Struct } = {}
-		for _, value: _google_protobuf_struct.Struct in self.repeated_struct do
+		for _, value in self.repeated_struct do
 			table.insert(newOutput, _google_protobuf_struct.Struct.jsonEncode(value))
 		end
 		output.repeatedStruct = newOutput
@@ -4069,7 +4106,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_any > 0 then
 		local newOutput: { _google_protobuf_any.Any } = {}
-		for _, value: _google_protobuf_any.Any in self.repeated_any do
+		for _, value in self.repeated_any do
 			table.insert(newOutput, _google_protobuf_any.Any.jsonEncode(value))
 		end
 		output.repeatedAny = newOutput
@@ -4077,7 +4114,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_value > 0 then
 		local newOutput: { _google_protobuf_struct.Value } = {}
-		for _, value: _google_protobuf_struct.Value in self.repeated_value do
+		for _, value in self.repeated_value do
 			table.insert(newOutput, _google_protobuf_struct.Value.jsonEncode(value))
 		end
 		output.repeatedValue = newOutput
@@ -4085,7 +4122,7 @@ function _TestAllTypesProto3Impl.jsonEncode(self: TestAllTypesProto3): any
 
 	if #self.repeated_list_value > 0 then
 		local newOutput: { _google_protobuf_struct.ListValue } = {}
-		for _, value: _google_protobuf_struct.ListValue in self.repeated_list_value do
+		for _, value in self.repeated_list_value do
 			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonEncode(value))
 		end
 		output.repeatedListValue = newOutput
@@ -7923,7 +7960,7 @@ end
 function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonEncode(self: TestAllTypesProto3_MapStringBytesEntry): any
 	local output: {
 		key: string?,
-		value: buffer?,
+		value: string?,
 	} = {}
 
 	if self.key ~= "" then
@@ -8207,7 +8244,7 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.encode(
 
 	if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.value))
+		output, cursor = proto.writeVarInt(output, cursor, TestAllTypesProto3_NestedEnum.toNumber(self.value :: any))
 	end
 
 	local shrunkBuffer = buffer.create(cursor)
@@ -8229,7 +8266,7 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.decode(
 			if field == 2 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.value = TestAllTypesProto3_NestedEnum.fromNumber(value) or value
+				self.value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
@@ -8264,7 +8301,7 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonEncode(
 	if self.value ~= 0 or self.value ~= TestAllTypesProto3_NestedEnum.fromNumber(0) then
 		output.value = if typeof(self.value) == "number"
 			then self.value
-			else TestAllTypesProto3_NestedEnum.toNumber(self.value)
+			else TestAllTypesProto3_NestedEnum.toNumber(self.value :: any)
 	end
 
 	return output
@@ -8320,7 +8357,7 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.encode(
 
 	if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.value))
+		output, cursor = proto.writeVarInt(output, cursor, ForeignEnum.toNumber(self.value :: any))
 	end
 
 	local shrunkBuffer = buffer.create(cursor)
@@ -8342,7 +8379,7 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.decode(
 			if field == 2 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.value = ForeignEnum.fromNumber(value) or value
+				self.value = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
@@ -8375,7 +8412,7 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonEncode(
 	end
 
 	if self.value ~= 0 or self.value ~= ForeignEnum.fromNumber(0) then
-		output.value = if typeof(self.value) == "number" then self.value else ForeignEnum.toNumber(self.value)
+		output.value = if typeof(self.value) == "number" then self.value else ForeignEnum.toNumber(self.value :: any)
 	end
 
 	return output

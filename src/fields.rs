@@ -231,19 +231,7 @@ impl FieldGenerator<'_> {
             FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
                     // Maps are { 1: key, 2: value }
-                    encode.push(format!(
-                        "for key: {}, value: {} in {this} do",
-                        type_definition_of_field_descriptor(
-                            &map_type.key,
-                            self.export_map,
-                            self.base_file
-                        ),
-                        type_definition_of_field_descriptor(
-                            &map_type.value,
-                            self.export_map,
-                            self.base_file
-                        ),
-                    ));
+                    encode.push(format!("for key, value in {this} do"));
 
                     encode.push("local mapBuffer = buffer.create(0)");
                     encode.push("local mapCursor = 0");
@@ -300,14 +288,7 @@ impl FieldGenerator<'_> {
                             output, cursor = proto.writeBuffer(output, cursor, packedBuffer, packedCursor)
                         "});
                     } else {
-                        encode.push(format!(
-                            "for _, value: {} in {this} do",
-                            type_definition_of_field_descriptor(
-                                field,
-                                self.export_map,
-                                self.base_file
-                            )
-                        ));
+                        encode.push(format!("for _, value in {this} do"));
                         encode.indent();
 
                         encode.push(encode_field_descriptor_ignore_repeated(
@@ -370,19 +351,7 @@ impl FieldGenerator<'_> {
                         "local newOutput: {} = {{}}",
                         self.json_map_type_definition()
                     ));
-                    json_encode.push(format!(
-                        "for key: {}, value: {} in {this} do",
-                        type_definition_of_field_descriptor(
-                            &map_type.key,
-                            self.export_map,
-                            self.base_file
-                        ),
-                        type_definition_of_field_descriptor(
-                            &map_type.value,
-                            self.export_map,
-                            self.base_file
-                        )
-                    ));
+                    json_encode.push(format!("for key, value in {this} do"));
                     json_encode.push(format!(
                         "newOutput[{}] = {}",
                         json_key_to_string(&map_type.key).encode,
@@ -404,10 +373,7 @@ impl FieldGenerator<'_> {
                             self.base_file
                         )
                     ));
-                    json_encode.push(format!(
-                        "for _, value: {} in {this} do",
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
-                    ));
+                    json_encode.push(format!("for _, value in {this} do"));
                     json_encode.push(format!(
                         "table.insert(newOutput, {})",
                         json_encode_instruction_field_descriptor_ignore_repeated(
@@ -650,6 +616,7 @@ fn json_type_definition_of_field_descriptor(
 ) -> String {
     match field.r#type() {
         Type::Float | Type::Double => "(number | string)".to_owned(),
+        Type::Bytes => "string".to_owned(),
         _ => type_definition_of_field_descriptor(field, export_map, base_file),
     }
 }
@@ -704,7 +671,8 @@ fn encode_field_descriptor_ignore_repeated_instruction(
         Type::Bytes => format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"),
 
         Type::Enum => format!(
-            "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var}))",
+            // :: any cast because Luau is bad with string unions
+            "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var} :: any))",
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
 
@@ -787,7 +755,8 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
         Type::Float | Type::Double => format!("proto.json.serializeNumber({value_var})"),
         Type::Bytes => format!("proto.json.serializeBuffer({value_var})"),
         Type::Enum => format!(
-            "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var})",
+            // :: any cast because Luau is bad with string unions
+            "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var} :: any)",
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
         Type::Message => format!(
@@ -942,7 +911,7 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         Type::String => "buffer.tostring(value)".into(),
 
         Type::Enum => format!(
-            "{}.fromNumber(value) or value",
+            "({}.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]",
             type_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
