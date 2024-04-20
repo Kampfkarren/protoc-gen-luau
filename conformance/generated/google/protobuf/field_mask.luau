@@ -6,11 +6,11 @@ local proto = require("../../proto")
 
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
-	new: () -> FieldMask,
+	new: (fields: _FieldMaskPartialFields?) -> FieldMask,
 	encode: (self: FieldMask) -> buffer,
 	decode: (input: buffer) -> FieldMask,
-	jsonEncode: (self: FieldMask) -> { [string]: any },
-	jsonDecode: (input: { [string]: any }) -> FieldMask,
+	jsonEncode: (self: FieldMask) -> string,
+	jsonDecode: (input: string) -> FieldMask,
 	descriptor: proto.Descriptor,
 }
 
@@ -18,15 +18,19 @@ type _FieldMaskFields = {
 	paths: { string },
 }
 
+type _FieldMaskPartialFields = {
+	paths: { string }?,
+}
+
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-local FieldMask: proto.Message<FieldMask>
+local FieldMask: proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
 local _FieldMaskImpl = {}
 _FieldMaskImpl.__index = _FieldMaskImpl
 
-function _FieldMaskImpl.new(data: _FieldMaskFields?): FieldMask
+function _FieldMaskImpl.new(data: _FieldMaskPartialFields?): FieldMask
 	return setmetatable({
-		paths = if data == nil then {} else data.paths,
+		paths = if data == nil or data.paths == nil then {} else data.paths,
 	}, _FieldMaskImpl)
 end
 
@@ -34,8 +38,8 @@ function _FieldMaskImpl.encode(self: FieldMask): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if #self.paths > 0 then
-		for _, value: string in self.paths do
+	if self.paths ~= nil and #self.paths > 0 then
+		for _, value in self.paths do
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeString(output, cursor, value)
 		end
@@ -74,35 +78,21 @@ function _FieldMaskImpl.decode(input: buffer): FieldMask
 	return self
 end
 
-function _FieldMaskImpl.jsonEncode(self: FieldMask): any
-	local output: {
-		paths: { string }?,
-	} = {}
-
-	if #self.paths > 0 then
-		local newOutput: { string } = {}
-		for _, value: string in self.paths do
-			table.insert(newOutput, value)
-		end
-		output.paths = newOutput
-	end
-
-	return output
+function _FieldMaskImpl.jsonEncode(fieldMask: FieldMask): string
+	return table.concat(fieldMask.paths, ",")
 end
 
-function _FieldMaskImpl.jsonDecode(input: { [string]: any }): FieldMask
-	local self = FieldMask.new()
+function _FieldMaskImpl.jsonDecode(anyInput: any): FieldMask
+	local input: string = anyInput
 
-	if input.paths ~= nil then
-		local newOutput: { string } = {}
-		for _, value in input.paths do
-			table.insert(newOutput, value)
-		end
-
-		self.paths = newOutput
+	local paths = {}
+	for path in string.gmatch(input, "[^,]+") do
+		table.insert(paths, path)
 	end
 
-	return self
+	return FieldMask.new({
+		paths = paths,
+	})
 end
 
 _FieldMaskImpl.descriptor = {

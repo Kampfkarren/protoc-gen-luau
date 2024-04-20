@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _StructImpl = {
 	__index: _StructImpl,
-	new: () -> Struct,
+	new: (fields: _StructPartialFields?) -> Struct,
 	encode: (self: Struct) -> buffer,
 	decode: (input: buffer) -> Struct,
 	jsonEncode: (self: Struct) -> { [string]: any },
@@ -18,12 +18,16 @@ type _StructFields = {
 	fields: { [string]: Value },
 }
 
+type _StructPartialFields = {
+	fields: { [string]: Value }?,
+}
+
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
-local Struct: proto.Message<Struct>
+local Struct: proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
 
 type _Struct_FieldsEntryImpl = {
 	__index: _Struct_FieldsEntryImpl,
-	new: () -> Struct_FieldsEntry,
+	new: (fields: _Struct_FieldsEntryPartialFields?) -> Struct_FieldsEntry,
 	encode: (self: Struct_FieldsEntry) -> buffer,
 	decode: (input: buffer) -> Struct_FieldsEntry,
 	jsonEncode: (self: Struct_FieldsEntry) -> { [string]: any },
@@ -36,12 +40,17 @@ type _Struct_FieldsEntryFields = {
 	value: Value?,
 }
 
+type _Struct_FieldsEntryPartialFields = {
+	key: string?,
+	value: Value?,
+}
+
 export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
-local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry>
+local Struct_FieldsEntry: proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
 
 type _ValueImpl = {
 	__index: _ValueImpl,
-	new: () -> Value,
+	new: (fields: _ValuePartialFields?) -> Value,
 	encode: (self: Value) -> buffer,
 	decode: (input: buffer) -> Value,
 	jsonEncode: (self: Value) -> any,
@@ -60,12 +69,23 @@ type _ValueFields = {
 	)?,
 }
 
+type _ValuePartialFields = {
+	kind: (
+		{ type: "null_value", value: NullValue }
+		| { type: "number_value", value: number }
+		| { type: "string_value", value: string }
+		| { type: "bool_value", value: boolean }
+		| { type: "struct_value", value: Struct }
+		| { type: "list_value", value: ListValue }
+	)?,
+}
+
 export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
-local Value: proto.Message<Value>
+local Value: proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
 
 type _ListValueImpl = {
 	__index: _ListValueImpl,
-	new: () -> ListValue,
+	new: (fields: _ListValuePartialFields?) -> ListValue,
 	encode: (self: ListValue) -> buffer,
 	decode: (input: buffer) -> ListValue,
 	jsonEncode: (self: ListValue) -> { any },
@@ -77,8 +97,12 @@ type _ListValueFields = {
 	values: { Value },
 }
 
+type _ListValuePartialFields = {
+	values: { Value }?,
+}
+
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
-local ListValue: proto.Message<ListValue>
+local ListValue: proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
 
 local NullValue: proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
@@ -86,9 +110,9 @@ export type NullValue = "NULL_VALUE" | number -- Unknown
 local _StructImpl = {}
 _StructImpl.__index = _StructImpl
 
-function _StructImpl.new(data: _StructFields?): Struct
+function _StructImpl.new(data: _StructPartialFields?): Struct
 	return setmetatable({
-		fields = if data == nil then {} else data.fields,
+		fields = if data == nil or data.fields == nil then {} else data.fields,
 	}, _StructImpl)
 end
 
@@ -96,8 +120,8 @@ function _StructImpl.encode(self: Struct): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if next(self.fields) ~= nil then
-		for key: string, value: Value in self.fields do
+	if self.fields ~= nil and next(self.fields) ~= nil then
+		for key, value in self.fields do
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -149,6 +173,28 @@ function _StructImpl.decode(input: buffer): Struct
 	return self
 end
 
+function _StructImpl.jsonEncode(struct: Struct): { [string]: any }
+	local serialized = {}
+
+	for key, value in struct.fields do
+		serialized[key] = Value.jsonEncode(value)
+	end
+
+	return serialized
+end
+
+function _StructImpl.jsonDecode(input: { [string]: any }): Struct
+	local fields = {}
+
+	for key, serializedValue in input do
+		fields[key] = Value.jsonDecode(serializedValue)
+	end
+
+	return Struct.new({
+		fields = fields,
+	})
+end
+
 _StructImpl.descriptor = {
 	name = "Struct",
 	fullName = "google.protobuf.Struct",
@@ -159,10 +205,10 @@ Struct = _StructImpl
 local _Struct_FieldsEntryImpl = {}
 _Struct_FieldsEntryImpl.__index = _Struct_FieldsEntryImpl
 
-function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryFields?): Struct_FieldsEntry
+function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryPartialFields?): Struct_FieldsEntry
 	return setmetatable({
-		key = if data == nil then "" else data.key,
-		value = if data == nil then nil else data.value,
+		key = if data == nil or data.key == nil then "" else data.key,
+		value = if data == nil or data.value == nil then nil else data.value,
 	}, _Struct_FieldsEntryImpl)
 end
 
@@ -170,7 +216,7 @@ function _Struct_FieldsEntryImpl.encode(self: Struct_FieldsEntry): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.key ~= "" then
+	if self.key ~= nil and self.key ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.key)
 	end
@@ -224,7 +270,7 @@ function _Struct_FieldsEntryImpl.jsonEncode(self: Struct_FieldsEntry): any
 		value: Value?,
 	} = {}
 
-	if self.key ~= "" then
+	if self.key ~= nil and self.key ~= "" then
 		output.key = self.key
 	end
 
@@ -259,9 +305,9 @@ Struct_FieldsEntry = _Struct_FieldsEntryImpl
 local _ValueImpl = {}
 _ValueImpl.__index = _ValueImpl
 
-function _ValueImpl.new(data: _ValueFields?): Value
+function _ValueImpl.new(data: _ValuePartialFields?): Value
 	return setmetatable({
-		kind = if data == nil then nil else data.kind,
+		kind = if data == nil or data.kind == nil then nil else data.kind,
 	}, _ValueImpl)
 end
 
@@ -272,7 +318,7 @@ function _ValueImpl.encode(self: Value): buffer
 	if self.kind ~= nil then
 		if self.kind.type == "null_value" then
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, NullValue.toNumber(self.kind.value))
+			output, cursor = proto.writeVarInt(output, cursor, NullValue.toNumber(self.kind.value :: any))
 		elseif self.kind.type == "number_value" then
 			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.i64)
 			output, cursor = proto.writeDouble(output, cursor, self.kind.value)
@@ -310,7 +356,10 @@ function _ValueImpl.decode(input: buffer): Value
 			if field == 1 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
-				self.kind = { type = "null_value", value = NullValue.fromNumber(value) or value }
+				self.kind = {
+					type = "null_value",
+					value = (NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
+				}
 			elseif field == 4 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
@@ -346,6 +395,55 @@ function _ValueImpl.decode(input: buffer): Value
 	return self
 end
 
+function _ValueImpl.jsonEncode(input: Value)
+	local kind = input.kind
+
+	if kind == nil or kind.type == "null_value" then
+		return nil
+	elseif kind.type == "number_value" or kind.type == "string_value" or kind.type == "bool_value" then
+		return kind.value
+	elseif kind.type == "list_value" then
+		return ListValue.jsonEncode(kind.value)
+	elseif kind.type == "struct_value" then
+		return Struct.jsonEncode(kind.value)
+	else
+		local exhaustiveMatch: never = kind.type
+		return exhaustiveMatch
+	end
+end
+
+function _ValueImpl.jsonDecode(input: any): Value
+	if input == nil then
+		return Value.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
+	elseif typeof(input) == "number" then
+		return Value.new({ kind = { type = "number_value", value = input } })
+	elseif typeof(input) == "string" then
+		return Value.new({ kind = { type = "string_value", value = input } })
+	elseif typeof(input) == "boolean" then
+		return Value.new({ kind = { type = "bool_value", value = input } })
+	elseif typeof(input) == "table" then
+		local isArray = true
+		local count = 0
+		for _ in input do
+			count += 1
+			if count > #input then
+				isArray = false
+				break
+			end
+		end
+
+		isArray = count == #input
+
+		if isArray then
+			return Value.new({ kind = { type = "list_value", value = ListValue.jsonDecode(input) } })
+		else
+			return Value.new({ kind = { type = "struct_value", value = Struct.jsonDecode(input) } })
+		end
+	else
+		error(`Unknown input type: {typeof(input)}`)
+	end
+end
+
 _ValueImpl.descriptor = {
 	name = "Value",
 	fullName = "google.protobuf.Value",
@@ -356,9 +454,9 @@ Value = _ValueImpl
 local _ListValueImpl = {}
 _ListValueImpl.__index = _ListValueImpl
 
-function _ListValueImpl.new(data: _ListValueFields?): ListValue
+function _ListValueImpl.new(data: _ListValuePartialFields?): ListValue
 	return setmetatable({
-		values = if data == nil then {} else data.values,
+		values = if data == nil or data.values == nil then {} else data.values,
 	}, _ListValueImpl)
 end
 
@@ -366,8 +464,8 @@ function _ListValueImpl.encode(self: ListValue): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if #self.values > 0 then
-		for _, value: Value in self.values do
+	if self.values ~= nil and #self.values > 0 then
+		for _, value in self.values do
 			local encoded = Value.encode(value)
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
@@ -407,6 +505,30 @@ function _ListValueImpl.decode(input: buffer): ListValue
 	return self
 end
 
+function _ListValueImpl.jsonEncode(list: ListValue): { any }
+	local serialized = {}
+
+	for _, value in list.values do
+		table.insert(serialized, Value.jsonEncode(value))
+	end
+
+	return serialized
+end
+
+function _ListValueImpl.jsonDecode(anyValue: any): ListValue
+	local input: { any } = anyValue
+
+	local values = {}
+
+	for _, value in input do
+		table.insert(values, Value.jsonDecode(value))
+	end
+
+	return ListValue.new({
+		values = values,
+	})
+end
+
 _ListValueImpl.descriptor = {
 	name = "ListValue",
 	fullName = "google.protobuf.ListValue",
@@ -439,107 +561,6 @@ NullValue = {
 		end
 	end,
 }
-
-function Value.jsonEncode(input: Value)
-	local kind = input.kind
-
-	if kind == nil or kind.type == "null_value" then
-		return nil
-	elseif kind.type == "number_value" or kind.type == "string_value" or kind.type == "bool_value" then
-		return kind.value
-	elseif kind.type == "list_value" then
-		return ListValue.jsonEncode(kind.value)
-	elseif kind.type == "struct_value" then
-		return Struct.jsonEncode(kind.value)
-	else
-		local exhaustiveMatch: never = kind.type
-		return exhaustiveMatch
-	end
-end
-
-function Value.jsonDecode(input: any): Value
-	if input == nil then
-		return Value.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
-	elseif typeof(input) == "number" then
-		return Value.new({ kind = { type = "number_value", value = input } })
-	elseif typeof(input) == "string" then
-		return Value.new({ kind = { type = "string_value", value = input } })
-	elseif typeof(input) == "boolean" then
-		return Value.new({ kind = { type = "bool_value", value = input } })
-	elseif typeof(input) == "table" then
-		local isArray = true
-		local count = 0
-		for _ in input do
-			count += 1
-			if count > #input then
-				isArray = false
-				break
-			end
-		end
-
-		isArray = count == #input
-
-		if isArray then
-			return Value.new({ kind = { type = "list_value", value = ListValue.jsonDecode(input) } })
-		else
-			return Value.new({ kind = { type = "struct_value", value = Struct.jsonDecode(input) } })
-		end
-	else
-		error(`Unknown input type: {typeof(input)}`)
-	end
-end
-
-function Struct.jsonEncode(struct: Struct): { [string]: any }
-	local serialized = {}
-
-	for key, value in struct.fields do
-		serialized[key] = Value.jsonEncode(value)
-	end
-
-	return serialized
-end
-
-function Struct.jsonDecode(input: { [string]: any }): Struct
-	local fields = {}
-
-	for key, serializedValue in input do
-		fields[key] = Value.jsonDecode(serializedValue)
-	end
-
-	return Struct.new({
-		fields = fields,
-	})
-end
-
-function ListValue.jsonEncode(list: ListValue): { any }
-	local serialized = {}
-
-	for _, value in list.values do
-		table.insert(serialized, Value.jsonEncode(value))
-	end
-
-	return serialized
-end
-
-function ListValue.jsonDecode<M>(input: { any }): ListValue
-	local values = {}
-
-	for _, value in input do
-		table.insert(values, Value.jsonDecode(value))
-	end
-
-	return ListValue.new({
-		values = values,
-	})
-end
-
-function NullValue.jsonEncode()
-	return nil
-end
-
-function NullValue.jsonDecode()
-	return NullValue.new()
-end
 
 return {
 	Struct = Struct,

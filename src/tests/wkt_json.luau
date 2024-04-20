@@ -1,6 +1,7 @@
 local tests = require("./tests")
 
 local duration = require("./samples/google/protobuf/duration")
+local field_mask = require("./samples/google/protobuf/field_mask")
 local struct = require("./samples/google/protobuf/struct")
 local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
@@ -14,45 +15,49 @@ describe("JSON round-trips should work for", function()
 		it("with null value", function()
 			local json = nil
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.type, "null_value")
-			assertEquals(deserialized_value.kind.value, "NULL_VALUE")
+			assertEquals(deserializedValue.kind.type, "null_value")
+			assertEquals(deserializedValue.kind.value, "NULL_VALUE")
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 
 		it("with number value", function()
 			local json = 3.14
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.type, "number_value")
-			assertEquals(deserialized_value.kind.value, 3.14)
+			assertEquals(deserializedValue.kind.type, "number_value")
+			assertEquals(deserializedValue.kind.value, 3.14)
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 
 		it("with string value", function()
 			local json = "Hello, World!"
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.type, "string_value")
-			assertEquals(deserialized_value.kind.value, "Hello, World!")
+			assertEquals(deserializedValue.kind.type, "string_value")
+			assertEquals(deserializedValue.kind.value, "Hello, World!")
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 
 		it("with boolean value", function()
 			local json = true
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.type, "bool_value")
-			assertEquals(deserialized_value.kind.value, true)
+			assertEquals(deserializedValue.kind.type, "bool_value")
+			assertEquals(deserializedValue.kind.value, true)
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 
 		it("with struct value", function()
@@ -64,35 +69,52 @@ describe("JSON round-trips should work for", function()
 				age = 42,
 			}
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
+			assert(deserializedValue.kind.type == "struct_value", "Deserialized value is not a Struct")
 
-			assertEquals(deserialized_value.kind.type, "struct_value")
-			assertEquals(deserialized_value.kind.value.fields.name.kind.value.fields.family.kind.value, "Doe")
+			local nameKind = deserializedValue.kind.value.fields.name.kind
+			assert(nameKind ~= nil, "Couldn't parse name field")
+			assert(nameKind.type == "struct_value", "Name wasn't a struct")
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			local familyKind = nameKind.value.fields.family.kind
+			assert(familyKind ~= nil, "Couldn't parse family field")
+
+			assertEquals(familyKind.value, "Doe")
+
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 
 		it("with list value", function()
-			local json = {
+			local json: { any } = {
 				3.14,
 				"Hello, World!",
 				true,
 			}
 
-			local deserialized_value = struct.Value.jsonDecode(json)
+			local deserializedValue = struct.Value.jsonDecode(json)
+			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
+			assert(deserializedValue.kind.type == "list_value", "Deserialized value is not a ListValue")
 
-			assertEquals(deserialized_value.kind.type, "list_value")
+			local firstValue = deserializedValue.kind.value.values[1]
+			assert(firstValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.value.values[1].kind.type, "number_value")
-			assertEquals(deserialized_value.kind.value.values[1].kind.value, 3.14)
+			local secondValue = deserializedValue.kind.value.values[2]
+			assert(secondValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.value.values[2].kind.type, "string_value")
-			assertEquals(deserialized_value.kind.value.values[2].kind.value, "Hello, World!")
+			local thirdValue = deserializedValue.kind.value.values[3]
+			assert(thirdValue.kind ~= nil, "Couldn't parse Value")
 
-			assertEquals(deserialized_value.kind.value.values[3].kind.type, "bool_value")
-			assertEquals(deserialized_value.kind.value.values[3].kind.value, true)
+			assertEquals(firstValue.kind.type, "number_value")
+			assertEquals(firstValue.kind.value, 3.14)
 
-			assertEquals(deserialized_value:jsonEncode(), json)
+			assertEquals(secondValue.kind.type, "string_value")
+			assertEquals(secondValue.kind.value, "Hello, World!")
+
+			assertEquals(thirdValue.kind.type, "bool_value")
+			assertEquals(thirdValue.kind.value, true)
+
+			assertEquals(deserializedValue:jsonEncode(), json)
 		end)
 	end)
 
@@ -132,7 +154,40 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_duration:jsonEncode(), json)
 		end)
 
-		it("with seconds and nanos", function()
+		it("with negative seconds", function()
+			local json = "-1s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, -1)
+			assertEquals(deserialized_duration.nanos, 0)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with nanos", function()
+			local json = "0.000000001s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, 1)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with seconds and many nanos", function()
+			local json = "1.5s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 1)
+			assertEquals(deserialized_duration.nanos, 500000000)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with seconds and one nano", function()
 			local json = "1.000000001s"
 
 			local deserialized_duration = duration.Duration.jsonDecode(json)
@@ -141,6 +196,53 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_duration.nanos, 1)
 
 			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with many negative nanos", function()
+			local json = "-0.5s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, -500000000)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+
+		it("with one negative nano", function()
+			local json = "-0.000000001s"
+
+			local deserialized_duration = duration.Duration.jsonDecode(json)
+
+			assertEquals(deserialized_duration.seconds, 0)
+			assertEquals(deserialized_duration.nanos, -1)
+
+			assertEquals(deserialized_duration:jsonEncode(), json)
+		end)
+	end)
+
+	describe("FieldMask", function()
+		it("with single path", function()
+			local json = "foo"
+
+			local deserialized_field_mask = field_mask.FieldMask.jsonDecode(json)
+
+			assertEquals(#deserialized_field_mask.paths, 1)
+			assertEquals(deserialized_field_mask.paths[1], "foo")
+
+			assertEquals(deserialized_field_mask:jsonEncode(), json)
+		end)
+
+		it("with multiple paths", function()
+			local json = "foo,bar.baz"
+
+			local deserialized_field_mask = field_mask.FieldMask.jsonDecode(json)
+
+			assertEquals(#deserialized_field_mask.paths, 2)
+			assertEquals(deserialized_field_mask.paths[1], "foo")
+			assertEquals(deserialized_field_mask.paths[2], "bar.baz")
+
+			assertEquals(deserialized_field_mask:jsonEncode(), json)
 		end)
 	end)
 
@@ -226,7 +328,9 @@ describe("JSON round-trips should work for", function()
 		end)
 
 		it("bytes", function()
-			local bytes_value = wrappers.BytesValue.new({ value = "Hello, World!" })
+			local bytes_value = wrappers.BytesValue.new({
+				value = buffer.fromstring("Hello, World!"),
+			})
 
 			local json = bytes_value:jsonEncode()
 

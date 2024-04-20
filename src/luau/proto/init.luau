@@ -1,23 +1,11 @@
 local base64 = require("./base64")
+local message = require("./message")
+
+export type Descriptor = message.Descriptor
+export type Message<T, Fields> = message.Message<T, Fields>
+export type CustomJson<T, Json> = message.CustomJson<T, Json>
 
 local proto = {}
-
-export type Descriptor = {
-	name: string,
-	fullName: string,
-}
-
-export type Message<T> = {
-	new: () -> T,
-
-	encode: (T) -> buffer,
-	decode: (buffer) -> T,
-
-	jsonEncode: (T) -> any,
-	jsonDecode: ({ [string]: any }) -> T,
-
-	descriptor: Descriptor,
-}
 
 export type Enum<T> = {
 	fromName: (string) -> T?,

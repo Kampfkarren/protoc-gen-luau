@@ -6,7 +6,7 @@ local proto = require("../../proto")
 
 type _AnyImpl = {
 	__index: _AnyImpl,
-	new: () -> Any,
+	new: (fields: _AnyPartialFields?) -> Any,
 	encode: (self: Any) -> buffer,
 	decode: (input: buffer) -> Any,
 	jsonEncode: (self: Any) -> { [string]: any },
@@ -19,16 +19,21 @@ type _AnyFields = {
 	value: buffer,
 }
 
+type _AnyPartialFields = {
+	type_url: string?,
+	value: buffer?,
+}
+
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-local Any: proto.Message<Any>
+local Any: proto.Message<Any, _AnyPartialFields>
 
 local _AnyImpl = {}
 _AnyImpl.__index = _AnyImpl
 
-function _AnyImpl.new(data: _AnyFields?): Any
+function _AnyImpl.new(data: _AnyPartialFields?): Any
 	return setmetatable({
-		type_url = if data == nil then "" else data.type_url,
-		value = if data == nil then buffer.create(0) else data.value,
+		type_url = if data == nil or data.type_url == nil then "" else data.type_url,
+		value = if data == nil or data.value == nil then buffer.create(0) else data.value,
 	}, _AnyImpl)
 end
 
@@ -36,12 +41,12 @@ function _AnyImpl.encode(self: Any): buffer
 	local output = buffer.create(0)
 	local cursor = 0
 
-	if self.type_url ~= "" then
+	if self.type_url ~= nil and self.type_url ~= "" then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeString(output, cursor, self.type_url)
 	end
 
-	if buffer.len(self.value) > 0 then
+	if self.value ~= nil and buffer.len(self.value) > 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
 	end
@@ -86,14 +91,14 @@ end
 function _AnyImpl.jsonEncode(self: Any): any
 	local output: {
 		typeUrl: string?,
-		value: buffer?,
+		value: string?,
 	} = {}
 
-	if self.type_url ~= "" then
+	if self.type_url ~= nil and self.type_url ~= "" then
 		output.typeUrl = self.type_url
 	end
 
-	if buffer.len(self.value) > 0 then
+	if self.value ~= nil and buffer.len(self.value) > 0 then
 		output.value = proto.json.serializeBuffer(self.value)
 	end
 

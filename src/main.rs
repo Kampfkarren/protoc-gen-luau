@@ -8,6 +8,7 @@ mod fields;
 mod generator;
 mod if_builder;
 mod string_builder;
+mod wkt_json;
 
 #[cfg(test)]
 mod luau_tests;

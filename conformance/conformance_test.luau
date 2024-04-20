@@ -80,7 +80,13 @@ local ok, problem: any = pcall(function()
 			return
 		end
 
-		testAllTypes = test_messages_proto3.TestAllTypesProto3.jsonDecode(result)
+		if not pcall(function()
+			testAllTypes = test_messages_proto3.TestAllTypesProto3.jsonDecode(result)
+		end) then
+			response.result = { type = "parse_error", value = "Failed to parse JSON" }
+			writeResponse()
+			return
+		end
 	elseif request.payload.type == "protobuf_payload" then
 		local success, result: any = pcall(test_messages_proto3.TestAllTypesProto3.decode, request.payload.value)
 		if not success then
