@@ -11,7 +11,7 @@ export type TypeRegistry = typeof(setmetatable(
 	TypeRegistry
 ))
 
-function TypeRegistry.new(inputTypes: { message.Message<unknown, unknown> })
+function TypeRegistry.new(inputTypes: { message.Message<any, any> })
 	local types = {}
 
 	for _, inputType in inputTypes do
@@ -27,7 +27,7 @@ function TypeRegistry.findMessage(self: TypeRegistry, fullName: string): message
 	return self._types[fullName]
 end
 
-function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<unknown, unknown>)
+function TypeRegistry.register(self: TypeRegistry, inputType: message.Message<any, any>)
 	self._types[inputType.descriptor.fullName] = inputType
 end
 
