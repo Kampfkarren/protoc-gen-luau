@@ -282,6 +282,8 @@ _<name>Impl.descriptor = {
     fullName = "<full_name>",
 }
 
+<any_methods>
+
 <name> = _<name>Impl
 
 typeRegistry.default:register(<name>)
@@ -310,6 +312,22 @@ const ENUM: &str = r#"<name> = {
         <from_name>
     end,
 }"#;
+
+const ANY_METHOD_SIGNATURES: &str = r#"
+-- Pack a message into an Any.
+--
+-- typeUrlPrefix should be the base URL for the type URL. For example, Google uses
+-- "type.googleapis.com".
+pack: <T, F>(payload: proto.Message<T, F>, typeUrlPrefix: string?) -> Any,
+
+-- Returns the message contained by the Any (or nil if the Any is empty).
+unpack: <T, F>(self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<T, F>?,
+
+-- Returns true if and only if the Any contains an object of the type specified by
+-- typeName. If typeName is a full type URL, it will be compared; otherwise,
+-- only the type name will be compared.
+isA: (self: Any, typeName: string) -> boolean,
+"#;
 
 fn create_decoder(fields: BTreeMap<i32, String>) -> String {
     if fields.is_empty() {
@@ -509,6 +527,15 @@ impl<'a> FileGenerator<'a> {
             None => "{ [string]: any }",
         };
 
+        let is_wkt_any =
+            self.file_descriptor_proto.package() == "google.protobuf" && message.name() == "Any";
+
+        let maybe_any_method_signatures = if is_wkt_any {
+            ANY_METHOD_SIGNATURES
+        } else {
+            ""
+        };
+
         self.types.push(format!(
             r#"type _{name}Impl = {{
                 __index: _{name}Impl,
@@ -518,6 +545,7 @@ impl<'a> FileGenerator<'a> {
                 jsonEncode: (self: {name}) -> {json_type},
                 jsonDecode: (input: {json_type}) -> {name},
                 descriptor: proto.Descriptor,
+                {maybe_any_method_signatures}
             }}
             "#
         ));
@@ -721,6 +749,10 @@ impl<'a> FileGenerator<'a> {
                     ),
             )
         }
+
+        // Add special methods for google.protobuf.Any: pack, unpack, and isA.
+        let any_methods = include_str!("./luau/wkt_mixins/Any_methods.luau");
+        final_code = final_code.replace("<any_methods>", if is_wkt_any { any_methods } else { "" });
 
         self.implementations.push(final_code);
         self.implementations.blank();

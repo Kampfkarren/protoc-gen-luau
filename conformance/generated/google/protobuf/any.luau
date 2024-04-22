@@ -13,6 +13,19 @@ type _AnyImpl = {
 	jsonEncode: (self: Any) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Any,
 	descriptor: proto.Descriptor,
+
+	-- Pack a message into an Any.
+	--
+	-- If typePrefix is not provided, defaults to "apis.roblox.com/cloud".
+	pack: <T, F>(payload: proto.Message<T, F>, typePrefix: string?) -> Any,
+
+	-- Returns the message contained by the Any (or nil if the Any is empty).
+	unpack: <T, F>(self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<T, F>?,
+
+	-- Returns true iff the Any contains an object of the type specified by
+	-- typeName. If typeName is a full type URL, it will be compared; otherwise,
+	-- only the type name will be compared.
+	isA: (self: Any, typeName: string) -> boolean,
 }
 
 type _AnyFields = {
@@ -26,7 +39,7 @@ type _AnyPartialFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-local Any: proto.Message<Any, _AnyPartialFields>
+local Any: proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
 
 local _AnyImpl = {}
 _AnyImpl.__index = _AnyImpl
@@ -89,45 +102,98 @@ function _AnyImpl.decode(input: buffer): Any
 	return self
 end
 
-function _AnyImpl.jsonEncode(self: Any): any
-	local output: {
-		typeUrl: string?,
-		value: string?,
-	} = {}
+function _AnyImpl.jsonEncode(input: Any): { [string]: any }
+	local registry = typeRegistry.default
 
-	if self.type_url ~= nil and self.type_url ~= "" then
-		output.typeUrl = self.type_url
+	local unpacked = input:unpack(registry)
+	if unpacked == nil then
+		error("Cannot JSON-encode empty Any")
+	end
+	local json = unpacked:jsonEncode()
+
+	if typeof(json) == "string" then
+		return { ["@type"] = input.type_url, ["value"] = json }
 	end
 
-	if self.value ~= nil and buffer.len(self.value) > 0 then
-		output.value = proto.json.serializeBuffer(self.value)
-	end
+	json["@type"] = input.type_url
 
-	return output
+	return json
 end
 
 function _AnyImpl.jsonDecode(input: { [string]: any }): Any
-	local self = Any.new()
+	local registry = typeRegistry.default
 
-	if input.type_url ~= nil then
-		self.type_url = input.type_url
+	local typeUrl = input["@type"]
+	local typeName = typeUrl:sub(typeUrl:find("([^/]+)$"))
+	local payloadType = registry:findMessage(typeName)
+
+	if payloadType == nil then
+		error("Could not find message type `" .. typeName .. "` for Any")
 	end
 
-	if input.typeUrl ~= nil then
-		self.type_url = input.typeUrl
+	local typePrefix = typeUrl:sub(0, #typeUrl - #typeName - 1)
+
+	local json = table.clone(input)
+	-- For WKTs with special JSON representations, we need to decode input["value"] rather than
+	-- input.
+	local gpb = "google.protobuf."
+	if typeName:sub(0, #gpb) == gpb and input["value"] then
+		json = input["value"]
+	else
+		-- Clear this because it's not part of the JSON encoding of the payload itself.
+		json["@type"] = nil
 	end
 
-	if input.value ~= nil then
-		self.value = proto.json.deserializeBuffer(input.value)
-	end
-
-	return self
+	return _AnyImpl.pack(payloadType.jsonDecode(json), typePrefix)
 end
 
 _AnyImpl.descriptor = {
 	name = "Any",
 	fullName = "google.protobuf.Any",
 }
+
+function _AnyImpl.pack<T, F>(payload: proto.Message<T, F>, typePrefix: string?): Any
+	return Any.new({
+		type_url = (typePrefix or "apis.roblox.com/cloud") .. "/" .. payload.descriptor.fullName,
+		value = payload:encode(),
+	})
+end
+
+function _AnyImpl.unpack<T, F>(self: Any, registry: typeRegistry.TypeRegistry?): proto.Message<T, F>?
+	if self.value == nil then
+		return nil
+	end
+
+	if registry == nil then
+		registry = typeRegistry.default
+	end
+
+	local typeName = _AnyImpl.typeUrlToTypeName(self.type_url)
+	local payloadType = (registry :: typeRegistry.TypeRegistry):findMessage(typeName)
+
+	if payloadType == nil then
+		error("Unknown type: " .. typeName)
+	end
+
+	return payloadType.decode(self.value)
+end
+
+function _AnyImpl.isA(self: Any, typeName: string): boolean
+	if self.type_url == typeName then
+		return true
+	end
+
+	local suffix = "/" .. typeName
+	return self.type_url:sub(-#suffix) == suffix
+end
+
+function _AnyImpl.typeUrlToTypeName(typeUrl: string): string
+	local first, _ = typeUrl:find("([^/]+)$")
+	if first == nil then
+		error("Invalid type URL: " .. typeUrl)
+	end
+	return typeUrl:sub(first)
+end
 
 Any = _AnyImpl
 

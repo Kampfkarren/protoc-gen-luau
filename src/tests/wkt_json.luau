@@ -1,10 +1,14 @@
 local tests = require("./tests")
 
+local any = require("./samples/google/protobuf/any")
 local duration = require("./samples/google/protobuf/duration")
 local field_mask = require("./samples/google/protobuf/field_mask")
 local struct = require("./samples/google/protobuf/struct")
 local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
+
+local kitchen_sink = require("./samples/kitchen_sink")
+local typeRegistry = require("./samples/proto/typeRegistry")
 
 local assertEquals = tests.assertEquals
 local describe = tests.describe
@@ -243,6 +247,47 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_field_mask.paths[2], "bar.baz")
 
 			assertEquals(deserialized_field_mask:jsonEncode(), json)
+		end)
+	end)
+
+	describe("Any", function()
+		it("with normal message", function()
+			local json = {
+				["@type"] = "type.googleapis.com/my.package.KitchenSink",
+				int32 = 42,
+
+				-- These need to be included because JSON output currently includes unset enum values.
+				aliasedEnum = 0,
+				enum = 0,
+				nestedEnum = 0,
+				enum2 = 0,
+			}
+
+			local deserialized_any = any.Any.jsonDecode(json)
+
+			assertEquals(deserialized_any.type_url, "type.googleapis.com/my.package.KitchenSink")
+			local unpacked = deserialized_any:unpack()
+			assertEquals(unpacked.int32, 42)
+
+			assertEquals(deserialized_any:jsonEncode(), json)
+			assertEquals(any.Any.pack(unpacked, "type.googleapis.com"):jsonEncode(), json)
+		end)
+
+		it("with WKT", function()
+			local json = {
+				["@type"] = "type.googleapis.com/google.protobuf.Timestamp",
+				value = "1970-01-01T00:00:01.000000001Z",
+			}
+
+			local deserialized_any = any.Any.jsonDecode(json)
+
+			assertEquals(deserialized_any.type_url, "type.googleapis.com/google.protobuf.Timestamp")
+			local unpacked = deserialized_any:unpack()
+			assertEquals(unpacked.seconds, 1)
+			assertEquals(unpacked.nanos, 1)
+
+			assertEquals(deserialized_any:jsonEncode(), json)
+			assertEquals(any.Any.pack(unpacked, "type.googleapis.com"):jsonEncode(), json)
 		end)
 	end)
 
