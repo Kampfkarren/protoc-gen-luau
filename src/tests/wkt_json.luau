@@ -7,6 +7,8 @@ local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
 
 local assertEquals = tests.assertEquals
+local assertThrows = tests.assertThrows
+local assertStringContains = tests.assertStringContains
 local describe = tests.describe
 local it = tests.it
 
@@ -139,6 +141,31 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_timestamp.nanos, 1)
 
 			assertEquals(deserialized_timestamp:jsonEncode(), json)
+		end)
+
+		it("with large seconds", function()
+			-- The maximum timestamp supported by os.date on Windows 11 seems to be 32536849999 (1/19/3001 21:53:19).
+			-- However, Timestamp is supposed to support up to 253402300799 (12/31/9999 23:59:59).
+			-- The protobuf conformance test uses 253402300800.
+			local large_timestamp = timestamp.Timestamp.new({ seconds = 253402300800 })
+
+			local error = assertThrows(function()
+				large_timestamp:jsonEncode()
+			end)
+
+			assertStringContains(error :: string, "Invalid timestamp provided")
+		end)
+
+		it("with small seconds", function()
+			-- This comes from the TimestampProtoInputTooSmall conformance test, which currently fails,
+			-- even though this test passes...?
+			local small_timestamp = timestamp.Timestamp.new({ seconds = -62135596801 })
+
+			local error = assertThrows(function()
+				small_timestamp:jsonEncode()
+			end)
+
+			assertStringContains(error :: string, "Invalid timestamp provided")
 		end)
 	end)
 
