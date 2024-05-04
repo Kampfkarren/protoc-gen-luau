@@ -110,14 +110,23 @@ function _AnyImpl.jsonDecode(input: { [string]: any }): Any
 	local self = Any.new()
 
 	if input.type_url ~= nil then
+		if typeof(input.type_url) ~= "string" then
+			error("Invalid value provided for field type_url")
+		end
 		self.type_url = input.type_url
 	end
 
 	if input.typeUrl ~= nil then
+		if typeof(input.typeUrl) ~= "string" then
+			error("Invalid value provided for field type_url")
+		end
 		self.type_url = input.typeUrl
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = proto.json.deserializeBuffer(input.value)
 	end
 

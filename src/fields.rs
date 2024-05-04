@@ -434,6 +434,7 @@ impl FieldGenerator<'_> {
         for inner_field in self.inner_fields() {
             let real_name = inner_field.name();
             let json_name = json_name(inner_field);
+            let luau_types = valid_json_types_of_field_descriptor(inner_field);
 
             let mut decode_name = |input_name: &str| {
                 json_decode.push(format!("if input.{input_name} ~= nil then"));
@@ -444,6 +445,41 @@ impl FieldGenerator<'_> {
                         self.type_definition()
                     ));
                     json_decode.push(format!("for key, value in input.{input_name} do"));
+
+                    let key_luau_types = valid_json_types_of_field_descriptor(&map_type.key);
+                    let key_type_checks = key_luau_types
+                        .iter()
+                        .map(|luau_type| {
+                            format!(
+                                "typeof(key) ~= \"{luau_type}\"",
+                                luau_type = luau_type
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join(" and ");
+                    json_decode.push(format!("if {key_type_checks} then"));
+                    json_decode.push(format!(
+                        "  error(\"Invalid value provided for field {real_name}\")"
+                    ));
+                    json_decode.push("end");
+
+                    let value_luau_types = valid_json_types_of_field_descriptor(&map_type.value);
+                    let value_type_checks = value_luau_types
+                        .iter()
+                        .map(|luau_type| {
+                            format!(
+                                "typeof(value) ~= \"{luau_type}\"",
+                                luau_type = luau_type
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join(" and ");
+                    json_decode.push(format!("if {value_type_checks} then"));
+                    json_decode.push(format!(
+                        "  error(\"Invalid value provided for field {real_name}\")"
+                    ));
+                    json_decode.push("end");
+
                     json_decode.push(format!(
                         "newOutput[{}] = {}",
                         json_key_to_string(&map_type.key).decode,
@@ -463,6 +499,22 @@ impl FieldGenerator<'_> {
                         self.type_definition()
                     ));
                     json_decode.push(format!("for _, value in input.{input_name} do"));
+                    let type_checks = luau_types
+                        .iter()
+                        .map(|luau_type| {
+                            format!(
+                                "typeof(value) ~= \"{luau_type}\"",
+                                luau_type = luau_type
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join(" and ");
+                    json_decode.push(format!("if {type_checks} then"));
+                    json_decode.push(format!(
+                        "  error(\"Invalid value provided for field {real_name}\")"
+                    ));
+                    json_decode.push("end");
+
                     json_decode.push(format!(
                         "table.insert(newOutput, {})",
                         json_decode_instruction_field_descriptor_ignore_repeated(
@@ -483,6 +535,31 @@ impl FieldGenerator<'_> {
                             self.base_file,
                             &format!("input.{input_name}"),
                         );
+
+                    // if ["number", "string", "boolean"].contains(&luau_type.as_str()) {
+                    //     json_decode.push(format!(
+                    //         "if typeof(input.{input_name}) ~= \"{luau_type}\" then"
+                    //     ));
+                    //     json_decode.push(format!(
+                    //         "  error(\"Invalid value provided for field {real_name}\")"
+                    //     ));
+                    //     json_decode.push("end");
+                    // }
+                    let type_checks = luau_types
+                        .iter()
+                        .map(|luau_type| {
+                            format!(
+                                "typeof(input.{input_name}) ~= \"{luau_type}\"",
+                                luau_type = luau_type
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join(" and ");
+                    json_decode.push(format!("if {type_checks} then"));
+                    json_decode.push(format!(
+                        "  error(\"Invalid value provided for field {real_name}\")"
+                    ));
+                    json_decode.push("end");
 
                     if let FieldKind::OneOf {
                         name: oneof_name, ..
@@ -618,6 +695,29 @@ fn json_type_definition_of_field_descriptor(
         Type::Float | Type::Double => "(number | string)".to_owned(),
         Type::Bytes => "string".to_owned(),
         _ => type_definition_of_field_descriptor(field, export_map, base_file),
+    }
+}
+
+fn valid_json_types_of_field_descriptor(field: &FieldDescriptorProto) -> &'static [&'static str] {
+    match field.r#type() {
+        Type::Int32
+        | Type::Uint32
+        | Type::Int64
+        | Type::Uint64
+        | Type::Fixed32
+        | Type::Fixed64
+        | Type::Sint32
+        | Type::Sint64
+        | Type::Sfixed32
+        | Type::Sfixed64
+        | Type::Float
+        | Type::Double => &["number", "string"],
+        Type::String => &["string"],
+        Type::Bool => &["boolean"],
+        Type::Bytes => &["string"],
+        Type::Enum => &["number", "string"],
+        Type::Message => &["table"],
+        Type::Group => unimplemented!("Group"),
     }
 }
 

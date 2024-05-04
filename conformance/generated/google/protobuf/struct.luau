@@ -288,10 +288,16 @@ function _Struct_FieldsEntryImpl.jsonDecode(input: { [string]: any }): Struct_Fi
 	local self = Struct_FieldsEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "table" then
+			error("Invalid value provided for field value")
+		end
 		self.value = Value.jsonDecode(input.value)
 	end
 
