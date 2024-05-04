@@ -55,14 +55,33 @@ end
 
 function tests.assertEquals<T>(x: T, y: T)
 	if not deepEqual(x, y) then
-		error(`Assertion failed. Expected {x} to equal {y}`)
+		error(`Assertion failed. Expected \`{x}\` to equal \`{y}\``)
 	end
 end
 
 function tests.assertNotEquals<T>(x: T, y: T)
 	if deepEqual(x, y) then
-		error(`Assertion failed. Expected {x} to not equal {y}`)
+		error(`Assertion failed. Expected \`{x}\` not to equal \`{y}\``)
 	end
+end
+
+function tests.assertStringContains(haystack: string, needle: string)
+	if not string.find(haystack, needle) then
+		error(`Assertion failed. Expected \`{haystack}\` to contain \`{needle}\``)
+	end
+end
+
+function tests.assertThrows(callback: () -> ()): any?
+	local thrown = nil
+	local success = xpcall(callback, function(problem)
+		thrown = problem
+	end)
+
+	if success then
+		error("Expected an error to be thrown, but it wasn't")
+	end
+
+	return thrown
 end
 
 function tests.finish()
