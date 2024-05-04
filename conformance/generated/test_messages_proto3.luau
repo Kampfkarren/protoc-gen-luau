@@ -4610,204 +4610,345 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	local self = TestAllTypesProto3.new()
 
 	if input.optional_int32 ~= nil then
+		if typeof(input.optional_int32) ~= "number" and typeof(input.optional_int32) ~= "string" then
+			error("Invalid value provided for field optional_int32")
+		end
 		self.optional_int32 = input.optional_int32
 	end
 
 	if input.optionalInt32 ~= nil then
+		if typeof(input.optionalInt32) ~= "number" and typeof(input.optionalInt32) ~= "string" then
+			error("Invalid value provided for field optional_int32")
+		end
 		self.optional_int32 = input.optionalInt32
 	end
 
 	if input.optional_int64 ~= nil then
+		if typeof(input.optional_int64) ~= "number" and typeof(input.optional_int64) ~= "string" then
+			error("Invalid value provided for field optional_int64")
+		end
 		self.optional_int64 = input.optional_int64
 	end
 
 	if input.optionalInt64 ~= nil then
+		if typeof(input.optionalInt64) ~= "number" and typeof(input.optionalInt64) ~= "string" then
+			error("Invalid value provided for field optional_int64")
+		end
 		self.optional_int64 = input.optionalInt64
 	end
 
 	if input.optional_uint32 ~= nil then
+		if typeof(input.optional_uint32) ~= "number" and typeof(input.optional_uint32) ~= "string" then
+			error("Invalid value provided for field optional_uint32")
+		end
 		self.optional_uint32 = input.optional_uint32
 	end
 
 	if input.optionalUint32 ~= nil then
+		if typeof(input.optionalUint32) ~= "number" and typeof(input.optionalUint32) ~= "string" then
+			error("Invalid value provided for field optional_uint32")
+		end
 		self.optional_uint32 = input.optionalUint32
 	end
 
 	if input.optional_uint64 ~= nil then
+		if typeof(input.optional_uint64) ~= "number" and typeof(input.optional_uint64) ~= "string" then
+			error("Invalid value provided for field optional_uint64")
+		end
 		self.optional_uint64 = input.optional_uint64
 	end
 
 	if input.optionalUint64 ~= nil then
+		if typeof(input.optionalUint64) ~= "number" and typeof(input.optionalUint64) ~= "string" then
+			error("Invalid value provided for field optional_uint64")
+		end
 		self.optional_uint64 = input.optionalUint64
 	end
 
 	if input.optional_sint32 ~= nil then
+		if typeof(input.optional_sint32) ~= "number" and typeof(input.optional_sint32) ~= "string" then
+			error("Invalid value provided for field optional_sint32")
+		end
 		self.optional_sint32 = input.optional_sint32
 	end
 
 	if input.optionalSint32 ~= nil then
+		if typeof(input.optionalSint32) ~= "number" and typeof(input.optionalSint32) ~= "string" then
+			error("Invalid value provided for field optional_sint32")
+		end
 		self.optional_sint32 = input.optionalSint32
 	end
 
 	if input.optional_sint64 ~= nil then
+		if typeof(input.optional_sint64) ~= "number" and typeof(input.optional_sint64) ~= "string" then
+			error("Invalid value provided for field optional_sint64")
+		end
 		self.optional_sint64 = input.optional_sint64
 	end
 
 	if input.optionalSint64 ~= nil then
+		if typeof(input.optionalSint64) ~= "number" and typeof(input.optionalSint64) ~= "string" then
+			error("Invalid value provided for field optional_sint64")
+		end
 		self.optional_sint64 = input.optionalSint64
 	end
 
 	if input.optional_fixed32 ~= nil then
+		if typeof(input.optional_fixed32) ~= "number" and typeof(input.optional_fixed32) ~= "string" then
+			error("Invalid value provided for field optional_fixed32")
+		end
 		self.optional_fixed32 = input.optional_fixed32
 	end
 
 	if input.optionalFixed32 ~= nil then
+		if typeof(input.optionalFixed32) ~= "number" and typeof(input.optionalFixed32) ~= "string" then
+			error("Invalid value provided for field optional_fixed32")
+		end
 		self.optional_fixed32 = input.optionalFixed32
 	end
 
 	if input.optional_fixed64 ~= nil then
+		if typeof(input.optional_fixed64) ~= "number" and typeof(input.optional_fixed64) ~= "string" then
+			error("Invalid value provided for field optional_fixed64")
+		end
 		self.optional_fixed64 = input.optional_fixed64
 	end
 
 	if input.optionalFixed64 ~= nil then
+		if typeof(input.optionalFixed64) ~= "number" and typeof(input.optionalFixed64) ~= "string" then
+			error("Invalid value provided for field optional_fixed64")
+		end
 		self.optional_fixed64 = input.optionalFixed64
 	end
 
 	if input.optional_sfixed32 ~= nil then
+		if typeof(input.optional_sfixed32) ~= "number" and typeof(input.optional_sfixed32) ~= "string" then
+			error("Invalid value provided for field optional_sfixed32")
+		end
 		self.optional_sfixed32 = input.optional_sfixed32
 	end
 
 	if input.optionalSfixed32 ~= nil then
+		if typeof(input.optionalSfixed32) ~= "number" and typeof(input.optionalSfixed32) ~= "string" then
+			error("Invalid value provided for field optional_sfixed32")
+		end
 		self.optional_sfixed32 = input.optionalSfixed32
 	end
 
 	if input.optional_sfixed64 ~= nil then
+		if typeof(input.optional_sfixed64) ~= "number" and typeof(input.optional_sfixed64) ~= "string" then
+			error("Invalid value provided for field optional_sfixed64")
+		end
 		self.optional_sfixed64 = input.optional_sfixed64
 	end
 
 	if input.optionalSfixed64 ~= nil then
+		if typeof(input.optionalSfixed64) ~= "number" and typeof(input.optionalSfixed64) ~= "string" then
+			error("Invalid value provided for field optional_sfixed64")
+		end
 		self.optional_sfixed64 = input.optionalSfixed64
 	end
 
 	if input.optional_float ~= nil then
+		if typeof(input.optional_float) ~= "number" and typeof(input.optional_float) ~= "string" then
+			error("Invalid value provided for field optional_float")
+		end
 		self.optional_float = proto.json.deserializeNumber(input.optional_float)
 	end
 
 	if input.optionalFloat ~= nil then
+		if typeof(input.optionalFloat) ~= "number" and typeof(input.optionalFloat) ~= "string" then
+			error("Invalid value provided for field optional_float")
+		end
 		self.optional_float = proto.json.deserializeNumber(input.optionalFloat)
 	end
 
 	if input.optional_double ~= nil then
+		if typeof(input.optional_double) ~= "number" and typeof(input.optional_double) ~= "string" then
+			error("Invalid value provided for field optional_double")
+		end
 		self.optional_double = proto.json.deserializeNumber(input.optional_double)
 	end
 
 	if input.optionalDouble ~= nil then
+		if typeof(input.optionalDouble) ~= "number" and typeof(input.optionalDouble) ~= "string" then
+			error("Invalid value provided for field optional_double")
+		end
 		self.optional_double = proto.json.deserializeNumber(input.optionalDouble)
 	end
 
 	if input.optional_bool ~= nil then
+		if typeof(input.optional_bool) ~= "boolean" then
+			error("Invalid value provided for field optional_bool")
+		end
 		self.optional_bool = input.optional_bool
 	end
 
 	if input.optionalBool ~= nil then
+		if typeof(input.optionalBool) ~= "boolean" then
+			error("Invalid value provided for field optional_bool")
+		end
 		self.optional_bool = input.optionalBool
 	end
 
 	if input.optional_string ~= nil then
+		if typeof(input.optional_string) ~= "string" then
+			error("Invalid value provided for field optional_string")
+		end
 		self.optional_string = input.optional_string
 	end
 
 	if input.optionalString ~= nil then
+		if typeof(input.optionalString) ~= "string" then
+			error("Invalid value provided for field optional_string")
+		end
 		self.optional_string = input.optionalString
 	end
 
 	if input.optional_bytes ~= nil then
+		if typeof(input.optional_bytes) ~= "string" then
+			error("Invalid value provided for field optional_bytes")
+		end
 		self.optional_bytes = proto.json.deserializeBuffer(input.optional_bytes)
 	end
 
 	if input.optionalBytes ~= nil then
+		if typeof(input.optionalBytes) ~= "string" then
+			error("Invalid value provided for field optional_bytes")
+		end
 		self.optional_bytes = proto.json.deserializeBuffer(input.optionalBytes)
 	end
 
 	if input.optional_nested_message ~= nil then
+		if typeof(input.optional_nested_message) ~= "table" then
+			error("Invalid value provided for field optional_nested_message")
+		end
 		self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optional_nested_message)
 	end
 
 	if input.optionalNestedMessage ~= nil then
+		if typeof(input.optionalNestedMessage) ~= "table" then
+			error("Invalid value provided for field optional_nested_message")
+		end
 		self.optional_nested_message = TestAllTypesProto3_NestedMessage.jsonDecode(input.optionalNestedMessage)
 	end
 
 	if input.optional_foreign_message ~= nil then
+		if typeof(input.optional_foreign_message) ~= "table" then
+			error("Invalid value provided for field optional_foreign_message")
+		end
 		self.optional_foreign_message = ForeignMessage.jsonDecode(input.optional_foreign_message)
 	end
 
 	if input.optionalForeignMessage ~= nil then
+		if typeof(input.optionalForeignMessage) ~= "table" then
+			error("Invalid value provided for field optional_foreign_message")
+		end
 		self.optional_foreign_message = ForeignMessage.jsonDecode(input.optionalForeignMessage)
 	end
 
 	if input.optional_nested_enum ~= nil then
+		if typeof(input.optional_nested_enum) ~= "number" and typeof(input.optional_nested_enum) ~= "string" then
+			error("Invalid value provided for field optional_nested_enum")
+		end
 		self.optional_nested_enum = if typeof(input.optional_nested_enum) == "number"
 			then (TestAllTypesProto3_NestedEnum.fromNumber(input.optional_nested_enum) or input.optional_nested_enum)
 			else (TestAllTypesProto3_NestedEnum.fromName(input.optional_nested_enum) or input.optional_nested_enum)
 	end
 
 	if input.optionalNestedEnum ~= nil then
+		if typeof(input.optionalNestedEnum) ~= "number" and typeof(input.optionalNestedEnum) ~= "string" then
+			error("Invalid value provided for field optional_nested_enum")
+		end
 		self.optional_nested_enum = if typeof(input.optionalNestedEnum) == "number"
 			then (TestAllTypesProto3_NestedEnum.fromNumber(input.optionalNestedEnum) or input.optionalNestedEnum)
 			else (TestAllTypesProto3_NestedEnum.fromName(input.optionalNestedEnum) or input.optionalNestedEnum)
 	end
 
 	if input.optional_foreign_enum ~= nil then
+		if typeof(input.optional_foreign_enum) ~= "number" and typeof(input.optional_foreign_enum) ~= "string" then
+			error("Invalid value provided for field optional_foreign_enum")
+		end
 		self.optional_foreign_enum = if typeof(input.optional_foreign_enum) == "number"
 			then (ForeignEnum.fromNumber(input.optional_foreign_enum) or input.optional_foreign_enum)
 			else (ForeignEnum.fromName(input.optional_foreign_enum) or input.optional_foreign_enum)
 	end
 
 	if input.optionalForeignEnum ~= nil then
+		if typeof(input.optionalForeignEnum) ~= "number" and typeof(input.optionalForeignEnum) ~= "string" then
+			error("Invalid value provided for field optional_foreign_enum")
+		end
 		self.optional_foreign_enum = if typeof(input.optionalForeignEnum) == "number"
 			then (ForeignEnum.fromNumber(input.optionalForeignEnum) or input.optionalForeignEnum)
 			else (ForeignEnum.fromName(input.optionalForeignEnum) or input.optionalForeignEnum)
 	end
 
 	if input.optional_aliased_enum ~= nil then
+		if typeof(input.optional_aliased_enum) ~= "number" and typeof(input.optional_aliased_enum) ~= "string" then
+			error("Invalid value provided for field optional_aliased_enum")
+		end
 		self.optional_aliased_enum = if typeof(input.optional_aliased_enum) == "number"
 			then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optional_aliased_enum) or input.optional_aliased_enum)
 			else (TestAllTypesProto3_AliasedEnum.fromName(input.optional_aliased_enum) or input.optional_aliased_enum)
 	end
 
 	if input.optionalAliasedEnum ~= nil then
+		if typeof(input.optionalAliasedEnum) ~= "number" and typeof(input.optionalAliasedEnum) ~= "string" then
+			error("Invalid value provided for field optional_aliased_enum")
+		end
 		self.optional_aliased_enum = if typeof(input.optionalAliasedEnum) == "number"
 			then (TestAllTypesProto3_AliasedEnum.fromNumber(input.optionalAliasedEnum) or input.optionalAliasedEnum)
 			else (TestAllTypesProto3_AliasedEnum.fromName(input.optionalAliasedEnum) or input.optionalAliasedEnum)
 	end
 
 	if input.optional_string_piece ~= nil then
+		if typeof(input.optional_string_piece) ~= "string" then
+			error("Invalid value provided for field optional_string_piece")
+		end
 		self.optional_string_piece = input.optional_string_piece
 	end
 
 	if input.optionalStringPiece ~= nil then
+		if typeof(input.optionalStringPiece) ~= "string" then
+			error("Invalid value provided for field optional_string_piece")
+		end
 		self.optional_string_piece = input.optionalStringPiece
 	end
 
 	if input.optional_cord ~= nil then
+		if typeof(input.optional_cord) ~= "string" then
+			error("Invalid value provided for field optional_cord")
+		end
 		self.optional_cord = input.optional_cord
 	end
 
 	if input.optionalCord ~= nil then
+		if typeof(input.optionalCord) ~= "string" then
+			error("Invalid value provided for field optional_cord")
+		end
 		self.optional_cord = input.optionalCord
 	end
 
 	if input.recursive_message ~= nil then
+		if typeof(input.recursive_message) ~= "table" then
+			error("Invalid value provided for field recursive_message")
+		end
 		self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursive_message)
 	end
 
 	if input.recursiveMessage ~= nil then
+		if typeof(input.recursiveMessage) ~= "table" then
+			error("Invalid value provided for field recursive_message")
+		end
 		self.recursive_message = TestAllTypesProto3.jsonDecode(input.recursiveMessage)
 	end
 
 	if input.repeated_int32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_int32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4817,6 +4958,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedInt32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedInt32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4826,6 +4970,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_int64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_int64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4835,6 +4982,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedInt64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedInt64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4844,6 +4994,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_uint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_uint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4853,6 +5006,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedUint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedUint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4862,6 +5018,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_uint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_uint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4871,6 +5030,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedUint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedUint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4880,6 +5042,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_sint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_sint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4889,6 +5054,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedSint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedSint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4898,6 +5066,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_sint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_sint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4907,6 +5078,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedSint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedSint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4916,6 +5090,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_fixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_fixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4925,6 +5102,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedFixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedFixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4934,6 +5114,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_fixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_fixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4943,6 +5126,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedFixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedFixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4952,6 +5138,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_sfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_sfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4961,6 +5150,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedSfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedSfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4970,6 +5162,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_sfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_sfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4979,6 +5174,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedSfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedSfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -4988,6 +5186,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_float ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_float do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -4997,6 +5198,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedFloat ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedFloat do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5006,6 +5210,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_double ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeated_double do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5015,6 +5222,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedDouble ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.repeatedDouble do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5024,6 +5234,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_bool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.repeated_bool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field repeated_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5033,6 +5246,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedBool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.repeatedBool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field repeated_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5042,6 +5258,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_string ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeated_string do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_string")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5051,6 +5270,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedString ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeatedString do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_string")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5060,6 +5282,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_bytes ~= nil then
 		local newOutput: { buffer } = {}
 		for _, value in input.repeated_bytes do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_bytes")
+			end
 			table.insert(newOutput, proto.json.deserializeBuffer(value))
 		end
 
@@ -5069,6 +5294,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedBytes ~= nil then
 		local newOutput: { buffer } = {}
 		for _, value in input.repeatedBytes do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_bytes")
+			end
 			table.insert(newOutput, proto.json.deserializeBuffer(value))
 		end
 
@@ -5078,6 +5306,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_nested_message ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
 		for _, value in input.repeated_nested_message do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_nested_message")
+			end
 			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
 		end
 
@@ -5087,6 +5318,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedNestedMessage ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedMessage } = {}
 		for _, value in input.repeatedNestedMessage do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_nested_message")
+			end
 			table.insert(newOutput, TestAllTypesProto3_NestedMessage.jsonDecode(value))
 		end
 
@@ -5096,6 +5330,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_foreign_message ~= nil then
 		local newOutput: { ForeignMessage } = {}
 		for _, value in input.repeated_foreign_message do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_foreign_message")
+			end
 			table.insert(newOutput, ForeignMessage.jsonDecode(value))
 		end
 
@@ -5105,6 +5342,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedForeignMessage ~= nil then
 		local newOutput: { ForeignMessage } = {}
 		for _, value in input.repeatedForeignMessage do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_foreign_message")
+			end
 			table.insert(newOutput, ForeignMessage.jsonDecode(value))
 		end
 
@@ -5114,6 +5354,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.repeated_nested_enum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5128,6 +5371,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.repeatedNestedEnum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5142,6 +5388,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_foreign_enum ~= nil then
 		local newOutput: { ForeignEnum } = {}
 		for _, value in input.repeated_foreign_enum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_foreign_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5156,6 +5405,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedForeignEnum ~= nil then
 		local newOutput: { ForeignEnum } = {}
 		for _, value in input.repeatedForeignEnum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_foreign_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5170,6 +5422,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_string_piece ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeated_string_piece do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_string_piece")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5179,6 +5434,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedStringPiece ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeatedStringPiece do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_string_piece")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5188,6 +5446,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_cord ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeated_cord do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_cord")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5197,6 +5458,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedCord ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.repeatedCord do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field repeated_cord")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5206,6 +5470,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_int32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_int32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5215,6 +5482,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedInt32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedInt32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5224,6 +5494,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_int64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_int64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5233,6 +5506,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedInt64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedInt64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5242,6 +5518,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_uint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_uint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5251,6 +5530,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedUint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedUint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5260,6 +5542,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_uint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_uint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5269,6 +5554,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedUint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedUint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5278,6 +5566,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_sint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_sint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5287,6 +5578,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedSint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedSint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5296,6 +5590,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_sint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_sint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5305,6 +5602,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedSint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedSint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5314,6 +5614,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_fixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_fixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5323,6 +5626,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedFixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedFixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5332,6 +5638,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_fixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_fixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5341,6 +5650,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedFixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedFixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5350,6 +5662,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_sfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_sfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5359,6 +5674,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedSfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedSfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5368,6 +5686,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_sfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_sfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5377,6 +5698,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedSfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedSfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5386,6 +5710,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_float ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_float do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5395,6 +5722,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedFloat ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedFloat do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5404,6 +5734,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_double ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packed_double do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5413,6 +5746,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedDouble ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.packedDouble do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5422,6 +5758,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_bool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.packed_bool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field packed_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5431,6 +5770,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedBool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.packedBool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field packed_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5440,6 +5782,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packed_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.packed_nested_enum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5454,6 +5799,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.packedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.packedNestedEnum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field packed_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5468,6 +5816,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_int32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_int32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5477,6 +5828,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedInt32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedInt32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_int32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5486,6 +5840,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_int64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_int64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5495,6 +5852,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedInt64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedInt64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_int64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5504,6 +5864,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_uint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_uint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5513,6 +5876,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedUint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedUint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_uint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5522,6 +5888,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_uint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_uint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5531,6 +5900,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedUint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedUint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_uint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5540,6 +5912,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_sint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_sint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5549,6 +5924,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedSint32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedSint32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sint32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5558,6 +5936,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_sint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_sint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5567,6 +5948,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedSint64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedSint64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sint64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5576,6 +5960,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_fixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_fixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5585,6 +5972,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedFixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedFixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_fixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5594,6 +5984,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_fixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_fixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5603,6 +5996,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedFixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedFixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_fixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5612,6 +6008,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_sfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_sfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5621,6 +6020,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedSfixed32 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedSfixed32 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sfixed32")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5630,6 +6032,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_sfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_sfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5639,6 +6044,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedSfixed64 ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedSfixed64 do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_sfixed64")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5648,6 +6056,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_float ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_float do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5657,6 +6068,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedFloat ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedFloat do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_float")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5666,6 +6080,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_double ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpacked_double do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5675,6 +6092,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedDouble ~= nil then
 		local newOutput: { number } = {}
 		for _, value in input.unpackedDouble do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_double")
+			end
 			table.insert(newOutput, proto.json.deserializeNumber(value))
 		end
 
@@ -5684,6 +6104,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_bool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.unpacked_bool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field unpacked_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5693,6 +6116,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedBool ~= nil then
 		local newOutput: { boolean } = {}
 		for _, value in input.unpackedBool do
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field unpacked_bool")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -5702,6 +6128,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpacked_nested_enum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.unpacked_nested_enum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5716,6 +6145,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.unpackedNestedEnum ~= nil then
 		local newOutput: { TestAllTypesProto3_NestedEnum } = {}
 		for _, value in input.unpackedNestedEnum do
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field unpacked_nested_enum")
+			end
 			table.insert(
 				newOutput,
 				if typeof(value) == "number"
@@ -5730,6 +6162,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_int32_int32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_int32_int32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_int32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_int32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5739,6 +6177,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapInt32Int32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapInt32Int32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_int32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_int32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5748,6 +6192,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_int64_int64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_int64_int64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int64_int64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int64_int64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5757,6 +6207,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapInt64Int64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapInt64Int64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int64_int64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int64_int64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5766,6 +6222,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_uint32_uint32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_uint32_uint32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_uint32_uint32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_uint32_uint32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5775,6 +6237,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapUint32Uint32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapUint32Uint32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_uint32_uint32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_uint32_uint32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5784,6 +6252,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_uint64_uint64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_uint64_uint64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_uint64_uint64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_uint64_uint64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5793,6 +6267,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapUint64Uint64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapUint64Uint64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_uint64_uint64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_uint64_uint64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5802,6 +6282,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_sint32_sint32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_sint32_sint32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sint32_sint32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sint32_sint32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5811,6 +6297,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapSint32Sint32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapSint32Sint32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sint32_sint32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sint32_sint32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5820,6 +6312,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_sint64_sint64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_sint64_sint64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sint64_sint64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sint64_sint64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5829,6 +6327,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapSint64Sint64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapSint64Sint64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sint64_sint64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sint64_sint64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5838,6 +6342,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_fixed32_fixed32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_fixed32_fixed32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_fixed32_fixed32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_fixed32_fixed32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5847,6 +6357,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapFixed32Fixed32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapFixed32Fixed32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_fixed32_fixed32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_fixed32_fixed32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5856,6 +6372,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_fixed64_fixed64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_fixed64_fixed64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_fixed64_fixed64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_fixed64_fixed64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5865,6 +6387,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapFixed64Fixed64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapFixed64Fixed64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_fixed64_fixed64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_fixed64_fixed64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5874,6 +6402,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_sfixed32_sfixed32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_sfixed32_sfixed32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sfixed32_sfixed32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sfixed32_sfixed32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5883,6 +6417,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapSfixed32Sfixed32 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapSfixed32Sfixed32 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sfixed32_sfixed32")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sfixed32_sfixed32")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5892,6 +6432,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_sfixed64_sfixed64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_sfixed64_sfixed64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sfixed64_sfixed64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sfixed64_sfixed64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5901,6 +6447,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapSfixed64Sfixed64 ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapSfixed64Sfixed64 do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_sfixed64_sfixed64")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_sfixed64_sfixed64")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 		end
 
@@ -5910,6 +6462,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_int32_float ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_int32_float do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_float")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_float")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
@@ -5919,6 +6477,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapInt32Float ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapInt32Float do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_float")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_float")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
@@ -5928,6 +6492,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_int32_double ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.map_int32_double do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_double")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_double")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
@@ -5937,6 +6507,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapInt32Double ~= nil then
 		local newOutput: { [number]: number } = {}
 		for key, value in input.mapInt32Double do
+			if typeof(key) ~= "number" and typeof(key) ~= "string" then
+				error("Invalid value provided for field map_int32_double")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_int32_double")
+			end
 			newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = proto.json.deserializeNumber(value)
 		end
 
@@ -5946,6 +6522,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_bool_bool ~= nil then
 		local newOutput: { [boolean]: boolean } = {}
 		for key, value in input.map_bool_bool do
+			if typeof(key) ~= "boolean" then
+				error("Invalid value provided for field map_bool_bool")
+			end
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field map_bool_bool")
+			end
 			newOutput[if key == "true" then true else false] = value
 		end
 
@@ -5955,6 +6537,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapBoolBool ~= nil then
 		local newOutput: { [boolean]: boolean } = {}
 		for key, value in input.mapBoolBool do
+			if typeof(key) ~= "boolean" then
+				error("Invalid value provided for field map_bool_bool")
+			end
+			if typeof(value) ~= "boolean" then
+				error("Invalid value provided for field map_bool_bool")
+			end
 			newOutput[if key == "true" then true else false] = value
 		end
 
@@ -5964,6 +6552,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_string ~= nil then
 		local newOutput: { [string]: string } = {}
 		for key, value in input.map_string_string do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_string")
+			end
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_string")
+			end
 			newOutput[key] = value
 		end
 
@@ -5973,6 +6567,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringString ~= nil then
 		local newOutput: { [string]: string } = {}
 		for key, value in input.mapStringString do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_string")
+			end
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_string")
+			end
 			newOutput[key] = value
 		end
 
@@ -5982,6 +6582,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_bytes ~= nil then
 		local newOutput: { [string]: buffer } = {}
 		for key, value in input.map_string_bytes do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_bytes")
+			end
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_bytes")
+			end
 			newOutput[key] = proto.json.deserializeBuffer(value)
 		end
 
@@ -5991,6 +6597,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringBytes ~= nil then
 		local newOutput: { [string]: buffer } = {}
 		for key, value in input.mapStringBytes do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_bytes")
+			end
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_bytes")
+			end
 			newOutput[key] = proto.json.deserializeBuffer(value)
 		end
 
@@ -6000,6 +6612,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_nested_message ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
 		for key, value in input.map_string_nested_message do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_nested_message")
+			end
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field map_string_nested_message")
+			end
 			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
 		end
 
@@ -6009,6 +6627,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringNestedMessage ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
 		for key, value in input.mapStringNestedMessage do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_nested_message")
+			end
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field map_string_nested_message")
+			end
 			newOutput[key] = TestAllTypesProto3_NestedMessage.jsonDecode(value)
 		end
 
@@ -6018,6 +6642,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_foreign_message ~= nil then
 		local newOutput: { [string]: ForeignMessage } = {}
 		for key, value in input.map_string_foreign_message do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_message")
+			end
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field map_string_foreign_message")
+			end
 			newOutput[key] = ForeignMessage.jsonDecode(value)
 		end
 
@@ -6027,6 +6657,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringForeignMessage ~= nil then
 		local newOutput: { [string]: ForeignMessage } = {}
 		for key, value in input.mapStringForeignMessage do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_message")
+			end
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field map_string_foreign_message")
+			end
 			newOutput[key] = ForeignMessage.jsonDecode(value)
 		end
 
@@ -6036,6 +6672,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_nested_enum ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
 		for key, value in input.map_string_nested_enum do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_nested_enum")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_nested_enum")
+			end
 			newOutput[key] = if typeof(value) == "number"
 				then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
 				else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
@@ -6047,6 +6689,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringNestedEnum ~= nil then
 		local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
 		for key, value in input.mapStringNestedEnum do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_nested_enum")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_nested_enum")
+			end
 			newOutput[key] = if typeof(value) == "number"
 				then (TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
 				else (TestAllTypesProto3_NestedEnum.fromName(value) or value)
@@ -6058,6 +6706,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.map_string_foreign_enum ~= nil then
 		local newOutput: { [string]: ForeignEnum } = {}
 		for key, value in input.map_string_foreign_enum do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_enum")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_enum")
+			end
 			newOutput[key] = if typeof(value) == "number"
 				then (ForeignEnum.fromNumber(value) or value)
 				else (ForeignEnum.fromName(value) or value)
@@ -6069,6 +6723,12 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.mapStringForeignEnum ~= nil then
 		local newOutput: { [string]: ForeignEnum } = {}
 		for key, value in input.mapStringForeignEnum do
+			if typeof(key) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_enum")
+			end
+			if typeof(value) ~= "number" and typeof(value) ~= "string" then
+				error("Invalid value provided for field map_string_foreign_enum")
+			end
 			newOutput[key] = if typeof(value) == "number"
 				then (ForeignEnum.fromNumber(value) or value)
 				else (ForeignEnum.fromName(value) or value)
@@ -6078,14 +6738,23 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneof_uint32 ~= nil then
+		if typeof(input.oneof_uint32) ~= "number" and typeof(input.oneof_uint32) ~= "string" then
+			error("Invalid value provided for field oneof_uint32")
+		end
 		self.oneof_field = { type = "oneof_uint32", value = input.oneof_uint32 }
 	end
 
 	if input.oneofUint32 ~= nil then
+		if typeof(input.oneofUint32) ~= "number" and typeof(input.oneofUint32) ~= "string" then
+			error("Invalid value provided for field oneof_uint32")
+		end
 		self.oneof_field = { type = "oneof_uint32", value = input.oneofUint32 }
 	end
 
 	if input.oneof_nested_message ~= nil then
+		if typeof(input.oneof_nested_message) ~= "table" then
+			error("Invalid value provided for field oneof_nested_message")
+		end
 		self.oneof_field = {
 			type = "oneof_nested_message",
 			value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneof_nested_message),
@@ -6093,6 +6762,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneofNestedMessage ~= nil then
+		if typeof(input.oneofNestedMessage) ~= "table" then
+			error("Invalid value provided for field oneof_nested_message")
+		end
 		self.oneof_field = {
 			type = "oneof_nested_message",
 			value = TestAllTypesProto3_NestedMessage.jsonDecode(input.oneofNestedMessage),
@@ -6100,54 +6772,93 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneof_string ~= nil then
+		if typeof(input.oneof_string) ~= "string" then
+			error("Invalid value provided for field oneof_string")
+		end
 		self.oneof_field = { type = "oneof_string", value = input.oneof_string }
 	end
 
 	if input.oneofString ~= nil then
+		if typeof(input.oneofString) ~= "string" then
+			error("Invalid value provided for field oneof_string")
+		end
 		self.oneof_field = { type = "oneof_string", value = input.oneofString }
 	end
 
 	if input.oneof_bytes ~= nil then
+		if typeof(input.oneof_bytes) ~= "string" then
+			error("Invalid value provided for field oneof_bytes")
+		end
 		self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneof_bytes) }
 	end
 
 	if input.oneofBytes ~= nil then
+		if typeof(input.oneofBytes) ~= "string" then
+			error("Invalid value provided for field oneof_bytes")
+		end
 		self.oneof_field = { type = "oneof_bytes", value = proto.json.deserializeBuffer(input.oneofBytes) }
 	end
 
 	if input.oneof_bool ~= nil then
+		if typeof(input.oneof_bool) ~= "boolean" then
+			error("Invalid value provided for field oneof_bool")
+		end
 		self.oneof_field = { type = "oneof_bool", value = input.oneof_bool }
 	end
 
 	if input.oneofBool ~= nil then
+		if typeof(input.oneofBool) ~= "boolean" then
+			error("Invalid value provided for field oneof_bool")
+		end
 		self.oneof_field = { type = "oneof_bool", value = input.oneofBool }
 	end
 
 	if input.oneof_uint64 ~= nil then
+		if typeof(input.oneof_uint64) ~= "number" and typeof(input.oneof_uint64) ~= "string" then
+			error("Invalid value provided for field oneof_uint64")
+		end
 		self.oneof_field = { type = "oneof_uint64", value = input.oneof_uint64 }
 	end
 
 	if input.oneofUint64 ~= nil then
+		if typeof(input.oneofUint64) ~= "number" and typeof(input.oneofUint64) ~= "string" then
+			error("Invalid value provided for field oneof_uint64")
+		end
 		self.oneof_field = { type = "oneof_uint64", value = input.oneofUint64 }
 	end
 
 	if input.oneof_float ~= nil then
+		if typeof(input.oneof_float) ~= "number" and typeof(input.oneof_float) ~= "string" then
+			error("Invalid value provided for field oneof_float")
+		end
 		self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneof_float) }
 	end
 
 	if input.oneofFloat ~= nil then
+		if typeof(input.oneofFloat) ~= "number" and typeof(input.oneofFloat) ~= "string" then
+			error("Invalid value provided for field oneof_float")
+		end
 		self.oneof_field = { type = "oneof_float", value = proto.json.deserializeNumber(input.oneofFloat) }
 	end
 
 	if input.oneof_double ~= nil then
+		if typeof(input.oneof_double) ~= "number" and typeof(input.oneof_double) ~= "string" then
+			error("Invalid value provided for field oneof_double")
+		end
 		self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneof_double) }
 	end
 
 	if input.oneofDouble ~= nil then
+		if typeof(input.oneofDouble) ~= "number" and typeof(input.oneofDouble) ~= "string" then
+			error("Invalid value provided for field oneof_double")
+		end
 		self.oneof_field = { type = "oneof_double", value = proto.json.deserializeNumber(input.oneofDouble) }
 	end
 
 	if input.oneof_enum ~= nil then
+		if typeof(input.oneof_enum) ~= "number" and typeof(input.oneof_enum) ~= "string" then
+			error("Invalid value provided for field oneof_enum")
+		end
 		self.oneof_field = {
 			type = "oneof_enum",
 			value = if typeof(input.oneof_enum) == "number"
@@ -6157,6 +6868,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneofEnum ~= nil then
+		if typeof(input.oneofEnum) ~= "number" and typeof(input.oneofEnum) ~= "string" then
+			error("Invalid value provided for field oneof_enum")
+		end
 		self.oneof_field = {
 			type = "oneof_enum",
 			value = if typeof(input.oneofEnum) == "number"
@@ -6166,6 +6880,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneof_null_value ~= nil then
+		if typeof(input.oneof_null_value) ~= "number" and typeof(input.oneof_null_value) ~= "string" then
+			error("Invalid value provided for field oneof_null_value")
+		end
 		self.oneof_field = {
 			type = "oneof_null_value",
 			value = if typeof(input.oneof_null_value) == "number"
@@ -6175,6 +6892,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.oneofNullValue ~= nil then
+		if typeof(input.oneofNullValue) ~= "number" and typeof(input.oneofNullValue) ~= "string" then
+			error("Invalid value provided for field oneof_null_value")
+		end
 		self.oneof_field = {
 			type = "oneof_null_value",
 			value = if typeof(input.oneofNullValue) == "number"
@@ -6184,80 +6904,137 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.optional_bool_wrapper ~= nil then
+		if typeof(input.optional_bool_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_bool_wrapper")
+		end
 		self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optional_bool_wrapper)
 	end
 
 	if input.optionalBoolWrapper ~= nil then
+		if typeof(input.optionalBoolWrapper) ~= "table" then
+			error("Invalid value provided for field optional_bool_wrapper")
+		end
 		self.optional_bool_wrapper = _google_protobuf_wrappers.BoolValue.jsonDecode(input.optionalBoolWrapper)
 	end
 
 	if input.optional_int32_wrapper ~= nil then
+		if typeof(input.optional_int32_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_int32_wrapper")
+		end
 		self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optional_int32_wrapper)
 	end
 
 	if input.optionalInt32Wrapper ~= nil then
+		if typeof(input.optionalInt32Wrapper) ~= "table" then
+			error("Invalid value provided for field optional_int32_wrapper")
+		end
 		self.optional_int32_wrapper = _google_protobuf_wrappers.Int32Value.jsonDecode(input.optionalInt32Wrapper)
 	end
 
 	if input.optional_int64_wrapper ~= nil then
+		if typeof(input.optional_int64_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_int64_wrapper")
+		end
 		self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optional_int64_wrapper)
 	end
 
 	if input.optionalInt64Wrapper ~= nil then
+		if typeof(input.optionalInt64Wrapper) ~= "table" then
+			error("Invalid value provided for field optional_int64_wrapper")
+		end
 		self.optional_int64_wrapper = _google_protobuf_wrappers.Int64Value.jsonDecode(input.optionalInt64Wrapper)
 	end
 
 	if input.optional_uint32_wrapper ~= nil then
+		if typeof(input.optional_uint32_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_uint32_wrapper")
+		end
 		self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.jsonDecode(input.optional_uint32_wrapper)
 	end
 
 	if input.optionalUint32Wrapper ~= nil then
+		if typeof(input.optionalUint32Wrapper) ~= "table" then
+			error("Invalid value provided for field optional_uint32_wrapper")
+		end
 		self.optional_uint32_wrapper = _google_protobuf_wrappers.UInt32Value.jsonDecode(input.optionalUint32Wrapper)
 	end
 
 	if input.optional_uint64_wrapper ~= nil then
+		if typeof(input.optional_uint64_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_uint64_wrapper")
+		end
 		self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.jsonDecode(input.optional_uint64_wrapper)
 	end
 
 	if input.optionalUint64Wrapper ~= nil then
+		if typeof(input.optionalUint64Wrapper) ~= "table" then
+			error("Invalid value provided for field optional_uint64_wrapper")
+		end
 		self.optional_uint64_wrapper = _google_protobuf_wrappers.UInt64Value.jsonDecode(input.optionalUint64Wrapper)
 	end
 
 	if input.optional_float_wrapper ~= nil then
+		if typeof(input.optional_float_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_float_wrapper")
+		end
 		self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optional_float_wrapper)
 	end
 
 	if input.optionalFloatWrapper ~= nil then
+		if typeof(input.optionalFloatWrapper) ~= "table" then
+			error("Invalid value provided for field optional_float_wrapper")
+		end
 		self.optional_float_wrapper = _google_protobuf_wrappers.FloatValue.jsonDecode(input.optionalFloatWrapper)
 	end
 
 	if input.optional_double_wrapper ~= nil then
+		if typeof(input.optional_double_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_double_wrapper")
+		end
 		self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.jsonDecode(input.optional_double_wrapper)
 	end
 
 	if input.optionalDoubleWrapper ~= nil then
+		if typeof(input.optionalDoubleWrapper) ~= "table" then
+			error("Invalid value provided for field optional_double_wrapper")
+		end
 		self.optional_double_wrapper = _google_protobuf_wrappers.DoubleValue.jsonDecode(input.optionalDoubleWrapper)
 	end
 
 	if input.optional_string_wrapper ~= nil then
+		if typeof(input.optional_string_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_string_wrapper")
+		end
 		self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.jsonDecode(input.optional_string_wrapper)
 	end
 
 	if input.optionalStringWrapper ~= nil then
+		if typeof(input.optionalStringWrapper) ~= "table" then
+			error("Invalid value provided for field optional_string_wrapper")
+		end
 		self.optional_string_wrapper = _google_protobuf_wrappers.StringValue.jsonDecode(input.optionalStringWrapper)
 	end
 
 	if input.optional_bytes_wrapper ~= nil then
+		if typeof(input.optional_bytes_wrapper) ~= "table" then
+			error("Invalid value provided for field optional_bytes_wrapper")
+		end
 		self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optional_bytes_wrapper)
 	end
 
 	if input.optionalBytesWrapper ~= nil then
+		if typeof(input.optionalBytesWrapper) ~= "table" then
+			error("Invalid value provided for field optional_bytes_wrapper")
+		end
 		self.optional_bytes_wrapper = _google_protobuf_wrappers.BytesValue.jsonDecode(input.optionalBytesWrapper)
 	end
 
 	if input.repeated_bool_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
 		for _, value in input.repeated_bool_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_bool_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
@@ -6267,6 +7044,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedBoolWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BoolValue } = {}
 		for _, value in input.repeatedBoolWrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_bool_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.BoolValue.jsonDecode(value))
 		end
 
@@ -6276,6 +7056,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_int32_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
 		for _, value in input.repeated_int32_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_int32_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
 		end
 
@@ -6285,6 +7068,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedInt32Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int32Value } = {}
 		for _, value in input.repeatedInt32Wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_int32_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.Int32Value.jsonDecode(value))
 		end
 
@@ -6294,6 +7080,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_int64_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
 		for _, value in input.repeated_int64_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_int64_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
 		end
 
@@ -6303,6 +7092,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedInt64Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.Int64Value } = {}
 		for _, value in input.repeatedInt64Wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_int64_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.Int64Value.jsonDecode(value))
 		end
 
@@ -6312,6 +7104,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_uint32_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
 		for _, value in input.repeated_uint32_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_uint32_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
 		end
 
@@ -6321,6 +7116,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedUint32Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt32Value } = {}
 		for _, value in input.repeatedUint32Wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_uint32_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.UInt32Value.jsonDecode(value))
 		end
 
@@ -6330,6 +7128,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_uint64_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
 		for _, value in input.repeated_uint64_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_uint64_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
 		end
 
@@ -6339,6 +7140,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedUint64Wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.UInt64Value } = {}
 		for _, value in input.repeatedUint64Wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_uint64_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.UInt64Value.jsonDecode(value))
 		end
 
@@ -6348,6 +7152,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_float_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
 		for _, value in input.repeated_float_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_float_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
 		end
 
@@ -6357,6 +7164,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedFloatWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.FloatValue } = {}
 		for _, value in input.repeatedFloatWrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_float_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.FloatValue.jsonDecode(value))
 		end
 
@@ -6366,6 +7176,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_double_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
 		for _, value in input.repeated_double_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_double_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
 		end
 
@@ -6375,6 +7188,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedDoubleWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.DoubleValue } = {}
 		for _, value in input.repeatedDoubleWrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_double_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.DoubleValue.jsonDecode(value))
 		end
 
@@ -6384,6 +7200,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_string_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
 		for _, value in input.repeated_string_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_string_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
 		end
 
@@ -6393,6 +7212,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedStringWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.StringValue } = {}
 		for _, value in input.repeatedStringWrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_string_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.StringValue.jsonDecode(value))
 		end
 
@@ -6402,6 +7224,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_bytes_wrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
 		for _, value in input.repeated_bytes_wrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_bytes_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
 		end
 
@@ -6411,6 +7236,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedBytesWrapper ~= nil then
 		local newOutput: { _google_protobuf_wrappers.BytesValue } = {}
 		for _, value in input.repeatedBytesWrapper do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_bytes_wrapper")
+			end
 			table.insert(newOutput, _google_protobuf_wrappers.BytesValue.jsonDecode(value))
 		end
 
@@ -6418,60 +7246,102 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.optional_duration ~= nil then
+		if typeof(input.optional_duration) ~= "table" then
+			error("Invalid value provided for field optional_duration")
+		end
 		self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optional_duration)
 	end
 
 	if input.optionalDuration ~= nil then
+		if typeof(input.optionalDuration) ~= "table" then
+			error("Invalid value provided for field optional_duration")
+		end
 		self.optional_duration = _google_protobuf_duration.Duration.jsonDecode(input.optionalDuration)
 	end
 
 	if input.optional_timestamp ~= nil then
+		if typeof(input.optional_timestamp) ~= "table" then
+			error("Invalid value provided for field optional_timestamp")
+		end
 		self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optional_timestamp)
 	end
 
 	if input.optionalTimestamp ~= nil then
+		if typeof(input.optionalTimestamp) ~= "table" then
+			error("Invalid value provided for field optional_timestamp")
+		end
 		self.optional_timestamp = _google_protobuf_timestamp.Timestamp.jsonDecode(input.optionalTimestamp)
 	end
 
 	if input.optional_field_mask ~= nil then
+		if typeof(input.optional_field_mask) ~= "table" then
+			error("Invalid value provided for field optional_field_mask")
+		end
 		self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optional_field_mask)
 	end
 
 	if input.optionalFieldMask ~= nil then
+		if typeof(input.optionalFieldMask) ~= "table" then
+			error("Invalid value provided for field optional_field_mask")
+		end
 		self.optional_field_mask = _google_protobuf_field_mask.FieldMask.jsonDecode(input.optionalFieldMask)
 	end
 
 	if input.optional_struct ~= nil then
+		if typeof(input.optional_struct) ~= "table" then
+			error("Invalid value provided for field optional_struct")
+		end
 		self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optional_struct)
 	end
 
 	if input.optionalStruct ~= nil then
+		if typeof(input.optionalStruct) ~= "table" then
+			error("Invalid value provided for field optional_struct")
+		end
 		self.optional_struct = _google_protobuf_struct.Struct.jsonDecode(input.optionalStruct)
 	end
 
 	if input.optional_any ~= nil then
+		if typeof(input.optional_any) ~= "table" then
+			error("Invalid value provided for field optional_any")
+		end
 		self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optional_any)
 	end
 
 	if input.optionalAny ~= nil then
+		if typeof(input.optionalAny) ~= "table" then
+			error("Invalid value provided for field optional_any")
+		end
 		self.optional_any = _google_protobuf_any.Any.jsonDecode(input.optionalAny)
 	end
 
 	if input.optional_value ~= nil then
+		if typeof(input.optional_value) ~= "table" then
+			error("Invalid value provided for field optional_value")
+		end
 		self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optional_value)
 	end
 
 	if input.optionalValue ~= nil then
+		if typeof(input.optionalValue) ~= "table" then
+			error("Invalid value provided for field optional_value")
+		end
 		self.optional_value = _google_protobuf_struct.Value.jsonDecode(input.optionalValue)
 	end
 
 	if input.optional_null_value ~= nil then
+		if typeof(input.optional_null_value) ~= "number" and typeof(input.optional_null_value) ~= "string" then
+			error("Invalid value provided for field optional_null_value")
+		end
 		self.optional_null_value = if typeof(input.optional_null_value) == "number"
 			then (_google_protobuf_struct.NullValue.fromNumber(input.optional_null_value) or input.optional_null_value)
 			else (_google_protobuf_struct.NullValue.fromName(input.optional_null_value) or input.optional_null_value)
 	end
 
 	if input.optionalNullValue ~= nil then
+		if typeof(input.optionalNullValue) ~= "number" and typeof(input.optionalNullValue) ~= "string" then
+			error("Invalid value provided for field optional_null_value")
+		end
 		self.optional_null_value = if typeof(input.optionalNullValue) == "number"
 			then (_google_protobuf_struct.NullValue.fromNumber(input.optionalNullValue) or input.optionalNullValue)
 			else (_google_protobuf_struct.NullValue.fromName(input.optionalNullValue) or input.optionalNullValue)
@@ -6480,6 +7350,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_duration ~= nil then
 		local newOutput: { _google_protobuf_duration.Duration } = {}
 		for _, value in input.repeated_duration do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_duration")
+			end
 			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
 		end
 
@@ -6489,6 +7362,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedDuration ~= nil then
 		local newOutput: { _google_protobuf_duration.Duration } = {}
 		for _, value in input.repeatedDuration do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_duration")
+			end
 			table.insert(newOutput, _google_protobuf_duration.Duration.jsonDecode(value))
 		end
 
@@ -6498,6 +7374,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_timestamp ~= nil then
 		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
 		for _, value in input.repeated_timestamp do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_timestamp")
+			end
 			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
 		end
 
@@ -6507,6 +7386,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedTimestamp ~= nil then
 		local newOutput: { _google_protobuf_timestamp.Timestamp } = {}
 		for _, value in input.repeatedTimestamp do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_timestamp")
+			end
 			table.insert(newOutput, _google_protobuf_timestamp.Timestamp.jsonDecode(value))
 		end
 
@@ -6516,6 +7398,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_fieldmask ~= nil then
 		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
 		for _, value in input.repeated_fieldmask do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_fieldmask")
+			end
 			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
 		end
 
@@ -6525,6 +7410,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedFieldmask ~= nil then
 		local newOutput: { _google_protobuf_field_mask.FieldMask } = {}
 		for _, value in input.repeatedFieldmask do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_fieldmask")
+			end
 			table.insert(newOutput, _google_protobuf_field_mask.FieldMask.jsonDecode(value))
 		end
 
@@ -6534,6 +7422,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_struct ~= nil then
 		local newOutput: { _google_protobuf_struct.Struct } = {}
 		for _, value in input.repeated_struct do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_struct")
+			end
 			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
 		end
 
@@ -6543,6 +7434,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedStruct ~= nil then
 		local newOutput: { _google_protobuf_struct.Struct } = {}
 		for _, value in input.repeatedStruct do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_struct")
+			end
 			table.insert(newOutput, _google_protobuf_struct.Struct.jsonDecode(value))
 		end
 
@@ -6552,6 +7446,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_any ~= nil then
 		local newOutput: { _google_protobuf_any.Any } = {}
 		for _, value in input.repeated_any do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_any")
+			end
 			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
 		end
 
@@ -6561,6 +7458,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedAny ~= nil then
 		local newOutput: { _google_protobuf_any.Any } = {}
 		for _, value in input.repeatedAny do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_any")
+			end
 			table.insert(newOutput, _google_protobuf_any.Any.jsonDecode(value))
 		end
 
@@ -6570,6 +7470,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_value ~= nil then
 		local newOutput: { _google_protobuf_struct.Value } = {}
 		for _, value in input.repeated_value do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_value")
+			end
 			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
 		end
 
@@ -6579,6 +7482,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedValue ~= nil then
 		local newOutput: { _google_protobuf_struct.Value } = {}
 		for _, value in input.repeatedValue do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_value")
+			end
 			table.insert(newOutput, _google_protobuf_struct.Value.jsonDecode(value))
 		end
 
@@ -6588,6 +7494,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeated_list_value ~= nil then
 		local newOutput: { _google_protobuf_struct.ListValue } = {}
 		for _, value in input.repeated_list_value do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_list_value")
+			end
 			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
 		end
 
@@ -6597,6 +7506,9 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	if input.repeatedListValue ~= nil then
 		local newOutput: { _google_protobuf_struct.ListValue } = {}
 		for _, value in input.repeatedListValue do
+			if typeof(value) ~= "table" then
+				error("Invalid value provided for field repeated_list_value")
+			end
 			table.insert(newOutput, _google_protobuf_struct.ListValue.jsonDecode(value))
 		end
 
@@ -6604,130 +7516,226 @@ function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTy
 	end
 
 	if input.fieldname1 ~= nil then
+		if typeof(input.fieldname1) ~= "number" and typeof(input.fieldname1) ~= "string" then
+			error("Invalid value provided for field fieldname1")
+		end
 		self.fieldname1 = input.fieldname1
 	end
 
 	if input.field_name2 ~= nil then
+		if typeof(input.field_name2) ~= "number" and typeof(input.field_name2) ~= "string" then
+			error("Invalid value provided for field field_name2")
+		end
 		self.field_name2 = input.field_name2
 	end
 
 	if input.fieldName2 ~= nil then
+		if typeof(input.fieldName2) ~= "number" and typeof(input.fieldName2) ~= "string" then
+			error("Invalid value provided for field field_name2")
+		end
 		self.field_name2 = input.fieldName2
 	end
 
 	if input._field_name3 ~= nil then
+		if typeof(input._field_name3) ~= "number" and typeof(input._field_name3) ~= "string" then
+			error("Invalid value provided for field _field_name3")
+		end
 		self._field_name3 = input._field_name3
 	end
 
 	if input.FieldName3 ~= nil then
+		if typeof(input.FieldName3) ~= "number" and typeof(input.FieldName3) ~= "string" then
+			error("Invalid value provided for field _field_name3")
+		end
 		self._field_name3 = input.FieldName3
 	end
 
 	if input.field__name4_ ~= nil then
+		if typeof(input.field__name4_) ~= "number" and typeof(input.field__name4_) ~= "string" then
+			error("Invalid value provided for field field__name4_")
+		end
 		self.field__name4_ = input.field__name4_
 	end
 
 	if input.fieldName4 ~= nil then
+		if typeof(input.fieldName4) ~= "number" and typeof(input.fieldName4) ~= "string" then
+			error("Invalid value provided for field field__name4_")
+		end
 		self.field__name4_ = input.fieldName4
 	end
 
 	if input.field0name5 ~= nil then
+		if typeof(input.field0name5) ~= "number" and typeof(input.field0name5) ~= "string" then
+			error("Invalid value provided for field field0name5")
+		end
 		self.field0name5 = input.field0name5
 	end
 
 	if input.field_0_name6 ~= nil then
+		if typeof(input.field_0_name6) ~= "number" and typeof(input.field_0_name6) ~= "string" then
+			error("Invalid value provided for field field_0_name6")
+		end
 		self.field_0_name6 = input.field_0_name6
 	end
 
 	if input.field0Name6 ~= nil then
+		if typeof(input.field0Name6) ~= "number" and typeof(input.field0Name6) ~= "string" then
+			error("Invalid value provided for field field_0_name6")
+		end
 		self.field_0_name6 = input.field0Name6
 	end
 
 	if input.fieldName7 ~= nil then
+		if typeof(input.fieldName7) ~= "number" and typeof(input.fieldName7) ~= "string" then
+			error("Invalid value provided for field fieldName7")
+		end
 		self.fieldName7 = input.fieldName7
 	end
 
 	if input.FieldName8 ~= nil then
+		if typeof(input.FieldName8) ~= "number" and typeof(input.FieldName8) ~= "string" then
+			error("Invalid value provided for field FieldName8")
+		end
 		self.FieldName8 = input.FieldName8
 	end
 
 	if input.field_Name9 ~= nil then
+		if typeof(input.field_Name9) ~= "number" and typeof(input.field_Name9) ~= "string" then
+			error("Invalid value provided for field field_Name9")
+		end
 		self.field_Name9 = input.field_Name9
 	end
 
 	if input.fieldName9 ~= nil then
+		if typeof(input.fieldName9) ~= "number" and typeof(input.fieldName9) ~= "string" then
+			error("Invalid value provided for field field_Name9")
+		end
 		self.field_Name9 = input.fieldName9
 	end
 
 	if input.Field_Name10 ~= nil then
+		if typeof(input.Field_Name10) ~= "number" and typeof(input.Field_Name10) ~= "string" then
+			error("Invalid value provided for field Field_Name10")
+		end
 		self.Field_Name10 = input.Field_Name10
 	end
 
 	if input.FieldName10 ~= nil then
+		if typeof(input.FieldName10) ~= "number" and typeof(input.FieldName10) ~= "string" then
+			error("Invalid value provided for field Field_Name10")
+		end
 		self.Field_Name10 = input.FieldName10
 	end
 
 	if input.FIELD_NAME11 ~= nil then
+		if typeof(input.FIELD_NAME11) ~= "number" and typeof(input.FIELD_NAME11) ~= "string" then
+			error("Invalid value provided for field FIELD_NAME11")
+		end
 		self.FIELD_NAME11 = input.FIELD_NAME11
 	end
 
 	if input.FIELDNAME11 ~= nil then
+		if typeof(input.FIELDNAME11) ~= "number" and typeof(input.FIELDNAME11) ~= "string" then
+			error("Invalid value provided for field FIELD_NAME11")
+		end
 		self.FIELD_NAME11 = input.FIELDNAME11
 	end
 
 	if input.FIELD_name12 ~= nil then
+		if typeof(input.FIELD_name12) ~= "number" and typeof(input.FIELD_name12) ~= "string" then
+			error("Invalid value provided for field FIELD_name12")
+		end
 		self.FIELD_name12 = input.FIELD_name12
 	end
 
 	if input.FIELDName12 ~= nil then
+		if typeof(input.FIELDName12) ~= "number" and typeof(input.FIELDName12) ~= "string" then
+			error("Invalid value provided for field FIELD_name12")
+		end
 		self.FIELD_name12 = input.FIELDName12
 	end
 
 	if input.__field_name13 ~= nil then
+		if typeof(input.__field_name13) ~= "number" and typeof(input.__field_name13) ~= "string" then
+			error("Invalid value provided for field __field_name13")
+		end
 		self.__field_name13 = input.__field_name13
 	end
 
 	if input.FieldName13 ~= nil then
+		if typeof(input.FieldName13) ~= "number" and typeof(input.FieldName13) ~= "string" then
+			error("Invalid value provided for field __field_name13")
+		end
 		self.__field_name13 = input.FieldName13
 	end
 
 	if input.__Field_name14 ~= nil then
+		if typeof(input.__Field_name14) ~= "number" and typeof(input.__Field_name14) ~= "string" then
+			error("Invalid value provided for field __Field_name14")
+		end
 		self.__Field_name14 = input.__Field_name14
 	end
 
 	if input.FieldName14 ~= nil then
+		if typeof(input.FieldName14) ~= "number" and typeof(input.FieldName14) ~= "string" then
+			error("Invalid value provided for field __Field_name14")
+		end
 		self.__Field_name14 = input.FieldName14
 	end
 
 	if input.field__name15 ~= nil then
+		if typeof(input.field__name15) ~= "number" and typeof(input.field__name15) ~= "string" then
+			error("Invalid value provided for field field__name15")
+		end
 		self.field__name15 = input.field__name15
 	end
 
 	if input.fieldName15 ~= nil then
+		if typeof(input.fieldName15) ~= "number" and typeof(input.fieldName15) ~= "string" then
+			error("Invalid value provided for field field__name15")
+		end
 		self.field__name15 = input.fieldName15
 	end
 
 	if input.field__Name16 ~= nil then
+		if typeof(input.field__Name16) ~= "number" and typeof(input.field__Name16) ~= "string" then
+			error("Invalid value provided for field field__Name16")
+		end
 		self.field__Name16 = input.field__Name16
 	end
 
 	if input.fieldName16 ~= nil then
+		if typeof(input.fieldName16) ~= "number" and typeof(input.fieldName16) ~= "string" then
+			error("Invalid value provided for field field__Name16")
+		end
 		self.field__Name16 = input.fieldName16
 	end
 
 	if input.field_name17__ ~= nil then
+		if typeof(input.field_name17__) ~= "number" and typeof(input.field_name17__) ~= "string" then
+			error("Invalid value provided for field field_name17__")
+		end
 		self.field_name17__ = input.field_name17__
 	end
 
 	if input.fieldName17 ~= nil then
+		if typeof(input.fieldName17) ~= "number" and typeof(input.fieldName17) ~= "string" then
+			error("Invalid value provided for field field_name17__")
+		end
 		self.field_name17__ = input.fieldName17
 	end
 
 	if input.Field_name18__ ~= nil then
+		if typeof(input.Field_name18__) ~= "number" and typeof(input.Field_name18__) ~= "string" then
+			error("Invalid value provided for field Field_name18__")
+		end
 		self.Field_name18__ = input.Field_name18__
 	end
 
 	if input.FieldName18 ~= nil then
+		if typeof(input.FieldName18) ~= "number" and typeof(input.FieldName18) ~= "string" then
+			error("Invalid value provided for field Field_name18__")
+		end
 		self.Field_name18__ = input.FieldName18
 	end
 
@@ -6828,10 +7836,16 @@ function _TestAllTypesProto3_NestedMessageImpl.jsonDecode(input: { [string]: any
 	local self = TestAllTypesProto3_NestedMessage.new()
 
 	if input.a ~= nil then
+		if typeof(input.a) ~= "number" and typeof(input.a) ~= "string" then
+			error("Invalid value provided for field a")
+		end
 		self.a = input.a
 	end
 
 	if input.corecursive ~= nil then
+		if typeof(input.corecursive) ~= "table" then
+			error("Invalid value provided for field corecursive")
+		end
 		self.corecursive = TestAllTypesProto3.jsonDecode(input.corecursive)
 	end
 
@@ -6933,10 +7947,16 @@ function _TestAllTypesProto3_MapInt32Int32EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapInt32Int32Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7038,10 +8058,16 @@ function _TestAllTypesProto3_MapInt64Int64EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapInt64Int64Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7143,10 +8169,16 @@ function _TestAllTypesProto3_MapUint32Uint32EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7248,10 +8280,16 @@ function _TestAllTypesProto3_MapUint64Uint64EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7353,10 +8391,16 @@ function _TestAllTypesProto3_MapSint32Sint32EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7458,10 +8502,16 @@ function _TestAllTypesProto3_MapSint64Sint64EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7563,10 +8613,16 @@ function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7668,10 +8724,16 @@ function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7779,10 +8841,16 @@ function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7890,10 +8958,16 @@ function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -7995,10 +9069,16 @@ function _TestAllTypesProto3_MapInt32FloatEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapInt32FloatEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = proto.json.deserializeNumber(input.value)
 	end
 
@@ -8100,10 +9180,16 @@ function _TestAllTypesProto3_MapInt32DoubleEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "number" and typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = proto.json.deserializeNumber(input.value)
 	end
 
@@ -8205,10 +9291,16 @@ function _TestAllTypesProto3_MapBoolBoolEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapBoolBoolEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "boolean" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "boolean" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -8310,10 +9402,16 @@ function _TestAllTypesProto3_MapStringStringEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringStringEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = input.value
 	end
 
@@ -8415,10 +9513,16 @@ function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringBytesEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = proto.json.deserializeBuffer(input.value)
 	end
 
@@ -8527,10 +9631,16 @@ function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "table" then
+			error("Invalid value provided for field value")
+		end
 		self.value = TestAllTypesProto3_NestedMessage.jsonDecode(input.value)
 	end
 
@@ -8639,10 +9749,16 @@ function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "table" then
+			error("Invalid value provided for field value")
+		end
 		self.value = ForeignMessage.jsonDecode(input.value)
 	end
 
@@ -8760,10 +9876,16 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = if typeof(input.value) == "number"
 			then (TestAllTypesProto3_NestedEnum.fromNumber(input.value) or input.value)
 			else (TestAllTypesProto3_NestedEnum.fromName(input.value) or input.value)
@@ -8875,10 +9997,16 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonDecode(
 	local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
 
 	if input.key ~= nil then
+		if typeof(input.key) ~= "string" then
+			error("Invalid value provided for field key")
+		end
 		self.key = input.key
 	end
 
 	if input.value ~= nil then
+		if typeof(input.value) ~= "number" and typeof(input.value) ~= "string" then
+			error("Invalid value provided for field value")
+		end
 		self.value = if typeof(input.value) == "number"
 			then (ForeignEnum.fromNumber(input.value) or input.value)
 			else (ForeignEnum.fromName(input.value) or input.value)
@@ -9057,6 +10185,9 @@ function _ForeignMessageImpl.jsonDecode(input: { [string]: any }): ForeignMessag
 	local self = ForeignMessage.new()
 
 	if input.c ~= nil then
+		if typeof(input.c) ~= "number" and typeof(input.c) ~= "string" then
+			error("Invalid value provided for field c")
+		end
 		self.c = input.c
 	end
 

@@ -217,6 +217,9 @@ function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
 	if input.failure ~= nil then
 		local newOutput: { string } = {}
 		for _, value in input.failure do
+			if typeof(value) ~= "string" then
+				error("Invalid value provided for field failure")
+			end
 			table.insert(newOutput, value)
 		end
 
@@ -443,82 +446,136 @@ function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): Conforman
 	local self = ConformanceRequest.new()
 
 	if input.protobuf_payload ~= nil then
+		if typeof(input.protobuf_payload) ~= "string" then
+			error("Invalid value provided for field protobuf_payload")
+		end
 		self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
 	end
 
 	if input.protobufPayload ~= nil then
+		if typeof(input.protobufPayload) ~= "string" then
+			error("Invalid value provided for field protobuf_payload")
+		end
 		self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
 	end
 
 	if input.json_payload ~= nil then
+		if typeof(input.json_payload) ~= "string" then
+			error("Invalid value provided for field json_payload")
+		end
 		self.payload = { type = "json_payload", value = input.json_payload }
 	end
 
 	if input.jsonPayload ~= nil then
+		if typeof(input.jsonPayload) ~= "string" then
+			error("Invalid value provided for field json_payload")
+		end
 		self.payload = { type = "json_payload", value = input.jsonPayload }
 	end
 
 	if input.jspb_payload ~= nil then
+		if typeof(input.jspb_payload) ~= "string" then
+			error("Invalid value provided for field jspb_payload")
+		end
 		self.payload = { type = "jspb_payload", value = input.jspb_payload }
 	end
 
 	if input.jspbPayload ~= nil then
+		if typeof(input.jspbPayload) ~= "string" then
+			error("Invalid value provided for field jspb_payload")
+		end
 		self.payload = { type = "jspb_payload", value = input.jspbPayload }
 	end
 
 	if input.text_payload ~= nil then
+		if typeof(input.text_payload) ~= "string" then
+			error("Invalid value provided for field text_payload")
+		end
 		self.payload = { type = "text_payload", value = input.text_payload }
 	end
 
 	if input.textPayload ~= nil then
+		if typeof(input.textPayload) ~= "string" then
+			error("Invalid value provided for field text_payload")
+		end
 		self.payload = { type = "text_payload", value = input.textPayload }
 	end
 
 	if input.requested_output_format ~= nil then
+		if typeof(input.requested_output_format) ~= "number" and typeof(input.requested_output_format) ~= "string" then
+			error("Invalid value provided for field requested_output_format")
+		end
 		self.requested_output_format = if typeof(input.requested_output_format) == "number"
 			then (WireFormat.fromNumber(input.requested_output_format) or input.requested_output_format)
 			else (WireFormat.fromName(input.requested_output_format) or input.requested_output_format)
 	end
 
 	if input.requestedOutputFormat ~= nil then
+		if typeof(input.requestedOutputFormat) ~= "number" and typeof(input.requestedOutputFormat) ~= "string" then
+			error("Invalid value provided for field requested_output_format")
+		end
 		self.requested_output_format = if typeof(input.requestedOutputFormat) == "number"
 			then (WireFormat.fromNumber(input.requestedOutputFormat) or input.requestedOutputFormat)
 			else (WireFormat.fromName(input.requestedOutputFormat) or input.requestedOutputFormat)
 	end
 
 	if input.message_type ~= nil then
+		if typeof(input.message_type) ~= "string" then
+			error("Invalid value provided for field message_type")
+		end
 		self.message_type = input.message_type
 	end
 
 	if input.messageType ~= nil then
+		if typeof(input.messageType) ~= "string" then
+			error("Invalid value provided for field message_type")
+		end
 		self.message_type = input.messageType
 	end
 
 	if input.test_category ~= nil then
+		if typeof(input.test_category) ~= "number" and typeof(input.test_category) ~= "string" then
+			error("Invalid value provided for field test_category")
+		end
 		self.test_category = if typeof(input.test_category) == "number"
 			then (TestCategory.fromNumber(input.test_category) or input.test_category)
 			else (TestCategory.fromName(input.test_category) or input.test_category)
 	end
 
 	if input.testCategory ~= nil then
+		if typeof(input.testCategory) ~= "number" and typeof(input.testCategory) ~= "string" then
+			error("Invalid value provided for field test_category")
+		end
 		self.test_category = if typeof(input.testCategory) == "number"
 			then (TestCategory.fromNumber(input.testCategory) or input.testCategory)
 			else (TestCategory.fromName(input.testCategory) or input.testCategory)
 	end
 
 	if input.jspb_encoding_options ~= nil then
+		if typeof(input.jspb_encoding_options) ~= "table" then
+			error("Invalid value provided for field jspb_encoding_options")
+		end
 		self.jspb_encoding_options = JspbEncodingConfig.jsonDecode(input.jspb_encoding_options)
 	end
 
 	if input.jspbEncodingOptions ~= nil then
+		if typeof(input.jspbEncodingOptions) ~= "table" then
+			error("Invalid value provided for field jspb_encoding_options")
+		end
 		self.jspb_encoding_options = JspbEncodingConfig.jsonDecode(input.jspbEncodingOptions)
 	end
 
 	if input.print_unknown_fields ~= nil then
+		if typeof(input.print_unknown_fields) ~= "boolean" then
+			error("Invalid value provided for field print_unknown_fields")
+		end
 		self.print_unknown_fields = input.print_unknown_fields
 	end
 
 	if input.printUnknownFields ~= nil then
+		if typeof(input.printUnknownFields) ~= "boolean" then
+			error("Invalid value provided for field print_unknown_fields")
+		end
 		self.print_unknown_fields = input.printUnknownFields
 	end
 
@@ -686,70 +743,121 @@ function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): Conforma
 	local self = ConformanceResponse.new()
 
 	if input.parse_error ~= nil then
+		if typeof(input.parse_error) ~= "string" then
+			error("Invalid value provided for field parse_error")
+		end
 		self.result = { type = "parse_error", value = input.parse_error }
 	end
 
 	if input.parseError ~= nil then
+		if typeof(input.parseError) ~= "string" then
+			error("Invalid value provided for field parse_error")
+		end
 		self.result = { type = "parse_error", value = input.parseError }
 	end
 
 	if input.serialize_error ~= nil then
+		if typeof(input.serialize_error) ~= "string" then
+			error("Invalid value provided for field serialize_error")
+		end
 		self.result = { type = "serialize_error", value = input.serialize_error }
 	end
 
 	if input.serializeError ~= nil then
+		if typeof(input.serializeError) ~= "string" then
+			error("Invalid value provided for field serialize_error")
+		end
 		self.result = { type = "serialize_error", value = input.serializeError }
 	end
 
 	if input.timeout_error ~= nil then
+		if typeof(input.timeout_error) ~= "string" then
+			error("Invalid value provided for field timeout_error")
+		end
 		self.result = { type = "timeout_error", value = input.timeout_error }
 	end
 
 	if input.timeoutError ~= nil then
+		if typeof(input.timeoutError) ~= "string" then
+			error("Invalid value provided for field timeout_error")
+		end
 		self.result = { type = "timeout_error", value = input.timeoutError }
 	end
 
 	if input.runtime_error ~= nil then
+		if typeof(input.runtime_error) ~= "string" then
+			error("Invalid value provided for field runtime_error")
+		end
 		self.result = { type = "runtime_error", value = input.runtime_error }
 	end
 
 	if input.runtimeError ~= nil then
+		if typeof(input.runtimeError) ~= "string" then
+			error("Invalid value provided for field runtime_error")
+		end
 		self.result = { type = "runtime_error", value = input.runtimeError }
 	end
 
 	if input.protobuf_payload ~= nil then
+		if typeof(input.protobuf_payload) ~= "string" then
+			error("Invalid value provided for field protobuf_payload")
+		end
 		self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
 	end
 
 	if input.protobufPayload ~= nil then
+		if typeof(input.protobufPayload) ~= "string" then
+			error("Invalid value provided for field protobuf_payload")
+		end
 		self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
 	end
 
 	if input.json_payload ~= nil then
+		if typeof(input.json_payload) ~= "string" then
+			error("Invalid value provided for field json_payload")
+		end
 		self.result = { type = "json_payload", value = input.json_payload }
 	end
 
 	if input.jsonPayload ~= nil then
+		if typeof(input.jsonPayload) ~= "string" then
+			error("Invalid value provided for field json_payload")
+		end
 		self.result = { type = "json_payload", value = input.jsonPayload }
 	end
 
 	if input.skipped ~= nil then
+		if typeof(input.skipped) ~= "string" then
+			error("Invalid value provided for field skipped")
+		end
 		self.result = { type = "skipped", value = input.skipped }
 	end
 
 	if input.jspb_payload ~= nil then
+		if typeof(input.jspb_payload) ~= "string" then
+			error("Invalid value provided for field jspb_payload")
+		end
 		self.result = { type = "jspb_payload", value = input.jspb_payload }
 	end
 
 	if input.jspbPayload ~= nil then
+		if typeof(input.jspbPayload) ~= "string" then
+			error("Invalid value provided for field jspb_payload")
+		end
 		self.result = { type = "jspb_payload", value = input.jspbPayload }
 	end
 
 	if input.text_payload ~= nil then
+		if typeof(input.text_payload) ~= "string" then
+			error("Invalid value provided for field text_payload")
+		end
 		self.result = { type = "text_payload", value = input.text_payload }
 	end
 
 	if input.textPayload ~= nil then
+		if typeof(input.textPayload) ~= "string" then
+			error("Invalid value provided for field text_payload")
+		end
 		self.result = { type = "text_payload", value = input.textPayload }
 	end
 
@@ -834,10 +942,16 @@ function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncod
 	local self = JspbEncodingConfig.new()
 
 	if input.use_jspb_array_any_format ~= nil then
+		if typeof(input.use_jspb_array_any_format) ~= "boolean" then
+			error("Invalid value provided for field use_jspb_array_any_format")
+		end
 		self.use_jspb_array_any_format = input.use_jspb_array_any_format
 	end
 
 	if input.useJspbArrayAnyFormat ~= nil then
+		if typeof(input.useJspbArrayAnyFormat) ~= "boolean" then
+			error("Invalid value provided for field use_jspb_array_any_format")
+		end
 		self.use_jspb_array_any_format = input.useJspbArrayAnyFormat
 	end
 
