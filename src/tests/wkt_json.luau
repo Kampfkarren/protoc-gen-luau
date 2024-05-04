@@ -246,6 +246,26 @@ describe("JSON round-trips should work for", function()
 
 			assertEquals(deserialized_duration:jsonEncode(), json)
 		end)
+
+		it("with too many seconds", function()
+			local json = "315576000001s"
+
+			local error = assertThrows(function()
+				duration.Duration.jsonDecode(json)
+			end)
+
+			assertStringContains(error :: string, "Duration seconds cannot exceed 315576000000")
+		end)
+
+		it("with too few seconds", function()
+			local json = "-315576000001s"
+
+			local error = assertThrows(function()
+				duration.Duration.jsonDecode(json)
+			end)
+
+			assertStringContains(error :: string, "Duration seconds cannot be less than %-315576000000")
+		end)
 	end)
 
 	describe("FieldMask", function()

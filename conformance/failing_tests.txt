@@ -24,8 +24,6 @@ Required.Proto3.JsonInput.DoubleFieldMinPositiveValue.JsonOutput
 Required.Proto3.JsonInput.DoubleFieldMinPositiveValue.ProtobufOutput
 Required.Proto3.JsonInput.DoubleFieldTooLarge
 Required.Proto3.JsonInput.DoubleFieldTooSmall
-Required.Proto3.JsonInput.DurationJsonInputTooLarge
-Required.Proto3.JsonInput.DurationJsonInputTooSmall
 Required.Proto3.JsonInput.EnumFieldNotQuoted
 Required.Proto3.JsonInput.FieldMask.ProtobufOutput
 Required.Proto3.JsonInput.FloatFieldTooLarge
