@@ -142,26 +142,31 @@ function _DurationImpl.jsonEncode(duration: Duration): string
 end
 
 function _DurationImpl.jsonDecode(anyValue: any): Duration
+	local maxSeconds = 315576000000
+	local minSeconds = -315576000000
 	local durationString: string = anyValue
 	local simpleSecondsText = string.match(durationString, "^([%-0-9]+)s$")
+	local seconds = 0
+	local nanos = 0
 	if simpleSecondsText ~= nil then
-		local simpleSeconds = assert(
+		seconds = assert(
 			tonumber(simpleSecondsText),
 			"Invalid duration string received--was formatted as just having seconds, but wasn't a properly formatted int"
 		)
+	else
+		local secondsText, nanosText = string.match(durationString, "^([%-0-9]+)%.([0-9]+)s$")
+		assert(secondsText ~= nil, "Invalid duration string received--seconds provided are invalid")
+		assert(nanosText ~= nil, "Invalid duration string received--nanos provided are invalid")
 
-		return Duration.new({
-			seconds = simpleSeconds,
-			nanos = 0,
-		})
+		seconds = assert(tonumber(secondsText), "Invalid duration string received--seconds provided are invalid")
+		nanos = deserializeFractionalNanos(nanosText) * (secondsText:sub(1, 1) == "-" and -1 or 1)
 	end
 
-	local secondsText, nanosText = string.match(durationString, "^([%-0-9]+)%.([0-9]+)s$")
-	assert(secondsText ~= nil, "Invalid duration string received--seconds provided are invalid")
-	assert(nanosText ~= nil, "Invalid duration string received--nanos provided are invalid")
-
-	local seconds = assert(tonumber(secondsText), "Invalid duration string received--seconds provided are invalid")
-	local nanos = deserializeFractionalNanos(nanosText) * (secondsText:sub(1, 1) == "-" and -1 or 1)
+	if seconds > maxSeconds then
+		error(`Duration seconds cannot exceed {maxSeconds}`)
+	elseif seconds < minSeconds then
+		error(`Duration seconds cannot be less than {minSeconds}`)
+	end
 
 	return Duration.new({
 		seconds = seconds,
