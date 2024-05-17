@@ -112,6 +112,9 @@ function _TimestampImpl.jsonEncode(timestamp: Timestamp): string
 	if timestamp.seconds > 253402300799 then
 		error("Invalid timestamp provided: years after 9999 are not supported")
 	end
+	if timestamp.seconds < -62135596800 then
+		error("Invalid timestamp provided: years before 0001 are not supported")
+	end
 	local dateInfo = os.date("!*t", timestamp.seconds or 0)
 	if dateInfo == nil then
 		error("Invalid timestamp provided: exceeded supported timestamp range on this platform")
