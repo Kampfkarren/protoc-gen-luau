@@ -289,6 +289,24 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_any:jsonEncode(), json)
 			assertEquals(any.Any.pack(unpacked, "type.googleapis.com"):jsonEncode(), json)
 		end)
+
+		it("should be able to use traditional message methods on unpacked results", function()
+			local anySink = any.Any
+				.jsonDecode({
+					["@type"] = "type.googleapis.com/my.package.KitchenSink",
+					int32 = 42,
+				})
+				:unpack()
+				:encode()
+
+			local equivalent = kitchen_sink.KitchenSink
+				.new({
+					int32 = 42,
+				})
+				:encode()
+
+			assertEquals(anySink, equivalent)
+		end)
 	end)
 
 	describe("wrapper for", function()
