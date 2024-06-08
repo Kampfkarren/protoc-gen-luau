@@ -32,29 +32,6 @@ end
 
 if request.message_type == "conformance.FailureSet" then
 	local failureSet = conformance.FailureSet.new()
-	failureSet.failure = {
-		-- Any is not supported
-		"Required.Proto3.JsonInput.Any.JsonOutput",
-		"Required.Proto3.JsonInput.Any.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyNested.JsonOutput",
-		"Required.Proto3.JsonInput.AnyNested.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyUnorderedTypeTag.JsonOutput",
-		"Required.Proto3.JsonInput.AnyUnorderedTypeTag.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithDuration.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithDuration.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithFieldMask.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithFieldMask.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithStruct.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithStruct.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithTimestamp.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithTimestamp.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithValueForInteger.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithValueForInteger.ProtobufOutput",
-		"Required.Proto3.JsonInput.AnyWithValueForJsonObject.JsonOutput",
-		"Required.Proto3.JsonInput.AnyWithValueForJsonObject.ProtobufOutput",
-	}
 
 	response.result = {
 		type = "protobuf_payload",

@@ -1,10 +1,16 @@
 local tests = require("./tests")
 
+local proto = require("./samples/proto")
+
+local any = require("./samples/google/protobuf/any")
+local api = require("./samples/google/protobuf/api")
 local duration = require("./samples/google/protobuf/duration")
 local field_mask = require("./samples/google/protobuf/field_mask")
 local struct = require("./samples/google/protobuf/struct")
 local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
+
+local kitchen_sink = require("./samples/kitchen_sink")
 
 local assertEquals = tests.assertEquals
 local assertThrows = tests.assertThrows
@@ -13,6 +19,23 @@ local describe = tests.describe
 local it = tests.it
 
 describe("JSON round-trips should work for", function()
+	describe("Api", function()
+		-- Luau type regression test
+		it("should allow encoding of inner methods", function()
+			local apiObject = api.Api.new({
+				methods = {
+					api.Method.new(),
+				},
+			})
+
+			local _method: api.Method = apiObject.methods[1]
+
+			for _, method in apiObject.methods do
+				method:encode()
+			end
+		end)
+	end)
+
 	describe("Value", function()
 		it("with null value", function()
 			local json = nil
@@ -290,6 +313,66 @@ describe("JSON round-trips should work for", function()
 			assertEquals(deserialized_field_mask.paths[2], "bar.baz")
 
 			assertEquals(deserialized_field_mask:jsonEncode(), json)
+		end)
+	end)
+
+	describe("Any", function()
+		it("with normal message", function()
+			local json = {
+				["@type"] = "type.googleapis.com/my.package.KitchenSink",
+				int32 = 42,
+
+				-- These need to be included because JSON output currently includes unset enum values.
+				aliasedEnum = 0,
+				enum = 0,
+				nestedEnum = 0,
+				enum2 = 0,
+			}
+
+			local deserialized_any = any.Any.jsonDecode(json)
+
+			assertEquals(deserialized_any.type_url, "type.googleapis.com/my.package.KitchenSink")
+
+			local unpacked = deserialized_any:unpack() :: proto.Message<kitchen_sink.KitchenSink, unknown>
+			assertEquals(unpacked.int32, 42)
+
+			assertEquals(deserialized_any:jsonEncode(), json)
+			assertEquals(any.Any.pack(unpacked, "type.googleapis.com"):jsonEncode(), json)
+		end)
+
+		it("with WKT", function()
+			local json = {
+				["@type"] = "type.googleapis.com/google.protobuf.Timestamp",
+				value = "1970-01-01T00:00:01.000000001Z",
+			}
+
+			local deserialized_any = any.Any.jsonDecode(json)
+
+			assertEquals(deserialized_any.type_url, "type.googleapis.com/google.protobuf.Timestamp")
+			local unpacked = deserialized_any:unpack() :: proto.Message<timestamp.Timestamp, unknown>
+			assertEquals(unpacked.seconds, 1)
+			assertEquals(unpacked.nanos, 1)
+
+			assertEquals(deserialized_any:jsonEncode(), json)
+			assertEquals(any.Any.pack(unpacked, "type.googleapis.com"):jsonEncode(), json)
+		end)
+
+		it("should be able to use traditional message methods on unpacked results", function()
+			local anySink = any.Any
+				.jsonDecode({
+					["@type"] = "type.googleapis.com/my.package.KitchenSink",
+					int32 = 42,
+				})
+				:unpack()
+			assert(anySink ~= nil, "Couldn't unpack")
+
+			local equivalent = kitchen_sink.KitchenSink
+				.new({
+					int32 = 42,
+				})
+				:encode()
+
+			assertEquals(anySink:encode(), equivalent)
 		end)
 	end)
 

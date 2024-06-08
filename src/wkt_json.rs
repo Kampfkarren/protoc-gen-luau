@@ -17,6 +17,11 @@ impl WktJson {
         }
 
         match message.name() {
+            "Any" => Some(WktJson {
+                luau_type: "{ [string]: any }",
+                code: include_str!("./luau/wkt_mixins/Any.luau").into(),
+            }),
+
             "BytesValue" => Some(WktJson {
                 luau_type: "string",
                 code: include_str!("./luau/wkt_mixins/BytesValue.luau").into(),

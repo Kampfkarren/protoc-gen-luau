@@ -282,7 +282,9 @@ _<name>Impl.descriptor = {
     fullName = "<full_name>",
 }
 
-<name> = _<name>Impl
+<any_methods>
+
+<name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(<name>)
 "#;
@@ -310,6 +312,22 @@ const ENUM: &str = r#"<name> = {
         <from_name>
     end,
 }"#;
+
+const ANY_METHOD_SIGNATURES: &str = r#"
+-- Pack a message into an Any.
+--
+-- typeUrlPrefix should be the base URL for the type URL. For example, Google uses
+-- "type.googleapis.com".
+pack: (payload: proto.Message<any, any>, typeUrlPrefix: string) -> Any,
+
+-- Returns the message contained by the Any (or nil if the Any is empty).
+unpack: (self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<any, any>?,
+
+-- Returns true if and only if the Any contains an object of the type specified by
+-- typeName. If typeName is a full type URL, it will be compared; otherwise,
+-- only the type name will be compared.
+isA: (self: Any, typeName: string) -> boolean,
+"#;
 
 fn create_decoder(fields: BTreeMap<i32, String>) -> String {
     if fields.is_empty() {
@@ -509,6 +527,15 @@ impl<'a> FileGenerator<'a> {
             None => "{ [string]: any }",
         };
 
+        let is_wkt_any =
+            self.file_descriptor_proto.package() == "google.protobuf" && message.name() == "Any";
+
+        let maybe_any_method_signatures = if is_wkt_any {
+            ANY_METHOD_SIGNATURES
+        } else {
+            ""
+        };
+
         self.types.push(format!(
             r#"type _{name}Impl = {{
                 __index: _{name}Impl,
@@ -518,6 +545,7 @@ impl<'a> FileGenerator<'a> {
                 jsonEncode: (self: {name}) -> {json_type},
                 jsonDecode: (input: {json_type}) -> {name},
                 descriptor: proto.Descriptor,
+                {maybe_any_method_signatures}
             }}
             "#
         ));
@@ -530,10 +558,6 @@ impl<'a> FileGenerator<'a> {
 
         partial_fields_builder.push(format!(r#"type _{name}PartialFields = {{"#));
         partial_fields_builder.indent();
-
-        let mut json_type = StringBuilder::new();
-        json_type.push("{");
-        json_type.indent_n(3);
 
         let mut default_lines = StringBuilder::new();
         default_lines.indent_n(3);
@@ -601,8 +625,6 @@ impl<'a> FileGenerator<'a> {
                 "{field_name}: {}?,",
                 field.type_definition_no_presence()
             ));
-
-            json_type.append(&mut field.json_type_and_names());
 
             encode_lines.append(&mut field.encode());
             encode_lines.blank();
@@ -683,9 +705,6 @@ impl<'a> FileGenerator<'a> {
 
         self.types.blank();
 
-        json_type.dedent();
-        json_type.push("}");
-
         let mut final_code = MESSAGE
             .replace("    ", "\t")
             .replace("<name>", &name)
@@ -707,8 +726,7 @@ impl<'a> FileGenerator<'a> {
                     .replace(
                         "<json_encode>",
                         &format!(
-                            "local output: {} = {{}}\n\n{}\nreturn output",
-                            json_type.build(),
+                            "local output = {{}}\n\n{}\nreturn output",
                             &json_encode_lines.build()
                         ),
                     )
@@ -721,6 +739,10 @@ impl<'a> FileGenerator<'a> {
                     ),
             )
         }
+
+        // Add special methods for google.protobuf.Any: pack, unpack, and isA.
+        let any_methods = include_str!("./luau/wkt_mixins/Any_methods.luau");
+        final_code = final_code.replace("<any_methods>", if is_wkt_any { any_methods } else { "" });
 
         self.implementations.push(final_code);
         self.implementations.blank();

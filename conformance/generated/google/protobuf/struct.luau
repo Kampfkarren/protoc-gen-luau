@@ -127,7 +127,7 @@ function _StructImpl.encode(self: Struct): buffer
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
 			mapBuffer, mapCursor = proto.writeString(mapBuffer, mapCursor, key)
-			local encoded = Value.encode(value)
+			local encoded = value:encode()
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.lengthDelimited)
 			mapBuffer, mapCursor = proto.writeBuffer(mapBuffer, mapCursor, encoded, buffer.len(encoded))
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
@@ -201,7 +201,7 @@ _StructImpl.descriptor = {
 	fullName = "google.protobuf.Struct",
 }
 
-Struct = _StructImpl
+Struct = _StructImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Struct)
 
@@ -225,7 +225,7 @@ function _Struct_FieldsEntryImpl.encode(self: Struct_FieldsEntry): buffer
 	end
 
 	if self.value ~= nil then
-		local encoded = Value.encode(self.value)
+		local encoded = self.value:encode()
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 	end
@@ -268,17 +268,14 @@ function _Struct_FieldsEntryImpl.decode(input: buffer): Struct_FieldsEntry
 end
 
 function _Struct_FieldsEntryImpl.jsonEncode(self: Struct_FieldsEntry): any
-	local output: {
-		key: string?,
-		value: Value?,
-	} = {}
+	local output = {}
 
 	if self.key ~= nil and self.key ~= "" then
 		output.key = self.key
 	end
 
 	if self.value ~= nil then
-		output.value = Value.jsonEncode(self.value)
+		output.value = self.value:jsonEncode()
 	end
 
 	return output
@@ -303,7 +300,7 @@ _Struct_FieldsEntryImpl.descriptor = {
 	fullName = "google.protobuf.FieldsEntry",
 }
 
-Struct_FieldsEntry = _Struct_FieldsEntryImpl
+Struct_FieldsEntry = _Struct_FieldsEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Struct_FieldsEntry)
 
@@ -334,11 +331,11 @@ function _ValueImpl.encode(self: Value): buffer
 			output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.varint)
 			output, cursor = proto.writeVarInt(output, cursor, if self.kind.value then 1 else 0)
 		elseif self.kind.type == "struct_value" then
-			local encoded = Struct.encode(self.kind.value)
+			local encoded = self.kind.value:encode()
 			output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		elseif self.kind.type == "list_value" then
-			local encoded = ListValue.encode(self.kind.value)
+			local encoded = self.kind.value:encode()
 			output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		end
@@ -454,7 +451,7 @@ _ValueImpl.descriptor = {
 	fullName = "google.protobuf.Value",
 }
 
-Value = _ValueImpl
+Value = _ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Value)
 
@@ -473,7 +470,7 @@ function _ListValueImpl.encode(self: ListValue): buffer
 
 	if self.values ~= nil and #self.values > 0 then
 		for _, value in self.values do
-			local encoded = Value.encode(value)
+			local encoded = value:encode()
 			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 		end
@@ -541,7 +538,7 @@ _ListValueImpl.descriptor = {
 	fullName = "google.protobuf.ListValue",
 }
 
-ListValue = _ListValueImpl
+ListValue = _ListValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(ListValue)
 

@@ -13,6 +13,20 @@ type _AnyImpl = {
 	jsonEncode: (self: Any) -> { [string]: any },
 	jsonDecode: (input: { [string]: any }) -> Any,
 	descriptor: proto.Descriptor,
+
+	-- Pack a message into an Any.
+	--
+	-- typeUrlPrefix should be the base URL for the type URL. For example, Google uses
+	-- "type.googleapis.com".
+	pack: (payload: proto.Message<any, any>, typeUrlPrefix: string) -> Any,
+
+	-- Returns the message contained by the Any (or nil if the Any is empty).
+	unpack: (self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<any, any>?,
+
+	-- Returns true if and only if the Any contains an object of the type specified by
+	-- typeName. If typeName is a full type URL, it will be compared; otherwise,
+	-- only the type name will be compared.
+	isA: (self: Any, typeName: string) -> boolean,
 }
 
 type _AnyFields = {
@@ -26,7 +40,7 @@ type _AnyPartialFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-local Any: proto.Message<Any, _AnyPartialFields>
+local Any: proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
 
 local _AnyImpl = {}
 _AnyImpl.__index = _AnyImpl
@@ -89,47 +103,103 @@ function _AnyImpl.decode(input: buffer): Any
 	return self
 end
 
-function _AnyImpl.jsonEncode(self: Any): any
-	local output: {
-		typeUrl: string?,
-		value: string?,
-	} = {}
+function _AnyImpl.jsonEncode(input: Any): { [string]: any }
+	local unpacked = input:unpack(typeRegistry.default)
+	assert(unpacked ~= nil, "Cannot JSON-encode empty Any")
 
-	if self.type_url ~= nil and self.type_url ~= "" then
-		output.typeUrl = self.type_url
+	local json = unpacked:jsonEncode()
+
+	if typeof(json) == "string" then
+		return { ["@type"] = input.type_url, ["value"] = json }
 	end
 
-	if self.value ~= nil and buffer.len(self.value) > 0 then
-		output.value = proto.json.serializeBuffer(self.value)
-	end
+	json["@type"] = input.type_url
 
-	return output
+	return json
 end
 
 function _AnyImpl.jsonDecode(input: { [string]: any }): Any
-	local self = Any.new()
+	local typeUrl = input["@type"]
+	local typeName = typeUrl:match("([^/]+)$")
+	local payloadType = typeRegistry.default:findMessage(typeName)
 
-	if input.type_url ~= nil then
-		self.type_url = input.type_url
+	if payloadType == nil then
+		error(`Could not find message type \`{typeName}\` for Any`)
 	end
 
-	if input.typeUrl ~= nil then
-		self.type_url = input.typeUrl
+	local typePrefix = typeUrl:sub(1, #typeUrl - #typeName - 1)
+
+	local json = table.clone(input)
+	-- For WKTs with special JSON representations, we need to decode input["value"] rather than
+	-- input.
+	if typeName:match("^google%.protobuf%.") and input["value"] ~= nil then
+		json = input["value"]
+	else
+		-- Clear this because it's not part of the JSON encoding of the payload itself.
+		json["@type"] = nil
 	end
 
-	if input.value ~= nil then
-		self.value = proto.json.deserializeBuffer(input.value)
-	end
-
-	return self
+	return _AnyImpl.pack(payloadType.jsonDecode(json) :: proto.Message<unknown, unknown>, typePrefix)
 end
+
+type _AnyJsonDecode = typeof(_AnyImpl.jsonDecode) -- Luau bug: It doesn't recognize this for some reason
 
 _AnyImpl.descriptor = {
 	name = "Any",
 	fullName = "google.protobuf.Any",
 }
 
-Any = _AnyImpl
+function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
+	return Any.new({
+		type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
+		value = payload:encode(),
+	})
+end
+
+-- Luau: It refuses to believe these are the same unpack, for some reason
+local anyUnpack: typeof(({} :: _AnyImpl).unpack) = function(
+	self: Any,
+	registry: typeRegistry.TypeRegistry?
+): proto.Message<any, any>?
+	if self.value == nil then
+		return nil
+	end
+
+	if registry == nil then
+		registry = typeRegistry.default
+	end
+	assert(registry ~= nil, "Luau")
+
+	local typeName = _AnyImpl.typeUrlToTypeName(self.type_url)
+	local payloadType = registry:findMessage(typeName)
+
+	if payloadType == nil then
+		error(`Unknown type: \`{typeName}\``)
+	end
+
+	return payloadType.decode(self.value) :: proto.Message<any, any>
+end
+
+_AnyImpl.unpack = anyUnpack
+
+function _AnyImpl.isA(self: Any, typeName: string): boolean
+	if self.type_url == typeName then
+		return true
+	end
+
+	local suffix = "/" .. typeName
+	return self.type_url:sub(-#suffix) == suffix
+end
+
+function _AnyImpl.typeUrlToTypeName(typeUrl: string): string
+	local typeName = typeUrl:match("([^/]+)$")
+	if typeName == nil then
+		error(`Invalid type URL: \`{typeUrl}\``)
+	end
+	return typeName
+end
+
+Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Any)
 

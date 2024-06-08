@@ -179,7 +179,7 @@ _DurationImpl.descriptor = {
 	fullName = "google.protobuf.Duration",
 }
 
-Duration = _DurationImpl
+Duration = _DurationImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Duration)
 

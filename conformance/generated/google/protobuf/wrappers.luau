@@ -261,7 +261,7 @@ _DoubleValueImpl.descriptor = {
 	fullName = "google.protobuf.DoubleValue",
 }
 
-DoubleValue = _DoubleValueImpl
+DoubleValue = _DoubleValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(DoubleValue)
 
@@ -332,7 +332,7 @@ _FloatValueImpl.descriptor = {
 	fullName = "google.protobuf.FloatValue",
 }
 
-FloatValue = _FloatValueImpl
+FloatValue = _FloatValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(FloatValue)
 
@@ -403,7 +403,7 @@ _Int64ValueImpl.descriptor = {
 	fullName = "google.protobuf.Int64Value",
 }
 
-Int64Value = _Int64ValueImpl
+Int64Value = _Int64ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Int64Value)
 
@@ -474,7 +474,7 @@ _UInt64ValueImpl.descriptor = {
 	fullName = "google.protobuf.UInt64Value",
 }
 
-UInt64Value = _UInt64ValueImpl
+UInt64Value = _UInt64ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(UInt64Value)
 
@@ -545,7 +545,7 @@ _Int32ValueImpl.descriptor = {
 	fullName = "google.protobuf.Int32Value",
 }
 
-Int32Value = _Int32ValueImpl
+Int32Value = _Int32ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Int32Value)
 
@@ -616,7 +616,7 @@ _UInt32ValueImpl.descriptor = {
 	fullName = "google.protobuf.UInt32Value",
 }
 
-UInt32Value = _UInt32ValueImpl
+UInt32Value = _UInt32ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(UInt32Value)
 
@@ -687,7 +687,7 @@ _BoolValueImpl.descriptor = {
 	fullName = "google.protobuf.BoolValue",
 }
 
-BoolValue = _BoolValueImpl
+BoolValue = _BoolValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(BoolValue)
 
@@ -758,7 +758,7 @@ _StringValueImpl.descriptor = {
 	fullName = "google.protobuf.StringValue",
 }
 
-StringValue = _StringValueImpl
+StringValue = _StringValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(StringValue)
 
@@ -829,7 +829,7 @@ _BytesValueImpl.descriptor = {
 	fullName = "google.protobuf.BytesValue",
 }
 
-BytesValue = _BytesValueImpl
+BytesValue = _BytesValueImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(BytesValue)
 
