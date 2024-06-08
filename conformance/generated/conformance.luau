@@ -196,12 +196,10 @@ function _FailureSetImpl.decode(input: buffer): FailureSet
 end
 
 function _FailureSetImpl.jsonEncode(self: FailureSet): any
-	local output: {
-		failure: { string }?,
-	} = {}
+	local output = {}
 
 	if self.failure ~= nil and #self.failure > 0 then
-		local newOutput: { string } = {}
+		local newOutput = {}
 		for _, value in self.failure do
 			table.insert(newOutput, value)
 		end
@@ -231,7 +229,7 @@ _FailureSetImpl.descriptor = {
 	fullName = "conformance.FailureSet",
 }
 
-FailureSet = _FailureSetImpl
+FailureSet = _FailureSetImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(FailureSet)
 
@@ -302,7 +300,7 @@ function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
 	end
 
 	if self.jspb_encoding_options ~= nil then
-		local encoded = JspbEncodingConfig.encode(self.jspb_encoding_options)
+		local encoded = self.jspb_encoding_options:encode()
 		output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
 		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
 	end
@@ -378,18 +376,7 @@ function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
 end
 
 function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
-	local output: {
-		protobufPayload: string?,
-		jsonPayload: string?,
-		jspbPayload: string?,
-		textPayload: string?,
-		requestedOutputFormat: WireFormat?,
-		messageType: string?,
-		testCategory: TestCategory?,
-		jspbEncodingOptions: JspbEncodingConfig?,
-		printUnknownFields: boolean?,
-	} =
-		{}
+	local output = {}
 
 	if self.payload ~= nil then
 		if self.payload.type == "protobuf_payload" then
@@ -429,7 +416,7 @@ function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
 	end
 
 	if self.jspb_encoding_options ~= nil then
-		output.jspbEncodingOptions = JspbEncodingConfig.jsonEncode(self.jspb_encoding_options)
+		output.jspbEncodingOptions = self.jspb_encoding_options:jsonEncode()
 	end
 
 	if self.print_unknown_fields then
@@ -530,7 +517,7 @@ _ConformanceRequestImpl.descriptor = {
 	fullName = "conformance.ConformanceRequest",
 }
 
-ConformanceRequest = _ConformanceRequestImpl
+ConformanceRequest = _ConformanceRequestImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(ConformanceRequest)
 
@@ -644,18 +631,7 @@ function _ConformanceResponseImpl.decode(input: buffer): ConformanceResponse
 end
 
 function _ConformanceResponseImpl.jsonEncode(self: ConformanceResponse): any
-	local output: {
-		parseError: string?,
-		serializeError: string?,
-		timeoutError: string?,
-		runtimeError: string?,
-		protobufPayload: string?,
-		jsonPayload: string?,
-		skipped: string?,
-		jspbPayload: string?,
-		textPayload: string?,
-	} =
-		{}
+	local output = {}
 
 	if self.result ~= nil then
 		if self.result.type == "parse_error" then
@@ -761,7 +737,7 @@ _ConformanceResponseImpl.descriptor = {
 	fullName = "conformance.ConformanceResponse",
 }
 
-ConformanceResponse = _ConformanceResponseImpl
+ConformanceResponse = _ConformanceResponseImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(ConformanceResponse)
 
@@ -819,9 +795,7 @@ function _JspbEncodingConfigImpl.decode(input: buffer): JspbEncodingConfig
 end
 
 function _JspbEncodingConfigImpl.jsonEncode(self: JspbEncodingConfig): any
-	local output: {
-		useJspbArrayAnyFormat: boolean?,
-	} = {}
+	local output = {}
 
 	if self.use_jspb_array_any_format then
 		output.useJspbArrayAnyFormat = self.use_jspb_array_any_format
@@ -849,7 +823,7 @@ _JspbEncodingConfigImpl.descriptor = {
 	fullName = "conformance.JspbEncodingConfig",
 }
 
-JspbEncodingConfig = _JspbEncodingConfigImpl
+JspbEncodingConfig = _JspbEncodingConfigImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(JspbEncodingConfig)
 

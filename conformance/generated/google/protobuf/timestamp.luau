@@ -162,7 +162,7 @@ _TimestampImpl.descriptor = {
 	fullName = "google.protobuf.Timestamp",
 }
 
-Timestamp = _TimestampImpl
+Timestamp = _TimestampImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Timestamp)
 

@@ -284,7 +284,7 @@ _<name>Impl.descriptor = {
 
 <any_methods>
 
-<name> = _<name>Impl
+<name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(<name>)
 "#;
@@ -318,10 +318,10 @@ const ANY_METHOD_SIGNATURES: &str = r#"
 --
 -- typeUrlPrefix should be the base URL for the type URL. For example, Google uses
 -- "type.googleapis.com".
-pack: <T, F>(payload: proto.Message<T, F>, typeUrlPrefix: string?) -> Any,
+pack: (payload: proto.Message<any, any>, typeUrlPrefix: string) -> Any,
 
 -- Returns the message contained by the Any (or nil if the Any is empty).
-unpack: <T, F>(self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<T, F>?,
+unpack: (self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<any, any>?,
 
 -- Returns true if and only if the Any contains an object of the type specified by
 -- typeName. If typeName is a full type URL, it will be compared; otherwise,
@@ -559,10 +559,6 @@ impl<'a> FileGenerator<'a> {
         partial_fields_builder.push(format!(r#"type _{name}PartialFields = {{"#));
         partial_fields_builder.indent();
 
-        let mut json_type = StringBuilder::new();
-        json_type.push("{");
-        json_type.indent_n(3);
-
         let mut default_lines = StringBuilder::new();
         default_lines.indent_n(3);
 
@@ -629,8 +625,6 @@ impl<'a> FileGenerator<'a> {
                 "{field_name}: {}?,",
                 field.type_definition_no_presence()
             ));
-
-            json_type.append(&mut field.json_type_and_names());
 
             encode_lines.append(&mut field.encode());
             encode_lines.blank();
@@ -711,9 +705,6 @@ impl<'a> FileGenerator<'a> {
 
         self.types.blank();
 
-        json_type.dedent();
-        json_type.push("}");
-
         let mut final_code = MESSAGE
             .replace("    ", "\t")
             .replace("<name>", &name)
@@ -735,8 +726,7 @@ impl<'a> FileGenerator<'a> {
                     .replace(
                         "<json_encode>",
                         &format!(
-                            "local output: {} = {{}}\n\n{}\nreturn output",
-                            json_type.build(),
+                            "local output = {{}}\n\n{}\nreturn output",
                             &json_encode_lines.build()
                         ),
                     )

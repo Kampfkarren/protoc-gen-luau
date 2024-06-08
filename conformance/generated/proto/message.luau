@@ -13,7 +13,7 @@ export type Message<T, Fields> = {
 	jsonDecode: ({ [string]: any }) -> T,
 
 	descriptor: Descriptor,
-}
+} & T
 
 -- Note that all consumers of CustomJson intentionally `any` their jsonDecode.
 -- This is because it's the best way we can get Luau to actually "override".

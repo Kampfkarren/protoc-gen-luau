@@ -16,13 +16,14 @@ type _AnyImpl = {
 
 	-- Pack a message into an Any.
 	--
-	-- If typePrefix is not provided, defaults to "apis.roblox.com/cloud".
-	pack: <T, F>(payload: proto.Message<T, F>, typePrefix: string?) -> Any,
+	-- typeUrlPrefix should be the base URL for the type URL. For example, Google uses
+	-- "type.googleapis.com".
+	pack: (payload: proto.Message<any, any>, typeUrlPrefix: string) -> Any,
 
 	-- Returns the message contained by the Any (or nil if the Any is empty).
-	unpack: <T, F>(self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<T, F>?,
+	unpack: (self: Any, registry: typeRegistry.TypeRegistry?) -> proto.Message<any, any>?,
 
-	-- Returns true iff the Any contains an object of the type specified by
+	-- Returns true if and only if the Any contains an object of the type specified by
 	-- typeName. If typeName is a full type URL, it will be compared; otherwise,
 	-- only the type name will be compared.
 	isA: (self: Any, typeName: string) -> boolean,
@@ -103,12 +104,9 @@ function _AnyImpl.decode(input: buffer): Any
 end
 
 function _AnyImpl.jsonEncode(input: Any): { [string]: any }
-	local registry = typeRegistry.default
+	local unpacked = input:unpack(typeRegistry.default)
+	assert(unpacked ~= nil, "Cannot JSON-encode empty Any")
 
-	local unpacked = input:unpack(registry)
-	if unpacked == nil then
-		error("Cannot JSON-encode empty Any")
-	end
 	local json = unpacked:jsonEncode()
 
 	if typeof(json) == "string" then
@@ -121,45 +119,48 @@ function _AnyImpl.jsonEncode(input: Any): { [string]: any }
 end
 
 function _AnyImpl.jsonDecode(input: { [string]: any }): Any
-	local registry = typeRegistry.default
-
 	local typeUrl = input["@type"]
-	local typeName = typeUrl:sub(typeUrl:find("([^/]+)$"))
-	local payloadType = registry:findMessage(typeName)
+	local typeName = typeUrl:match("([^/]+)$")
+	local payloadType = typeRegistry.default:findMessage(typeName)
 
 	if payloadType == nil then
-		error("Could not find message type `" .. typeName .. "` for Any")
+		error(`Could not find message type \`{typeName}\` for Any`)
 	end
 
-	local typePrefix = typeUrl:sub(0, #typeUrl - #typeName - 1)
+	local typePrefix = typeUrl:sub(1, #typeUrl - #typeName - 1)
 
 	local json = table.clone(input)
 	-- For WKTs with special JSON representations, we need to decode input["value"] rather than
 	-- input.
-	local gpb = "google.protobuf."
-	if typeName:sub(0, #gpb) == gpb and input["value"] then
+	if typeName:match("^google%.protobuf%.") and input["value"] ~= nil then
 		json = input["value"]
 	else
 		-- Clear this because it's not part of the JSON encoding of the payload itself.
 		json["@type"] = nil
 	end
 
-	return _AnyImpl.pack(payloadType.jsonDecode(json), typePrefix)
+	return _AnyImpl.pack(payloadType.jsonDecode(json) :: proto.Message<unknown, unknown>, typePrefix)
 end
+
+type _AnyJsonDecode = typeof(_AnyImpl.jsonDecode) -- Luau bug: It doesn't recognize this for some reason
 
 _AnyImpl.descriptor = {
 	name = "Any",
 	fullName = "google.protobuf.Any",
 }
 
-function _AnyImpl.pack<T, F>(payload: proto.Message<T, F>, typePrefix: string?): Any
+function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
 	return Any.new({
-		type_url = (typePrefix or "apis.roblox.com/cloud") .. "/" .. payload.descriptor.fullName,
+		type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
 		value = payload:encode(),
 	})
 end
 
-function _AnyImpl.unpack<T, F>(self: Any, registry: typeRegistry.TypeRegistry?): proto.Message<T, F>?
+-- Luau: It refuses to believe these are the same unpack, for some reason
+local anyUnpack: typeof(({} :: _AnyImpl).unpack) = function(
+	self: Any,
+	registry: typeRegistry.TypeRegistry?
+): proto.Message<any, any>?
 	if self.value == nil then
 		return nil
 	end
@@ -167,16 +168,19 @@ function _AnyImpl.unpack<T, F>(self: Any, registry: typeRegistry.TypeRegistry?):
 	if registry == nil then
 		registry = typeRegistry.default
 	end
+	assert(registry ~= nil, "Luau")
 
 	local typeName = _AnyImpl.typeUrlToTypeName(self.type_url)
-	local payloadType = (registry :: typeRegistry.TypeRegistry):findMessage(typeName)
+	local payloadType = registry:findMessage(typeName)
 
 	if payloadType == nil then
-		error("Unknown type: " .. typeName)
+		error(`Unknown type: \`{typeName}\``)
 	end
 
-	return payloadType.decode(self.value)
+	return payloadType.decode(self.value) :: proto.Message<any, any>
 end
+
+_AnyImpl.unpack = anyUnpack
 
 function _AnyImpl.isA(self: Any, typeName: string): boolean
 	if self.type_url == typeName then
@@ -188,14 +192,14 @@ function _AnyImpl.isA(self: Any, typeName: string): boolean
 end
 
 function _AnyImpl.typeUrlToTypeName(typeUrl: string): string
-	local first, _ = typeUrl:find("([^/]+)$")
-	if first == nil then
-		error("Invalid type URL: " .. typeUrl)
+	local typeName = typeUrl:match("([^/]+)$")
+	if typeName == nil then
+		error(`Invalid type URL: \`{typeUrl}\``)
 	end
-	return typeUrl:sub(first)
+	return typeName
 end
 
-Any = _AnyImpl
+Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(Any)
 

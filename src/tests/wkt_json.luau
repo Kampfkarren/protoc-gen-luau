@@ -1,6 +1,9 @@
 local tests = require("./tests")
 
+local proto = require("./samples/proto")
+
 local any = require("./samples/google/protobuf/any")
+local api = require("./samples/google/protobuf/api")
 local duration = require("./samples/google/protobuf/duration")
 local field_mask = require("./samples/google/protobuf/field_mask")
 local struct = require("./samples/google/protobuf/struct")
@@ -8,13 +11,29 @@ local timestamp = require("./samples/google/protobuf/timestamp")
 local wrappers = require("./samples/google/protobuf/wrappers")
 
 local kitchen_sink = require("./samples/kitchen_sink")
-local typeRegistry = require("./samples/proto/typeRegistry")
 
 local assertEquals = tests.assertEquals
 local describe = tests.describe
 local it = tests.it
 
 describe("JSON round-trips should work for", function()
+	describe("Api", function()
+		-- Luau type regression test
+		it("should allow encoding of inner methods", function()
+			local apiObject = api.Api.new({
+				methods = {
+					api.Method.new(),
+				},
+			})
+
+			local _method: api.Method = apiObject.methods[1]
+
+			for _, method in apiObject.methods do
+				method:encode()
+			end
+		end)
+	end)
+
 	describe("Value", function()
 		it("with null value", function()
 			local json = nil
@@ -266,7 +285,8 @@ describe("JSON round-trips should work for", function()
 			local deserialized_any = any.Any.jsonDecode(json)
 
 			assertEquals(deserialized_any.type_url, "type.googleapis.com/my.package.KitchenSink")
-			local unpacked = deserialized_any:unpack()
+
+			local unpacked = deserialized_any:unpack() :: proto.Message<kitchen_sink.KitchenSink, unknown>
 			assertEquals(unpacked.int32, 42)
 
 			assertEquals(deserialized_any:jsonEncode(), json)
@@ -282,7 +302,7 @@ describe("JSON round-trips should work for", function()
 			local deserialized_any = any.Any.jsonDecode(json)
 
 			assertEquals(deserialized_any.type_url, "type.googleapis.com/google.protobuf.Timestamp")
-			local unpacked = deserialized_any:unpack()
+			local unpacked = deserialized_any:unpack() :: proto.Message<timestamp.Timestamp, unknown>
 			assertEquals(unpacked.seconds, 1)
 			assertEquals(unpacked.nanos, 1)
 
@@ -297,7 +317,7 @@ describe("JSON round-trips should work for", function()
 					int32 = 42,
 				})
 				:unpack()
-				:encode()
+			assert(anySink ~= nil, "Couldn't unpack")
 
 			local equivalent = kitchen_sink.KitchenSink
 				.new({
@@ -305,7 +325,7 @@ describe("JSON round-trips should work for", function()
 				})
 				:encode()
 
-			assertEquals(anySink, equivalent)
+			assertEquals(anySink:encode(), equivalent)
 		end)
 	end)
 

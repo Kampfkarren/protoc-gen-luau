@@ -115,62 +115,6 @@ impl FieldGenerator<'_> {
         definition
     }
 
-    fn json_map_type_definition(&self) -> String {
-        let map_type = self.map_type().unwrap();
-
-        format!(
-            "{{ [string]: {} }}",
-            json_type_definition_of_field_descriptor(
-                &map_type.value,
-                self.export_map,
-                self.base_file
-            )
-        )
-    }
-
-    pub fn json_type_and_names(&self) -> StringBuilder {
-        match &self.field_kind {
-            FieldKind::Single(field) => {
-                let name = json_name(field);
-
-                if self.map_type().is_some() {
-                    StringBuilder::from(format!("{name}: {}?,", self.json_map_type_definition()))
-                } else {
-                    let mut definition = json_type_definition_of_field_descriptor(
-                        field,
-                        self.export_map,
-                        self.base_file,
-                    );
-
-                    if field.label.is_some() && field.label() == Label::Repeated {
-                        definition = format!("{{ {definition} }}");
-                    }
-
-                    definition.push('?');
-                    StringBuilder::from(format!("{name}: {definition},"))
-                }
-            }
-
-            FieldKind::OneOf { fields, .. } => {
-                let mut json_type_and_names = StringBuilder::new();
-
-                for field in fields {
-                    json_type_and_names.push(format!(
-                        "{}: {}?,",
-                        json_name(field),
-                        json_type_definition_of_field_descriptor(
-                            field,
-                            self.export_map,
-                            self.base_file
-                        )
-                    ));
-                }
-
-                json_type_and_names
-            }
-        }
-    }
-
     pub fn should_encode(&self) -> String {
         let this = format!("self.{}", self.name());
 
@@ -347,10 +291,7 @@ impl FieldGenerator<'_> {
                 let output = format!("output.{}", json_name(field));
 
                 if let Some(map_type) = self.map_type() {
-                    json_encode.push(format!(
-                        "local newOutput: {} = {{}}",
-                        self.json_map_type_definition()
-                    ));
+                    json_encode.push("local newOutput = {}");
                     json_encode.push(format!("for key, value in {this} do"));
                     json_encode.push(format!(
                         "newOutput[{}] = {}",
@@ -365,14 +306,7 @@ impl FieldGenerator<'_> {
                     json_encode.push("end");
                     json_encode.push(format!("{output} = newOutput"));
                 } else if field.label.is_some() && field.label() == Label::Repeated {
-                    json_encode.push(format!(
-                        "local newOutput: {{ {} }} = {{}}",
-                        json_type_definition_of_field_descriptor(
-                            field,
-                            self.export_map,
-                            self.base_file
-                        )
-                    ));
+                    json_encode.push("local newOutput = {}");
                     json_encode.push(format!("for _, value in {this} do"));
                     json_encode.push(format!(
                         "table.insert(newOutput, {})",
@@ -609,18 +543,6 @@ fn type_definition_of_field_descriptor(
     }
 }
 
-fn json_type_definition_of_field_descriptor(
-    field: &FieldDescriptorProto,
-    export_map: &ExportMap,
-    base_file: &FileDescriptorProto,
-) -> String {
-    match field.r#type() {
-        Type::Float | Type::Double => "(number | string)".to_owned(),
-        Type::Bytes => "string".to_owned(),
-        _ => type_definition_of_field_descriptor(field, export_map, base_file),
-    }
-}
-
 #[derive(Clone, Copy)]
 pub enum WireType {
     Varint,
@@ -693,10 +615,7 @@ fn encode_field_descriptor_ignore_repeated(
 ) -> String {
     if field.r#type() == Type::Message {
         return [
-            format!(
-                "local encoded = {}.encode({value_var})",
-                type_definition_of_field_descriptor(field, export_map, base_file)
-            ),
+            format!("local encoded = {value_var}:encode()"),
             format!(
                 "output, cursor = proto.writeTag(output, cursor, {}, proto.wireTypes.lengthDelimited)",
                 field.number()
@@ -759,10 +678,7 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
             "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var} :: any)",
             type_definition_of_field_descriptor(field, export_map, base_file)
         ),
-        Type::Message => format!(
-            "{}.jsonEncode({value_var})",
-            type_definition_of_field_descriptor(field, export_map, base_file)
-        ),
+        Type::Message => format!("{value_var}:jsonEncode()"),
         Type::Group => unimplemented!("Group"),
     }
 }

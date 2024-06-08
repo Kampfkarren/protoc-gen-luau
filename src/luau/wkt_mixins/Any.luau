@@ -34,5 +34,7 @@ function _AnyImpl.jsonDecode(input: { [string]: any }): Any
 		json["@type"] = nil
 	end
 
-	return _AnyImpl.pack(payloadType.jsonDecode(json), typePrefix)
+	return _AnyImpl.pack(payloadType.jsonDecode(json) :: proto.Message<unknown, unknown>, typePrefix)
 end
+
+type _AnyJsonDecode = typeof(_AnyImpl.jsonDecode) -- Luau bug: It doesn't recognize this for some reason

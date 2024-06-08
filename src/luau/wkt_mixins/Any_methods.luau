@@ -1,11 +1,15 @@
-function _AnyImpl.pack<T, F>(payload: proto.Message<T, F>, typeUrlPrefix: string): Any
+function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
 	return Any.new({
 		type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
 		value = payload:encode(),
 	})
 end
 
-function _AnyImpl.unpack<T, F>(self: Any, registry: typeRegistry.TypeRegistry?): proto.Message<T, F>?
+-- Luau: It refuses to believe these are the same unpack, for some reason
+local anyUnpack: typeof(({} :: _AnyImpl).unpack) = function(
+	self: Any,
+	registry: typeRegistry.TypeRegistry?
+): proto.Message<any, any>?
 	if self.value == nil then
 		return nil
 	end
@@ -22,8 +26,10 @@ function _AnyImpl.unpack<T, F>(self: Any, registry: typeRegistry.TypeRegistry?):
 		error(`Unknown type: \`{typeName}\``)
 	end
 
-	return payloadType.decode(self.value)
+	return payloadType.decode(self.value) :: proto.Message<any, any>
 end
+
+_AnyImpl.unpack = anyUnpack
 
 function _AnyImpl.isA(self: Any, typeName: string): boolean
 	if self.type_url == typeName then

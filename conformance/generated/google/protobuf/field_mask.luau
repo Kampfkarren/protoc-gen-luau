@@ -101,7 +101,7 @@ _FieldMaskImpl.descriptor = {
 	fullName = "google.protobuf.FieldMask",
 }
 
-FieldMask = _FieldMaskImpl
+FieldMask = _FieldMaskImpl :: any -- Luau: Not sure why this intersection fails.
 
 typeRegistry.default:register(FieldMask)
 
