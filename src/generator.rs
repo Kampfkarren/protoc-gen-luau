@@ -42,7 +42,8 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
     if roblox_imports {
         proto_init = proto_init
             .replace("require(\"./base64\")", "require(script.base64)")
-            .replace("require(\"./message\")", "require(script.message)");
+            .replace("require(\"./message\")", "require(script.message)")
+            .replace("require(\"./typeRegistry\")", "require(script.typeRegistry)");
     }
 
     let mut type_registry_init = include_str!("./luau/proto/typeRegistry.luau").to_owned();
