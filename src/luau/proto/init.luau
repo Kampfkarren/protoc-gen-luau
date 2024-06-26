@@ -16,40 +16,70 @@ export type Enum<T> = {
 	toNumber: (T) -> number,
 }
 
--- TODO: Round-trip every number -2^31 through 2^31
-function proto.readVarInt(input: buffer, cursor: number): (number, number)
-	local width = 0
+-- TODO: Round-trip all numbers in range for varint reader functions
+
+local function readVarIntBytes(input: buffer, cursor: number): (number, number)
+	local lo = 0
+	local hi = 0
+	local shift = 0
+
 	repeat
-		local b = buffer.readu8(input, cursor + width)
-		width += 1
+		local b = buffer.readu8(input, cursor)
+		local n = bit32.band(b, 0b0111_1111)
+		lo = bit32.bor(lo, bit32.lshift(n, shift))
+		hi = bit32.bor(hi, bit32.lshift(n, shift - 32))
+		shift += 7
+		cursor += 1
 	until not bit32.btest(b, 0b1000_0000)
 
-	local mask = 0b0111_1111
+	return lo, hi, cursor
+end
 
-	-- The max 64-bit int (2^63-1) encodes into fewer than 10 bytes (9)
-	-- and negatives always use 10 bytes, so we can branch safely
-	if width < 10 then
-		local final = 0
+function proto.readVarIntU64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
 
-		for offset = 0, width - 1 do
-			local byte = buffer.readu8(input, cursor + offset)
-			final += (bit32.lshift(1, 7) ^ offset) * bit32.band(byte, mask)
-		end
+	return hi * 0x100000000 + lo, cursor
+end
 
-		return final, cursor + width
+function proto.readVarIntU32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	return lo, cursor
+end
+
+function proto.readVarIntI64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
+
+	if hi < 0x80000000 then
+		return hi * 0x100000000 + lo, cursor
 	end
 
-	local final = bit32.band(buffer.readu8(input, cursor + 0), mask)
-		+ bit32.band(buffer.readu8(input, cursor + 1), mask) * bit32.lshift(1, 7)
-		+ bit32.band(buffer.readu8(input, cursor + 2), mask) * bit32.lshift(1, 7) ^ 2
-		+ bit32.band(buffer.readu8(input, cursor + 3), mask) * bit32.lshift(1, 7) ^ 3
-		+ bit32.band(buffer.readu8(input, cursor + 4), mask) * bit32.lshift(1, 7) ^ 4
-		+ bit32.band(buffer.readu8(input, cursor + 5), mask) * bit32.lshift(1, 7) ^ 5
-		+ bit32.band(buffer.readu8(input, cursor + 6), mask) * bit32.lshift(1, 7) ^ 6
-		+ bit32.band(buffer.readu8(input, cursor + 7), 0b0000_1111) * bit32.lshift(1, 7) ^ 7
+	lo = bit32.bnot(lo) + 1
+	hi = bit32.bnot(hi)
 
-	return final - 2 ^ 53, cursor + width
+	if lo > 0xFFFFFFFF then
+		lo = 0
+		hi += 1
+	end
+
+	return -(hi * 0x100000000 + lo), cursor
 end
+
+function proto.readVarIntI32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	if lo < 0x80000000 then
+		return lo, cursor
+	end
+
+	return lo - 0x100000000, cursor
+end
+
+proto.readVarInt = proto.readVarIntI64
 
 function proto.readFloat(input: buffer, cursor: number): (number, number)
 	return buffer.readf32(input, cursor), cursor + 4
@@ -212,17 +242,6 @@ end
 
 function proto.encodeZigZag(number: number): number
 	return if number < 0 then -2 * number - 1 else 2 * number
-end
-
-function proto.limitInt32(number: number): number
-	local overflow = math.sign(number) * (math.abs(number) % (2 ^ 32))
-	if overflow >= 2 ^ 31 then
-		overflow -= 2 ^ 31
-	elseif overflow <= -2 ^ 31 then
-		overflow += 2 ^ 31
-	end
-
-	return overflow
 end
 
 proto.json = {}

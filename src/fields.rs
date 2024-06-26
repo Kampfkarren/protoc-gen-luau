@@ -807,7 +807,8 @@ fn decode_instruction_field_descriptor_ignore_repeated(
     base_file: &FileDescriptorProto,
 ) -> Cow<'static, str> {
     match field.r#type() {
-        Type::Uint32
+		Type::Int32
+        | Type::Uint32
         | Type::Int64
         | Type::Uint64
         | Type::Fixed32
@@ -817,8 +818,6 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Float
         | Type::Double
         | Type::Bytes => "value".into(),
-
-        Type::Int32 => "proto.limitInt32(value)".into(),
 
         Type::Sint32 | Type::Sint64 => "proto.decodeZigZag(value)".into(),
 
@@ -904,6 +903,26 @@ pub fn decode_field(
             Type::Sfixed64 => {
                 decode.push("local value");
                 decode.push("value, cursor = proto.readSignedFixed64(input, cursor)");
+            }
+
+            Type::Uint64 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntU64(input, cursor)");
+            }
+
+            Type::Uint32 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntU32(input, cursor)");
+            }
+
+            Type::Int64 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntI64(input, cursor)");
+            }
+
+            Type::Int32 | Type::Enum => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntI32(input, cursor)");
             }
 
             _ => match wire_type_of_field_descriptor(field) {
