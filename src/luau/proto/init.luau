@@ -111,55 +111,43 @@ proto.wireTypes = {
 	i32 = 5,
 }
 
--- TODO: Test negative number
 function proto.writeVarInt(output: buffer, cursor: number, number: number): (buffer, number)
-	local highestBitMask = bit32.lshift(1, 7)
-	local lowerBitsMask = 0b0111_1111
-
 	if number >= 0 then
 		repeat
 			output = reserveBuffer(output, cursor, 1)
-			local nextByte = number % highestBitMask
-			number = number // highestBitMask
-			buffer.writeu8(output, cursor, if number == 0 then nextByte else nextByte + highestBitMask)
+			local nextByte = number % 0x80
+			number = number // 0x80
+			buffer.writeu8(output, cursor, if number == 0 then nextByte else nextByte + 0x80)
 			cursor += 1
 		until number == 0
-
-		return output, cursor
 	else
-		local comp = 2 ^ 53 + number -- precision lost, could error
+		local positive = -number
+		local hi = bit32.bnot(positive // 0x100000000)
+		local lo = bit32.bnot(positive % 0x100000000) + 1
+		if lo == 0x100000000 then
+			lo = 0
+			hi += 1
+		end
 
 		output = reserveBuffer(output, cursor, 10)
-
-		buffer.writeu8(output, cursor + 0, bit32.bor(highestBitMask, comp % highestBitMask))
-		buffer.writeu8(output, cursor + 1, bit32.bor(highestBitMask, comp // highestBitMask % highestBitMask))
-		buffer.writeu8(output, cursor + 2, bit32.bor(highestBitMask, comp // (highestBitMask ^ 2) % highestBitMask))
-		buffer.writeu8(
-			output,
-			cursor + 3,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 3), lowerBitsMask))
-		)
+		buffer.writeu8(output, cursor, bit32.bor(0x80, bit32.band(lo, 0x7F)))
+		buffer.writeu8(output, cursor + 1, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 7), 0x7F)))
+		buffer.writeu8(output, cursor + 2, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 14), 0x7F)))
+		buffer.writeu8(output, cursor + 3, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 21), 0x7F)))
 		buffer.writeu8(
 			output,
 			cursor + 4,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 4), lowerBitsMask))
+			bit32.bor(0x80, bit32.lshift(bit32.band(hi, 0b111), 4), bit32.rshift(lo, 28))
 		)
-		buffer.writeu8(
-			output,
-			cursor + 5,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 5), lowerBitsMask))
-		)
-		buffer.writeu8(
-			output,
-			cursor + 6,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 6), lowerBitsMask))
-		)
-		buffer.writeu8(output, cursor + 7, bit32.bor(0b1_1110000, comp // (highestBitMask ^ 7)))
-		buffer.writeu8(output, cursor + 8, 0b1111_1111)
-		buffer.writeu8(output, cursor + 9, 0b0000_0001)
-
-		return output, cursor + 10
+		buffer.writeu8(output, cursor + 5, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 3), 0x7F)))
+		buffer.writeu8(output, cursor + 6, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 10), 0x7F)))
+		buffer.writeu8(output, cursor + 7, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 17), 0x7F)))
+		buffer.writeu8(output, cursor + 8, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 24), 0x7F)))
+		buffer.writeu8(output, cursor + 9, bit32.rshift(hi, 31))
+		cursor += 10
 	end
+
+	return output, cursor
 end
 
 function proto.writeFloat(output: buffer, cursor: number, float: number): (buffer, number)

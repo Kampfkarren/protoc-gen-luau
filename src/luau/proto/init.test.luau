@@ -37,9 +37,20 @@ end
 
 do
 	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, 150)
-
 	assertEquals(newCursor, 2)
 	assertBufferEquals(output, newCursor, "\x96\x01")
+end
+
+do
+	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, -150)
+	assertEquals(newCursor, 10)
+	assertBufferEquals(output, newCursor, "\xEA\xFE\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x01")
+end
+
+do
+	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, -2 ^ 60)
+	assertEquals(newCursor, 10)
+	assertBufferEquals(output, newCursor, "\x80\x80\x80\x80\x80\x80\x80\x80\xF0\x01")
 end
 
 do
