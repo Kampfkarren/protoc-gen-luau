@@ -1216,12 +1216,12 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 
 	if self.optional_sint32 ~= nil and self.optional_sint32 ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint32))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.optional_sint32)
 	end
 
 	if self.optional_sint64 ~= nil and self.optional_sint64 ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.optional_sint64))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.optional_sint64)
 	end
 
 	if self.optional_fixed32 ~= nil and self.optional_fixed32 ~= 0 then
@@ -1388,7 +1388,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		local packedCursor = 0
 
 		for _, value in self.repeated_sint32 do
-			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+			packedBuffer, packedCursor = proto.writeVarIntZigZag(packedBuffer, packedCursor, value)
 		end
 
 		output, cursor = proto.writeTag(output, cursor, 35, proto.wireTypes.lengthDelimited)
@@ -1400,7 +1400,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		local packedCursor = 0
 
 		for _, value in self.repeated_sint64 do
-			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+			packedBuffer, packedCursor = proto.writeVarIntZigZag(packedBuffer, packedCursor, value)
 		end
 
 		output, cursor = proto.writeTag(output, cursor, 36, proto.wireTypes.lengthDelimited)
@@ -1602,7 +1602,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		local packedCursor = 0
 
 		for _, value in self.packed_sint32 do
-			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+			packedBuffer, packedCursor = proto.writeVarIntZigZag(packedBuffer, packedCursor, value)
 		end
 
 		output, cursor = proto.writeTag(output, cursor, 79, proto.wireTypes.lengthDelimited)
@@ -1614,7 +1614,7 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 		local packedCursor = 0
 
 		for _, value in self.packed_sint64 do
-			packedBuffer, packedCursor = proto.writeVarInt(packedBuffer, packedCursor, proto.encodeZigZag(value))
+			packedBuffer, packedCursor = proto.writeVarIntZigZag(packedBuffer, packedCursor, value)
 		end
 
 		output, cursor = proto.writeTag(output, cursor, 80, proto.wireTypes.lengthDelimited)
@@ -1743,14 +1743,14 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 	if self.unpacked_sint32 ~= nil and #self.unpacked_sint32 > 0 then
 		for _, value in self.unpacked_sint32 do
 			output, cursor = proto.writeTag(output, cursor, 93, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
+			output, cursor = proto.writeVarIntZigZag(output, cursor, value)
 		end
 	end
 
 	if self.unpacked_sint64 ~= nil and #self.unpacked_sint64 > 0 then
 		for _, value in self.unpacked_sint64 do
 			output, cursor = proto.writeTag(output, cursor, 94, proto.wireTypes.varint)
-			output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(value))
+			output, cursor = proto.writeVarIntZigZag(output, cursor, value)
 		end
 	end
 
@@ -1867,9 +1867,9 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
+			mapBuffer, mapCursor = proto.writeVarIntZigZag(mapBuffer, mapCursor, key)
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
+			mapBuffer, mapCursor = proto.writeVarIntZigZag(mapBuffer, mapCursor, value)
 			output, cursor = proto.writeTag(output, cursor, 60, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
 		end
@@ -1880,9 +1880,9 @@ function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
 			local mapBuffer = buffer.create(0)
 			local mapCursor = 0
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
-			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(key))
+			mapBuffer, mapCursor = proto.writeVarIntZigZag(mapBuffer, mapCursor, key)
 			mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 2, proto.wireTypes.varint)
-			mapBuffer, mapCursor = proto.writeVarInt(mapBuffer, mapCursor, proto.encodeZigZag(value))
+			mapBuffer, mapCursor = proto.writeVarIntZigZag(mapBuffer, mapCursor, value)
 			output, cursor = proto.writeTag(output, cursor, 61, proto.wireTypes.lengthDelimited)
 			output, cursor = proto.writeBuffer(output, cursor, mapBuffer, mapCursor)
 		end
@@ -2440,159 +2440,159 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_int32 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.optional_int32 = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				self.optional_int64 = value
 			elseif field == 3 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				self.optional_uint32 = value
 			elseif field == 4 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				self.optional_uint64 = value
 			elseif field == 5 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_sint32 = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS32(input, cursor)
+				self.optional_sint32 = value
 			elseif field == 6 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.optional_sint64 = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS64(input, cursor)
+				self.optional_sint64 = value
 			elseif field == 13 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.optional_bool = value ~= 0
 			elseif field == 21 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.optional_nested_enum = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 22 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.optional_foreign_enum = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 23 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.optional_aliased_enum = (TestAllTypesProto3_AliasedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 31 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_int32, proto.limitInt32(value))
+				value, cursor = proto.readVarIntI32(input, cursor)
+				table.insert(self.repeated_int32, value)
 			elseif field == 32 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				table.insert(self.repeated_int64, value)
 			elseif field == 33 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				table.insert(self.repeated_uint32, value)
 			elseif field == 34 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				table.insert(self.repeated_uint64, value)
 			elseif field == 35 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_sint32, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS32(input, cursor)
+				table.insert(self.repeated_sint32, value)
 			elseif field == 36 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.repeated_sint64, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS64(input, cursor)
+				table.insert(self.repeated_sint64, value)
 			elseif field == 43 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				table.insert(self.repeated_bool, value ~= 0)
 			elseif field == 51 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				table.insert(
 					self.repeated_nested_enum,
 					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 				)
 			elseif field == 52 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				table.insert(
 					self.repeated_foreign_enum,
 					(ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 				)
 			elseif field == 75 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.packed_int32, proto.limitInt32(value))
+				value, cursor = proto.readVarIntI32(input, cursor)
+				table.insert(self.packed_int32, value)
 			elseif field == 76 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				table.insert(self.packed_int64, value)
 			elseif field == 77 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				table.insert(self.packed_uint32, value)
 			elseif field == 78 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				table.insert(self.packed_uint64, value)
 			elseif field == 79 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.packed_sint32, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS32(input, cursor)
+				table.insert(self.packed_sint32, value)
 			elseif field == 80 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.packed_sint64, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS64(input, cursor)
+				table.insert(self.packed_sint64, value)
 			elseif field == 87 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				table.insert(self.packed_bool, value ~= 0)
 			elseif field == 88 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				table.insert(
 					self.packed_nested_enum,
 					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 				)
 			elseif field == 89 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.unpacked_int32, proto.limitInt32(value))
+				value, cursor = proto.readVarIntI32(input, cursor)
+				table.insert(self.unpacked_int32, value)
 			elseif field == 90 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				table.insert(self.unpacked_int64, value)
 			elseif field == 91 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				table.insert(self.unpacked_uint32, value)
 			elseif field == 92 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				table.insert(self.unpacked_uint64, value)
 			elseif field == 93 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.unpacked_sint32, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS32(input, cursor)
+				table.insert(self.unpacked_sint32, value)
 			elseif field == 94 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				table.insert(self.unpacked_sint64, proto.decodeZigZag(value))
+				value, cursor = proto.readVarIntS64(input, cursor)
+				table.insert(self.unpacked_sint64, value)
 			elseif field == 101 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				table.insert(self.unpacked_bool, value ~= 0)
 			elseif field == 102 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				table.insert(
 					self.unpacked_nested_enum,
 					(TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 				)
 			elseif field == 111 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				self.oneof_field = { type = "oneof_uint32", value = value }
 			elseif field == 115 then
 				local value
@@ -2600,98 +2600,98 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 				self.oneof_field = { type = "oneof_bool", value = value ~= 0 }
 			elseif field == 116 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				self.oneof_field = { type = "oneof_uint64", value = value }
 			elseif field == 119 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.oneof_field = {
 					type = "oneof_enum",
 					value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
 				}
 			elseif field == 120 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.oneof_field = {
 					type = "oneof_null_value",
 					value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],
 				}
 			elseif field == 307 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.optional_null_value = (_google_protobuf_struct.NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			elseif field == 401 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.fieldname1 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.fieldname1 = value
 			elseif field == 402 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field_name2 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field_name2 = value
 			elseif field == 403 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self._field_name3 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self._field_name3 = value
 			elseif field == 404 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field__name4_ = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field__name4_ = value
 			elseif field == 405 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field0name5 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field0name5 = value
 			elseif field == 406 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field_0_name6 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field_0_name6 = value
 			elseif field == 407 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.fieldName7 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.fieldName7 = value
 			elseif field == 408 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.FieldName8 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.FieldName8 = value
 			elseif field == 409 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field_Name9 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field_Name9 = value
 			elseif field == 410 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.Field_Name10 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.Field_Name10 = value
 			elseif field == 411 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.FIELD_NAME11 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.FIELD_NAME11 = value
 			elseif field == 412 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.FIELD_name12 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.FIELD_name12 = value
 			elseif field == 413 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.__field_name13 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.__field_name13 = value
 			elseif field == 414 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.__Field_name14 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.__Field_name14 = value
 			elseif field == 415 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field__name15 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field__name15 = value
 			elseif field == 416 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field__Name16 = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field__Name16 = value
 			elseif field == 417 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.field_name17__ = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.field_name17__ = value
 			elseif field == 418 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.Field_name18__ = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.Field_name18__ = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 14 then
@@ -2730,8 +2730,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_int32, proto.limitInt32(value))
+					value, cursor = proto.readVarIntI32(input, cursor)
+					table.insert(self.repeated_int32, value)
 				end
 			elseif field == 32 then
 				local length
@@ -2741,7 +2741,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntI64(input, cursor)
 					table.insert(self.repeated_int64, value)
 				end
 			elseif field == 33 then
@@ -2752,7 +2752,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntU32(input, cursor)
 					table.insert(self.repeated_uint32, value)
 				end
 			elseif field == 34 then
@@ -2763,7 +2763,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntU64(input, cursor)
 					table.insert(self.repeated_uint64, value)
 				end
 			elseif field == 35 then
@@ -2774,8 +2774,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_sint32, proto.decodeZigZag(value))
+					value, cursor = proto.readVarIntS32(input, cursor)
+					table.insert(self.repeated_sint32, value)
 				end
 			elseif field == 36 then
 				local length
@@ -2785,8 +2785,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.repeated_sint64, proto.decodeZigZag(value))
+					value, cursor = proto.readVarIntS64(input, cursor)
+					table.insert(self.repeated_sint64, value)
 				end
 			elseif field == 37 then
 				local length
@@ -3087,8 +3087,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_int32, proto.limitInt32(value))
+					value, cursor = proto.readVarIntI32(input, cursor)
+					table.insert(self.packed_int32, value)
 				end
 			elseif field == 76 then
 				local length
@@ -3098,7 +3098,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntI64(input, cursor)
 					table.insert(self.packed_int64, value)
 				end
 			elseif field == 77 then
@@ -3109,7 +3109,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntU32(input, cursor)
 					table.insert(self.packed_uint32, value)
 				end
 			elseif field == 78 then
@@ -3120,7 +3120,7 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
+					value, cursor = proto.readVarIntU64(input, cursor)
 					table.insert(self.packed_uint64, value)
 				end
 			elseif field == 79 then
@@ -3131,8 +3131,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_sint32, proto.decodeZigZag(value))
+					value, cursor = proto.readVarIntS32(input, cursor)
+					table.insert(self.packed_sint32, value)
 				end
 			elseif field == 80 then
 				local length
@@ -3142,8 +3142,8 @@ function _TestAllTypesProto3Impl.decode(input: buffer): TestAllTypesProto3
 
 				while cursor < limit do
 					local value
-					value, cursor = proto.readVarInt(input, cursor)
-					table.insert(self.packed_sint64, proto.decodeZigZag(value))
+					value, cursor = proto.readVarIntS64(input, cursor)
+					table.insert(self.packed_sint64, value)
 				end
 			elseif field == 81 then
 				local length
@@ -6633,8 +6633,8 @@ function _TestAllTypesProto3_NestedMessageImpl.decode(input: buffer): TestAllTyp
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.a = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.a = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 2 then
@@ -6733,12 +6733,12 @@ function _TestAllTypesProto3_MapInt32Int32EntryImpl.decode(input: buffer): TestA
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.key = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.value = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -6835,11 +6835,11 @@ function _TestAllTypesProto3_MapInt64Int64EntryImpl.decode(input: buffer): TestA
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -6937,11 +6937,11 @@ function _TestAllTypesProto3_MapUint32Uint32EntryImpl.decode(input: buffer): Tes
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -7039,11 +7039,11 @@ function _TestAllTypesProto3_MapUint64Uint64EntryImpl.decode(input: buffer): Tes
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -7117,12 +7117,12 @@ function _TestAllTypesProto3_MapSint32Sint32EntryImpl.encode(self: TestAllTypesP
 
 	if self.key ~= nil and self.key ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.key)
 	end
 
 	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.value)
 	end
 
 	local shrunkBuffer = buffer.create(cursor)
@@ -7141,12 +7141,12 @@ function _TestAllTypesProto3_MapSint32Sint32EntryImpl.decode(input: buffer): Tes
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.key = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS32(input, cursor)
+				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.value = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS32(input, cursor)
+				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -7219,12 +7219,12 @@ function _TestAllTypesProto3_MapSint64Sint64EntryImpl.encode(self: TestAllTypesP
 
 	if self.key ~= nil and self.key ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.key))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.key)
 	end
 
 	if self.value ~= nil and self.value ~= 0 then
 		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag(self.value))
+		output, cursor = proto.writeVarIntZigZag(output, cursor, self.value)
 	end
 
 	local shrunkBuffer = buffer.create(cursor)
@@ -7243,12 +7243,12 @@ function _TestAllTypesProto3_MapSint64Sint64EntryImpl.decode(input: buffer): Tes
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.key = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS64(input, cursor)
+				self.key = value
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.value = proto.decodeZigZag(value)
+				value, cursor = proto.readVarIntS64(input, cursor)
+				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -7765,8 +7765,8 @@ function _TestAllTypesProto3_MapInt32FloatEntryImpl.decode(input: buffer): TestA
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.key = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.key = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -7867,8 +7867,8 @@ function _TestAllTypesProto3_MapInt32DoubleEntryImpl.decode(input: buffer): Test
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.key = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.key = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -8502,7 +8502,7 @@ function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.decode(
 		if wireType == proto.wireTypes.varint then
 			if field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.value = (TestAllTypesProto3_NestedEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -8619,7 +8619,7 @@ function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.decode(
 		if wireType == proto.wireTypes.varint then
 			if field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.value = (ForeignEnum.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -8811,8 +8811,8 @@ function _ForeignMessageImpl.decode(input: buffer): ForeignMessage
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.c = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.c = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields

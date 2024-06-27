@@ -370,7 +370,7 @@ function _Int64ValueImpl.decode(input: buffer): Int64Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -441,7 +441,7 @@ function _UInt64ValueImpl.decode(input: buffer): UInt64Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU64(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
@@ -512,8 +512,8 @@ function _Int32ValueImpl.decode(input: buffer): Int32Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.value = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
@@ -583,7 +583,7 @@ function _UInt32ValueImpl.decode(input: buffer): UInt32Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntU32(input, cursor)
 				self.value = value
 			end
 		elseif wireType == proto.wireTypes.lengthDelimited then
