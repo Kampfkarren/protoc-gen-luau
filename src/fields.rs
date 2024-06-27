@@ -579,7 +579,7 @@ fn encode_field_descriptor_ignore_repeated_instruction(
             format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})"),
 
         Type::Sint32 | Type::Sint64 => format!(
-            "output, cursor = proto.writeVarInt(output, cursor, proto.encodeZigZag({value_var}))",
+			"output, cursor = proto.writeVarIntZigZag(output, cursor, {value_var})",
         ),
 
         Type::Float => format!("output, cursor = proto.writeFloat(output, cursor, {value_var})"),
@@ -811,6 +811,8 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Uint32
         | Type::Int64
         | Type::Uint64
+		| Type::Sint32
+		| Type::Sint64
         | Type::Fixed32
         | Type::Fixed64
         | Type::Sfixed32
@@ -818,8 +820,6 @@ fn decode_instruction_field_descriptor_ignore_repeated(
         | Type::Float
         | Type::Double
         | Type::Bytes => "value".into(),
-
-        Type::Sint32 | Type::Sint64 => "proto.decodeZigZag(value)".into(),
 
         Type::Bool => "value ~= 0".into(),
 
@@ -923,6 +923,16 @@ pub fn decode_field(
             Type::Int32 | Type::Enum => {
                 decode.push("local value");
                 decode.push("value, cursor = proto.readVarIntI32(input, cursor)");
+            }
+
+            Type::Sint64 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntS64(input, cursor)");
+            }
+
+            Type::Sint32 => {
+                decode.push("local value");
+                decode.push("value, cursor = proto.readVarIntS32(input, cursor)");
             }
 
             _ => match wire_type_of_field_descriptor(field) {

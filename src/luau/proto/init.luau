@@ -79,6 +79,48 @@ function proto.readVarIntI32(input: buffer, cursor: number): (number, number)
 	return lo - 0x100000000, cursor
 end
 
+function proto.readVarIntS64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
+
+	local isOdd = bit32.btest(lo, 1) -- will be negative
+	if isOdd then
+		-- add 1
+		lo += 1
+		if lo > 0xFFFFFFFF then
+			lo = 0
+			hi += 1
+		end
+	end
+
+	-- edge case: hi overflows 32-bit after adding 1
+	-- this only happens when the encoded value is -2^63
+	if hi > 0xFFFFFFFF then
+		return -2 ^ 63, cursor
+	end
+
+	-- divide by 2
+	lo = bit32.bor(bit32.rshift(lo, 1), bit32.lshift(bit32.band(hi, 0b1), 31))
+	hi = bit32.rshift(hi, 1)
+
+	if isOdd then
+		return -(hi * 0x100000000 + lo), cursor
+	end
+
+	return hi * 0x100000000 + lo, cursor
+end
+
+function proto.readVarIntS32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	if bit32.btest(lo, 1) then
+		return -(lo + 1) / 2, cursor
+	end
+
+	return lo / 2, cursor
+end
+
 proto.readVarInt = proto.readVarIntI64
 
 function proto.readFloat(input: buffer, cursor: number): (number, number)
@@ -180,6 +222,40 @@ function proto.writeVarInt(output: buffer, cursor: number, number: number): (buf
 	return output, cursor
 end
 
+function proto.writeVarIntZigZag(output: buffer, cursor: number, number: number): (buffer, number)
+	local isNegative = number < 0
+	number = math.abs(number)
+
+	local hi = number // 0x100000000
+	local lo = number % 0x100000000
+
+	-- multiply by 2
+	local overflow = bit32.extract(lo, 31)
+	lo = bit32.lshift(lo, 1)
+	hi = bit32.bor(bit32.lshift(hi, 1), overflow)
+
+	if isNegative then
+		-- subtract 1
+		lo -= 1
+		if lo < 0 then
+			lo = 0xFFFFFFFF
+			hi -= 1
+		end
+	end
+
+	repeat
+		output = reserveBuffer(output, cursor, 1)
+		local nextByte = lo % 0x80
+		lo = bit32.bor(bit32.rshift(lo, 7), bit32.lshift(bit32.band(hi, 0x7F), 25))
+		hi = bit32.rshift(hi, 7)
+		local last = lo == 0 and hi == 0
+		buffer.writeu8(output, cursor, if last then nextByte else nextByte + 0x80)
+		cursor += 1
+	until last
+
+	return output, cursor
+end
+
 function proto.writeFloat(output: buffer, cursor: number, float: number): (buffer, number)
 	output = reserveBuffer(output, cursor, 4)
 	buffer.writef32(output, cursor, float)
@@ -234,14 +310,6 @@ end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)
 	return proto.writeBuffer(output, cursor, buffer.fromstring(text), #text)
-end
-
-function proto.decodeZigZag(number: number): number
-	return (if number % 2 == 1 then -number // 2 else number // 2)
-end
-
-function proto.encodeZigZag(number: number): number
-	return if number < 0 then -2 * number - 1 else 2 * number
 end
 
 proto.json = {}
