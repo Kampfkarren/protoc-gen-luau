@@ -16,40 +16,112 @@ export type Enum<T> = {
 	toNumber: (T) -> number,
 }
 
--- TODO: Round-trip every number -2^31 through 2^31
-function proto.readVarInt(input: buffer, cursor: number): (number, number)
-	local width = 0
+-- TODO: Round-trip all numbers in range for varint reader functions
+
+local function readVarIntBytes(input: buffer, cursor: number): (number, number)
+	local lo = 0
+	local hi = 0
+	local shift = 0
+
 	repeat
-		local b = buffer.readu8(input, cursor + width)
-		width += 1
+		local b = buffer.readu8(input, cursor)
+		local n = bit32.band(b, 0b0111_1111)
+		lo = bit32.bor(lo, bit32.lshift(n, shift))
+		hi = bit32.bor(hi, bit32.lshift(n, shift - 32))
+		shift += 7
+		cursor += 1
 	until not bit32.btest(b, 0b1000_0000)
 
-	local mask = 0b0111_1111
+	return lo, hi, cursor
+end
 
-	-- The max 64-bit int (2^63-1) encodes into fewer than 10 bytes (9)
-	-- and negatives always use 10 bytes, so we can branch safely
-	if width < 10 then
-		local final = 0
+function proto.readVarIntU64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
 
-		for offset = 0, width - 1 do
-			local byte = buffer.readu8(input, cursor + offset)
-			final += (bit32.lshift(1, 7) ^ offset) * bit32.band(byte, mask)
-		end
+	return hi * 0x100000000 + lo, cursor
+end
 
-		return final, cursor + width
+function proto.readVarIntU32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	return lo, cursor
+end
+
+function proto.readVarIntI64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
+
+	if hi < 0x80000000 then
+		return hi * 0x100000000 + lo, cursor
 	end
 
-	local final = bit32.band(buffer.readu8(input, cursor + 0), mask)
-		+ bit32.band(buffer.readu8(input, cursor + 1), mask) * bit32.lshift(1, 7)
-		+ bit32.band(buffer.readu8(input, cursor + 2), mask) * bit32.lshift(1, 7) ^ 2
-		+ bit32.band(buffer.readu8(input, cursor + 3), mask) * bit32.lshift(1, 7) ^ 3
-		+ bit32.band(buffer.readu8(input, cursor + 4), mask) * bit32.lshift(1, 7) ^ 4
-		+ bit32.band(buffer.readu8(input, cursor + 5), mask) * bit32.lshift(1, 7) ^ 5
-		+ bit32.band(buffer.readu8(input, cursor + 6), mask) * bit32.lshift(1, 7) ^ 6
-		+ bit32.band(buffer.readu8(input, cursor + 7), 0b0000_1111) * bit32.lshift(1, 7) ^ 7
+	lo = bit32.bnot(lo) + 1
+	hi = bit32.bnot(hi)
 
-	return final - 2 ^ 53, cursor + width
+	if lo > 0xFFFFFFFF then
+		lo = 0
+		hi += 1
+	end
+
+	return -(hi * 0x100000000 + lo), cursor
 end
+
+function proto.readVarIntI32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	if lo < 0x80000000 then
+		return lo, cursor
+	end
+
+	return lo - 0x100000000, cursor
+end
+
+function proto.readVarIntS64(input: buffer, cursor: number): (number, number)
+	local lo, hi
+	lo, hi, cursor = readVarIntBytes(input, cursor)
+
+	local isOdd = bit32.btest(lo, 1) -- will be negative
+	if isOdd then
+		-- add 1
+		lo += 1
+		if lo > 0xFFFFFFFF then
+			lo = 0
+			hi += 1
+		end
+	end
+
+	-- edge case: hi overflows 32-bit after adding 1
+	-- this only happens when the encoded value is -2^63
+	if hi > 0xFFFFFFFF then
+		return -2 ^ 63, cursor
+	end
+
+	-- divide by 2
+	lo = bit32.bor(bit32.rshift(lo, 1), bit32.lshift(bit32.band(hi, 0b1), 31))
+	hi = bit32.rshift(hi, 1)
+
+	if isOdd then
+		return -(hi * 0x100000000 + lo), cursor
+	end
+
+	return hi * 0x100000000 + lo, cursor
+end
+
+function proto.readVarIntS32(input: buffer, cursor: number): (number, number)
+	local lo, _
+	lo, _, cursor = readVarIntBytes(input, cursor)
+
+	if bit32.btest(lo, 1) then
+		return -(lo + 1) / 2, cursor
+	end
+
+	return lo / 2, cursor
+end
+
+proto.readVarInt = proto.readVarIntI64
 
 function proto.readFloat(input: buffer, cursor: number): (number, number)
 	return buffer.readf32(input, cursor), cursor + 4
@@ -111,55 +183,77 @@ proto.wireTypes = {
 	i32 = 5,
 }
 
--- TODO: Test negative number
 function proto.writeVarInt(output: buffer, cursor: number, number: number): (buffer, number)
-	local highestBitMask = bit32.lshift(1, 7)
-	local lowerBitsMask = 0b0111_1111
-
 	if number >= 0 then
 		repeat
 			output = reserveBuffer(output, cursor, 1)
-			local nextByte = number % highestBitMask
-			number = number // highestBitMask
-			buffer.writeu8(output, cursor, if number == 0 then nextByte else nextByte + highestBitMask)
+			local nextByte = number % 0x80
+			number = number // 0x80
+			buffer.writeu8(output, cursor, if number == 0 then nextByte else nextByte + 0x80)
 			cursor += 1
 		until number == 0
-
-		return output, cursor
 	else
-		local comp = 2 ^ 53 + number -- precision lost, could error
+		local positive = -number
+		local hi = bit32.bnot(positive // 0x100000000)
+		local lo = bit32.bnot(positive % 0x100000000) + 1
+		if lo == 0x100000000 then
+			lo = 0
+			hi += 1
+		end
 
 		output = reserveBuffer(output, cursor, 10)
-
-		buffer.writeu8(output, cursor + 0, bit32.bor(highestBitMask, comp % highestBitMask))
-		buffer.writeu8(output, cursor + 1, bit32.bor(highestBitMask, comp // highestBitMask % highestBitMask))
-		buffer.writeu8(output, cursor + 2, bit32.bor(highestBitMask, comp // (highestBitMask ^ 2) % highestBitMask))
-		buffer.writeu8(
-			output,
-			cursor + 3,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 3), lowerBitsMask))
-		)
+		buffer.writeu8(output, cursor, bit32.bor(0x80, bit32.band(lo, 0x7F)))
+		buffer.writeu8(output, cursor + 1, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 7), 0x7F)))
+		buffer.writeu8(output, cursor + 2, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 14), 0x7F)))
+		buffer.writeu8(output, cursor + 3, bit32.bor(0x80, bit32.band(bit32.rshift(lo, 21), 0x7F)))
 		buffer.writeu8(
 			output,
 			cursor + 4,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 4), lowerBitsMask))
+			bit32.bor(0x80, bit32.lshift(bit32.band(hi, 0b111), 4), bit32.rshift(lo, 28))
 		)
-		buffer.writeu8(
-			output,
-			cursor + 5,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 5), lowerBitsMask))
-		)
-		buffer.writeu8(
-			output,
-			cursor + 6,
-			bit32.bor(highestBitMask, bit32.band(comp // (highestBitMask ^ 6), lowerBitsMask))
-		)
-		buffer.writeu8(output, cursor + 7, bit32.bor(0b1_1110000, comp // (highestBitMask ^ 7)))
-		buffer.writeu8(output, cursor + 8, 0b1111_1111)
-		buffer.writeu8(output, cursor + 9, 0b0000_0001)
-
-		return output, cursor + 10
+		buffer.writeu8(output, cursor + 5, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 3), 0x7F)))
+		buffer.writeu8(output, cursor + 6, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 10), 0x7F)))
+		buffer.writeu8(output, cursor + 7, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 17), 0x7F)))
+		buffer.writeu8(output, cursor + 8, bit32.bor(0x80, bit32.band(bit32.rshift(hi, 24), 0x7F)))
+		buffer.writeu8(output, cursor + 9, bit32.rshift(hi, 31))
+		cursor += 10
 	end
+
+	return output, cursor
+end
+
+function proto.writeVarIntZigZag(output: buffer, cursor: number, number: number): (buffer, number)
+	local isNegative = number < 0
+	number = math.abs(number)
+
+	local hi = number // 0x100000000
+	local lo = number % 0x100000000
+
+	-- multiply by 2
+	local overflow = bit32.extract(lo, 31)
+	lo = bit32.lshift(lo, 1)
+	hi = bit32.bor(bit32.lshift(hi, 1), overflow)
+
+	if isNegative then
+		-- subtract 1
+		lo -= 1
+		if lo < 0 then
+			lo = 0xFFFFFFFF
+			hi -= 1
+		end
+	end
+
+	repeat
+		output = reserveBuffer(output, cursor, 1)
+		local nextByte = lo % 0x80
+		lo = bit32.bor(bit32.rshift(lo, 7), bit32.lshift(bit32.band(hi, 0x7F), 25))
+		hi = bit32.rshift(hi, 7)
+		local last = lo == 0 and hi == 0
+		buffer.writeu8(output, cursor, if last then nextByte else nextByte + 0x80)
+		cursor += 1
+	until last
+
+	return output, cursor
 end
 
 function proto.writeFloat(output: buffer, cursor: number, float: number): (buffer, number)
@@ -216,25 +310,6 @@ end
 
 function proto.writeString(output: buffer, cursor: number, text: string): (buffer, number)
 	return proto.writeBuffer(output, cursor, buffer.fromstring(text), #text)
-end
-
-function proto.decodeZigZag(number: number): number
-	return (if number % 2 == 1 then -number // 2 else number // 2)
-end
-
-function proto.encodeZigZag(number: number): number
-	return if number < 0 then -2 * number - 1 else 2 * number
-end
-
-function proto.limitInt32(number: number): number
-	local overflow = math.sign(number) * (math.abs(number) % (2 ^ 32))
-	if overflow >= 2 ^ 31 then
-		overflow -= 2 ^ 31
-	elseif overflow <= -2 ^ 31 then
-		overflow += 2 ^ 31
-	end
-
-	return overflow
 end
 
 proto.json = {}

@@ -357,7 +357,7 @@ function _ValueImpl.decode(input: buffer): Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI32(input, cursor)
 				self.kind = {
 					type = "null_value",
 					value = (NullValue.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]],

@@ -37,9 +37,20 @@ end
 
 do
 	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, 150)
-
 	assertEquals(newCursor, 2)
 	assertBufferEquals(output, newCursor, "\x96\x01")
+end
+
+do
+	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, -150)
+	assertEquals(newCursor, 10)
+	assertBufferEquals(output, newCursor, "\xEA\xFE\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x01")
+end
+
+do
+	local output, newCursor = proto.writeVarInt(buffer.create(0), 0, -2 ^ 60)
+	assertEquals(newCursor, 10)
+	assertBufferEquals(output, newCursor, "\x80\x80\x80\x80\x80\x80\x80\x80\xF0\x01")
 end
 
 do
@@ -56,15 +67,99 @@ do
 end
 
 do
-	local number, newCursor = proto.readVarInt(buffer.fromstring("\x9C\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x01"), 0)
+	local number, newCursor = proto.readVarIntI32(buffer.fromstring("\x9C\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x01"), 0)
 	assertEquals(number, -100)
 	assertEquals(newCursor, 10)
 end
 
 do
-	local number, newCursor = proto.readVarInt(buffer.fromstring("\x80\x80\x80\x80\xf8\xff\xff\xff\xff\x01"), 0)
+	local number, newCursor = proto.readVarIntI32(buffer.fromstring("\x80\x80\x80\x80\xF8\xFF\xFF\xFF\xFF\x01"), 0)
 	assertEquals(number, -2 ^ 31)
 	assertEquals(newCursor, 10)
+end
+
+do
+	local number, newCursor = proto.readVarIntI32(buffer.fromstring("\xFF\xFF\xFF\xFF\x07"), 0)
+	assertEquals(number, 2 ^ 31 - 1)
+	assertEquals(newCursor, 5)
+end
+
+do
+	local number, newCursor = proto.readVarIntU32(buffer.fromstring("\x00"), 0)
+	assertEquals(number, 0)
+	assertEquals(newCursor, 1)
+end
+
+do
+	local number, newCursor = proto.readVarIntU32(buffer.fromstring("\xFF\xFF\xFF\xFF\x0F"), 0)
+	assertEquals(number, 2 ^ 32 - 1)
+	assertEquals(newCursor, 5)
+end
+
+do
+	local number, newCursor = proto.readVarIntI64(buffer.fromstring("\x80\x80\x80\x80\x80\x80\x80\x80\x10"), 0)
+	assertEquals(number, 2 ^ 60)
+	assertEquals(newCursor, 9)
+end
+
+do
+	local number, newCursor = proto.readVarIntI64(buffer.fromstring("\x80\x80\x80\x80\x80\x80\x80\x80\xF0\x01"), 0)
+	assertEquals(number, -2 ^ 60)
+	assertEquals(newCursor, 10)
+end
+
+do
+	local number, newCursor = proto.readVarIntU64(buffer.fromstring("\x00"), 0)
+	assertEquals(number, 0)
+	assertEquals(newCursor, 1)
+end
+
+do
+	local number, newCursor = proto.readVarIntU64(buffer.fromstring("\x80\x80\x80\x80\x80\x80\x80\x80\x10"), 0)
+	assertEquals(number, 2 ^ 60)
+	assertEquals(newCursor, 9)
+end
+
+do
+	local output, newCursor = proto.writeVarIntZigZag(buffer.create(0), 0, 0)
+	assertBufferEquals(output, newCursor, "\x00")
+	assertEquals(newCursor, 1)
+end
+
+do
+	local output, newCursor = proto.writeVarIntZigZag(buffer.create(0), 0, 2 ^ 60)
+	assertBufferEquals(output, newCursor, "\x80\x80\x80\x80\x80\x80\x80\x80\x20")
+	assertEquals(newCursor, 9)
+end
+
+do
+	local output, newCursor = proto.writeVarIntZigZag(buffer.create(0), 0, -2 ^ 60)
+	assertBufferEquals(output, newCursor, "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x1F")
+	assertEquals(newCursor, 9)
+end
+
+do
+	local number, newCursor = proto.readVarIntS32(buffer.fromstring("\xFE\xFF\xFF\xFF\x0F"), 0)
+	assertEquals(number, 2 ^ 31 - 1)
+	assertEquals(newCursor, 5)
+end
+
+do
+	local number, newCursor = proto.readVarIntS32(buffer.fromstring("\xFF\xFF\xFF\xFF\x0F"), 0)
+	assertEquals(number, -2 ^ 31)
+	assertEquals(newCursor, 5)
+end
+
+do
+	local number, newCursor = proto.readVarIntS64(buffer.fromstring("\x80\x80\x80\x80\x80\x80\x80\x80\x20"), 0)
+	assertEquals(number, 2 ^ 60)
+	assertEquals(newCursor, 9)
+end
+
+do
+	local number, newCursor = proto.readVarIntS64(buffer.fromstring("\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x1F"), 0)
+	assertEquals(number, -2 ^ 60)
+	assertEquals(newCursor, 9)
 end
 
 do
