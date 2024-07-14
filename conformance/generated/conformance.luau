@@ -177,16 +177,31 @@ function _FailureSetImpl.decode(input: buffer): FailureSet
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				table.insert(self.failure, buffer.tostring(value))
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -328,45 +343,68 @@ function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.requested_output_format = (WireFormat.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				continue
 			elseif field == 5 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.test_category = (TestCategory.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+				continue
 			elseif field == 9 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.print_unknown_fields = value ~= 0
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.payload = { type = "protobuf_payload", value = value }
+				continue
 			elseif field == 2 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.payload = { type = "json_payload", value = buffer.tostring(value) }
+				continue
 			elseif field == 4 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.message_type = buffer.tostring(value)
+				continue
 			elseif field == 6 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.jspb_encoding_options = JspbEncodingConfig.decode(value)
+				continue
 			elseif field == 7 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.payload = { type = "jspb_payload", value = buffer.tostring(value) }
+				continue
 			elseif field == 8 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.payload = { type = "text_payload", value = buffer.tostring(value) }
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -580,48 +618,71 @@ function _ConformanceResponseImpl.decode(input: buffer): ConformanceResponse
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "parse_error", value = buffer.tostring(value) }
+				continue
 			elseif field == 2 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "runtime_error", value = buffer.tostring(value) }
+				continue
 			elseif field == 3 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "protobuf_payload", value = value }
+				continue
 			elseif field == 4 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "json_payload", value = buffer.tostring(value) }
+				continue
 			elseif field == 5 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "skipped", value = buffer.tostring(value) }
+				continue
 			elseif field == 6 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "serialize_error", value = buffer.tostring(value) }
+				continue
 			elseif field == 7 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "jspb_payload", value = buffer.tostring(value) }
+				continue
 			elseif field == 8 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "text_payload", value = buffer.tostring(value) }
+				continue
 			elseif field == 9 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.result = { type = "timeout_error", value = buffer.tostring(value) }
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -779,13 +840,28 @@ function _JspbEncodingConfigImpl.decode(input: buffer): JspbEncodingConfig
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.use_jspb_array_any_format = value ~= 0
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end

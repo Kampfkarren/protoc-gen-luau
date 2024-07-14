@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message OneOfEach {
+	int32 int32 = 1;
+	fixed32 fixed32 = 2;
+	fixed64 fixed64 = 3;
+	repeated int32 repeated_int32 = 4;
+}
+
+message TwoOfEach {
+	int32 int32 = 1;
+	fixed32 fixed32 = 2;
+	fixed64 fixed64 = 3;
+	repeated int32 repeated_int32 = 4;
+	int32 int32_2 = 5;
+	fixed32 fixed32_2 = 6;
+	fixed64 fixed64_2 = 7;
+	repeated int32 repeated_int32_2 = 8;
+	int32 int32_3 = 9; // Ensure the repeated cursor offset works
+}
+
+message JustInt {
+	int32 int32 = 1;
+}

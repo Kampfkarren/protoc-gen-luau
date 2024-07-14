@@ -70,17 +70,33 @@ function _DurationImpl.decode(input: buffer): Duration
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.seconds = value
+				continue
 			elseif field == 2 then
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.nanos = proto.limitInt32(value)
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end

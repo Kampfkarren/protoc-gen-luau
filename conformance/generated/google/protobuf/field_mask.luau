@@ -61,16 +61,31 @@ function _FieldMaskImpl.decode(input: buffer): FieldMask
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				table.insert(self.paths, buffer.tostring(value))
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end

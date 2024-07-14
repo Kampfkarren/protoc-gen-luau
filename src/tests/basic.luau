@@ -2,6 +2,7 @@
 local tests = require("./tests")
 
 local deeper_include_me2 = require("./samples/deeper/include_me2")
+local forwards_compatibility = require("./samples/forwards_compatibility")
 local include_me = require("./samples/include_me")
 local kitchen_sink = require("./samples/kitchen_sink")
 local recursive = require("./samples/recursive")
@@ -156,6 +157,37 @@ it("should accept fields passed to new", function()
 
 	assertEquals(kitchenSink.int32, 100)
 	assertEquals(kitchenSink.float, 0)
+end)
+
+describe("forwards compatibility", function()
+	local twoOfEachBuffer = forwards_compatibility.TwoOfEach
+		.new({
+			int32 = 100,
+			fixed32 = 100,
+			fixed64 = 100,
+			repeated_int32 = { 100, 200, 300 },
+			int32_2 = 100,
+			fixed32_2 = 100,
+			fixed64_2 = 100,
+			repeated_int32_2 = { 100, 200, 300 },
+			int32_3 = 100,
+		})
+		:encode()
+
+	it("should support unused fields", function()
+		local oneOfEach = forwards_compatibility.OneOfEach.decode(twoOfEachBuffer)
+
+		assertEquals(oneOfEach.int32, 100)
+		assertEquals(oneOfEach.fixed32, 100)
+		assertEquals(oneOfEach.fixed64, 100)
+		assertEquals(oneOfEach.repeated_int32, { 100, 200, 300 })
+	end)
+
+	it("should support unused wire types", function()
+		local justInt = forwards_compatibility.JustInt.decode(twoOfEachBuffer)
+
+		assertEquals(justInt.int32, 100)
+	end)
 end)
 
 tests.finish()
