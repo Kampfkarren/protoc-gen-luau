@@ -68,13 +68,13 @@ function _TimestampImpl.decode(input: buffer): Timestamp
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
+				value, cursor = proto.readVarIntI64(input, cursor)
 				self.seconds = value
 				continue
 			elseif field == 2 then
 				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.nanos = proto.limitInt32(value)
+				value, cursor = proto.readVarIntI32(input, cursor)
+				self.nanos = value
 				continue
 			end
 
