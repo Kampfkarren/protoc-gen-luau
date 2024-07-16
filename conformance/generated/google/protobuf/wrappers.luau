@@ -227,16 +227,31 @@ function _DoubleValueImpl.decode(input: buffer): DoubleValue
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			if field == 1 then
 				local value
 				value, cursor = proto.readDouble(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -298,16 +313,31 @@ function _FloatValueImpl.decode(input: buffer): FloatValue
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			if field == 1 then
 				local value
 				value, cursor = proto.readFloat(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -370,15 +400,30 @@ function _Int64ValueImpl.decode(input: buffer): Int64Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarIntI64(input, cursor)
+				value, cursor = proto.readVarInt(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -441,15 +486,30 @@ function _UInt64ValueImpl.decode(input: buffer): UInt64Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarIntU64(input, cursor)
+				value, cursor = proto.readVarInt(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -512,15 +572,30 @@ function _Int32ValueImpl.decode(input: buffer): Int32Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarIntI32(input, cursor)
-				self.value = value
+				value, cursor = proto.readVarInt(input, cursor)
+				self.value = proto.limitInt32(value)
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -583,15 +658,30 @@ function _UInt32ValueImpl.decode(input: buffer): UInt32Value
 		if wireType == proto.wireTypes.varint then
 			if field == 1 then
 				local value
-				value, cursor = proto.readVarIntU32(input, cursor)
+				value, cursor = proto.readVarInt(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -656,13 +746,28 @@ function _BoolValueImpl.decode(input: buffer): BoolValue
 				local value
 				value, cursor = proto.readVarInt(input, cursor)
 				self.value = value ~= 0
+				continue
 			end
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			-- No fields
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -724,16 +829,31 @@ function _StringValueImpl.decode(input: buffer): StringValue
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.value = buffer.tostring(value)
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end
@@ -795,16 +915,31 @@ function _BytesValueImpl.decode(input: buffer): BytesValue
 
 		if wireType == proto.wireTypes.varint then
 			-- No fields
+
+			local _
+			_, cursor = proto.readVarInt(input, cursor)
 		elseif wireType == proto.wireTypes.lengthDelimited then
 			if field == 1 then
 				local value
 				value, cursor = proto.readBuffer(input, cursor)
 				self.value = value
+				continue
 			end
+
+			local length
+			length, cursor = proto.readVarInt(input, cursor)
+
+			cursor += length
 		elseif wireType == proto.wireTypes.i32 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed32(input, cursor)
 		elseif wireType == proto.wireTypes.i64 then
 			-- No fields
+
+			local _
+			_, cursor = proto.readFixed64(input, cursor)
 		else
 			error("Unsupported wire type: " .. wireType)
 		end

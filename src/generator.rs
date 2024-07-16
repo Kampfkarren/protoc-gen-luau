@@ -265,12 +265,26 @@ function _<name>Impl.decode(input: buffer): <name>
 
         if wireType == proto.wireTypes.varint then
             <decode_varint>
+
+            local _
+            _, cursor = proto.readVarInt(input, cursor)
         elseif wireType == proto.wireTypes.lengthDelimited then
             <decode_len>
+
+            local length
+            length, cursor = proto.readVarInt(input, cursor)
+
+            cursor += length
         elseif wireType == proto.wireTypes.i32 then
             <decode_i32>
+
+            local _
+            _, cursor = proto.readFixed32(input, cursor)
         elseif wireType == proto.wireTypes.i64 then
             <decode_i64>
+
+            local _
+            _, cursor = proto.readFixed64(input, cursor)
         else
             error("Unsupported wire type: " .. wireType)
         end
@@ -347,6 +361,7 @@ fn create_decoder(fields: BTreeMap<i32, String>) -> String {
             if index == 0 { "if" } else { "elseif" }
         ));
         lines.push(format!("\t{code}"));
+        lines.push("continue");
     }
 
     lines.push("end");
