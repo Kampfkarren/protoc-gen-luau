@@ -30,7 +30,7 @@ jobs:
         repository: bufbuild/protobuf-conformance
         extract: true
         out-file-path: conformance_test_runner
-        tag: latest
+        latest: true
         fileName: conformance_test_runner-29.0-linux-x86_64.zip
     - name: Move conformance tests
       run: mv ./conformance_test_runner/bin/conformance_test_runner ./conformance/conformance_test_runner
