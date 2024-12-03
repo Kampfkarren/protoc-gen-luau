@@ -1,6 +1,7 @@
 /target
 
 conformance/conformance_test_runner
+conformance/runtime_errors
 conformance/last_message.bin
 
 src/tests/samples

@@ -45,14 +45,14 @@ elseif request.message_type ~= "protobuf_test_messages.proto3.TestAllTypesProto3
 	return
 end
 
-local ok, problem: any = pcall(function()
+local ok, problem: any = xpcall(function()
 	local testAllTypes: test_messages_proto3.TestAllTypesProto3
 
 	assert(request.payload ~= nil, "No payload provided")
 	if request.payload.type == "json_payload" then
 		local success, result = pcall(net.jsonDecode, request.payload.value)
 		if not success then
-			response.result = { type = "parse_error", value = result }
+			response.result = { type = "parse_error", value = tostring(result) }
 			writeResponse()
 			return
 		end
@@ -67,7 +67,7 @@ local ok, problem: any = pcall(function()
 	elseif request.payload.type == "protobuf_payload" then
 		local success, result: any = pcall(test_messages_proto3.TestAllTypesProto3.decode, request.payload.value)
 		if not success then
-			response.result = { type = "parse_error", value = result }
+			response.result = { type = "parse_error", value = tostring(result) }
 			writeResponse()
 			return
 		end
@@ -81,9 +81,11 @@ local ok, problem: any = pcall(function()
 
 	if request.requested_output_format == "JSON" then
 		local json
-		if not pcall(function()
-			json = jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes))
-		end) then
+		if
+			not pcall(function()
+				json = jsonEncode(test_messages_proto3.TestAllTypesProto3.jsonEncode(testAllTypes))
+			end)
+		then
 			response.result = { type = "serialize_error", value = "Failed to encode JSON" }
 			writeResponse()
 			return
@@ -104,6 +106,8 @@ local ok, problem: any = pcall(function()
 	end
 
 	writeResponse()
+end, function(message)
+	return tostring(message) .. "\n" .. debug.traceback()
 end)
 
 if not ok then
@@ -111,6 +115,10 @@ if not ok then
 		type = "runtime_error",
 		value = tostring(problem),
 	}
+
+	local clock = os.clock()
+	fs.writeFile(`runtime_errors/{clock}.bin`, buffer.tostring(file))
+	fs.writeFile(`runtime_errors/{clock}.txt`, tostring(problem))
 
 	writeResponse()
 end
