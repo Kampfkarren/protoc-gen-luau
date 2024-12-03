@@ -118,7 +118,7 @@ if not ok then
 
 	local clock = os.clock()
 	fs.writeFile(`runtime_errors/{clock}.bin`, buffer.tostring(file))
-	fs.writeFile(`runtime_errors/{clock}.txt`, tostring(problem))
+	fs.writeFile(`runtime_errors/{clock}.txt`, `{problem}\nPayload type: {request.payload and request.payload.type}`)
 
 	writeResponse()
 end
