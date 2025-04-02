@@ -13,6 +13,7 @@ async fn create_samples_once() {
 
 fn generate_samples() {
     let files = [
+        "descriptors.proto",
         "enum_regression.proto",
         "forwards_compatibility.proto",
         "kitchen_sink.proto",
@@ -73,6 +74,32 @@ async fn basic() {
 }
 
 #[tokio::test]
+async fn descriptors_require() {
+    run_luau_test(Path::new("descriptors_require.luau")).await;
+}
+
+#[tokio::test]
 async fn wkt_json() {
     run_luau_test(Path::new("wkt_json.luau")).await;
+}
+
+#[test]
+fn descriptors_uses_it() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/descriptors_uses_it.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    assert!(
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/descriptors_uses_it.proto".to_owned()],
+            parameter: None,
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        })
+        .error
+        .is_some()
+    );
 }

@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup foreman
-      uses: Roblox/setup-foreman@v1
+    - name: Setup rokit
+      uses: CompeyDev/setup-rokit@v0.1.2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run tests
@@ -32,4 +32,4 @@ jobs:
     - name: Analyze
       # cargo test will generate files to analyze, so it's worth checking those regardless of if the actual tests pass
       if: ${{ !cancelled() }}
-      run: luau-lsp analyze --settings ./.vscode/settings.json --flag:LuauTinyControlFlowAnalysis=True --flag:LuauInstantiateInSubtyping=True ./conformance/generated ./src/luau/proto ./src/tests
+      run: luau-lsp analyze --flag:LuauInstantiateInSubtyping=True ./conformance/generated ./src/luau/proto ./src/tests

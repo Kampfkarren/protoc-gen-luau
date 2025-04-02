@@ -19,6 +19,10 @@ use crate::{
     wkt_json::WktJson,
 };
 
+// This is used for options in proto3, but is syntax = proto2.
+// Don't import it, and error if we see it.
+const DESCRIPTORS_IMPORT: &str = "google/protobuf/descriptor.proto";
+
 pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse {
     let export_map = create_export_map(&request.proto_file);
 
@@ -78,29 +82,65 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         ..Default::default()
     });
 
+    let mut errors = Vec::new();
+
+    // If we import the descriptor proto file, we need to explicitly block
+    // everything it tries to import.
+    // That way you can use descriptors for options, without needing to parse proto2.
+    let mut forbidden_types = HashSet::new();
+
     files.append(
         &mut request
             .proto_file
             .into_iter()
             .filter_map(|file| {
-                if file.syntax() != "proto3" {
-                    eprintln!("Non-proto3 {} is not supported", file.name());
+                if file.name() == DESCRIPTORS_IMPORT {
+                    for enum_descriptor in file.enum_type {
+                        forbidden_types
+                            .insert(format!(".google.protobuf.{}", enum_descriptor.name()));
+                    }
+
+                    for message_descriptor in file.message_type {
+                        forbidden_types
+                            .insert(format!(".google.protobuf.{}", message_descriptor.name()));
+
+                        // Only goes one deep
+                        for nested_type in &message_descriptor.nested_type {
+                            forbidden_types.insert(format!(
+                                ".google.protobuf.{}.{}",
+                                message_descriptor.name(),
+                                nested_type.name()
+                            ));
+                        }
+                    }
+
+                    None
+                } else if file.syntax() != "proto3" {
+                    errors.push(format!("{} is not proto3", file.name()));
                     None
                 } else {
-                    let mut generator = FileGenerator::new(file, &export_map);
+                    let mut generator = FileGenerator::new(file, &export_map, &forbidden_types);
 
                     if roblox_imports {
                         generator.enable_roblox_imports();
                     }
 
-                    Some(generator.generate_file())
+                    let generated = generator.generate_file();
+
+                    errors.extend(generated.errors);
+
+                    Some(generated.file)
                 }
             })
             .collect(),
     );
 
     CodeGeneratorResponse {
-        error: None,
+        error: if errors.is_empty() {
+            None
+        } else {
+            Some(errors.join("\n"))
+        },
         supported_features: Some(Feature::Proto3Optional as u64),
         file: files,
     }
@@ -375,14 +415,23 @@ struct FileGenerator<'a> {
     types: StringBuilder,
     implementations: StringBuilder,
     exports: Vec<String>,
+    errors: Vec<String>,
+
+    forbidden_types: &'a HashSet<String>,
 
     roblox_imports: bool,
+}
+
+struct FileAndErrors {
+    file: File,
+    errors: Vec<String>,
 }
 
 impl<'a> FileGenerator<'a> {
     fn new(
         file_descriptor_proto: FileDescriptorProto,
         export_map: &'a ExportMap,
+        forbidden_types: &'a HashSet<String>,
     ) -> FileGenerator<'a> {
         Self {
             file_descriptor_proto,
@@ -391,6 +440,9 @@ impl<'a> FileGenerator<'a> {
             types: StringBuilder::new(),
             implementations: StringBuilder::new(),
             exports: Vec::new(),
+            errors: Vec::new(),
+
+            forbidden_types,
 
             roblox_imports: false,
         }
@@ -400,12 +452,13 @@ impl<'a> FileGenerator<'a> {
         self.roblox_imports = true;
     }
 
-    fn generate_file(mut self) -> File {
+    fn generate_file(mut self) -> FileAndErrors {
         let file_path = Path::new(self.file_descriptor_proto.name());
 
         let mut contents = StringBuilder::new();
         contents.push("--!strict");
         contents.push("--!nolint LocalUnused");
+        contents.push("--!nolint ImportUnused");
         contents.push(
             "--# selene: allow(empty_if, if_same_then_else, manual_table_clone, unused_variable)",
         );
@@ -440,6 +493,10 @@ impl<'a> FileGenerator<'a> {
         ));
 
         for import in &self.file_descriptor_proto.dependency {
+            if import == DESCRIPTORS_IMPORT {
+                continue;
+            }
+
             let path_diff = pathdiff::diff_paths(
                 std::path::Path::new(&import),
                 std::path::Path::new(
@@ -502,28 +559,32 @@ impl<'a> FileGenerator<'a> {
 
         let code = contents.build();
 
-        File {
-            name: Some(
-                PathBuf::from(self.file_descriptor_proto.name())
-                    .with_extension("luau")
-                    .to_string_lossy()
-                    .into_owned(),
-            ),
-            content: Some(
-                match stylua_lib::format_code(
-                    &code,
-                    stylua_lib::Config::default(),
-                    None,
-                    stylua_lib::OutputVerification::None,
-                ) {
-                    Ok(formatted) => formatted,
-                    Err(error) => {
-                        eprintln!("Error formatting code: {error}");
-                        code
-                    }
-                },
-            ),
-            ..Default::default()
+        FileAndErrors {
+            file: File {
+                name: Some(
+                    PathBuf::from(self.file_descriptor_proto.name())
+                        .with_extension("luau")
+                        .to_string_lossy()
+                        .into_owned(),
+                ),
+                content: Some(
+                    match stylua_lib::format_code(
+                        &code,
+                        stylua_lib::Config::default(),
+                        None,
+                        stylua_lib::OutputVerification::None,
+                    ) {
+                        Ok(formatted) => formatted,
+                        Err(error) => {
+                            eprintln!("Error formatting code: {error}");
+                            code
+                        }
+                    },
+                ),
+                ..Default::default()
+            },
+
+            errors: self.errors,
         }
     }
 
@@ -616,6 +677,15 @@ impl<'a> FileGenerator<'a> {
                 {
                     existing_fields.push(field);
                 } else {
+                    if self.forbidden_types.contains(field.type_name()) {
+                        self.errors.push(format!(
+                            "{}::{} is not supported",
+                            message.name(),
+                            field.name()
+                        ));
+                        continue;
+                    }
+
                     fields.push(FieldGenerator {
                         field_kind: FieldKind::OneOf {
                             name: oneof.to_owned(),
@@ -627,6 +697,15 @@ impl<'a> FileGenerator<'a> {
                     });
                 }
             } else {
+                if self.forbidden_types.contains(dbg!(field.type_name())) {
+                    self.errors.push(format!(
+                        "{}::{} is not supported",
+                        message.name(),
+                        field.name()
+                    ));
+                    continue;
+                }
+
                 fields.push(FieldGenerator {
                     field_kind: FieldKind::Single(field),
                     export_map: self.export_map,

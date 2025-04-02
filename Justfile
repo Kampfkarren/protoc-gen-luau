@@ -15,4 +15,4 @@ run-conformance-tests: generate-conformance
 
 # Change workflows/ci.yml if you change this.
 luau:
-	luau-lsp analyze --settings ./.vscode/settings.json --flag:LuauTinyControlFlowAnalysis=True --flag:LuauInstantiateInSubtyping=True ./conformance/generated ./src/luau/proto ./src/tests
+	luau-lsp analyze --flag:LuauInstantiateInSubtyping=True ./conformance/generated ./src/luau/proto ./src/tests
