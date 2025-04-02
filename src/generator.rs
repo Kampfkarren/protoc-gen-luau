@@ -458,6 +458,7 @@ impl<'a> FileGenerator<'a> {
         let mut contents = StringBuilder::new();
         contents.push("--!strict");
         contents.push("--!nolint LocalUnused");
+        contents.push("--!nolint ImportUnused");
         contents.push(
             "--# selene: allow(empty_if, if_same_then_else, manual_table_clone, unused_variable)",
         );
