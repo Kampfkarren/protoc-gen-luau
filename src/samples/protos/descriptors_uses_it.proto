@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package descriptors_uses_it;
+
+import "google/protobuf/descriptor.proto";
+
+message Thing {
+	google.protobuf.FileDescriptorSet set = 1;
+}
