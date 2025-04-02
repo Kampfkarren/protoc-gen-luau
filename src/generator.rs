@@ -697,7 +697,7 @@ impl<'a> FileGenerator<'a> {
                     });
                 }
             } else {
-                if self.forbidden_types.contains(dbg!(field.type_name())) {
+                if self.forbidden_types.contains(field.type_name()) {
                     self.errors.push(format!(
                         "{}::{} is not supported",
                         message.name(),
