@@ -31,7 +31,7 @@ jobs:
         extract: true
         out-file-path: conformance_test_runner
         latest: true
-        fileName: conformance_test_runner-29.0-linux-x86_64.zip
+        fileName: conformance_test_runner-30.2-linux-x86_64.zip
     - name: Move conformance tests
       run: mv ./conformance_test_runner/bin/conformance_test_runner ./conformance/conformance_test_runner
     - name: Run conformance tests
