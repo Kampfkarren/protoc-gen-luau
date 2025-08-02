@@ -1,5 +1,5 @@
 function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
-	return Any.new({
+	return _AnyImpl.new({
 		type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
 		value = payload:encode(),
 	})

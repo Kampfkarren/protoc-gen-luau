@@ -7,7 +7,7 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	Timestamp: Timestamp,
+	Timestamp: _TimestampMessage,
 } = {} :: any -- Luau: We will fill these in later
 
 type _TimestampImpl = {
@@ -32,10 +32,9 @@ type _TimestampPartialFields = {
 
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
 
-do
-	type Timestamp = proto.Message<Timestamp, _TimestampPartialFields> & proto.CustomJson<Timestamp, string>
-	local Timestamp: Timestamp
+type _TimestampMessage = proto.Message<Timestamp, _TimestampPartialFields> & proto.CustomJson<Timestamp, string>
 
+do
 	local _TimestampImpl = {}
 	_TimestampImpl.__index = _TimestampImpl
 
@@ -195,7 +194,7 @@ do
 			sec = assert(tonumber(sec), "Invalid formatted sec"),
 		})
 
-		return Timestamp.new({
+		return _TimestampImpl.new({
 			seconds = totalSeconds,
 			nanos = nanos,
 		})
@@ -206,10 +205,9 @@ do
 		fullName = "google.protobuf.Timestamp",
 	}
 
-	Timestamp = _TimestampImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Timestamp = Timestamp
+	messages.Timestamp = _TimestampImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Timestamp)
+	typeRegistry.default:register(messages.Timestamp)
 end
 
 return {

@@ -269,7 +269,7 @@ fn create_messages_init(names: &[String]) -> String {
     builder.indent();
 
     for name in names {
-        builder.push(format!("{name}: {name},"));
+        builder.push(format!("{name}: _{name}Message,"));
     }
 
     builder.dedent();
@@ -298,10 +298,9 @@ pub fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"
-do
-    type <name> = proto.Message<<name>, _<name>PartialFields> <json_intersection>
-    local <name>: <name>
+type _<name>Message = proto.Message<<name>, _<name>PartialFields> <json_intersection>
 
+do
     local _<name>Impl = {}
     _<name>Impl.__index = _<name>Impl
 
@@ -368,10 +367,9 @@ do
 
     <any_methods>
 
-    <name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
-    messages.<name> = <name>
+    messages.<name> = _<name>Impl :: any  -- Luau: Not sure why this intersection fails.
 
-    typeRegistry.default:register(<name>)
+    typeRegistry.default:register(messages.<name>)
 end
 "#;
 
@@ -870,7 +868,7 @@ impl<'a> FileGenerator<'a> {
                     .replace(
                         "<json_decode>",
                         &format!(
-                            "local self = {name}.new()\n\n{}\nreturn self",
+                            "local self = _{name}Impl.new()\n\n{}\nreturn self",
                             &json_decode_lines.build()
                         ),
                     ),
@@ -897,6 +895,7 @@ impl<'a> FileGenerator<'a> {
         let name = format!("{prefix}{}", descriptor.name());
 
         self.types.push(format!("local {name}: proto.Enum<{name}>"));
+        self.types.push(format!("type _{name}Message = {name}"));
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 

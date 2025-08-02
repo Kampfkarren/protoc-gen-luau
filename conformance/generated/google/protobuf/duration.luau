@@ -7,7 +7,7 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	Duration: Duration,
+	Duration: _DurationMessage,
 } = {} :: any -- Luau: We will fill these in later
 
 type _DurationImpl = {
@@ -32,10 +32,9 @@ type _DurationPartialFields = {
 
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
 
-do
-	type Duration = proto.Message<Duration, _DurationPartialFields> & proto.CustomJson<Duration, string>
-	local Duration: Duration
+type _DurationMessage = proto.Message<Duration, _DurationPartialFields> & proto.CustomJson<Duration, string>
 
+do
 	local _DurationImpl = {}
 	_DurationImpl.__index = _DurationImpl
 
@@ -192,7 +191,7 @@ do
 			error(`Duration seconds cannot be less than {minSeconds}`)
 		end
 
-		return Duration.new({
+		return _DurationImpl.new({
 			seconds = seconds,
 			nanos = nanos,
 		})
@@ -203,10 +202,9 @@ do
 		fullName = "google.protobuf.Duration",
 	}
 
-	Duration = _DurationImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Duration = Duration
+	messages.Duration = _DurationImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Duration)
+	typeRegistry.default:register(messages.Duration)
 end
 
 return {

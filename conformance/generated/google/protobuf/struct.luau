@@ -7,11 +7,11 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	Struct: Struct,
-	Struct_FieldsEntry: Struct_FieldsEntry,
-	Value: Value,
-	ListValue: ListValue,
-	NullValue: NullValue,
+	Struct: _StructMessage,
+	Struct_FieldsEntry: _Struct_FieldsEntryMessage,
+	Value: _ValueMessage,
+	ListValue: _ListValueMessage,
+	NullValue: _NullValueMessage,
 } =
 	{} :: any -- Luau: We will fill these in later
 
@@ -112,12 +112,12 @@ type _ListValuePartialFields = {
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
 
 local NullValue: proto.Enum<NullValue>
+type _NullValueMessage = NullValue
 export type NullValue = "NULL_VALUE" | number -- Unknown
 
-do
-	type Struct = proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
-	local Struct: Struct
+type _StructMessage = proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
 
+do
 	local _StructImpl = {}
 	_StructImpl.__index = _StructImpl
 
@@ -217,7 +217,7 @@ do
 			fields[key] = messages.Value.jsonDecode(serializedValue)
 		end
 
-		return Struct.new({
+		return _StructImpl.new({
 			fields = fields,
 		})
 	end
@@ -227,16 +227,14 @@ do
 		fullName = "google.protobuf.Struct",
 	}
 
-	Struct = _StructImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Struct = Struct
+	messages.Struct = _StructImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Struct)
+	typeRegistry.default:register(messages.Struct)
 end
 
-do
-	type Struct_FieldsEntry = proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
-	local Struct_FieldsEntry: Struct_FieldsEntry
+type _Struct_FieldsEntryMessage = proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
 
+do
 	local _Struct_FieldsEntryImpl = {}
 	_Struct_FieldsEntryImpl.__index = _Struct_FieldsEntryImpl
 
@@ -330,7 +328,7 @@ do
 	end
 
 	function _Struct_FieldsEntryImpl.jsonDecode(input: { [string]: any }): Struct_FieldsEntry
-		local self = Struct_FieldsEntry.new()
+		local self = _Struct_FieldsEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -348,16 +346,14 @@ do
 		fullName = "google.protobuf.FieldsEntry",
 	}
 
-	Struct_FieldsEntry = _Struct_FieldsEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Struct_FieldsEntry = Struct_FieldsEntry
+	messages.Struct_FieldsEntry = _Struct_FieldsEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Struct_FieldsEntry)
+	typeRegistry.default:register(messages.Struct_FieldsEntry)
 end
 
-do
-	type Value = proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
-	local Value: Value
+type _ValueMessage = proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
 
+do
 	local _ValueImpl = {}
 	_ValueImpl.__index = _ValueImpl
 
@@ -490,13 +486,13 @@ do
 
 	function _ValueImpl.jsonDecode(input: any): Value
 		if input == nil then
-			return messages.Value.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
+			return _ValueImpl.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
 		elseif typeof(input) == "number" then
-			return messages.Value.new({ kind = { type = "number_value", value = input } })
+			return _ValueImpl.new({ kind = { type = "number_value", value = input } })
 		elseif typeof(input) == "string" then
-			return messages.Value.new({ kind = { type = "string_value", value = input } })
+			return _ValueImpl.new({ kind = { type = "string_value", value = input } })
 		elseif typeof(input) == "boolean" then
-			return messages.Value.new({ kind = { type = "bool_value", value = input } })
+			return _ValueImpl.new({ kind = { type = "bool_value", value = input } })
 		elseif typeof(input) == "table" then
 			local isArray = true
 			local count = 0
@@ -511,13 +507,9 @@ do
 			isArray = count == #input
 
 			if isArray then
-				return messages.Value.new({
-					kind = { type = "list_value", value = messages.ListValue.jsonDecode(input) },
-				})
+				return _ValueImpl.new({ kind = { type = "list_value", value = messages.ListValue.jsonDecode(input) } })
 			else
-				return messages.Value.new({
-					kind = { type = "struct_value", value = messages.Struct.jsonDecode(input) },
-				})
+				return _ValueImpl.new({ kind = { type = "struct_value", value = messages.Struct.jsonDecode(input) } })
 			end
 		else
 			error(`Unknown input type: {typeof(input)}`)
@@ -529,16 +521,14 @@ do
 		fullName = "google.protobuf.Value",
 	}
 
-	Value = _ValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Value = Value
+	messages.Value = _ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Value)
+	typeRegistry.default:register(messages.Value)
 end
 
-do
-	type ListValue = proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
-	local ListValue: ListValue
+type _ListValueMessage = proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
 
+do
 	local _ListValueImpl = {}
 	_ListValueImpl.__index = _ListValueImpl
 
@@ -627,7 +617,7 @@ do
 			table.insert(values, messages.Value.jsonDecode(value))
 		end
 
-		return ListValue.new({
+		return _ListValueImpl.new({
 			values = values,
 		})
 	end
@@ -637,10 +627,9 @@ do
 		fullName = "google.protobuf.ListValue",
 	}
 
-	ListValue = _ListValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.ListValue = ListValue
+	messages.ListValue = _ListValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(ListValue)
+	typeRegistry.default:register(messages.ListValue)
 end
 
 messages.NullValue = {

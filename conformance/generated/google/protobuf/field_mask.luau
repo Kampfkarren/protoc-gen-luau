@@ -7,7 +7,7 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	FieldMask: FieldMask,
+	FieldMask: _FieldMaskMessage,
 } = {} :: any -- Luau: We will fill these in later
 
 type _FieldMaskImpl = {
@@ -30,10 +30,9 @@ type _FieldMaskPartialFields = {
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
 
-do
-	type FieldMask = proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
-	local FieldMask: FieldMask
+type _FieldMaskMessage = proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
+do
 	local _FieldMaskImpl = {}
 	_FieldMaskImpl.__index = _FieldMaskImpl
 
@@ -114,7 +113,7 @@ do
 			table.insert(paths, path)
 		end
 
-		return FieldMask.new({
+		return _FieldMaskImpl.new({
 			paths = paths,
 		})
 	end
@@ -124,10 +123,9 @@ do
 		fullName = "google.protobuf.FieldMask",
 	}
 
-	FieldMask = _FieldMaskImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.FieldMask = FieldMask
+	messages.FieldMask = _FieldMaskImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(FieldMask)
+	typeRegistry.default:register(messages.FieldMask)
 end
 
 return {

@@ -15,7 +15,7 @@ function _StructImpl.jsonDecode(input: { [string]: any }): Struct
 		fields[key] = messages.Value.jsonDecode(serializedValue)
 	end
 
-	return Struct.new({
+	return _StructImpl.new({
 		fields = fields,
 	})
 end

@@ -10,7 +10,7 @@ function _FieldMaskImpl.jsonDecode(anyInput: any): FieldMask
 		table.insert(paths, path)
 	end
 
-	return FieldMask.new({
+	return _FieldMaskImpl.new({
 		paths = paths,
 	})
 end

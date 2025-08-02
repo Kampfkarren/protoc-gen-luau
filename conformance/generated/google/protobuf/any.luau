@@ -7,7 +7,7 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	Any: Any,
+	Any: _AnyMessage,
 } = {} :: any -- Luau: We will fill these in later
 
 type _AnyImpl = {
@@ -46,10 +46,9 @@ type _AnyPartialFields = {
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
 
-do
-	type Any = proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
-	local Any: Any
+type _AnyMessage = proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
 
+do
 	local _AnyImpl = {}
 	_AnyImpl.__index = _AnyImpl
 
@@ -174,7 +173,7 @@ do
 	}
 
 	function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
-		return Any.new({
+		return _AnyImpl.new({
 			type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
 			value = payload:encode(),
 		})
@@ -223,10 +222,9 @@ do
 		return typeName
 	end
 
-	Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Any = Any
+	messages.Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Any)
+	typeRegistry.default:register(messages.Any)
 end
 
 return {

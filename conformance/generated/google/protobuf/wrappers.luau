@@ -7,15 +7,15 @@ local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
 local messages: {
-	DoubleValue: DoubleValue,
-	FloatValue: FloatValue,
-	Int64Value: Int64Value,
-	UInt64Value: UInt64Value,
-	Int32Value: Int32Value,
-	UInt32Value: UInt32Value,
-	BoolValue: BoolValue,
-	StringValue: StringValue,
-	BytesValue: BytesValue,
+	DoubleValue: _DoubleValueMessage,
+	FloatValue: _FloatValueMessage,
+	Int64Value: _Int64ValueMessage,
+	UInt64Value: _UInt64ValueMessage,
+	Int32Value: _Int32ValueMessage,
+	UInt32Value: _UInt32ValueMessage,
+	BoolValue: _BoolValueMessage,
+	StringValue: _StringValueMessage,
+	BytesValue: _BytesValueMessage,
 } =
 	{} :: any -- Luau: We will fill these in later
 
@@ -199,10 +199,9 @@ type _BytesValuePartialFields = {
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
 
-do
-	type DoubleValue = proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
-	local DoubleValue: DoubleValue
+type _DoubleValueMessage = proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
 
+do
 	local _DoubleValueImpl = {}
 	_DoubleValueImpl.__index = _DoubleValueImpl
 
@@ -275,7 +274,7 @@ do
 
 	function _DoubleValueImpl.jsonDecode(anyValue: any): DoubleValue
 		local value: number = anyValue
-		return DoubleValue.new({
+		return _DoubleValueImpl.new({
 			value = value,
 		})
 	end
@@ -285,16 +284,14 @@ do
 		fullName = "google.protobuf.DoubleValue",
 	}
 
-	DoubleValue = _DoubleValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.DoubleValue = DoubleValue
+	messages.DoubleValue = _DoubleValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(DoubleValue)
+	typeRegistry.default:register(messages.DoubleValue)
 end
 
-do
-	type FloatValue = proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
-	local FloatValue: FloatValue
+type _FloatValueMessage = proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
 
+do
 	local _FloatValueImpl = {}
 	_FloatValueImpl.__index = _FloatValueImpl
 
@@ -367,7 +364,7 @@ do
 
 	function _FloatValueImpl.jsonDecode(anyValue: any): FloatValue
 		local value: number = anyValue
-		return FloatValue.new({
+		return _FloatValueImpl.new({
 			value = value,
 		})
 	end
@@ -377,16 +374,14 @@ do
 		fullName = "google.protobuf.FloatValue",
 	}
 
-	FloatValue = _FloatValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.FloatValue = FloatValue
+	messages.FloatValue = _FloatValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(FloatValue)
+	typeRegistry.default:register(messages.FloatValue)
 end
 
-do
-	type Int64Value = proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
-	local Int64Value: Int64Value
+type _Int64ValueMessage = proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
 
+do
 	local _Int64ValueImpl = {}
 	_Int64ValueImpl.__index = _Int64ValueImpl
 
@@ -459,7 +454,7 @@ do
 
 	function _Int64ValueImpl.jsonDecode(anyValue: any): Int64Value
 		local value: number = anyValue
-		return Int64Value.new({
+		return _Int64ValueImpl.new({
 			value = value,
 		})
 	end
@@ -469,16 +464,14 @@ do
 		fullName = "google.protobuf.Int64Value",
 	}
 
-	Int64Value = _Int64ValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Int64Value = Int64Value
+	messages.Int64Value = _Int64ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Int64Value)
+	typeRegistry.default:register(messages.Int64Value)
 end
 
-do
-	type UInt64Value = proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
-	local UInt64Value: UInt64Value
+type _UInt64ValueMessage = proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
 
+do
 	local _UInt64ValueImpl = {}
 	_UInt64ValueImpl.__index = _UInt64ValueImpl
 
@@ -551,7 +544,7 @@ do
 
 	function _UInt64ValueImpl.jsonDecode(anyValue: any): UInt64Value
 		local value: number = anyValue
-		return UInt64Value.new({
+		return _UInt64ValueImpl.new({
 			value = value,
 		})
 	end
@@ -561,16 +554,14 @@ do
 		fullName = "google.protobuf.UInt64Value",
 	}
 
-	UInt64Value = _UInt64ValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.UInt64Value = UInt64Value
+	messages.UInt64Value = _UInt64ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(UInt64Value)
+	typeRegistry.default:register(messages.UInt64Value)
 end
 
-do
-	type Int32Value = proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
-	local Int32Value: Int32Value
+type _Int32ValueMessage = proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
 
+do
 	local _Int32ValueImpl = {}
 	_Int32ValueImpl.__index = _Int32ValueImpl
 
@@ -643,7 +634,7 @@ do
 
 	function _Int32ValueImpl.jsonDecode(anyValue: any): Int32Value
 		local value: number = anyValue
-		return Int32Value.new({
+		return _Int32ValueImpl.new({
 			value = value,
 		})
 	end
@@ -653,16 +644,14 @@ do
 		fullName = "google.protobuf.Int32Value",
 	}
 
-	Int32Value = _Int32ValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.Int32Value = Int32Value
+	messages.Int32Value = _Int32ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(Int32Value)
+	typeRegistry.default:register(messages.Int32Value)
 end
 
-do
-	type UInt32Value = proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
-	local UInt32Value: UInt32Value
+type _UInt32ValueMessage = proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
 
+do
 	local _UInt32ValueImpl = {}
 	_UInt32ValueImpl.__index = _UInt32ValueImpl
 
@@ -735,7 +724,7 @@ do
 
 	function _UInt32ValueImpl.jsonDecode(anyValue: any): UInt32Value
 		local value: number = anyValue
-		return UInt32Value.new({
+		return _UInt32ValueImpl.new({
 			value = value,
 		})
 	end
@@ -745,16 +734,14 @@ do
 		fullName = "google.protobuf.UInt32Value",
 	}
 
-	UInt32Value = _UInt32ValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.UInt32Value = UInt32Value
+	messages.UInt32Value = _UInt32ValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(UInt32Value)
+	typeRegistry.default:register(messages.UInt32Value)
 end
 
-do
-	type BoolValue = proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
-	local BoolValue: BoolValue
+type _BoolValueMessage = proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
 
+do
 	local _BoolValueImpl = {}
 	_BoolValueImpl.__index = _BoolValueImpl
 
@@ -827,7 +814,7 @@ do
 
 	function _BoolValueImpl.jsonDecode(anyValue: any): BoolValue
 		local value: boolean = anyValue
-		return BoolValue.new({
+		return _BoolValueImpl.new({
 			value = value,
 		})
 	end
@@ -837,16 +824,14 @@ do
 		fullName = "google.protobuf.BoolValue",
 	}
 
-	BoolValue = _BoolValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.BoolValue = BoolValue
+	messages.BoolValue = _BoolValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(BoolValue)
+	typeRegistry.default:register(messages.BoolValue)
 end
 
-do
-	type StringValue = proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
-	local StringValue: StringValue
+type _StringValueMessage = proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
 
+do
 	local _StringValueImpl = {}
 	_StringValueImpl.__index = _StringValueImpl
 
@@ -919,7 +904,7 @@ do
 
 	function _StringValueImpl.jsonDecode(anyValue: any): StringValue
 		local value: string = anyValue
-		return StringValue.new({
+		return _StringValueImpl.new({
 			value = value,
 		})
 	end
@@ -929,16 +914,14 @@ do
 		fullName = "google.protobuf.StringValue",
 	}
 
-	StringValue = _StringValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.StringValue = StringValue
+	messages.StringValue = _StringValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(StringValue)
+	typeRegistry.default:register(messages.StringValue)
 end
 
-do
-	type BytesValue = proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
-	local BytesValue: BytesValue
+type _BytesValueMessage = proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
 
+do
 	local _BytesValueImpl = {}
 	_BytesValueImpl.__index = _BytesValueImpl
 
@@ -1011,7 +994,7 @@ do
 
 	function _BytesValueImpl.jsonDecode(anyValue: any): BytesValue
 		local value: string = anyValue
-		return BytesValue.new({
+		return _BytesValueImpl.new({
 			value = buffer.fromstring(value),
 		})
 	end
@@ -1021,10 +1004,9 @@ do
 		fullName = "google.protobuf.BytesValue",
 	}
 
-	BytesValue = _BytesValueImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.BytesValue = BytesValue
+	messages.BytesValue = _BytesValueImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(BytesValue)
+	typeRegistry.default:register(messages.BytesValue)
 end
 
 return {

@@ -7,12 +7,12 @@ local proto = require("./proto")
 local typeRegistry = require("./proto/typeRegistry")
 
 local messages: {
-	FailureSet: FailureSet,
-	ConformanceRequest: ConformanceRequest,
-	ConformanceResponse: ConformanceResponse,
-	JspbEncodingConfig: JspbEncodingConfig,
-	WireFormat: WireFormat,
-	TestCategory: TestCategory,
+	FailureSet: _FailureSetMessage,
+	ConformanceRequest: _ConformanceRequestMessage,
+	ConformanceResponse: _ConformanceResponseMessage,
+	JspbEncodingConfig: _JspbEncodingConfigMessage,
+	WireFormat: _WireFormatMessage,
+	TestCategory: _TestCategoryMessage,
 } =
 	{} :: any -- Luau: We will fill these in later
 
@@ -137,9 +137,11 @@ type _JspbEncodingConfigPartialFields = {
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
 
 local WireFormat: proto.Enum<WireFormat>
+type _WireFormatMessage = WireFormat
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
 
 local TestCategory: proto.Enum<TestCategory>
+type _TestCategoryMessage = TestCategory
 export type TestCategory =
 	"UNSPECIFIED_TEST"
 	| "BINARY_TEST"
@@ -149,10 +151,9 @@ export type TestCategory =
 	| "TEXT_FORMAT_TEST"
 	| number -- Unknown
 
-do
-	type FailureSet = proto.Message<FailureSet, _FailureSetPartialFields>
-	local FailureSet: FailureSet
+type _FailureSetMessage = proto.Message<FailureSet, _FailureSetPartialFields>
 
+do
 	local _FailureSetImpl = {}
 	_FailureSetImpl.__index = _FailureSetImpl
 
@@ -236,7 +237,7 @@ do
 	end
 
 	function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
-		local self = FailureSet.new()
+		local self = _FailureSetImpl.new()
 
 		if input.failure ~= nil then
 			local newOutput: { string } = {}
@@ -255,16 +256,14 @@ do
 		fullName = "conformance.FailureSet",
 	}
 
-	FailureSet = _FailureSetImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.FailureSet = FailureSet
+	messages.FailureSet = _FailureSetImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(FailureSet)
+	typeRegistry.default:register(messages.FailureSet)
 end
 
-do
-	type ConformanceRequest = proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
-	local ConformanceRequest: ConformanceRequest
+type _ConformanceRequestMessage = proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
 
+do
 	local _ConformanceRequestImpl = {}
 	_ConformanceRequestImpl.__index = _ConformanceRequestImpl
 
@@ -490,7 +489,7 @@ do
 	end
 
 	function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): ConformanceRequest
-		local self = ConformanceRequest.new()
+		local self = _ConformanceRequestImpl.new()
 
 		if input.protobuf_payload ~= nil then
 			self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
@@ -580,16 +579,14 @@ do
 		fullName = "conformance.ConformanceRequest",
 	}
 
-	ConformanceRequest = _ConformanceRequestImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.ConformanceRequest = ConformanceRequest
+	messages.ConformanceRequest = _ConformanceRequestImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(ConformanceRequest)
+	typeRegistry.default:register(messages.ConformanceRequest)
 end
 
-do
-	type ConformanceResponse = proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
-	local ConformanceResponse: ConformanceResponse
+type _ConformanceResponseMessage = proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
 
+do
 	local _ConformanceResponseImpl = {}
 	_ConformanceResponseImpl.__index = _ConformanceResponseImpl
 
@@ -751,7 +748,7 @@ do
 	end
 
 	function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): ConformanceResponse
-		local self = ConformanceResponse.new()
+		local self = _ConformanceResponseImpl.new()
 
 		if input.parse_error ~= nil then
 			self.result = { type = "parse_error", value = input.parse_error }
@@ -829,16 +826,14 @@ do
 		fullName = "conformance.ConformanceResponse",
 	}
 
-	ConformanceResponse = _ConformanceResponseImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.ConformanceResponse = ConformanceResponse
+	messages.ConformanceResponse = _ConformanceResponseImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(ConformanceResponse)
+	typeRegistry.default:register(messages.ConformanceResponse)
 end
 
-do
-	type JspbEncodingConfig = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
-	local JspbEncodingConfig: JspbEncodingConfig
+type _JspbEncodingConfigMessage = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
 
+do
 	local _JspbEncodingConfigImpl = {}
 	_JspbEncodingConfigImpl.__index = _JspbEncodingConfigImpl
 
@@ -918,7 +913,7 @@ do
 	end
 
 	function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncodingConfig
-		local self = JspbEncodingConfig.new()
+		local self = _JspbEncodingConfigImpl.new()
 
 		if input.use_jspb_array_any_format ~= nil then
 			self.use_jspb_array_any_format = input.use_jspb_array_any_format
@@ -936,10 +931,9 @@ do
 		fullName = "conformance.JspbEncodingConfig",
 	}
 
-	JspbEncodingConfig = _JspbEncodingConfigImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.JspbEncodingConfig = JspbEncodingConfig
+	messages.JspbEncodingConfig = _JspbEncodingConfigImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(JspbEncodingConfig)
+	typeRegistry.default:register(messages.JspbEncodingConfig)
 end
 
 messages.WireFormat = {

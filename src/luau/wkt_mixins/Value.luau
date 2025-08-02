@@ -17,13 +17,13 @@ end
 
 function _ValueImpl.jsonDecode(input: any): Value
 	if input == nil then
-		return messages.Value.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
+		return _ValueImpl.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
 	elseif typeof(input) == "number" then
-		return messages.Value.new({ kind = { type = "number_value", value = input } })
+		return _ValueImpl.new({ kind = { type = "number_value", value = input } })
 	elseif typeof(input) == "string" then
-		return messages.Value.new({ kind = { type = "string_value", value = input } })
+		return _ValueImpl.new({ kind = { type = "string_value", value = input } })
 	elseif typeof(input) == "boolean" then
-		return messages.Value.new({ kind = { type = "bool_value", value = input } })
+		return _ValueImpl.new({ kind = { type = "bool_value", value = input } })
 	elseif typeof(input) == "table" then
 		local isArray = true
 		local count = 0
@@ -38,9 +38,9 @@ function _ValueImpl.jsonDecode(input: any): Value
 		isArray = count == #input
 
 		if isArray then
-			return messages.Value.new({ kind = { type = "list_value", value = messages.ListValue.jsonDecode(input) } })
+			return _ValueImpl.new({ kind = { type = "list_value", value = messages.ListValue.jsonDecode(input) } })
 		else
-			return messages.Value.new({ kind = { type = "struct_value", value = messages.Struct.jsonDecode(input) } })
+			return _ValueImpl.new({ kind = { type = "struct_value", value = messages.Struct.jsonDecode(input) } })
 		end
 	else
 		error(`Unknown input type: {typeof(input)}`)

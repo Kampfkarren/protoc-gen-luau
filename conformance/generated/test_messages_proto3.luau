@@ -7,34 +7,34 @@ local proto = require("./proto")
 local typeRegistry = require("./proto/typeRegistry")
 
 local messages: {
-	TestAllTypesProto3: TestAllTypesProto3,
-	TestAllTypesProto3_NestedMessage: TestAllTypesProto3_NestedMessage,
-	TestAllTypesProto3_MapInt32Int32Entry: TestAllTypesProto3_MapInt32Int32Entry,
-	TestAllTypesProto3_MapInt64Int64Entry: TestAllTypesProto3_MapInt64Int64Entry,
-	TestAllTypesProto3_MapUint32Uint32Entry: TestAllTypesProto3_MapUint32Uint32Entry,
-	TestAllTypesProto3_MapUint64Uint64Entry: TestAllTypesProto3_MapUint64Uint64Entry,
-	TestAllTypesProto3_MapSint32Sint32Entry: TestAllTypesProto3_MapSint32Sint32Entry,
-	TestAllTypesProto3_MapSint64Sint64Entry: TestAllTypesProto3_MapSint64Sint64Entry,
-	TestAllTypesProto3_MapFixed32Fixed32Entry: TestAllTypesProto3_MapFixed32Fixed32Entry,
-	TestAllTypesProto3_MapFixed64Fixed64Entry: TestAllTypesProto3_MapFixed64Fixed64Entry,
-	TestAllTypesProto3_MapSfixed32Sfixed32Entry: TestAllTypesProto3_MapSfixed32Sfixed32Entry,
-	TestAllTypesProto3_MapSfixed64Sfixed64Entry: TestAllTypesProto3_MapSfixed64Sfixed64Entry,
-	TestAllTypesProto3_MapInt32FloatEntry: TestAllTypesProto3_MapInt32FloatEntry,
-	TestAllTypesProto3_MapInt32DoubleEntry: TestAllTypesProto3_MapInt32DoubleEntry,
-	TestAllTypesProto3_MapBoolBoolEntry: TestAllTypesProto3_MapBoolBoolEntry,
-	TestAllTypesProto3_MapStringStringEntry: TestAllTypesProto3_MapStringStringEntry,
-	TestAllTypesProto3_MapStringBytesEntry: TestAllTypesProto3_MapStringBytesEntry,
-	TestAllTypesProto3_MapStringNestedMessageEntry: TestAllTypesProto3_MapStringNestedMessageEntry,
-	TestAllTypesProto3_MapStringForeignMessageEntry: TestAllTypesProto3_MapStringForeignMessageEntry,
-	TestAllTypesProto3_MapStringNestedEnumEntry: TestAllTypesProto3_MapStringNestedEnumEntry,
-	TestAllTypesProto3_MapStringForeignEnumEntry: TestAllTypesProto3_MapStringForeignEnumEntry,
-	TestAllTypesProto3_NestedEnum: TestAllTypesProto3_NestedEnum,
-	TestAllTypesProto3_AliasedEnum: TestAllTypesProto3_AliasedEnum,
-	ForeignMessage: ForeignMessage,
-	NullHypothesisProto3: NullHypothesisProto3,
-	EnumOnlyProto3: EnumOnlyProto3,
-	EnumOnlyProto3_Bool: EnumOnlyProto3_Bool,
-	ForeignEnum: ForeignEnum,
+	TestAllTypesProto3: _TestAllTypesProto3Message,
+	TestAllTypesProto3_NestedMessage: _TestAllTypesProto3_NestedMessageMessage,
+	TestAllTypesProto3_MapInt32Int32Entry: _TestAllTypesProto3_MapInt32Int32EntryMessage,
+	TestAllTypesProto3_MapInt64Int64Entry: _TestAllTypesProto3_MapInt64Int64EntryMessage,
+	TestAllTypesProto3_MapUint32Uint32Entry: _TestAllTypesProto3_MapUint32Uint32EntryMessage,
+	TestAllTypesProto3_MapUint64Uint64Entry: _TestAllTypesProto3_MapUint64Uint64EntryMessage,
+	TestAllTypesProto3_MapSint32Sint32Entry: _TestAllTypesProto3_MapSint32Sint32EntryMessage,
+	TestAllTypesProto3_MapSint64Sint64Entry: _TestAllTypesProto3_MapSint64Sint64EntryMessage,
+	TestAllTypesProto3_MapFixed32Fixed32Entry: _TestAllTypesProto3_MapFixed32Fixed32EntryMessage,
+	TestAllTypesProto3_MapFixed64Fixed64Entry: _TestAllTypesProto3_MapFixed64Fixed64EntryMessage,
+	TestAllTypesProto3_MapSfixed32Sfixed32Entry: _TestAllTypesProto3_MapSfixed32Sfixed32EntryMessage,
+	TestAllTypesProto3_MapSfixed64Sfixed64Entry: _TestAllTypesProto3_MapSfixed64Sfixed64EntryMessage,
+	TestAllTypesProto3_MapInt32FloatEntry: _TestAllTypesProto3_MapInt32FloatEntryMessage,
+	TestAllTypesProto3_MapInt32DoubleEntry: _TestAllTypesProto3_MapInt32DoubleEntryMessage,
+	TestAllTypesProto3_MapBoolBoolEntry: _TestAllTypesProto3_MapBoolBoolEntryMessage,
+	TestAllTypesProto3_MapStringStringEntry: _TestAllTypesProto3_MapStringStringEntryMessage,
+	TestAllTypesProto3_MapStringBytesEntry: _TestAllTypesProto3_MapStringBytesEntryMessage,
+	TestAllTypesProto3_MapStringNestedMessageEntry: _TestAllTypesProto3_MapStringNestedMessageEntryMessage,
+	TestAllTypesProto3_MapStringForeignMessageEntry: _TestAllTypesProto3_MapStringForeignMessageEntryMessage,
+	TestAllTypesProto3_MapStringNestedEnumEntry: _TestAllTypesProto3_MapStringNestedEnumEntryMessage,
+	TestAllTypesProto3_MapStringForeignEnumEntry: _TestAllTypesProto3_MapStringForeignEnumEntryMessage,
+	TestAllTypesProto3_NestedEnum: _TestAllTypesProto3_NestedEnumMessage,
+	TestAllTypesProto3_AliasedEnum: _TestAllTypesProto3_AliasedEnumMessage,
+	ForeignMessage: _ForeignMessageMessage,
+	NullHypothesisProto3: _NullHypothesisProto3Message,
+	EnumOnlyProto3: _EnumOnlyProto3Message,
+	EnumOnlyProto3_Bool: _EnumOnlyProto3_BoolMessage,
+	ForeignEnum: _ForeignEnumMessage,
 } =
 	{} :: any -- Luau: We will fill these in later
 
@@ -886,9 +886,11 @@ export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
 ))
 
 local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
+type _TestAllTypesProto3_NestedEnumMessage = TestAllTypesProto3_NestedEnum
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
 
 local TestAllTypesProto3_AliasedEnum: proto.Enum<TestAllTypesProto3_AliasedEnum>
+type _TestAllTypesProto3_AliasedEnumMessage = TestAllTypesProto3_AliasedEnum
 export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_BAZ" | "MOO" | "moo" | "bAz" | number -- Unknown
 
 type _ForeignMessageImpl = {
@@ -947,15 +949,16 @@ type _EnumOnlyProto3PartialFields = {}
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
 
 local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
+type _EnumOnlyProto3_BoolMessage = EnumOnlyProto3_Bool
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
 
 local ForeignEnum: proto.Enum<ForeignEnum>
+type _ForeignEnumMessage = ForeignEnum
 export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number -- Unknown
 
-do
-	type TestAllTypesProto3 = proto.Message<TestAllTypesProto3, _TestAllTypesProto3PartialFields>
-	local TestAllTypesProto3: TestAllTypesProto3
+type _TestAllTypesProto3Message = proto.Message<TestAllTypesProto3, _TestAllTypesProto3PartialFields>
 
+do
 	local _TestAllTypesProto3Impl = {}
 	_TestAllTypesProto3Impl.__index = _TestAllTypesProto3Impl
 
@@ -4722,7 +4725,7 @@ do
 	end
 
 	function _TestAllTypesProto3Impl.jsonDecode(input: { [string]: any }): TestAllTypesProto3
-		local self = TestAllTypesProto3.new()
+		local self = _TestAllTypesProto3Impl.new()
 
 		if input.optional_int32 ~= nil then
 			self.optional_int32 = input.optional_int32
@@ -4881,7 +4884,8 @@ do
 					or input.optionalNestedEnum
 				)
 				else (
-					messages.TestAllTypesProto3_NestedEnum.fromName(input.optionalNestedEnum) or input.optionalNestedEnum
+					messages.TestAllTypesProto3_NestedEnum.fromName(input.optionalNestedEnum)
+					or input.optionalNestedEnum
 				)
 		end
 
@@ -6889,19 +6893,17 @@ do
 		fullName = "protobuf_test_messages.proto3.TestAllTypesProto3",
 	}
 
-	TestAllTypesProto3 = _TestAllTypesProto3Impl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3 = TestAllTypesProto3
+	messages.TestAllTypesProto3 = _TestAllTypesProto3Impl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3)
+	typeRegistry.default:register(messages.TestAllTypesProto3)
 end
 
-do
-	type TestAllTypesProto3_NestedMessage = proto.Message<
-		TestAllTypesProto3_NestedMessage,
-		_TestAllTypesProto3_NestedMessagePartialFields
-	>
-	local TestAllTypesProto3_NestedMessage: TestAllTypesProto3_NestedMessage
+type _TestAllTypesProto3_NestedMessageMessage = proto.Message<
+	TestAllTypesProto3_NestedMessage,
+	_TestAllTypesProto3_NestedMessagePartialFields
+>
 
+do
 	local _TestAllTypesProto3_NestedMessageImpl = {}
 	_TestAllTypesProto3_NestedMessageImpl.__index = _TestAllTypesProto3_NestedMessageImpl
 
@@ -6999,7 +7001,7 @@ do
 	function _TestAllTypesProto3_NestedMessageImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_NestedMessage
-		local self = TestAllTypesProto3_NestedMessage.new()
+		local self = _TestAllTypesProto3_NestedMessageImpl.new()
 
 		if input.a ~= nil then
 			self.a = input.a
@@ -7017,19 +7019,17 @@ do
 		fullName = "protobuf_test_messages.proto3.NestedMessage",
 	}
 
-	TestAllTypesProto3_NestedMessage = _TestAllTypesProto3_NestedMessageImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_NestedMessage = TestAllTypesProto3_NestedMessage
+	messages.TestAllTypesProto3_NestedMessage = _TestAllTypesProto3_NestedMessageImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_NestedMessage)
+	typeRegistry.default:register(messages.TestAllTypesProto3_NestedMessage)
 end
 
-do
-	type TestAllTypesProto3_MapInt32Int32Entry = proto.Message<
-		TestAllTypesProto3_MapInt32Int32Entry,
-		_TestAllTypesProto3_MapInt32Int32EntryPartialFields
-	>
-	local TestAllTypesProto3_MapInt32Int32Entry: TestAllTypesProto3_MapInt32Int32Entry
+type _TestAllTypesProto3_MapInt32Int32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32Int32Entry,
+	_TestAllTypesProto3_MapInt32Int32EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapInt32Int32EntryImpl = {}
 	_TestAllTypesProto3_MapInt32Int32EntryImpl.__index = _TestAllTypesProto3_MapInt32Int32EntryImpl
 
@@ -7126,7 +7126,7 @@ do
 	function _TestAllTypesProto3_MapInt32Int32EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapInt32Int32Entry
-		local self = TestAllTypesProto3_MapInt32Int32Entry.new()
+		local self = _TestAllTypesProto3_MapInt32Int32EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7144,19 +7144,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapInt32Int32Entry",
 	}
 
-	TestAllTypesProto3_MapInt32Int32Entry = _TestAllTypesProto3_MapInt32Int32EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapInt32Int32Entry = TestAllTypesProto3_MapInt32Int32Entry
+	messages.TestAllTypesProto3_MapInt32Int32Entry = _TestAllTypesProto3_MapInt32Int32EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapInt32Int32Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32Int32Entry)
 end
 
-do
-	type TestAllTypesProto3_MapInt64Int64Entry = proto.Message<
-		TestAllTypesProto3_MapInt64Int64Entry,
-		_TestAllTypesProto3_MapInt64Int64EntryPartialFields
-	>
-	local TestAllTypesProto3_MapInt64Int64Entry: TestAllTypesProto3_MapInt64Int64Entry
+type _TestAllTypesProto3_MapInt64Int64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt64Int64Entry,
+	_TestAllTypesProto3_MapInt64Int64EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapInt64Int64EntryImpl = {}
 	_TestAllTypesProto3_MapInt64Int64EntryImpl.__index = _TestAllTypesProto3_MapInt64Int64EntryImpl
 
@@ -7253,7 +7251,7 @@ do
 	function _TestAllTypesProto3_MapInt64Int64EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapInt64Int64Entry
-		local self = TestAllTypesProto3_MapInt64Int64Entry.new()
+		local self = _TestAllTypesProto3_MapInt64Int64EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7271,19 +7269,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapInt64Int64Entry",
 	}
 
-	TestAllTypesProto3_MapInt64Int64Entry = _TestAllTypesProto3_MapInt64Int64EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapInt64Int64Entry = TestAllTypesProto3_MapInt64Int64Entry
+	messages.TestAllTypesProto3_MapInt64Int64Entry = _TestAllTypesProto3_MapInt64Int64EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapInt64Int64Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt64Int64Entry)
 end
 
-do
-	type TestAllTypesProto3_MapUint32Uint32Entry = proto.Message<
-		TestAllTypesProto3_MapUint32Uint32Entry,
-		_TestAllTypesProto3_MapUint32Uint32EntryPartialFields
-	>
-	local TestAllTypesProto3_MapUint32Uint32Entry: TestAllTypesProto3_MapUint32Uint32Entry
+type _TestAllTypesProto3_MapUint32Uint32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapUint32Uint32Entry,
+	_TestAllTypesProto3_MapUint32Uint32EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapUint32Uint32EntryImpl = {}
 	_TestAllTypesProto3_MapUint32Uint32EntryImpl.__index = _TestAllTypesProto3_MapUint32Uint32EntryImpl
 
@@ -7380,7 +7376,7 @@ do
 	function _TestAllTypesProto3_MapUint32Uint32EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapUint32Uint32Entry
-		local self = TestAllTypesProto3_MapUint32Uint32Entry.new()
+		local self = _TestAllTypesProto3_MapUint32Uint32EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7398,19 +7394,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapUint32Uint32Entry",
 	}
 
-	TestAllTypesProto3_MapUint32Uint32Entry = _TestAllTypesProto3_MapUint32Uint32EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapUint32Uint32Entry = TestAllTypesProto3_MapUint32Uint32Entry
+	messages.TestAllTypesProto3_MapUint32Uint32Entry = _TestAllTypesProto3_MapUint32Uint32EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapUint32Uint32Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapUint32Uint32Entry)
 end
 
-do
-	type TestAllTypesProto3_MapUint64Uint64Entry = proto.Message<
-		TestAllTypesProto3_MapUint64Uint64Entry,
-		_TestAllTypesProto3_MapUint64Uint64EntryPartialFields
-	>
-	local TestAllTypesProto3_MapUint64Uint64Entry: TestAllTypesProto3_MapUint64Uint64Entry
+type _TestAllTypesProto3_MapUint64Uint64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapUint64Uint64Entry,
+	_TestAllTypesProto3_MapUint64Uint64EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapUint64Uint64EntryImpl = {}
 	_TestAllTypesProto3_MapUint64Uint64EntryImpl.__index = _TestAllTypesProto3_MapUint64Uint64EntryImpl
 
@@ -7507,7 +7501,7 @@ do
 	function _TestAllTypesProto3_MapUint64Uint64EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapUint64Uint64Entry
-		local self = TestAllTypesProto3_MapUint64Uint64Entry.new()
+		local self = _TestAllTypesProto3_MapUint64Uint64EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7525,19 +7519,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapUint64Uint64Entry",
 	}
 
-	TestAllTypesProto3_MapUint64Uint64Entry = _TestAllTypesProto3_MapUint64Uint64EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapUint64Uint64Entry = TestAllTypesProto3_MapUint64Uint64Entry
+	messages.TestAllTypesProto3_MapUint64Uint64Entry = _TestAllTypesProto3_MapUint64Uint64EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapUint64Uint64Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapUint64Uint64Entry)
 end
 
-do
-	type TestAllTypesProto3_MapSint32Sint32Entry = proto.Message<
-		TestAllTypesProto3_MapSint32Sint32Entry,
-		_TestAllTypesProto3_MapSint32Sint32EntryPartialFields
-	>
-	local TestAllTypesProto3_MapSint32Sint32Entry: TestAllTypesProto3_MapSint32Sint32Entry
+type _TestAllTypesProto3_MapSint32Sint32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSint32Sint32Entry,
+	_TestAllTypesProto3_MapSint32Sint32EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapSint32Sint32EntryImpl = {}
 	_TestAllTypesProto3_MapSint32Sint32EntryImpl.__index = _TestAllTypesProto3_MapSint32Sint32EntryImpl
 
@@ -7634,7 +7626,7 @@ do
 	function _TestAllTypesProto3_MapSint32Sint32EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapSint32Sint32Entry
-		local self = TestAllTypesProto3_MapSint32Sint32Entry.new()
+		local self = _TestAllTypesProto3_MapSint32Sint32EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7652,19 +7644,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapSint32Sint32Entry",
 	}
 
-	TestAllTypesProto3_MapSint32Sint32Entry = _TestAllTypesProto3_MapSint32Sint32EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapSint32Sint32Entry = TestAllTypesProto3_MapSint32Sint32Entry
+	messages.TestAllTypesProto3_MapSint32Sint32Entry = _TestAllTypesProto3_MapSint32Sint32EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapSint32Sint32Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapSint32Sint32Entry)
 end
 
-do
-	type TestAllTypesProto3_MapSint64Sint64Entry = proto.Message<
-		TestAllTypesProto3_MapSint64Sint64Entry,
-		_TestAllTypesProto3_MapSint64Sint64EntryPartialFields
-	>
-	local TestAllTypesProto3_MapSint64Sint64Entry: TestAllTypesProto3_MapSint64Sint64Entry
+type _TestAllTypesProto3_MapSint64Sint64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSint64Sint64Entry,
+	_TestAllTypesProto3_MapSint64Sint64EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapSint64Sint64EntryImpl = {}
 	_TestAllTypesProto3_MapSint64Sint64EntryImpl.__index = _TestAllTypesProto3_MapSint64Sint64EntryImpl
 
@@ -7761,7 +7751,7 @@ do
 	function _TestAllTypesProto3_MapSint64Sint64EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapSint64Sint64Entry
-		local self = TestAllTypesProto3_MapSint64Sint64Entry.new()
+		local self = _TestAllTypesProto3_MapSint64Sint64EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7779,19 +7769,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapSint64Sint64Entry",
 	}
 
-	TestAllTypesProto3_MapSint64Sint64Entry = _TestAllTypesProto3_MapSint64Sint64EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapSint64Sint64Entry = TestAllTypesProto3_MapSint64Sint64Entry
+	messages.TestAllTypesProto3_MapSint64Sint64Entry = _TestAllTypesProto3_MapSint64Sint64EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapSint64Sint64Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapSint64Sint64Entry)
 end
 
-do
-	type TestAllTypesProto3_MapFixed32Fixed32Entry = proto.Message<
-		TestAllTypesProto3_MapFixed32Fixed32Entry,
-		_TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields
-	>
-	local TestAllTypesProto3_MapFixed32Fixed32Entry: TestAllTypesProto3_MapFixed32Fixed32Entry
+type _TestAllTypesProto3_MapFixed32Fixed32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapFixed32Fixed32Entry,
+	_TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {}
 	_TestAllTypesProto3_MapFixed32Fixed32EntryImpl.__index = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 
@@ -7894,7 +7882,7 @@ do
 	function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapFixed32Fixed32Entry
-		local self = TestAllTypesProto3_MapFixed32Fixed32Entry.new()
+		local self = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -7912,19 +7900,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapFixed32Fixed32Entry",
 	}
 
-	TestAllTypesProto3_MapFixed32Fixed32Entry = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapFixed32Fixed32Entry = TestAllTypesProto3_MapFixed32Fixed32Entry
+	messages.TestAllTypesProto3_MapFixed32Fixed32Entry = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapFixed32Fixed32Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapFixed32Fixed32Entry)
 end
 
-do
-	type TestAllTypesProto3_MapFixed64Fixed64Entry = proto.Message<
-		TestAllTypesProto3_MapFixed64Fixed64Entry,
-		_TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields
-	>
-	local TestAllTypesProto3_MapFixed64Fixed64Entry: TestAllTypesProto3_MapFixed64Fixed64Entry
+type _TestAllTypesProto3_MapFixed64Fixed64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapFixed64Fixed64Entry,
+	_TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {}
 	_TestAllTypesProto3_MapFixed64Fixed64EntryImpl.__index = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 
@@ -8027,7 +8013,7 @@ do
 	function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapFixed64Fixed64Entry
-		local self = TestAllTypesProto3_MapFixed64Fixed64Entry.new()
+		local self = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8045,19 +8031,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapFixed64Fixed64Entry",
 	}
 
-	TestAllTypesProto3_MapFixed64Fixed64Entry = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapFixed64Fixed64Entry = TestAllTypesProto3_MapFixed64Fixed64Entry
+	messages.TestAllTypesProto3_MapFixed64Fixed64Entry = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapFixed64Fixed64Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapFixed64Fixed64Entry)
 end
 
-do
-	type TestAllTypesProto3_MapSfixed32Sfixed32Entry = proto.Message<
-		TestAllTypesProto3_MapSfixed32Sfixed32Entry,
-		_TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields
-	>
-	local TestAllTypesProto3_MapSfixed32Sfixed32Entry: TestAllTypesProto3_MapSfixed32Sfixed32Entry
+type _TestAllTypesProto3_MapSfixed32Sfixed32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	_TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {}
 	_TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.__index = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 
@@ -8160,7 +8144,7 @@ do
 	function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapSfixed32Sfixed32Entry
-		local self = TestAllTypesProto3_MapSfixed32Sfixed32Entry.new()
+		local self = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8178,19 +8162,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapSfixed32Sfixed32Entry",
 	}
 
-	TestAllTypesProto3_MapSfixed32Sfixed32Entry = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapSfixed32Sfixed32Entry = TestAllTypesProto3_MapSfixed32Sfixed32Entry
+	messages.TestAllTypesProto3_MapSfixed32Sfixed32Entry = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapSfixed32Sfixed32Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapSfixed32Sfixed32Entry)
 end
 
-do
-	type TestAllTypesProto3_MapSfixed64Sfixed64Entry = proto.Message<
-		TestAllTypesProto3_MapSfixed64Sfixed64Entry,
-		_TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields
-	>
-	local TestAllTypesProto3_MapSfixed64Sfixed64Entry: TestAllTypesProto3_MapSfixed64Sfixed64Entry
+type _TestAllTypesProto3_MapSfixed64Sfixed64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	_TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {}
 	_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.__index = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 
@@ -8293,7 +8275,7 @@ do
 	function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapSfixed64Sfixed64Entry
-		local self = TestAllTypesProto3_MapSfixed64Sfixed64Entry.new()
+		local self = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8311,19 +8293,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapSfixed64Sfixed64Entry",
 	}
 
-	TestAllTypesProto3_MapSfixed64Sfixed64Entry = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapSfixed64Sfixed64Entry = TestAllTypesProto3_MapSfixed64Sfixed64Entry
+	messages.TestAllTypesProto3_MapSfixed64Sfixed64Entry = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapSfixed64Sfixed64Entry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapSfixed64Sfixed64Entry)
 end
 
-do
-	type TestAllTypesProto3_MapInt32FloatEntry = proto.Message<
-		TestAllTypesProto3_MapInt32FloatEntry,
-		_TestAllTypesProto3_MapInt32FloatEntryPartialFields
-	>
-	local TestAllTypesProto3_MapInt32FloatEntry: TestAllTypesProto3_MapInt32FloatEntry
+type _TestAllTypesProto3_MapInt32FloatEntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32FloatEntry,
+	_TestAllTypesProto3_MapInt32FloatEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapInt32FloatEntryImpl = {}
 	_TestAllTypesProto3_MapInt32FloatEntryImpl.__index = _TestAllTypesProto3_MapInt32FloatEntryImpl
 
@@ -8420,7 +8400,7 @@ do
 	function _TestAllTypesProto3_MapInt32FloatEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapInt32FloatEntry
-		local self = TestAllTypesProto3_MapInt32FloatEntry.new()
+		local self = _TestAllTypesProto3_MapInt32FloatEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8438,19 +8418,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapInt32FloatEntry",
 	}
 
-	TestAllTypesProto3_MapInt32FloatEntry = _TestAllTypesProto3_MapInt32FloatEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapInt32FloatEntry = TestAllTypesProto3_MapInt32FloatEntry
+	messages.TestAllTypesProto3_MapInt32FloatEntry = _TestAllTypesProto3_MapInt32FloatEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapInt32FloatEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32FloatEntry)
 end
 
-do
-	type TestAllTypesProto3_MapInt32DoubleEntry = proto.Message<
-		TestAllTypesProto3_MapInt32DoubleEntry,
-		_TestAllTypesProto3_MapInt32DoubleEntryPartialFields
-	>
-	local TestAllTypesProto3_MapInt32DoubleEntry: TestAllTypesProto3_MapInt32DoubleEntry
+type _TestAllTypesProto3_MapInt32DoubleEntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32DoubleEntry,
+	_TestAllTypesProto3_MapInt32DoubleEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapInt32DoubleEntryImpl = {}
 	_TestAllTypesProto3_MapInt32DoubleEntryImpl.__index = _TestAllTypesProto3_MapInt32DoubleEntryImpl
 
@@ -8547,7 +8525,7 @@ do
 	function _TestAllTypesProto3_MapInt32DoubleEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapInt32DoubleEntry
-		local self = TestAllTypesProto3_MapInt32DoubleEntry.new()
+		local self = _TestAllTypesProto3_MapInt32DoubleEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8565,19 +8543,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapInt32DoubleEntry",
 	}
 
-	TestAllTypesProto3_MapInt32DoubleEntry = _TestAllTypesProto3_MapInt32DoubleEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapInt32DoubleEntry = TestAllTypesProto3_MapInt32DoubleEntry
+	messages.TestAllTypesProto3_MapInt32DoubleEntry = _TestAllTypesProto3_MapInt32DoubleEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapInt32DoubleEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32DoubleEntry)
 end
 
-do
-	type TestAllTypesProto3_MapBoolBoolEntry = proto.Message<
-		TestAllTypesProto3_MapBoolBoolEntry,
-		_TestAllTypesProto3_MapBoolBoolEntryPartialFields
-	>
-	local TestAllTypesProto3_MapBoolBoolEntry: TestAllTypesProto3_MapBoolBoolEntry
+type _TestAllTypesProto3_MapBoolBoolEntryMessage = proto.Message<
+	TestAllTypesProto3_MapBoolBoolEntry,
+	_TestAllTypesProto3_MapBoolBoolEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapBoolBoolEntryImpl = {}
 	_TestAllTypesProto3_MapBoolBoolEntryImpl.__index = _TestAllTypesProto3_MapBoolBoolEntryImpl
 
@@ -8674,7 +8650,7 @@ do
 	function _TestAllTypesProto3_MapBoolBoolEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapBoolBoolEntry
-		local self = TestAllTypesProto3_MapBoolBoolEntry.new()
+		local self = _TestAllTypesProto3_MapBoolBoolEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8692,19 +8668,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapBoolBoolEntry",
 	}
 
-	TestAllTypesProto3_MapBoolBoolEntry = _TestAllTypesProto3_MapBoolBoolEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapBoolBoolEntry = TestAllTypesProto3_MapBoolBoolEntry
+	messages.TestAllTypesProto3_MapBoolBoolEntry = _TestAllTypesProto3_MapBoolBoolEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapBoolBoolEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapBoolBoolEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringStringEntry = proto.Message<
-		TestAllTypesProto3_MapStringStringEntry,
-		_TestAllTypesProto3_MapStringStringEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringStringEntry: TestAllTypesProto3_MapStringStringEntry
+type _TestAllTypesProto3_MapStringStringEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringStringEntry,
+	_TestAllTypesProto3_MapStringStringEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringStringEntryImpl = {}
 	_TestAllTypesProto3_MapStringStringEntryImpl.__index = _TestAllTypesProto3_MapStringStringEntryImpl
 
@@ -8801,7 +8775,7 @@ do
 	function _TestAllTypesProto3_MapStringStringEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringStringEntry
-		local self = TestAllTypesProto3_MapStringStringEntry.new()
+		local self = _TestAllTypesProto3_MapStringStringEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8819,19 +8793,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringStringEntry",
 	}
 
-	TestAllTypesProto3_MapStringStringEntry = _TestAllTypesProto3_MapStringStringEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringStringEntry = TestAllTypesProto3_MapStringStringEntry
+	messages.TestAllTypesProto3_MapStringStringEntry = _TestAllTypesProto3_MapStringStringEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringStringEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringStringEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringBytesEntry = proto.Message<
-		TestAllTypesProto3_MapStringBytesEntry,
-		_TestAllTypesProto3_MapStringBytesEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringBytesEntry: TestAllTypesProto3_MapStringBytesEntry
+type _TestAllTypesProto3_MapStringBytesEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringBytesEntry,
+	_TestAllTypesProto3_MapStringBytesEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringBytesEntryImpl = {}
 	_TestAllTypesProto3_MapStringBytesEntryImpl.__index = _TestAllTypesProto3_MapStringBytesEntryImpl
 
@@ -8928,7 +8900,7 @@ do
 	function _TestAllTypesProto3_MapStringBytesEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringBytesEntry
-		local self = TestAllTypesProto3_MapStringBytesEntry.new()
+		local self = _TestAllTypesProto3_MapStringBytesEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -8946,19 +8918,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringBytesEntry",
 	}
 
-	TestAllTypesProto3_MapStringBytesEntry = _TestAllTypesProto3_MapStringBytesEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringBytesEntry = TestAllTypesProto3_MapStringBytesEntry
+	messages.TestAllTypesProto3_MapStringBytesEntry = _TestAllTypesProto3_MapStringBytesEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringBytesEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringBytesEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringNestedMessageEntry = proto.Message<
-		TestAllTypesProto3_MapStringNestedMessageEntry,
-		_TestAllTypesProto3_MapStringNestedMessageEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringNestedMessageEntry: TestAllTypesProto3_MapStringNestedMessageEntry
+type _TestAllTypesProto3_MapStringNestedMessageEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringNestedMessageEntry,
+	_TestAllTypesProto3_MapStringNestedMessageEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {}
 	_TestAllTypesProto3_MapStringNestedMessageEntryImpl.__index = _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 
@@ -9062,7 +9032,7 @@ do
 	function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringNestedMessageEntry
-		local self = TestAllTypesProto3_MapStringNestedMessageEntry.new()
+		local self = _TestAllTypesProto3_MapStringNestedMessageEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -9080,19 +9050,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringNestedMessageEntry",
 	}
 
-	TestAllTypesProto3_MapStringNestedMessageEntry = _TestAllTypesProto3_MapStringNestedMessageEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringNestedMessageEntry = TestAllTypesProto3_MapStringNestedMessageEntry
+	messages.TestAllTypesProto3_MapStringNestedMessageEntry = _TestAllTypesProto3_MapStringNestedMessageEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringNestedMessageEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringNestedMessageEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringForeignMessageEntry = proto.Message<
-		TestAllTypesProto3_MapStringForeignMessageEntry,
-		_TestAllTypesProto3_MapStringForeignMessageEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringForeignMessageEntry: TestAllTypesProto3_MapStringForeignMessageEntry
+type _TestAllTypesProto3_MapStringForeignMessageEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringForeignMessageEntry,
+	_TestAllTypesProto3_MapStringForeignMessageEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {}
 	_TestAllTypesProto3_MapStringForeignMessageEntryImpl.__index = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 
@@ -9196,7 +9164,7 @@ do
 	function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringForeignMessageEntry
-		local self = TestAllTypesProto3_MapStringForeignMessageEntry.new()
+		local self = _TestAllTypesProto3_MapStringForeignMessageEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -9214,19 +9182,18 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringForeignMessageEntry",
 	}
 
-	TestAllTypesProto3_MapStringForeignMessageEntry = _TestAllTypesProto3_MapStringForeignMessageEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringForeignMessageEntry = TestAllTypesProto3_MapStringForeignMessageEntry
+	messages.TestAllTypesProto3_MapStringForeignMessageEntry =
+		_TestAllTypesProto3_MapStringForeignMessageEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringForeignMessageEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringForeignMessageEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringNestedEnumEntry = proto.Message<
-		TestAllTypesProto3_MapStringNestedEnumEntry,
-		_TestAllTypesProto3_MapStringNestedEnumEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringNestedEnumEntry: TestAllTypesProto3_MapStringNestedEnumEntry
+type _TestAllTypesProto3_MapStringNestedEnumEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringNestedEnumEntry,
+	_TestAllTypesProto3_MapStringNestedEnumEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {}
 	_TestAllTypesProto3_MapStringNestedEnumEntryImpl.__index = _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 
@@ -9346,7 +9313,7 @@ do
 	function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringNestedEnumEntry
-		local self = TestAllTypesProto3_MapStringNestedEnumEntry.new()
+		local self = _TestAllTypesProto3_MapStringNestedEnumEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -9366,19 +9333,17 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringNestedEnumEntry",
 	}
 
-	TestAllTypesProto3_MapStringNestedEnumEntry = _TestAllTypesProto3_MapStringNestedEnumEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringNestedEnumEntry = TestAllTypesProto3_MapStringNestedEnumEntry
+	messages.TestAllTypesProto3_MapStringNestedEnumEntry = _TestAllTypesProto3_MapStringNestedEnumEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringNestedEnumEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringNestedEnumEntry)
 end
 
-do
-	type TestAllTypesProto3_MapStringForeignEnumEntry = proto.Message<
-		TestAllTypesProto3_MapStringForeignEnumEntry,
-		_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
-	>
-	local TestAllTypesProto3_MapStringForeignEnumEntry: TestAllTypesProto3_MapStringForeignEnumEntry
+type _TestAllTypesProto3_MapStringForeignEnumEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringForeignEnumEntry,
+	_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
+>
 
+do
 	local _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {}
 	_TestAllTypesProto3_MapStringForeignEnumEntryImpl.__index = _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 
@@ -9491,7 +9456,7 @@ do
 	function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.jsonDecode(
 		input: { [string]: any }
 	): TestAllTypesProto3_MapStringForeignEnumEntry
-		local self = TestAllTypesProto3_MapStringForeignEnumEntry.new()
+		local self = _TestAllTypesProto3_MapStringForeignEnumEntryImpl.new()
 
 		if input.key ~= nil then
 			self.key = input.key
@@ -9511,10 +9476,9 @@ do
 		fullName = "protobuf_test_messages.proto3.MapStringForeignEnumEntry",
 	}
 
-	TestAllTypesProto3_MapStringForeignEnumEntry = _TestAllTypesProto3_MapStringForeignEnumEntryImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.TestAllTypesProto3_MapStringForeignEnumEntry = TestAllTypesProto3_MapStringForeignEnumEntry
+	messages.TestAllTypesProto3_MapStringForeignEnumEntry = _TestAllTypesProto3_MapStringForeignEnumEntryImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(TestAllTypesProto3_MapStringForeignEnumEntry)
+	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringForeignEnumEntry)
 end
 
 messages.TestAllTypesProto3_NestedEnum = {
@@ -9611,10 +9575,9 @@ messages.TestAllTypesProto3_AliasedEnum = {
 	end,
 }
 
-do
-	type ForeignMessage = proto.Message<ForeignMessage, _ForeignMessagePartialFields>
-	local ForeignMessage: ForeignMessage
+type _ForeignMessageMessage = proto.Message<ForeignMessage, _ForeignMessagePartialFields>
 
+do
 	local _ForeignMessageImpl = {}
 	_ForeignMessageImpl.__index = _ForeignMessageImpl
 
@@ -9692,7 +9655,7 @@ do
 	end
 
 	function _ForeignMessageImpl.jsonDecode(input: { [string]: any }): ForeignMessage
-		local self = ForeignMessage.new()
+		local self = _ForeignMessageImpl.new()
 
 		if input.c ~= nil then
 			self.c = input.c
@@ -9706,16 +9669,14 @@ do
 		fullName = "protobuf_test_messages.proto3.ForeignMessage",
 	}
 
-	ForeignMessage = _ForeignMessageImpl :: any -- Luau: Not sure why this intersection fails.
-	messages.ForeignMessage = ForeignMessage
+	messages.ForeignMessage = _ForeignMessageImpl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(ForeignMessage)
+	typeRegistry.default:register(messages.ForeignMessage)
 end
 
-do
-	type NullHypothesisProto3 = proto.Message<NullHypothesisProto3, _NullHypothesisProto3PartialFields>
-	local NullHypothesisProto3: NullHypothesisProto3
+type _NullHypothesisProto3Message = proto.Message<NullHypothesisProto3, _NullHypothesisProto3PartialFields>
 
+do
 	local _NullHypothesisProto3Impl = {}
 	_NullHypothesisProto3Impl.__index = _NullHypothesisProto3Impl
 
@@ -9777,7 +9738,7 @@ do
 	end
 
 	function _NullHypothesisProto3Impl.jsonDecode(input: { [string]: any }): NullHypothesisProto3
-		local self = NullHypothesisProto3.new()
+		local self = _NullHypothesisProto3Impl.new()
 
 		return self
 	end
@@ -9787,16 +9748,14 @@ do
 		fullName = "protobuf_test_messages.proto3.NullHypothesisProto3",
 	}
 
-	NullHypothesisProto3 = _NullHypothesisProto3Impl :: any -- Luau: Not sure why this intersection fails.
-	messages.NullHypothesisProto3 = NullHypothesisProto3
+	messages.NullHypothesisProto3 = _NullHypothesisProto3Impl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(NullHypothesisProto3)
+	typeRegistry.default:register(messages.NullHypothesisProto3)
 end
 
-do
-	type EnumOnlyProto3 = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
-	local EnumOnlyProto3: EnumOnlyProto3
+type _EnumOnlyProto3Message = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
 
+do
 	local _EnumOnlyProto3Impl = {}
 	_EnumOnlyProto3Impl.__index = _EnumOnlyProto3Impl
 
@@ -9858,7 +9817,7 @@ do
 	end
 
 	function _EnumOnlyProto3Impl.jsonDecode(input: { [string]: any }): EnumOnlyProto3
-		local self = EnumOnlyProto3.new()
+		local self = _EnumOnlyProto3Impl.new()
 
 		return self
 	end
@@ -9868,10 +9827,9 @@ do
 		fullName = "protobuf_test_messages.proto3.EnumOnlyProto3",
 	}
 
-	EnumOnlyProto3 = _EnumOnlyProto3Impl :: any -- Luau: Not sure why this intersection fails.
-	messages.EnumOnlyProto3 = EnumOnlyProto3
+	messages.EnumOnlyProto3 = _EnumOnlyProto3Impl :: any -- Luau: Not sure why this intersection fails.
 
-	typeRegistry.default:register(EnumOnlyProto3)
+	typeRegistry.default:register(messages.EnumOnlyProto3)
 end
 
 messages.EnumOnlyProto3_Bool = {

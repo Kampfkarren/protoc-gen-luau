@@ -17,7 +17,7 @@ function _ListValueImpl.jsonDecode(anyValue: any): ListValue
 		table.insert(values, messages.Value.jsonDecode(value))
 	end
 
-	return ListValue.new({
+	return _ListValueImpl.new({
 		values = values,
 	})
 end
