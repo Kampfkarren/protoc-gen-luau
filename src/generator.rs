@@ -258,6 +258,28 @@ fn add_enum_descriptors(
     }
 }
 
+fn create_messages_init(names: &[String]) -> String {
+    let mut builder = StringBuilder::new();
+
+    builder.blank();
+
+    // We need to do this because referencing can happen out of order,
+    // but at runtime it will always be safe.
+    builder.push("local messages: {");
+    builder.indent();
+
+    for name in names {
+        builder.push(format!("{name}: {name},"));
+    }
+
+    builder.dedent();
+    builder.push("} = {} :: any -- Luau: We will fill these in later");
+
+    builder.blank();
+
+    builder.build()
+}
+
 fn create_return(exports: Vec<String>) -> String {
     let mut lines = Vec::new();
     lines.push("return {".to_owned());
@@ -277,7 +299,8 @@ pub fn file_path_export_name(path: &Path) -> String {
 
 const MESSAGE: &str = r#"
 do
-    local <name>: proto.Message<<name>, _<name>PartialFields> <json_intersection>
+    type <name> = proto.Message<<name>, _<name>PartialFields> <json_intersection>
+    local <name>: <name>
 
     local _<name>Impl = {}
     _<name>Impl.__index = _<name>Impl
@@ -419,7 +442,9 @@ struct FileGenerator<'a> {
 
     types: StringBuilder,
     implementations: StringBuilder,
+
     exports: Vec<String>,
+    names_defined_here: Vec<String>,
     errors: Vec<String>,
 
     forbidden_types: &'a HashSet<String>,
@@ -444,6 +469,7 @@ impl<'a> FileGenerator<'a> {
 
             types: StringBuilder::new(),
             implementations: StringBuilder::new(),
+            names_defined_here: Vec::new(),
             exports: Vec::new(),
             errors: Vec::new(),
 
@@ -497,7 +523,8 @@ impl<'a> FileGenerator<'a> {
             self.require_path(&type_registry_require_path)
         ));
 
-        contents.push("\nlocal messages = {{}}");
+        // contents.push("\nlocal messages = {}");
+        let line_to_insert_messages = contents.len();
 
         for import in &self.file_descriptor_proto.dependency {
             if import == DESCRIPTORS_IMPORT {
@@ -562,6 +589,11 @@ impl<'a> FileGenerator<'a> {
         contents.push(self.types.build());
         contents.push(self.implementations.build());
 
+        contents.insert(
+            line_to_insert_messages,
+            create_messages_init(&self.names_defined_here),
+        );
+
         contents.push(create_return(self.exports));
 
         let code = contents.build();
@@ -607,6 +639,8 @@ impl<'a> FileGenerator<'a> {
         {
             self.exports.push(name.clone());
         }
+
+        self.names_defined_here.push(name.clone());
 
         let wkt_json = WktJson::try_create(&self.file_descriptor_proto, message);
         let json_type = match wkt_json.as_ref() {
@@ -905,6 +939,7 @@ impl<'a> FileGenerator<'a> {
         self.types.blank();
 
         self.exports.push(name.clone());
+        self.names_defined_here.push(name.clone());
 
         self.implementations.push(
             ENUM.replace("<name>", &name)
