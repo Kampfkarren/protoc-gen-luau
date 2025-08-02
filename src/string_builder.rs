@@ -27,6 +27,15 @@ impl StringBuilder {
         }
     }
 
+    pub fn insert<T: Display>(&mut self, index: usize, text: T) {
+        let text = text.to_string();
+
+        for (offset, line) in text.split('\n').enumerate() {
+            self.lines
+                .insert(index + offset, format!("{}{line}", "\t".repeat(self.depth)));
+        }
+    }
+
     pub fn append(&mut self, other: &mut Self) {
         for line in &other.lines {
             self.push(line.trim_start_matches('\t'));
@@ -47,6 +56,10 @@ impl StringBuilder {
 
     pub fn dedent(&mut self) {
         self.depth -= 1;
+    }
+
+    pub fn len(&self) -> usize {
+        self.lines.len()
     }
 }
 

@@ -72,7 +72,7 @@ function _TimestampImpl.jsonDecode(anyValue: any): Timestamp
 		sec = assert(tonumber(sec), "Invalid formatted sec"),
 	})
 
-	return Timestamp.new({
+	return _TimestampImpl.new({
 		seconds = totalSeconds,
 		nanos = nanos,
 	})

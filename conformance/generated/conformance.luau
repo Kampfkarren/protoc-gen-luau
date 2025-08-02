@@ -6,6 +6,16 @@
 local proto = require("./proto")
 local typeRegistry = require("./proto/typeRegistry")
 
+local messages: {
+	FailureSet: _FailureSetMessage,
+	ConformanceRequest: _ConformanceRequestMessage,
+	ConformanceResponse: _ConformanceResponseMessage,
+	JspbEncodingConfig: _JspbEncodingConfigMessage,
+	WireFormat: _WireFormatMessage,
+	TestCategory: _TestCategoryMessage,
+} =
+	{} :: any -- Luau: We will fill these in later
+
 type _FailureSetImpl = {
 	__index: _FailureSetImpl,
 	new: (fields: _FailureSetPartialFields?) -> FailureSet,
@@ -25,7 +35,6 @@ type _FailureSetPartialFields = {
 }
 
 export type FailureSet = typeof(setmetatable({} :: _FailureSetFields, {} :: _FailureSetImpl))
-local FailureSet: proto.Message<FailureSet, _FailureSetPartialFields>
 
 type _ConformanceRequestImpl = {
 	__index: _ConformanceRequestImpl,
@@ -66,7 +75,6 @@ type _ConformanceRequestPartialFields = {
 }
 
 export type ConformanceRequest = typeof(setmetatable({} :: _ConformanceRequestFields, {} :: _ConformanceRequestImpl))
-local ConformanceRequest: proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
 
 type _ConformanceResponseImpl = {
 	__index: _ConformanceResponseImpl,
@@ -107,7 +115,6 @@ type _ConformanceResponsePartialFields = {
 }
 
 export type ConformanceResponse = typeof(setmetatable({} :: _ConformanceResponseFields, {} :: _ConformanceResponseImpl))
-local ConformanceResponse: proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
 
 type _JspbEncodingConfigImpl = {
 	__index: _JspbEncodingConfigImpl,
@@ -128,12 +135,13 @@ type _JspbEncodingConfigPartialFields = {
 }
 
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
-local JspbEncodingConfig: proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
 
 local WireFormat: proto.Enum<WireFormat>
+type _WireFormatMessage = WireFormat
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
 
 local TestCategory: proto.Enum<TestCategory>
+type _TestCategoryMessage = TestCategory
 export type TestCategory =
 	"UNSPECIFIED_TEST"
 	| "BINARY_TEST"
@@ -143,768 +151,800 @@ export type TestCategory =
 	| "TEXT_FORMAT_TEST"
 	| number -- Unknown
 
-local _FailureSetImpl = {}
-_FailureSetImpl.__index = _FailureSetImpl
+type _FailureSetMessage = proto.Message<FailureSet, _FailureSetPartialFields>
 
-function _FailureSetImpl.new(data: _FailureSetPartialFields?): FailureSet
-	return setmetatable({
-		failure = if data == nil or data.failure == nil then {} else data.failure,
-	}, _FailureSetImpl)
-end
+do
+	local _FailureSetImpl = {}
+	_FailureSetImpl.__index = _FailureSetImpl
 
-function _FailureSetImpl.encode(self: FailureSet): buffer
-	local output = buffer.create(0)
-	local cursor = 0
+	function _FailureSetImpl.new(data: _FailureSetPartialFields?): FailureSet
+		return setmetatable({
+			failure = if data == nil or data.failure == nil then {} else data.failure,
 
-	if self.failure ~= nil and #self.failure > 0 then
-		for _, value in self.failure do
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, value)
-		end
+			decode = _FailureSetImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+		}, _FailureSetImpl)
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
+	function _FailureSetImpl.encode(self: FailureSet): buffer
+		local output = buffer.create(0)
+		local cursor = 0
 
-function _FailureSetImpl.decode(input: buffer): FailureSet
-	local self = _FailureSetImpl.new()
-	local cursor = 0
+		if self.failure ~= nil and #self.failure > 0 then
+			for _, value in self.failure do
+				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, value)
+			end
+		end
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
 
-		if wireType == proto.wireTypes.varint then
-			-- No fields
+	function _FailureSetImpl.decode(input: buffer): FailureSet
+		local self = _FailureSetImpl.new()
+		local cursor = 0
 
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				table.insert(self.failure, buffer.tostring(value))
-				continue
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					table.insert(self.failure, buffer.tostring(value))
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
+	end
+
+	function _FailureSetImpl.jsonEncode(self: FailureSet): any
+		local output = {}
+
+		if self.failure ~= nil and #self.failure > 0 then
+			local newOutput = {}
+			for _, value in self.failure do
+				table.insert(newOutput, value)
+			end
+			output.failure = newOutput
+		end
+
+		return output
+	end
+
+	function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
+		local self = _FailureSetImpl.new()
+
+		if input.failure ~= nil then
+			local newOutput: { string } = {}
+			for _, value in input.failure do
+				table.insert(newOutput, value)
 			end
 
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
-		end
-	end
-
-	return self
-end
-
-function _FailureSetImpl.jsonEncode(self: FailureSet): any
-	local output = {}
-
-	if self.failure ~= nil and #self.failure > 0 then
-		local newOutput = {}
-		for _, value in self.failure do
-			table.insert(newOutput, value)
-		end
-		output.failure = newOutput
-	end
-
-	return output
-end
-
-function _FailureSetImpl.jsonDecode(input: { [string]: any }): FailureSet
-	local self = FailureSet.new()
-
-	if input.failure ~= nil then
-		local newOutput: { string } = {}
-		for _, value in input.failure do
-			table.insert(newOutput, value)
+			self.failure = newOutput
 		end
 
-		self.failure = newOutput
+		return self
 	end
 
-	return self
+	_FailureSetImpl.descriptor = {
+		name = "FailureSet",
+		fullName = "conformance.FailureSet",
+	}
+
+	messages.FailureSet = _FailureSetImpl :: any -- Luau: Not sure why this intersection fails.
+
+	typeRegistry.default:register(messages.FailureSet)
 end
 
-_FailureSetImpl.descriptor = {
-	name = "FailureSet",
-	fullName = "conformance.FailureSet",
-}
+type _ConformanceRequestMessage = proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
 
-FailureSet = _FailureSetImpl :: any -- Luau: Not sure why this intersection fails.
+do
+	local _ConformanceRequestImpl = {}
+	_ConformanceRequestImpl.__index = _ConformanceRequestImpl
 
-typeRegistry.default:register(FailureSet)
+	function _ConformanceRequestImpl.new(data: _ConformanceRequestPartialFields?): ConformanceRequest
+		return setmetatable({
+			payload = if data == nil or data.payload == nil then nil else data.payload,
+			requested_output_format = if data == nil or data.requested_output_format == nil
+				then assert(messages.WireFormat.fromNumber(0), "Enum has no 0 default")
+				else data.requested_output_format,
+			message_type = if data == nil or data.message_type == nil then "" else data.message_type,
+			test_category = if data == nil or data.test_category == nil
+				then assert(messages.TestCategory.fromNumber(0), "Enum has no 0 default")
+				else data.test_category,
+			jspb_encoding_options = if data == nil or data.jspb_encoding_options == nil
+				then nil
+				else data.jspb_encoding_options,
+			print_unknown_fields = if data == nil or data.print_unknown_fields == nil
+				then false
+				else data.print_unknown_fields,
 
-local _ConformanceRequestImpl = {}
-_ConformanceRequestImpl.__index = _ConformanceRequestImpl
-
-function _ConformanceRequestImpl.new(data: _ConformanceRequestPartialFields?): ConformanceRequest
-	return setmetatable({
-		payload = if data == nil or data.payload == nil then nil else data.payload,
-		requested_output_format = if data == nil or data.requested_output_format == nil
-			then assert(WireFormat.fromNumber(0), "Enum has no 0 default")
-			else data.requested_output_format,
-		message_type = if data == nil or data.message_type == nil then "" else data.message_type,
-		test_category = if data == nil or data.test_category == nil
-			then assert(TestCategory.fromNumber(0), "Enum has no 0 default")
-			else data.test_category,
-		jspb_encoding_options = if data == nil or data.jspb_encoding_options == nil
-			then nil
-			else data.jspb_encoding_options,
-		print_unknown_fields = if data == nil or data.print_unknown_fields == nil
-			then false
-			else data.print_unknown_fields,
-	}, _ConformanceRequestImpl)
-end
-
-function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.payload ~= nil then
-		if self.payload.type == "protobuf_payload" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, self.payload.value, buffer.len(self.payload.value))
-		elseif self.payload.type == "json_payload" then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.payload.value)
-		elseif self.payload.type == "jspb_payload" then
-			output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.payload.value)
-		elseif self.payload.type == "text_payload" then
-			output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.payload.value)
-		end
+			decode = _ConformanceRequestImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+		}, _ConformanceRequestImpl)
 	end
 
-	if
-		self.requested_output_format ~= nil
-		and (
-			self.requested_output_format ~= nil and self.requested_output_format ~= 0
-			or self.requested_output_format ~= WireFormat.fromNumber(0)
-		)
-	then
-		output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, WireFormat.toNumber(self.requested_output_format :: any))
-	end
+	function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
+		local output = buffer.create(0)
+		local cursor = 0
 
-	if self.message_type ~= nil and self.message_type ~= "" then
-		output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeString(output, cursor, self.message_type)
-	end
-
-	if
-		self.test_category ~= nil
-		and (self.test_category ~= nil and self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0))
-	then
-		output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, TestCategory.toNumber(self.test_category :: any))
-	end
-
-	if self.jspb_encoding_options ~= nil then
-		local encoded = self.jspb_encoding_options:encode()
-		output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
-	end
-
-	if self.print_unknown_fields then
-		output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, if self.print_unknown_fields then 1 else 0)
-	end
-
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
-
-function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
-	local self = _ConformanceRequestImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			if field == 3 then
-				local value
-				value, cursor = proto.readVarIntI32(input, cursor)
-				self.requested_output_format = (WireFormat.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
-				continue
-			elseif field == 5 then
-				local value
-				value, cursor = proto.readVarIntI32(input, cursor)
-				self.test_category = (TestCategory.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
-				continue
-			elseif field == 9 then
-				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.print_unknown_fields = value ~= 0
-				continue
+		if self.payload ~= nil then
+			if self.payload.type == "protobuf_payload" then
+				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeBuffer(output, cursor, self.payload.value, buffer.len(self.payload.value))
+			elseif self.payload.type == "json_payload" then
+				output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.payload.value)
+			elseif self.payload.type == "jspb_payload" then
+				output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.payload.value)
+			elseif self.payload.type == "text_payload" then
+				output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.payload.value)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.payload = { type = "protobuf_payload", value = value }
-				continue
-			elseif field == 2 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.payload = { type = "json_payload", value = buffer.tostring(value) }
-				continue
-			elseif field == 4 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.message_type = buffer.tostring(value)
-				continue
-			elseif field == 6 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.jspb_encoding_options = JspbEncodingConfig.decode(value)
-				continue
-			elseif field == 7 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.payload = { type = "jspb_payload", value = buffer.tostring(value) }
-				continue
-			elseif field == 8 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.payload = { type = "text_payload", value = buffer.tostring(value) }
-				continue
-			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
-	end
 
-	return self
-end
-
-function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
-	local output = {}
-
-	if self.payload ~= nil then
-		if self.payload.type == "protobuf_payload" then
-			output.protobufPayload = proto.json.serializeBuffer(self.payload.value)
-		elseif self.payload.type == "json_payload" then
-			output.jsonPayload = self.payload.value
-		elseif self.payload.type == "jspb_payload" then
-			output.jspbPayload = self.payload.value
-		elseif self.payload.type == "text_payload" then
-			output.textPayload = self.payload.value
+		if
+			self.requested_output_format ~= nil
+			and (
+				self.requested_output_format ~= nil and self.requested_output_format ~= 0
+				or self.requested_output_format ~= messages.WireFormat.fromNumber(0)
+			)
+		then
+			output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.varint)
+			output, cursor =
+				proto.writeVarInt(output, cursor, messages.WireFormat.toNumber(self.requested_output_format :: any))
 		end
-	end
 
-	if
-		self.requested_output_format ~= nil
-		and (
-			self.requested_output_format ~= nil and self.requested_output_format ~= 0
-			or self.requested_output_format ~= WireFormat.fromNumber(0)
-		)
-	then
-		output.requestedOutputFormat = if typeof(self.requested_output_format) == "number"
-			then self.requested_output_format
-			else WireFormat.toNumber(self.requested_output_format :: any)
-	end
-
-	if self.message_type ~= nil and self.message_type ~= "" then
-		output.messageType = self.message_type
-	end
-
-	if
-		self.test_category ~= nil
-		and (self.test_category ~= nil and self.test_category ~= 0 or self.test_category ~= TestCategory.fromNumber(0))
-	then
-		output.testCategory = if typeof(self.test_category) == "number"
-			then self.test_category
-			else TestCategory.toNumber(self.test_category :: any)
-	end
-
-	if self.jspb_encoding_options ~= nil then
-		output.jspbEncodingOptions = self.jspb_encoding_options:jsonEncode()
-	end
-
-	if self.print_unknown_fields then
-		output.printUnknownFields = self.print_unknown_fields
-	end
-
-	return output
-end
-
-function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): ConformanceRequest
-	local self = ConformanceRequest.new()
-
-	if input.protobuf_payload ~= nil then
-		self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
-	end
-
-	if input.protobufPayload ~= nil then
-		self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
-	end
-
-	if input.json_payload ~= nil then
-		self.payload = { type = "json_payload", value = input.json_payload }
-	end
-
-	if input.jsonPayload ~= nil then
-		self.payload = { type = "json_payload", value = input.jsonPayload }
-	end
-
-	if input.jspb_payload ~= nil then
-		self.payload = { type = "jspb_payload", value = input.jspb_payload }
-	end
-
-	if input.jspbPayload ~= nil then
-		self.payload = { type = "jspb_payload", value = input.jspbPayload }
-	end
-
-	if input.text_payload ~= nil then
-		self.payload = { type = "text_payload", value = input.text_payload }
-	end
-
-	if input.textPayload ~= nil then
-		self.payload = { type = "text_payload", value = input.textPayload }
-	end
-
-	if input.requested_output_format ~= nil then
-		self.requested_output_format = if typeof(input.requested_output_format) == "number"
-			then (WireFormat.fromNumber(input.requested_output_format) or input.requested_output_format)
-			else (WireFormat.fromName(input.requested_output_format) or input.requested_output_format)
-	end
-
-	if input.requestedOutputFormat ~= nil then
-		self.requested_output_format = if typeof(input.requestedOutputFormat) == "number"
-			then (WireFormat.fromNumber(input.requestedOutputFormat) or input.requestedOutputFormat)
-			else (WireFormat.fromName(input.requestedOutputFormat) or input.requestedOutputFormat)
-	end
-
-	if input.message_type ~= nil then
-		self.message_type = input.message_type
-	end
-
-	if input.messageType ~= nil then
-		self.message_type = input.messageType
-	end
-
-	if input.test_category ~= nil then
-		self.test_category = if typeof(input.test_category) == "number"
-			then (TestCategory.fromNumber(input.test_category) or input.test_category)
-			else (TestCategory.fromName(input.test_category) or input.test_category)
-	end
-
-	if input.testCategory ~= nil then
-		self.test_category = if typeof(input.testCategory) == "number"
-			then (TestCategory.fromNumber(input.testCategory) or input.testCategory)
-			else (TestCategory.fromName(input.testCategory) or input.testCategory)
-	end
-
-	if input.jspb_encoding_options ~= nil then
-		self.jspb_encoding_options = JspbEncodingConfig.jsonDecode(input.jspb_encoding_options)
-	end
-
-	if input.jspbEncodingOptions ~= nil then
-		self.jspb_encoding_options = JspbEncodingConfig.jsonDecode(input.jspbEncodingOptions)
-	end
-
-	if input.print_unknown_fields ~= nil then
-		self.print_unknown_fields = input.print_unknown_fields
-	end
-
-	if input.printUnknownFields ~= nil then
-		self.print_unknown_fields = input.printUnknownFields
-	end
-
-	return self
-end
-
-_ConformanceRequestImpl.descriptor = {
-	name = "ConformanceRequest",
-	fullName = "conformance.ConformanceRequest",
-}
-
-ConformanceRequest = _ConformanceRequestImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(ConformanceRequest)
-
-local _ConformanceResponseImpl = {}
-_ConformanceResponseImpl.__index = _ConformanceResponseImpl
-
-function _ConformanceResponseImpl.new(data: _ConformanceResponsePartialFields?): ConformanceResponse
-	return setmetatable({
-		result = if data == nil or data.result == nil then nil else data.result,
-	}, _ConformanceResponseImpl)
-end
-
-function _ConformanceResponseImpl.encode(self: ConformanceResponse): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.result ~= nil then
-		if self.result.type == "parse_error" then
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "serialize_error" then
-			output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "timeout_error" then
-			output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "runtime_error" then
-			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "protobuf_payload" then
-			output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeBuffer(output, cursor, self.result.value, buffer.len(self.result.value))
-		elseif self.result.type == "json_payload" then
+		if self.message_type ~= nil and self.message_type ~= "" then
 			output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "skipped" then
-			output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "jspb_payload" then
-			output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
-		elseif self.result.type == "text_payload" then
-			output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, self.result.value)
+			output, cursor = proto.writeString(output, cursor, self.message_type)
 		end
+
+		if
+			self.test_category ~= nil
+			and (
+				self.test_category ~= nil and self.test_category ~= 0
+				or self.test_category ~= messages.TestCategory.fromNumber(0)
+			)
+		then
+			output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.varint)
+			output, cursor =
+				proto.writeVarInt(output, cursor, messages.TestCategory.toNumber(self.test_category :: any))
+		end
+
+		if self.jspb_encoding_options ~= nil then
+			local encoded = self.jspb_encoding_options:encode()
+			output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, encoded, buffer.len(encoded))
+		end
+
+		if self.print_unknown_fields then
+			output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if self.print_unknown_fields then 1 else 0)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
+	function _ConformanceRequestImpl.decode(input: buffer): ConformanceRequest
+		local self = _ConformanceRequestImpl.new()
+		local cursor = 0
 
-function _ConformanceResponseImpl.decode(input: buffer): ConformanceResponse
-	local self = _ConformanceResponseImpl.new()
-	local cursor = 0
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+			if wireType == proto.wireTypes.varint then
+				if field == 3 then
+					local value
+					value, cursor = proto.readVarIntI32(input, cursor)
+					self.requested_output_format = (messages.WireFormat.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+					continue
+				elseif field == 5 then
+					local value
+					value, cursor = proto.readVarIntI32(input, cursor)
+					self.test_category = (messages.TestCategory.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]
+					continue
+				elseif field == 9 then
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					self.print_unknown_fields = value ~= 0
+					continue
+				end
 
-		if wireType == proto.wireTypes.varint then
-			-- No fields
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.payload = { type = "protobuf_payload", value = value }
+					continue
+				elseif field == 2 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.payload = { type = "json_payload", value = buffer.tostring(value) }
+					continue
+				elseif field == 4 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.message_type = buffer.tostring(value)
+					continue
+				elseif field == 6 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.jspb_encoding_options = messages.JspbEncodingConfig.decode(value)
+					continue
+				elseif field == 7 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.payload = { type = "jspb_payload", value = buffer.tostring(value) }
+					continue
+				elseif field == 8 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.payload = { type = "text_payload", value = buffer.tostring(value) }
+					continue
+				end
 
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "parse_error", value = buffer.tostring(value) }
-				continue
-			elseif field == 2 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "runtime_error", value = buffer.tostring(value) }
-				continue
-			elseif field == 3 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "protobuf_payload", value = value }
-				continue
-			elseif field == 4 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "json_payload", value = buffer.tostring(value) }
-				continue
-			elseif field == 5 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "skipped", value = buffer.tostring(value) }
-				continue
-			elseif field == 6 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "serialize_error", value = buffer.tostring(value) }
-				continue
-			elseif field == 7 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "jspb_payload", value = buffer.tostring(value) }
-				continue
-			elseif field == 8 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "text_payload", value = buffer.tostring(value) }
-				continue
-			elseif field == 9 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.result = { type = "timeout_error", value = buffer.tostring(value) }
-				continue
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
+	function _ConformanceRequestImpl.jsonEncode(self: ConformanceRequest): any
+		local output = {}
 
-function _ConformanceResponseImpl.jsonEncode(self: ConformanceResponse): any
-	local output = {}
-
-	if self.result ~= nil then
-		if self.result.type == "parse_error" then
-			output.parseError = self.result.value
-		elseif self.result.type == "serialize_error" then
-			output.serializeError = self.result.value
-		elseif self.result.type == "timeout_error" then
-			output.timeoutError = self.result.value
-		elseif self.result.type == "runtime_error" then
-			output.runtimeError = self.result.value
-		elseif self.result.type == "protobuf_payload" then
-			output.protobufPayload = proto.json.serializeBuffer(self.result.value)
-		elseif self.result.type == "json_payload" then
-			output.jsonPayload = self.result.value
-		elseif self.result.type == "skipped" then
-			output.skipped = self.result.value
-		elseif self.result.type == "jspb_payload" then
-			output.jspbPayload = self.result.value
-		elseif self.result.type == "text_payload" then
-			output.textPayload = self.result.value
-		end
-	end
-
-	return output
-end
-
-function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): ConformanceResponse
-	local self = ConformanceResponse.new()
-
-	if input.parse_error ~= nil then
-		self.result = { type = "parse_error", value = input.parse_error }
-	end
-
-	if input.parseError ~= nil then
-		self.result = { type = "parse_error", value = input.parseError }
-	end
-
-	if input.serialize_error ~= nil then
-		self.result = { type = "serialize_error", value = input.serialize_error }
-	end
-
-	if input.serializeError ~= nil then
-		self.result = { type = "serialize_error", value = input.serializeError }
-	end
-
-	if input.timeout_error ~= nil then
-		self.result = { type = "timeout_error", value = input.timeout_error }
-	end
-
-	if input.timeoutError ~= nil then
-		self.result = { type = "timeout_error", value = input.timeoutError }
-	end
-
-	if input.runtime_error ~= nil then
-		self.result = { type = "runtime_error", value = input.runtime_error }
-	end
-
-	if input.runtimeError ~= nil then
-		self.result = { type = "runtime_error", value = input.runtimeError }
-	end
-
-	if input.protobuf_payload ~= nil then
-		self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
-	end
-
-	if input.protobufPayload ~= nil then
-		self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
-	end
-
-	if input.json_payload ~= nil then
-		self.result = { type = "json_payload", value = input.json_payload }
-	end
-
-	if input.jsonPayload ~= nil then
-		self.result = { type = "json_payload", value = input.jsonPayload }
-	end
-
-	if input.skipped ~= nil then
-		self.result = { type = "skipped", value = input.skipped }
-	end
-
-	if input.jspb_payload ~= nil then
-		self.result = { type = "jspb_payload", value = input.jspb_payload }
-	end
-
-	if input.jspbPayload ~= nil then
-		self.result = { type = "jspb_payload", value = input.jspbPayload }
-	end
-
-	if input.text_payload ~= nil then
-		self.result = { type = "text_payload", value = input.text_payload }
-	end
-
-	if input.textPayload ~= nil then
-		self.result = { type = "text_payload", value = input.textPayload }
-	end
-
-	return self
-end
-
-_ConformanceResponseImpl.descriptor = {
-	name = "ConformanceResponse",
-	fullName = "conformance.ConformanceResponse",
-}
-
-ConformanceResponse = _ConformanceResponseImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(ConformanceResponse)
-
-local _JspbEncodingConfigImpl = {}
-_JspbEncodingConfigImpl.__index = _JspbEncodingConfigImpl
-
-function _JspbEncodingConfigImpl.new(data: _JspbEncodingConfigPartialFields?): JspbEncodingConfig
-	return setmetatable({
-		use_jspb_array_any_format = if data == nil or data.use_jspb_array_any_format == nil
-			then false
-			else data.use_jspb_array_any_format,
-	}, _JspbEncodingConfigImpl)
-end
-
-function _JspbEncodingConfigImpl.encode(self: JspbEncodingConfig): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.use_jspb_array_any_format then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, if self.use_jspb_array_any_format then 1 else 0)
-	end
-
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
-
-function _JspbEncodingConfigImpl.decode(input: buffer): JspbEncodingConfig
-	local self = _JspbEncodingConfigImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.use_jspb_array_any_format = value ~= 0
-				continue
+		if self.payload ~= nil then
+			if self.payload.type == "protobuf_payload" then
+				output.protobufPayload = proto.json.serializeBuffer(self.payload.value)
+			elseif self.payload.type == "json_payload" then
+				output.jsonPayload = self.payload.value
+			elseif self.payload.type == "jspb_payload" then
+				output.jspbPayload = self.payload.value
+			elseif self.payload.type == "text_payload" then
+				output.textPayload = self.payload.value
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		if
+			self.requested_output_format ~= nil
+			and (
+				self.requested_output_format ~= nil and self.requested_output_format ~= 0
+				or self.requested_output_format ~= messages.WireFormat.fromNumber(0)
+			)
+		then
+			output.requestedOutputFormat = if typeof(self.requested_output_format) == "number"
+				then self.requested_output_format
+				else messages.WireFormat.toNumber(self.requested_output_format :: any)
+		end
+
+		if self.message_type ~= nil and self.message_type ~= "" then
+			output.messageType = self.message_type
+		end
+
+		if
+			self.test_category ~= nil
+			and (
+				self.test_category ~= nil and self.test_category ~= 0
+				or self.test_category ~= messages.TestCategory.fromNumber(0)
+			)
+		then
+			output.testCategory = if typeof(self.test_category) == "number"
+				then self.test_category
+				else messages.TestCategory.toNumber(self.test_category :: any)
+		end
+
+		if self.jspb_encoding_options ~= nil then
+			output.jspbEncodingOptions = self.jspb_encoding_options:jsonEncode()
+		end
+
+		if self.print_unknown_fields then
+			output.printUnknownFields = self.print_unknown_fields
+		end
+
+		return output
 	end
 
-	return self
+	function _ConformanceRequestImpl.jsonDecode(input: { [string]: any }): ConformanceRequest
+		local self = _ConformanceRequestImpl.new()
+
+		if input.protobuf_payload ~= nil then
+			self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
+		end
+
+		if input.protobufPayload ~= nil then
+			self.payload = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
+		end
+
+		if input.json_payload ~= nil then
+			self.payload = { type = "json_payload", value = input.json_payload }
+		end
+
+		if input.jsonPayload ~= nil then
+			self.payload = { type = "json_payload", value = input.jsonPayload }
+		end
+
+		if input.jspb_payload ~= nil then
+			self.payload = { type = "jspb_payload", value = input.jspb_payload }
+		end
+
+		if input.jspbPayload ~= nil then
+			self.payload = { type = "jspb_payload", value = input.jspbPayload }
+		end
+
+		if input.text_payload ~= nil then
+			self.payload = { type = "text_payload", value = input.text_payload }
+		end
+
+		if input.textPayload ~= nil then
+			self.payload = { type = "text_payload", value = input.textPayload }
+		end
+
+		if input.requested_output_format ~= nil then
+			self.requested_output_format = if typeof(input.requested_output_format) == "number"
+				then (messages.WireFormat.fromNumber(input.requested_output_format) or input.requested_output_format)
+				else (messages.WireFormat.fromName(input.requested_output_format) or input.requested_output_format)
+		end
+
+		if input.requestedOutputFormat ~= nil then
+			self.requested_output_format = if typeof(input.requestedOutputFormat) == "number"
+				then (messages.WireFormat.fromNumber(input.requestedOutputFormat) or input.requestedOutputFormat)
+				else (messages.WireFormat.fromName(input.requestedOutputFormat) or input.requestedOutputFormat)
+		end
+
+		if input.message_type ~= nil then
+			self.message_type = input.message_type
+		end
+
+		if input.messageType ~= nil then
+			self.message_type = input.messageType
+		end
+
+		if input.test_category ~= nil then
+			self.test_category = if typeof(input.test_category) == "number"
+				then (messages.TestCategory.fromNumber(input.test_category) or input.test_category)
+				else (messages.TestCategory.fromName(input.test_category) or input.test_category)
+		end
+
+		if input.testCategory ~= nil then
+			self.test_category = if typeof(input.testCategory) == "number"
+				then (messages.TestCategory.fromNumber(input.testCategory) or input.testCategory)
+				else (messages.TestCategory.fromName(input.testCategory) or input.testCategory)
+		end
+
+		if input.jspb_encoding_options ~= nil then
+			self.jspb_encoding_options = messages.JspbEncodingConfig.jsonDecode(input.jspb_encoding_options)
+		end
+
+		if input.jspbEncodingOptions ~= nil then
+			self.jspb_encoding_options = messages.JspbEncodingConfig.jsonDecode(input.jspbEncodingOptions)
+		end
+
+		if input.print_unknown_fields ~= nil then
+			self.print_unknown_fields = input.print_unknown_fields
+		end
+
+		if input.printUnknownFields ~= nil then
+			self.print_unknown_fields = input.printUnknownFields
+		end
+
+		return self
+	end
+
+	_ConformanceRequestImpl.descriptor = {
+		name = "ConformanceRequest",
+		fullName = "conformance.ConformanceRequest",
+	}
+
+	messages.ConformanceRequest = _ConformanceRequestImpl :: any -- Luau: Not sure why this intersection fails.
+
+	typeRegistry.default:register(messages.ConformanceRequest)
 end
 
-function _JspbEncodingConfigImpl.jsonEncode(self: JspbEncodingConfig): any
-	local output = {}
+type _ConformanceResponseMessage = proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
 
-	if self.use_jspb_array_any_format then
-		output.useJspbArrayAnyFormat = self.use_jspb_array_any_format
+do
+	local _ConformanceResponseImpl = {}
+	_ConformanceResponseImpl.__index = _ConformanceResponseImpl
+
+	function _ConformanceResponseImpl.new(data: _ConformanceResponsePartialFields?): ConformanceResponse
+		return setmetatable({
+			result = if data == nil or data.result == nil then nil else data.result,
+
+			decode = _ConformanceResponseImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+		}, _ConformanceResponseImpl)
 	end
 
-	return output
+	function _ConformanceResponseImpl.encode(self: ConformanceResponse): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.result ~= nil then
+			if self.result.type == "parse_error" then
+				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "serialize_error" then
+				output, cursor = proto.writeTag(output, cursor, 6, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "timeout_error" then
+				output, cursor = proto.writeTag(output, cursor, 9, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "runtime_error" then
+				output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "protobuf_payload" then
+				output, cursor = proto.writeTag(output, cursor, 3, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeBuffer(output, cursor, self.result.value, buffer.len(self.result.value))
+			elseif self.result.type == "json_payload" then
+				output, cursor = proto.writeTag(output, cursor, 4, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "skipped" then
+				output, cursor = proto.writeTag(output, cursor, 5, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "jspb_payload" then
+				output, cursor = proto.writeTag(output, cursor, 7, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			elseif self.result.type == "text_payload" then
+				output, cursor = proto.writeTag(output, cursor, 8, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, self.result.value)
+			end
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _ConformanceResponseImpl.decode(input: buffer): ConformanceResponse
+		local self = _ConformanceResponseImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "parse_error", value = buffer.tostring(value) }
+					continue
+				elseif field == 2 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "runtime_error", value = buffer.tostring(value) }
+					continue
+				elseif field == 3 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "protobuf_payload", value = value }
+					continue
+				elseif field == 4 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "json_payload", value = buffer.tostring(value) }
+					continue
+				elseif field == 5 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "skipped", value = buffer.tostring(value) }
+					continue
+				elseif field == 6 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "serialize_error", value = buffer.tostring(value) }
+					continue
+				elseif field == 7 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "jspb_payload", value = buffer.tostring(value) }
+					continue
+				elseif field == 8 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "text_payload", value = buffer.tostring(value) }
+					continue
+				elseif field == 9 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.result = { type = "timeout_error", value = buffer.tostring(value) }
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
+	end
+
+	function _ConformanceResponseImpl.jsonEncode(self: ConformanceResponse): any
+		local output = {}
+
+		if self.result ~= nil then
+			if self.result.type == "parse_error" then
+				output.parseError = self.result.value
+			elseif self.result.type == "serialize_error" then
+				output.serializeError = self.result.value
+			elseif self.result.type == "timeout_error" then
+				output.timeoutError = self.result.value
+			elseif self.result.type == "runtime_error" then
+				output.runtimeError = self.result.value
+			elseif self.result.type == "protobuf_payload" then
+				output.protobufPayload = proto.json.serializeBuffer(self.result.value)
+			elseif self.result.type == "json_payload" then
+				output.jsonPayload = self.result.value
+			elseif self.result.type == "skipped" then
+				output.skipped = self.result.value
+			elseif self.result.type == "jspb_payload" then
+				output.jspbPayload = self.result.value
+			elseif self.result.type == "text_payload" then
+				output.textPayload = self.result.value
+			end
+		end
+
+		return output
+	end
+
+	function _ConformanceResponseImpl.jsonDecode(input: { [string]: any }): ConformanceResponse
+		local self = _ConformanceResponseImpl.new()
+
+		if input.parse_error ~= nil then
+			self.result = { type = "parse_error", value = input.parse_error }
+		end
+
+		if input.parseError ~= nil then
+			self.result = { type = "parse_error", value = input.parseError }
+		end
+
+		if input.serialize_error ~= nil then
+			self.result = { type = "serialize_error", value = input.serialize_error }
+		end
+
+		if input.serializeError ~= nil then
+			self.result = { type = "serialize_error", value = input.serializeError }
+		end
+
+		if input.timeout_error ~= nil then
+			self.result = { type = "timeout_error", value = input.timeout_error }
+		end
+
+		if input.timeoutError ~= nil then
+			self.result = { type = "timeout_error", value = input.timeoutError }
+		end
+
+		if input.runtime_error ~= nil then
+			self.result = { type = "runtime_error", value = input.runtime_error }
+		end
+
+		if input.runtimeError ~= nil then
+			self.result = { type = "runtime_error", value = input.runtimeError }
+		end
+
+		if input.protobuf_payload ~= nil then
+			self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobuf_payload) }
+		end
+
+		if input.protobufPayload ~= nil then
+			self.result = { type = "protobuf_payload", value = proto.json.deserializeBuffer(input.protobufPayload) }
+		end
+
+		if input.json_payload ~= nil then
+			self.result = { type = "json_payload", value = input.json_payload }
+		end
+
+		if input.jsonPayload ~= nil then
+			self.result = { type = "json_payload", value = input.jsonPayload }
+		end
+
+		if input.skipped ~= nil then
+			self.result = { type = "skipped", value = input.skipped }
+		end
+
+		if input.jspb_payload ~= nil then
+			self.result = { type = "jspb_payload", value = input.jspb_payload }
+		end
+
+		if input.jspbPayload ~= nil then
+			self.result = { type = "jspb_payload", value = input.jspbPayload }
+		end
+
+		if input.text_payload ~= nil then
+			self.result = { type = "text_payload", value = input.text_payload }
+		end
+
+		if input.textPayload ~= nil then
+			self.result = { type = "text_payload", value = input.textPayload }
+		end
+
+		return self
+	end
+
+	_ConformanceResponseImpl.descriptor = {
+		name = "ConformanceResponse",
+		fullName = "conformance.ConformanceResponse",
+	}
+
+	messages.ConformanceResponse = _ConformanceResponseImpl :: any -- Luau: Not sure why this intersection fails.
+
+	typeRegistry.default:register(messages.ConformanceResponse)
 end
 
-function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncodingConfig
-	local self = JspbEncodingConfig.new()
+type _JspbEncodingConfigMessage = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
 
-	if input.use_jspb_array_any_format ~= nil then
-		self.use_jspb_array_any_format = input.use_jspb_array_any_format
+do
+	local _JspbEncodingConfigImpl = {}
+	_JspbEncodingConfigImpl.__index = _JspbEncodingConfigImpl
+
+	function _JspbEncodingConfigImpl.new(data: _JspbEncodingConfigPartialFields?): JspbEncodingConfig
+		return setmetatable({
+			use_jspb_array_any_format = if data == nil or data.use_jspb_array_any_format == nil
+				then false
+				else data.use_jspb_array_any_format,
+
+			decode = _JspbEncodingConfigImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+		}, _JspbEncodingConfigImpl)
 	end
 
-	if input.useJspbArrayAnyFormat ~= nil then
-		self.use_jspb_array_any_format = input.useJspbArrayAnyFormat
+	function _JspbEncodingConfigImpl.encode(self: JspbEncodingConfig): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.use_jspb_array_any_format then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if self.use_jspb_array_any_format then 1 else 0)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
 	end
 
-	return self
+	function _JspbEncodingConfigImpl.decode(input: buffer): JspbEncodingConfig
+		local self = _JspbEncodingConfigImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					self.use_jspb_array_any_format = value ~= 0
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
+	end
+
+	function _JspbEncodingConfigImpl.jsonEncode(self: JspbEncodingConfig): any
+		local output = {}
+
+		if self.use_jspb_array_any_format then
+			output.useJspbArrayAnyFormat = self.use_jspb_array_any_format
+		end
+
+		return output
+	end
+
+	function _JspbEncodingConfigImpl.jsonDecode(input: { [string]: any }): JspbEncodingConfig
+		local self = _JspbEncodingConfigImpl.new()
+
+		if input.use_jspb_array_any_format ~= nil then
+			self.use_jspb_array_any_format = input.use_jspb_array_any_format
+		end
+
+		if input.useJspbArrayAnyFormat ~= nil then
+			self.use_jspb_array_any_format = input.useJspbArrayAnyFormat
+		end
+
+		return self
+	end
+
+	_JspbEncodingConfigImpl.descriptor = {
+		name = "JspbEncodingConfig",
+		fullName = "conformance.JspbEncodingConfig",
+	}
+
+	messages.JspbEncodingConfig = _JspbEncodingConfigImpl :: any -- Luau: Not sure why this intersection fails.
+
+	typeRegistry.default:register(messages.JspbEncodingConfig)
 end
 
-_JspbEncodingConfigImpl.descriptor = {
-	name = "JspbEncodingConfig",
-	fullName = "conformance.JspbEncodingConfig",
-}
-
-JspbEncodingConfig = _JspbEncodingConfigImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(JspbEncodingConfig)
-
-WireFormat = {
+messages.WireFormat = {
 	fromNumber = function(value: number): WireFormat?
 		if value == 0 then
 			return "UNSPECIFIED"
@@ -954,7 +994,7 @@ WireFormat = {
 	end,
 }
 
-TestCategory = {
+messages.TestCategory = {
 	fromNumber = function(value: number): TestCategory?
 		if value == 0 then
 			return "UNSPECIFIED_TEST"
@@ -1011,10 +1051,10 @@ TestCategory = {
 }
 
 return {
-	FailureSet = FailureSet,
-	ConformanceRequest = ConformanceRequest,
-	ConformanceResponse = ConformanceResponse,
-	JspbEncodingConfig = JspbEncodingConfig,
-	WireFormat = WireFormat,
-	TestCategory = TestCategory,
+	FailureSet = messages.FailureSet,
+	ConformanceRequest = messages.ConformanceRequest,
+	ConformanceResponse = messages.ConformanceResponse,
+	JspbEncodingConfig = messages.JspbEncodingConfig,
+	WireFormat = messages.WireFormat,
+	TestCategory = messages.TestCategory,
 }

@@ -6,6 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
+local messages: {
+	FieldMask: _FieldMaskMessage,
+} = {} :: any -- Luau: We will fill these in later
+
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
 	new: (fields: _FieldMaskPartialFields?) -> FieldMask,
@@ -25,102 +29,107 @@ type _FieldMaskPartialFields = {
 }
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-local FieldMask: proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
-local _FieldMaskImpl = {}
-_FieldMaskImpl.__index = _FieldMaskImpl
+type _FieldMaskMessage = proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
-function _FieldMaskImpl.new(data: _FieldMaskPartialFields?): FieldMask
-	return setmetatable({
-		paths = if data == nil or data.paths == nil then {} else data.paths,
-	}, _FieldMaskImpl)
-end
+do
+	local _FieldMaskImpl = {}
+	_FieldMaskImpl.__index = _FieldMaskImpl
 
-function _FieldMaskImpl.encode(self: FieldMask): buffer
-	local output = buffer.create(0)
-	local cursor = 0
+	function _FieldMaskImpl.new(data: _FieldMaskPartialFields?): FieldMask
+		return setmetatable({
+			paths = if data == nil or data.paths == nil then {} else data.paths,
 
-	if self.paths ~= nil and #self.paths > 0 then
-		for _, value in self.paths do
-			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-			output, cursor = proto.writeString(output, cursor, value)
-		end
+			decode = _FieldMaskImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+		}, _FieldMaskImpl)
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
+	function _FieldMaskImpl.encode(self: FieldMask): buffer
+		local output = buffer.create(0)
+		local cursor = 0
 
-function _FieldMaskImpl.decode(input: buffer): FieldMask
-	local self = _FieldMaskImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			-- No fields
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				table.insert(self.paths, buffer.tostring(value))
-				continue
+		if self.paths ~= nil and #self.paths > 0 then
+			for _, value in self.paths do
+				output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+				output, cursor = proto.writeString(output, cursor, value)
 			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
 	end
 
-	return self
-end
+	function _FieldMaskImpl.decode(input: buffer): FieldMask
+		local self = _FieldMaskImpl.new()
+		local cursor = 0
 
-function _FieldMaskImpl.jsonEncode(fieldMask: FieldMask): string
-	return table.concat(fieldMask.paths, ",")
-end
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
 
-function _FieldMaskImpl.jsonDecode(anyInput: any): FieldMask
-	local input: string = anyInput
+			if wireType == proto.wireTypes.varint then
+				-- No fields
 
-	local paths = {}
-	for path in string.gmatch(input, "[^,]+") do
-		table.insert(paths, path)
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					table.insert(self.paths, buffer.tostring(value))
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
 	end
 
-	return FieldMask.new({
-		paths = paths,
-	})
+	function _FieldMaskImpl.jsonEncode(fieldMask: FieldMask): string
+		return table.concat(fieldMask.paths, ",")
+	end
+
+	function _FieldMaskImpl.jsonDecode(anyInput: any): FieldMask
+		local input: string = anyInput
+
+		local paths = {}
+		for path in string.gmatch(input, "[^,]+") do
+			table.insert(paths, path)
+		end
+
+		return _FieldMaskImpl.new({
+			paths = paths,
+		})
+	end
+
+	_FieldMaskImpl.descriptor = {
+		name = "FieldMask",
+		fullName = "google.protobuf.FieldMask",
+	}
+
+	messages.FieldMask = _FieldMaskImpl :: any -- Luau: Not sure why this intersection fails.
+
+	typeRegistry.default:register(messages.FieldMask)
 end
-
-_FieldMaskImpl.descriptor = {
-	name = "FieldMask",
-	fullName = "google.protobuf.FieldMask",
-}
-
-FieldMask = _FieldMaskImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(FieldMask)
 
 return {
-	FieldMask = FieldMask,
+	FieldMask = messages.FieldMask,
 }

@@ -77,7 +77,7 @@ end
 
 function _<message_name>Impl.jsonDecode(anyValue: any): <message_name>
 	local value: <type> = anyValue
-	return <message_name>.new({
+	return _<message_name>Impl.new({
 		value = value
 	})
 end"#;

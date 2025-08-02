@@ -77,7 +77,7 @@ function _DurationImpl.jsonDecode(anyValue: any): Duration
 		error(`Duration seconds cannot be less than {minSeconds}`)
 	end
 
-	return Duration.new({
+	return _DurationImpl.new({
 		seconds = seconds,
 		nanos = nanos,
 	})

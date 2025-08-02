@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup foreman
-      uses: Roblox/setup-foreman@v1
+    - name: Setup rokit
+      uses: CompeyDev/setup-rokit@v0.1.2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Download Rust

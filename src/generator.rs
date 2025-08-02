@@ -258,11 +258,33 @@ fn add_enum_descriptors(
     }
 }
 
+fn create_messages_init(names: &[String]) -> String {
+    let mut builder = StringBuilder::new();
+
+    builder.blank();
+
+    // We need to do this because referencing can happen out of order,
+    // but at runtime it will always be safe.
+    builder.push("local messages: {");
+    builder.indent();
+
+    for name in names {
+        builder.push(format!("{name}: _{name}Message,"));
+    }
+
+    builder.dedent();
+    builder.push("} = {} :: any -- Luau: We will fill these in later");
+
+    builder.blank();
+
+    builder.build()
+}
+
 fn create_return(exports: Vec<String>) -> String {
     let mut lines = Vec::new();
     lines.push("return {".to_owned());
     for export in exports {
-        lines.push(format!("\t{export} = {export},"));
+        lines.push(format!("\t{export} = messages.{export},"));
     }
     lines.push("}\n".to_owned());
     lines.join("\n")
@@ -276,75 +298,81 @@ pub fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"
-local _<name>Impl = {}
-_<name>Impl.__index = _<name>Impl
+type _<name>Message = proto.Message<<name>, _<name>PartialFields> <json_intersection>
 
-function _<name>Impl.new(data: _<name>PartialFields?): <name>
-    return setmetatable({
-<default>
-    }, _<name>Impl)
-end
+do
+    local _<name>Impl = {}
+    _<name>Impl.__index = _<name>Impl
 
-function _<name>Impl.encode(self: <name>): buffer
-    local output = buffer.create(0)
-    local cursor = 0
+    function _<name>Impl.new(data: _<name>PartialFields?): <name>
+        return setmetatable({
+    <default>
 
-<encode>
-    local shrunkBuffer = buffer.create(cursor)
-    buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-    return shrunkBuffer
-end
-
-function _<name>Impl.decode(input: buffer): <name>
-    local self = _<name>Impl.new()
-    local cursor = 0
-
-    while cursor < buffer.len(input) do
-        local field, wireType
-        field, wireType, cursor = proto.readTag(input, cursor)
-
-        if wireType == proto.wireTypes.varint then
-            <decode_varint>
-
-            local _
-            _, cursor = proto.readVarInt(input, cursor)
-        elseif wireType == proto.wireTypes.lengthDelimited then
-            <decode_len>
-
-            local length
-            length, cursor = proto.readVarInt(input, cursor)
-
-            cursor += length
-        elseif wireType == proto.wireTypes.i32 then
-            <decode_i32>
-
-            local _
-            _, cursor = proto.readFixed32(input, cursor)
-        elseif wireType == proto.wireTypes.i64 then
-            <decode_i64>
-
-            local _
-            _, cursor = proto.readFixed64(input, cursor)
-        else
-            error("Unsupported wire type: " .. wireType)
-        end
+            decode = _<name>Impl.decode, -- Luau: Fixes rare bug with "missing fields decode"
+        }, _<name>Impl)
     end
 
-    return self
+    function _<name>Impl.encode(self: <name>): buffer
+        local output = buffer.create(0)
+        local cursor = 0
+
+    <encode>
+        local shrunkBuffer = buffer.create(cursor)
+        buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+        return shrunkBuffer
+    end
+
+    function _<name>Impl.decode(input: buffer): <name>
+        local self = _<name>Impl.new()
+        local cursor = 0
+
+        while cursor < buffer.len(input) do
+            local field, wireType
+            field, wireType, cursor = proto.readTag(input, cursor)
+
+            if wireType == proto.wireTypes.varint then
+                <decode_varint>
+
+                local _
+                _, cursor = proto.readVarInt(input, cursor)
+            elseif wireType == proto.wireTypes.lengthDelimited then
+                <decode_len>
+
+                local length
+                length, cursor = proto.readVarInt(input, cursor)
+
+                cursor += length
+            elseif wireType == proto.wireTypes.i32 then
+                <decode_i32>
+
+                local _
+                _, cursor = proto.readFixed32(input, cursor)
+            elseif wireType == proto.wireTypes.i64 then
+                <decode_i64>
+
+                local _
+                _, cursor = proto.readFixed64(input, cursor)
+            else
+                error("Unsupported wire type: " .. wireType)
+            end
+        end
+
+        return self
+    end
+
+    <json>
+
+    _<name>Impl.descriptor = {
+        name = "<name>",
+        fullName = "<full_name>",
+    }
+
+    <any_methods>
+
+    messages.<name> = _<name>Impl :: any  -- Luau: Not sure why this intersection fails.
+
+    typeRegistry.default:register(messages.<name>)
 end
-
-<json>
-
-_<name>Impl.descriptor = {
-    name = "<name>",
-    fullName = "<full_name>",
-}
-
-<any_methods>
-
-<name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(<name>)
 "#;
 
 const JSON: &str = r#"
@@ -357,7 +385,7 @@ function _<name>Impl.jsonDecode(input: { [string]: any }): <name>
 end
 "#;
 
-const ENUM: &str = r#"<name> = {
+const ENUM: &str = r#"messages.<name> = {
     fromNumber = function(value: number): <name>?
         <from_number>
     end,
@@ -414,7 +442,9 @@ struct FileGenerator<'a> {
 
     types: StringBuilder,
     implementations: StringBuilder,
+
     exports: Vec<String>,
+    names_defined_here: Vec<String>,
     errors: Vec<String>,
 
     forbidden_types: &'a HashSet<String>,
@@ -439,6 +469,7 @@ impl<'a> FileGenerator<'a> {
 
             types: StringBuilder::new(),
             implementations: StringBuilder::new(),
+            names_defined_here: Vec::new(),
             exports: Vec::new(),
             errors: Vec::new(),
 
@@ -491,6 +522,9 @@ impl<'a> FileGenerator<'a> {
             "local typeRegistry = require({})",
             self.require_path(&type_registry_require_path)
         ));
+
+        // contents.push("\nlocal messages = {}");
+        let line_to_insert_messages = contents.len();
 
         for import in &self.file_descriptor_proto.dependency {
             if import == DESCRIPTORS_IMPORT {
@@ -555,6 +589,11 @@ impl<'a> FileGenerator<'a> {
         contents.push(self.types.build());
         contents.push(self.implementations.build());
 
+        contents.insert(
+            line_to_insert_messages,
+            create_messages_init(&self.names_defined_here),
+        );
+
         contents.push(create_return(self.exports));
 
         let code = contents.build();
@@ -600,6 +639,8 @@ impl<'a> FileGenerator<'a> {
         {
             self.exports.push(name.clone());
         }
+
+        self.names_defined_here.push(name.clone());
 
         let wkt_json = WktJson::try_create(&self.file_descriptor_proto, message);
         let json_type = match wkt_json.as_ref() {
@@ -791,16 +832,6 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}PartialFields>");
-        if let Some(wkt_json) = wkt_json.as_ref() {
-            declaration.push_str(&format!(
-                " & proto.CustomJson<{name}, {}>",
-                wkt_json.luau_type
-            ));
-        }
-
-        self.types.push(declaration);
-
         self.types.blank();
 
         let mut final_code = MESSAGE
@@ -812,7 +843,15 @@ impl<'a> FileGenerator<'a> {
             .replace("<decode_varint>", &create_decoder(varint_fields))
             .replace("<decode_len>", &create_decoder(len_fields))
             .replace("<decode_i32>", &create_decoder(i32_fields))
-            .replace("<decode_i64>", &create_decoder(i64_fields));
+            .replace("<decode_i64>", &create_decoder(i64_fields))
+            .replace(
+                "<json_intersection>",
+                &if let Some(wkt_json) = wkt_json.as_ref() {
+                    format!(" & proto.CustomJson<{name}, {}>", wkt_json.luau_type)
+                } else {
+                    String::new()
+                },
+            );
 
         if let Some(wkt_json) = WktJson::try_create(&self.file_descriptor_proto, message) {
             final_code = final_code.replace("<json>", &wkt_json.code);
@@ -831,7 +870,7 @@ impl<'a> FileGenerator<'a> {
                     .replace(
                         "<json_decode>",
                         &format!(
-                            "local self = {name}.new()\n\n{}\nreturn self",
+                            "local self = _{name}Impl.new()\n\n{}\nreturn self",
                             &json_decode_lines.build()
                         ),
                     ),
@@ -858,6 +897,7 @@ impl<'a> FileGenerator<'a> {
         let name = format!("{prefix}{}", descriptor.name());
 
         self.types.push(format!("local {name}: proto.Enum<{name}>"));
+        self.types.push(format!("type _{name}Message = {name}"));
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 
@@ -900,6 +940,7 @@ impl<'a> FileGenerator<'a> {
         self.types.blank();
 
         self.exports.push(name.clone());
+        self.names_defined_here.push(name.clone());
 
         self.implementations.push(
             ENUM.replace("<name>", &name)
