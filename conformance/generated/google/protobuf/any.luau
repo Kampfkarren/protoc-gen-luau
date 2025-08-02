@@ -6,6 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
+local messages: {
+	Any: Any,
+} = {} :: any -- Luau: We will fill these in later
+
 type _AnyImpl = {
 	__index: _AnyImpl,
 	new: (fields: _AnyPartialFields?) -> Any,
@@ -41,185 +45,190 @@ type _AnyPartialFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-local Any: proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
 
-local _AnyImpl = {}
-_AnyImpl.__index = _AnyImpl
+do
+	type Any = proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
+	local Any: Any
 
-function _AnyImpl.new(data: _AnyPartialFields?): Any
-	return setmetatable({
-		type_url = if data == nil or data.type_url == nil then "" else data.type_url,
-		value = if data == nil or data.value == nil then buffer.create(0) else data.value,
-	}, _AnyImpl)
-end
+	local _AnyImpl = {}
+	_AnyImpl.__index = _AnyImpl
 
-function _AnyImpl.encode(self: Any): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.type_url ~= nil and self.type_url ~= "" then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeString(output, cursor, self.type_url)
+	function _AnyImpl.new(data: _AnyPartialFields?): Any
+		return setmetatable({
+			type_url = if data == nil or data.type_url == nil then "" else data.type_url,
+			value = if data == nil or data.value == nil then buffer.create(0) else data.value,
+		}, _AnyImpl)
 	end
 
-	if self.value ~= nil and buffer.len(self.value) > 0 then
-		output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
-	end
+	function _AnyImpl.encode(self: Any): buffer
+		local output = buffer.create(0)
+		local cursor = 0
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
-
-function _AnyImpl.decode(input: buffer): Any
-	local self = _AnyImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			-- No fields
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.type_url = buffer.tostring(value)
-				continue
-			elseif field == 2 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.value = value
-				continue
-			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
+		if self.type_url ~= nil and self.type_url ~= "" then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, self.type_url)
 		end
+
+		if self.value ~= nil and buffer.len(self.value) > 0 then
+			output, cursor = proto.writeTag(output, cursor, 2, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
 	end
 
-	return self
+	function _AnyImpl.decode(input: buffer): Any
+		local self = _AnyImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.type_url = buffer.tostring(value)
+					continue
+				elseif field == 2 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
+	end
+
+	function _AnyImpl.jsonEncode(input: Any): { [string]: any }
+		local unpacked = input:unpack(typeRegistry.default)
+		assert(unpacked ~= nil, "Cannot JSON-encode empty Any")
+
+		local json = unpacked:jsonEncode()
+
+		if typeof(json) == "string" then
+			return { ["@type"] = input.type_url, ["value"] = json }
+		end
+
+		json["@type"] = input.type_url
+
+		return json
+	end
+
+	function _AnyImpl.jsonDecode(input: { [string]: any }): Any
+		local typeUrl = input["@type"]
+		local typeName = typeUrl:match("([^/]+)$")
+		local payloadType = typeRegistry.default:findMessage(typeName)
+
+		if payloadType == nil then
+			error(`Could not find message type \`{typeName}\` for Any`)
+		end
+
+		local typePrefix = typeUrl:sub(1, #typeUrl - #typeName - 1)
+
+		local json = table.clone(input)
+		-- For WKTs with special JSON representations, we need to decode input["value"] rather than
+		-- input.
+		if typeName:match("^google%.protobuf%.") and input["value"] ~= nil then
+			json = input["value"]
+		else
+			-- Clear this because it's not part of the JSON encoding of the payload itself.
+			json["@type"] = nil
+		end
+
+		return _AnyImpl.pack(payloadType.jsonDecode(json) :: proto.Message<unknown, unknown>, typePrefix)
+	end
+
+	type _AnyJsonDecode = typeof(_AnyImpl.jsonDecode) -- Luau bug: It doesn't recognize this for some reason
+
+	_AnyImpl.descriptor = {
+		name = "Any",
+		fullName = "google.protobuf.Any",
+	}
+
+	function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
+		return Any.new({
+			type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
+			value = payload:encode(),
+		})
+	end
+
+	-- Luau: It refuses to believe these are the same unpack, for some reason
+	local anyUnpack: typeof(({} :: _AnyImpl).unpack) = function(
+		self: Any,
+		registry: typeRegistry.TypeRegistry?
+	): proto.Message<any, any>?
+		if self.value == nil then
+			return nil
+		end
+
+		if registry == nil then
+			registry = typeRegistry.default
+		end
+		assert(registry ~= nil, "Luau")
+
+		local typeName = _AnyImpl.typeUrlToTypeName(self.type_url)
+		local payloadType = registry:findMessage(typeName)
+
+		if payloadType == nil then
+			error(`Unknown type: \`{typeName}\``)
+		end
+
+		return payloadType.decode(self.value) :: proto.Message<any, any>
+	end
+
+	_AnyImpl.unpack = anyUnpack
+
+	function _AnyImpl.isA(self: Any, typeName: string): boolean
+		if self.type_url == typeName then
+			return true
+		end
+
+		local suffix = "/" .. typeName
+		return self.type_url:sub(-#suffix) == suffix
+	end
+
+	function _AnyImpl.typeUrlToTypeName(typeUrl: string): string
+		local typeName = typeUrl:match("([^/]+)$")
+		if typeName == nil then
+			error(`Invalid type URL: \`{typeUrl}\``)
+		end
+		return typeName
+	end
+
+	Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.Any = Any
+
+	typeRegistry.default:register(Any)
 end
-
-function _AnyImpl.jsonEncode(input: Any): { [string]: any }
-	local unpacked = input:unpack(typeRegistry.default)
-	assert(unpacked ~= nil, "Cannot JSON-encode empty Any")
-
-	local json = unpacked:jsonEncode()
-
-	if typeof(json) == "string" then
-		return { ["@type"] = input.type_url, ["value"] = json }
-	end
-
-	json["@type"] = input.type_url
-
-	return json
-end
-
-function _AnyImpl.jsonDecode(input: { [string]: any }): Any
-	local typeUrl = input["@type"]
-	local typeName = typeUrl:match("([^/]+)$")
-	local payloadType = typeRegistry.default:findMessage(typeName)
-
-	if payloadType == nil then
-		error(`Could not find message type \`{typeName}\` for Any`)
-	end
-
-	local typePrefix = typeUrl:sub(1, #typeUrl - #typeName - 1)
-
-	local json = table.clone(input)
-	-- For WKTs with special JSON representations, we need to decode input["value"] rather than
-	-- input.
-	if typeName:match("^google%.protobuf%.") and input["value"] ~= nil then
-		json = input["value"]
-	else
-		-- Clear this because it's not part of the JSON encoding of the payload itself.
-		json["@type"] = nil
-	end
-
-	return _AnyImpl.pack(payloadType.jsonDecode(json) :: proto.Message<unknown, unknown>, typePrefix)
-end
-
-type _AnyJsonDecode = typeof(_AnyImpl.jsonDecode) -- Luau bug: It doesn't recognize this for some reason
-
-_AnyImpl.descriptor = {
-	name = "Any",
-	fullName = "google.protobuf.Any",
-}
-
-function _AnyImpl.pack(payload: proto.Message<any, any>, typeUrlPrefix: string): Any
-	return Any.new({
-		type_url = typeUrlPrefix .. "/" .. payload.descriptor.fullName,
-		value = payload:encode(),
-	})
-end
-
--- Luau: It refuses to believe these are the same unpack, for some reason
-local anyUnpack: typeof(({} :: _AnyImpl).unpack) = function(
-	self: Any,
-	registry: typeRegistry.TypeRegistry?
-): proto.Message<any, any>?
-	if self.value == nil then
-		return nil
-	end
-
-	if registry == nil then
-		registry = typeRegistry.default
-	end
-	assert(registry ~= nil, "Luau")
-
-	local typeName = _AnyImpl.typeUrlToTypeName(self.type_url)
-	local payloadType = registry:findMessage(typeName)
-
-	if payloadType == nil then
-		error(`Unknown type: \`{typeName}\``)
-	end
-
-	return payloadType.decode(self.value) :: proto.Message<any, any>
-end
-
-_AnyImpl.unpack = anyUnpack
-
-function _AnyImpl.isA(self: Any, typeName: string): boolean
-	if self.type_url == typeName then
-		return true
-	end
-
-	local suffix = "/" .. typeName
-	return self.type_url:sub(-#suffix) == suffix
-end
-
-function _AnyImpl.typeUrlToTypeName(typeUrl: string): string
-	local typeName = typeUrl:match("([^/]+)$")
-	if typeName == nil then
-		error(`Invalid type URL: \`{typeUrl}\``)
-	end
-	return typeName
-end
-
-Any = _AnyImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(Any)
 
 return {
-	Any = Any,
+	Any = messages.Any,
 }

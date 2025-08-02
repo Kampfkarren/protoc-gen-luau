@@ -6,6 +6,19 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
+local messages: {
+	DoubleValue: DoubleValue,
+	FloatValue: FloatValue,
+	Int64Value: Int64Value,
+	UInt64Value: UInt64Value,
+	Int32Value: Int32Value,
+	UInt32Value: UInt32Value,
+	BoolValue: BoolValue,
+	StringValue: StringValue,
+	BytesValue: BytesValue,
+} =
+	{} :: any -- Luau: We will fill these in later
+
 type _DoubleValueImpl = {
 	__index: _DoubleValueImpl,
 	new: (fields: _DoubleValuePartialFields?) -> DoubleValue,
@@ -25,7 +38,6 @@ type _DoubleValuePartialFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
-local DoubleValue: proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
@@ -46,7 +58,6 @@ type _FloatValuePartialFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
-local FloatValue: proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
@@ -67,7 +78,6 @@ type _Int64ValuePartialFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
-local Int64Value: proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
@@ -88,7 +98,6 @@ type _UInt64ValuePartialFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
-local UInt64Value: proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
@@ -109,7 +118,6 @@ type _Int32ValuePartialFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
-local Int32Value: proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
@@ -130,7 +138,6 @@ type _UInt32ValuePartialFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
-local UInt32Value: proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
@@ -151,7 +158,6 @@ type _BoolValuePartialFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
-local BoolValue: proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
@@ -172,7 +178,6 @@ type _StringValuePartialFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
-local StringValue: proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
@@ -193,790 +198,843 @@ type _BytesValuePartialFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-local BytesValue: proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
 
-local _DoubleValueImpl = {}
-_DoubleValueImpl.__index = _DoubleValueImpl
+do
+	type DoubleValue = proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
+	local DoubleValue: DoubleValue
 
-function _DoubleValueImpl.new(data: _DoubleValuePartialFields?): DoubleValue
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _DoubleValueImpl)
-end
+	local _DoubleValueImpl = {}
+	_DoubleValueImpl.__index = _DoubleValueImpl
 
-function _DoubleValueImpl.encode(self: DoubleValue): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
-		output, cursor = proto.writeDouble(output, cursor, self.value)
+	function _DoubleValueImpl.new(data: _DoubleValuePartialFields?): DoubleValue
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _DoubleValueImpl)
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
+	function _DoubleValueImpl.encode(self: DoubleValue): buffer
+		local output = buffer.create(0)
+		local cursor = 0
 
-function _DoubleValueImpl.decode(input: buffer): DoubleValue
-	local self = _DoubleValueImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			-- No fields
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			if field == 1 then
-				local value
-				value, cursor = proto.readDouble(input, cursor)
-				self.value = value
-				continue
-			end
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i64)
+			output, cursor = proto.writeDouble(output, cursor, self.value)
 		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
 	end
 
-	return self
-end
+	function _DoubleValueImpl.decode(input: buffer): DoubleValue
+		local self = _DoubleValueImpl.new()
+		local cursor = 0
 
-function _DoubleValueImpl.jsonEncode(self: DoubleValue): number
-	return self.value
-end
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
 
-function _DoubleValueImpl.jsonDecode(anyValue: any): DoubleValue
-	local value: number = anyValue
-	return DoubleValue.new({
-		value = value,
-	})
-end
+			if wireType == proto.wireTypes.varint then
+				-- No fields
 
-_DoubleValueImpl.descriptor = {
-	name = "DoubleValue",
-	fullName = "google.protobuf.DoubleValue",
-}
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
 
-DoubleValue = _DoubleValueImpl :: any -- Luau: Not sure why this intersection fails.
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
 
-typeRegistry.default:register(DoubleValue)
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
 
-local _FloatValueImpl = {}
-_FloatValueImpl.__index = _FloatValueImpl
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				if field == 1 then
+					local value
+					value, cursor = proto.readDouble(input, cursor)
+					self.value = value
+					continue
+				end
 
-function _FloatValueImpl.new(data: _FloatValuePartialFields?): FloatValue
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _FloatValueImpl)
-end
-
-function _FloatValueImpl.encode(self: FloatValue): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
-		output, cursor = proto.writeFloat(output, cursor, self.value)
-	end
-
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
-end
-
-function _FloatValueImpl.decode(input: buffer): FloatValue
-	local self = _FloatValueImpl.new()
-	local cursor = 0
-
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
-
-		if wireType == proto.wireTypes.varint then
-			-- No fields
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			if field == 1 then
-				local value
-				value, cursor = proto.readFloat(input, cursor)
-				self.value = value
-				continue
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _FloatValueImpl.jsonEncode(self: FloatValue): number
-	return self.value
-end
-
-function _FloatValueImpl.jsonDecode(anyValue: any): FloatValue
-	local value: number = anyValue
-	return FloatValue.new({
-		value = value,
-	})
-end
-
-_FloatValueImpl.descriptor = {
-	name = "FloatValue",
-	fullName = "google.protobuf.FloatValue",
-}
-
-FloatValue = _FloatValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(FloatValue)
-
-local _Int64ValueImpl = {}
-_Int64ValueImpl.__index = _Int64ValueImpl
-
-function _Int64ValueImpl.new(data: _Int64ValuePartialFields?): Int64Value
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _Int64ValueImpl)
-end
-
-function _Int64ValueImpl.encode(self: Int64Value): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	function _DoubleValueImpl.jsonEncode(self: DoubleValue): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _DoubleValueImpl.jsonDecode(anyValue: any): DoubleValue
+		local value: number = anyValue
+		return DoubleValue.new({
+			value = value,
+		})
+	end
+
+	_DoubleValueImpl.descriptor = {
+		name = "DoubleValue",
+		fullName = "google.protobuf.DoubleValue",
+	}
+
+	DoubleValue = _DoubleValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.DoubleValue = DoubleValue
+
+	typeRegistry.default:register(DoubleValue)
 end
 
-function _Int64ValueImpl.decode(input: buffer): Int64Value
-	local self = _Int64ValueImpl.new()
-	local cursor = 0
+do
+	type FloatValue = proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
+	local FloatValue: FloatValue
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _FloatValueImpl = {}
+	_FloatValueImpl.__index = _FloatValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarIntI64(input, cursor)
-				self.value = value
-				continue
+	function _FloatValueImpl.new(data: _FloatValuePartialFields?): FloatValue
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _FloatValueImpl)
+	end
+
+	function _FloatValueImpl.encode(self: FloatValue): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.i32)
+			output, cursor = proto.writeFloat(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _FloatValueImpl.decode(input: buffer): FloatValue
+		local self = _FloatValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				if field == 1 then
+					local value
+					value, cursor = proto.readFloat(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _Int64ValueImpl.jsonEncode(self: Int64Value): number
-	return self.value
-end
-
-function _Int64ValueImpl.jsonDecode(anyValue: any): Int64Value
-	local value: number = anyValue
-	return Int64Value.new({
-		value = value,
-	})
-end
-
-_Int64ValueImpl.descriptor = {
-	name = "Int64Value",
-	fullName = "google.protobuf.Int64Value",
-}
-
-Int64Value = _Int64ValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(Int64Value)
-
-local _UInt64ValueImpl = {}
-_UInt64ValueImpl.__index = _UInt64ValueImpl
-
-function _UInt64ValueImpl.new(data: _UInt64ValuePartialFields?): UInt64Value
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _UInt64ValueImpl)
-end
-
-function _UInt64ValueImpl.encode(self: UInt64Value): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	function _FloatValueImpl.jsonEncode(self: FloatValue): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _FloatValueImpl.jsonDecode(anyValue: any): FloatValue
+		local value: number = anyValue
+		return FloatValue.new({
+			value = value,
+		})
+	end
+
+	_FloatValueImpl.descriptor = {
+		name = "FloatValue",
+		fullName = "google.protobuf.FloatValue",
+	}
+
+	FloatValue = _FloatValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.FloatValue = FloatValue
+
+	typeRegistry.default:register(FloatValue)
 end
 
-function _UInt64ValueImpl.decode(input: buffer): UInt64Value
-	local self = _UInt64ValueImpl.new()
-	local cursor = 0
+do
+	type Int64Value = proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
+	local Int64Value: Int64Value
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _Int64ValueImpl = {}
+	_Int64ValueImpl.__index = _Int64ValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarIntU64(input, cursor)
-				self.value = value
-				continue
+	function _Int64ValueImpl.new(data: _Int64ValuePartialFields?): Int64Value
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _Int64ValueImpl)
+	end
+
+	function _Int64ValueImpl.encode(self: Int64Value): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _Int64ValueImpl.decode(input: buffer): Int64Value
+		local self = _Int64ValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarIntI64(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _UInt64ValueImpl.jsonEncode(self: UInt64Value): number
-	return self.value
-end
-
-function _UInt64ValueImpl.jsonDecode(anyValue: any): UInt64Value
-	local value: number = anyValue
-	return UInt64Value.new({
-		value = value,
-	})
-end
-
-_UInt64ValueImpl.descriptor = {
-	name = "UInt64Value",
-	fullName = "google.protobuf.UInt64Value",
-}
-
-UInt64Value = _UInt64ValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(UInt64Value)
-
-local _Int32ValueImpl = {}
-_Int32ValueImpl.__index = _Int32ValueImpl
-
-function _Int32ValueImpl.new(data: _Int32ValuePartialFields?): Int32Value
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _Int32ValueImpl)
-end
-
-function _Int32ValueImpl.encode(self: Int32Value): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	function _Int64ValueImpl.jsonEncode(self: Int64Value): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _Int64ValueImpl.jsonDecode(anyValue: any): Int64Value
+		local value: number = anyValue
+		return Int64Value.new({
+			value = value,
+		})
+	end
+
+	_Int64ValueImpl.descriptor = {
+		name = "Int64Value",
+		fullName = "google.protobuf.Int64Value",
+	}
+
+	Int64Value = _Int64ValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.Int64Value = Int64Value
+
+	typeRegistry.default:register(Int64Value)
 end
 
-function _Int32ValueImpl.decode(input: buffer): Int32Value
-	local self = _Int32ValueImpl.new()
-	local cursor = 0
+do
+	type UInt64Value = proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
+	local UInt64Value: UInt64Value
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _UInt64ValueImpl = {}
+	_UInt64ValueImpl.__index = _UInt64ValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarIntI32(input, cursor)
-				self.value = value
-				continue
+	function _UInt64ValueImpl.new(data: _UInt64ValuePartialFields?): UInt64Value
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _UInt64ValueImpl)
+	end
+
+	function _UInt64ValueImpl.encode(self: UInt64Value): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _UInt64ValueImpl.decode(input: buffer): UInt64Value
+		local self = _UInt64ValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarIntU64(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _Int32ValueImpl.jsonEncode(self: Int32Value): number
-	return self.value
-end
-
-function _Int32ValueImpl.jsonDecode(anyValue: any): Int32Value
-	local value: number = anyValue
-	return Int32Value.new({
-		value = value,
-	})
-end
-
-_Int32ValueImpl.descriptor = {
-	name = "Int32Value",
-	fullName = "google.protobuf.Int32Value",
-}
-
-Int32Value = _Int32ValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(Int32Value)
-
-local _UInt32ValueImpl = {}
-_UInt32ValueImpl.__index = _UInt32ValueImpl
-
-function _UInt32ValueImpl.new(data: _UInt32ValuePartialFields?): UInt32Value
-	return setmetatable({
-		value = if data == nil or data.value == nil then 0 else data.value,
-	}, _UInt32ValueImpl)
-end
-
-function _UInt32ValueImpl.encode(self: UInt32Value): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, self.value)
+	function _UInt64ValueImpl.jsonEncode(self: UInt64Value): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _UInt64ValueImpl.jsonDecode(anyValue: any): UInt64Value
+		local value: number = anyValue
+		return UInt64Value.new({
+			value = value,
+		})
+	end
+
+	_UInt64ValueImpl.descriptor = {
+		name = "UInt64Value",
+		fullName = "google.protobuf.UInt64Value",
+	}
+
+	UInt64Value = _UInt64ValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.UInt64Value = UInt64Value
+
+	typeRegistry.default:register(UInt64Value)
 end
 
-function _UInt32ValueImpl.decode(input: buffer): UInt32Value
-	local self = _UInt32ValueImpl.new()
-	local cursor = 0
+do
+	type Int32Value = proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
+	local Int32Value: Int32Value
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _Int32ValueImpl = {}
+	_Int32ValueImpl.__index = _Int32ValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarIntU32(input, cursor)
-				self.value = value
-				continue
+	function _Int32ValueImpl.new(data: _Int32ValuePartialFields?): Int32Value
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _Int32ValueImpl)
+	end
+
+	function _Int32ValueImpl.encode(self: Int32Value): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _Int32ValueImpl.decode(input: buffer): Int32Value
+		local self = _Int32ValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarIntI32(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _UInt32ValueImpl.jsonEncode(self: UInt32Value): number
-	return self.value
-end
-
-function _UInt32ValueImpl.jsonDecode(anyValue: any): UInt32Value
-	local value: number = anyValue
-	return UInt32Value.new({
-		value = value,
-	})
-end
-
-_UInt32ValueImpl.descriptor = {
-	name = "UInt32Value",
-	fullName = "google.protobuf.UInt32Value",
-}
-
-UInt32Value = _UInt32ValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(UInt32Value)
-
-local _BoolValueImpl = {}
-_BoolValueImpl.__index = _BoolValueImpl
-
-function _BoolValueImpl.new(data: _BoolValuePartialFields?): BoolValue
-	return setmetatable({
-		value = if data == nil or data.value == nil then false else data.value,
-	}, _BoolValueImpl)
-end
-
-function _BoolValueImpl.encode(self: BoolValue): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
-		output, cursor = proto.writeVarInt(output, cursor, if self.value then 1 else 0)
+	function _Int32ValueImpl.jsonEncode(self: Int32Value): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _Int32ValueImpl.jsonDecode(anyValue: any): Int32Value
+		local value: number = anyValue
+		return Int32Value.new({
+			value = value,
+		})
+	end
+
+	_Int32ValueImpl.descriptor = {
+		name = "Int32Value",
+		fullName = "google.protobuf.Int32Value",
+	}
+
+	Int32Value = _Int32ValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.Int32Value = Int32Value
+
+	typeRegistry.default:register(Int32Value)
 end
 
-function _BoolValueImpl.decode(input: buffer): BoolValue
-	local self = _BoolValueImpl.new()
-	local cursor = 0
+do
+	type UInt32Value = proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
+	local UInt32Value: UInt32Value
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _UInt32ValueImpl = {}
+	_UInt32ValueImpl.__index = _UInt32ValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			if field == 1 then
-				local value
-				value, cursor = proto.readVarInt(input, cursor)
-				self.value = value ~= 0
-				continue
+	function _UInt32ValueImpl.new(data: _UInt32ValuePartialFields?): UInt32Value
+		return setmetatable({
+			value = if data == nil or data.value == nil then 0 else data.value,
+		}, _UInt32ValueImpl)
+	end
+
+	function _UInt32ValueImpl.encode(self: UInt32Value): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _UInt32ValueImpl.decode(input: buffer): UInt32Value
+		local self = _UInt32ValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarIntU32(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			-- No fields
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _BoolValueImpl.jsonEncode(self: BoolValue): boolean
-	return self.value
-end
-
-function _BoolValueImpl.jsonDecode(anyValue: any): BoolValue
-	local value: boolean = anyValue
-	return BoolValue.new({
-		value = value,
-	})
-end
-
-_BoolValueImpl.descriptor = {
-	name = "BoolValue",
-	fullName = "google.protobuf.BoolValue",
-}
-
-BoolValue = _BoolValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(BoolValue)
-
-local _StringValueImpl = {}
-_StringValueImpl.__index = _StringValueImpl
-
-function _StringValueImpl.new(data: _StringValuePartialFields?): StringValue
-	return setmetatable({
-		value = if data == nil or data.value == nil then "" else data.value,
-	}, _StringValueImpl)
-end
-
-function _StringValueImpl.encode(self: StringValue): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and self.value ~= "" then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeString(output, cursor, self.value)
+	function _UInt32ValueImpl.jsonEncode(self: UInt32Value): number
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _UInt32ValueImpl.jsonDecode(anyValue: any): UInt32Value
+		local value: number = anyValue
+		return UInt32Value.new({
+			value = value,
+		})
+	end
+
+	_UInt32ValueImpl.descriptor = {
+		name = "UInt32Value",
+		fullName = "google.protobuf.UInt32Value",
+	}
+
+	UInt32Value = _UInt32ValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.UInt32Value = UInt32Value
+
+	typeRegistry.default:register(UInt32Value)
 end
 
-function _StringValueImpl.decode(input: buffer): StringValue
-	local self = _StringValueImpl.new()
-	local cursor = 0
+do
+	type BoolValue = proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
+	local BoolValue: BoolValue
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _BoolValueImpl = {}
+	_BoolValueImpl.__index = _BoolValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			-- No fields
+	function _BoolValueImpl.new(data: _BoolValuePartialFields?): BoolValue
+		return setmetatable({
+			value = if data == nil or data.value == nil then false else data.value,
+		}, _BoolValueImpl)
+	end
 
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.value = buffer.tostring(value)
-				continue
+	function _BoolValueImpl.encode(self: BoolValue): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.varint)
+			output, cursor = proto.writeVarInt(output, cursor, if self.value then 1 else 0)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _BoolValueImpl.decode(input: buffer): BoolValue
+		local self = _BoolValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				if field == 1 then
+					local value
+					value, cursor = proto.readVarInt(input, cursor)
+					self.value = value ~= 0
+					continue
+				end
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				-- No fields
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
-end
-
-function _StringValueImpl.jsonEncode(self: StringValue): string
-	return self.value
-end
-
-function _StringValueImpl.jsonDecode(anyValue: any): StringValue
-	local value: string = anyValue
-	return StringValue.new({
-		value = value,
-	})
-end
-
-_StringValueImpl.descriptor = {
-	name = "StringValue",
-	fullName = "google.protobuf.StringValue",
-}
-
-StringValue = _StringValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(StringValue)
-
-local _BytesValueImpl = {}
-_BytesValueImpl.__index = _BytesValueImpl
-
-function _BytesValueImpl.new(data: _BytesValuePartialFields?): BytesValue
-	return setmetatable({
-		value = if data == nil or data.value == nil then buffer.create(0) else data.value,
-	}, _BytesValueImpl)
-end
-
-function _BytesValueImpl.encode(self: BytesValue): buffer
-	local output = buffer.create(0)
-	local cursor = 0
-
-	if self.value ~= nil and buffer.len(self.value) > 0 then
-		output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
-		output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
+	function _BoolValueImpl.jsonEncode(self: BoolValue): boolean
+		return self.value
 	end
 
-	local shrunkBuffer = buffer.create(cursor)
-	buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-	return shrunkBuffer
+	function _BoolValueImpl.jsonDecode(anyValue: any): BoolValue
+		local value: boolean = anyValue
+		return BoolValue.new({
+			value = value,
+		})
+	end
+
+	_BoolValueImpl.descriptor = {
+		name = "BoolValue",
+		fullName = "google.protobuf.BoolValue",
+	}
+
+	BoolValue = _BoolValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.BoolValue = BoolValue
+
+	typeRegistry.default:register(BoolValue)
 end
 
-function _BytesValueImpl.decode(input: buffer): BytesValue
-	local self = _BytesValueImpl.new()
-	local cursor = 0
+do
+	type StringValue = proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
+	local StringValue: StringValue
 
-	while cursor < buffer.len(input) do
-		local field, wireType
-		field, wireType, cursor = proto.readTag(input, cursor)
+	local _StringValueImpl = {}
+	_StringValueImpl.__index = _StringValueImpl
 
-		if wireType == proto.wireTypes.varint then
-			-- No fields
+	function _StringValueImpl.new(data: _StringValuePartialFields?): StringValue
+		return setmetatable({
+			value = if data == nil or data.value == nil then "" else data.value,
+		}, _StringValueImpl)
+	end
 
-			local _
-			_, cursor = proto.readVarInt(input, cursor)
-		elseif wireType == proto.wireTypes.lengthDelimited then
-			if field == 1 then
-				local value
-				value, cursor = proto.readBuffer(input, cursor)
-				self.value = value
-				continue
+	function _StringValueImpl.encode(self: StringValue): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and self.value ~= "" then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeString(output, cursor, self.value)
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _StringValueImpl.decode(input: buffer): StringValue
+		local self = _StringValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.value = buffer.tostring(value)
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
 			end
-
-			local length
-			length, cursor = proto.readVarInt(input, cursor)
-
-			cursor += length
-		elseif wireType == proto.wireTypes.i32 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed32(input, cursor)
-		elseif wireType == proto.wireTypes.i64 then
-			-- No fields
-
-			local _
-			_, cursor = proto.readFixed64(input, cursor)
-		else
-			error("Unsupported wire type: " .. wireType)
 		end
+
+		return self
 	end
 
-	return self
+	function _StringValueImpl.jsonEncode(self: StringValue): string
+		return self.value
+	end
+
+	function _StringValueImpl.jsonDecode(anyValue: any): StringValue
+		local value: string = anyValue
+		return StringValue.new({
+			value = value,
+		})
+	end
+
+	_StringValueImpl.descriptor = {
+		name = "StringValue",
+		fullName = "google.protobuf.StringValue",
+	}
+
+	StringValue = _StringValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.StringValue = StringValue
+
+	typeRegistry.default:register(StringValue)
 end
 
-function _BytesValueImpl.jsonEncode(self: BytesValue): string
-	return buffer.tostring(self.value)
+do
+	type BytesValue = proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
+	local BytesValue: BytesValue
+
+	local _BytesValueImpl = {}
+	_BytesValueImpl.__index = _BytesValueImpl
+
+	function _BytesValueImpl.new(data: _BytesValuePartialFields?): BytesValue
+		return setmetatable({
+			value = if data == nil or data.value == nil then buffer.create(0) else data.value,
+		}, _BytesValueImpl)
+	end
+
+	function _BytesValueImpl.encode(self: BytesValue): buffer
+		local output = buffer.create(0)
+		local cursor = 0
+
+		if self.value ~= nil and buffer.len(self.value) > 0 then
+			output, cursor = proto.writeTag(output, cursor, 1, proto.wireTypes.lengthDelimited)
+			output, cursor = proto.writeBuffer(output, cursor, self.value, buffer.len(self.value))
+		end
+
+		local shrunkBuffer = buffer.create(cursor)
+		buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+		return shrunkBuffer
+	end
+
+	function _BytesValueImpl.decode(input: buffer): BytesValue
+		local self = _BytesValueImpl.new()
+		local cursor = 0
+
+		while cursor < buffer.len(input) do
+			local field, wireType
+			field, wireType, cursor = proto.readTag(input, cursor)
+
+			if wireType == proto.wireTypes.varint then
+				-- No fields
+
+				local _
+				_, cursor = proto.readVarInt(input, cursor)
+			elseif wireType == proto.wireTypes.lengthDelimited then
+				if field == 1 then
+					local value
+					value, cursor = proto.readBuffer(input, cursor)
+					self.value = value
+					continue
+				end
+
+				local length
+				length, cursor = proto.readVarInt(input, cursor)
+
+				cursor += length
+			elseif wireType == proto.wireTypes.i32 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed32(input, cursor)
+			elseif wireType == proto.wireTypes.i64 then
+				-- No fields
+
+				local _
+				_, cursor = proto.readFixed64(input, cursor)
+			else
+				error("Unsupported wire type: " .. wireType)
+			end
+		end
+
+		return self
+	end
+
+	function _BytesValueImpl.jsonEncode(self: BytesValue): string
+		return buffer.tostring(self.value)
+	end
+
+	function _BytesValueImpl.jsonDecode(anyValue: any): BytesValue
+		local value: string = anyValue
+		return BytesValue.new({
+			value = buffer.fromstring(value),
+		})
+	end
+
+	_BytesValueImpl.descriptor = {
+		name = "BytesValue",
+		fullName = "google.protobuf.BytesValue",
+	}
+
+	BytesValue = _BytesValueImpl :: any -- Luau: Not sure why this intersection fails.
+	messages.BytesValue = BytesValue
+
+	typeRegistry.default:register(BytesValue)
 end
-
-function _BytesValueImpl.jsonDecode(anyValue: any): BytesValue
-	local value: string = anyValue
-	return BytesValue.new({
-		value = buffer.fromstring(value),
-	})
-end
-
-_BytesValueImpl.descriptor = {
-	name = "BytesValue",
-	fullName = "google.protobuf.BytesValue",
-}
-
-BytesValue = _BytesValueImpl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(BytesValue)
 
 return {
-	DoubleValue = DoubleValue,
-	FloatValue = FloatValue,
-	Int64Value = Int64Value,
-	UInt64Value = UInt64Value,
-	Int32Value = Int32Value,
-	UInt32Value = UInt32Value,
-	BoolValue = BoolValue,
-	StringValue = StringValue,
-	BytesValue = BytesValue,
+	DoubleValue = messages.DoubleValue,
+	FloatValue = messages.FloatValue,
+	Int64Value = messages.Int64Value,
+	UInt64Value = messages.UInt64Value,
+	Int32Value = messages.Int32Value,
+	UInt32Value = messages.UInt32Value,
+	BoolValue = messages.BoolValue,
+	StringValue = messages.StringValue,
+	BytesValue = messages.BytesValue,
 }
