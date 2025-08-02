@@ -262,7 +262,7 @@ fn create_return(exports: Vec<String>) -> String {
     let mut lines = Vec::new();
     lines.push("return {".to_owned());
     for export in exports {
-        lines.push(format!("\t{export} = {export},"));
+        lines.push(format!("\t{export} = messages.{export},"));
     }
     lines.push("}\n".to_owned());
     lines.join("\n")
@@ -276,75 +276,80 @@ pub fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"
-local _<name>Impl = {}
-_<name>Impl.__index = _<name>Impl
+do
+    local <name>: proto.Message<<name>, _<name>PartialFields> <json_intersection>
 
-function _<name>Impl.new(data: _<name>PartialFields?): <name>
-    return setmetatable({
-<default>
-    }, _<name>Impl)
-end
+    local _<name>Impl = {}
+    _<name>Impl.__index = _<name>Impl
 
-function _<name>Impl.encode(self: <name>): buffer
-    local output = buffer.create(0)
-    local cursor = 0
-
-<encode>
-    local shrunkBuffer = buffer.create(cursor)
-    buffer.copy(shrunkBuffer, 0, output, 0, cursor)
-    return shrunkBuffer
-end
-
-function _<name>Impl.decode(input: buffer): <name>
-    local self = _<name>Impl.new()
-    local cursor = 0
-
-    while cursor < buffer.len(input) do
-        local field, wireType
-        field, wireType, cursor = proto.readTag(input, cursor)
-
-        if wireType == proto.wireTypes.varint then
-            <decode_varint>
-
-            local _
-            _, cursor = proto.readVarInt(input, cursor)
-        elseif wireType == proto.wireTypes.lengthDelimited then
-            <decode_len>
-
-            local length
-            length, cursor = proto.readVarInt(input, cursor)
-
-            cursor += length
-        elseif wireType == proto.wireTypes.i32 then
-            <decode_i32>
-
-            local _
-            _, cursor = proto.readFixed32(input, cursor)
-        elseif wireType == proto.wireTypes.i64 then
-            <decode_i64>
-
-            local _
-            _, cursor = proto.readFixed64(input, cursor)
-        else
-            error("Unsupported wire type: " .. wireType)
-        end
+    function _<name>Impl.new(data: _<name>PartialFields?): <name>
+        return setmetatable({
+    <default>
+        }, _<name>Impl)
     end
 
-    return self
+    function _<name>Impl.encode(self: <name>): buffer
+        local output = buffer.create(0)
+        local cursor = 0
+
+    <encode>
+        local shrunkBuffer = buffer.create(cursor)
+        buffer.copy(shrunkBuffer, 0, output, 0, cursor)
+        return shrunkBuffer
+    end
+
+    function _<name>Impl.decode(input: buffer): <name>
+        local self = _<name>Impl.new()
+        local cursor = 0
+
+        while cursor < buffer.len(input) do
+            local field, wireType
+            field, wireType, cursor = proto.readTag(input, cursor)
+
+            if wireType == proto.wireTypes.varint then
+                <decode_varint>
+
+                local _
+                _, cursor = proto.readVarInt(input, cursor)
+            elseif wireType == proto.wireTypes.lengthDelimited then
+                <decode_len>
+
+                local length
+                length, cursor = proto.readVarInt(input, cursor)
+
+                cursor += length
+            elseif wireType == proto.wireTypes.i32 then
+                <decode_i32>
+
+                local _
+                _, cursor = proto.readFixed32(input, cursor)
+            elseif wireType == proto.wireTypes.i64 then
+                <decode_i64>
+
+                local _
+                _, cursor = proto.readFixed64(input, cursor)
+            else
+                error("Unsupported wire type: " .. wireType)
+            end
+        end
+
+        return self
+    end
+
+    <json>
+
+    _<name>Impl.descriptor = {
+        name = "<name>",
+        fullName = "<full_name>",
+    }
+
+    <any_methods>
+
+    <name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
+    messages.<name> = <name>
+
+    typeRegistry.default:register(<name>)
 end
-
-<json>
-
-_<name>Impl.descriptor = {
-    name = "<name>",
-    fullName = "<full_name>",
-}
-
-<any_methods>
-
-<name> = _<name>Impl :: any -- Luau: Not sure why this intersection fails.
-
-typeRegistry.default:register(<name>)
 "#;
 
 const JSON: &str = r#"
@@ -357,7 +362,7 @@ function _<name>Impl.jsonDecode(input: { [string]: any }): <name>
 end
 "#;
 
-const ENUM: &str = r#"<name> = {
+const ENUM: &str = r#"messages.<name> = {
     fromNumber = function(value: number): <name>?
         <from_number>
     end,
@@ -491,6 +496,8 @@ impl<'a> FileGenerator<'a> {
             "local typeRegistry = require({})",
             self.require_path(&type_registry_require_path)
         ));
+
+        contents.push("\nlocal messages = {{}}");
 
         for import in &self.file_descriptor_proto.dependency {
             if import == DESCRIPTORS_IMPORT {
@@ -791,16 +798,6 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
-        let mut declaration = format!("local {name}: proto.Message<{name}, _{name}PartialFields>");
-        if let Some(wkt_json) = wkt_json.as_ref() {
-            declaration.push_str(&format!(
-                " & proto.CustomJson<{name}, {}>",
-                wkt_json.luau_type
-            ));
-        }
-
-        self.types.push(declaration);
-
         self.types.blank();
 
         let mut final_code = MESSAGE
@@ -812,7 +809,15 @@ impl<'a> FileGenerator<'a> {
             .replace("<decode_varint>", &create_decoder(varint_fields))
             .replace("<decode_len>", &create_decoder(len_fields))
             .replace("<decode_i32>", &create_decoder(i32_fields))
-            .replace("<decode_i64>", &create_decoder(i64_fields));
+            .replace("<decode_i64>", &create_decoder(i64_fields))
+            .replace(
+                "<json_intersection>",
+                &if let Some(wkt_json) = wkt_json.as_ref() {
+                    format!(" & proto.CustomJson<{name}, {}>", wkt_json.luau_type)
+                } else {
+                    String::new()
+                },
+            );
 
         if let Some(wkt_json) = WktJson::try_create(&self.file_descriptor_proto, message) {
             final_code = final_code.replace("<json>", &wkt_json.code);

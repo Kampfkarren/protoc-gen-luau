@@ -155,7 +155,7 @@ impl FieldGenerator<'_> {
                     Type::Bytes => format!("{this} ~= nil and buffer.len({this}) > 0"),
                     Type::Enum => format!(
                         "{this} ~= nil and ({this} ~= nil and {this} ~= 0 or {this} ~= {}.fromNumber(0))",
-                        type_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                        runtime_definition_of_field_descriptor(field, self.export_map, self.base_file)
                     ),
                     Type::Message => unreachable!("Message has presence"),
 
@@ -489,10 +489,11 @@ impl FieldGenerator<'_> {
     }
 }
 
-fn type_definition_of_field_descriptor(
+fn definition_of_field_descriptor(
     field: &FieldDescriptorProto,
     export_map: &ExportMap,
     base_file: &FileDescriptorProto,
+    local_scope_prefix: &str,
 ) -> String {
     match field.r#type() {
         Type::Int32
@@ -529,7 +530,7 @@ fn type_definition_of_field_descriptor(
                 .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
 
             if export.path == Path::new(base_file.name()).with_extension("") {
-                format!("{}{just_type}", export.prefix)
+                format!("{local_scope_prefix}{}{just_type}", export.prefix)
             } else {
                 format!(
                     "{}.{}{just_type}",
@@ -541,6 +542,22 @@ fn type_definition_of_field_descriptor(
 
         Type::Group => unimplemented!("Group"),
     }
+}
+
+fn runtime_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    definition_of_field_descriptor(field, export_map, base_file, "messages.")
+}
+
+fn type_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    definition_of_field_descriptor(field, export_map, base_file, "")
 }
 
 #[derive(Clone, Copy)]
@@ -595,7 +612,7 @@ fn encode_field_descriptor_ignore_repeated_instruction(
         Type::Enum => format!(
             // :: any cast because Luau is bad with string unions
             "output, cursor = proto.writeVarInt(output, cursor, {}.toNumber({value_var} :: any))",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         ),
 
         Type::Message => unimplemented!(),
@@ -676,7 +693,7 @@ fn json_encode_instruction_field_descriptor_ignore_repeated(
         Type::Enum => format!(
             // :: any cast because Luau is bad with string unions
             "if typeof({value_var}) == \"number\" then {value_var} else {}.toNumber({value_var} :: any)",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         ),
         Type::Message => format!("{value_var}:jsonEncode()"),
         Type::Group => unimplemented!("Group"),
@@ -707,11 +724,11 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
         Type::Enum => format!(
             "if typeof({value_var}) == \"number\" then ({qualified_enum}.fromNumber({value_var}) \
                 or {value_var}) else ({qualified_enum}.fromName({value_var}) or {value_var})",
-            qualified_enum = type_definition_of_field_descriptor(field, export_map, base_file)
+            qualified_enum = runtime_definition_of_field_descriptor(field, export_map, base_file)
         ),
         Type::Message => format!(
             "{}.jsonDecode({value_var})",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         ),
         Type::Group => unimplemented!("Group"),
     }
@@ -789,12 +806,12 @@ fn default_of_type_descriptor_ignore_presence(
         // proto2: Enums default to first value
         Type::Enum => format!(
             "assert({}.fromNumber(0), \"Enum has no 0 default\")",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
         Type::Message => format!(
             "{}.new()",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
         Type::Group => unimplemented!("Group"),
@@ -827,13 +844,13 @@ fn decode_instruction_field_descriptor_ignore_repeated(
 
         Type::Enum => format!(
             "({}.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
 
         Type::Message => format!(
             "{}.decode(value)",
-            type_definition_of_field_descriptor(field, export_map, base_file)
+            runtime_definition_of_field_descriptor(field, export_map, base_file)
         )
         .into(),
 
@@ -853,7 +870,7 @@ pub fn decode_field(
     let mut decode = StringBuilder::new();
 
     if let Some(map_type) = map_type {
-        let map_entry_type = type_definition_of_field_descriptor(field, export_map, base_file);
+        let map_entry_type = runtime_definition_of_field_descriptor(field, export_map, base_file);
 
         let key_default =
             default_of_type_descriptor_ignore_presence(&map_type.key, export_map, base_file);

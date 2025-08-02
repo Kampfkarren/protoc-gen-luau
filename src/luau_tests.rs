@@ -17,6 +17,7 @@ fn generate_samples() {
         "enum_regression.proto",
         "forwards_compatibility.proto",
         "kitchen_sink.proto",
+        "many_messages.proto",
         "recursive.proto",
         "wkt.proto",
     ];
@@ -76,6 +77,11 @@ async fn basic() {
 #[tokio::test]
 async fn descriptors_require() {
     run_luau_test(Path::new("descriptors_require.luau")).await;
+}
+
+#[tokio::test]
+async fn many_messages() {
+    run_luau_test(Path::new("many_messages.luau")).await;
 }
 
 #[tokio::test]

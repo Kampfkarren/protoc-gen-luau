@@ -2,7 +2,7 @@ function _StructImpl.jsonEncode(struct: Struct): { [string]: any }
 	local serialized = {}
 
 	for key, value in struct.fields do
-		serialized[key] = Value.jsonEncode(value)
+		serialized[key] = messages.Value.jsonEncode(value)
 	end
 
 	return serialized
@@ -12,7 +12,7 @@ function _StructImpl.jsonDecode(input: { [string]: any }): Struct
 	local fields = {}
 
 	for key, serializedValue in input do
-		fields[key] = Value.jsonDecode(serializedValue)
+		fields[key] = messages.Value.jsonDecode(serializedValue)
 	end
 
 	return Struct.new({
