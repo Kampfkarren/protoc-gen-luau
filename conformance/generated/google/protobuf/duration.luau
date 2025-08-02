@@ -42,6 +42,8 @@ do
 		return setmetatable({
 			seconds = if data == nil or data.seconds == nil then 0 else data.seconds,
 			nanos = if data == nil or data.nanos == nil then 0 else data.nanos,
+
+			decode = _DurationImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _DurationImpl)
 	end
 

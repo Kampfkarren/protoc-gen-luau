@@ -307,6 +307,8 @@ do
     function _<name>Impl.new(data: _<name>PartialFields?): <name>
         return setmetatable({
     <default>
+
+            decode = _<name>Impl.decode, -- Luau: Fixes rare bug with "missing fields decode"
         }, _<name>Impl)
     end
 

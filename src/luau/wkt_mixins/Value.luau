@@ -1,4 +1,4 @@
-function _ValueImpl.jsonEncode(input: Value)
+function _ValueImpl.jsonEncode(input: Value): any
 	local kind = input.kind
 
 	if kind == nil or kind.type == "null_value" then

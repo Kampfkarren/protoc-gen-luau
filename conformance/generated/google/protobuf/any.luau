@@ -56,6 +56,8 @@ do
 		return setmetatable({
 			type_url = if data == nil or data.type_url == nil then "" else data.type_url,
 			value = if data == nil or data.value == nil then buffer.create(0) else data.value,
+
+			decode = _AnyImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _AnyImpl)
 	end
 

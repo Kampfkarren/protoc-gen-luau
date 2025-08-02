@@ -124,6 +124,8 @@ do
 	function _StructImpl.new(data: _StructPartialFields?): Struct
 		return setmetatable({
 			fields = if data == nil or data.fields == nil then {} else data.fields,
+
+			decode = _StructImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _StructImpl)
 	end
 
@@ -242,6 +244,8 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
 			value = if data == nil or data.value == nil then nil else data.value,
+
+			decode = _Struct_FieldsEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _Struct_FieldsEntryImpl)
 	end
 
@@ -360,6 +364,8 @@ do
 	function _ValueImpl.new(data: _ValuePartialFields?): Value
 		return setmetatable({
 			kind = if data == nil or data.kind == nil then nil else data.kind,
+
+			decode = _ValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _ValueImpl)
 	end
 
@@ -467,7 +473,7 @@ do
 		return self
 	end
 
-	function _ValueImpl.jsonEncode(input: Value)
+	function _ValueImpl.jsonEncode(input: Value): any
 		local kind = input.kind
 
 		if kind == nil or kind.type == "null_value" then
@@ -535,6 +541,8 @@ do
 	function _ListValueImpl.new(data: _ListValuePartialFields?): ListValue
 		return setmetatable({
 			values = if data == nil or data.values == nil then {} else data.values,
+
+			decode = _ListValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _ListValueImpl)
 	end
 

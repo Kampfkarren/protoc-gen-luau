@@ -39,6 +39,8 @@ do
 	function _FieldMaskImpl.new(data: _FieldMaskPartialFields?): FieldMask
 		return setmetatable({
 			paths = if data == nil or data.paths == nil then {} else data.paths,
+
+			decode = _FieldMaskImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
 		}, _FieldMaskImpl)
 	end
 
