@@ -160,9 +160,7 @@ do
 	function _FailureSetImpl.new(data: _FailureSetPartialFields?): FailureSet
 		return setmetatable({
 			failure = if data == nil or data.failure == nil then {} else data.failure,
-
-			decode = _FailureSetImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _FailureSetImpl)
+		}, _FailureSetImpl :: _FailureSetImpl)
 	end
 
 	function _FailureSetImpl.encode(self: FailureSet): buffer
@@ -285,9 +283,7 @@ do
 			print_unknown_fields = if data == nil or data.print_unknown_fields == nil
 				then false
 				else data.print_unknown_fields,
-
-			decode = _ConformanceRequestImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _ConformanceRequestImpl)
+		}, _ConformanceRequestImpl :: _ConformanceRequestImpl)
 	end
 
 	function _ConformanceRequestImpl.encode(self: ConformanceRequest): buffer
@@ -597,9 +593,7 @@ do
 	function _ConformanceResponseImpl.new(data: _ConformanceResponsePartialFields?): ConformanceResponse
 		return setmetatable({
 			result = if data == nil or data.result == nil then nil else data.result,
-
-			decode = _ConformanceResponseImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _ConformanceResponseImpl)
+		}, _ConformanceResponseImpl :: _ConformanceResponseImpl)
 	end
 
 	function _ConformanceResponseImpl.encode(self: ConformanceResponse): buffer
@@ -848,9 +842,7 @@ do
 			use_jspb_array_any_format = if data == nil or data.use_jspb_array_any_format == nil
 				then false
 				else data.use_jspb_array_any_format,
-
-			decode = _JspbEncodingConfigImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _JspbEncodingConfigImpl)
+		}, _JspbEncodingConfigImpl :: _JspbEncodingConfigImpl)
 	end
 
 	function _JspbEncodingConfigImpl.encode(self: JspbEncodingConfig): buffer

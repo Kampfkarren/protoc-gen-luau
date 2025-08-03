@@ -208,9 +208,7 @@ do
 	function _DoubleValueImpl.new(data: _DoubleValuePartialFields?): DoubleValue
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _DoubleValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _DoubleValueImpl)
+		}, _DoubleValueImpl :: _DoubleValueImpl)
 	end
 
 	function _DoubleValueImpl.encode(self: DoubleValue): buffer
@@ -300,9 +298,7 @@ do
 	function _FloatValueImpl.new(data: _FloatValuePartialFields?): FloatValue
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _FloatValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _FloatValueImpl)
+		}, _FloatValueImpl :: _FloatValueImpl)
 	end
 
 	function _FloatValueImpl.encode(self: FloatValue): buffer
@@ -392,9 +388,7 @@ do
 	function _Int64ValueImpl.new(data: _Int64ValuePartialFields?): Int64Value
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _Int64ValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _Int64ValueImpl)
+		}, _Int64ValueImpl :: _Int64ValueImpl)
 	end
 
 	function _Int64ValueImpl.encode(self: Int64Value): buffer
@@ -484,9 +478,7 @@ do
 	function _UInt64ValueImpl.new(data: _UInt64ValuePartialFields?): UInt64Value
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _UInt64ValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _UInt64ValueImpl)
+		}, _UInt64ValueImpl :: _UInt64ValueImpl)
 	end
 
 	function _UInt64ValueImpl.encode(self: UInt64Value): buffer
@@ -576,9 +568,7 @@ do
 	function _Int32ValueImpl.new(data: _Int32ValuePartialFields?): Int32Value
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _Int32ValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _Int32ValueImpl)
+		}, _Int32ValueImpl :: _Int32ValueImpl)
 	end
 
 	function _Int32ValueImpl.encode(self: Int32Value): buffer
@@ -668,9 +658,7 @@ do
 	function _UInt32ValueImpl.new(data: _UInt32ValuePartialFields?): UInt32Value
 		return setmetatable({
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _UInt32ValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _UInt32ValueImpl)
+		}, _UInt32ValueImpl :: _UInt32ValueImpl)
 	end
 
 	function _UInt32ValueImpl.encode(self: UInt32Value): buffer
@@ -760,9 +748,7 @@ do
 	function _BoolValueImpl.new(data: _BoolValuePartialFields?): BoolValue
 		return setmetatable({
 			value = if data == nil or data.value == nil then false else data.value,
-
-			decode = _BoolValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _BoolValueImpl)
+		}, _BoolValueImpl :: _BoolValueImpl)
 	end
 
 	function _BoolValueImpl.encode(self: BoolValue): buffer
@@ -852,9 +838,7 @@ do
 	function _StringValueImpl.new(data: _StringValuePartialFields?): StringValue
 		return setmetatable({
 			value = if data == nil or data.value == nil then "" else data.value,
-
-			decode = _StringValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _StringValueImpl)
+		}, _StringValueImpl :: _StringValueImpl)
 	end
 
 	function _StringValueImpl.encode(self: StringValue): buffer
@@ -944,9 +928,7 @@ do
 	function _BytesValueImpl.new(data: _BytesValuePartialFields?): BytesValue
 		return setmetatable({
 			value = if data == nil or data.value == nil then buffer.create(0) else data.value,
-
-			decode = _BytesValueImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _BytesValueImpl)
+		}, _BytesValueImpl :: _BytesValueImpl)
 	end
 
 	function _BytesValueImpl.encode(self: BytesValue): buffer

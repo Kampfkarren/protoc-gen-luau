@@ -1190,9 +1190,7 @@ do
 			field__Name16 = if data == nil or data.field__Name16 == nil then 0 else data.field__Name16,
 			field_name17__ = if data == nil or data.field_name17__ == nil then 0 else data.field_name17__,
 			Field_name18__ = if data == nil or data.Field_name18__ == nil then 0 else data.Field_name18__,
-
-			decode = _TestAllTypesProto3Impl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3Impl)
+		}, _TestAllTypesProto3Impl :: _TestAllTypesProto3Impl)
 	end
 
 	function _TestAllTypesProto3Impl.encode(self: TestAllTypesProto3): buffer
@@ -6914,9 +6912,7 @@ do
 		return setmetatable({
 			a = if data == nil or data.a == nil then 0 else data.a,
 			corecursive = if data == nil or data.corecursive == nil then nil else data.corecursive,
-
-			decode = _TestAllTypesProto3_NestedMessageImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_NestedMessageImpl)
+		}, _TestAllTypesProto3_NestedMessageImpl :: _TestAllTypesProto3_NestedMessageImpl)
 	end
 
 	function _TestAllTypesProto3_NestedMessageImpl.encode(self: TestAllTypesProto3_NestedMessage): buffer
@@ -7042,9 +7038,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapInt32Int32EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapInt32Int32EntryImpl)
+		}, _TestAllTypesProto3_MapInt32Int32EntryImpl :: _TestAllTypesProto3_MapInt32Int32EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapInt32Int32EntryImpl.encode(self: TestAllTypesProto3_MapInt32Int32Entry): buffer
@@ -7169,9 +7163,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapInt64Int64EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapInt64Int64EntryImpl)
+		}, _TestAllTypesProto3_MapInt64Int64EntryImpl :: _TestAllTypesProto3_MapInt64Int64EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapInt64Int64EntryImpl.encode(self: TestAllTypesProto3_MapInt64Int64Entry): buffer
@@ -7296,9 +7288,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapUint32Uint32EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapUint32Uint32EntryImpl)
+		}, _TestAllTypesProto3_MapUint32Uint32EntryImpl :: _TestAllTypesProto3_MapUint32Uint32EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapUint32Uint32EntryImpl.encode(self: TestAllTypesProto3_MapUint32Uint32Entry): buffer
@@ -7423,9 +7413,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapUint64Uint64EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapUint64Uint64EntryImpl)
+		}, _TestAllTypesProto3_MapUint64Uint64EntryImpl :: _TestAllTypesProto3_MapUint64Uint64EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapUint64Uint64EntryImpl.encode(self: TestAllTypesProto3_MapUint64Uint64Entry): buffer
@@ -7550,9 +7538,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapSint32Sint32EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapSint32Sint32EntryImpl)
+		}, _TestAllTypesProto3_MapSint32Sint32EntryImpl :: _TestAllTypesProto3_MapSint32Sint32EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapSint32Sint32EntryImpl.encode(self: TestAllTypesProto3_MapSint32Sint32Entry): buffer
@@ -7677,9 +7663,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapSint64Sint64EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapSint64Sint64EntryImpl)
+		}, _TestAllTypesProto3_MapSint64Sint64EntryImpl :: _TestAllTypesProto3_MapSint64Sint64EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapSint64Sint64EntryImpl.encode(self: TestAllTypesProto3_MapSint64Sint64Entry): buffer
@@ -7804,9 +7788,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapFixed32Fixed32EntryImpl)
+		}, _TestAllTypesProto3_MapFixed32Fixed32EntryImpl :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapFixed32Fixed32EntryImpl.encode(
@@ -7937,9 +7919,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapFixed64Fixed64EntryImpl)
+		}, _TestAllTypesProto3_MapFixed64Fixed64EntryImpl :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.encode(
@@ -8070,9 +8050,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl)
+		}, _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl.encode(
@@ -8203,9 +8181,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl)
+		}, _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.encode(
@@ -8336,9 +8312,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapInt32FloatEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapInt32FloatEntryImpl)
+		}, _TestAllTypesProto3_MapInt32FloatEntryImpl :: _TestAllTypesProto3_MapInt32FloatEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapInt32FloatEntryImpl.encode(self: TestAllTypesProto3_MapInt32FloatEntry): buffer
@@ -8463,9 +8437,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then 0 else data.key,
 			value = if data == nil or data.value == nil then 0 else data.value,
-
-			decode = _TestAllTypesProto3_MapInt32DoubleEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapInt32DoubleEntryImpl)
+		}, _TestAllTypesProto3_MapInt32DoubleEntryImpl :: _TestAllTypesProto3_MapInt32DoubleEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapInt32DoubleEntryImpl.encode(self: TestAllTypesProto3_MapInt32DoubleEntry): buffer
@@ -8590,9 +8562,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then false else data.key,
 			value = if data == nil or data.value == nil then false else data.value,
-
-			decode = _TestAllTypesProto3_MapBoolBoolEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapBoolBoolEntryImpl)
+		}, _TestAllTypesProto3_MapBoolBoolEntryImpl :: _TestAllTypesProto3_MapBoolBoolEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapBoolBoolEntryImpl.encode(self: TestAllTypesProto3_MapBoolBoolEntry): buffer
@@ -8717,9 +8687,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
 			value = if data == nil or data.value == nil then "" else data.value,
-
-			decode = _TestAllTypesProto3_MapStringStringEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringStringEntryImpl)
+		}, _TestAllTypesProto3_MapStringStringEntryImpl :: _TestAllTypesProto3_MapStringStringEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringStringEntryImpl.encode(self: TestAllTypesProto3_MapStringStringEntry): buffer
@@ -8844,9 +8812,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
 			value = if data == nil or data.value == nil then buffer.create(0) else data.value,
-
-			decode = _TestAllTypesProto3_MapStringBytesEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringBytesEntryImpl)
+		}, _TestAllTypesProto3_MapStringBytesEntryImpl :: _TestAllTypesProto3_MapStringBytesEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringBytesEntryImpl.encode(self: TestAllTypesProto3_MapStringBytesEntry): buffer
@@ -8971,9 +8937,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
 			value = if data == nil or data.value == nil then nil else data.value,
-
-			decode = _TestAllTypesProto3_MapStringNestedMessageEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringNestedMessageEntryImpl)
+		}, _TestAllTypesProto3_MapStringNestedMessageEntryImpl :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringNestedMessageEntryImpl.encode(
@@ -9105,9 +9069,7 @@ do
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
 			value = if data == nil or data.value == nil then nil else data.value,
-
-			decode = _TestAllTypesProto3_MapStringForeignMessageEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringForeignMessageEntryImpl)
+		}, _TestAllTypesProto3_MapStringForeignMessageEntryImpl :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringForeignMessageEntryImpl.encode(
@@ -9242,9 +9204,7 @@ do
 			value = if data == nil or data.value == nil
 				then assert(messages.TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
 				else data.value,
-
-			decode = _TestAllTypesProto3_MapStringNestedEnumEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringNestedEnumEntryImpl)
+		}, _TestAllTypesProto3_MapStringNestedEnumEntryImpl :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringNestedEnumEntryImpl.encode(
@@ -9394,9 +9354,7 @@ do
 			value = if data == nil or data.value == nil
 				then assert(messages.ForeignEnum.fromNumber(0), "Enum has no 0 default")
 				else data.value,
-
-			decode = _TestAllTypesProto3_MapStringForeignEnumEntryImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _TestAllTypesProto3_MapStringForeignEnumEntryImpl)
+		}, _TestAllTypesProto3_MapStringForeignEnumEntryImpl :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl)
 	end
 
 	function _TestAllTypesProto3_MapStringForeignEnumEntryImpl.encode(
@@ -9625,9 +9583,7 @@ do
 	function _ForeignMessageImpl.new(data: _ForeignMessagePartialFields?): ForeignMessage
 		return setmetatable({
 			c = if data == nil or data.c == nil then 0 else data.c,
-
-			decode = _ForeignMessageImpl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _ForeignMessageImpl)
+		}, _ForeignMessageImpl :: _ForeignMessageImpl)
 	end
 
 	function _ForeignMessageImpl.encode(self: ForeignMessage): buffer
@@ -9724,10 +9680,7 @@ do
 	_NullHypothesisProto3Impl.__index = _NullHypothesisProto3Impl
 
 	function _NullHypothesisProto3Impl.new(data: _NullHypothesisProto3PartialFields?): NullHypothesisProto3
-		return setmetatable({
-
-			decode = _NullHypothesisProto3Impl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _NullHypothesisProto3Impl)
+		return setmetatable({}, _NullHypothesisProto3Impl :: _NullHypothesisProto3Impl)
 	end
 
 	function _NullHypothesisProto3Impl.encode(self: NullHypothesisProto3): buffer
@@ -9806,10 +9759,7 @@ do
 	_EnumOnlyProto3Impl.__index = _EnumOnlyProto3Impl
 
 	function _EnumOnlyProto3Impl.new(data: _EnumOnlyProto3PartialFields?): EnumOnlyProto3
-		return setmetatable({
-
-			decode = _EnumOnlyProto3Impl.decode, -- Luau: Fixes rare bug with "missing fields decode"
-		}, _EnumOnlyProto3Impl)
+		return setmetatable({}, _EnumOnlyProto3Impl :: _EnumOnlyProto3Impl)
 	end
 
 	function _EnumOnlyProto3Impl.encode(self: EnumOnlyProto3): buffer
