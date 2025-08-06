@@ -8,7 +8,7 @@ local stdio = require("@lune/stdio")
 local conformance = require("./generated/conformance")
 local test_messages_proto3 = require("./generated/test_messages_proto3")
 
-local jsonEncode = require("jsonEncode")
+local jsonEncode = require("./jsonEncode")
 
 local file = buffer.fromstring(fs.readFile(process.args[1]))
 
