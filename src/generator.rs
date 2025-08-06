@@ -265,7 +265,7 @@ fn create_messages_init(names: &[String]) -> String {
 
     // We need to do this because referencing can happen out of order,
     // but at runtime it will always be safe.
-    builder.push("local messages: {");
+    builder.push("type _Messages = {");
     builder.indent();
 
     for name in names {
@@ -273,7 +273,8 @@ fn create_messages_init(names: &[String]) -> String {
     }
 
     builder.dedent();
-    builder.push("} = {} :: any -- Luau: We will fill these in later");
+    builder.push("}");
+    builder.push("local messages: _Messages = {} :: _Messages");
 
     builder.blank();
 
@@ -895,7 +896,8 @@ impl<'a> FileGenerator<'a> {
         let name = format!("{prefix}{}", descriptor.name());
 
         self.types.push(format!("local {name}: proto.Enum<{name}>"));
-        self.types.push(format!("type _{name}Message = {name}"));
+        self.types
+            .push(format!("type _{name}Message = proto.Enum<{name}>"));
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 
