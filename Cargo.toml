@@ -18,6 +18,8 @@ typed-path = "0.8.0"
 opt-level = 3
 
 [dev-dependencies]
-lune = { version = "0.8.6", default-features = false, features = ["std"] }
+lune = { version = "0.10.1", default-features = false, features = ["std"] }
 protox = "0.6.0"
-tokio = { version = "1.37.0", features = ["test-util"] }
+tokio = { version = "1.47.1", features = ["macros", "rt", "test-util"] }
+
+futures-util = "0.3.31" # Unused, fixes a bug brought from one of lune's dependencies
