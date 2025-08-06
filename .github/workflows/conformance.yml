@@ -20,7 +20,7 @@ jobs:
     - name: Cache Rust dependencies
       uses: Swatinem/rust-cache@v2
     - name: Download just
-      run: sudo snap install --edge --classic just
+      uses: extractions/setup-just@v3
     - name: Download Protoc
       uses: arduino/setup-protoc@v3
     - name: Run conformance tests
