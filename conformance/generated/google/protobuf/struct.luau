@@ -6,14 +6,14 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	Struct: _StructMessage,
 	Struct_FieldsEntry: _Struct_FieldsEntryMessage,
 	Value: _ValueMessage,
 	ListValue: _ListValueMessage,
 	NullValue: _NullValueMessage,
-} =
-	{} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _StructImpl = {
 	__index: _StructImpl,
@@ -34,6 +34,7 @@ type _StructPartialFields = {
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
+type _StructMessage = proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
 
 type _Struct_FieldsEntryImpl = {
 	__index: _Struct_FieldsEntryImpl,
@@ -56,6 +57,7 @@ type _Struct_FieldsEntryPartialFields = {
 }
 
 export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
+type _Struct_FieldsEntryMessage = proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
 
 type _ValueImpl = {
 	__index: _ValueImpl,
@@ -90,6 +92,7 @@ type _ValuePartialFields = {
 }
 
 export type Value = typeof(setmetatable({} :: _ValueFields, {} :: _ValueImpl))
+type _ValueMessage = proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
 
 type _ListValueImpl = {
 	__index: _ListValueImpl,
@@ -110,12 +113,10 @@ type _ListValuePartialFields = {
 }
 
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
+type _ListValueMessage = proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
 
-local NullValue: proto.Enum<NullValue>
-type _NullValueMessage = NullValue
+type _NullValueMessage = proto.Enum<NullValue>
 export type NullValue = "NULL_VALUE" | number -- Unknown
-
-type _StructMessage = proto.Message<Struct, _StructPartialFields> & proto.CustomJson<Struct, { [string]: any }>
 
 do
 	local _StructImpl = {}
@@ -231,8 +232,6 @@ do
 
 	typeRegistry.default:register(messages.Struct)
 end
-
-type _Struct_FieldsEntryMessage = proto.Message<Struct_FieldsEntry, _Struct_FieldsEntryPartialFields>
 
 do
 	local _Struct_FieldsEntryImpl = {}
@@ -350,8 +349,6 @@ do
 
 	typeRegistry.default:register(messages.Struct_FieldsEntry)
 end
-
-type _ValueMessage = proto.Message<Value, _ValuePartialFields> & proto.CustomJson<Value, any>
 
 do
 	local _ValueImpl = {}
@@ -526,8 +523,6 @@ do
 	typeRegistry.default:register(messages.Value)
 end
 
-type _ListValueMessage = proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
-
 do
 	local _ListValueImpl = {}
 	_ListValueImpl.__index = _ListValueImpl
@@ -632,6 +627,7 @@ do
 	typeRegistry.default:register(messages.ListValue)
 end
 
+local NullValue: proto.Enum<NullValue>
 messages.NullValue = {
 	fromNumber = function(value: number): NullValue?
 		if value == 0 then

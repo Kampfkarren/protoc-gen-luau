@@ -6,9 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	Duration: _DurationMessage,
-} = {} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _DurationImpl = {
 	__index: _DurationImpl,
@@ -31,7 +32,6 @@ type _DurationPartialFields = {
 }
 
 export type Duration = typeof(setmetatable({} :: _DurationFields, {} :: _DurationImpl))
-
 type _DurationMessage = proto.Message<Duration, _DurationPartialFields> & proto.CustomJson<Duration, string>
 
 do

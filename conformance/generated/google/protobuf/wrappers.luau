@@ -6,7 +6,7 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	DoubleValue: _DoubleValueMessage,
 	FloatValue: _FloatValueMessage,
 	Int64Value: _Int64ValueMessage,
@@ -16,8 +16,8 @@ local messages: {
 	BoolValue: _BoolValueMessage,
 	StringValue: _StringValueMessage,
 	BytesValue: _BytesValueMessage,
-} =
-	{} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _DoubleValueImpl = {
 	__index: _DoubleValueImpl,
@@ -38,6 +38,7 @@ type _DoubleValuePartialFields = {
 }
 
 export type DoubleValue = typeof(setmetatable({} :: _DoubleValueFields, {} :: _DoubleValueImpl))
+type _DoubleValueMessage = proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
 
 type _FloatValueImpl = {
 	__index: _FloatValueImpl,
@@ -58,6 +59,7 @@ type _FloatValuePartialFields = {
 }
 
 export type FloatValue = typeof(setmetatable({} :: _FloatValueFields, {} :: _FloatValueImpl))
+type _FloatValueMessage = proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
 
 type _Int64ValueImpl = {
 	__index: _Int64ValueImpl,
@@ -78,6 +80,7 @@ type _Int64ValuePartialFields = {
 }
 
 export type Int64Value = typeof(setmetatable({} :: _Int64ValueFields, {} :: _Int64ValueImpl))
+type _Int64ValueMessage = proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
 
 type _UInt64ValueImpl = {
 	__index: _UInt64ValueImpl,
@@ -98,6 +101,7 @@ type _UInt64ValuePartialFields = {
 }
 
 export type UInt64Value = typeof(setmetatable({} :: _UInt64ValueFields, {} :: _UInt64ValueImpl))
+type _UInt64ValueMessage = proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
 
 type _Int32ValueImpl = {
 	__index: _Int32ValueImpl,
@@ -118,6 +122,7 @@ type _Int32ValuePartialFields = {
 }
 
 export type Int32Value = typeof(setmetatable({} :: _Int32ValueFields, {} :: _Int32ValueImpl))
+type _Int32ValueMessage = proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
 
 type _UInt32ValueImpl = {
 	__index: _UInt32ValueImpl,
@@ -138,6 +143,7 @@ type _UInt32ValuePartialFields = {
 }
 
 export type UInt32Value = typeof(setmetatable({} :: _UInt32ValueFields, {} :: _UInt32ValueImpl))
+type _UInt32ValueMessage = proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
 
 type _BoolValueImpl = {
 	__index: _BoolValueImpl,
@@ -158,6 +164,7 @@ type _BoolValuePartialFields = {
 }
 
 export type BoolValue = typeof(setmetatable({} :: _BoolValueFields, {} :: _BoolValueImpl))
+type _BoolValueMessage = proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
 
 type _StringValueImpl = {
 	__index: _StringValueImpl,
@@ -178,6 +185,7 @@ type _StringValuePartialFields = {
 }
 
 export type StringValue = typeof(setmetatable({} :: _StringValueFields, {} :: _StringValueImpl))
+type _StringValueMessage = proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
 
 type _BytesValueImpl = {
 	__index: _BytesValueImpl,
@@ -198,8 +206,7 @@ type _BytesValuePartialFields = {
 }
 
 export type BytesValue = typeof(setmetatable({} :: _BytesValueFields, {} :: _BytesValueImpl))
-
-type _DoubleValueMessage = proto.Message<DoubleValue, _DoubleValuePartialFields> & proto.CustomJson<DoubleValue, number>
+type _BytesValueMessage = proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
 
 do
 	local _DoubleValueImpl = {}
@@ -289,8 +296,6 @@ do
 	typeRegistry.default:register(messages.DoubleValue)
 end
 
-type _FloatValueMessage = proto.Message<FloatValue, _FloatValuePartialFields> & proto.CustomJson<FloatValue, number>
-
 do
 	local _FloatValueImpl = {}
 	_FloatValueImpl.__index = _FloatValueImpl
@@ -378,8 +383,6 @@ do
 
 	typeRegistry.default:register(messages.FloatValue)
 end
-
-type _Int64ValueMessage = proto.Message<Int64Value, _Int64ValuePartialFields> & proto.CustomJson<Int64Value, number>
 
 do
 	local _Int64ValueImpl = {}
@@ -469,8 +472,6 @@ do
 	typeRegistry.default:register(messages.Int64Value)
 end
 
-type _UInt64ValueMessage = proto.Message<UInt64Value, _UInt64ValuePartialFields> & proto.CustomJson<UInt64Value, number>
-
 do
 	local _UInt64ValueImpl = {}
 	_UInt64ValueImpl.__index = _UInt64ValueImpl
@@ -558,8 +559,6 @@ do
 
 	typeRegistry.default:register(messages.UInt64Value)
 end
-
-type _Int32ValueMessage = proto.Message<Int32Value, _Int32ValuePartialFields> & proto.CustomJson<Int32Value, number>
 
 do
 	local _Int32ValueImpl = {}
@@ -649,8 +648,6 @@ do
 	typeRegistry.default:register(messages.Int32Value)
 end
 
-type _UInt32ValueMessage = proto.Message<UInt32Value, _UInt32ValuePartialFields> & proto.CustomJson<UInt32Value, number>
-
 do
 	local _UInt32ValueImpl = {}
 	_UInt32ValueImpl.__index = _UInt32ValueImpl
@@ -738,8 +735,6 @@ do
 
 	typeRegistry.default:register(messages.UInt32Value)
 end
-
-type _BoolValueMessage = proto.Message<BoolValue, _BoolValuePartialFields> & proto.CustomJson<BoolValue, boolean>
 
 do
 	local _BoolValueImpl = {}
@@ -829,8 +824,6 @@ do
 	typeRegistry.default:register(messages.BoolValue)
 end
 
-type _StringValueMessage = proto.Message<StringValue, _StringValuePartialFields> & proto.CustomJson<StringValue, string>
-
 do
 	local _StringValueImpl = {}
 	_StringValueImpl.__index = _StringValueImpl
@@ -918,8 +911,6 @@ do
 
 	typeRegistry.default:register(messages.StringValue)
 end
-
-type _BytesValueMessage = proto.Message<BytesValue, _BytesValuePartialFields> & proto.CustomJson<BytesValue, string>
 
 do
 	local _BytesValueImpl = {}

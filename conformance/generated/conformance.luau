@@ -6,15 +6,15 @@
 local proto = require("./proto")
 local typeRegistry = require("./proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	FailureSet: _FailureSetMessage,
 	ConformanceRequest: _ConformanceRequestMessage,
 	ConformanceResponse: _ConformanceResponseMessage,
 	JspbEncodingConfig: _JspbEncodingConfigMessage,
 	WireFormat: _WireFormatMessage,
 	TestCategory: _TestCategoryMessage,
-} =
-	{} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _FailureSetImpl = {
 	__index: _FailureSetImpl,
@@ -35,6 +35,7 @@ type _FailureSetPartialFields = {
 }
 
 export type FailureSet = typeof(setmetatable({} :: _FailureSetFields, {} :: _FailureSetImpl))
+type _FailureSetMessage = proto.Message<FailureSet, _FailureSetPartialFields>
 
 type _ConformanceRequestImpl = {
 	__index: _ConformanceRequestImpl,
@@ -75,6 +76,7 @@ type _ConformanceRequestPartialFields = {
 }
 
 export type ConformanceRequest = typeof(setmetatable({} :: _ConformanceRequestFields, {} :: _ConformanceRequestImpl))
+type _ConformanceRequestMessage = proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
 
 type _ConformanceResponseImpl = {
 	__index: _ConformanceResponseImpl,
@@ -115,6 +117,7 @@ type _ConformanceResponsePartialFields = {
 }
 
 export type ConformanceResponse = typeof(setmetatable({} :: _ConformanceResponseFields, {} :: _ConformanceResponseImpl))
+type _ConformanceResponseMessage = proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
 
 type _JspbEncodingConfigImpl = {
 	__index: _JspbEncodingConfigImpl,
@@ -135,13 +138,12 @@ type _JspbEncodingConfigPartialFields = {
 }
 
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
+type _JspbEncodingConfigMessage = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
 
-local WireFormat: proto.Enum<WireFormat>
-type _WireFormatMessage = WireFormat
+type _WireFormatMessage = proto.Enum<WireFormat>
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
 
-local TestCategory: proto.Enum<TestCategory>
-type _TestCategoryMessage = TestCategory
+type _TestCategoryMessage = proto.Enum<TestCategory>
 export type TestCategory =
 	"UNSPECIFIED_TEST"
 	| "BINARY_TEST"
@@ -150,8 +152,6 @@ export type TestCategory =
 	| "JSPB_TEST"
 	| "TEXT_FORMAT_TEST"
 	| number -- Unknown
-
-type _FailureSetMessage = proto.Message<FailureSet, _FailureSetPartialFields>
 
 do
 	local _FailureSetImpl = {}
@@ -260,8 +260,6 @@ do
 
 	typeRegistry.default:register(messages.FailureSet)
 end
-
-type _ConformanceRequestMessage = proto.Message<ConformanceRequest, _ConformanceRequestPartialFields>
 
 do
 	local _ConformanceRequestImpl = {}
@@ -584,8 +582,6 @@ do
 	typeRegistry.default:register(messages.ConformanceRequest)
 end
 
-type _ConformanceResponseMessage = proto.Message<ConformanceResponse, _ConformanceResponsePartialFields>
-
 do
 	local _ConformanceResponseImpl = {}
 	_ConformanceResponseImpl.__index = _ConformanceResponseImpl
@@ -831,8 +827,6 @@ do
 	typeRegistry.default:register(messages.ConformanceResponse)
 end
 
-type _JspbEncodingConfigMessage = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
-
 do
 	local _JspbEncodingConfigImpl = {}
 	_JspbEncodingConfigImpl.__index = _JspbEncodingConfigImpl
@@ -936,6 +930,7 @@ do
 	typeRegistry.default:register(messages.JspbEncodingConfig)
 end
 
+local WireFormat: proto.Enum<WireFormat>
 messages.WireFormat = {
 	fromNumber = function(value: number): WireFormat?
 		if value == 0 then
@@ -986,6 +981,7 @@ messages.WireFormat = {
 	end,
 }
 
+local TestCategory: proto.Enum<TestCategory>
 messages.TestCategory = {
 	fromNumber = function(value: number): TestCategory?
 		if value == 0 then
