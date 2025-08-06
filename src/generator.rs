@@ -901,9 +901,6 @@ impl<'a> FileGenerator<'a> {
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 
-        self.implementations
-            .push(format!("local {name}: proto.Enum<{name}>"));
-
         let mut from_number = IfBuilder::new();
         from_number.indent_n(2);
 
