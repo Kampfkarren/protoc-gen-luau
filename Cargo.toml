@@ -20,6 +20,6 @@ opt-level = 3
 [dev-dependencies]
 lune = { version = "0.10.1", default-features = false, features = ["std"] }
 protox = "0.6.0"
-tokio = { version = "1.37.0", features = ["test-util"] }
+tokio = { version = "1.37.0", features = ["macros", "rt", "test-util"] }
 
 futures-util = "0.3.31" # Unused, fixes a bug brought from one of lune's dependencies
