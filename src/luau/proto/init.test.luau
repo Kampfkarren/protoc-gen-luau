@@ -1,6 +1,6 @@
 --!strict
 -- TODO: This file is NOT RAN! Needs to be fixed in a properly run test file.
-local proto = require("./")
+local proto = require("@self")
 
 local function assertEquals<T>(x: T, y: T)
 	if x ~= y then

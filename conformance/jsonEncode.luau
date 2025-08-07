@@ -1,5 +1,5 @@
 --!strict
-local net = require("@lune/net")
+local serde = require("@lune/serde")
 
 local function isArray(input: { [any]: any })
 	local count = 0
@@ -32,7 +32,7 @@ local function jsonEncode(input: any): string
 	elseif typeof(input) == "number" or typeof(input) == "boolean" then
 		return tostring(input)
 	elseif typeof(input) == "string" then
-		return net.jsonEncode(input)
+		return serde.encode("json", input)
 	else
 		error(`Unknown input type: {tostring(input)}`)
 	end

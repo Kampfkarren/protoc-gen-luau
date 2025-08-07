@@ -1,6 +1,6 @@
-local base64 = require("./base64")
-local message = require("./message")
-local typeRegistry = require("./typeRegistry")
+local base64 = require("@self/base64")
+local message = require("@self/message")
+local typeRegistry = require("@self/typeRegistry")
 
 export type Descriptor = message.Descriptor
 export type Message<T, Fields> = message.Message<T, Fields>

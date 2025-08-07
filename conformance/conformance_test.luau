@@ -1,14 +1,14 @@
 #!/usr/bin/env -S lune run
 --!strict
 local fs = require("@lune/fs")
-local net = require("@lune/net")
 local process = require("@lune/process")
+local serde = require("@lune/serde")
 local stdio = require("@lune/stdio")
 
 local conformance = require("./generated/conformance")
 local test_messages_proto3 = require("./generated/test_messages_proto3")
 
-local jsonEncode = require("jsonEncode")
+local jsonEncode = require("./jsonEncode")
 
 local file = buffer.fromstring(fs.readFile(process.args[1]))
 
@@ -50,7 +50,7 @@ local ok, problem: any = xpcall(function()
 
 	assert(request.payload ~= nil, "No payload provided")
 	if request.payload.type == "json_payload" then
-		local success, result = pcall(net.jsonDecode, request.payload.value)
+		local success, result = pcall(serde.decode, "json" :: "json", request.payload.value)
 		if not success then
 			response.result = { type = "parse_error", value = tostring(result) }
 			writeResponse()
