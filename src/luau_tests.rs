@@ -1,4 +1,4 @@
-use std::{path::Path, process::ExitCode};
+use std::path::Path;
 
 use tokio::sync::OnceCell;
 

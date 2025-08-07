@@ -6,9 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	Any: _AnyMessage,
-} = {} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _AnyImpl = {
 	__index: _AnyImpl,
@@ -45,7 +46,6 @@ type _AnyPartialFields = {
 }
 
 export type Any = typeof(setmetatable({} :: _AnyFields, {} :: _AnyImpl))
-
 type _AnyMessage = proto.Message<Any, _AnyPartialFields> & proto.CustomJson<Any, { [string]: any }>
 
 do

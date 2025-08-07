@@ -6,9 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	Timestamp: _TimestampMessage,
-} = {} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _TimestampImpl = {
 	__index: _TimestampImpl,
@@ -31,7 +32,6 @@ type _TimestampPartialFields = {
 }
 
 export type Timestamp = typeof(setmetatable({} :: _TimestampFields, {} :: _TimestampImpl))
-
 type _TimestampMessage = proto.Message<Timestamp, _TimestampPartialFields> & proto.CustomJson<Timestamp, string>
 
 do

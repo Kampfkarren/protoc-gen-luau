@@ -6,7 +6,7 @@
 local proto = require("./proto")
 local typeRegistry = require("./proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	TestAllTypesProto3: _TestAllTypesProto3Message,
 	TestAllTypesProto3_NestedMessage: _TestAllTypesProto3_NestedMessageMessage,
 	TestAllTypesProto3_MapInt32Int32Entry: _TestAllTypesProto3_MapInt32Int32EntryMessage,
@@ -35,8 +35,8 @@ local messages: {
 	EnumOnlyProto3: _EnumOnlyProto3Message,
 	EnumOnlyProto3_Bool: _EnumOnlyProto3_BoolMessage,
 	ForeignEnum: _ForeignEnumMessage,
-} =
-	{} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 local _google_protobuf_any = require("./google/protobuf/any")
 local _google_protobuf_duration = require("./google/protobuf/duration")
@@ -368,6 +368,7 @@ type _TestAllTypesProto3PartialFields = {
 }
 
 export type TestAllTypesProto3 = typeof(setmetatable({} :: _TestAllTypesProto3Fields, {} :: _TestAllTypesProto3Impl))
+type _TestAllTypesProto3Message = proto.Message<TestAllTypesProto3, _TestAllTypesProto3PartialFields>
 
 type _TestAllTypesProto3_NestedMessageImpl = {
 	__index: _TestAllTypesProto3_NestedMessageImpl,
@@ -393,6 +394,10 @@ export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_NestedMessageFields,
 	{} :: _TestAllTypesProto3_NestedMessageImpl
 ))
+type _TestAllTypesProto3_NestedMessageMessage = proto.Message<
+	TestAllTypesProto3_NestedMessage,
+	_TestAllTypesProto3_NestedMessagePartialFields
+>
 
 type _TestAllTypesProto3_MapInt32Int32EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32Int32EntryImpl,
@@ -418,6 +423,10 @@ export type TestAllTypesProto3_MapInt32Int32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryFields,
 	{} :: _TestAllTypesProto3_MapInt32Int32EntryImpl
 ))
+type _TestAllTypesProto3_MapInt32Int32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32Int32Entry,
+	_TestAllTypesProto3_MapInt32Int32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapInt64Int64EntryImpl = {
 	__index: _TestAllTypesProto3_MapInt64Int64EntryImpl,
@@ -443,6 +452,10 @@ export type TestAllTypesProto3_MapInt64Int64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryFields,
 	{} :: _TestAllTypesProto3_MapInt64Int64EntryImpl
 ))
+type _TestAllTypesProto3_MapInt64Int64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt64Int64Entry,
+	_TestAllTypesProto3_MapInt64Int64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapUint32Uint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint32Uint32EntryImpl,
@@ -468,6 +481,10 @@ export type TestAllTypesProto3_MapUint32Uint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryFields,
 	{} :: _TestAllTypesProto3_MapUint32Uint32EntryImpl
 ))
+type _TestAllTypesProto3_MapUint32Uint32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapUint32Uint32Entry,
+	_TestAllTypesProto3_MapUint32Uint32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapUint64Uint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapUint64Uint64EntryImpl,
@@ -493,6 +510,10 @@ export type TestAllTypesProto3_MapUint64Uint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryFields,
 	{} :: _TestAllTypesProto3_MapUint64Uint64EntryImpl
 ))
+type _TestAllTypesProto3_MapUint64Uint64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapUint64Uint64Entry,
+	_TestAllTypesProto3_MapUint64Uint64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSint32Sint32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint32Sint32EntryImpl,
@@ -518,6 +539,10 @@ export type TestAllTypesProto3_MapSint32Sint32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryFields,
 	{} :: _TestAllTypesProto3_MapSint32Sint32EntryImpl
 ))
+type _TestAllTypesProto3_MapSint32Sint32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSint32Sint32Entry,
+	_TestAllTypesProto3_MapSint32Sint32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSint64Sint64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSint64Sint64EntryImpl,
@@ -543,6 +568,10 @@ export type TestAllTypesProto3_MapSint64Sint64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryFields,
 	{} :: _TestAllTypesProto3_MapSint64Sint64EntryImpl
 ))
+type _TestAllTypesProto3_MapSint64Sint64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSint64Sint64Entry,
+	_TestAllTypesProto3_MapSint64Sint64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl,
@@ -570,6 +599,10 @@ export type TestAllTypesProto3_MapFixed32Fixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed32Fixed32EntryImpl
 ))
+type _TestAllTypesProto3_MapFixed32Fixed32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapFixed32Fixed32Entry,
+	_TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl,
@@ -597,6 +630,10 @@ export type TestAllTypesProto3_MapFixed64Fixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
 ))
+type _TestAllTypesProto3_MapFixed64Fixed64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapFixed64Fixed64Entry,
+	_TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl,
@@ -624,6 +661,10 @@ export type TestAllTypesProto3_MapSfixed32Sfixed32Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl
 ))
+type _TestAllTypesProto3_MapSfixed32Sfixed32EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSfixed32Sfixed32Entry,
+	_TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {
 	__index: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl,
@@ -651,6 +692,10 @@ export type TestAllTypesProto3_MapSfixed64Sfixed64Entry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields,
 	{} :: _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
 ))
+type _TestAllTypesProto3_MapSfixed64Sfixed64EntryMessage = proto.Message<
+	TestAllTypesProto3_MapSfixed64Sfixed64Entry,
+	_TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields
+>
 
 type _TestAllTypesProto3_MapInt32FloatEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32FloatEntryImpl,
@@ -676,6 +721,10 @@ export type TestAllTypesProto3_MapInt32FloatEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32FloatEntryImpl
 ))
+type _TestAllTypesProto3_MapInt32FloatEntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32FloatEntry,
+	_TestAllTypesProto3_MapInt32FloatEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapInt32DoubleEntryImpl = {
 	__index: _TestAllTypesProto3_MapInt32DoubleEntryImpl,
@@ -701,6 +750,10 @@ export type TestAllTypesProto3_MapInt32DoubleEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryFields,
 	{} :: _TestAllTypesProto3_MapInt32DoubleEntryImpl
 ))
+type _TestAllTypesProto3_MapInt32DoubleEntryMessage = proto.Message<
+	TestAllTypesProto3_MapInt32DoubleEntry,
+	_TestAllTypesProto3_MapInt32DoubleEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapBoolBoolEntryImpl = {
 	__index: _TestAllTypesProto3_MapBoolBoolEntryImpl,
@@ -726,6 +779,10 @@ export type TestAllTypesProto3_MapBoolBoolEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryFields,
 	{} :: _TestAllTypesProto3_MapBoolBoolEntryImpl
 ))
+type _TestAllTypesProto3_MapBoolBoolEntryMessage = proto.Message<
+	TestAllTypesProto3_MapBoolBoolEntry,
+	_TestAllTypesProto3_MapBoolBoolEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringStringEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringStringEntryImpl,
@@ -751,6 +808,10 @@ export type TestAllTypesProto3_MapStringStringEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringStringEntryFields,
 	{} :: _TestAllTypesProto3_MapStringStringEntryImpl
 ))
+type _TestAllTypesProto3_MapStringStringEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringStringEntry,
+	_TestAllTypesProto3_MapStringStringEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringBytesEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringBytesEntryImpl,
@@ -776,6 +837,10 @@ export type TestAllTypesProto3_MapStringBytesEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringBytesEntryFields,
 	{} :: _TestAllTypesProto3_MapStringBytesEntryImpl
 ))
+type _TestAllTypesProto3_MapStringBytesEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringBytesEntry,
+	_TestAllTypesProto3_MapStringBytesEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedMessageEntryImpl,
@@ -803,6 +868,10 @@ export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl
 ))
+type _TestAllTypesProto3_MapStringNestedMessageEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringNestedMessageEntry,
+	_TestAllTypesProto3_MapStringNestedMessageEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignMessageEntryImpl,
@@ -830,6 +899,10 @@ export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatabl
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl
 ))
+type _TestAllTypesProto3_MapStringForeignMessageEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringForeignMessageEntry,
+	_TestAllTypesProto3_MapStringForeignMessageEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringNestedEnumEntryImpl,
@@ -857,6 +930,10 @@ export type TestAllTypesProto3_MapStringNestedEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringNestedEnumEntryImpl
 ))
+type _TestAllTypesProto3_MapStringNestedEnumEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringNestedEnumEntry,
+	_TestAllTypesProto3_MapStringNestedEnumEntryPartialFields
+>
 
 type _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {
 	__index: _TestAllTypesProto3_MapStringForeignEnumEntryImpl,
@@ -884,13 +961,15 @@ export type TestAllTypesProto3_MapStringForeignEnumEntry = typeof(setmetatable(
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryFields,
 	{} :: _TestAllTypesProto3_MapStringForeignEnumEntryImpl
 ))
+type _TestAllTypesProto3_MapStringForeignEnumEntryMessage = proto.Message<
+	TestAllTypesProto3_MapStringForeignEnumEntry,
+	_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
+>
 
-local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
-type _TestAllTypesProto3_NestedEnumMessage = TestAllTypesProto3_NestedEnum
+type _TestAllTypesProto3_NestedEnumMessage = proto.Enum<TestAllTypesProto3_NestedEnum>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
 
-local TestAllTypesProto3_AliasedEnum: proto.Enum<TestAllTypesProto3_AliasedEnum>
-type _TestAllTypesProto3_AliasedEnumMessage = TestAllTypesProto3_AliasedEnum
+type _TestAllTypesProto3_AliasedEnumMessage = proto.Enum<TestAllTypesProto3_AliasedEnum>
 export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_BAZ" | "MOO" | "moo" | "bAz" | number -- Unknown
 
 type _ForeignMessageImpl = {
@@ -912,6 +991,7 @@ type _ForeignMessagePartialFields = {
 }
 
 export type ForeignMessage = typeof(setmetatable({} :: _ForeignMessageFields, {} :: _ForeignMessageImpl))
+type _ForeignMessageMessage = proto.Message<ForeignMessage, _ForeignMessagePartialFields>
 
 type _NullHypothesisProto3Impl = {
 	__index: _NullHypothesisProto3Impl,
@@ -931,6 +1011,7 @@ export type NullHypothesisProto3 = typeof(setmetatable(
 	{} :: _NullHypothesisProto3Fields,
 	{} :: _NullHypothesisProto3Impl
 ))
+type _NullHypothesisProto3Message = proto.Message<NullHypothesisProto3, _NullHypothesisProto3PartialFields>
 
 type _EnumOnlyProto3Impl = {
 	__index: _EnumOnlyProto3Impl,
@@ -947,16 +1028,13 @@ type _EnumOnlyProto3Fields = {}
 type _EnumOnlyProto3PartialFields = {}
 
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
+type _EnumOnlyProto3Message = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
 
-local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
-type _EnumOnlyProto3_BoolMessage = EnumOnlyProto3_Bool
+type _EnumOnlyProto3_BoolMessage = proto.Enum<EnumOnlyProto3_Bool>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
 
-local ForeignEnum: proto.Enum<ForeignEnum>
-type _ForeignEnumMessage = ForeignEnum
+type _ForeignEnumMessage = proto.Enum<ForeignEnum>
 export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number -- Unknown
-
-type _TestAllTypesProto3Message = proto.Message<TestAllTypesProto3, _TestAllTypesProto3PartialFields>
 
 do
 	local _TestAllTypesProto3Impl = {}
@@ -6897,11 +6975,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3)
 end
 
-type _TestAllTypesProto3_NestedMessageMessage = proto.Message<
-	TestAllTypesProto3_NestedMessage,
-	_TestAllTypesProto3_NestedMessagePartialFields
->
-
 do
 	local _TestAllTypesProto3_NestedMessageImpl = {}
 	_TestAllTypesProto3_NestedMessageImpl.__index = _TestAllTypesProto3_NestedMessageImpl
@@ -7023,11 +7096,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_NestedMessage)
 end
 
-type _TestAllTypesProto3_MapInt32Int32EntryMessage = proto.Message<
-	TestAllTypesProto3_MapInt32Int32Entry,
-	_TestAllTypesProto3_MapInt32Int32EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapInt32Int32EntryImpl = {}
 	_TestAllTypesProto3_MapInt32Int32EntryImpl.__index = _TestAllTypesProto3_MapInt32Int32EntryImpl
@@ -7147,11 +7215,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32Int32Entry)
 end
-
-type _TestAllTypesProto3_MapInt64Int64EntryMessage = proto.Message<
-	TestAllTypesProto3_MapInt64Int64Entry,
-	_TestAllTypesProto3_MapInt64Int64EntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapInt64Int64EntryImpl = {}
@@ -7273,11 +7336,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt64Int64Entry)
 end
 
-type _TestAllTypesProto3_MapUint32Uint32EntryMessage = proto.Message<
-	TestAllTypesProto3_MapUint32Uint32Entry,
-	_TestAllTypesProto3_MapUint32Uint32EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapUint32Uint32EntryImpl = {}
 	_TestAllTypesProto3_MapUint32Uint32EntryImpl.__index = _TestAllTypesProto3_MapUint32Uint32EntryImpl
@@ -7397,11 +7455,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapUint32Uint32Entry)
 end
-
-type _TestAllTypesProto3_MapUint64Uint64EntryMessage = proto.Message<
-	TestAllTypesProto3_MapUint64Uint64Entry,
-	_TestAllTypesProto3_MapUint64Uint64EntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapUint64Uint64EntryImpl = {}
@@ -7523,11 +7576,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapUint64Uint64Entry)
 end
 
-type _TestAllTypesProto3_MapSint32Sint32EntryMessage = proto.Message<
-	TestAllTypesProto3_MapSint32Sint32Entry,
-	_TestAllTypesProto3_MapSint32Sint32EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapSint32Sint32EntryImpl = {}
 	_TestAllTypesProto3_MapSint32Sint32EntryImpl.__index = _TestAllTypesProto3_MapSint32Sint32EntryImpl
@@ -7648,11 +7696,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapSint32Sint32Entry)
 end
 
-type _TestAllTypesProto3_MapSint64Sint64EntryMessage = proto.Message<
-	TestAllTypesProto3_MapSint64Sint64Entry,
-	_TestAllTypesProto3_MapSint64Sint64EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapSint64Sint64EntryImpl = {}
 	_TestAllTypesProto3_MapSint64Sint64EntryImpl.__index = _TestAllTypesProto3_MapSint64Sint64EntryImpl
@@ -7772,11 +7815,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapSint64Sint64Entry)
 end
-
-type _TestAllTypesProto3_MapFixed32Fixed32EntryMessage = proto.Message<
-	TestAllTypesProto3_MapFixed32Fixed32Entry,
-	_TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapFixed32Fixed32EntryImpl = {}
@@ -7904,11 +7942,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapFixed32Fixed32Entry)
 end
 
-type _TestAllTypesProto3_MapFixed64Fixed64EntryMessage = proto.Message<
-	TestAllTypesProto3_MapFixed64Fixed64Entry,
-	_TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapFixed64Fixed64EntryImpl = {}
 	_TestAllTypesProto3_MapFixed64Fixed64EntryImpl.__index = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl
@@ -8034,11 +8067,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapFixed64Fixed64Entry)
 end
-
-type _TestAllTypesProto3_MapSfixed32Sfixed32EntryMessage = proto.Message<
-	TestAllTypesProto3_MapSfixed32Sfixed32Entry,
-	_TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapSfixed32Sfixed32EntryImpl = {}
@@ -8166,11 +8194,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapSfixed32Sfixed32Entry)
 end
 
-type _TestAllTypesProto3_MapSfixed64Sfixed64EntryMessage = proto.Message<
-	TestAllTypesProto3_MapSfixed64Sfixed64Entry,
-	_TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl = {}
 	_TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.__index = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl
@@ -8297,11 +8320,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapSfixed64Sfixed64Entry)
 end
 
-type _TestAllTypesProto3_MapInt32FloatEntryMessage = proto.Message<
-	TestAllTypesProto3_MapInt32FloatEntry,
-	_TestAllTypesProto3_MapInt32FloatEntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapInt32FloatEntryImpl = {}
 	_TestAllTypesProto3_MapInt32FloatEntryImpl.__index = _TestAllTypesProto3_MapInt32FloatEntryImpl
@@ -8421,11 +8439,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32FloatEntry)
 end
-
-type _TestAllTypesProto3_MapInt32DoubleEntryMessage = proto.Message<
-	TestAllTypesProto3_MapInt32DoubleEntry,
-	_TestAllTypesProto3_MapInt32DoubleEntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapInt32DoubleEntryImpl = {}
@@ -8547,11 +8560,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapInt32DoubleEntry)
 end
 
-type _TestAllTypesProto3_MapBoolBoolEntryMessage = proto.Message<
-	TestAllTypesProto3_MapBoolBoolEntry,
-	_TestAllTypesProto3_MapBoolBoolEntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapBoolBoolEntryImpl = {}
 	_TestAllTypesProto3_MapBoolBoolEntryImpl.__index = _TestAllTypesProto3_MapBoolBoolEntryImpl
@@ -8671,11 +8679,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapBoolBoolEntry)
 end
-
-type _TestAllTypesProto3_MapStringStringEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringStringEntry,
-	_TestAllTypesProto3_MapStringStringEntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapStringStringEntryImpl = {}
@@ -8797,11 +8800,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringStringEntry)
 end
 
-type _TestAllTypesProto3_MapStringBytesEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringBytesEntry,
-	_TestAllTypesProto3_MapStringBytesEntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapStringBytesEntryImpl = {}
 	_TestAllTypesProto3_MapStringBytesEntryImpl.__index = _TestAllTypesProto3_MapStringBytesEntryImpl
@@ -8921,11 +8919,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringBytesEntry)
 end
-
-type _TestAllTypesProto3_MapStringNestedMessageEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringNestedMessageEntry,
-	_TestAllTypesProto3_MapStringNestedMessageEntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapStringNestedMessageEntryImpl = {}
@@ -9054,11 +9047,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringNestedMessageEntry)
 end
 
-type _TestAllTypesProto3_MapStringForeignMessageEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringForeignMessageEntry,
-	_TestAllTypesProto3_MapStringForeignMessageEntryPartialFields
->
-
 do
 	local _TestAllTypesProto3_MapStringForeignMessageEntryImpl = {}
 	_TestAllTypesProto3_MapStringForeignMessageEntryImpl.__index = _TestAllTypesProto3_MapStringForeignMessageEntryImpl
@@ -9186,11 +9174,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringForeignMessageEntry)
 end
-
-type _TestAllTypesProto3_MapStringNestedEnumEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringNestedEnumEntry,
-	_TestAllTypesProto3_MapStringNestedEnumEntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapStringNestedEnumEntryImpl = {}
@@ -9336,11 +9319,6 @@ do
 
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringNestedEnumEntry)
 end
-
-type _TestAllTypesProto3_MapStringForeignEnumEntryMessage = proto.Message<
-	TestAllTypesProto3_MapStringForeignEnumEntry,
-	_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
->
 
 do
 	local _TestAllTypesProto3_MapStringForeignEnumEntryImpl = {}
@@ -9574,8 +9552,6 @@ messages.TestAllTypesProto3_AliasedEnum = {
 	end,
 }
 
-type _ForeignMessageMessage = proto.Message<ForeignMessage, _ForeignMessagePartialFields>
-
 do
 	local _ForeignMessageImpl = {}
 	_ForeignMessageImpl.__index = _ForeignMessageImpl
@@ -9673,8 +9649,6 @@ do
 	typeRegistry.default:register(messages.ForeignMessage)
 end
 
-type _NullHypothesisProto3Message = proto.Message<NullHypothesisProto3, _NullHypothesisProto3PartialFields>
-
 do
 	local _NullHypothesisProto3Impl = {}
 	_NullHypothesisProto3Impl.__index = _NullHypothesisProto3Impl
@@ -9751,8 +9725,6 @@ do
 
 	typeRegistry.default:register(messages.NullHypothesisProto3)
 end
-
-type _EnumOnlyProto3Message = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
 
 do
 	local _EnumOnlyProto3Impl = {}

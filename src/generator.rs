@@ -45,18 +45,20 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
     let mut proto_init = include_str!("./luau/proto/init.luau").to_owned();
     if roblox_imports {
         proto_init = proto_init
-            .replace("require(\"./base64\")", "require(script.base64)")
-            .replace("require(\"./message\")", "require(script.message)")
+            .replace("require(\"@self/base64\")", "require(script.base64)")
+            .replace("require(\"@self/message\")", "require(script.message)")
             .replace(
-                "require(\"./typeRegistry\")",
+                "require(\"@self/typeRegistry\")",
                 "require(script.typeRegistry)",
             );
     }
 
     let mut type_registry_init = include_str!("./luau/proto/typeRegistry.luau").to_owned();
     if roblox_imports {
-        type_registry_init =
-            type_registry_init.replace("require(\"./message\")", "require(script.Parent.message)");
+        type_registry_init = type_registry_init.replace(
+            "require(\"@self/message\")",
+            "require(script.Parent.message)",
+        );
     }
     files.push(File {
         name: Some("proto/typeRegistry.luau".to_owned()),
@@ -265,7 +267,7 @@ fn create_messages_init(names: &[String]) -> String {
 
     // We need to do this because referencing can happen out of order,
     // but at runtime it will always be safe.
-    builder.push("local messages: {");
+    builder.push("type _Messages = {");
     builder.indent();
 
     for name in names {
@@ -273,7 +275,8 @@ fn create_messages_init(names: &[String]) -> String {
     }
 
     builder.dedent();
-    builder.push("} = {} :: any -- Luau: We will fill these in later");
+    builder.push("}");
+    builder.push("local messages: _Messages = {} :: _Messages");
 
     builder.blank();
 
@@ -298,8 +301,6 @@ pub fn file_path_export_name(path: &Path) -> String {
 }
 
 const MESSAGE: &str = r#"
-type _<name>Message = proto.Message<<name>, _<name>PartialFields> <json_intersection>
-
 do
     local _<name>Impl = {}
     _<name>Impl.__index = _<name>Impl
@@ -830,6 +831,15 @@ impl<'a> FileGenerator<'a> {
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
         ));
 
+        self.types.push(format!(
+            "type _{name}Message = proto.Message<{name}, _{name}PartialFields> {}",
+            if let Some(wkt_json) = wkt_json.as_ref() {
+                format!(" & proto.CustomJson<{name}, {}>", wkt_json.luau_type)
+            } else {
+                String::new()
+            }
+        ));
+
         self.types.blank();
 
         let mut final_code = MESSAGE
@@ -841,15 +851,7 @@ impl<'a> FileGenerator<'a> {
             .replace("<decode_varint>", &create_decoder(varint_fields))
             .replace("<decode_len>", &create_decoder(len_fields))
             .replace("<decode_i32>", &create_decoder(i32_fields))
-            .replace("<decode_i64>", &create_decoder(i64_fields))
-            .replace(
-                "<json_intersection>",
-                &if let Some(wkt_json) = wkt_json.as_ref() {
-                    format!(" & proto.CustomJson<{name}, {}>", wkt_json.luau_type)
-                } else {
-                    String::new()
-                },
-            );
+            .replace("<decode_i64>", &create_decoder(i64_fields));
 
         if let Some(wkt_json) = WktJson::try_create(&self.file_descriptor_proto, message) {
             final_code = final_code.replace("<json>", &wkt_json.code);
@@ -894,8 +896,8 @@ impl<'a> FileGenerator<'a> {
     fn generate_enum(&mut self, descriptor: &EnumDescriptorProto, prefix: &str) {
         let name = format!("{prefix}{}", descriptor.name());
 
-        self.types.push(format!("local {name}: proto.Enum<{name}>"));
-        self.types.push(format!("type _{name}Message = {name}"));
+        self.types
+            .push(format!("type _{name}Message = proto.Enum<{name}>"));
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 

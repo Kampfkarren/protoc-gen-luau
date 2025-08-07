@@ -6,9 +6,10 @@
 local proto = require("../../proto")
 local typeRegistry = require("../../proto/typeRegistry")
 
-local messages: {
+type _Messages = {
 	FieldMask: _FieldMaskMessage,
-} = {} :: any -- Luau: We will fill these in later
+}
+local messages: _Messages = {} :: _Messages
 
 type _FieldMaskImpl = {
 	__index: _FieldMaskImpl,
@@ -29,7 +30,6 @@ type _FieldMaskPartialFields = {
 }
 
 export type FieldMask = typeof(setmetatable({} :: _FieldMaskFields, {} :: _FieldMaskImpl))
-
 type _FieldMaskMessage = proto.Message<FieldMask, _FieldMaskPartialFields> & proto.CustomJson<FieldMask, string>
 
 do
