@@ -61,6 +61,7 @@ async fn run_luau_test(filename: &Path) {
     lune::Runtime::new()
         .unwrap()
         .run_custom(path.to_string_lossy(), contents)
+        .await
         .expect("Error running test");
 }
 
