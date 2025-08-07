@@ -9458,7 +9458,6 @@ do
 	typeRegistry.default:register(messages.TestAllTypesProto3_MapStringForeignEnumEntry)
 end
 
-local TestAllTypesProto3_NestedEnum: proto.Enum<TestAllTypesProto3_NestedEnum>
 messages.TestAllTypesProto3_NestedEnum = {
 	fromNumber = function(value: number): TestAllTypesProto3_NestedEnum?
 		if value == 0 then
@@ -9503,7 +9502,6 @@ messages.TestAllTypesProto3_NestedEnum = {
 	end,
 }
 
-local TestAllTypesProto3_AliasedEnum: proto.Enum<TestAllTypesProto3_AliasedEnum>
 messages.TestAllTypesProto3_AliasedEnum = {
 	fromNumber = function(value: number): TestAllTypesProto3_AliasedEnum?
 		if value == 0 then
@@ -9805,7 +9803,6 @@ do
 	typeRegistry.default:register(messages.EnumOnlyProto3)
 end
 
-local EnumOnlyProto3_Bool: proto.Enum<EnumOnlyProto3_Bool>
 messages.EnumOnlyProto3_Bool = {
 	fromNumber = function(value: number): EnumOnlyProto3_Bool?
 		if value == 0 then
@@ -9838,7 +9835,6 @@ messages.EnumOnlyProto3_Bool = {
 	end,
 }
 
-local ForeignEnum: proto.Enum<ForeignEnum>
 messages.ForeignEnum = {
 	fromNumber = function(value: number): ForeignEnum?
 		if value == 0 then

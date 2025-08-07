@@ -930,7 +930,6 @@ do
 	typeRegistry.default:register(messages.JspbEncodingConfig)
 end
 
-local WireFormat: proto.Enum<WireFormat>
 messages.WireFormat = {
 	fromNumber = function(value: number): WireFormat?
 		if value == 0 then
@@ -981,7 +980,6 @@ messages.WireFormat = {
 	end,
 }
 
-local TestCategory: proto.Enum<TestCategory>
 messages.TestCategory = {
 	fromNumber = function(value: number): TestCategory?
 		if value == 0 then

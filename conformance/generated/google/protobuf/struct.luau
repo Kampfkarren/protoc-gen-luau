@@ -627,7 +627,6 @@ do
 	typeRegistry.default:register(messages.ListValue)
 end
 
-local NullValue: proto.Enum<NullValue>
 messages.NullValue = {
 	fromNumber = function(value: number): NullValue?
 		if value == 0 then
