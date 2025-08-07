@@ -770,7 +770,7 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
     }
 }
 
-fn json_name(field: &FieldDescriptorProto) -> Cow<str> {
+fn json_name(field: &FieldDescriptorProto) -> Cow<'_, str> {
     if let Some(json_name) = &field.json_name {
         json_name.into()
     } else {
