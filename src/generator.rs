@@ -1,4 +1,5 @@
 use std::collections::{BTreeMap, HashMap, HashSet};
+use std::sync::Arc;
 
 use prost_types::{
     compiler::{
@@ -7,6 +8,7 @@ use prost_types::{
     },
     DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
 };
+use rayon::prelude::*;
 use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
@@ -24,7 +26,7 @@ use crate::{
 const DESCRIPTORS_IMPORT: &str = "google/protobuf/descriptor.proto";
 
 pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse {
-    let export_map = create_export_map(&request.proto_file);
+    let export_map = Arc::new(create_export_map(&request.proto_file));
 
     let mut files = Vec::new();
 
@@ -84,58 +86,77 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         ..Default::default()
     });
 
-    let mut errors = Vec::new();
-
     // If we import the descriptor proto file, we need to explicitly block
     // everything it tries to import.
     // That way you can use descriptors for options, without needing to parse proto2.
     let mut forbidden_types = HashSet::new();
 
-    files.append(
-        &mut request
-            .proto_file
-            .into_iter()
-            .filter_map(|file| {
-                if file.name() == DESCRIPTORS_IMPORT {
-                    for enum_descriptor in file.enum_type {
-                        forbidden_types
-                            .insert(format!(".google.protobuf.{}", enum_descriptor.name()));
-                    }
-
-                    for message_descriptor in file.message_type {
-                        forbidden_types
-                            .insert(format!(".google.protobuf.{}", message_descriptor.name()));
-
-                        // Only goes one deep
-                        for nested_type in &message_descriptor.nested_type {
-                            forbidden_types.insert(format!(
-                                ".google.protobuf.{}.{}",
-                                message_descriptor.name(),
-                                nested_type.name()
-                            ));
-                        }
-                    }
-
-                    None
-                } else if file.syntax() != "proto3" {
-                    errors.push(format!("{} is not proto3", file.name()));
-                    None
-                } else {
-                    let mut generator = FileGenerator::new(file, &export_map, &forbidden_types);
-
-                    if roblox_imports {
-                        generator.enable_roblox_imports();
-                    }
-
-                    let generated = generator.generate_file();
-
-                    errors.extend(generated.errors);
-
-                    Some(generated.file)
+    let proto_files_to_process: Vec<_> = request
+        .proto_file
+        .into_iter()
+        .filter(|file| {
+            if file.name() == DESCRIPTORS_IMPORT {
+                for enum_descriptor in &file.enum_type {
+                    forbidden_types
+                        .insert(format!(".google.protobuf.{}", enum_descriptor.name()));
                 }
-            })
-            .collect(),
-    );
+
+                for message_descriptor in &file.message_type {
+                    forbidden_types
+                        .insert(format!(".google.protobuf.{}", message_descriptor.name()));
+
+                    // Only goes one deep
+                    for nested_type in &message_descriptor.nested_type {
+                        forbidden_types.insert(format!(
+                            ".google.protobuf.{}.{}",
+                            message_descriptor.name(),
+                            nested_type.name()
+                        ));
+                    }
+                }
+                false
+            } else {
+                true
+            }
+        })
+        .collect();
+
+    let forbidden_types = Arc::new(forbidden_types);
+
+    let results: Vec<_> = proto_files_to_process
+        .into_par_iter()
+        .map(|file| {
+            if file.syntax() != "proto3" {
+                return Err(format!("{} is not proto3", file.name()));
+            }
+
+            let mut generator = FileGenerator::new(file, &export_map, &forbidden_types);
+
+            if roblox_imports {
+                generator.enable_roblox_imports();
+            }
+
+            let generated = generator.generate_file();
+            Ok((generated.file, generated.errors))
+        })
+        .collect();
+
+    let mut errors = Vec::new();
+    let mut generated_files = Vec::new();
+
+    for result in results {
+        match result {
+            Ok((file, file_errors)) => {
+                generated_files.push(file);
+                errors.extend(file_errors);
+            }
+            Err(error) => {
+                errors.push(error);
+            }
+        }
+    }
+
+    files.extend(generated_files);
 
     CodeGeneratorResponse {
         error: if errors.is_empty() {
