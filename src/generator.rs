@@ -97,8 +97,7 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         .filter(|file| {
             if file.name() == DESCRIPTORS_IMPORT {
                 for enum_descriptor in &file.enum_type {
-                    forbidden_types
-                        .insert(format!(".google.protobuf.{}", enum_descriptor.name()));
+                    forbidden_types.insert(format!(".google.protobuf.{}", enum_descriptor.name()));
                 }
 
                 for message_descriptor in &file.message_type {
