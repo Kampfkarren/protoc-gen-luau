@@ -2385,7 +2385,7 @@ dependencies = [
 
 [[package]]
 name = "protoc-gen-luau"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "color-eyre",
  "futures-util",
