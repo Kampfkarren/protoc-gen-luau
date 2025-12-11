@@ -1,6 +1,8 @@
 [package]
 name = "protoc-gen-luau"
+description = "A protobuf generator for Luau"
 version = "1.0.0"
+license = "MPL-2.0"
 edition = "2021"
 
 [dependencies]
