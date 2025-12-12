@@ -57,10 +57,8 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
 
     let mut type_registry_init = include_str!("./luau/proto/typeRegistry.luau").to_owned();
     if roblox_imports {
-        type_registry_init = type_registry_init.replace(
-            "require(\"@self/message\")",
-            "require(script.Parent.message)",
-        );
+        type_registry_init =
+            type_registry_init.replace("require(\"./message\")", "require(script.Parent.message)");
     }
     files.push(File {
         name: Some("proto/typeRegistry.luau".to_owned()),
