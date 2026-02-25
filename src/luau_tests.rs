@@ -135,8 +135,48 @@ fn field_name_case_invalid_returns_error() {
 }
 
 #[tokio::test]
-async fn field_case_snake() {
+async fn field_case_preserve() {
     run_luau_test(Path::new("field_case.luau")).await;
+}
+
+#[tokio::test]
+async fn field_case_snake() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["field_case_test.proto".to_owned()],
+            parameter: Some("field_name_case=snake".to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
+
+    assert!(
+        response.error.is_none(),
+        "generation should succeed: {:?}",
+        response.error
+    );
+
+    let output_dir = Path::new("src/tests/samples/field_case_snake");
+    std::fs::remove_dir_all(output_dir).ok();
+    for file in &response.file {
+        let path = output_dir.join(Path::new(file.name()));
+        std::fs::create_dir_all(path.parent().unwrap()).ok();
+        std::fs::write(path, file.content()).unwrap();
+    }
+
+    let test_path = Path::new("src/tests/").join("field_case_snake.luau");
+    let contents = std::fs::read_to_string(&test_path).unwrap();
+    lune::Runtime::new()
+        .unwrap()
+        .run_custom(test_path.to_string_lossy(), contents)
+        .await
+        .expect("Error running field_case_snake.luau");
 }
 
 #[tokio::test]

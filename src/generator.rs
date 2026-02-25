@@ -45,12 +45,13 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
     let roblox_imports = options.get("roblox_imports").map(|x| x.as_str()) == Some("true");
 
     let field_name_case = match options.get("field_name_case").map(|s| s.as_str()) {
-        None | Some("snake") => FieldNameCase::Snake,
+        None => FieldNameCase::Preserve,
+        Some("snake") => FieldNameCase::Snake,
         Some("camel") => FieldNameCase::Camel,
         Some(invalid) => {
             return CodeGeneratorResponse {
                 error: Some(format!(
-                    "invalid field_name_case: \"{invalid}\" (expected \"snake\" or \"camel\")",
+                    "invalid field_name_case: \"{invalid}\" (expected \"snake\" or \"camel\", or omit for default)",
                 )),
                 supported_features: Some(Feature::Proto3Optional as u64),
                 file: Vec::new(),

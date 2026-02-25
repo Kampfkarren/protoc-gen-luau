@@ -12,20 +12,24 @@ describe("field_name_case camel", function()
 		local msg = field_case_test.FieldCaseTest.new({
 			stringValue = "hello",
 			otherField = 42,
+			nonSnakeCaseField = true,
 		})
 		assertEquals(msg.stringValue, "hello")
 		assertEquals(msg.otherField, 42)
+		assertEquals(msg.nonSnakeCaseField, true)
 	end)
 
 	it("should round-trip encode and decode with camelCase fields", function()
 		local msg = field_case_test.FieldCaseTest.new({
 			stringValue = "test",
 			otherField = 1,
+			nonSnakeCaseField = false,
 		})
 		local encoded = msg:encode()
 		local decoded = field_case_test.FieldCaseTest.decode(encoded)
 		assertEquals(decoded.stringValue, "test")
 		assertEquals(decoded.otherField, 1)
+		assertEquals(decoded.nonSnakeCaseField, false)
 	end)
 end)
 

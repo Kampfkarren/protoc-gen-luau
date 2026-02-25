@@ -16,16 +16,21 @@ use crate::{
 /// Casing style for generated field names.
 #[derive(Debug, Clone, Copy)]
 pub enum FieldNameCase {
-    Camel,
+    /// Keep the proto field name exactly as-is (default when no option is passed).
+    Preserve,
+    /// Normalize to snake_case (e.g. `NON_SNAKE_CASE_FIELD` → `non_snake_case_field`).
     Snake,
+    /// Lower camelCase (e.g. `string_value` → `stringValue`).
+    Camel,
 }
 
 impl FieldNameCase {
     /// Converts a protobuf field name to the requested casing for Luau output.
     pub fn apply(self, raw: &str) -> String {
         match self {
+            FieldNameCase::Preserve => raw.to_string(),
+            FieldNameCase::Snake => heck::AsSnakeCase(raw).to_string(),
             FieldNameCase::Camel => heck::AsLowerCamelCase(raw).to_string(),
-            FieldNameCase::Snake => raw.to_string(),
         }
     }
 }

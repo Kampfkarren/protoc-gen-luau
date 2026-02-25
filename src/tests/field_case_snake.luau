@@ -1,34 +1,35 @@
 --!strict
--- Validates that generated protos preserve field names as-is when no field_name_case option is passed.
+-- Validates that generated protos use normalized snake_case (field_name_case=snake).
+-- Run by the Rust test after generating with field_name_case=snake into samples/field_case_snake/.
 local tests = require("./tests")
-local field_case_test = require("./samples/field_case_test")
+local field_case_test = require("./samples/field_case_snake/field_case_test")
 local assertEquals = tests.assertEquals
 local describe = tests.describe
 local it = tests.it
 
-describe("field_name_case preserve (default)", function()
-	it("should accept and expose fields with original names", function()
+describe("field_name_case snake", function()
+	it("should accept and expose fields via normalized snake_case", function()
 		local msg = field_case_test.FieldCaseTest.new({
 			string_value = "hello",
 			other_field = 42,
-			NON_SNAKE_CASE_FIELD = true,
+			non_snake_case_field = true,
 		})
 		assertEquals(msg.string_value, "hello")
 		assertEquals(msg.other_field, 42)
-		assertEquals(msg.NON_SNAKE_CASE_FIELD, true)
+		assertEquals(msg.non_snake_case_field, true)
 	end)
 
-	it("should round-trip encode and decode with preserved field names", function()
+	it("should round-trip encode and decode with snake_case fields", function()
 		local msg = field_case_test.FieldCaseTest.new({
 			string_value = "test",
 			other_field = 1,
-			NON_SNAKE_CASE_FIELD = false,
+			non_snake_case_field = false,
 		})
 		local encoded = msg:encode()
 		local decoded = field_case_test.FieldCaseTest.decode(encoded)
 		assertEquals(decoded.string_value, "test")
 		assertEquals(decoded.other_field, 1)
-		assertEquals(decoded.NON_SNAKE_CASE_FIELD, false)
+		assertEquals(decoded.non_snake_case_field, false)
 	end)
 end)
 

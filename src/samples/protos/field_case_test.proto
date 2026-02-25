@@ -6,4 +6,5 @@ package field_case_test;
 message FieldCaseTest {
 	string string_value = 1;
 	int32 other_field = 2;
+	bool NON_SNAKE_CASE_FIELD = 3;
 }
