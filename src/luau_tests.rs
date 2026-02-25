@@ -137,16 +137,24 @@ fn field_name_case_invalid_returns_error() {
         .unwrap()
         .file_descriptor_set();
 
-    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-        parameter: Some("field_name_case=other".to_owned()),
-        proto_file: file_descriptor_set.file,
-        compiler_version: None,
-    });
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            parameter: Some("field_name_case=other".to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
 
-    assert!(response.error.is_some(), "expected error for invalid field_name_case");
     assert!(
-        response.error.as_deref().unwrap().contains("invalid field_name_case"),
+        response.error.is_some(),
+        "expected error for invalid field_name_case"
+    );
+    assert!(
+        response
+            .error
+            .as_deref()
+            .unwrap()
+            .contains("invalid field_name_case"),
         "error message should mention invalid field_name_case"
     );
     assert!(
@@ -164,14 +172,19 @@ fn field_name_case_default_generates_snake_case_fields() {
         .unwrap()
         .file_descriptor_set();
 
-    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-        parameter: None,
-        proto_file: file_descriptor_set.file,
-        compiler_version: None,
-    });
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            parameter: None,
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
 
-    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    assert!(
+        response.error.is_none(),
+        "generation should succeed: {:?}",
+        response.error
+    );
     let content: &str = response
         .file
         .iter()
@@ -194,14 +207,19 @@ fn field_name_case_snake_generates_snake_case_fields() {
         .unwrap()
         .file_descriptor_set();
 
-    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-        parameter: Some("field_name_case=snake".to_owned()),
-        proto_file: file_descriptor_set.file,
-        compiler_version: None,
-    });
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            parameter: Some("field_name_case=snake".to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
 
-    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    assert!(
+        response.error.is_none(),
+        "generation should succeed: {:?}",
+        response.error
+    );
     let content: &str = response
         .file
         .iter()
@@ -224,14 +242,19 @@ fn field_name_case_camel_generates_camel_case_fields() {
         .unwrap()
         .file_descriptor_set();
 
-    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-        parameter: Some("field_name_case=camel".to_owned()),
-        proto_file: file_descriptor_set.file,
-        compiler_version: None,
-    });
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            parameter: Some("field_name_case=camel".to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
 
-    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    assert!(
+        response.error.is_none(),
+        "generation should succeed: {:?}",
+        response.error
+    );
     let content: &str = response
         .file
         .iter()
