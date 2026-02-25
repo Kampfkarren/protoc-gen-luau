@@ -9,7 +9,11 @@ protoc -Iprotos --luau_out=src/LuauProtos
 ## Options
 - Add `--luau_opt=roblox_imports=true` to indicate you are in a Roblox environment. This currently replaces `require`s from string requires to instance based requires. I'm not actually sure this is necessary anymore though.
 
-- `--luau_opt=field_name_case=snake|camel` — Control Luau field names casing. Default is `snake` (proto names unchanged, e.g. `string_value`). Use `camel` to generate camelCase (e.g. `stringValue`). Invalid values cause compilation to fail.
+- `--luau_opt=field_name_case=snake|camel` — Control Luau field names casing. 
+  - `snake`: converts field names to snake case (e.g. `string_value`)
+  - `camel`: converts field names to camel case (e.g. `stringValue`)
+  - If no option passed, the default behavior is to keep the proto name unchanged (e.g. `string_value` -> `string_value`, `FIELD` -> `FIELD`)
+  - Invalid values cause compilation to fail
 
 ## API
 
