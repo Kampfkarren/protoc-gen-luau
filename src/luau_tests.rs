@@ -125,7 +125,10 @@ fn field_name_case_invalid_returns_error() {
         });
 
     assert!(
-        response.error.expect("error should be present for invalid field name case").contains("invalid field_name_case"),
+        response
+            .error
+            .expect("error should be present for invalid field name case")
+            .contains("invalid field_name_case"),
         "expected error for invalid field_name_case"
     );
     assert!(
