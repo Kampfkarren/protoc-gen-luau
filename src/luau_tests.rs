@@ -160,6 +160,10 @@ fn field_name_case_default_generates_snake_case_fields() {
         content.contains("string_value"),
         "default (no option) should produce snake_case string_value in output"
     );
+    assert!(
+        content.contains("other_field"),
+        "default (no option) should produce snake_case other_field in output"
+    );
 }
 
 #[test]
@@ -187,7 +191,11 @@ fn field_name_case_snake_generates_snake_case_fields() {
         .expect("should generate field_case_test Luau file");
     assert!(
         content.contains("string_value"),
-        "explicit field_name_case=snake should produce string_value in output"
+        "snake option should produce string_value in output"
+    );
+    assert!(
+        content.contains("other_field"),
+        "snake option should produce other_field in output"
     );
 }
 
@@ -217,5 +225,9 @@ fn field_name_case_camel_generates_camel_case_fields() {
     assert!(
         content.contains("stringValue"),
         "camel option should produce stringValue in output"
+    );
+    assert!(
+        content.contains("otherField"),
+        "camel option should produce otherField in output"
     );
 }

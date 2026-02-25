@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package field_case_test;
+
+// Used by tests to assert snake_case vs camelCase output for field_name_case option.
+message FieldCaseTest {
+	string string_value = 1;
+	int32 other_field = 2;
+}
