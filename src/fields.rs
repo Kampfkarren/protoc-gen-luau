@@ -13,15 +13,11 @@ use crate::{
     string_builder::StringBuilder,
 };
 
-/// Casing style for generated field and oneof names. Extensible for future styles (e.g. PascalCase).
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+/// Casing style for generated field names.
+#[derive(Debug, Clone, Copy)]
 pub enum FieldNameCase {
-    /// Keep proto snake_case as-is (e.g. `string_value`).
-    Snake,
-    /// Lower camelCase (e.g. `stringValue`).
     Camel,
-    /// PascalCase (e.g. `StringValue`). Reserved for future use.
-    Pascal,
+    Snake,
 }
 
 impl FieldNameCase {
@@ -30,7 +26,6 @@ impl FieldNameCase {
         match self {
             FieldNameCase::Snake => raw.to_string(),
             FieldNameCase::Camel => heck::AsLowerCamelCase(raw).to_string(),
-            FieldNameCase::Pascal => heck::AsUpperCamelCase(raw).to_string(),
         }
     }
 }

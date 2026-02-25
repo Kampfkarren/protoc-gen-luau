@@ -47,11 +47,10 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
     let field_name_case = match options.get("field_name_case").map(|s| s.as_str()) {
         None | Some("snake") => FieldNameCase::Snake,
         Some("camel") => FieldNameCase::Camel,
-        Some("pascal") => FieldNameCase::Pascal,
         Some(invalid) => {
             return CodeGeneratorResponse {
                 error: Some(format!(
-                    "invalid field_name_case: \"{}\" (expected \"snake\", \"camel\", or \"pascal\")",
+                    "invalid field_name_case: \"{}\" (expected \"snake\" or \"camel\")",
                     invalid
                 )),
                 supported_features: Some(Feature::Proto3Optional as u64),
