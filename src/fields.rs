@@ -1005,10 +1005,9 @@ pub fn decode_field(
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else if is_oneof {
-            let oneof_type_name = field_name_case.apply(field.name());
             decode.push(format!(
                 "{this} = {{ type = \"{}\", value = {} }}",
-                oneof_type_name,
+                field_name_case.apply(field.name()),
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else {
