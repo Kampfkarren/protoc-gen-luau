@@ -44,6 +44,22 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
 
     let roblox_imports = options.get("roblox_imports").map(|x| x.as_str()) == Some("true");
 
+    let camel_case_fields = match options.get("field_name_case").map(|s| s.as_str()) {
+        None => false,
+        Some("snake") => false,
+        Some("camel") => true,
+        Some(invalid) => {
+            return CodeGeneratorResponse {
+                error: Some(format!(
+                    "invalid field_name_case: \"{}\" (expected \"snake\" or \"camel\")",
+                    invalid
+                )),
+                supported_features: Some(Feature::Proto3Optional as u64),
+                file: Vec::new(),
+            };
+        }
+    };
+
     let mut proto_init = include_str!("./luau/proto/init.luau").to_owned();
     if roblox_imports {
         proto_init = proto_init
@@ -127,7 +143,8 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
                 return Err(format!("{} is not proto3", file.name()));
             }
 
-            let mut generator = FileGenerator::new(file, &export_map, &forbidden_types);
+            let mut generator =
+                FileGenerator::new(file, &export_map, &forbidden_types, camel_case_fields);
 
             if roblox_imports {
                 generator.enable_roblox_imports();
@@ -467,6 +484,7 @@ struct FileGenerator<'a> {
     forbidden_types: &'a HashSet<String>,
 
     roblox_imports: bool,
+    camel_case_fields: bool,
 }
 
 struct FileAndErrors {
@@ -479,6 +497,7 @@ impl<'a> FileGenerator<'a> {
         file_descriptor_proto: FileDescriptorProto,
         export_map: &'a ExportMap,
         forbidden_types: &'a HashSet<String>,
+        camel_case_fields: bool,
     ) -> FileGenerator<'a> {
         Self {
             file_descriptor_proto,
@@ -493,6 +512,7 @@ impl<'a> FileGenerator<'a> {
             forbidden_types,
 
             roblox_imports: false,
+            camel_case_fields,
         }
     }
 
@@ -752,6 +772,7 @@ impl<'a> FileGenerator<'a> {
 
                         export_map: self.export_map,
                         base_file: &self.file_descriptor_proto,
+                        camel_case_fields: self.camel_case_fields,
                     });
                 }
             } else {
@@ -768,6 +789,7 @@ impl<'a> FileGenerator<'a> {
                     field_kind: FieldKind::Single(field),
                     export_map: self.export_map,
                     base_file: &self.file_descriptor_proto,
+                    camel_case_fields: self.camel_case_fields,
                 });
             }
         }
@@ -807,6 +829,7 @@ impl<'a> FileGenerator<'a> {
                     &self.file_descriptor_proto,
                     field.map_type(),
                     matches!(field.field_kind, FieldKind::OneOf { .. }),
+                    self.camel_case_fields,
                 );
 
                 match wire_type_of_field_descriptor(inner_field) {

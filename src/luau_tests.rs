@@ -65,6 +65,28 @@ async fn run_luau_test(filename: &Path) {
         .expect("Error running test");
 }
 
+/// Extracts the body of `type _{message_name}Fields = { ... }` so tests can assert on
+/// field names in the type definition only, not elsewhere in the file (e.g. decode branches).
+fn extract_fields_type_block<'a>(content: &'a str, message_name: &str) -> &'a str {
+    let prefix = format!("type _{message_name}Fields = {{");
+    let start = content
+        .find(&prefix)
+        .unwrap_or_else(|| panic!("missing type _{message_name}Fields in generated content"));
+    let body_start = start + prefix.len();
+    let mut depth = 1u32;
+    let mut i = body_start;
+    let bytes = content.as_bytes();
+    while i < bytes.len() && depth > 0 {
+        match bytes[i] {
+            b'{' => depth += 1,
+            b'}' => depth -= 1,
+            _ => {}
+        }
+        i += 1;
+    }
+    &content[body_start..i.saturating_sub(1)]
+}
+
 #[tokio::test]
 async fn basic() {
     run_luau_test(Path::new("basic.luau")).await;
@@ -156,13 +178,10 @@ fn field_name_case_default_generates_snake_case_fields() {
         .find(|f| f.name().contains("field_case_test"))
         .map(|f| f.content())
         .expect("should generate field_case_test Luau file");
+    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
     assert!(
-        content.contains("string_value"),
-        "default (no option) should produce snake_case string_value in output"
-    );
-    assert!(
-        content.contains("other_field"),
-        "default (no option) should produce snake_case other_field in output"
+        fields_type.contains("string_value:") && fields_type.contains("other_field:"),
+        "default (no option) should produce snake_case in _FieldCaseTestFields; got: {fields_type:?}"
     );
 }
 
@@ -189,13 +208,10 @@ fn field_name_case_snake_generates_snake_case_fields() {
         .find(|f| f.name().contains("field_case_test"))
         .map(|f| f.content())
         .expect("should generate field_case_test Luau file");
+    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
     assert!(
-        content.contains("string_value"),
-        "snake option should produce string_value in output"
-    );
-    assert!(
-        content.contains("other_field"),
-        "snake option should produce other_field in output"
+        fields_type.contains("string_value:") && fields_type.contains("other_field:"),
+        "snake option should produce snake_case in _FieldCaseTestFields; got: {fields_type:?}"
     );
 }
 
@@ -222,12 +238,9 @@ fn field_name_case_camel_generates_camel_case_fields() {
         .find(|f| f.name().contains("field_case_test"))
         .map(|f| f.content())
         .expect("should generate field_case_test Luau file");
+    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
     assert!(
-        content.contains("stringValue"),
-        "camel option should produce stringValue in output"
-    );
-    assert!(
-        content.contains("otherField"),
-        "camel option should produce otherField in output"
+        fields_type.contains("stringValue:") && fields_type.contains("otherField:"),
+        "camel option should produce camelCase in _FieldCaseTestFields; got: {fields_type:?}"
     );
 }

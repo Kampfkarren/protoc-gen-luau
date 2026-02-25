@@ -17,6 +17,7 @@ pub struct FieldGenerator<'a> {
     pub field_kind: FieldKind<'a>,
     pub export_map: &'a ExportMap,
     pub base_file: &'a FileDescriptorProto,
+    pub camel_case_fields: bool,
 }
 
 #[derive(Debug)]
@@ -48,10 +49,19 @@ impl FieldGenerator<'_> {
         }
     }
 
-    pub fn name(&self) -> &str {
+    /// Luau property name for this field (snake_case or camelCase per option).
+    pub fn name(&self) -> String {
         match &self.field_kind {
-            FieldKind::Single(field) => field.name(),
-            FieldKind::OneOf { name, .. } => name,
+            FieldKind::Single(field) => self.luau_name(field.name()),
+            FieldKind::OneOf { name, .. } => self.luau_name(name),
+        }
+    }
+
+    fn luau_name(&self, raw: &str) -> String {
+        if self.camel_case_fields {
+            luau_field_name(raw)
+        } else {
+            raw.to_string()
         }
     }
 
@@ -90,7 +100,7 @@ impl FieldGenerator<'_> {
                     .map(|field| {
                         format!(
                             "{{ type: \"{}\", value: {} }}",
-                            field.name(),
+                            self.luau_name(field.name()),
                             type_definition_of_field_descriptor(
                                 field,
                                 self.export_map,
@@ -260,7 +270,7 @@ impl FieldGenerator<'_> {
 
                 for field in fields {
                     if_builder.add_condition(
-                        &format!("{this}.type == \"{}\"", field.name()),
+                        &format!("{this}.type == \"{}\"", self.luau_name(field.name())),
                         |builder| {
                             builder.push(encode_field_descriptor_ignore_repeated(
                                 field,
@@ -337,7 +347,7 @@ impl FieldGenerator<'_> {
 
                 for field in fields {
                     if_builder.add_condition(
-                        &format!("{this}.type == \"{}\"", field.name()),
+                        &format!("{this}.type == \"{}\"", self.luau_name(field.name())),
                         |builder| {
                             builder.push(format!(
                                 "output.{} = {}",
@@ -361,12 +371,11 @@ impl FieldGenerator<'_> {
         json_encode
     }
 
-    // TODO: For here and json_encode, they need to be camelCase
     pub fn json_decode(&self) -> StringBuilder {
         let mut json_decode = StringBuilder::new();
 
         for inner_field in self.inner_fields() {
-            let real_name = inner_field.name();
+            let real_name = self.luau_name(inner_field.name());
             let json_name = json_name(inner_field);
 
             let mut decode_name = |input_name: &str| {
@@ -418,12 +427,10 @@ impl FieldGenerator<'_> {
                             &format!("input.{input_name}"),
                         );
 
-                    if let FieldKind::OneOf {
-                        name: oneof_name, ..
-                    } = &self.field_kind
-                    {
+                    if let FieldKind::OneOf { .. } = &self.field_kind {
                         json_decode.push(format!(
-                        "self.{oneof_name} = {{ type = \"{real_name}\", value = {json_decode_instruction} }}",
+                        "self.{} = {{ type = \"{real_name}\", value = {json_decode_instruction} }}",
+                        self.name(),
                     ));
                     } else {
                         json_decode.push(format!("self.{real_name} = {json_decode_instruction}"));
@@ -434,9 +441,9 @@ impl FieldGenerator<'_> {
                 json_decode.blank();
             };
 
-            decode_name(real_name);
+            decode_name(&real_name);
 
-            if real_name != json_name {
+            if real_name != &*json_name {
                 decode_name(&json_name);
             }
         }
@@ -770,6 +777,11 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
     }
 }
 
+/// Converts a protobuf field name (snake_case) to the Luau property name (camelCase).
+pub fn luau_field_name(s: &str) -> String {
+    heck::AsLowerCamelCase(s).to_string()
+}
+
 fn json_name(field: &FieldDescriptorProto) -> Cow<'_, str> {
     if let Some(json_name) = &field.json_name {
         json_name.into()
@@ -866,6 +878,7 @@ pub fn decode_field(
     base_file: &FileDescriptorProto,
     map_type: Option<&MapType>,
     is_oneof: bool,
+    camel_case_fields: bool,
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
@@ -973,9 +986,14 @@ pub fn decode_field(
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else if is_oneof {
+            let oneof_type_name = if camel_case_fields {
+                luau_field_name(field.name())
+            } else {
+                field.name().to_string()
+            };
             decode.push(format!(
                 "{this} = {{ type = \"{}\", value = {} }}",
-                field.name(),
+                oneof_type_name,
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else {
@@ -1027,6 +1045,7 @@ pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> S
         &HashMap::new(),
         &FileDescriptorProto::default(),
         None,
+        false,
         false,
     )
     .build();
