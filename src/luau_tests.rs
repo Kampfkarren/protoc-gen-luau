@@ -105,3 +105,117 @@ fn descriptors_uses_it() {
         .is_some()
     );
 }
+
+#[test]
+fn field_name_case_invalid_returns_error() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+        parameter: Some("field_name_case=other".to_owned()),
+        proto_file: file_descriptor_set.file,
+        compiler_version: None,
+    });
+
+    assert!(response.error.is_some(), "expected error for invalid field_name_case");
+    assert!(
+        response.error.as_deref().unwrap().contains("invalid field_name_case"),
+        "error message should mention invalid field_name_case"
+    );
+    assert!(
+        response.file.is_empty(),
+        "should not generate any files when option is invalid"
+    );
+}
+
+#[test]
+fn field_name_case_default_generates_snake_case_fields() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+        parameter: None,
+        proto_file: file_descriptor_set.file,
+        compiler_version: None,
+    });
+
+    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    let content: &str = response
+        .file
+        .iter()
+        .find(|f| f.name().contains("field_case_test"))
+        .map(|f| f.content())
+        .expect("should generate field_case_test Luau file");
+    assert!(
+        content.contains("string_value"),
+        "default (no option) should produce snake_case string_value in output"
+    );
+}
+
+#[test]
+fn field_name_case_snake_generates_snake_case_fields() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+        parameter: Some("field_name_case=snake".to_owned()),
+        proto_file: file_descriptor_set.file,
+        compiler_version: None,
+    });
+
+    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    let content: &str = response
+        .file
+        .iter()
+        .find(|f| f.name().contains("field_case_test"))
+        .map(|f| f.content())
+        .expect("should generate field_case_test Luau file");
+    assert!(
+        content.contains("string_value"),
+        "explicit field_name_case=snake should produce string_value in output"
+    );
+}
+
+#[test]
+fn field_name_case_camel_generates_camel_case_fields() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response = crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+        file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+        parameter: Some("field_name_case=camel".to_owned()),
+        proto_file: file_descriptor_set.file,
+        compiler_version: None,
+    });
+
+    assert!(response.error.is_none(), "generation should succeed: {:?}", response.error);
+    let content: &str = response
+        .file
+        .iter()
+        .find(|f| f.name().contains("field_case_test"))
+        .map(|f| f.content())
+        .expect("should generate field_case_test Luau file");
+    assert!(
+        content.contains("stringValue"),
+        "camel option should produce stringValue in output"
+    );
+}
