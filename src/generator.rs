@@ -50,8 +50,7 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         Some(invalid) => {
             return CodeGeneratorResponse {
                 error: Some(format!(
-                    "invalid field_name_case: \"{}\" (expected \"snake\" or \"camel\")",
-                    invalid
+                    "invalid field_name_case: \"{invalid}\" (expected \"snake\" or \"camel\")",
                 )),
                 supported_features: Some(Feature::Proto3Optional as u64),
                 file: Vec::new(),
