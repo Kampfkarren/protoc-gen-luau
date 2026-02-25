@@ -146,16 +146,8 @@ fn field_name_case_invalid_returns_error() {
         });
 
     assert!(
-        response.error.is_some(),
+        response.error.expect("error should be present for invalid field name case").contains("invalid field_name_case"),
         "expected error for invalid field_name_case"
-    );
-    assert!(
-        response
-            .error
-            .as_deref()
-            .unwrap()
-            .contains("invalid field_name_case"),
-        "error message should mention invalid field_name_case"
     );
     assert!(
         response.file.is_empty(),
