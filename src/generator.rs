@@ -2,19 +2,19 @@ use std::collections::{BTreeMap, HashMap, HashSet};
 use std::sync::Arc;
 
 use prost_types::{
-    compiler::{
-        code_generator_response::{Feature, File},
-        CodeGeneratorRequest, CodeGeneratorResponse,
-    },
     DescriptorProto, EnumDescriptorProto, FieldDescriptorProto, FileDescriptorProto,
+    compiler::{
+        CodeGeneratorRequest, CodeGeneratorResponse,
+        code_generator_response::{Feature, File},
+    },
 };
 use rayon::prelude::*;
 use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
     fields::{
-        decode_field, decode_packed, is_packed, wire_type_of_field_descriptor, FieldGenerator,
-        FieldKind, WireType,
+        FieldGenerator, FieldKind, WireType, decode_field, decode_packed, is_packed,
+        wire_type_of_field_descriptor,
     },
     if_builder::IfBuilder,
     string_builder::StringBuilder,
@@ -716,11 +716,13 @@ impl<'a> FileGenerator<'a> {
 
         let mut fields: Vec<FieldGenerator<'_>> = Vec::new();
         for field in &message.field {
-            if field.oneof_index.is_some() && !field.proto3_optional() {
-                let oneof = message.oneof_decl[field.oneof_index.unwrap() as usize].name();
+            if let Some(oneof_index) = field.oneof_index
+                && !field.proto3_optional()
+            {
+                let oneof = message.oneof_decl[oneof_index as usize].name();
 
                 if let Some(FieldKind::OneOf {
-                    fields: ref mut existing_fields,
+                    fields: existing_fields,
                     ..
                 }) = fields
                     .iter_mut()
