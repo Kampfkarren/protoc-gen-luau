@@ -3,12 +3,12 @@ use std::{borrow::Cow, collections::HashMap};
 use typed_path::UnixPath as Path;
 
 use prost_types::{
-    field_descriptor_proto::{Label, Type},
     FieldDescriptorProto, FileDescriptorProto,
+    field_descriptor_proto::{Label, Type},
 };
 
 use crate::{
-    generator::{file_path_export_name, ExportMap, MapType},
+    generator::{ExportMap, MapType, file_path_export_name},
     if_builder::IfBuilder,
     string_builder::StringBuilder,
 };
@@ -177,7 +177,11 @@ impl FieldGenerator<'_> {
                     Type::Bytes => format!("{this} ~= nil and buffer.len({this}) > 0"),
                     Type::Enum => format!(
                         "{this} ~= nil and ({this} ~= nil and {this} ~= 0 or {this} ~= {}.fromNumber(0))",
-                        runtime_definition_of_field_descriptor(field, self.export_map, self.base_file)
+                        runtime_definition_of_field_descriptor(
+                            field,
+                            self.export_map,
+                            self.base_file
+                        )
                     ),
                     Type::Message => unreachable!("Message has presence"),
 
@@ -612,12 +616,13 @@ fn encode_field_descriptor_ignore_repeated_instruction(
     value_var: &str,
 ) -> String {
     match field.r#type() {
-        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 =>
-            format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})"),
+        Type::Int32 | Type::Uint32 | Type::Int64 | Type::Uint64 => {
+            format!("output, cursor = proto.writeVarInt(output, cursor, {value_var})")
+        }
 
-        Type::Sint32 | Type::Sint64 => format!(
-			"output, cursor = proto.writeVarIntZigZag(output, cursor, {value_var})",
-        ),
+        Type::Sint32 | Type::Sint64 => {
+            format!("output, cursor = proto.writeVarIntZigZag(output, cursor, {value_var})",)
+        }
 
         Type::Float => format!("output, cursor = proto.writeFloat(output, cursor, {value_var})"),
         Type::Double => format!("output, cursor = proto.writeDouble(output, cursor, {value_var})"),
@@ -627,7 +632,9 @@ fn encode_field_descriptor_ignore_repeated_instruction(
             "output, cursor = proto.writeVarInt(output, cursor, if {value_var} then 1 else 0)",
         ),
 
-        Type::Bytes => format!("output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"),
+        Type::Bytes => format!(
+            "output, cursor = proto.writeBuffer(output, cursor, {value_var}, buffer.len({value_var}))"
+        ),
 
         Type::Enum => format!(
             // :: any cast because Luau is bad with string unions
@@ -637,8 +644,12 @@ fn encode_field_descriptor_ignore_repeated_instruction(
 
         Type::Message => unimplemented!(),
 
-        Type::Fixed32 | Type::Sfixed32 => format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})"),
-        Type::Fixed64 | Type::Sfixed64 => format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})"),
+        Type::Fixed32 | Type::Sfixed32 => {
+            format!("output, cursor = proto.writeFixed32(output, cursor, {value_var})")
+        }
+        Type::Fixed64 | Type::Sfixed64 => {
+            format!("output, cursor = proto.writeFixed64(output, cursor, {value_var})")
+        }
 
         Type::Group => unimplemented!("Group"),
     }
