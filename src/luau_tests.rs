@@ -65,17 +65,22 @@ fn generate_field_case_samples() {
 
     for (parameter, output_subdir) in [
         (None, "field_case_test"),
-        (Some("field_name_case=snake".to_owned()), "field_case_test_snake"),
-        (Some("field_name_case=camel".to_owned()), "field_case_test_camel"),
+        (
+            Some("field_name_case=snake".to_owned()),
+            "field_case_test_snake",
+        ),
+        (
+            Some("field_name_case=camel".to_owned()),
+            "field_case_test_camel",
+        ),
     ] {
-        let response = crate::generator::generate_response(
-            prost_types::compiler::CodeGeneratorRequest {
+        let response =
+            crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
                 file_to_generate: vec!["field_case_test.proto".to_owned()],
                 parameter: parameter.clone(),
                 proto_file: file_descriptor_set.file.clone(),
                 compiler_version: None,
-            },
-        );
+            });
 
         assert!(
             response.error.is_none(),
