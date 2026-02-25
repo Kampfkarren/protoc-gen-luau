@@ -15,6 +15,7 @@ fn generate_samples() {
     let files = [
         "descriptors.proto",
         "enum_regression.proto",
+        "field_case_test.proto",
         "forwards_compatibility.proto",
         "kitchen_sink.proto",
         "many_messages.proto",
@@ -63,28 +64,6 @@ async fn run_luau_test(filename: &Path) {
         .run_custom(path.to_string_lossy(), contents)
         .await
         .expect("Error running test");
-}
-
-/// Extracts the body of `type _{message_name}Fields = { ... }` so tests can assert on
-/// field names in the type definition only, not elsewhere in the file (e.g. decode branches).
-fn extract_fields_type_block<'a>(content: &'a str, message_name: &str) -> &'a str {
-    let prefix = format!("type _{message_name}Fields = {{");
-    let start = content
-        .find(&prefix)
-        .unwrap_or_else(|| panic!("missing type _{message_name}Fields in generated content"));
-    let body_start = start + prefix.len();
-    let mut depth = 1u32;
-    let mut i = body_start;
-    let bytes = content.as_bytes();
-    while i < bytes.len() && depth > 0 {
-        match bytes[i] {
-            b'{' => depth += 1,
-            b'}' => depth -= 1,
-            _ => {}
-        }
-        i += 1;
-    }
-    &content[body_start..i.saturating_sub(1)]
 }
 
 #[tokio::test]
@@ -155,88 +134,23 @@ fn field_name_case_invalid_returns_error() {
     );
 }
 
-#[test]
-fn field_name_case_default_generates_snake_case_fields() {
-    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
-        .unwrap()
-        .include_imports(true)
-        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
-        .unwrap()
-        .file_descriptor_set();
-
-    let response =
-        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-            parameter: None,
-            proto_file: file_descriptor_set.file,
-            compiler_version: None,
-        });
-
-    assert!(
-        response.error.is_none(),
-        "generation should succeed: {:?}",
-        response.error
-    );
-    let content: &str = response
-        .file
-        .iter()
-        .find(|f| f.name().contains("field_case_test"))
-        .map(|f| f.content())
-        .expect("should generate field_case_test Luau file");
-    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
-    assert!(
-        fields_type.contains("string_value:") && fields_type.contains("other_field:"),
-        "default (no option) should produce snake_case in _FieldCaseTestFields; got: {fields_type:?}"
-    );
+#[tokio::test]
+async fn field_case_snake() {
+    run_luau_test(Path::new("field_case.luau")).await;
 }
 
-#[test]
-fn field_name_case_snake_generates_snake_case_fields() {
+#[tokio::test]
+async fn field_case_camel() {
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()
         .include_imports(true)
-        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .open_files(vec!["field_case_test.proto"])
         .unwrap()
         .file_descriptor_set();
 
     let response =
         crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
-            parameter: Some("field_name_case=snake".to_owned()),
-            proto_file: file_descriptor_set.file,
-            compiler_version: None,
-        });
-
-    assert!(
-        response.error.is_none(),
-        "generation should succeed: {:?}",
-        response.error
-    );
-    let content: &str = response
-        .file
-        .iter()
-        .find(|f| f.name().contains("field_case_test"))
-        .map(|f| f.content())
-        .expect("should generate field_case_test Luau file");
-    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
-    assert!(
-        fields_type.contains("string_value:") && fields_type.contains("other_field:"),
-        "snake option should produce snake_case in _FieldCaseTestFields; got: {fields_type:?}"
-    );
-}
-
-#[test]
-fn field_name_case_camel_generates_camel_case_fields() {
-    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
-        .unwrap()
-        .include_imports(true)
-        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
-        .unwrap()
-        .file_descriptor_set();
-
-    let response =
-        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
-            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            file_to_generate: vec!["field_case_test.proto".to_owned()],
             parameter: Some("field_name_case=camel".to_owned()),
             proto_file: file_descriptor_set.file,
             compiler_version: None,
@@ -247,15 +161,20 @@ fn field_name_case_camel_generates_camel_case_fields() {
         "generation should succeed: {:?}",
         response.error
     );
-    let content: &str = response
-        .file
-        .iter()
-        .find(|f| f.name().contains("field_case_test"))
-        .map(|f| f.content())
-        .expect("should generate field_case_test Luau file");
-    let fields_type = extract_fields_type_block(content, "FieldCaseTest");
-    assert!(
-        fields_type.contains("stringValue:") && fields_type.contains("otherField:"),
-        "camel option should produce camelCase in _FieldCaseTestFields; got: {fields_type:?}"
-    );
+
+    let output_dir = Path::new("src/tests/samples/field_case_camel");
+    std::fs::remove_dir_all(output_dir).ok();
+    for file in &response.file {
+        let path = output_dir.join(Path::new(file.name()));
+        std::fs::create_dir_all(path.parent().unwrap()).ok();
+        std::fs::write(path, file.content()).unwrap();
+    }
+
+    let test_path = Path::new("src/tests/").join("field_case_camel.luau");
+    let contents = std::fs::read_to_string(&test_path).unwrap();
+    lune::Runtime::new()
+        .unwrap()
+        .run_custom(test_path.to_string_lossy(), contents)
+        .await
+        .expect("Error running field_case_camel.luau");
 }
