@@ -13,11 +13,33 @@ use crate::{
     string_builder::StringBuilder,
 };
 
+/// Casing style for generated field and oneof names. Extensible for future styles (e.g. PascalCase).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FieldNameCase {
+    /// Keep proto snake_case as-is (e.g. `string_value`).
+    Snake,
+    /// Lower camelCase (e.g. `stringValue`).
+    Camel,
+    /// PascalCase (e.g. `StringValue`). Reserved for future use.
+    Pascal,
+}
+
+impl FieldNameCase {
+    /// Converts a protobuf field name (snake_case) to the requested casing for Luau output.
+    pub fn apply(self, raw: &str) -> String {
+        match self {
+            FieldNameCase::Snake => raw.to_string(),
+            FieldNameCase::Camel => heck::AsLowerCamelCase(raw).to_string(),
+            FieldNameCase::Pascal => heck::AsUpperCamelCase(raw).to_string(),
+        }
+    }
+}
+
 pub struct FieldGenerator<'a> {
     pub field_kind: FieldKind<'a>,
     pub export_map: &'a ExportMap,
     pub base_file: &'a FileDescriptorProto,
-    pub camel_case_fields: bool,
+    pub field_name_case: FieldNameCase,
 }
 
 #[derive(Debug)]
@@ -58,11 +80,7 @@ impl FieldGenerator<'_> {
     }
 
     fn luau_name(&self, raw: &str) -> String {
-        if self.camel_case_fields {
-            luau_field_name(raw)
-        } else {
-            raw.to_string()
-        }
+        self.field_name_case.apply(raw)
     }
 
     pub fn type_definition_no_presence(&self) -> String {
@@ -777,9 +795,9 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
     }
 }
 
-/// Converts a protobuf field name (snake_case) to the Luau property name (camelCase).
+/// Converts a protobuf field name (snake_case) to lower camelCase (e.g. for JSON names).
 pub fn luau_field_name(s: &str) -> String {
-    heck::AsLowerCamelCase(s).to_string()
+    FieldNameCase::Camel.apply(s)
 }
 
 fn json_name(field: &FieldDescriptorProto) -> Cow<'_, str> {
@@ -878,7 +896,7 @@ pub fn decode_field(
     base_file: &FileDescriptorProto,
     map_type: Option<&MapType>,
     is_oneof: bool,
-    camel_case_fields: bool,
+    field_name_case: FieldNameCase,
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
@@ -986,11 +1004,7 @@ pub fn decode_field(
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else if is_oneof {
-            let oneof_type_name = if camel_case_fields {
-                luau_field_name(field.name())
-            } else {
-                field.name().to_string()
-            };
+            let oneof_type_name = field_name_case.apply(field.name());
             decode.push(format!(
                 "{this} = {{ type = \"{}\", value = {} }}",
                 oneof_type_name,
@@ -1038,7 +1052,11 @@ pub fn is_packed(field_descriptor: &FieldDescriptorProto) -> bool {
     }
 }
 
-pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> String {
+pub fn decode_packed(
+    field_descriptor: &FieldDescriptorProto,
+    output: &str,
+    field_name_case: FieldNameCase,
+) -> String {
     let entry_decode = decode_field(
         output,
         field_descriptor,
@@ -1046,7 +1064,7 @@ pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> S
         &FileDescriptorProto::default(),
         None,
         false,
-        false,
+        field_name_case,
     )
     .build();
 

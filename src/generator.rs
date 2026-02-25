@@ -14,7 +14,7 @@ use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 use crate::{
     fields::{
         decode_field, decode_packed, is_packed, wire_type_of_field_descriptor, FieldGenerator,
-        FieldKind, WireType,
+        FieldKind, FieldNameCase, WireType,
     },
     if_builder::IfBuilder,
     string_builder::StringBuilder,
@@ -44,14 +44,14 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
 
     let roblox_imports = options.get("roblox_imports").map(|x| x.as_str()) == Some("true");
 
-    let camel_case_fields = match options.get("field_name_case").map(|s| s.as_str()) {
-        None => false,
-        Some("snake") => false,
-        Some("camel") => true,
+    let field_name_case = match options.get("field_name_case").map(|s| s.as_str()) {
+        None | Some("snake") => FieldNameCase::Snake,
+        Some("camel") => FieldNameCase::Camel,
+        Some("pascal") => FieldNameCase::Pascal,
         Some(invalid) => {
             return CodeGeneratorResponse {
                 error: Some(format!(
-                    "invalid field_name_case: \"{}\" (expected \"snake\" or \"camel\")",
+                    "invalid field_name_case: \"{}\" (expected \"snake\", \"camel\", or \"pascal\")",
                     invalid
                 )),
                 supported_features: Some(Feature::Proto3Optional as u64),
@@ -144,7 +144,7 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
             }
 
             let mut generator =
-                FileGenerator::new(file, &export_map, &forbidden_types, camel_case_fields);
+                FileGenerator::new(file, &export_map, &forbidden_types, field_name_case);
 
             if roblox_imports {
                 generator.enable_roblox_imports();
@@ -484,7 +484,7 @@ struct FileGenerator<'a> {
     forbidden_types: &'a HashSet<String>,
 
     roblox_imports: bool,
-    camel_case_fields: bool,
+    field_name_case: FieldNameCase,
 }
 
 struct FileAndErrors {
@@ -497,7 +497,7 @@ impl<'a> FileGenerator<'a> {
         file_descriptor_proto: FileDescriptorProto,
         export_map: &'a ExportMap,
         forbidden_types: &'a HashSet<String>,
-        camel_case_fields: bool,
+        field_name_case: FieldNameCase,
     ) -> FileGenerator<'a> {
         Self {
             file_descriptor_proto,
@@ -512,7 +512,7 @@ impl<'a> FileGenerator<'a> {
             forbidden_types,
 
             roblox_imports: false,
-            camel_case_fields,
+            field_name_case,
         }
     }
 
@@ -772,7 +772,7 @@ impl<'a> FileGenerator<'a> {
 
                         export_map: self.export_map,
                         base_file: &self.file_descriptor_proto,
-                        camel_case_fields: self.camel_case_fields,
+                        field_name_case: self.field_name_case,
                     });
                 }
             } else {
@@ -789,7 +789,7 @@ impl<'a> FileGenerator<'a> {
                     field_kind: FieldKind::Single(field),
                     export_map: self.export_map,
                     base_file: &self.file_descriptor_proto,
-                    camel_case_fields: self.camel_case_fields,
+                    field_name_case: self.field_name_case,
                 });
             }
         }
@@ -829,7 +829,7 @@ impl<'a> FileGenerator<'a> {
                     &self.file_descriptor_proto,
                     field.map_type(),
                     matches!(field.field_kind, FieldKind::OneOf { .. }),
-                    self.camel_case_fields,
+                    self.field_name_case,
                 );
 
                 match wire_type_of_field_descriptor(inner_field) {
@@ -851,7 +851,10 @@ impl<'a> FileGenerator<'a> {
                 }
 
                 if is_packed(inner_field) {
-                    len_fields.insert(inner_field.number(), decode_packed(inner_field, output));
+                    len_fields.insert(
+                        inner_field.number(),
+                        decode_packed(inner_field, output, self.field_name_case),
+                    );
                 }
             }
         }
