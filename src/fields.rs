@@ -21,11 +21,11 @@ pub enum FieldNameCase {
 }
 
 impl FieldNameCase {
-    /// Converts a protobuf field name (snake_case) to the requested casing for Luau output.
+    /// Converts a protobuf field name to the requested casing for Luau output.
     pub fn apply(self, raw: &str) -> String {
         match self {
-            FieldNameCase::Snake => raw.to_string(),
             FieldNameCase::Camel => heck::AsLowerCamelCase(raw).to_string(),
+            FieldNameCase::Snake => raw.to_string(),
         }
     }
 }
@@ -66,7 +66,6 @@ impl FieldGenerator<'_> {
         }
     }
 
-    /// Luau property name for this field (snake_case or camelCase per option).
     pub fn name(&self) -> String {
         match &self.field_kind {
             FieldKind::Single(field) => self.luau_name(field.name()),
@@ -788,11 +787,6 @@ fn json_key_to_string(field: &FieldDescriptorProto) -> JsonKeyToString {
             unreachable!("Invalid type for map key")
         }
     }
-}
-
-/// Converts a protobuf field name (snake_case) to lower camelCase (e.g. for JSON names).
-pub fn luau_field_name(s: &str) -> String {
-    FieldNameCase::Camel.apply(s)
 }
 
 fn json_name(field: &FieldDescriptorProto) -> Cow<'_, str> {
