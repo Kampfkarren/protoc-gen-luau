@@ -1,6 +1,5 @@
 --!strict
 -- Validates that generated protos use normalized snake_case (field_name_case=snake).
--- Uses samples from generate_field_case_samples() in samples/field_case_test_snake/.
 local tests = require("./tests")
 local field_case_test = require("./samples/field_case_test_snake/field_case_test")
 local assertEquals = tests.assertEquals

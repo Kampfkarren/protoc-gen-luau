@@ -1,6 +1,5 @@
 --!strict
 -- Validates that generated protos use camelCase field names (field_name_case=camel).
--- Uses samples from generate_field_case_samples() in samples/field_case_test_camel/.
 local tests = require("./tests")
 local field_case_test = require("./samples/field_case_test_camel/field_case_test")
 local assertEquals = tests.assertEquals
