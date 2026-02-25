@@ -53,8 +53,8 @@ fn generate_samples() {
     }
 }
 
-/// Compiles the given proto with the given generator parameter and writes output to `samples/{output_subdir}/`.
-fn generate_sample_with_parameter(proto_file: &str, output_subdir: &str, parameter: &str) {
+/// Compiles the given proto with the given generator parameter and writes output to `src/tests/samples/{output_filename}`.
+fn generate_sample_with_parameter(proto_file: &str, output_filename: &str, parameter: &str) {
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()
         .include_imports(true)
@@ -77,7 +77,7 @@ fn generate_sample_with_parameter(proto_file: &str, output_subdir: &str, paramet
     );
 
     let samples_directory = Path::new("src/tests/samples");
-    let output_dir = samples_directory.join(output_subdir);
+    let output_dir = samples_directory.join(Path::new(output_filename));
     std::fs::remove_dir_all(&output_dir).ok();
     for file in &response.file {
         let path = output_dir.join(Path::new(file.name()));
@@ -179,7 +179,7 @@ async fn field_case_preserve() {
 async fn field_case_snake() {
     generate_sample_with_parameter(
         "field_case_test.proto",
-        "field_case_test_snake",
+        "field_case_test_snake.luau",
         "field_name_case=snake",
     );
     run_luau_test(Path::new("field_case_snake.luau")).await;
@@ -189,7 +189,7 @@ async fn field_case_snake() {
 async fn field_case_camel() {
     generate_sample_with_parameter(
         "field_case_test.proto",
-        "field_case_test_camel",
+        "field_case_test_camel.luau",
         "field_name_case=camel",
     );
     run_luau_test(Path::new("field_case_camel.luau")).await;
