@@ -1,8 +1,8 @@
 --!strict
 -- Validates that generated protos use normalized snake_case (field_name_case=snake).
--- Run by the Rust test after generating with field_name_case=snake into samples/field_case_snake/.
+-- Uses samples from generate_field_case_samples() in samples/field_case_test_snake/.
 local tests = require("./tests")
-local field_case_test = require("./samples/field_case_test")
+local field_case_test = require("./samples/field_case_test_snake/field_case_test")
 local assertEquals = tests.assertEquals
 local describe = tests.describe
 local it = tests.it
@@ -16,7 +16,7 @@ describe("field_name_case snake", function()
 		})
 		assertEquals(msg.string_value, "hello")
 		assertEquals(msg.other_field, 42)
-		assertEquals(msg.non_snake_case_FIEld, true)
+		assertEquals(msg.non_snake_case_field, true)
 	end)
 
 	it("should round-trip encode and decode with snake_case fields", function()
@@ -29,7 +29,7 @@ describe("field_name_case snake", function()
 		local decoded = field_case_test.FieldCaseTest.decode(encoded)
 		assertEquals(decoded.string_value, "test")
 		assertEquals(decoded.other_field, 1)
-		assertEquals(decoded.non_snake_case_FIeld, false)
+		assertEquals(decoded.non_snake_case_field, false)
 	end)
 end)
 

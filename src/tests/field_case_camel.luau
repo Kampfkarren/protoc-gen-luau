@@ -1,8 +1,8 @@
 --!strict
 -- Validates that generated protos use camelCase field names (field_name_case=camel).
--- This file is run by the Rust test after generating with field_name_case=camel into samples/field_case_camel/.
+-- Uses samples from generate_field_case_samples() in samples/field_case_test_camel/.
 local tests = require("./tests")
-local field_case_test = require("./samples/field_case_test")
+local field_case_test = require("./samples/field_case_test_camel/field_case_test")
 local assertEquals = tests.assertEquals
 local describe = tests.describe
 local it = tests.it
