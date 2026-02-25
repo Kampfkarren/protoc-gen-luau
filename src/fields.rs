@@ -383,6 +383,7 @@ impl FieldGenerator<'_> {
         json_encode
     }
 
+    // TODO: For here and json_encode, they need to be camelCase
     pub fn json_decode(&self) -> StringBuilder {
         let mut json_decode = StringBuilder::new();
 
