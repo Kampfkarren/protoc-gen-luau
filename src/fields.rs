@@ -456,8 +456,8 @@ impl FieldGenerator<'_> {
 
             decode_name(&real_name);
 
-            if real_name != &*json_name {
-                decode_name(&json_name);
+            if real_name != *json_name {
+                decode_name(json_name.as_ref());
             }
         }
 
