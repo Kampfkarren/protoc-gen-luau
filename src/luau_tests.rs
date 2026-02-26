@@ -51,6 +51,18 @@ fn generate_samples() {
 
         std::fs::write(path, proto_file.content()).unwrap();
     }
+
+    // Generate additional samples with field_name_case options
+    generate_sample_with_parameter(
+        "field_case_test.proto",
+        "field_case_test_snake",
+        "field_name_case=snake",
+    );
+    generate_sample_with_parameter(
+        "field_case_test.proto",
+        "field_case_test_camel",
+        "field_name_case=camel",
+    );
 }
 
 /// Compiles the given proto with the given generator parameter and writes output to `samples/{output_dir}/`.
@@ -179,22 +191,10 @@ async fn field_case_preserve() {
 
 #[tokio::test]
 async fn field_case_snake() {
-    create_samples_once().await;
-    generate_sample_with_parameter(
-        "field_case_test.proto",
-        "field_case_test_snake",
-        "field_name_case=snake",
-    );
     run_luau_test(Path::new("field_case_snake.luau")).await;
 }
 
 #[tokio::test]
 async fn field_case_camel() {
-    create_samples_once().await;
-    generate_sample_with_parameter(
-        "field_case_test.proto",
-        "field_case_test_camel",
-        "field_name_case=camel",
-    );
     run_luau_test(Path::new("field_case_camel.luau")).await;
 }
