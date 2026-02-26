@@ -13,10 +13,33 @@ use crate::{
     string_builder::StringBuilder,
 };
 
+/// Casing style for generated field names.
+#[derive(Debug, Clone, Copy)]
+pub enum FieldNameCase {
+    /// Keep the proto field name exactly as-is (default when no option is passed).
+    Preserve,
+    /// Normalize to snake_case (e.g. `NON_SNAKE_CASE_FIELD` → `non_snake_case_field`).
+    Snake,
+    /// Lower camelCase (e.g. `string_value` → `stringValue`).
+    Camel,
+}
+
+impl FieldNameCase {
+    /// Converts a protobuf field name to the requested casing for Luau output.
+    pub fn apply(self, raw: &str) -> String {
+        match self {
+            FieldNameCase::Preserve => raw.to_string(),
+            FieldNameCase::Snake => heck::AsSnakeCase(raw).to_string(),
+            FieldNameCase::Camel => heck::AsLowerCamelCase(raw).to_string(),
+        }
+    }
+}
+
 pub struct FieldGenerator<'a> {
     pub field_kind: FieldKind<'a>,
     pub export_map: &'a ExportMap,
     pub base_file: &'a FileDescriptorProto,
+    pub field_name_case: FieldNameCase,
 }
 
 #[derive(Debug)]
@@ -48,11 +71,15 @@ impl FieldGenerator<'_> {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub fn name(&self) -> String {
         match &self.field_kind {
-            FieldKind::Single(field) => field.name(),
-            FieldKind::OneOf { name, .. } => name,
+            FieldKind::Single(field) => self.luau_name(field.name()),
+            FieldKind::OneOf { name, .. } => self.luau_name(name),
         }
+    }
+
+    fn luau_name(&self, raw: &str) -> String {
+        self.field_name_case.apply(raw)
     }
 
     pub fn type_definition_no_presence(&self) -> String {
@@ -90,7 +117,7 @@ impl FieldGenerator<'_> {
                     .map(|field| {
                         format!(
                             "{{ type: \"{}\", value: {} }}",
-                            field.name(),
+                            self.luau_name(field.name()),
                             type_definition_of_field_descriptor(
                                 field,
                                 self.export_map,
@@ -264,7 +291,7 @@ impl FieldGenerator<'_> {
 
                 for field in fields {
                     if_builder.add_condition(
-                        &format!("{this}.type == \"{}\"", field.name()),
+                        &format!("{this}.type == \"{}\"", self.luau_name(field.name())),
                         |builder| {
                             builder.push(encode_field_descriptor_ignore_repeated(
                                 field,
@@ -341,7 +368,7 @@ impl FieldGenerator<'_> {
 
                 for field in fields {
                     if_builder.add_condition(
-                        &format!("{this}.type == \"{}\"", field.name()),
+                        &format!("{this}.type == \"{}\"", self.luau_name(field.name())),
                         |builder| {
                             builder.push(format!(
                                 "output.{} = {}",
@@ -370,7 +397,7 @@ impl FieldGenerator<'_> {
         let mut json_decode = StringBuilder::new();
 
         for inner_field in self.inner_fields() {
-            let real_name = inner_field.name();
+            let real_name = self.luau_name(inner_field.name());
             let json_name = json_name(inner_field);
 
             let mut decode_name = |input_name: &str| {
@@ -422,12 +449,10 @@ impl FieldGenerator<'_> {
                             &format!("input.{input_name}"),
                         );
 
-                    if let FieldKind::OneOf {
-                        name: oneof_name, ..
-                    } = &self.field_kind
-                    {
+                    if let FieldKind::OneOf { .. } = &self.field_kind {
                         json_decode.push(format!(
-                        "self.{oneof_name} = {{ type = \"{real_name}\", value = {json_decode_instruction} }}",
+                        "self.{} = {{ type = \"{real_name}\", value = {json_decode_instruction} }}",
+                        self.name(),
                     ));
                     } else {
                         json_decode.push(format!("self.{real_name} = {json_decode_instruction}"));
@@ -438,10 +463,10 @@ impl FieldGenerator<'_> {
                 json_decode.blank();
             };
 
-            decode_name(real_name);
+            decode_name(&real_name);
 
-            if real_name != json_name {
-                decode_name(&json_name);
+            if real_name != *json_name {
+                decode_name(json_name.as_ref());
             }
         }
 
@@ -877,6 +902,7 @@ pub fn decode_field(
     base_file: &FileDescriptorProto,
     map_type: Option<&MapType>,
     is_oneof: bool,
+    field_name_case: FieldNameCase,
 ) -> StringBuilder {
     let mut decode = StringBuilder::new();
 
@@ -986,7 +1012,7 @@ pub fn decode_field(
         } else if is_oneof {
             decode.push(format!(
                 "{this} = {{ type = \"{}\", value = {} }}",
-                field.name(),
+                field_name_case.apply(field.name()),
                 decode_instruction_field_descriptor_ignore_repeated(field, export_map, base_file)
             ));
         } else {
@@ -1031,7 +1057,11 @@ pub fn is_packed(field_descriptor: &FieldDescriptorProto) -> bool {
     }
 }
 
-pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> String {
+pub fn decode_packed(
+    field_descriptor: &FieldDescriptorProto,
+    output: &str,
+    field_name_case: FieldNameCase,
+) -> String {
     let entry_decode = decode_field(
         output,
         field_descriptor,
@@ -1039,6 +1069,7 @@ pub fn decode_packed(field_descriptor: &FieldDescriptorProto, output: &str) -> S
         &FileDescriptorProto::default(),
         None,
         false,
+        field_name_case,
     )
     .build();
 

@@ -15,6 +15,7 @@ fn generate_samples() {
     let files = [
         "descriptors.proto",
         "enum_regression.proto",
+        "field_case_test.proto",
         "forwards_compatibility.proto",
         "kitchen_sink.proto",
         "many_messages.proto",
@@ -49,6 +50,53 @@ fn generate_samples() {
         std::fs::create_dir_all(path.parent().unwrap()).ok();
 
         std::fs::write(path, proto_file.content()).unwrap();
+    }
+
+    // Generate additional samples with field_name_case options
+    generate_sample_with_parameter(
+        "field_case_test.proto",
+        "field_case_test_snake",
+        "field_name_case=snake",
+    );
+    generate_sample_with_parameter(
+        "field_case_test.proto",
+        "field_case_test_camel",
+        "field_name_case=camel",
+    );
+}
+
+/// Compiles the given proto with the given generator parameter and writes output to `samples/{output_dir}/`.
+fn generate_sample_with_parameter(proto_file: &str, output_dir: &str, parameter: &str) {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec![proto_file])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec![proto_file.to_owned()],
+            parameter: Some(parameter.to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
+
+    assert!(
+        response.error.is_none(),
+        "generation should succeed for {proto_file}: {:?}",
+        response.error
+    );
+
+    let samples_directory = Path::new("src/tests/samples");
+    let output_path = samples_directory.join(output_dir);
+    std::fs::remove_dir_all(&output_path).ok();
+    for file in &response.file {
+        let path = output_path.join(Path::new(file.name()));
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent).ok();
+        }
+        std::fs::write(&path, file.content()).unwrap();
     }
 }
 
@@ -104,4 +152,49 @@ fn descriptors_uses_it() {
         .error
         .is_some()
     );
+}
+
+#[test]
+fn field_name_case_invalid_returns_error() {
+    let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
+        .unwrap()
+        .include_imports(true)
+        .open_files(vec!["./src/samples/protos/field_case_test.proto"])
+        .unwrap()
+        .file_descriptor_set();
+
+    let response =
+        crate::generator::generate_response(prost_types::compiler::CodeGeneratorRequest {
+            file_to_generate: vec!["./src/samples/protos/field_case_test.proto".to_owned()],
+            parameter: Some("field_name_case=other".to_owned()),
+            proto_file: file_descriptor_set.file,
+            compiler_version: None,
+        });
+
+    assert!(
+        response
+            .error
+            .expect("error should be present for invalid field name case")
+            .contains("invalid field_name_case"),
+        "expected error for invalid field_name_case"
+    );
+    assert!(
+        response.file.is_empty(),
+        "should not generate any files when option is invalid"
+    );
+}
+
+#[tokio::test]
+async fn field_case_preserve() {
+    run_luau_test(Path::new("field_case.luau")).await;
+}
+
+#[tokio::test]
+async fn field_case_snake() {
+    run_luau_test(Path::new("field_case_snake.luau")).await;
+}
+
+#[tokio::test]
+async fn field_case_camel() {
+    run_luau_test(Path::new("field_case_camel.luau")).await;
 }

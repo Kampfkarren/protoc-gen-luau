@@ -13,7 +13,7 @@ use typed_path::{PathType, TypedPath, UnixPath as Path, UnixPathBuf as PathBuf};
 
 use crate::{
     fields::{
-        FieldGenerator, FieldKind, WireType, decode_field, decode_packed, is_packed,
+        FieldGenerator, FieldKind, FieldNameCase, WireType, decode_field, decode_packed, is_packed,
         wire_type_of_field_descriptor,
     },
     if_builder::IfBuilder,
@@ -43,6 +43,21 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
         .unwrap_or_default();
 
     let roblox_imports = options.get("roblox_imports").map(|x| x.as_str()) == Some("true");
+
+    let field_name_case = match options.get("field_name_case").map(|s| s.as_str()) {
+        None => FieldNameCase::Preserve,
+        Some("snake") => FieldNameCase::Snake,
+        Some("camel") => FieldNameCase::Camel,
+        Some(invalid) => {
+            return CodeGeneratorResponse {
+                error: Some(format!(
+                    "invalid field_name_case: \"{invalid}\" (expected \"snake\" or \"camel\", or omit for default)",
+                )),
+                supported_features: Some(Feature::Proto3Optional as u64),
+                file: Vec::new(),
+            };
+        }
+    };
 
     let mut proto_init = include_str!("./luau/proto/init.luau").to_owned();
     if roblox_imports {
@@ -127,7 +142,8 @@ pub fn generate_response(request: CodeGeneratorRequest) -> CodeGeneratorResponse
                 return Err(format!("{} is not proto3", file.name()));
             }
 
-            let mut generator = FileGenerator::new(file, &export_map, &forbidden_types);
+            let mut generator =
+                FileGenerator::new(file, &export_map, &forbidden_types, field_name_case);
 
             if roblox_imports {
                 generator.enable_roblox_imports();
@@ -467,6 +483,7 @@ struct FileGenerator<'a> {
     forbidden_types: &'a HashSet<String>,
 
     roblox_imports: bool,
+    field_name_case: FieldNameCase,
 }
 
 struct FileAndErrors {
@@ -479,6 +496,7 @@ impl<'a> FileGenerator<'a> {
         file_descriptor_proto: FileDescriptorProto,
         export_map: &'a ExportMap,
         forbidden_types: &'a HashSet<String>,
+        field_name_case: FieldNameCase,
     ) -> FileGenerator<'a> {
         Self {
             file_descriptor_proto,
@@ -493,6 +511,7 @@ impl<'a> FileGenerator<'a> {
             forbidden_types,
 
             roblox_imports: false,
+            field_name_case,
         }
     }
 
@@ -754,6 +773,7 @@ impl<'a> FileGenerator<'a> {
 
                         export_map: self.export_map,
                         base_file: &self.file_descriptor_proto,
+                        field_name_case: self.field_name_case,
                     });
                 }
             } else {
@@ -770,6 +790,7 @@ impl<'a> FileGenerator<'a> {
                     field_kind: FieldKind::Single(field),
                     export_map: self.export_map,
                     base_file: &self.file_descriptor_proto,
+                    field_name_case: self.field_name_case,
                 });
             }
         }
@@ -809,6 +830,7 @@ impl<'a> FileGenerator<'a> {
                     &self.file_descriptor_proto,
                     field.map_type(),
                     matches!(field.field_kind, FieldKind::OneOf { .. }),
+                    self.field_name_case,
                 );
 
                 match wire_type_of_field_descriptor(inner_field) {
@@ -830,7 +852,10 @@ impl<'a> FileGenerator<'a> {
                 }
 
                 if is_packed(inner_field) {
-                    len_fields.insert(inner_field.number(), decode_packed(inner_field, output));
+                    len_fields.insert(
+                        inner_field.number(),
+                        decode_packed(inner_field, output, self.field_name_case),
+                    );
                 }
             }
         }
