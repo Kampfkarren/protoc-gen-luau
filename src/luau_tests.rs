@@ -53,8 +53,8 @@ fn generate_samples() {
     }
 }
 
-/// Compiles the given proto with the given generator parameter and writes output to `src/tests/samples/{output_filename}`.
-fn generate_sample_with_parameter(proto_file: &str, output_filename: &str, parameter: &str) {
+/// Compiles the given proto with the given generator parameter and writes output to `samples/{output_dir}/`.
+fn generate_sample_with_parameter(proto_file: &str, output_dir: &str, parameter: &str) {
     let file_descriptor_set = protox::Compiler::new(["./src/samples/protos"])
         .unwrap()
         .include_imports(true)
@@ -77,12 +77,14 @@ fn generate_sample_with_parameter(proto_file: &str, output_filename: &str, param
     );
 
     let samples_directory = Path::new("src/tests/samples");
-    // let output_dir = samples_directory.join(Path::new(output_filename));
-    // std::fs::remove_dir_all(&output_dir).ok();
+    let output_path = samples_directory.join(output_dir);
+    std::fs::remove_dir_all(&output_path).ok();
     for file in &response.file {
-        let path = samples_directory.join(Path::new(output_filename));
-        std::fs::create_dir_all(path.parent().unwrap()).ok();
-        std::fs::write(path, file.content()).unwrap();
+        let path = output_path.join(Path::new(file.name()));
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent).ok();
+        }
+        std::fs::write(&path, file.content()).unwrap();
     }
 }
 
