@@ -179,6 +179,7 @@ async fn field_case_preserve() {
 
 #[tokio::test]
 async fn field_case_snake() {
+    create_samples_once().await;
     generate_sample_with_parameter(
         "field_case_test.proto",
         "field_case_test_snake",
@@ -189,6 +190,7 @@ async fn field_case_snake() {
 
 #[tokio::test]
 async fn field_case_camel() {
+    create_samples_once().await;
     generate_sample_with_parameter(
         "field_case_test.proto",
         "field_case_test_camel",
