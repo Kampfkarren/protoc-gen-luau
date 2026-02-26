@@ -77,10 +77,10 @@ fn generate_sample_with_parameter(proto_file: &str, output_filename: &str, param
     );
 
     let samples_directory = Path::new("src/tests/samples");
-    let output_dir = samples_directory.join(Path::new(output_filename));
-    std::fs::remove_dir_all(&output_dir).ok();
+    // let output_dir = samples_directory.join(Path::new(output_filename));
+    // std::fs::remove_dir_all(&output_dir).ok();
     for file in &response.file {
-        let path = output_dir.join(Path::new(file.name()));
+        let path = samples_directory.join(Path::new(output_filename));
         std::fs::create_dir_all(path.parent().unwrap()).ok();
         std::fs::write(path, file.content()).unwrap();
     }
