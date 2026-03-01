@@ -104,13 +104,17 @@ async fn run_luau_test(filename: &Path) {
     create_samples_once().await;
 
     let path = Path::new("src/tests/").join(filename);
-    let contents = std::fs::read_to_string(&path).unwrap();
 
-    lune::Runtime::new()
+    let runtime_return_value = lune::Runtime::new()
         .unwrap()
-        .run_custom(path.to_string_lossy(), contents)
+        .run_file(path)
         .await
         .expect("Error running test");
+
+    assert!(
+        runtime_return_value.success(),
+        "Luau test error: {runtime_return_value:#?}"
+    );
 }
 
 #[tokio::test]
@@ -182,6 +186,12 @@ fn field_name_case_invalid_returns_error() {
         response.file.is_empty(),
         "should not generate any files when option is invalid"
     );
+}
+
+#[tokio::test]
+#[ignore]
+async fn invalid_utf8() {
+    run_luau_test(Path::new("invalid_utf8.luau")).await;
 }
 
 #[tokio::test]
