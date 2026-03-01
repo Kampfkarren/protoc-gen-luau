@@ -95,7 +95,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.type_url = buffer.tostring(value)
+					self.type_url = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value

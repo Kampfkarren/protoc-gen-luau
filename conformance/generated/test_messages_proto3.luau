@@ -2858,7 +2858,7 @@ do
 				if field == 14 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_string = buffer.tostring(value)
+					self.optional_string = proto.decodeString(value)
 					continue
 				elseif field == 15 then
 					local value
@@ -2878,12 +2878,12 @@ do
 				elseif field == 24 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_string_piece = buffer.tostring(value)
+					self.optional_string_piece = proto.decodeString(value)
 					continue
 				elseif field == 25 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.optional_cord = buffer.tostring(value)
+					self.optional_cord = proto.decodeString(value)
 					continue
 				elseif field == 27 then
 					local value
@@ -3062,7 +3062,7 @@ do
 				elseif field == 44 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_string, buffer.tostring(value))
+					table.insert(self.repeated_string, proto.decodeString(value))
 					continue
 				elseif field == 45 then
 					local value
@@ -3082,12 +3082,12 @@ do
 				elseif field == 54 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_string_piece, buffer.tostring(value))
+					table.insert(self.repeated_string_piece, proto.decodeString(value))
 					continue
 				elseif field == 55 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.repeated_cord, buffer.tostring(value))
+					table.insert(self.repeated_cord, proto.decodeString(value))
 					continue
 				elseif field == 56 then
 					local value
@@ -3498,7 +3498,7 @@ do
 				elseif field == 113 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.oneof_field = { type = "oneof_string", value = buffer.tostring(value) }
+					self.oneof_field = { type = "oneof_string", value = proto.decodeString(value) }
 					continue
 				elseif field == 114 then
 					local value
@@ -8729,12 +8729,12 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.value = buffer.tostring(value)
+					self.value = proto.decodeString(value)
 					continue
 				end
 
@@ -8849,7 +8849,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value
@@ -8974,7 +8974,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value
@@ -9101,7 +9101,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value
@@ -9242,7 +9242,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				end
 
@@ -9383,7 +9383,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				end
 

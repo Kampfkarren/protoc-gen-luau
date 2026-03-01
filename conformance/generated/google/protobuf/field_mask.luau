@@ -75,7 +75,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.paths, buffer.tostring(value))
+					table.insert(self.paths, proto.decodeString(value))
 					continue
 				end
 

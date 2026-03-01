@@ -74,6 +74,8 @@ message KitchenSink {
 	string customJson = 31 [json_name = "MyCustomJson"];
 
 	bytes bytes = 32;
+
+	string text = 33;
 }
 
 enum AliasedEnum {

@@ -196,7 +196,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					table.insert(self.failure, buffer.tostring(value))
+					table.insert(self.failure, proto.decodeString(value))
 					continue
 				end
 
@@ -386,12 +386,12 @@ do
 				elseif field == 2 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.payload = { type = "json_payload", value = buffer.tostring(value) }
+					self.payload = { type = "json_payload", value = proto.decodeString(value) }
 					continue
 				elseif field == 4 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.message_type = buffer.tostring(value)
+					self.message_type = proto.decodeString(value)
 					continue
 				elseif field == 6 then
 					local value
@@ -401,12 +401,12 @@ do
 				elseif field == 7 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.payload = { type = "jspb_payload", value = buffer.tostring(value) }
+					self.payload = { type = "jspb_payload", value = proto.decodeString(value) }
 					continue
 				elseif field == 8 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.payload = { type = "text_payload", value = buffer.tostring(value) }
+					self.payload = { type = "text_payload", value = proto.decodeString(value) }
 					continue
 				end
 
@@ -649,12 +649,12 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "parse_error", value = buffer.tostring(value) }
+					self.result = { type = "parse_error", value = proto.decodeString(value) }
 					continue
 				elseif field == 2 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "runtime_error", value = buffer.tostring(value) }
+					self.result = { type = "runtime_error", value = proto.decodeString(value) }
 					continue
 				elseif field == 3 then
 					local value
@@ -664,32 +664,32 @@ do
 				elseif field == 4 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "json_payload", value = buffer.tostring(value) }
+					self.result = { type = "json_payload", value = proto.decodeString(value) }
 					continue
 				elseif field == 5 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "skipped", value = buffer.tostring(value) }
+					self.result = { type = "skipped", value = proto.decodeString(value) }
 					continue
 				elseif field == 6 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "serialize_error", value = buffer.tostring(value) }
+					self.result = { type = "serialize_error", value = proto.decodeString(value) }
 					continue
 				elseif field == 7 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "jspb_payload", value = buffer.tostring(value) }
+					self.result = { type = "jspb_payload", value = proto.decodeString(value) }
 					continue
 				elseif field == 8 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "text_payload", value = buffer.tostring(value) }
+					self.result = { type = "text_payload", value = proto.decodeString(value) }
 					continue
 				elseif field == 9 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.result = { type = "timeout_error", value = buffer.tostring(value) }
+					self.result = { type = "timeout_error", value = proto.decodeString(value) }
 					continue
 				end
 

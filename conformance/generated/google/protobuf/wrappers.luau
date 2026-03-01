@@ -865,7 +865,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.value = buffer.tostring(value)
+					self.value = proto.decodeString(value)
 					continue
 				end
 

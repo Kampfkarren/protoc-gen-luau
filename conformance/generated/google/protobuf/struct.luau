@@ -281,7 +281,7 @@ do
 				if field == 1 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.key = buffer.tostring(value)
+					self.key = proto.decodeString(value)
 					continue
 				elseif field == 2 then
 					local value
@@ -423,7 +423,7 @@ do
 				if field == 3 then
 					local value
 					value, cursor = proto.readBuffer(input, cursor)
-					self.kind = { type = "string_value", value = buffer.tostring(value) }
+					self.kind = { type = "string_value", value = proto.decodeString(value) }
 					continue
 				elseif field == 5 then
 					local value

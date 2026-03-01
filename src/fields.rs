@@ -876,7 +876,7 @@ fn decode_instruction_field_descriptor_ignore_repeated(
 
         Type::Bool => "value ~= 0".into(),
 
-        Type::String => "buffer.tostring(value)".into(),
+        Type::String => "proto.decodeString(value)".into(),
 
         Type::Enum => format!(
             "({}.fromNumber(value) or value) :: any --[[ Luau: Enums are a string intersection which Luau is quick to dismantle ]]",
