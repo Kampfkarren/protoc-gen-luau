@@ -189,7 +189,6 @@ fn field_name_case_invalid_returns_error() {
 }
 
 #[tokio::test]
-#[ignore]
 async fn invalid_utf8() {
     run_luau_test(Path::new("invalid_utf8.luau")).await;
 }
