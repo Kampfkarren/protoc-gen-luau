@@ -1,7 +1,5 @@
 -- Jest does not yet work in Lune.
 -- Replace this when it can.
-local serde = require("@lune/serde")
-
 local tests = {}
 
 local anyFailed = false
@@ -57,13 +55,13 @@ end
 
 function tests.assertEquals<T>(x: T, y: T)
 	if not deepEqual(x, y) then
-		error(`Assertion failed. Expected \`{serde.encode("json", x)}\` to equal \`{serde.encode("json", y)}\``)
+		error(`Assertion failed. Expected \`{x}\` to equal \`{y}\``)
 	end
 end
 
 function tests.assertNotEquals<T>(x: T, y: T)
 	if deepEqual(x, y) then
-		error(`Assertion failed. Expected \`{serde.encode("json", x)}\` not to equal \`{serde.encode("json", y)}\``)
+		error(`Assertion failed. Expected \`{x}\` not to equal \`{y}\``)
 	end
 end
 
