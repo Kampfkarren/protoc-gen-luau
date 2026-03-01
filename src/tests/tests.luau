@@ -1,6 +1,7 @@
 -- Jest does not yet work in Lune.
 -- Replace this when it can.
 local serde = require("@lune/serde")
+
 local tests = {}
 
 local anyFailed = false
