@@ -815,10 +815,7 @@ impl<'a> FileGenerator<'a> {
                 json_decode_lines.append(&mut field.json_decode());
             }
 
-            default_lines.push(format!(
-                r#"{field_name} = if data == nil or data.{field_name} == nil then {} else data.{field_name},"#,
-                field.default()
-            ));
+            default_lines.push(field.new_body_assignment());
 
             for inner_field in field.inner_fields() {
                 let output = &format!("self.{field_name}");

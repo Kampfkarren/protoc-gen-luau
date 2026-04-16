@@ -19,6 +19,7 @@ fn generate_samples() {
         "forwards_compatibility.proto",
         "kitchen_sink.proto",
         "many_messages.proto",
+        "nested_autowrap.proto",
         "recursive.proto",
         "wkt.proto",
     ];
@@ -206,4 +207,9 @@ async fn field_case_snake() {
 #[tokio::test]
 async fn field_case_camel() {
     run_luau_test(Path::new("field_case_camel.luau")).await;
+}
+
+#[tokio::test]
+async fn nested_autowrap() {
+    run_luau_test(Path::new("nested_autowrap.luau")).await;
 }

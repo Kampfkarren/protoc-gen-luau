@@ -516,6 +516,138 @@ impl FieldGenerator<'_> {
             FieldKind::OneOf { .. } => "nil".into(),
         }
     }
+
+    /// Emit the full `{field} = ...,` line for the `.new()` body.
+    ///
+    /// For message-typed fields (singular, repeated, map-value, oneof-case), plain-table
+    /// inputs are recursively wrapped with the nested message's `.new()` so that downstream
+    /// operations that require the metatable (`:jsonEncode()`, `:encode()`, etc.) work.
+    /// Already-typed instances (ones that carry a metatable) pass through unchanged.
+    ///
+    /// Mirrors the algorithm in protoc-gen-es's `create(Schema, plainObject)` — iterate
+    /// field descriptors, for each message-kind field auto-construct recursively.
+    pub fn new_body_assignment(&self) -> String {
+        let field_name = self.name();
+        let default = self.default();
+
+        match &self.field_kind {
+            FieldKind::Single(field) => {
+                // Maps are modeled at the proto level as `repeated MapEntry` but exposed here
+                // as a separate kind via `map_type()` — check that first.
+                if let Some(map_type) = self.map_type() {
+                    if map_type.value.r#type() == Type::Message {
+                        let value_type = runtime_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file,
+                        );
+                        return format!(
+                            "{field_name} = (function()\n\
+                                local src = if data == nil then nil else data.{field_name}\n\
+                                if src == nil then return {{}} end\n\
+                                local out = {{}}\n\
+                                for k, v in src do\n\
+                                    out[k] = if getmetatable(v :: any) == nil then {value_type}.new(v) else v\n\
+                                end\n\
+                                return out\n\
+                            end)(),"
+                        );
+                    }
+                    return format!(
+                        "{field_name} = if data == nil or data.{field_name} == nil then {default} else data.{field_name},"
+                    );
+                }
+
+                // Repeated scalar or repeated message.
+                if field.label.is_some() && field.label() == Label::Repeated {
+                    if field.r#type() == Type::Message {
+                        let msg_type = runtime_definition_of_field_descriptor(
+                            field,
+                            self.export_map,
+                            self.base_file,
+                        );
+                        return format!(
+                            "{field_name} = (function()\n\
+                                local src = if data == nil then nil else data.{field_name}\n\
+                                if src == nil then return {{}} end\n\
+                                local out = table.create(#src)\n\
+                                for i, v in src do\n\
+                                    out[i] = if getmetatable(v :: any) == nil then {msg_type}.new(v) else v\n\
+                                end\n\
+                                return out\n\
+                            end)(),"
+                        );
+                    }
+                    return format!(
+                        "{field_name} = if data == nil or data.{field_name} == nil then {default} else data.{field_name},"
+                    );
+                }
+
+                // Singular message field — auto-wrap plain tables.
+                if field.r#type() == Type::Message {
+                    let msg_type = runtime_definition_of_field_descriptor(
+                        field,
+                        self.export_map,
+                        self.base_file,
+                    );
+                    return format!(
+                        "{field_name} = if data == nil or data.{field_name} == nil then {default} \
+                         elseif getmetatable(data.{field_name} :: any) == nil then {msg_type}.new(data.{field_name}) \
+                         else data.{field_name},"
+                    );
+                }
+
+                // Scalar / enum / bytes / bool — pass through as today.
+                format!(
+                    "{field_name} = if data == nil or data.{field_name} == nil then {default} else data.{field_name},"
+                )
+            }
+
+            FieldKind::OneOf { fields, .. } => {
+                // Auto-wrap plain-table `value` when the tagged variant is a message case.
+                // Non-message cases (string/int/etc.) pass through unchanged.
+                let message_cases: Vec<(&FieldDescriptorProto, String, String)> = fields
+                    .iter()
+                    .filter(|f| f.r#type() == Type::Message)
+                    .map(|f| {
+                        let case_name = self.luau_name(f.name());
+                        let msg_type = runtime_definition_of_field_descriptor(
+                            f,
+                            self.export_map,
+                            self.base_file,
+                        );
+                        (*f, case_name, msg_type)
+                    })
+                    .collect();
+
+                if message_cases.is_empty() {
+                    return format!(
+                        "{field_name} = if data == nil or data.{field_name} == nil then nil else data.{field_name},"
+                    );
+                }
+
+                let mut body = String::new();
+                body.push_str(&format!(
+                    "{field_name} = (function()\n\
+                        if data == nil or data.{field_name} == nil then return nil end\n\
+                        local v = data.{field_name}\n"
+                ));
+                for (i, (_, case_name, msg_type)) in message_cases.iter().enumerate() {
+                    let keyword = if i == 0 { "if" } else { "elseif" };
+                    body.push_str(&format!(
+                        "{keyword} (v :: any).type == \"{case_name}\" and (v :: any).value ~= nil and getmetatable((v :: any).value) == nil then\n\
+                            return {{ type = (v :: any).type, value = {msg_type}.new((v :: any).value) }} :: any\n"
+                    ));
+                }
+                body.push_str(
+                    "end\n\
+                    return v\n\
+                end)(),"
+                );
+                body
+            }
+        }
+    }
 }
 
 fn definition_of_field_descriptor(

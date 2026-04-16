@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package nested_autowrap;
+
+message Inner {
+	string value = 1;
+}
+
+message Other {
+	int32 n = 1;
+}
+
+message Container {
+	Inner single = 1;
+	repeated Inner items = 2;
+	map<string, Inner> entries = 3;
+
+	oneof payload {
+		Inner case_msg = 4;
+		string case_string = 5;
+		Other case_other = 6;
+	}
+}
