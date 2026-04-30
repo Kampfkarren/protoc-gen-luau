@@ -142,6 +142,75 @@ impl FieldGenerator<'_> {
         definition
     }
 
+    /// Same shape as `type_definition_no_presence`, but for message-typed
+    /// positions widens to `<Type> | _<Type>PartialFields` so callers can
+    /// pass either a constructed instance or a plain-table partial.
+    /// Mirrors the runtime `getmetatable(v) == nil then .new(v) else v`
+    /// auto-wrap branch.
+    ///
+    /// Maps with message values use `{ [K]: any }` rather than the union —
+    /// Luau treats indexed table types as invariant in their value, so an
+    /// object-literal map like `{ foo = { value = "x" } }` cannot fit a
+    /// `{ [K]: A | B }` slot even when each value would be assignable to
+    /// `A | B` individually.
+    pub fn partial_input_type_definition_no_presence(&self) -> String {
+        match &self.field_kind {
+            FieldKind::Single(field) => {
+                if let Some(map_type) = self.map_type() {
+                    let value = if map_type.value.r#type() == Type::Message {
+                        "any".to_owned()
+                    } else {
+                        type_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file,
+                        )
+                    };
+                    format!(
+                        "{{ [{}]: {} }}",
+                        type_definition_of_field_descriptor(
+                            &map_type.key,
+                            self.export_map,
+                            self.base_file
+                        ),
+                        value,
+                    )
+                } else {
+                    let definition = partial_input_definition_of_field_descriptor(
+                        field,
+                        self.export_map,
+                        self.base_file,
+                    );
+
+                    if field.label.is_some() && field.label() == Label::Repeated {
+                        format!("{{ {definition} }}")
+                    } else {
+                        definition
+                    }
+                }
+            }
+
+            FieldKind::OneOf { fields, .. } => {
+                let variants = fields
+                    .iter()
+                    .map(|field| {
+                        format!(
+                            "{{ type: \"{}\", value: {} }}",
+                            self.luau_name(field.name()),
+                            partial_input_definition_of_field_descriptor(
+                                field,
+                                self.export_map,
+                                self.base_file
+                            )
+                        )
+                    })
+                    .collect::<Vec<_>>();
+
+                format!("({})", variants.join(" | "))
+            }
+        }
+    }
+
     pub fn should_encode(&self) -> String {
         let this = format!("self.{}", self.name());
 
@@ -541,13 +610,18 @@ impl FieldGenerator<'_> {
                             self.export_map,
                             self.base_file,
                         );
+                        let value_type_name = type_definition_of_field_descriptor(
+                            &map_type.value,
+                            self.export_map,
+                            self.base_file,
+                        );
                         return format!(
                             "{field_name} = (function()\n\
                                 local src = if data == nil then nil else data.{field_name}\n\
                                 if src == nil then return {{}} end\n\
                                 local out = {{}}\n\
                                 for k, v in src do\n\
-                                    out[k] = if getmetatable(v :: any) == nil then {value_type}.new(v) else v\n\
+                                    out[k] = if getmetatable(v :: any) == nil then {value_type}.new(v :: any) else (v :: any) :: {value_type_name}\n\
                                 end\n\
                                 return out\n\
                             end)(),"
@@ -566,13 +640,18 @@ impl FieldGenerator<'_> {
                             self.export_map,
                             self.base_file,
                         );
+                        let msg_type_name = type_definition_of_field_descriptor(
+                            field,
+                            self.export_map,
+                            self.base_file,
+                        );
                         return format!(
                             "{field_name} = (function()\n\
                                 local src = if data == nil then nil else data.{field_name}\n\
                                 if src == nil then return {{}} end\n\
                                 local out = table.create(#src)\n\
                                 for i, v in src do\n\
-                                    out[i] = if getmetatable(v :: any) == nil then {msg_type}.new(v) else v\n\
+                                    out[i] = if getmetatable(v :: any) == nil then {msg_type}.new(v :: any) else (v :: any) :: {msg_type_name}\n\
                                 end\n\
                                 return out\n\
                             end)(),"
@@ -590,10 +669,12 @@ impl FieldGenerator<'_> {
                         self.export_map,
                         self.base_file,
                     );
+                    let msg_type_name =
+                        type_definition_of_field_descriptor(field, self.export_map, self.base_file);
                     return format!(
                         "{field_name} = if data == nil or data.{field_name} == nil then {default} \
-                         elseif getmetatable(data.{field_name} :: any) == nil then {msg_type}.new(data.{field_name}) \
-                         else data.{field_name},"
+                         elseif getmetatable(data.{field_name} :: any) == nil then {msg_type}.new(data.{field_name} :: any) \
+                         else (data.{field_name} :: any) :: {msg_type_name},"
                     );
                 }
 
@@ -641,8 +722,8 @@ impl FieldGenerator<'_> {
                 }
                 body.push_str(
                     "end\n\
-                    return v\n\
-                end)(),"
+                    return v :: any\n\
+                end)(),",
                 );
                 body
             }
@@ -719,6 +800,57 @@ fn type_definition_of_field_descriptor(
     base_file: &FileDescriptorProto,
 ) -> String {
     definition_of_field_descriptor(field, export_map, base_file, "")
+}
+
+/// Type expression for an input position that accepts either a constructed
+/// message or a plain-table partial. For non-message fields, behaves the
+/// same as `type_definition_of_field_descriptor`.
+fn partial_input_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    let typed = type_definition_of_field_descriptor(field, export_map, base_file);
+    if field.r#type() == Type::Message {
+        let partial = partial_fields_definition_of_field_descriptor(field, export_map, base_file);
+        format!("({typed} | {partial})")
+    } else {
+        typed
+    }
+}
+
+/// Path to the `_<Name>PartialFields` type for a message field, including
+/// any cross-file `<file_export>.` prefix.
+fn partial_fields_definition_of_field_descriptor(
+    field: &FieldDescriptorProto,
+    export_map: &ExportMap,
+    base_file: &FileDescriptorProto,
+) -> String {
+    let original_type_name = field.type_name();
+    assert!(
+        original_type_name.starts_with('.'),
+        "NYI: Relative type names: {original_type_name}"
+    );
+
+    let type_name = &original_type_name[1..];
+    let mut segments: Vec<&str> = type_name.split('.').collect();
+    let just_type = segments.pop().unwrap();
+    let package = segments.join(".");
+
+    let export = export_map
+        .get(&format!("{package}.{just_type}"))
+        .or_else(|| export_map.get(original_type_name))
+        .unwrap_or_else(|| panic!("couldn't find export {package}.{just_type}"));
+
+    if export.path == Path::new(base_file.name()).with_extension("") {
+        format!("_{}{just_type}PartialFields", export.prefix)
+    } else {
+        format!(
+            "{}._{}{just_type}PartialFields",
+            file_path_export_name(&export.path),
+            export.prefix,
+        )
+    }
 }
 
 #[derive(Clone, Copy)]

@@ -10,7 +10,7 @@ local it = tests.it
 
 local Container = nested_autowrap.Container
 local Inner = nested_autowrap.Inner
-local Other = nested_autowrap.Other
+local _Other = nested_autowrap.Other
 
 describe("nested_autowrap", function()
 	describe("singular message field", function()
@@ -18,6 +18,7 @@ describe("nested_autowrap", function()
 			local c = Container.new({
 				single = { value = "hello" },
 			})
+			assert(c.single, "expected c.single to be set")
 			assertEquals(c.single.value, "hello")
 			assert(getmetatable(c.single :: any) ~= nil, "expected c.single to have a metatable")
 		end)

@@ -26,7 +26,7 @@ type _TimestampFields = {
 	nanos: number,
 }
 
-type _TimestampPartialFields = {
+export type _TimestampPartialFields = {
 	seconds: number?,
 	nanos: number?,
 }

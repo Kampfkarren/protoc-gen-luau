@@ -26,7 +26,7 @@ type _DurationFields = {
 	nanos: number,
 }
 
-type _DurationPartialFields = {
+export type _DurationPartialFields = {
 	seconds: number?,
 	nanos: number?,
 }

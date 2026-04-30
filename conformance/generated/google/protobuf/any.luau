@@ -40,7 +40,7 @@ type _AnyFields = {
 	value: buffer,
 }
 
-type _AnyPartialFields = {
+export type _AnyPartialFields = {
 	type_url: string?,
 	value: buffer?,
 }

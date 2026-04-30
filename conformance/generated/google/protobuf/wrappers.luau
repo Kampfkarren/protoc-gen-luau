@@ -33,7 +33,7 @@ type _DoubleValueFields = {
 	value: number,
 }
 
-type _DoubleValuePartialFields = {
+export type _DoubleValuePartialFields = {
 	value: number?,
 }
 
@@ -54,7 +54,7 @@ type _FloatValueFields = {
 	value: number,
 }
 
-type _FloatValuePartialFields = {
+export type _FloatValuePartialFields = {
 	value: number?,
 }
 
@@ -75,7 +75,7 @@ type _Int64ValueFields = {
 	value: number,
 }
 
-type _Int64ValuePartialFields = {
+export type _Int64ValuePartialFields = {
 	value: number?,
 }
 
@@ -96,7 +96,7 @@ type _UInt64ValueFields = {
 	value: number,
 }
 
-type _UInt64ValuePartialFields = {
+export type _UInt64ValuePartialFields = {
 	value: number?,
 }
 
@@ -117,7 +117,7 @@ type _Int32ValueFields = {
 	value: number,
 }
 
-type _Int32ValuePartialFields = {
+export type _Int32ValuePartialFields = {
 	value: number?,
 }
 
@@ -138,7 +138,7 @@ type _UInt32ValueFields = {
 	value: number,
 }
 
-type _UInt32ValuePartialFields = {
+export type _UInt32ValuePartialFields = {
 	value: number?,
 }
 
@@ -159,7 +159,7 @@ type _BoolValueFields = {
 	value: boolean,
 }
 
-type _BoolValuePartialFields = {
+export type _BoolValuePartialFields = {
 	value: boolean?,
 }
 
@@ -180,7 +180,7 @@ type _StringValueFields = {
 	value: string,
 }
 
-type _StringValuePartialFields = {
+export type _StringValuePartialFields = {
 	value: string?,
 }
 
@@ -201,7 +201,7 @@ type _BytesValueFields = {
 	value: buffer,
 }
 
-type _BytesValuePartialFields = {
+export type _BytesValuePartialFields = {
 	value: buffer?,
 }
 

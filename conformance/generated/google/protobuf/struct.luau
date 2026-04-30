@@ -29,8 +29,8 @@ type _StructFields = {
 	fields: { [string]: Value },
 }
 
-type _StructPartialFields = {
-	fields: { [string]: Value }?,
+export type _StructPartialFields = {
+	fields: { [string]: any }?,
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
@@ -51,9 +51,9 @@ type _Struct_FieldsEntryFields = {
 	value: Value?,
 }
 
-type _Struct_FieldsEntryPartialFields = {
+export type _Struct_FieldsEntryPartialFields = {
 	key: string?,
-	value: Value?,
+	value: (Value | _ValuePartialFields)?,
 }
 
 export type Struct_FieldsEntry = typeof(setmetatable({} :: _Struct_FieldsEntryFields, {} :: _Struct_FieldsEntryImpl))
@@ -80,14 +80,14 @@ type _ValueFields = {
 	)?,
 }
 
-type _ValuePartialFields = {
+export type _ValuePartialFields = {
 	kind: (
 		{ type: "null_value", value: NullValue }
 		| { type: "number_value", value: number }
 		| { type: "string_value", value: string }
 		| { type: "bool_value", value: boolean }
-		| { type: "struct_value", value: Struct }
-		| { type: "list_value", value: ListValue }
+		| { type: "struct_value", value: Struct | _StructPartialFields }
+		| { type: "list_value", value: ListValue | _ListValuePartialFields }
 	)?,
 }
 
@@ -108,8 +108,8 @@ type _ListValueFields = {
 	values: { Value },
 }
 
-type _ListValuePartialFields = {
-	values: { Value }?,
+export type _ListValuePartialFields = {
+	values: { Value | _ValuePartialFields }?,
 }
 
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
@@ -124,7 +124,17 @@ do
 
 	function _StructImpl.new(data: _StructPartialFields?): Struct
 		return setmetatable({
-			fields = if data == nil or data.fields == nil then {} else data.fields,
+			fields = (function()
+				local src = if data == nil then nil else data.fields
+				if src == nil then
+					return {}
+				end
+				local out = {}
+				for k, v in src do
+					out[k] = if getmetatable(v :: any) == nil then messages.Value.new(v :: any) else (v :: any) :: Value
+				end
+				return out
+			end)(),
 		}, _StructImpl :: _StructImpl)
 	end
 
@@ -240,7 +250,10 @@ do
 	function _Struct_FieldsEntryImpl.new(data: _Struct_FieldsEntryPartialFields?): Struct_FieldsEntry
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
-			value = if data == nil or data.value == nil then nil else data.value,
+			value = if data == nil or data.value == nil
+				then nil
+				elseif getmetatable(data.value :: any) == nil then messages.Value.new(data.value :: any)
+				else (data.value :: any) :: Value,
 		}, _Struct_FieldsEntryImpl :: _Struct_FieldsEntryImpl)
 	end
 
@@ -356,7 +369,26 @@ do
 
 	function _ValueImpl.new(data: _ValuePartialFields?): Value
 		return setmetatable({
-			kind = if data == nil or data.kind == nil then nil else data.kind,
+			kind = (function()
+				if data == nil or data.kind == nil then
+					return nil
+				end
+				local v = data.kind
+				if
+					(v :: any).type == "struct_value"
+					and (v :: any).value ~= nil
+					and getmetatable((v :: any).value) == nil
+				then
+					return { type = (v :: any).type, value = messages.Struct.new((v :: any).value) } :: any
+				elseif
+					(v :: any).type == "list_value"
+					and (v :: any).value ~= nil
+					and getmetatable((v :: any).value) == nil
+				then
+					return { type = (v :: any).type, value = messages.ListValue.new((v :: any).value) } :: any
+				end
+				return v :: any
+			end)(),
 		}, _ValueImpl :: _ValueImpl)
 	end
 
@@ -529,7 +561,17 @@ do
 
 	function _ListValueImpl.new(data: _ListValuePartialFields?): ListValue
 		return setmetatable({
-			values = if data == nil or data.values == nil then {} else data.values,
+			values = (function()
+				local src = if data == nil then nil else data.values
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil then messages.Value.new(v :: any) else (v :: any) :: Value
+				end
+				return out
+			end)(),
 		}, _ListValueImpl :: _ListValueImpl)
 	end
 

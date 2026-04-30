@@ -211,7 +211,7 @@ type _TestAllTypesProto3Fields = {
 	Field_name18__: number,
 }
 
-type _TestAllTypesProto3PartialFields = {
+export type _TestAllTypesProto3PartialFields = {
 	optional_int32: number?,
 	optional_int64: number?,
 	optional_uint32: number?,
@@ -227,14 +227,14 @@ type _TestAllTypesProto3PartialFields = {
 	optional_bool: boolean?,
 	optional_string: string?,
 	optional_bytes: buffer?,
-	optional_nested_message: TestAllTypesProto3_NestedMessage?,
-	optional_foreign_message: ForeignMessage?,
+	optional_nested_message: (TestAllTypesProto3_NestedMessage | _TestAllTypesProto3_NestedMessagePartialFields)?,
+	optional_foreign_message: (ForeignMessage | _ForeignMessagePartialFields)?,
 	optional_nested_enum: TestAllTypesProto3_NestedEnum?,
 	optional_foreign_enum: ForeignEnum?,
 	optional_aliased_enum: TestAllTypesProto3_AliasedEnum?,
 	optional_string_piece: string?,
 	optional_cord: string?,
-	recursive_message: TestAllTypesProto3?,
+	recursive_message: (TestAllTypesProto3 | _TestAllTypesProto3PartialFields)?,
 	repeated_int32: { number }?,
 	repeated_int64: { number }?,
 	repeated_uint32: { number }?,
@@ -250,8 +250,8 @@ type _TestAllTypesProto3PartialFields = {
 	repeated_bool: { boolean }?,
 	repeated_string: { string }?,
 	repeated_bytes: { buffer }?,
-	repeated_nested_message: { TestAllTypesProto3_NestedMessage }?,
-	repeated_foreign_message: { ForeignMessage }?,
+	repeated_nested_message: { TestAllTypesProto3_NestedMessage | _TestAllTypesProto3_NestedMessagePartialFields }?,
+	repeated_foreign_message: { ForeignMessage | _ForeignMessagePartialFields }?,
 	repeated_nested_enum: { TestAllTypesProto3_NestedEnum }?,
 	repeated_foreign_enum: { ForeignEnum }?,
 	repeated_string_piece: { string }?,
@@ -299,13 +299,16 @@ type _TestAllTypesProto3PartialFields = {
 	map_bool_bool: { [boolean]: boolean }?,
 	map_string_string: { [string]: string }?,
 	map_string_bytes: { [string]: buffer }?,
-	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage }?,
-	map_string_foreign_message: { [string]: ForeignMessage }?,
+	map_string_nested_message: { [string]: any }?,
+	map_string_foreign_message: { [string]: any }?,
 	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum }?,
 	map_string_foreign_enum: { [string]: ForeignEnum }?,
 	oneof_field: (
 		{ type: "oneof_uint32", value: number }
-		| { type: "oneof_nested_message", value: TestAllTypesProto3_NestedMessage }
+		| {
+			type: "oneof_nested_message",
+			value: TestAllTypesProto3_NestedMessage | _TestAllTypesProto3_NestedMessagePartialFields,
+		}
 		| { type: "oneof_string", value: string }
 		| { type: "oneof_bytes", value: buffer }
 		| { type: "oneof_bool", value: boolean }
@@ -315,38 +318,78 @@ type _TestAllTypesProto3PartialFields = {
 		| { type: "oneof_enum", value: TestAllTypesProto3_NestedEnum }
 		| { type: "oneof_null_value", value: _google_protobuf_struct.NullValue }
 	)?,
-	optional_bool_wrapper: _google_protobuf_wrappers.BoolValue?,
-	optional_int32_wrapper: _google_protobuf_wrappers.Int32Value?,
-	optional_int64_wrapper: _google_protobuf_wrappers.Int64Value?,
-	optional_uint32_wrapper: _google_protobuf_wrappers.UInt32Value?,
-	optional_uint64_wrapper: _google_protobuf_wrappers.UInt64Value?,
-	optional_float_wrapper: _google_protobuf_wrappers.FloatValue?,
-	optional_double_wrapper: _google_protobuf_wrappers.DoubleValue?,
-	optional_string_wrapper: _google_protobuf_wrappers.StringValue?,
-	optional_bytes_wrapper: _google_protobuf_wrappers.BytesValue?,
-	repeated_bool_wrapper: { _google_protobuf_wrappers.BoolValue }?,
-	repeated_int32_wrapper: { _google_protobuf_wrappers.Int32Value }?,
-	repeated_int64_wrapper: { _google_protobuf_wrappers.Int64Value }?,
-	repeated_uint32_wrapper: { _google_protobuf_wrappers.UInt32Value }?,
-	repeated_uint64_wrapper: { _google_protobuf_wrappers.UInt64Value }?,
-	repeated_float_wrapper: { _google_protobuf_wrappers.FloatValue }?,
-	repeated_double_wrapper: { _google_protobuf_wrappers.DoubleValue }?,
-	repeated_string_wrapper: { _google_protobuf_wrappers.StringValue }?,
-	repeated_bytes_wrapper: { _google_protobuf_wrappers.BytesValue }?,
-	optional_duration: _google_protobuf_duration.Duration?,
-	optional_timestamp: _google_protobuf_timestamp.Timestamp?,
-	optional_field_mask: _google_protobuf_field_mask.FieldMask?,
-	optional_struct: _google_protobuf_struct.Struct?,
-	optional_any: _google_protobuf_any.Any?,
-	optional_value: _google_protobuf_struct.Value?,
+	optional_bool_wrapper: (_google_protobuf_wrappers.BoolValue | _google_protobuf_wrappers._BoolValuePartialFields)?,
+	optional_int32_wrapper: (_google_protobuf_wrappers.Int32Value | _google_protobuf_wrappers._Int32ValuePartialFields)?,
+	optional_int64_wrapper: (_google_protobuf_wrappers.Int64Value | _google_protobuf_wrappers._Int64ValuePartialFields)?,
+	optional_uint32_wrapper: (
+		_google_protobuf_wrappers.UInt32Value | _google_protobuf_wrappers._UInt32ValuePartialFields
+	)?,
+	optional_uint64_wrapper: (
+		_google_protobuf_wrappers.UInt64Value | _google_protobuf_wrappers._UInt64ValuePartialFields
+	)?,
+	optional_float_wrapper: (_google_protobuf_wrappers.FloatValue | _google_protobuf_wrappers._FloatValuePartialFields)?,
+	optional_double_wrapper: (
+		_google_protobuf_wrappers.DoubleValue | _google_protobuf_wrappers._DoubleValuePartialFields
+	)?,
+	optional_string_wrapper: (
+		_google_protobuf_wrappers.StringValue | _google_protobuf_wrappers._StringValuePartialFields
+	)?,
+	optional_bytes_wrapper: (_google_protobuf_wrappers.BytesValue | _google_protobuf_wrappers._BytesValuePartialFields)?,
+	repeated_bool_wrapper: { _google_protobuf_wrappers.BoolValue | _google_protobuf_wrappers._BoolValuePartialFields }?,
+	repeated_int32_wrapper: {
+		(
+			_google_protobuf_wrappers.Int32Value | _google_protobuf_wrappers._Int32ValuePartialFields
+		)
+	}?,
+	repeated_int64_wrapper: {
+		(
+			_google_protobuf_wrappers.Int64Value | _google_protobuf_wrappers._Int64ValuePartialFields
+		)
+	}?,
+	repeated_uint32_wrapper: {
+		(
+			_google_protobuf_wrappers.UInt32Value | _google_protobuf_wrappers._UInt32ValuePartialFields
+		)
+	}?,
+	repeated_uint64_wrapper: {
+		(
+			_google_protobuf_wrappers.UInt64Value | _google_protobuf_wrappers._UInt64ValuePartialFields
+		)
+	}?,
+	repeated_float_wrapper: {
+		(
+			_google_protobuf_wrappers.FloatValue | _google_protobuf_wrappers._FloatValuePartialFields
+		)
+	}?,
+	repeated_double_wrapper: {
+		(
+			_google_protobuf_wrappers.DoubleValue | _google_protobuf_wrappers._DoubleValuePartialFields
+		)
+	}?,
+	repeated_string_wrapper: {
+		(
+			_google_protobuf_wrappers.StringValue | _google_protobuf_wrappers._StringValuePartialFields
+		)
+	}?,
+	repeated_bytes_wrapper: {
+		(
+			_google_protobuf_wrappers.BytesValue | _google_protobuf_wrappers._BytesValuePartialFields
+		)
+	}?,
+	optional_duration: (_google_protobuf_duration.Duration | _google_protobuf_duration._DurationPartialFields)?,
+	optional_timestamp: (_google_protobuf_timestamp.Timestamp | _google_protobuf_timestamp._TimestampPartialFields)?,
+	optional_field_mask: (_google_protobuf_field_mask.FieldMask | _google_protobuf_field_mask._FieldMaskPartialFields)?,
+	optional_struct: (_google_protobuf_struct.Struct | _google_protobuf_struct._StructPartialFields)?,
+	optional_any: (_google_protobuf_any.Any | _google_protobuf_any._AnyPartialFields)?,
+	optional_value: (_google_protobuf_struct.Value | _google_protobuf_struct._ValuePartialFields)?,
 	optional_null_value: _google_protobuf_struct.NullValue?,
-	repeated_duration: { _google_protobuf_duration.Duration }?,
-	repeated_timestamp: { _google_protobuf_timestamp.Timestamp }?,
-	repeated_fieldmask: { _google_protobuf_field_mask.FieldMask }?,
-	repeated_struct: { _google_protobuf_struct.Struct }?,
-	repeated_any: { _google_protobuf_any.Any }?,
-	repeated_value: { _google_protobuf_struct.Value }?,
-	repeated_list_value: { _google_protobuf_struct.ListValue }?,
+	repeated_duration: { _google_protobuf_duration.Duration | _google_protobuf_duration._DurationPartialFields }?,
+	repeated_timestamp: { _google_protobuf_timestamp.Timestamp | _google_protobuf_timestamp._TimestampPartialFields }?,
+	repeated_fieldmask: { _google_protobuf_field_mask.FieldMask | _google_protobuf_field_mask._FieldMaskPartialFields }?,
+	repeated_struct: { _google_protobuf_struct.Struct | _google_protobuf_struct._StructPartialFields }?,
+	repeated_any: { _google_protobuf_any.Any | _google_protobuf_any._AnyPartialFields }?,
+	repeated_value: { _google_protobuf_struct.Value | _google_protobuf_struct._ValuePartialFields }?,
+	repeated_list_value: { _google_protobuf_struct.ListValue | _google_protobuf_struct._ListValuePartialFields }?,
 	fieldname1: number?,
 	field_name2: number?,
 	_field_name3: number?,
@@ -385,9 +428,9 @@ type _TestAllTypesProto3_NestedMessageFields = {
 	corecursive: TestAllTypesProto3?,
 }
 
-type _TestAllTypesProto3_NestedMessagePartialFields = {
+export type _TestAllTypesProto3_NestedMessagePartialFields = {
 	a: number?,
-	corecursive: TestAllTypesProto3?,
+	corecursive: (TestAllTypesProto3 | _TestAllTypesProto3PartialFields)?,
 }
 
 export type TestAllTypesProto3_NestedMessage = typeof(setmetatable(
@@ -414,7 +457,7 @@ type _TestAllTypesProto3_MapInt32Int32EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapInt32Int32EntryPartialFields = {
+export type _TestAllTypesProto3_MapInt32Int32EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -443,7 +486,7 @@ type _TestAllTypesProto3_MapInt64Int64EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapInt64Int64EntryPartialFields = {
+export type _TestAllTypesProto3_MapInt64Int64EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -472,7 +515,7 @@ type _TestAllTypesProto3_MapUint32Uint32EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapUint32Uint32EntryPartialFields = {
+export type _TestAllTypesProto3_MapUint32Uint32EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -501,7 +544,7 @@ type _TestAllTypesProto3_MapUint64Uint64EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapUint64Uint64EntryPartialFields = {
+export type _TestAllTypesProto3_MapUint64Uint64EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -530,7 +573,7 @@ type _TestAllTypesProto3_MapSint32Sint32EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapSint32Sint32EntryPartialFields = {
+export type _TestAllTypesProto3_MapSint32Sint32EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -559,7 +602,7 @@ type _TestAllTypesProto3_MapSint64Sint64EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapSint64Sint64EntryPartialFields = {
+export type _TestAllTypesProto3_MapSint64Sint64EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -590,7 +633,7 @@ type _TestAllTypesProto3_MapFixed32Fixed32EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields = {
+export type _TestAllTypesProto3_MapFixed32Fixed32EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -621,7 +664,7 @@ type _TestAllTypesProto3_MapFixed64Fixed64EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields = {
+export type _TestAllTypesProto3_MapFixed64Fixed64EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -652,7 +695,7 @@ type _TestAllTypesProto3_MapSfixed32Sfixed32EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields = {
+export type _TestAllTypesProto3_MapSfixed32Sfixed32EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -683,7 +726,7 @@ type _TestAllTypesProto3_MapSfixed64Sfixed64EntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields = {
+export type _TestAllTypesProto3_MapSfixed64Sfixed64EntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -712,7 +755,7 @@ type _TestAllTypesProto3_MapInt32FloatEntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapInt32FloatEntryPartialFields = {
+export type _TestAllTypesProto3_MapInt32FloatEntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -741,7 +784,7 @@ type _TestAllTypesProto3_MapInt32DoubleEntryFields = {
 	value: number,
 }
 
-type _TestAllTypesProto3_MapInt32DoubleEntryPartialFields = {
+export type _TestAllTypesProto3_MapInt32DoubleEntryPartialFields = {
 	key: number?,
 	value: number?,
 }
@@ -770,7 +813,7 @@ type _TestAllTypesProto3_MapBoolBoolEntryFields = {
 	value: boolean,
 }
 
-type _TestAllTypesProto3_MapBoolBoolEntryPartialFields = {
+export type _TestAllTypesProto3_MapBoolBoolEntryPartialFields = {
 	key: boolean?,
 	value: boolean?,
 }
@@ -799,7 +842,7 @@ type _TestAllTypesProto3_MapStringStringEntryFields = {
 	value: string,
 }
 
-type _TestAllTypesProto3_MapStringStringEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringStringEntryPartialFields = {
 	key: string?,
 	value: string?,
 }
@@ -828,7 +871,7 @@ type _TestAllTypesProto3_MapStringBytesEntryFields = {
 	value: buffer,
 }
 
-type _TestAllTypesProto3_MapStringBytesEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringBytesEntryPartialFields = {
 	key: string?,
 	value: buffer?,
 }
@@ -859,9 +902,9 @@ type _TestAllTypesProto3_MapStringNestedMessageEntryFields = {
 	value: TestAllTypesProto3_NestedMessage?,
 }
 
-type _TestAllTypesProto3_MapStringNestedMessageEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringNestedMessageEntryPartialFields = {
 	key: string?,
-	value: TestAllTypesProto3_NestedMessage?,
+	value: (TestAllTypesProto3_NestedMessage | _TestAllTypesProto3_NestedMessagePartialFields)?,
 }
 
 export type TestAllTypesProto3_MapStringNestedMessageEntry = typeof(setmetatable(
@@ -890,9 +933,9 @@ type _TestAllTypesProto3_MapStringForeignMessageEntryFields = {
 	value: ForeignMessage?,
 }
 
-type _TestAllTypesProto3_MapStringForeignMessageEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringForeignMessageEntryPartialFields = {
 	key: string?,
-	value: ForeignMessage?,
+	value: (ForeignMessage | _ForeignMessagePartialFields)?,
 }
 
 export type TestAllTypesProto3_MapStringForeignMessageEntry = typeof(setmetatable(
@@ -921,7 +964,7 @@ type _TestAllTypesProto3_MapStringNestedEnumEntryFields = {
 	value: TestAllTypesProto3_NestedEnum,
 }
 
-type _TestAllTypesProto3_MapStringNestedEnumEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringNestedEnumEntryPartialFields = {
 	key: string?,
 	value: TestAllTypesProto3_NestedEnum?,
 }
@@ -952,7 +995,7 @@ type _TestAllTypesProto3_MapStringForeignEnumEntryFields = {
 	value: ForeignEnum,
 }
 
-type _TestAllTypesProto3_MapStringForeignEnumEntryPartialFields = {
+export type _TestAllTypesProto3_MapStringForeignEnumEntryPartialFields = {
 	key: string?,
 	value: ForeignEnum?,
 }
@@ -986,7 +1029,7 @@ type _ForeignMessageFields = {
 	c: number,
 }
 
-type _ForeignMessagePartialFields = {
+export type _ForeignMessagePartialFields = {
 	c: number?,
 }
 
@@ -1005,7 +1048,7 @@ type _NullHypothesisProto3Impl = {
 
 type _NullHypothesisProto3Fields = {}
 
-type _NullHypothesisProto3PartialFields = {}
+export type _NullHypothesisProto3PartialFields = {}
 
 export type NullHypothesisProto3 = typeof(setmetatable(
 	{} :: _NullHypothesisProto3Fields,
@@ -1025,7 +1068,7 @@ type _EnumOnlyProto3Impl = {
 
 type _EnumOnlyProto3Fields = {}
 
-type _EnumOnlyProto3PartialFields = {}
+export type _EnumOnlyProto3PartialFields = {}
 
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
 type _EnumOnlyProto3Message = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
@@ -1061,10 +1104,16 @@ do
 				else data.optional_bytes,
 			optional_nested_message = if data == nil or data.optional_nested_message == nil
 				then nil
-				else data.optional_nested_message,
+				elseif
+					getmetatable(data.optional_nested_message :: any) == nil
+				then messages.TestAllTypesProto3_NestedMessage.new(data.optional_nested_message :: any)
+				else (data.optional_nested_message :: any) :: TestAllTypesProto3_NestedMessage,
 			optional_foreign_message = if data == nil or data.optional_foreign_message == nil
 				then nil
-				else data.optional_foreign_message,
+				elseif getmetatable(data.optional_foreign_message :: any) == nil then messages.ForeignMessage.new(
+					data.optional_foreign_message :: any
+				)
+				else (data.optional_foreign_message :: any) :: ForeignMessage,
 			optional_nested_enum = if data == nil or data.optional_nested_enum == nil
 				then assert(messages.TestAllTypesProto3_NestedEnum.fromNumber(0), "Enum has no 0 default")
 				else data.optional_nested_enum,
@@ -1078,7 +1127,12 @@ do
 				then ""
 				else data.optional_string_piece,
 			optional_cord = if data == nil or data.optional_cord == nil then "" else data.optional_cord,
-			recursive_message = if data == nil or data.recursive_message == nil then nil else data.recursive_message,
+			recursive_message = if data == nil or data.recursive_message == nil
+				then nil
+				elseif getmetatable(data.recursive_message :: any) == nil then messages.TestAllTypesProto3.new(
+					data.recursive_message :: any
+				)
+				else (data.recursive_message :: any) :: TestAllTypesProto3,
 			repeated_int32 = if data == nil or data.repeated_int32 == nil then {} else data.repeated_int32,
 			repeated_int64 = if data == nil or data.repeated_int64 == nil then {} else data.repeated_int64,
 			repeated_uint32 = if data == nil or data.repeated_uint32 == nil then {} else data.repeated_uint32,
@@ -1094,12 +1148,32 @@ do
 			repeated_bool = if data == nil or data.repeated_bool == nil then {} else data.repeated_bool,
 			repeated_string = if data == nil or data.repeated_string == nil then {} else data.repeated_string,
 			repeated_bytes = if data == nil or data.repeated_bytes == nil then {} else data.repeated_bytes,
-			repeated_nested_message = if data == nil or data.repeated_nested_message == nil
-				then {}
-				else data.repeated_nested_message,
-			repeated_foreign_message = if data == nil or data.repeated_foreign_message == nil
-				then {}
-				else data.repeated_foreign_message,
+			repeated_nested_message = (function()
+				local src = if data == nil then nil else data.repeated_nested_message
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then messages.TestAllTypesProto3_NestedMessage.new(v :: any)
+						else (v :: any) :: TestAllTypesProto3_NestedMessage
+				end
+				return out
+			end)(),
+			repeated_foreign_message = (function()
+				local src = if data == nil then nil else data.repeated_foreign_message
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then messages.ForeignMessage.new(v :: any)
+						else (v :: any) :: ForeignMessage
+				end
+				return out
+			end)(),
 			repeated_nested_enum = if data == nil or data.repeated_nested_enum == nil
 				then {}
 				else data.repeated_nested_enum,
@@ -1163,93 +1237,356 @@ do
 			map_bool_bool = if data == nil or data.map_bool_bool == nil then {} else data.map_bool_bool,
 			map_string_string = if data == nil or data.map_string_string == nil then {} else data.map_string_string,
 			map_string_bytes = if data == nil or data.map_string_bytes == nil then {} else data.map_string_bytes,
-			map_string_nested_message = if data == nil or data.map_string_nested_message == nil
-				then {}
-				else data.map_string_nested_message,
-			map_string_foreign_message = if data == nil or data.map_string_foreign_message == nil
-				then {}
-				else data.map_string_foreign_message,
+			map_string_nested_message = (function()
+				local src = if data == nil then nil else data.map_string_nested_message
+				if src == nil then
+					return {}
+				end
+				local out = {}
+				for k, v in src do
+					out[k] = if getmetatable(v :: any) == nil
+						then messages.TestAllTypesProto3_NestedMessage.new(v :: any)
+						else (v :: any) :: TestAllTypesProto3_NestedMessage
+				end
+				return out
+			end)(),
+			map_string_foreign_message = (function()
+				local src = if data == nil then nil else data.map_string_foreign_message
+				if src == nil then
+					return {}
+				end
+				local out = {}
+				for k, v in src do
+					out[k] = if getmetatable(v :: any) == nil
+						then messages.ForeignMessage.new(v :: any)
+						else (v :: any) :: ForeignMessage
+				end
+				return out
+			end)(),
 			map_string_nested_enum = if data == nil or data.map_string_nested_enum == nil
 				then {}
 				else data.map_string_nested_enum,
 			map_string_foreign_enum = if data == nil or data.map_string_foreign_enum == nil
 				then {}
 				else data.map_string_foreign_enum,
-			oneof_field = if data == nil or data.oneof_field == nil then nil else data.oneof_field,
+			oneof_field = (function()
+				if data == nil or data.oneof_field == nil then
+					return nil
+				end
+				local v = data.oneof_field
+				if
+					(v :: any).type == "oneof_nested_message"
+					and (v :: any).value ~= nil
+					and getmetatable((v :: any).value) == nil
+				then
+					return {
+						type = (v :: any).type,
+						value = messages.TestAllTypesProto3_NestedMessage.new((v :: any).value),
+					} :: any
+				end
+				return v :: any
+			end)(),
 			optional_bool_wrapper = if data == nil or data.optional_bool_wrapper == nil
 				then nil
-				else data.optional_bool_wrapper,
+				elseif
+					getmetatable(data.optional_bool_wrapper :: any) == nil
+				then _google_protobuf_wrappers.BoolValue.new(data.optional_bool_wrapper :: any)
+				else (data.optional_bool_wrapper :: any) :: _google_protobuf_wrappers.BoolValue,
 			optional_int32_wrapper = if data == nil or data.optional_int32_wrapper == nil
 				then nil
-				else data.optional_int32_wrapper,
+				elseif
+					getmetatable(data.optional_int32_wrapper :: any) == nil
+				then _google_protobuf_wrappers.Int32Value.new(data.optional_int32_wrapper :: any)
+				else (data.optional_int32_wrapper :: any) :: _google_protobuf_wrappers.Int32Value,
 			optional_int64_wrapper = if data == nil or data.optional_int64_wrapper == nil
 				then nil
-				else data.optional_int64_wrapper,
+				elseif
+					getmetatable(data.optional_int64_wrapper :: any) == nil
+				then _google_protobuf_wrappers.Int64Value.new(data.optional_int64_wrapper :: any)
+				else (data.optional_int64_wrapper :: any) :: _google_protobuf_wrappers.Int64Value,
 			optional_uint32_wrapper = if data == nil or data.optional_uint32_wrapper == nil
 				then nil
-				else data.optional_uint32_wrapper,
+				elseif
+					getmetatable(data.optional_uint32_wrapper :: any) == nil
+				then _google_protobuf_wrappers.UInt32Value.new(data.optional_uint32_wrapper :: any)
+				else (data.optional_uint32_wrapper :: any) :: _google_protobuf_wrappers.UInt32Value,
 			optional_uint64_wrapper = if data == nil or data.optional_uint64_wrapper == nil
 				then nil
-				else data.optional_uint64_wrapper,
+				elseif
+					getmetatable(data.optional_uint64_wrapper :: any) == nil
+				then _google_protobuf_wrappers.UInt64Value.new(data.optional_uint64_wrapper :: any)
+				else (data.optional_uint64_wrapper :: any) :: _google_protobuf_wrappers.UInt64Value,
 			optional_float_wrapper = if data == nil or data.optional_float_wrapper == nil
 				then nil
-				else data.optional_float_wrapper,
+				elseif
+					getmetatable(data.optional_float_wrapper :: any) == nil
+				then _google_protobuf_wrappers.FloatValue.new(data.optional_float_wrapper :: any)
+				else (data.optional_float_wrapper :: any) :: _google_protobuf_wrappers.FloatValue,
 			optional_double_wrapper = if data == nil or data.optional_double_wrapper == nil
 				then nil
-				else data.optional_double_wrapper,
+				elseif
+					getmetatable(data.optional_double_wrapper :: any) == nil
+				then _google_protobuf_wrappers.DoubleValue.new(data.optional_double_wrapper :: any)
+				else (data.optional_double_wrapper :: any) :: _google_protobuf_wrappers.DoubleValue,
 			optional_string_wrapper = if data == nil or data.optional_string_wrapper == nil
 				then nil
-				else data.optional_string_wrapper,
+				elseif
+					getmetatable(data.optional_string_wrapper :: any) == nil
+				then _google_protobuf_wrappers.StringValue.new(data.optional_string_wrapper :: any)
+				else (data.optional_string_wrapper :: any) :: _google_protobuf_wrappers.StringValue,
 			optional_bytes_wrapper = if data == nil or data.optional_bytes_wrapper == nil
 				then nil
-				else data.optional_bytes_wrapper,
-			repeated_bool_wrapper = if data == nil or data.repeated_bool_wrapper == nil
-				then {}
-				else data.repeated_bool_wrapper,
-			repeated_int32_wrapper = if data == nil or data.repeated_int32_wrapper == nil
-				then {}
-				else data.repeated_int32_wrapper,
-			repeated_int64_wrapper = if data == nil or data.repeated_int64_wrapper == nil
-				then {}
-				else data.repeated_int64_wrapper,
-			repeated_uint32_wrapper = if data == nil or data.repeated_uint32_wrapper == nil
-				then {}
-				else data.repeated_uint32_wrapper,
-			repeated_uint64_wrapper = if data == nil or data.repeated_uint64_wrapper == nil
-				then {}
-				else data.repeated_uint64_wrapper,
-			repeated_float_wrapper = if data == nil or data.repeated_float_wrapper == nil
-				then {}
-				else data.repeated_float_wrapper,
-			repeated_double_wrapper = if data == nil or data.repeated_double_wrapper == nil
-				then {}
-				else data.repeated_double_wrapper,
-			repeated_string_wrapper = if data == nil or data.repeated_string_wrapper == nil
-				then {}
-				else data.repeated_string_wrapper,
-			repeated_bytes_wrapper = if data == nil or data.repeated_bytes_wrapper == nil
-				then {}
-				else data.repeated_bytes_wrapper,
-			optional_duration = if data == nil or data.optional_duration == nil then nil else data.optional_duration,
-			optional_timestamp = if data == nil or data.optional_timestamp == nil then nil else data.optional_timestamp,
+				elseif
+					getmetatable(data.optional_bytes_wrapper :: any) == nil
+				then _google_protobuf_wrappers.BytesValue.new(data.optional_bytes_wrapper :: any)
+				else (data.optional_bytes_wrapper :: any) :: _google_protobuf_wrappers.BytesValue,
+			repeated_bool_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_bool_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.BoolValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.BoolValue
+				end
+				return out
+			end)(),
+			repeated_int32_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_int32_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.Int32Value.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.Int32Value
+				end
+				return out
+			end)(),
+			repeated_int64_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_int64_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.Int64Value.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.Int64Value
+				end
+				return out
+			end)(),
+			repeated_uint32_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_uint32_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.UInt32Value.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.UInt32Value
+				end
+				return out
+			end)(),
+			repeated_uint64_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_uint64_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.UInt64Value.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.UInt64Value
+				end
+				return out
+			end)(),
+			repeated_float_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_float_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.FloatValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.FloatValue
+				end
+				return out
+			end)(),
+			repeated_double_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_double_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.DoubleValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.DoubleValue
+				end
+				return out
+			end)(),
+			repeated_string_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_string_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.StringValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.StringValue
+				end
+				return out
+			end)(),
+			repeated_bytes_wrapper = (function()
+				local src = if data == nil then nil else data.repeated_bytes_wrapper
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_wrappers.BytesValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_wrappers.BytesValue
+				end
+				return out
+			end)(),
+			optional_duration = if data == nil or data.optional_duration == nil
+				then nil
+				elseif getmetatable(data.optional_duration :: any) == nil then _google_protobuf_duration.Duration.new(
+					data.optional_duration :: any
+				)
+				else (data.optional_duration :: any) :: _google_protobuf_duration.Duration,
+			optional_timestamp = if data == nil or data.optional_timestamp == nil
+				then nil
+				elseif
+					getmetatable(data.optional_timestamp :: any) == nil
+				then _google_protobuf_timestamp.Timestamp.new(data.optional_timestamp :: any)
+				else (data.optional_timestamp :: any) :: _google_protobuf_timestamp.Timestamp,
 			optional_field_mask = if data == nil or data.optional_field_mask == nil
 				then nil
-				else data.optional_field_mask,
-			optional_struct = if data == nil or data.optional_struct == nil then nil else data.optional_struct,
-			optional_any = if data == nil or data.optional_any == nil then nil else data.optional_any,
-			optional_value = if data == nil or data.optional_value == nil then nil else data.optional_value,
+				elseif
+					getmetatable(data.optional_field_mask :: any) == nil
+				then _google_protobuf_field_mask.FieldMask.new(data.optional_field_mask :: any)
+				else (data.optional_field_mask :: any) :: _google_protobuf_field_mask.FieldMask,
+			optional_struct = if data == nil or data.optional_struct == nil
+				then nil
+				elseif getmetatable(data.optional_struct :: any) == nil then _google_protobuf_struct.Struct.new(
+					data.optional_struct :: any
+				)
+				else (data.optional_struct :: any) :: _google_protobuf_struct.Struct,
+			optional_any = if data == nil or data.optional_any == nil
+				then nil
+				elseif getmetatable(data.optional_any :: any) == nil then _google_protobuf_any.Any.new(
+					data.optional_any :: any
+				)
+				else (data.optional_any :: any) :: _google_protobuf_any.Any,
+			optional_value = if data == nil or data.optional_value == nil
+				then nil
+				elseif getmetatable(data.optional_value :: any) == nil then _google_protobuf_struct.Value.new(
+					data.optional_value :: any
+				)
+				else (data.optional_value :: any) :: _google_protobuf_struct.Value,
 			optional_null_value = if data == nil or data.optional_null_value == nil
 				then assert(_google_protobuf_struct.NullValue.fromNumber(0), "Enum has no 0 default")
 				else data.optional_null_value,
-			repeated_duration = if data == nil or data.repeated_duration == nil then {} else data.repeated_duration,
-			repeated_timestamp = if data == nil or data.repeated_timestamp == nil then {} else data.repeated_timestamp,
-			repeated_fieldmask = if data == nil or data.repeated_fieldmask == nil then {} else data.repeated_fieldmask,
-			repeated_struct = if data == nil or data.repeated_struct == nil then {} else data.repeated_struct,
-			repeated_any = if data == nil or data.repeated_any == nil then {} else data.repeated_any,
-			repeated_value = if data == nil or data.repeated_value == nil then {} else data.repeated_value,
-			repeated_list_value = if data == nil or data.repeated_list_value == nil
-				then {}
-				else data.repeated_list_value,
+			repeated_duration = (function()
+				local src = if data == nil then nil else data.repeated_duration
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_duration.Duration.new(v :: any)
+						else (v :: any) :: _google_protobuf_duration.Duration
+				end
+				return out
+			end)(),
+			repeated_timestamp = (function()
+				local src = if data == nil then nil else data.repeated_timestamp
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_timestamp.Timestamp.new(v :: any)
+						else (v :: any) :: _google_protobuf_timestamp.Timestamp
+				end
+				return out
+			end)(),
+			repeated_fieldmask = (function()
+				local src = if data == nil then nil else data.repeated_fieldmask
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_field_mask.FieldMask.new(v :: any)
+						else (v :: any) :: _google_protobuf_field_mask.FieldMask
+				end
+				return out
+			end)(),
+			repeated_struct = (function()
+				local src = if data == nil then nil else data.repeated_struct
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_struct.Struct.new(v :: any)
+						else (v :: any) :: _google_protobuf_struct.Struct
+				end
+				return out
+			end)(),
+			repeated_any = (function()
+				local src = if data == nil then nil else data.repeated_any
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_any.Any.new(v :: any)
+						else (v :: any) :: _google_protobuf_any.Any
+				end
+				return out
+			end)(),
+			repeated_value = (function()
+				local src = if data == nil then nil else data.repeated_value
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_struct.Value.new(v :: any)
+						else (v :: any) :: _google_protobuf_struct.Value
+				end
+				return out
+			end)(),
+			repeated_list_value = (function()
+				local src = if data == nil then nil else data.repeated_list_value
+				if src == nil then
+					return {}
+				end
+				local out = table.create(#src)
+				for i, v in src do
+					out[i] = if getmetatable(v :: any) == nil
+						then _google_protobuf_struct.ListValue.new(v :: any)
+						else (v :: any) :: _google_protobuf_struct.ListValue
+				end
+				return out
+			end)(),
 			fieldname1 = if data == nil or data.fieldname1 == nil then 0 else data.fieldname1,
 			field_name2 = if data == nil or data.field_name2 == nil then 0 else data.field_name2,
 			_field_name3 = if data == nil or data._field_name3 == nil then 0 else data._field_name3,
@@ -6984,7 +7321,12 @@ do
 	): TestAllTypesProto3_NestedMessage
 		return setmetatable({
 			a = if data == nil or data.a == nil then 0 else data.a,
-			corecursive = if data == nil or data.corecursive == nil then nil else data.corecursive,
+			corecursive = if data == nil or data.corecursive == nil
+				then nil
+				elseif getmetatable(data.corecursive :: any) == nil then messages.TestAllTypesProto3.new(
+					data.corecursive :: any
+				)
+				else (data.corecursive :: any) :: TestAllTypesProto3,
 		}, _TestAllTypesProto3_NestedMessageImpl :: _TestAllTypesProto3_NestedMessageImpl)
 	end
 
@@ -8929,7 +9271,12 @@ do
 	): TestAllTypesProto3_MapStringNestedMessageEntry
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
-			value = if data == nil or data.value == nil then nil else data.value,
+			value = if data == nil or data.value == nil
+				then nil
+				elseif getmetatable(data.value :: any) == nil then messages.TestAllTypesProto3_NestedMessage.new(
+					data.value :: any
+				)
+				else (data.value :: any) :: TestAllTypesProto3_NestedMessage,
 		}, _TestAllTypesProto3_MapStringNestedMessageEntryImpl :: _TestAllTypesProto3_MapStringNestedMessageEntryImpl)
 	end
 
@@ -9056,7 +9403,10 @@ do
 	): TestAllTypesProto3_MapStringForeignMessageEntry
 		return setmetatable({
 			key = if data == nil or data.key == nil then "" else data.key,
-			value = if data == nil or data.value == nil then nil else data.value,
+			value = if data == nil or data.value == nil
+				then nil
+				elseif getmetatable(data.value :: any) == nil then messages.ForeignMessage.new(data.value :: any)
+				else (data.value :: any) :: ForeignMessage,
 		}, _TestAllTypesProto3_MapStringForeignMessageEntryImpl :: _TestAllTypesProto3_MapStringForeignMessageEntryImpl)
 	end
 

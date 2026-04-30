@@ -30,7 +30,7 @@ type _FailureSetFields = {
 	failure: { string },
 }
 
-type _FailureSetPartialFields = {
+export type _FailureSetPartialFields = {
 	failure: { string }?,
 }
 
@@ -61,7 +61,7 @@ type _ConformanceRequestFields = {
 	print_unknown_fields: boolean,
 }
 
-type _ConformanceRequestPartialFields = {
+export type _ConformanceRequestPartialFields = {
 	payload: (
 		{ type: "protobuf_payload", value: buffer }
 		| { type: "json_payload", value: string }
@@ -71,7 +71,7 @@ type _ConformanceRequestPartialFields = {
 	requested_output_format: WireFormat?,
 	message_type: string?,
 	test_category: TestCategory?,
-	jspb_encoding_options: JspbEncodingConfig?,
+	jspb_encoding_options: (JspbEncodingConfig | _JspbEncodingConfigPartialFields)?,
 	print_unknown_fields: boolean?,
 }
 
@@ -102,7 +102,7 @@ type _ConformanceResponseFields = {
 	)?,
 }
 
-type _ConformanceResponsePartialFields = {
+export type _ConformanceResponsePartialFields = {
 	result: (
 		{ type: "parse_error", value: string }
 		| { type: "serialize_error", value: string }
@@ -133,7 +133,7 @@ type _JspbEncodingConfigFields = {
 	use_jspb_array_any_format: boolean,
 }
 
-type _JspbEncodingConfigPartialFields = {
+export type _JspbEncodingConfigPartialFields = {
 	use_jspb_array_any_format: boolean?,
 }
 
@@ -277,7 +277,10 @@ do
 				else data.test_category,
 			jspb_encoding_options = if data == nil or data.jspb_encoding_options == nil
 				then nil
-				else data.jspb_encoding_options,
+				elseif getmetatable(data.jspb_encoding_options :: any) == nil then messages.JspbEncodingConfig.new(
+					data.jspb_encoding_options :: any
+				)
+				else (data.jspb_encoding_options :: any) :: JspbEncodingConfig,
 			print_unknown_fields = if data == nil or data.print_unknown_fields == nil
 				then false
 				else data.print_unknown_fields,

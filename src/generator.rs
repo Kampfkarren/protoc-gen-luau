@@ -713,7 +713,7 @@ impl<'a> FileGenerator<'a> {
         fields_builder.push(format!(r#"type _{name}Fields = {{"#));
         fields_builder.indent();
 
-        partial_fields_builder.push(format!(r#"type _{name}PartialFields = {{"#));
+        partial_fields_builder.push(format!(r#"export type _{name}PartialFields = {{"#));
         partial_fields_builder.indent();
 
         let mut default_lines = StringBuilder::new();
@@ -802,7 +802,7 @@ impl<'a> FileGenerator<'a> {
             fields_builder.push(format!("{field_name}: {},", field.type_definition()));
             partial_fields_builder.push(format!(
                 "{field_name}: {}?,",
-                field.type_definition_no_presence()
+                field.partial_input_type_definition_no_presence()
             ));
 
             encode_lines.append(&mut field.encode());

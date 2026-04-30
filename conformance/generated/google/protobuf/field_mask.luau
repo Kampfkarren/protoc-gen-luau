@@ -25,7 +25,7 @@ type _FieldMaskFields = {
 	paths: { string },
 }
 
-type _FieldMaskPartialFields = {
+export type _FieldMaskPartialFields = {
 	paths: { string }?,
 }
 
