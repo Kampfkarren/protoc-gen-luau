@@ -656,7 +656,7 @@ messages.NullValue = {
 	end,
 
 	variants = {
-		NULL_VALUE = "NULL_VALUE",
+		NULL_VALUE = "NULL_VALUE" :: "NULL_VALUE",
 	},
 }
 

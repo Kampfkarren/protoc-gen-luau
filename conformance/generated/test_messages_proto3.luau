@@ -9531,10 +9531,10 @@ messages.TestAllTypesProto3_NestedEnum = {
 	end,
 
 	variants = {
-		FOO = "FOO",
-		BAR = "BAR",
-		BAZ = "BAZ",
-		NEG = "NEG",
+		FOO = "FOO" :: "FOO",
+		BAR = "BAR" :: "BAR",
+		BAZ = "BAZ" :: "BAZ",
+		NEG = "NEG" :: "NEG",
 	},
 }
 
@@ -9588,12 +9588,12 @@ messages.TestAllTypesProto3_AliasedEnum = {
 	end,
 
 	variants = {
-		ALIAS_FOO = "ALIAS_FOO",
-		ALIAS_BAR = "ALIAS_BAR",
-		ALIAS_BAZ = "ALIAS_BAZ",
-		MOO = "MOO",
-		moo = "moo",
-		bAz = "bAz",
+		ALIAS_FOO = "ALIAS_FOO" :: "ALIAS_FOO",
+		ALIAS_BAR = "ALIAS_BAR" :: "ALIAS_BAR",
+		ALIAS_BAZ = "ALIAS_BAZ" :: "ALIAS_BAZ",
+		MOO = "MOO" :: "MOO",
+		moo = "moo" :: "moo",
+		bAz = "bAz" :: "bAz",
 	},
 }
 
@@ -9880,8 +9880,8 @@ messages.EnumOnlyProto3_Bool = {
 	end,
 
 	variants = {
-		kFalse = "kFalse",
-		kTrue = "kTrue",
+		kFalse = "kFalse" :: "kFalse",
+		kTrue = "kTrue" :: "kTrue",
 	},
 }
 
@@ -9923,9 +9923,9 @@ messages.ForeignEnum = {
 	end,
 
 	variants = {
-		FOREIGN_FOO = "FOREIGN_FOO",
-		FOREIGN_BAR = "FOREIGN_BAR",
-		FOREIGN_BAZ = "FOREIGN_BAZ",
+		FOREIGN_FOO = "FOREIGN_FOO" :: "FOREIGN_FOO",
+		FOREIGN_BAR = "FOREIGN_BAR" :: "FOREIGN_BAR",
+		FOREIGN_BAZ = "FOREIGN_BAZ" :: "FOREIGN_BAZ",
 	},
 }
 

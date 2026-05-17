@@ -987,7 +987,10 @@ impl<'a> FileGenerator<'a> {
             });
 
             variants_type.push(format!(r#"["{name}"]: "{name}","#, name = field.name()));
-            variants_value.push(format!("{name} = \"{name}\",", name = field.name()));
+            variants_value.push(format!(
+                r#"{name} = "{name}" :: "{name}","#,
+                name = field.name()
+            ));
         }
 
         self.types.push("| number -- Unknown");
