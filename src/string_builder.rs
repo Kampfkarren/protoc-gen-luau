@@ -36,7 +36,7 @@ impl StringBuilder {
         }
     }
 
-    pub fn append(&mut self, other: &mut Self) {
+    pub fn append(&mut self, other: &Self) {
         for line in &other.lines {
             self.push(line.trim_start_matches('\t'));
         }

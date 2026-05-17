@@ -129,7 +129,7 @@ describe("binary encoding", function()
 			floats = { 1.25, 2.5 },
 
 			mapWithSetup = { [1] = 1, [2] = 4, [3] = 9 },
-			mapWithEnums = { [1] = "One", [2] = "Two" },
+			mapWithEnums = { [1] = "One", [2] = kitchen_sink.MyEnum.variants.Two },
 
 			aliasedEnum = "AliasedEnum_One",
 

@@ -430,6 +430,10 @@ const ENUM: &str = r#"messages.<name> = {
     fromName = function(name: string): <name>?
         <from_name>
     end,
+
+    variants = {
+        <variants>
+    },
 }"#;
 
 const ANY_METHOD_SIGNATURES: &str = r#"
@@ -941,8 +945,9 @@ impl<'a> FileGenerator<'a> {
     fn generate_enum(&mut self, descriptor: &EnumDescriptorProto, prefix: &str) {
         let name = format!("{prefix}{}", descriptor.name());
 
-        self.types
-            .push(format!("type _{name}Message = proto.Enum<{name}>"));
+        self.types.push(format!(
+            "type _{name}Message = proto.Enum<{name}, _{name}Variants>"
+        ));
         self.types.push(format!("export type {name} ="));
         self.types.indent();
 
@@ -956,6 +961,9 @@ impl<'a> FileGenerator<'a> {
 
         let mut from_name = IfBuilder::new();
         from_name.indent_n(2);
+
+        let mut variants_type = StringBuilder::new();
+        let mut variants_value = StringBuilder::new();
 
         for (index, field) in descriptor.value.iter().enumerate() {
             self.types.push(format!(
@@ -977,11 +985,19 @@ impl<'a> FileGenerator<'a> {
             from_name.add_condition(&format!("name == \"{}\"", field.name()), |builder| {
                 builder.push(format!("return \"{}\"", field.name()));
             });
+
+            variants_type.push(format!(r#"["{name}"]: "{name}","#, name = field.name()));
+            variants_value.push(format!("{name} = \"{name}\",", name = field.name()));
         }
 
         self.types.push("| number -- Unknown");
 
         self.types.dedent();
+
+        self.types.push(format!("type _{name}Variants = {{"));
+        self.types.append(&variants_type);
+        self.types.push("}");
+
         self.types.blank();
 
         self.exports.push(name.clone());
@@ -1015,7 +1031,8 @@ impl<'a> FileGenerator<'a> {
                         })
                         .build()
                         .trim_start(),
-                ),
+                )
+                .replace("<variants>", &variants_value.build()),
         );
         self.implementations.blank();
     }

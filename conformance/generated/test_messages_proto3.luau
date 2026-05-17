@@ -966,11 +966,31 @@ type _TestAllTypesProto3_MapStringForeignEnumEntryMessage = proto.Message<
 	_TestAllTypesProto3_MapStringForeignEnumEntryPartialFields
 >
 
-type _TestAllTypesProto3_NestedEnumMessage = proto.Enum<TestAllTypesProto3_NestedEnum>
+type _TestAllTypesProto3_NestedEnumMessage = proto.Enum<
+	TestAllTypesProto3_NestedEnum,
+	_TestAllTypesProto3_NestedEnumVariants
+>
 export type TestAllTypesProto3_NestedEnum = "FOO" | "BAR" | "BAZ" | "NEG" | number -- Unknown
+type _TestAllTypesProto3_NestedEnumVariants = {
+	["FOO"]: "FOO",
+	["BAR"]: "BAR",
+	["BAZ"]: "BAZ",
+	["NEG"]: "NEG",
+}
 
-type _TestAllTypesProto3_AliasedEnumMessage = proto.Enum<TestAllTypesProto3_AliasedEnum>
+type _TestAllTypesProto3_AliasedEnumMessage = proto.Enum<
+	TestAllTypesProto3_AliasedEnum,
+	_TestAllTypesProto3_AliasedEnumVariants
+>
 export type TestAllTypesProto3_AliasedEnum = "ALIAS_FOO" | "ALIAS_BAR" | "ALIAS_BAZ" | "MOO" | "moo" | "bAz" | number -- Unknown
+type _TestAllTypesProto3_AliasedEnumVariants = {
+	["ALIAS_FOO"]: "ALIAS_FOO",
+	["ALIAS_BAR"]: "ALIAS_BAR",
+	["ALIAS_BAZ"]: "ALIAS_BAZ",
+	["MOO"]: "MOO",
+	["moo"]: "moo",
+	["bAz"]: "bAz",
+}
 
 type _ForeignMessageImpl = {
 	__index: _ForeignMessageImpl,
@@ -1030,11 +1050,20 @@ type _EnumOnlyProto3PartialFields = {}
 export type EnumOnlyProto3 = typeof(setmetatable({} :: _EnumOnlyProto3Fields, {} :: _EnumOnlyProto3Impl))
 type _EnumOnlyProto3Message = proto.Message<EnumOnlyProto3, _EnumOnlyProto3PartialFields>
 
-type _EnumOnlyProto3_BoolMessage = proto.Enum<EnumOnlyProto3_Bool>
+type _EnumOnlyProto3_BoolMessage = proto.Enum<EnumOnlyProto3_Bool, _EnumOnlyProto3_BoolVariants>
 export type EnumOnlyProto3_Bool = "kFalse" | "kTrue" | number -- Unknown
+type _EnumOnlyProto3_BoolVariants = {
+	["kFalse"]: "kFalse",
+	["kTrue"]: "kTrue",
+}
 
-type _ForeignEnumMessage = proto.Enum<ForeignEnum>
+type _ForeignEnumMessage = proto.Enum<ForeignEnum, _ForeignEnumVariants>
 export type ForeignEnum = "FOREIGN_FOO" | "FOREIGN_BAR" | "FOREIGN_BAZ" | number -- Unknown
+type _ForeignEnumVariants = {
+	["FOREIGN_FOO"]: "FOREIGN_FOO",
+	["FOREIGN_BAR"]: "FOREIGN_BAR",
+	["FOREIGN_BAZ"]: "FOREIGN_BAZ",
+}
 
 do
 	local _TestAllTypesProto3Impl = {}
@@ -9500,6 +9529,13 @@ messages.TestAllTypesProto3_NestedEnum = {
 			return nil
 		end
 	end,
+
+	variants = {
+		FOO = "FOO",
+		BAR = "BAR",
+		BAZ = "BAZ",
+		NEG = "NEG",
+	},
 }
 
 messages.TestAllTypesProto3_AliasedEnum = {
@@ -9550,6 +9586,15 @@ messages.TestAllTypesProto3_AliasedEnum = {
 			return nil
 		end
 	end,
+
+	variants = {
+		ALIAS_FOO = "ALIAS_FOO",
+		ALIAS_BAR = "ALIAS_BAR",
+		ALIAS_BAZ = "ALIAS_BAZ",
+		MOO = "MOO",
+		moo = "moo",
+		bAz = "bAz",
+	},
 }
 
 do
@@ -9833,6 +9878,11 @@ messages.EnumOnlyProto3_Bool = {
 			return nil
 		end
 	end,
+
+	variants = {
+		kFalse = "kFalse",
+		kTrue = "kTrue",
+	},
 }
 
 messages.ForeignEnum = {
@@ -9871,6 +9921,12 @@ messages.ForeignEnum = {
 			return nil
 		end
 	end,
+
+	variants = {
+		FOREIGN_FOO = "FOREIGN_FOO",
+		FOREIGN_BAR = "FOREIGN_BAR",
+		FOREIGN_BAZ = "FOREIGN_BAZ",
+	},
 }
 
 return {

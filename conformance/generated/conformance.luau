@@ -140,10 +140,17 @@ type _JspbEncodingConfigPartialFields = {
 export type JspbEncodingConfig = typeof(setmetatable({} :: _JspbEncodingConfigFields, {} :: _JspbEncodingConfigImpl))
 type _JspbEncodingConfigMessage = proto.Message<JspbEncodingConfig, _JspbEncodingConfigPartialFields>
 
-type _WireFormatMessage = proto.Enum<WireFormat>
+type _WireFormatMessage = proto.Enum<WireFormat, _WireFormatVariants>
 export type WireFormat = "UNSPECIFIED" | "PROTOBUF" | "JSON" | "JSPB" | "TEXT_FORMAT" | number -- Unknown
+type _WireFormatVariants = {
+	["UNSPECIFIED"]: "UNSPECIFIED",
+	["PROTOBUF"]: "PROTOBUF",
+	["JSON"]: "JSON",
+	["JSPB"]: "JSPB",
+	["TEXT_FORMAT"]: "TEXT_FORMAT",
+}
 
-type _TestCategoryMessage = proto.Enum<TestCategory>
+type _TestCategoryMessage = proto.Enum<TestCategory, _TestCategoryVariants>
 export type TestCategory =
 	"UNSPECIFIED_TEST"
 	| "BINARY_TEST"
@@ -152,6 +159,14 @@ export type TestCategory =
 	| "JSPB_TEST"
 	| "TEXT_FORMAT_TEST"
 	| number -- Unknown
+type _TestCategoryVariants = {
+	["UNSPECIFIED_TEST"]: "UNSPECIFIED_TEST",
+	["BINARY_TEST"]: "BINARY_TEST",
+	["JSON_TEST"]: "JSON_TEST",
+	["JSON_IGNORE_UNKNOWN_PARSING_TEST"]: "JSON_IGNORE_UNKNOWN_PARSING_TEST",
+	["JSPB_TEST"]: "JSPB_TEST",
+	["TEXT_FORMAT_TEST"]: "TEXT_FORMAT_TEST",
+}
 
 do
 	local _FailureSetImpl = {}
@@ -978,6 +993,14 @@ messages.WireFormat = {
 			return nil
 		end
 	end,
+
+	variants = {
+		UNSPECIFIED = "UNSPECIFIED",
+		PROTOBUF = "PROTOBUF",
+		JSON = "JSON",
+		JSPB = "JSPB",
+		TEXT_FORMAT = "TEXT_FORMAT",
+	},
 }
 
 messages.TestCategory = {
@@ -1034,6 +1057,15 @@ messages.TestCategory = {
 			return nil
 		end
 	end,
+
+	variants = {
+		UNSPECIFIED_TEST = "UNSPECIFIED_TEST",
+		BINARY_TEST = "BINARY_TEST",
+		JSON_TEST = "JSON_TEST",
+		JSON_IGNORE_UNKNOWN_PARSING_TEST = "JSON_IGNORE_UNKNOWN_PARSING_TEST",
+		JSPB_TEST = "JSPB_TEST",
+		TEXT_FORMAT_TEST = "TEXT_FORMAT_TEST",
+	},
 }
 
 return {
