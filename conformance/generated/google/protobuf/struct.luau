@@ -115,8 +115,11 @@ type _ListValuePartialFields = {
 export type ListValue = typeof(setmetatable({} :: _ListValueFields, {} :: _ListValueImpl))
 type _ListValueMessage = proto.Message<ListValue, _ListValuePartialFields> & proto.CustomJson<ListValue, { any }>
 
-type _NullValueMessage = proto.Enum<NullValue>
+type _NullValueMessage = proto.Enum<NullValue, _NullValueVariants>
 export type NullValue = "NULL_VALUE" | number -- Unknown
+type _NullValueVariants = {
+	["NULL_VALUE"]: "NULL_VALUE",
+}
 
 do
 	local _StructImpl = {}
@@ -651,6 +654,10 @@ messages.NullValue = {
 			return nil
 		end
 	end,
+
+	variants = {
+		NULL_VALUE = "NULL_VALUE" :: "NULL_VALUE",
+	},
 }
 
 return {

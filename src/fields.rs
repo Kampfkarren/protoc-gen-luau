@@ -303,7 +303,7 @@ impl FieldGenerator<'_> {
                     );
                 }
 
-                encode.append(&mut if_builder.into_string_builder())
+                encode.append(&if_builder.into_string_builder())
             }
         }
 
@@ -384,7 +384,7 @@ impl FieldGenerator<'_> {
                     );
                 }
 
-                json_encode.append(&mut if_builder.into_string_builder())
+                json_encode.append(&if_builder.into_string_builder())
             }
         }
 

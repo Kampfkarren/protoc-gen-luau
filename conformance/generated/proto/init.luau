@@ -9,11 +9,15 @@ export type TypeRegistry = typeRegistry.TypeRegistry
 
 local proto = {}
 
-export type Enum<T> = {
+export type Enum<T, Variants> = {
 	fromName: (string) -> T?,
 
 	fromNumber: (number) -> T?,
 	toNumber: (T) -> number,
+
+	-- Ideally this would be { [T]: T }, but Luau gives cryptic errors for that
+	-- with string unions in old solver.
+	variants: Variants,
 }
 
 -- TODO: Round-trip all numbers in range for varint reader functions
