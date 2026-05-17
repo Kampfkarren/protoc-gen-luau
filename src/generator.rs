@@ -809,14 +809,14 @@ impl<'a> FileGenerator<'a> {
                 field.type_definition_no_presence()
             ));
 
-            encode_lines.append(&mut field.encode());
+            encode_lines.append(&field.encode());
             encode_lines.blank();
 
             if wkt_json.is_none() {
-                json_encode_lines.append(&mut field.json_encode());
+                json_encode_lines.append(&field.json_encode());
                 json_encode_lines.blank();
 
-                json_decode_lines.append(&mut field.json_decode());
+                json_decode_lines.append(&field.json_decode());
             }
 
             default_lines.push(format!(
@@ -872,9 +872,9 @@ impl<'a> FileGenerator<'a> {
         partial_fields_builder.push("}");
         partial_fields_builder.blank();
 
-        self.types.append(&mut fields_builder);
+        self.types.append(&fields_builder);
         self.types.blank();
-        self.types.append(&mut partial_fields_builder);
+        self.types.append(&partial_fields_builder);
 
         self.types.push(format!(
             "export type {name} = typeof(setmetatable({{}} :: _{name}Fields, {{}} :: _{name}Impl))"
