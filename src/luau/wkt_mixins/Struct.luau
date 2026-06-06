@@ -2,6 +2,7 @@ function _StructImpl.jsonEncode(struct: Struct): { [string]: any }
 	local serialized = {}
 
 	for key, value in struct.fields do
+		assert(value ~= nil, "Luau")
 		serialized[key] = messages.Value.jsonEncode(value)
 	end
 

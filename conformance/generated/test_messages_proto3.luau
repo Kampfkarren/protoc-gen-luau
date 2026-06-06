@@ -1929,6 +1929,7 @@ do
 
 		if self.map_int32_int32 ~= nil and next(self.map_int32_int32) ~= nil then
 			for key, value in self.map_int32_int32 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1942,6 +1943,7 @@ do
 
 		if self.map_int64_int64 ~= nil and next(self.map_int64_int64) ~= nil then
 			for key, value in self.map_int64_int64 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1955,6 +1957,7 @@ do
 
 		if self.map_uint32_uint32 ~= nil and next(self.map_uint32_uint32) ~= nil then
 			for key, value in self.map_uint32_uint32 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1968,6 +1971,7 @@ do
 
 		if self.map_uint64_uint64 ~= nil and next(self.map_uint64_uint64) ~= nil then
 			for key, value in self.map_uint64_uint64 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1981,6 +1985,7 @@ do
 
 		if self.map_sint32_sint32 ~= nil and next(self.map_sint32_sint32) ~= nil then
 			for key, value in self.map_sint32_sint32 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -1994,6 +1999,7 @@ do
 
 		if self.map_sint64_sint64 ~= nil and next(self.map_sint64_sint64) ~= nil then
 			for key, value in self.map_sint64_sint64 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -2007,6 +2013,7 @@ do
 
 		if self.map_fixed32_fixed32 ~= nil and next(self.map_fixed32_fixed32) ~= nil then
 			for key, value in self.map_fixed32_fixed32 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
@@ -2020,6 +2027,7 @@ do
 
 		if self.map_fixed64_fixed64 ~= nil and next(self.map_fixed64_fixed64) ~= nil then
 			for key, value in self.map_fixed64_fixed64 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
@@ -2033,6 +2041,7 @@ do
 
 		if self.map_sfixed32_sfixed32 ~= nil and next(self.map_sfixed32_sfixed32) ~= nil then
 			for key, value in self.map_sfixed32_sfixed32 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i32)
@@ -2046,6 +2055,7 @@ do
 
 		if self.map_sfixed64_sfixed64 ~= nil and next(self.map_sfixed64_sfixed64) ~= nil then
 			for key, value in self.map_sfixed64_sfixed64 do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.i64)
@@ -2059,6 +2069,7 @@ do
 
 		if self.map_int32_float ~= nil and next(self.map_int32_float) ~= nil then
 			for key, value in self.map_int32_float do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -2072,6 +2083,7 @@ do
 
 		if self.map_int32_double ~= nil and next(self.map_int32_double) ~= nil then
 			for key, value in self.map_int32_double do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -2085,6 +2097,7 @@ do
 
 		if self.map_bool_bool ~= nil and next(self.map_bool_bool) ~= nil then
 			for key, value in self.map_bool_bool do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.varint)
@@ -2098,6 +2111,7 @@ do
 
 		if self.map_string_string ~= nil and next(self.map_string_string) ~= nil then
 			for key, value in self.map_string_string do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -2111,6 +2125,7 @@ do
 
 		if self.map_string_bytes ~= nil and next(self.map_string_bytes) ~= nil then
 			for key, value in self.map_string_bytes do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -2124,6 +2139,7 @@ do
 
 		if self.map_string_nested_message ~= nil and next(self.map_string_nested_message) ~= nil then
 			for key, value in self.map_string_nested_message do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -2138,6 +2154,7 @@ do
 
 		if self.map_string_foreign_message ~= nil and next(self.map_string_foreign_message) ~= nil then
 			for key, value in self.map_string_foreign_message do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -2152,6 +2169,7 @@ do
 
 		if self.map_string_nested_enum ~= nil and next(self.map_string_nested_enum) ~= nil then
 			for key, value in self.map_string_nested_enum do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -2169,6 +2187,7 @@ do
 
 		if self.map_string_foreign_enum ~= nil and next(self.map_string_foreign_enum) ~= nil then
 			for key, value in self.map_string_foreign_enum do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -4375,6 +4394,7 @@ do
 		if self.map_int32_int32 ~= nil and next(self.map_int32_int32) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_int32_int32 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapInt32Int32 = newOutput
@@ -4383,6 +4403,7 @@ do
 		if self.map_int64_int64 ~= nil and next(self.map_int64_int64) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_int64_int64 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapInt64Int64 = newOutput
@@ -4391,6 +4412,7 @@ do
 		if self.map_uint32_uint32 ~= nil and next(self.map_uint32_uint32) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_uint32_uint32 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapUint32Uint32 = newOutput
@@ -4399,6 +4421,7 @@ do
 		if self.map_uint64_uint64 ~= nil and next(self.map_uint64_uint64) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_uint64_uint64 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapUint64Uint64 = newOutput
@@ -4407,6 +4430,7 @@ do
 		if self.map_sint32_sint32 ~= nil and next(self.map_sint32_sint32) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_sint32_sint32 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapSint32Sint32 = newOutput
@@ -4415,6 +4439,7 @@ do
 		if self.map_sint64_sint64 ~= nil and next(self.map_sint64_sint64) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_sint64_sint64 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapSint64Sint64 = newOutput
@@ -4423,6 +4448,7 @@ do
 		if self.map_fixed32_fixed32 ~= nil and next(self.map_fixed32_fixed32) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_fixed32_fixed32 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapFixed32Fixed32 = newOutput
@@ -4431,6 +4457,7 @@ do
 		if self.map_fixed64_fixed64 ~= nil and next(self.map_fixed64_fixed64) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_fixed64_fixed64 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapFixed64Fixed64 = newOutput
@@ -4439,6 +4466,7 @@ do
 		if self.map_sfixed32_sfixed32 ~= nil and next(self.map_sfixed32_sfixed32) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_sfixed32_sfixed32 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapSfixed32Sfixed32 = newOutput
@@ -4447,6 +4475,7 @@ do
 		if self.map_sfixed64_sfixed64 ~= nil and next(self.map_sfixed64_sfixed64) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_sfixed64_sfixed64 do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapSfixed64Sfixed64 = newOutput
@@ -4455,6 +4484,7 @@ do
 		if self.map_int32_float ~= nil and next(self.map_int32_float) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_int32_float do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = proto.json.serializeNumber(value)
 			end
 			output.mapInt32Float = newOutput
@@ -4463,6 +4493,7 @@ do
 		if self.map_int32_double ~= nil and next(self.map_int32_double) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_int32_double do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = proto.json.serializeNumber(value)
 			end
 			output.mapInt32Double = newOutput
@@ -4471,6 +4502,7 @@ do
 		if self.map_bool_bool ~= nil and next(self.map_bool_bool) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_bool_bool do
+				assert(value ~= nil, "Luau")
 				newOutput[tostring(key)] = value
 			end
 			output.mapBoolBool = newOutput
@@ -4479,6 +4511,7 @@ do
 		if self.map_string_string ~= nil and next(self.map_string_string) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_string do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = value
 			end
 			output.mapStringString = newOutput
@@ -4487,6 +4520,7 @@ do
 		if self.map_string_bytes ~= nil and next(self.map_string_bytes) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_bytes do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = proto.json.serializeBuffer(value)
 			end
 			output.mapStringBytes = newOutput
@@ -4495,6 +4529,7 @@ do
 		if self.map_string_nested_message ~= nil and next(self.map_string_nested_message) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_nested_message do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = value:jsonEncode()
 			end
 			output.mapStringNestedMessage = newOutput
@@ -4503,6 +4538,7 @@ do
 		if self.map_string_foreign_message ~= nil and next(self.map_string_foreign_message) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_foreign_message do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = value:jsonEncode()
 			end
 			output.mapStringForeignMessage = newOutput
@@ -4511,6 +4547,7 @@ do
 		if self.map_string_nested_enum ~= nil and next(self.map_string_nested_enum) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_nested_enum do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = if typeof(value) == "number"
 					then value
 					else messages.TestAllTypesProto3_NestedEnum.toNumber(value :: any)
@@ -4521,6 +4558,7 @@ do
 		if self.map_string_foreign_enum ~= nil and next(self.map_string_foreign_enum) ~= nil then
 			local newOutput = {}
 			for key, value in self.map_string_foreign_enum do
+				assert(value ~= nil, "Luau")
 				newOutput[key] = if typeof(value) == "number"
 					then value
 					else messages.ForeignEnum.toNumber(value :: any)

@@ -98,11 +98,11 @@ describe("JSON round-trips should work for", function()
 			assert(deserializedValue.kind ~= nil, "Couldn't parse Value")
 			assert(deserializedValue.kind.type == "struct_value", "Deserialized value is not a Struct")
 
-			local nameKind = deserializedValue.kind.value.fields.name.kind
+			local nameKind = deserializedValue.kind.value.fields.name and deserializedValue.kind.value.fields.name.kind
 			assert(nameKind ~= nil, "Couldn't parse name field")
 			assert(nameKind.type == "struct_value", "Name wasn't a struct")
 
-			local familyKind = nameKind.value.fields.family.kind
+			local familyKind = nameKind.value.fields.family and nameKind.value.fields.family.kind
 			assert(familyKind ~= nil, "Couldn't parse family field")
 
 			assertEquals(familyKind.value, "Doe")
