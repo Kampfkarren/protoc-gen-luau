@@ -26,11 +26,11 @@ type _StructImpl = {
 }
 
 type _StructFields = {
-	fields: { [string]: Value },
+	fields: { [string]: Value? },
 }
 
 type _StructPartialFields = {
-	fields: { [string]: Value }?,
+	fields: { [string]: Value? }?,
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))

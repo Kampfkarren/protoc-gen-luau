@@ -87,7 +87,7 @@ impl FieldGenerator<'_> {
             FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
                     format!(
-                        "{{ [{}]: {} }}",
+                        "{{ [{}]: {}? }}",
                         type_definition_of_field_descriptor(
                             &map_type.key,
                             self.export_map,

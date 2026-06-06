@@ -128,25 +128,25 @@ type _TestAllTypesProto3Fields = {
 	unpacked_double: { number },
 	unpacked_bool: { boolean },
 	unpacked_nested_enum: { TestAllTypesProto3_NestedEnum },
-	map_int32_int32: { [number]: number },
-	map_int64_int64: { [number]: number },
-	map_uint32_uint32: { [number]: number },
-	map_uint64_uint64: { [number]: number },
-	map_sint32_sint32: { [number]: number },
-	map_sint64_sint64: { [number]: number },
-	map_fixed32_fixed32: { [number]: number },
-	map_fixed64_fixed64: { [number]: number },
-	map_sfixed32_sfixed32: { [number]: number },
-	map_sfixed64_sfixed64: { [number]: number },
-	map_int32_float: { [number]: number },
-	map_int32_double: { [number]: number },
-	map_bool_bool: { [boolean]: boolean },
-	map_string_string: { [string]: string },
-	map_string_bytes: { [string]: buffer },
-	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage },
-	map_string_foreign_message: { [string]: ForeignMessage },
-	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum },
-	map_string_foreign_enum: { [string]: ForeignEnum },
+	map_int32_int32: { [number]: number? },
+	map_int64_int64: { [number]: number? },
+	map_uint32_uint32: { [number]: number? },
+	map_uint64_uint64: { [number]: number? },
+	map_sint32_sint32: { [number]: number? },
+	map_sint64_sint64: { [number]: number? },
+	map_fixed32_fixed32: { [number]: number? },
+	map_fixed64_fixed64: { [number]: number? },
+	map_sfixed32_sfixed32: { [number]: number? },
+	map_sfixed64_sfixed64: { [number]: number? },
+	map_int32_float: { [number]: number? },
+	map_int32_double: { [number]: number? },
+	map_bool_bool: { [boolean]: boolean? },
+	map_string_string: { [string]: string? },
+	map_string_bytes: { [string]: buffer? },
+	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage? },
+	map_string_foreign_message: { [string]: ForeignMessage? },
+	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum? },
+	map_string_foreign_enum: { [string]: ForeignEnum? },
 	oneof_field: (
 		{ type: "oneof_uint32", value: number }
 		| { type: "oneof_nested_message", value: TestAllTypesProto3_NestedMessage }
@@ -284,25 +284,25 @@ type _TestAllTypesProto3PartialFields = {
 	unpacked_double: { number }?,
 	unpacked_bool: { boolean }?,
 	unpacked_nested_enum: { TestAllTypesProto3_NestedEnum }?,
-	map_int32_int32: { [number]: number }?,
-	map_int64_int64: { [number]: number }?,
-	map_uint32_uint32: { [number]: number }?,
-	map_uint64_uint64: { [number]: number }?,
-	map_sint32_sint32: { [number]: number }?,
-	map_sint64_sint64: { [number]: number }?,
-	map_fixed32_fixed32: { [number]: number }?,
-	map_fixed64_fixed64: { [number]: number }?,
-	map_sfixed32_sfixed32: { [number]: number }?,
-	map_sfixed64_sfixed64: { [number]: number }?,
-	map_int32_float: { [number]: number }?,
-	map_int32_double: { [number]: number }?,
-	map_bool_bool: { [boolean]: boolean }?,
-	map_string_string: { [string]: string }?,
-	map_string_bytes: { [string]: buffer }?,
-	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage }?,
-	map_string_foreign_message: { [string]: ForeignMessage }?,
-	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum }?,
-	map_string_foreign_enum: { [string]: ForeignEnum }?,
+	map_int32_int32: { [number]: number? }?,
+	map_int64_int64: { [number]: number? }?,
+	map_uint32_uint32: { [number]: number? }?,
+	map_uint64_uint64: { [number]: number? }?,
+	map_sint32_sint32: { [number]: number? }?,
+	map_sint64_sint64: { [number]: number? }?,
+	map_fixed32_fixed32: { [number]: number? }?,
+	map_fixed64_fixed64: { [number]: number? }?,
+	map_sfixed32_sfixed32: { [number]: number? }?,
+	map_sfixed64_sfixed64: { [number]: number? }?,
+	map_int32_float: { [number]: number? }?,
+	map_int32_double: { [number]: number? }?,
+	map_bool_bool: { [boolean]: boolean? }?,
+	map_string_string: { [string]: string? }?,
+	map_string_bytes: { [string]: buffer? }?,
+	map_string_nested_message: { [string]: TestAllTypesProto3_NestedMessage? }?,
+	map_string_foreign_message: { [string]: ForeignMessage? }?,
+	map_string_nested_enum: { [string]: TestAllTypesProto3_NestedEnum? }?,
+	map_string_foreign_enum: { [string]: ForeignEnum? }?,
 	oneof_field: (
 		{ type: "oneof_uint32", value: number }
 		| { type: "oneof_nested_message", value: TestAllTypesProto3_NestedMessage }
@@ -5978,7 +5978,7 @@ do
 		end
 
 		if input.map_int32_int32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_int32_int32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -5987,7 +5987,7 @@ do
 		end
 
 		if input.mapInt32Int32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapInt32Int32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -5996,7 +5996,7 @@ do
 		end
 
 		if input.map_int64_int64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_int64_int64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6005,7 +6005,7 @@ do
 		end
 
 		if input.mapInt64Int64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapInt64Int64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6014,7 +6014,7 @@ do
 		end
 
 		if input.map_uint32_uint32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_uint32_uint32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6023,7 +6023,7 @@ do
 		end
 
 		if input.mapUint32Uint32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapUint32Uint32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6032,7 +6032,7 @@ do
 		end
 
 		if input.map_uint64_uint64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_uint64_uint64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6041,7 +6041,7 @@ do
 		end
 
 		if input.mapUint64Uint64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapUint64Uint64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6050,7 +6050,7 @@ do
 		end
 
 		if input.map_sint32_sint32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sint32_sint32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6059,7 +6059,7 @@ do
 		end
 
 		if input.mapSint32Sint32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSint32Sint32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6068,7 +6068,7 @@ do
 		end
 
 		if input.map_sint64_sint64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sint64_sint64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6077,7 +6077,7 @@ do
 		end
 
 		if input.mapSint64Sint64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSint64Sint64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6086,7 +6086,7 @@ do
 		end
 
 		if input.map_fixed32_fixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_fixed32_fixed32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6095,7 +6095,7 @@ do
 		end
 
 		if input.mapFixed32Fixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapFixed32Fixed32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6104,7 +6104,7 @@ do
 		end
 
 		if input.map_fixed64_fixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_fixed64_fixed64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6113,7 +6113,7 @@ do
 		end
 
 		if input.mapFixed64Fixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapFixed64Fixed64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6122,7 +6122,7 @@ do
 		end
 
 		if input.map_sfixed32_sfixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sfixed32_sfixed32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6131,7 +6131,7 @@ do
 		end
 
 		if input.mapSfixed32Sfixed32 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSfixed32Sfixed32 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6140,7 +6140,7 @@ do
 		end
 
 		if input.map_sfixed64_sfixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sfixed64_sfixed64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6149,7 +6149,7 @@ do
 		end
 
 		if input.mapSfixed64Sfixed64 ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSfixed64Sfixed64 do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
 			end
@@ -6158,7 +6158,7 @@ do
 		end
 
 		if input.map_int32_float ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_int32_float do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
 					proto.json.deserializeNumber(value)
@@ -6168,7 +6168,7 @@ do
 		end
 
 		if input.mapInt32Float ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapInt32Float do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
 					proto.json.deserializeNumber(value)
@@ -6178,7 +6178,7 @@ do
 		end
 
 		if input.map_int32_double ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_int32_double do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
 					proto.json.deserializeNumber(value)
@@ -6188,7 +6188,7 @@ do
 		end
 
 		if input.mapInt32Double ~= nil then
-			local newOutput: { [number]: number } = {}
+			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapInt32Double do
 				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
 					proto.json.deserializeNumber(value)
@@ -6198,7 +6198,7 @@ do
 		end
 
 		if input.map_bool_bool ~= nil then
-			local newOutput: { [boolean]: boolean } = {}
+			local newOutput: { [boolean]: boolean? } = {}
 			for key, value in input.map_bool_bool do
 				newOutput[if key == "true" then true else false] = value
 			end
@@ -6207,7 +6207,7 @@ do
 		end
 
 		if input.mapBoolBool ~= nil then
-			local newOutput: { [boolean]: boolean } = {}
+			local newOutput: { [boolean]: boolean? } = {}
 			for key, value in input.mapBoolBool do
 				newOutput[if key == "true" then true else false] = value
 			end
@@ -6216,7 +6216,7 @@ do
 		end
 
 		if input.map_string_string ~= nil then
-			local newOutput: { [string]: string } = {}
+			local newOutput: { [string]: string? } = {}
 			for key, value in input.map_string_string do
 				newOutput[key] = value
 			end
@@ -6225,7 +6225,7 @@ do
 		end
 
 		if input.mapStringString ~= nil then
-			local newOutput: { [string]: string } = {}
+			local newOutput: { [string]: string? } = {}
 			for key, value in input.mapStringString do
 				newOutput[key] = value
 			end
@@ -6234,7 +6234,7 @@ do
 		end
 
 		if input.map_string_bytes ~= nil then
-			local newOutput: { [string]: buffer } = {}
+			local newOutput: { [string]: buffer? } = {}
 			for key, value in input.map_string_bytes do
 				newOutput[key] = proto.json.deserializeBuffer(value)
 			end
@@ -6243,7 +6243,7 @@ do
 		end
 
 		if input.mapStringBytes ~= nil then
-			local newOutput: { [string]: buffer } = {}
+			local newOutput: { [string]: buffer? } = {}
 			for key, value in input.mapStringBytes do
 				newOutput[key] = proto.json.deserializeBuffer(value)
 			end
@@ -6252,7 +6252,7 @@ do
 		end
 
 		if input.map_string_nested_message ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
+			local newOutput: { [string]: TestAllTypesProto3_NestedMessage? } = {}
 			for key, value in input.map_string_nested_message do
 				newOutput[key] = messages.TestAllTypesProto3_NestedMessage.jsonDecode(value)
 			end
@@ -6261,7 +6261,7 @@ do
 		end
 
 		if input.mapStringNestedMessage ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedMessage } = {}
+			local newOutput: { [string]: TestAllTypesProto3_NestedMessage? } = {}
 			for key, value in input.mapStringNestedMessage do
 				newOutput[key] = messages.TestAllTypesProto3_NestedMessage.jsonDecode(value)
 			end
@@ -6270,7 +6270,7 @@ do
 		end
 
 		if input.map_string_foreign_message ~= nil then
-			local newOutput: { [string]: ForeignMessage } = {}
+			local newOutput: { [string]: ForeignMessage? } = {}
 			for key, value in input.map_string_foreign_message do
 				newOutput[key] = messages.ForeignMessage.jsonDecode(value)
 			end
@@ -6279,7 +6279,7 @@ do
 		end
 
 		if input.mapStringForeignMessage ~= nil then
-			local newOutput: { [string]: ForeignMessage } = {}
+			local newOutput: { [string]: ForeignMessage? } = {}
 			for key, value in input.mapStringForeignMessage do
 				newOutput[key] = messages.ForeignMessage.jsonDecode(value)
 			end
@@ -6288,7 +6288,7 @@ do
 		end
 
 		if input.map_string_nested_enum ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
+			local newOutput: { [string]: TestAllTypesProto3_NestedEnum? } = {}
 			for key, value in input.map_string_nested_enum do
 				newOutput[key] = if typeof(value) == "number"
 					then (messages.TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
@@ -6299,7 +6299,7 @@ do
 		end
 
 		if input.mapStringNestedEnum ~= nil then
-			local newOutput: { [string]: TestAllTypesProto3_NestedEnum } = {}
+			local newOutput: { [string]: TestAllTypesProto3_NestedEnum? } = {}
 			for key, value in input.mapStringNestedEnum do
 				newOutput[key] = if typeof(value) == "number"
 					then (messages.TestAllTypesProto3_NestedEnum.fromNumber(value) or value)
@@ -6310,7 +6310,7 @@ do
 		end
 
 		if input.map_string_foreign_enum ~= nil then
-			local newOutput: { [string]: ForeignEnum } = {}
+			local newOutput: { [string]: ForeignEnum? } = {}
 			for key, value in input.map_string_foreign_enum do
 				newOutput[key] = if typeof(value) == "number"
 					then (messages.ForeignEnum.fromNumber(value) or value)
@@ -6321,7 +6321,7 @@ do
 		end
 
 		if input.mapStringForeignEnum ~= nil then
-			local newOutput: { [string]: ForeignEnum } = {}
+			local newOutput: { [string]: ForeignEnum? } = {}
 			for key, value in input.mapStringForeignEnum do
 				newOutput[key] = if typeof(value) == "number"
 					then (messages.ForeignEnum.fromNumber(value) or value)
