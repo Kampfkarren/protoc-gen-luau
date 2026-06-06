@@ -26,11 +26,11 @@ type _StructImpl = {
 }
 
 type _StructFields = {
-	fields: { [string]: Value },
+	fields: { [string]: Value? },
 }
 
 type _StructPartialFields = {
-	fields: { [string]: Value }?,
+	fields: { [string]: Value? }?,
 }
 
 export type Struct = typeof(setmetatable({} :: _StructFields, {} :: _StructImpl))
@@ -137,6 +137,7 @@ do
 
 		if self.fields ~= nil and next(self.fields) ~= nil then
 			for key, value in self.fields do
+				assert(value ~= nil, "Luau")
 				local mapBuffer = buffer.create(0)
 				local mapCursor = 0
 				mapBuffer, mapCursor = proto.writeTag(mapBuffer, mapCursor, 1, proto.wireTypes.lengthDelimited)
@@ -208,6 +209,7 @@ do
 		local serialized = {}
 
 		for key, value in struct.fields do
+			assert(value ~= nil, "Luau")
 			serialized[key] = messages.Value.jsonEncode(value)
 		end
 

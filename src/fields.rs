@@ -87,7 +87,7 @@ impl FieldGenerator<'_> {
             FieldKind::Single(field) => {
                 if let Some(map_type) = self.map_type() {
                     format!(
-                        "{{ [{}]: {} }}",
+                        "{{ [{}]: {}? }}",
                         type_definition_of_field_descriptor(
                             &map_type.key,
                             self.export_map,
@@ -208,6 +208,7 @@ impl FieldGenerator<'_> {
                     // Maps are { 1: key, 2: value }
                     encode.push(format!("for key, value in {this} do"));
 
+                    encode.push("assert(value ~= nil, \"Luau\")");
                     encode.push("local mapBuffer = buffer.create(0)");
                     encode.push("local mapCursor = 0");
 
@@ -324,6 +325,7 @@ impl FieldGenerator<'_> {
                 if let Some(map_type) = self.map_type() {
                     json_encode.push("local newOutput = {}");
                     json_encode.push(format!("for key, value in {this} do"));
+                    json_encode.push("assert(value ~= nil, \"Luau\")");
                     json_encode.push(format!(
                         "newOutput[{}] = {}",
                         json_key_to_string(&map_type.key).encode,
