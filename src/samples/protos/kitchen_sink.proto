@@ -76,6 +76,8 @@ message KitchenSink {
 	bytes bytes = 32;
 
 	string text = 33;
+
+	int64 int64 = 34;
 }
 
 enum AliasedEnum {

@@ -4881,11 +4881,11 @@ do
 		end
 
 		if input.optional_int64 ~= nil then
-			self.optional_int64 = input.optional_int64
+			self.optional_int64 = proto.json.deserializeInt64(input.optional_int64)
 		end
 
 		if input.optionalInt64 ~= nil then
-			self.optional_int64 = input.optionalInt64
+			self.optional_int64 = proto.json.deserializeInt64(input.optionalInt64)
 		end
 
 		if input.optional_uint32 ~= nil then
@@ -4897,11 +4897,11 @@ do
 		end
 
 		if input.optional_uint64 ~= nil then
-			self.optional_uint64 = input.optional_uint64
+			self.optional_uint64 = proto.json.deserializeInt64(input.optional_uint64)
 		end
 
 		if input.optionalUint64 ~= nil then
-			self.optional_uint64 = input.optionalUint64
+			self.optional_uint64 = proto.json.deserializeInt64(input.optionalUint64)
 		end
 
 		if input.optional_sint32 ~= nil then
@@ -4913,11 +4913,11 @@ do
 		end
 
 		if input.optional_sint64 ~= nil then
-			self.optional_sint64 = input.optional_sint64
+			self.optional_sint64 = proto.json.deserializeInt64(input.optional_sint64)
 		end
 
 		if input.optionalSint64 ~= nil then
-			self.optional_sint64 = input.optionalSint64
+			self.optional_sint64 = proto.json.deserializeInt64(input.optionalSint64)
 		end
 
 		if input.optional_fixed32 ~= nil then
@@ -4929,11 +4929,11 @@ do
 		end
 
 		if input.optional_fixed64 ~= nil then
-			self.optional_fixed64 = input.optional_fixed64
+			self.optional_fixed64 = proto.json.deserializeInt64(input.optional_fixed64)
 		end
 
 		if input.optionalFixed64 ~= nil then
-			self.optional_fixed64 = input.optionalFixed64
+			self.optional_fixed64 = proto.json.deserializeInt64(input.optionalFixed64)
 		end
 
 		if input.optional_sfixed32 ~= nil then
@@ -4945,11 +4945,11 @@ do
 		end
 
 		if input.optional_sfixed64 ~= nil then
-			self.optional_sfixed64 = input.optional_sfixed64
+			self.optional_sfixed64 = proto.json.deserializeInt64(input.optional_sfixed64)
 		end
 
 		if input.optionalSfixed64 ~= nil then
-			self.optional_sfixed64 = input.optionalSfixed64
+			self.optional_sfixed64 = proto.json.deserializeInt64(input.optionalSfixed64)
 		end
 
 		if input.optional_float ~= nil then
@@ -5114,7 +5114,7 @@ do
 		if input.repeated_int64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeated_int64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_int64 = newOutput
@@ -5123,7 +5123,7 @@ do
 		if input.repeatedInt64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeatedInt64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_int64 = newOutput
@@ -5150,7 +5150,7 @@ do
 		if input.repeated_uint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeated_uint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_uint64 = newOutput
@@ -5159,7 +5159,7 @@ do
 		if input.repeatedUint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeatedUint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_uint64 = newOutput
@@ -5186,7 +5186,7 @@ do
 		if input.repeated_sint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeated_sint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_sint64 = newOutput
@@ -5195,7 +5195,7 @@ do
 		if input.repeatedSint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeatedSint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_sint64 = newOutput
@@ -5222,7 +5222,7 @@ do
 		if input.repeated_fixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeated_fixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_fixed64 = newOutput
@@ -5231,7 +5231,7 @@ do
 		if input.repeatedFixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeatedFixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_fixed64 = newOutput
@@ -5258,7 +5258,7 @@ do
 		if input.repeated_sfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeated_sfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_sfixed64 = newOutput
@@ -5267,7 +5267,7 @@ do
 		if input.repeatedSfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.repeatedSfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.repeated_sfixed64 = newOutput
@@ -5512,7 +5512,7 @@ do
 		if input.packed_int64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packed_int64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_int64 = newOutput
@@ -5521,7 +5521,7 @@ do
 		if input.packedInt64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packedInt64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_int64 = newOutput
@@ -5548,7 +5548,7 @@ do
 		if input.packed_uint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packed_uint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_uint64 = newOutput
@@ -5557,7 +5557,7 @@ do
 		if input.packedUint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packedUint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_uint64 = newOutput
@@ -5584,7 +5584,7 @@ do
 		if input.packed_sint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packed_sint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_sint64 = newOutput
@@ -5593,7 +5593,7 @@ do
 		if input.packedSint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packedSint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_sint64 = newOutput
@@ -5620,7 +5620,7 @@ do
 		if input.packed_fixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packed_fixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_fixed64 = newOutput
@@ -5629,7 +5629,7 @@ do
 		if input.packedFixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packedFixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_fixed64 = newOutput
@@ -5656,7 +5656,7 @@ do
 		if input.packed_sfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packed_sfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_sfixed64 = newOutput
@@ -5665,7 +5665,7 @@ do
 		if input.packedSfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.packedSfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.packed_sfixed64 = newOutput
@@ -5774,7 +5774,7 @@ do
 		if input.unpacked_int64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpacked_int64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_int64 = newOutput
@@ -5783,7 +5783,7 @@ do
 		if input.unpackedInt64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpackedInt64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_int64 = newOutput
@@ -5810,7 +5810,7 @@ do
 		if input.unpacked_uint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpacked_uint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_uint64 = newOutput
@@ -5819,7 +5819,7 @@ do
 		if input.unpackedUint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpackedUint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_uint64 = newOutput
@@ -5846,7 +5846,7 @@ do
 		if input.unpacked_sint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpacked_sint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_sint64 = newOutput
@@ -5855,7 +5855,7 @@ do
 		if input.unpackedSint64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpackedSint64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_sint64 = newOutput
@@ -5882,7 +5882,7 @@ do
 		if input.unpacked_fixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpacked_fixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_fixed64 = newOutput
@@ -5891,7 +5891,7 @@ do
 		if input.unpackedFixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpackedFixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_fixed64 = newOutput
@@ -5918,7 +5918,7 @@ do
 		if input.unpacked_sfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpacked_sfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_sfixed64 = newOutput
@@ -5927,7 +5927,7 @@ do
 		if input.unpackedSfixed64 ~= nil then
 			local newOutput: { number } = {}
 			for _, value in input.unpackedSfixed64 do
-				table.insert(newOutput, value)
+				table.insert(newOutput, proto.json.deserializeInt64(value))
 			end
 
 			self.unpacked_sfixed64 = newOutput
@@ -6036,7 +6036,8 @@ do
 		if input.map_int64_int64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_int64_int64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_int64_int64 = newOutput
@@ -6045,7 +6046,8 @@ do
 		if input.mapInt64Int64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapInt64Int64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_int64_int64 = newOutput
@@ -6072,7 +6074,8 @@ do
 		if input.map_uint64_uint64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_uint64_uint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_uint64_uint64 = newOutput
@@ -6081,7 +6084,8 @@ do
 		if input.mapUint64Uint64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapUint64Uint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_uint64_uint64 = newOutput
@@ -6108,7 +6112,8 @@ do
 		if input.map_sint64_sint64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sint64_sint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_sint64_sint64 = newOutput
@@ -6117,7 +6122,8 @@ do
 		if input.mapSint64Sint64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSint64Sint64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_sint64_sint64 = newOutput
@@ -6144,7 +6150,8 @@ do
 		if input.map_fixed64_fixed64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_fixed64_fixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_fixed64_fixed64 = newOutput
@@ -6153,7 +6160,8 @@ do
 		if input.mapFixed64Fixed64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapFixed64Fixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_fixed64_fixed64 = newOutput
@@ -6180,7 +6188,8 @@ do
 		if input.map_sfixed64_sfixed64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.map_sfixed64_sfixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_sfixed64_sfixed64 = newOutput
@@ -6189,7 +6198,8 @@ do
 		if input.mapSfixed64Sfixed64 ~= nil then
 			local newOutput: { [number]: number? } = {}
 			for key, value in input.mapSfixed64Sfixed64 do
-				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] = value
+				newOutput[(assert(tonumber(key), "Invalid number provided as key"))] =
+					proto.json.deserializeInt64(value)
 			end
 
 			self.map_sfixed64_sfixed64 = newOutput
@@ -6416,11 +6426,11 @@ do
 		end
 
 		if input.oneof_uint64 ~= nil then
-			self.oneof_field = { type = "oneof_uint64", value = input.oneof_uint64 }
+			self.oneof_field = { type = "oneof_uint64", value = proto.json.deserializeInt64(input.oneof_uint64) }
 		end
 
 		if input.oneofUint64 ~= nil then
-			self.oneof_field = { type = "oneof_uint64", value = input.oneofUint64 }
+			self.oneof_field = { type = "oneof_uint64", value = proto.json.deserializeInt64(input.oneofUint64) }
 		end
 
 		if input.oneof_float ~= nil then
@@ -7383,11 +7393,11 @@ do
 		local self = _TestAllTypesProto3_MapInt64Int64EntryImpl.new()
 
 		if input.key ~= nil then
-			self.key = input.key
+			self.key = proto.json.deserializeInt64(input.key)
 		end
 
 		if input.value ~= nil then
-			self.value = input.value
+			self.value = proto.json.deserializeInt64(input.value)
 		end
 
 		return self
@@ -7623,11 +7633,11 @@ do
 		local self = _TestAllTypesProto3_MapUint64Uint64EntryImpl.new()
 
 		if input.key ~= nil then
-			self.key = input.key
+			self.key = proto.json.deserializeInt64(input.key)
 		end
 
 		if input.value ~= nil then
-			self.value = input.value
+			self.value = proto.json.deserializeInt64(input.value)
 		end
 
 		return self
@@ -7863,11 +7873,11 @@ do
 		local self = _TestAllTypesProto3_MapSint64Sint64EntryImpl.new()
 
 		if input.key ~= nil then
-			self.key = input.key
+			self.key = proto.json.deserializeInt64(input.key)
 		end
 
 		if input.value ~= nil then
-			self.value = input.value
+			self.value = proto.json.deserializeInt64(input.value)
 		end
 
 		return self
@@ -8115,11 +8125,11 @@ do
 		local self = _TestAllTypesProto3_MapFixed64Fixed64EntryImpl.new()
 
 		if input.key ~= nil then
-			self.key = input.key
+			self.key = proto.json.deserializeInt64(input.key)
 		end
 
 		if input.value ~= nil then
-			self.value = input.value
+			self.value = proto.json.deserializeInt64(input.value)
 		end
 
 		return self
@@ -8367,11 +8377,11 @@ do
 		local self = _TestAllTypesProto3_MapSfixed64Sfixed64EntryImpl.new()
 
 		if input.key ~= nil then
-			self.key = input.key
+			self.key = proto.json.deserializeInt64(input.key)
 		end
 
 		if input.value ~= nil then
-			self.value = input.value
+			self.value = proto.json.deserializeInt64(input.value)
 		end
 
 		return self

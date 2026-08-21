@@ -746,17 +746,15 @@ fn json_decode_instruction_field_descriptor_ignore_repeated(
 ) -> String {
     match field.r#type() {
         Type::Int32
-        | Type::Int64
         | Type::Uint32
-        | Type::Uint64
         | Type::Fixed32
-        | Type::Fixed64
         | Type::Sfixed32
-        | Type::Sfixed64
         | Type::Sint32
-        | Type::Sint64
         | Type::Bool
         | Type::String => value_var.to_owned(),
+        Type::Fixed64 | Type::Sint64 | Type::Int64 | Type::Uint64 | Type::Sfixed64 => {
+            format!("proto.json.deserializeInt64({value_var})")
+        }
         Type::Float | Type::Double => format!("proto.json.deserializeNumber({value_var})"),
         Type::Bytes => format!("proto.json.deserializeBuffer({value_var})"),
         Type::Enum => format!(
