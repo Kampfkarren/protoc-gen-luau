@@ -375,6 +375,22 @@ function proto.json.deserializeNumber(input: string | number): number
 	end
 end
 
+function proto.json.deserializeInt64(input: string | number): number
+	if typeof(input) == "string" then
+		local number = tonumber(input)
+		assert(number ~= nil, "Number given that could not be parsed")
+
+		-- selene: allow(incorrect_standard_library_use)
+		if math.isnan(number) or not math.isfinite(number) then
+			error("Number is not a valid int64")
+		end
+
+		return math.floor(number)
+	else
+		return input
+	end
+end
+
 function proto.json.serializeBuffer(input: buffer): string
 	return base64.encode(buffer.tostring(input))
 end

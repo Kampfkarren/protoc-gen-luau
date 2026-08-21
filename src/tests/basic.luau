@@ -47,6 +47,16 @@ describe("json deserializing", function()
 
 		assertEquals(decoded.b.a.number, 100)
 	end)
+
+	it("should deserialize int64s as strings", function()
+		local json = {
+			int64 = "123456789",
+		}
+
+		local kitchenSink = kitchen_sink.KitchenSink.jsonDecode(json)
+
+		assertEquals(kitchenSink.int64, 123456789)
+	end)
 end)
 
 describe("descriptors can return", function()

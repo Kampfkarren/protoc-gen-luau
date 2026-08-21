@@ -913,14 +913,14 @@ impl<'a> FileGenerator<'a> {
                         "<json_encode>",
                         &format!(
                             "local output = {{}}\n\n{}\nreturn output",
-                            &json_encode_lines.build()
+                            json_encode_lines.build()
                         ),
                     )
                     .replace(
                         "<json_decode>",
                         &format!(
                             "local self = _{name}Impl.new()\n\n{}\nreturn self",
-                            &json_decode_lines.build()
+                            json_decode_lines.build()
                         ),
                     ),
             )
